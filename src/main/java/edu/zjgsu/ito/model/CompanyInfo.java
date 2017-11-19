@@ -15,15 +15,13 @@ public class CompanyInfo {
 
     private String email;
 
-    private String status;
+    private String type;
 
     private String logo;
 
     private String network;
 
     private String size;
-
-    private String nature;
 
     private String stage;
 
@@ -81,12 +79,12 @@ public class CompanyInfo {
         this.email = email == null ? null : email.trim();
     }
 
-    public String getStatus() {
-        return status;
+    public String getType() {
+        return type;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 
     public String getLogo() {
@@ -111,14 +109,6 @@ public class CompanyInfo {
 
     public void setSize(String size) {
         this.size = size == null ? null : size.trim();
-    }
-
-    public String getNature() {
-        return nature;
-    }
-
-    public void setNature(String nature) {
-        this.nature = nature == null ? null : nature.trim();
     }
 
     public String getStage() {

@@ -8,16 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09f4d6c2-4f7f-4972-a58c-418c63860f22" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$USER_HOME$/环保院/hhprojmgn/src/main/java/cn/ito/zjgsu/web/controller/IndexController.java" afterPath="$USER_HOME$/环保院/hhprojmgn/src/main/java/cn/ito/zjgsu/web/controller/IndexController.java" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/环保院/hhprojmgn/src/main/java/cn/ito/zjgsu/web/controller/DepartmentPersonController.java" afterPath="$USER_HOME$/环保院/hhprojmgn/src/main/java/cn/ito/zjgsu/web/controller/DepartmentPersonController.java" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/环保院/hhprojmgn/src/main/java/cn/ito/zjgsu/service/impl/RolePermissionServiceImpl.java" afterPath="$USER_HOME$/环保院/hhprojmgn/src/main/java/cn/ito/zjgsu/service/impl/RolePermissionServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/环保院/hhprojmgn/src/main/java/cn/ito/zjgsu/service/impl/UserDPServiceImpl.java" afterPath="$USER_HOME$/环保院/hhprojmgn/src/main/java/cn/ito/zjgsu/service/impl/UserDPServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/环保院/hhprojmgn/src/main/java/cn/ito/zjgsu/vo/PidDepInfo.java" afterPath="$USER_HOME$/环保院/hhprojmgn/src/main/java/cn/ito/zjgsu/vo/PidDepInfo.java" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/环保院/hhprojmgn/src/main/webapp/WEB-INF/web.xml" afterPath="$USER_HOME$/环保院/hhprojmgn/src/main/webapp/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/环保院/hhprojmgn/.idea/workspace.xml" afterPath="$USER_HOME$/环保院/hhprojmgn/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/环保院/hhprojmgn/src/main/java/cn/ito/zjgsu/mapping/RoleAuthorityMapper.java" afterPath="$USER_HOME$/环保院/hhprojmgn/src/main/java/cn/ito/zjgsu/mapping/RoleAuthorityMapper.java" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/环保院/hhprojmgn/epi.iml" afterPath="$USER_HOME$/环保院/hhprojmgn/epi.iml" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/环保院/hhprojmgn/src/main/resources/cn/ito/zjgsu/mapping/RoleAuthorityMapper.xml" afterPath="$USER_HOME$/环保院/hhprojmgn/src/main/resources/cn/ito/zjgsu/mapping/RoleAuthorityMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/mapping/CompanyInfoMapper.xml" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/mapping/CompanyInfoMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/CompanyInfo.java" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/CompanyInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/CompanyInfoExample.java" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/CompanyInfoExample.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$USER_HOME$/环保院/hhprojmgn/target/" />
@@ -70,7 +64,7 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$USER_HOME$/环保院/hhprojmgn" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -118,12 +112,12 @@
         <option value="$PROJECT_DIR$/src/main/resources/spring-mvc.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/filter/LoginFilter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/CompanyInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/CompanyInfoMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/StuInfoMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/TeacherInfoMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/UserMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/controller/admin/OperateController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/CompanyInfo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/CompanyInfoMapper.java" />
       </list>
     </option>
   </component>
@@ -178,6 +172,7 @@
       </profile-state>
     </entry>
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -193,8 +188,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -252,6 +246,24 @@
               <item name="fieldManagement" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ito" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fieldManagement" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fieldManagement" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ito" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fieldManagement" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fieldManagement" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -294,8 +306,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="AndroidView" />
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -635,11 +648,12 @@
       <workItem from="1511079805933" duration="537000" />
       <workItem from="1511080348575" duration="9373000" />
       <workItem from="1511092989271" duration="216000" />
+      <workItem from="1511099808073" duration="867000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96430000" />
+    <option name="totallyTimeSpent" value="97297000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
@@ -658,16 +672,15 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3989011" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41318682" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41318682" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13432837" sideWeight="0.49016392" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13539445" sideWeight="0.49016392" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2553305" sideWeight="0.5098361" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -676,6 +689,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" x="92" y="92" width="1736" height="866" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -719,10 +733,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="108" column="24" lean-forward="true" selection-start-line="108" selection-start-column="24" selection-end-line="108" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1873#1889#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -895,13 +905,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/CompanyInfoMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="8" column="11" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/StuInfoMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
@@ -923,13 +926,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/CompanyInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="21" column="23" lean-forward="false" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/StuInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
@@ -943,11 +939,11 @@
           <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1199#1207#0" expanded="true" />
-            <element signature="e#2560#2576#0" expanded="true" />
-            <element signature="e#3469#3485#0" expanded="true" />
-            <element signature="e#4336#4352#0" expanded="true" />
-            <element signature="e#5236#5252#0" expanded="true" />
+            <element signature="e#1199#1207#0" expanded="false" />
+            <element signature="e#2560#2576#0" expanded="false" />
+            <element signature="e#3469#3485#0" expanded="false" />
+            <element signature="e#4336#4352#0" expanded="false" />
+            <element signature="e#5236#5252#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -956,9 +952,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="28">
           <caret line="35" column="7" lean-forward="true" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -966,6 +959,77 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
           <caret line="1961" column="16" lean-forward="true" selection-start-line="1961" selection-start-column="16" selection-end-line="1961" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/CompanyInfoMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56">
+          <caret line="8" column="11" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/CompanyInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="15" column="25" lean-forward="true" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+          <folding>
+            <element signature="e#507#508#0" expanded="true" />
+            <element signature="e#532#533#0" expanded="true" />
+            <element signature="e#568#569#0" expanded="true" />
+            <element signature="e#623#624#0" expanded="true" />
+            <element signature="e#661#662#0" expanded="true" />
+            <element signature="e#695#696#0" expanded="true" />
+            <element signature="e#865#866#0" expanded="true" />
+            <element signature="e#895#896#0" expanded="true" />
+            <element signature="e#941#942#0" expanded="true" />
+            <element signature="e#1011#1012#0" expanded="true" />
+            <element signature="e#1044#1045#0" expanded="true" />
+            <element signature="e#1073#1074#0" expanded="true" />
+            <element signature="e#1117#1118#0" expanded="true" />
+            <element signature="e#1184#1185#0" expanded="true" />
+            <element signature="e#1219#1220#0" expanded="true" />
+            <element signature="e#1252#1253#0" expanded="true" />
+            <element signature="e#1302#1303#0" expanded="true" />
+            <element signature="e#1346#1347#0" expanded="true" />
+            <element signature="e#1378#1379#0" expanded="true" />
+            <element signature="e#1406#1407#0" expanded="true" />
+            <element signature="e#1448#1449#0" expanded="true" />
+            <element signature="e#1512#1513#0" expanded="true" />
+            <element signature="e#1543#1544#0" expanded="true" />
+            <element signature="e#1570#1571#0" expanded="true" />
+            <element signature="e#1610#1611#0" expanded="true" />
+            <element signature="e#1671#1672#0" expanded="true" />
+            <element signature="e#1702#1703#0" expanded="true" />
+            <element signature="e#1729#1730#0" expanded="true" />
+            <element signature="e#1769#1770#0" expanded="true" />
+            <element signature="e#1830#1831#0" expanded="true" />
+            <element signature="e#1864#1865#0" expanded="true" />
+            <element signature="e#1894#1895#0" expanded="true" />
+            <element signature="e#1940#1941#0" expanded="true" />
+            <element signature="e#2010#2011#0" expanded="true" />
+            <element signature="e#2041#2042#0" expanded="true" />
+            <element signature="e#2068#2069#0" expanded="true" />
+            <element signature="e#2108#2109#0" expanded="true" />
+            <element signature="e#2169#2170#0" expanded="true" />
+            <marker date="1511100866946" expanded="false" signature="2200:2211" ph=" { " />
+            <marker date="1511100866946" expanded="false" signature="2224:2230" ph=" }" />
+            <marker date="1511100866946" expanded="false" signature="2270:2281" ph=" { " />
+            <marker date="1511100866946" expanded="false" signature="2330:2336" ph=" }" />
+            <marker date="1511100866946" expanded="false" signature="2368:2379" ph=" { " />
+            <marker date="1511100866946" expanded="false" signature="2394:2400" ph=" }" />
+            <marker date="1511100866946" expanded="false" signature="2444:2455" ph=" { " />
+            <marker date="1511100866946" expanded="false" signature="2510:2516" ph=" }" />
+            <marker date="1511100866946" expanded="false" signature="2551:2562" ph=" { " />
+            <marker date="1511100866946" expanded="false" signature="2580:2586" ph=" }" />
+            <marker date="1511100866946" expanded="false" signature="2636:2647" ph=" { " />
+            <marker date="1511100866946" expanded="false" signature="2711:2717" ph=" }" />
+            <marker date="1511100866946" expanded="false" signature="2754:2765" ph=" { " />
+            <marker date="1511100866946" expanded="false" signature="2784:2790" ph=" }" />
+            <marker date="1511100866946" expanded="false" signature="2843:2854" ph=" { " />
+            <marker date="1511100866946" expanded="false" signature="2885:2891" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>

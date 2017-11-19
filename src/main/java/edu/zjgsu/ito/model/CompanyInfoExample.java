@@ -515,73 +515,73 @@ public class CompanyInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNull() {
-            addCriterion("status is null");
+        public Criteria andTypeIsNull() {
+            addCriterion("type is null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNotNull() {
-            addCriterion("status is not null");
+        public Criteria andTypeIsNotNull() {
+            addCriterion("type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(String value) {
-            addCriterion("status =", value, "status");
+        public Criteria andTypeEqualTo(String value) {
+            addCriterion("type =", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(String value) {
-            addCriterion("status <>", value, "status");
+        public Criteria andTypeNotEqualTo(String value) {
+            addCriterion("type <>", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(String value) {
-            addCriterion("status >", value, "status");
+        public Criteria andTypeGreaterThan(String value) {
+            addCriterion("type >", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(String value) {
-            addCriterion("status >=", value, "status");
+        public Criteria andTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("type >=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(String value) {
-            addCriterion("status <", value, "status");
+        public Criteria andTypeLessThan(String value) {
+            addCriterion("type <", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(String value) {
-            addCriterion("status <=", value, "status");
+        public Criteria andTypeLessThanOrEqualTo(String value) {
+            addCriterion("type <=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLike(String value) {
-            addCriterion("status like", value, "status");
+        public Criteria andTypeLike(String value) {
+            addCriterion("type like", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotLike(String value) {
-            addCriterion("status not like", value, "status");
+        public Criteria andTypeNotLike(String value) {
+            addCriterion("type not like", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<String> values) {
-            addCriterion("status in", values, "status");
+        public Criteria andTypeIn(List<String> values) {
+            addCriterion("type in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<String> values) {
-            addCriterion("status not in", values, "status");
+        public Criteria andTypeNotIn(List<String> values) {
+            addCriterion("type not in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(String value1, String value2) {
-            addCriterion("status between", value1, value2, "status");
+        public Criteria andTypeBetween(String value1, String value2) {
+            addCriterion("type between", value1, value2, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(String value1, String value2) {
-            addCriterion("status not between", value1, value2, "status");
+        public Criteria andTypeNotBetween(String value1, String value2) {
+            addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
 
@@ -792,76 +792,6 @@ public class CompanyInfoExample {
 
         public Criteria andSizeNotBetween(String value1, String value2) {
             addCriterion("size not between", value1, value2, "size");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureIsNull() {
-            addCriterion("nature is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureIsNotNull() {
-            addCriterion("nature is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureEqualTo(String value) {
-            addCriterion("nature =", value, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureNotEqualTo(String value) {
-            addCriterion("nature <>", value, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureGreaterThan(String value) {
-            addCriterion("nature >", value, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureGreaterThanOrEqualTo(String value) {
-            addCriterion("nature >=", value, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureLessThan(String value) {
-            addCriterion("nature <", value, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureLessThanOrEqualTo(String value) {
-            addCriterion("nature <=", value, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureLike(String value) {
-            addCriterion("nature like", value, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureNotLike(String value) {
-            addCriterion("nature not like", value, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureIn(List<String> values) {
-            addCriterion("nature in", values, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureNotIn(List<String> values) {
-            addCriterion("nature not in", values, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureBetween(String value1, String value2) {
-            addCriterion("nature between", value1, value2, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureNotBetween(String value1, String value2) {
-            addCriterion("nature not between", value1, value2, "nature");
             return (Criteria) this;
         }
 
