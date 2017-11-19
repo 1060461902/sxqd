@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50133
 File Encoding         : 65001
 
-Date: 2017-11-19 20:38:14
+Date: 2017-11-20 00:17:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -84,22 +84,22 @@ CREATE TABLE `companyinfo` (
   `userId` varchar(255) DEFAULT NULL COMMENT '负责人id',
   `createtime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `email` varchar(255) DEFAULT NULL COMMENT '邮件',
-  `status` varchar(255) DEFAULT NULL COMMENT '领域',
+  `type` varchar(255) DEFAULT NULL COMMENT '企业类型',
   `logo` varchar(255) DEFAULT NULL COMMENT '标志',
   `network` varchar(255) DEFAULT NULL COMMENT '网址',
   `size` varchar(255) DEFAULT NULL COMMENT '规模',
-  `nature` varchar(255) DEFAULT NULL COMMENT '性质',
   `stage` varchar(255) DEFAULT NULL COMMENT '阶段',
   `slogans` varchar(255) DEFAULT NULL COMMENT '标语',
   `intruction` varchar(1255) DEFAULT NULL COMMENT '简介',
-  `confirmpass` tinyint(1) DEFAULT NULL,
+  `checked` tinyint(1) DEFAULT '0' COMMENT '0代表未审批，1代表已审批',
+  `pass` tinyint(1) DEFAULT '0' COMMENT '0代表审批未通过，1代表审批通过',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of companyinfo
 -- ----------------------------
-INSERT INTO `companyinfo` VALUES ('1', '杭州富远有限公司', '杭州市江干区学正街204号', '4', '2017-10-24 14:42:38', null, null, null, null, null, null, null, null, null, '1');
+INSERT INTO `companyinfo` VALUES ('1', '杭州富远有限公司', '杭州市江干区学正街204号', '4', '2017-10-24 14:42:38', null, null, null, null, null, null, null, null, '0', '1');
 
 -- ----------------------------
 -- Table structure for `companymark`
@@ -175,9 +175,10 @@ CREATE TABLE `dynamicapproval` (
 -- ----------------------------
 DROP TABLE IF EXISTS `image`;
 CREATE TABLE `image` (
-  `id` varchar(255) DEFAULT NULL,
+  `id` varchar(255) NOT NULL DEFAULT '',
   `reportId` varchar(255) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL COMMENT '图片url'
+  `url` varchar(255) DEFAULT NULL COMMENT '图片url',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
