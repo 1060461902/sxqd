@@ -10,7 +10,8 @@ Target Server Type    : MYSQL
 Target Server Version : 50133
 File Encoding         : 65001
 
-Date: 2017-11-20 00:17:24
+Date: 2017-11-20 11:49:10
+
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -99,7 +100,7 @@ CREATE TABLE `companyinfo` (
 -- ----------------------------
 -- Records of companyinfo
 -- ----------------------------
-INSERT INTO `companyinfo` VALUES ('1', '杭州富远有限公司', '杭州市江干区学正街204号', '4', '2017-10-24 14:42:38', null, null, null, null, null, null, null, null, '0', '1');
+INSERT INTO `companyinfo` VALUES ('1', '杭州富远有限公司', '杭州市江干区学正街204号', '4', '2017-10-24 14:42:38', null, null, null, null, null, null, null, null, '1', '0');
 
 -- ----------------------------
 -- Table structure for `companymark`
@@ -212,17 +213,19 @@ CREATE TABLE `recruitmentinfo` (
   `currentNumber` int(10) DEFAULT NULL COMMENT '现在招收人数',
   `totalNumber` int(10) DEFAULT NULL COMMENT '总招募人数',
   `postInfo` varchar(255) DEFAULT NULL COMMENT '职位信息',
-  `passing` tinyint(1) DEFAULT '0' COMMENT '0为未通过，默认未通过,1待审核，2招聘中',
-  `deleteTag` tinyint(1) DEFAULT '1',
+  `checked` tinyint(1) DEFAULT '0' COMMENT '0代表未审批，1代表已审批',
+  `pass` tinyint(1) DEFAULT '0' COMMENT '0代表审批未通过，1代表审批通过',
+  `delete` tinyint(1) DEFAULT '0' COMMENT '标记删除，0-false，1-true',
   `address` varchar(255) DEFAULT NULL COMMENT '地址',
   `skillRequirement` varchar(255) DEFAULT NULL COMMENT '技能要求',
   `postTime` datetime DEFAULT NULL COMMENT '招聘时间',
-  `remove` int(11) DEFAULT NULL COMMENT '是否被撤下',
-  `delete_tag` int(11) DEFAULT NULL,
+  `remove` tinyint(1) DEFAULT '0' COMMENT '是否被撤下0-false,1-true',
+  `forbidden` tinyint(1) DEFAULT '0' COMMENT '0-没有被禁用，1-禁用',
   `salary` varchar(255) DEFAULT NULL COMMENT '薪资待遇',
   `contact` varchar(255) DEFAULT NULL COMMENT '联系人',
   `phone` varchar(255) DEFAULT NULL COMMENT '电话',
   `email` varchar(255) DEFAULT NULL COMMENT '邮箱',
+  `recruitment` tinyint(1) DEFAULT '1' COMMENT '招聘状态，1-招聘中，0-招聘结束',
   `userId` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -422,7 +425,7 @@ CREATE TABLE `user` (
   `deleteTag` tinyint(1) DEFAULT '1' COMMENT '1存在0删除 默认1',
   `roleID` varchar(255) DEFAULT NULL COMMENT '1.2.3.4管理员，学生，教师，公司',
   `createtime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `forbidden` tinyint(1) DEFAULT '1' COMMENT '是否被禁用1为否',
+  `forbidden` tinyint(1) DEFAULT '0' COMMENT '0-没有被禁用，1-禁用',
   PRIMARY KEY (`id`),
   KEY `user_ibfk_2` (`roleID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
