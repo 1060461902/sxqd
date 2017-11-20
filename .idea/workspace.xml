@@ -7,51 +7,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09f4d6c2-4f7f-4972-a58c-418c63860f22" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/dao/RecruitmentInfoMapper.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/RecruitmentInfo.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/RecruitmentInfoExample$Criteria.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/RecruitmentInfoExample$Criterion.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/RecruitmentInfoExample$GeneratedCriteria.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/RecruitmentInfoExample.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/dao/RecruitmentInfoMapper.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/RecruitmentInfo.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/RecruitmentInfoExample$Criteria.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/RecruitmentInfoExample$Criterion.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/RecruitmentInfoExample$GeneratedCriteria.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/RecruitmentInfoExample.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/RecruitmentInfoMapper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/mapping/RecruitmentInfoMapper.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/RecruitmentInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/RecruitmentInfoExample.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/mapping/RecruitmentInfoMapper.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/mapping/RecruitmentInfoMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/controller/admin/OperateController.class" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/controller/admin/OperateController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/CompanyInfo.class" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/CompanyInfo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/CompanyInfoExample$Criteria.class" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/CompanyInfoExample$Criteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/CompanyInfoExample$Criterion.class" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/CompanyInfoExample$Criterion.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/CompanyInfoExample$GeneratedCriteria.class" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/CompanyInfoExample$GeneratedCriteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT.war" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/controller/admin/OperateController.class" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/controller/admin/OperateController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/CompanyInfo.class" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/CompanyInfo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/CompanyInfoExample$Criteria.class" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/CompanyInfoExample$Criteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/CompanyInfoExample$Criterion.class" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/CompanyInfoExample$Criterion.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/CompanyInfoExample$GeneratedCriteria.class" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/CompanyInfoExample$GeneratedCriteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/controller/admin/OperateController.java" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/controller/admin/OperateController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/mapping/CompanyInfoMapper.xml" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/mapping/CompanyInfoMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/CompanyInfo.java" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/CompanyInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/CompanyInfoExample.java" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/CompanyInfoExample.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fieldwork.sql" afterPath="$PROJECT_DIR$/src/main/resources/fieldwork.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/mapping/CompanyInfoMapper.xml" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/mapping/CompanyInfoMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/fieldwork.sql" afterPath="$PROJECT_DIR$/target/classes/fieldwork.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/log4j.properties" afterPath="$PROJECT_DIR$/target/classes/log4j.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/mapping/CompanyInfoMapper.xml" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/mapping/CompanyInfoMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/fieldwork.sql" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/fieldwork.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/log4j.properties" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/log4j.properties" />
-    </list>
+    <list default="true" id="09f4d6c2-4f7f-4972-a58c-418c63860f22" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$USER_HOME$/环保院/hhprojmgn/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -65,38 +21,7 @@
     <favorites_list name="fieldManagement" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="fieldwork.sql" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/fieldwork.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="128" column="31" lean-forward="true" selection-start-line="128" selection-start-column="31" selection-end-line="128" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="vcs.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/vcs.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="5" column="10" lean-forward="true" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
-              <caret line="128" column="21" lean-forward="true" selection-start-line="128" selection-start-column="21" selection-end-line="128" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -282,11 +207,6 @@
             <path>
               <item name="fieldManagement" type="b2602c69:ProjectViewProjectNode" />
               <item name="fieldManagement" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fieldManagement" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fieldManagement" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -300,7 +220,15 @@
               <item name="fieldManagement" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fieldManagement" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fieldManagement" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ito" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -648,16 +576,15 @@
       <workItem from="1511079805933" duration="537000" />
       <workItem from="1511080348575" duration="9373000" />
       <workItem from="1511092989271" duration="216000" />
-      <workItem from="1511099808073" duration="8623000" />
+      <workItem from="1511099808073" duration="8709000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105053000" />
+    <option name="totallyTimeSpent" value="105139000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -682,7 +609,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41254124" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13539445" sideWeight="0.49016392" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13539445" sideWeight="0.49016392" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2553305" sideWeight="0.5098361" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1050,16 +977,53 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="128" column="21" lean-forward="true" selection-start-line="128" selection-start-column="21" selection-end-line="128" selection-end-column="21" />
-          <folding />
+        <state relative-caret-position="827">
+          <caret line="137" column="21" lean-forward="true" selection-start-line="137" selection-start-column="21" selection-end-line="137" selection-end-column="21" />
+          <folding>
+            <marker date="1511150501466" expanded="true" signature="60241:60283" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="60241:60301" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="60241:60314" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="60241:60329" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="60364:63035" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="60377:63020" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="60431:60822" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="60450:60807" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="60570:60787" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="60610:60753" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="60631:60731" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="60872:61181" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="60891:61166" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="60968:61146" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="61008:61112" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="61029:61090" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="61232:61497" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="61251:61482" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="61284:61462" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="61324:61428" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="61345:61406" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="61540:61846" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="61559:61831" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="61633:61811" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="61673:61777" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="61694:61755" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="61897:62254" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="61916:62239" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="62002:62219" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="62042:62185" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="62063:62163" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="62289:62595" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="62308:62580" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="62382:62560" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="62422:62526" ph="..." />
+            <marker date="1511150501466" expanded="true" signature="62443:62504" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fieldwork.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="128" column="31" lean-forward="true" selection-start-line="128" selection-start-column="31" selection-end-line="128" selection-end-column="31" />
+        <state relative-caret-position="70">
+          <caret line="118" column="0" lean-forward="true" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
           <folding />
         </state>
       </provider>
