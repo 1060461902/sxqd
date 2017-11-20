@@ -15,7 +15,7 @@ public class CompanyInfo {
 
     private String email;
 
-    private String status;
+    private String type;
 
     private String logo;
 
@@ -23,15 +23,15 @@ public class CompanyInfo {
 
     private String size;
 
-    private String nature;
-
     private String stage;
 
     private String slogans;
 
     private String intruction;
 
-    private Boolean confirmpass;
+    private Boolean checked;
+
+    private Boolean pass;
 
     public String getId() {
         return id;
@@ -81,12 +81,12 @@ public class CompanyInfo {
         this.email = email == null ? null : email.trim();
     }
 
-    public String getStatus() {
-        return status;
+    public String getType() {
+        return type;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 
     public String getLogo() {
@@ -113,14 +113,6 @@ public class CompanyInfo {
         this.size = size == null ? null : size.trim();
     }
 
-    public String getNature() {
-        return nature;
-    }
-
-    public void setNature(String nature) {
-        this.nature = nature == null ? null : nature.trim();
-    }
-
     public String getStage() {
         return stage;
     }
@@ -145,11 +137,19 @@ public class CompanyInfo {
         this.intruction = intruction == null ? null : intruction.trim();
     }
 
-    public Boolean getConfirmpass() {
-        return confirmpass;
+    public Boolean getChecked() {
+        return checked;
     }
 
-    public void setConfirmpass(Boolean confirmpass) {
-        this.confirmpass = confirmpass;
+    public void setChecked(Boolean checked) {
+        this.checked = checked;
+    }
+
+    public Boolean getPass() {
+        return pass;
+    }
+
+    public void setPass(Boolean pass) {
+        this.pass = pass;
     }
 }

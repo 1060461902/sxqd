@@ -8,15 +8,15 @@
     <result column="userId" jdbcType="VARCHAR" property="userid" />
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="logo" jdbcType="VARCHAR" property="logo" />
     <result column="network" jdbcType="VARCHAR" property="network" />
     <result column="size" jdbcType="VARCHAR" property="size" />
-    <result column="nature" jdbcType="VARCHAR" property="nature" />
     <result column="stage" jdbcType="VARCHAR" property="stage" />
     <result column="slogans" jdbcType="VARCHAR" property="slogans" />
     <result column="intruction" jdbcType="VARCHAR" property="intruction" />
-    <result column="confirmpass" jdbcType="BIT" property="confirmpass" />
+    <result column="checked" jdbcType="BIT" property="checked" />
+    <result column="pass" jdbcType="BIT" property="pass" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -77,8 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, companyname, address, userId, createtime, email, status, logo, network, size, 
-    nature, stage, slogans, intruction, confirmpass
+    id, companyname, address, userId, createtime, email, type, logo, network, size, stage, 
+    slogans, intruction, checked, pass
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.CompanyInfoExample" resultMap="BaseResultMap">
     select
@@ -114,16 +114,14 @@
   <insert id="insert" parameterType="edu.zjgsu.ito.model.CompanyInfo">
     insert into companyinfo (id, companyname, address, 
       userId, createtime, email, 
-      status, logo, network, 
-      size, nature, stage, 
-      slogans, intruction, confirmpass
-      )
+      type, logo, network, 
+      size, stage, slogans, 
+      intruction, checked, pass)
     values (#{id,jdbcType=VARCHAR}, #{companyname,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{userid,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{network,jdbcType=VARCHAR}, 
-      #{size,jdbcType=VARCHAR}, #{nature,jdbcType=VARCHAR}, #{stage,jdbcType=VARCHAR}, 
-      #{slogans,jdbcType=VARCHAR}, #{intruction,jdbcType=VARCHAR}, #{confirmpass,jdbcType=BIT}
-      )
+      #{type,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{network,jdbcType=VARCHAR}, 
+      #{size,jdbcType=VARCHAR}, #{stage,jdbcType=VARCHAR}, #{slogans,jdbcType=VARCHAR}, 
+      #{intruction,jdbcType=VARCHAR}, #{checked,jdbcType=BIT}, #{pass,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.CompanyInfo">
     insert into companyinfo
@@ -146,8 +144,8 @@
       <if test="email != null">
         email,
       </if>
-      <if test="status != null">
-        status,
+      <if test="type != null">
+        type,
       </if>
       <if test="logo != null">
         logo,
@@ -158,9 +156,6 @@
       <if test="size != null">
         size,
       </if>
-      <if test="nature != null">
-        nature,
-      </if>
       <if test="stage != null">
         stage,
       </if>
@@ -170,8 +165,11 @@
       <if test="intruction != null">
         intruction,
       </if>
-      <if test="confirmpass != null">
-        confirmpass,
+      <if test="checked != null">
+        checked,
+      </if>
+      <if test="pass != null">
+        pass,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -193,8 +191,8 @@
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
       </if>
       <if test="logo != null">
         #{logo,jdbcType=VARCHAR},
@@ -205,9 +203,6 @@
       <if test="size != null">
         #{size,jdbcType=VARCHAR},
       </if>
-      <if test="nature != null">
-        #{nature,jdbcType=VARCHAR},
-      </if>
       <if test="stage != null">
         #{stage,jdbcType=VARCHAR},
       </if>
@@ -217,8 +212,11 @@
       <if test="intruction != null">
         #{intruction,jdbcType=VARCHAR},
       </if>
-      <if test="confirmpass != null">
-        #{confirmpass,jdbcType=BIT},
+      <if test="checked != null">
+        #{checked,jdbcType=BIT},
+      </if>
+      <if test="pass != null">
+        #{pass,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -249,8 +247,8 @@
       <if test="record.email != null">
         email = #{record.email,jdbcType=VARCHAR},
       </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=VARCHAR},
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
       </if>
       <if test="record.logo != null">
         logo = #{record.logo,jdbcType=VARCHAR},
@@ -261,9 +259,6 @@
       <if test="record.size != null">
         size = #{record.size,jdbcType=VARCHAR},
       </if>
-      <if test="record.nature != null">
-        nature = #{record.nature,jdbcType=VARCHAR},
-      </if>
       <if test="record.stage != null">
         stage = #{record.stage,jdbcType=VARCHAR},
       </if>
@@ -273,8 +268,11 @@
       <if test="record.intruction != null">
         intruction = #{record.intruction,jdbcType=VARCHAR},
       </if>
-      <if test="record.confirmpass != null">
-        confirmpass = #{record.confirmpass,jdbcType=BIT},
+      <if test="record.checked != null">
+        checked = #{record.checked,jdbcType=BIT},
+      </if>
+      <if test="record.pass != null">
+        pass = #{record.pass,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -289,15 +287,15 @@
       userId = #{record.userid,jdbcType=VARCHAR},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       email = #{record.email,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
       logo = #{record.logo,jdbcType=VARCHAR},
       network = #{record.network,jdbcType=VARCHAR},
       size = #{record.size,jdbcType=VARCHAR},
-      nature = #{record.nature,jdbcType=VARCHAR},
       stage = #{record.stage,jdbcType=VARCHAR},
       slogans = #{record.slogans,jdbcType=VARCHAR},
       intruction = #{record.intruction,jdbcType=VARCHAR},
-      confirmpass = #{record.confirmpass,jdbcType=BIT}
+      checked = #{record.checked,jdbcType=BIT},
+      pass = #{record.pass,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -320,8 +318,8 @@
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        status = #{status,jdbcType=VARCHAR},
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
       </if>
       <if test="logo != null">
         logo = #{logo,jdbcType=VARCHAR},
@@ -332,9 +330,6 @@
       <if test="size != null">
         size = #{size,jdbcType=VARCHAR},
       </if>
-      <if test="nature != null">
-        nature = #{nature,jdbcType=VARCHAR},
-      </if>
       <if test="stage != null">
         stage = #{stage,jdbcType=VARCHAR},
       </if>
@@ -344,8 +339,11 @@
       <if test="intruction != null">
         intruction = #{intruction,jdbcType=VARCHAR},
       </if>
-      <if test="confirmpass != null">
-        confirmpass = #{confirmpass,jdbcType=BIT},
+      <if test="checked != null">
+        checked = #{checked,jdbcType=BIT},
+      </if>
+      <if test="pass != null">
+        pass = #{pass,jdbcType=BIT},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -357,15 +355,15 @@
       userId = #{userid,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       email = #{email,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
       logo = #{logo,jdbcType=VARCHAR},
       network = #{network,jdbcType=VARCHAR},
       size = #{size,jdbcType=VARCHAR},
-      nature = #{nature,jdbcType=VARCHAR},
       stage = #{stage,jdbcType=VARCHAR},
       slogans = #{slogans,jdbcType=VARCHAR},
       intruction = #{intruction,jdbcType=VARCHAR},
-      confirmpass = #{confirmpass,jdbcType=BIT}
+      checked = #{checked,jdbcType=BIT},
+      pass = #{pass,jdbcType=BIT}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

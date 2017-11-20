@@ -515,73 +515,73 @@ public class CompanyInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNull() {
-            addCriterion("status is null");
+        public Criteria andTypeIsNull() {
+            addCriterion("type is null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNotNull() {
-            addCriterion("status is not null");
+        public Criteria andTypeIsNotNull() {
+            addCriterion("type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(String value) {
-            addCriterion("status =", value, "status");
+        public Criteria andTypeEqualTo(String value) {
+            addCriterion("type =", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(String value) {
-            addCriterion("status <>", value, "status");
+        public Criteria andTypeNotEqualTo(String value) {
+            addCriterion("type <>", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(String value) {
-            addCriterion("status >", value, "status");
+        public Criteria andTypeGreaterThan(String value) {
+            addCriterion("type >", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(String value) {
-            addCriterion("status >=", value, "status");
+        public Criteria andTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("type >=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(String value) {
-            addCriterion("status <", value, "status");
+        public Criteria andTypeLessThan(String value) {
+            addCriterion("type <", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(String value) {
-            addCriterion("status <=", value, "status");
+        public Criteria andTypeLessThanOrEqualTo(String value) {
+            addCriterion("type <=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLike(String value) {
-            addCriterion("status like", value, "status");
+        public Criteria andTypeLike(String value) {
+            addCriterion("type like", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotLike(String value) {
-            addCriterion("status not like", value, "status");
+        public Criteria andTypeNotLike(String value) {
+            addCriterion("type not like", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<String> values) {
-            addCriterion("status in", values, "status");
+        public Criteria andTypeIn(List<String> values) {
+            addCriterion("type in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<String> values) {
-            addCriterion("status not in", values, "status");
+        public Criteria andTypeNotIn(List<String> values) {
+            addCriterion("type not in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(String value1, String value2) {
-            addCriterion("status between", value1, value2, "status");
+        public Criteria andTypeBetween(String value1, String value2) {
+            addCriterion("type between", value1, value2, "type");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(String value1, String value2) {
-            addCriterion("status not between", value1, value2, "status");
+        public Criteria andTypeNotBetween(String value1, String value2) {
+            addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
 
@@ -795,76 +795,6 @@ public class CompanyInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andNatureIsNull() {
-            addCriterion("nature is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureIsNotNull() {
-            addCriterion("nature is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureEqualTo(String value) {
-            addCriterion("nature =", value, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureNotEqualTo(String value) {
-            addCriterion("nature <>", value, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureGreaterThan(String value) {
-            addCriterion("nature >", value, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureGreaterThanOrEqualTo(String value) {
-            addCriterion("nature >=", value, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureLessThan(String value) {
-            addCriterion("nature <", value, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureLessThanOrEqualTo(String value) {
-            addCriterion("nature <=", value, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureLike(String value) {
-            addCriterion("nature like", value, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureNotLike(String value) {
-            addCriterion("nature not like", value, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureIn(List<String> values) {
-            addCriterion("nature in", values, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureNotIn(List<String> values) {
-            addCriterion("nature not in", values, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureBetween(String value1, String value2) {
-            addCriterion("nature between", value1, value2, "nature");
-            return (Criteria) this;
-        }
-
-        public Criteria andNatureNotBetween(String value1, String value2) {
-            addCriterion("nature not between", value1, value2, "nature");
-            return (Criteria) this;
-        }
-
         public Criteria andStageIsNull() {
             addCriterion("stage is null");
             return (Criteria) this;
@@ -1075,63 +1005,123 @@ public class CompanyInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andConfirmpassIsNull() {
-            addCriterion("confirmpass is null");
+        public Criteria andCheckedIsNull() {
+            addCriterion("checked is null");
             return (Criteria) this;
         }
 
-        public Criteria andConfirmpassIsNotNull() {
-            addCriterion("confirmpass is not null");
+        public Criteria andCheckedIsNotNull() {
+            addCriterion("checked is not null");
             return (Criteria) this;
         }
 
-        public Criteria andConfirmpassEqualTo(Boolean value) {
-            addCriterion("confirmpass =", value, "confirmpass");
+        public Criteria andCheckedEqualTo(Boolean value) {
+            addCriterion("checked =", value, "checked");
             return (Criteria) this;
         }
 
-        public Criteria andConfirmpassNotEqualTo(Boolean value) {
-            addCriterion("confirmpass <>", value, "confirmpass");
+        public Criteria andCheckedNotEqualTo(Boolean value) {
+            addCriterion("checked <>", value, "checked");
             return (Criteria) this;
         }
 
-        public Criteria andConfirmpassGreaterThan(Boolean value) {
-            addCriterion("confirmpass >", value, "confirmpass");
+        public Criteria andCheckedGreaterThan(Boolean value) {
+            addCriterion("checked >", value, "checked");
             return (Criteria) this;
         }
 
-        public Criteria andConfirmpassGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("confirmpass >=", value, "confirmpass");
+        public Criteria andCheckedGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("checked >=", value, "checked");
             return (Criteria) this;
         }
 
-        public Criteria andConfirmpassLessThan(Boolean value) {
-            addCriterion("confirmpass <", value, "confirmpass");
+        public Criteria andCheckedLessThan(Boolean value) {
+            addCriterion("checked <", value, "checked");
             return (Criteria) this;
         }
 
-        public Criteria andConfirmpassLessThanOrEqualTo(Boolean value) {
-            addCriterion("confirmpass <=", value, "confirmpass");
+        public Criteria andCheckedLessThanOrEqualTo(Boolean value) {
+            addCriterion("checked <=", value, "checked");
             return (Criteria) this;
         }
 
-        public Criteria andConfirmpassIn(List<Boolean> values) {
-            addCriterion("confirmpass in", values, "confirmpass");
+        public Criteria andCheckedIn(List<Boolean> values) {
+            addCriterion("checked in", values, "checked");
             return (Criteria) this;
         }
 
-        public Criteria andConfirmpassNotIn(List<Boolean> values) {
-            addCriterion("confirmpass not in", values, "confirmpass");
+        public Criteria andCheckedNotIn(List<Boolean> values) {
+            addCriterion("checked not in", values, "checked");
             return (Criteria) this;
         }
 
-        public Criteria andConfirmpassBetween(Boolean value1, Boolean value2) {
-            addCriterion("confirmpass between", value1, value2, "confirmpass");
+        public Criteria andCheckedBetween(Boolean value1, Boolean value2) {
+            addCriterion("checked between", value1, value2, "checked");
             return (Criteria) this;
         }
 
-        public Criteria andConfirmpassNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("confirmpass not between", value1, value2, "confirmpass");
+        public Criteria andCheckedNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("checked not between", value1, value2, "checked");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassIsNull() {
+            addCriterion("pass is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassIsNotNull() {
+            addCriterion("pass is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassEqualTo(Boolean value) {
+            addCriterion("pass =", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassNotEqualTo(Boolean value) {
+            addCriterion("pass <>", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassGreaterThan(Boolean value) {
+            addCriterion("pass >", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("pass >=", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassLessThan(Boolean value) {
+            addCriterion("pass <", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassLessThanOrEqualTo(Boolean value) {
+            addCriterion("pass <=", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassIn(List<Boolean> values) {
+            addCriterion("pass in", values, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassNotIn(List<Boolean> values) {
+            addCriterion("pass not in", values, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassBetween(Boolean value1, Boolean value2) {
+            addCriterion("pass between", value1, value2, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("pass not between", value1, value2, "pass");
             return (Criteria) this;
         }
     }
