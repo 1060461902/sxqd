@@ -9,6 +9,7 @@ import edu.zjgsu.ito.utils.Constant;
 import edu.zjgsu.ito.utils.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -20,12 +21,12 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "admin")
 public class OperateController {
-    public static final Boolean positive  = true;
-    public static final Boolean negative = false;
     public static final String defaultPwd = "123456";
 
 //    private String userId;
 
+//    @Autowired
+//
     @Autowired
     CompanyInfoService companyInfoService;
     @Autowired
@@ -101,7 +102,7 @@ public class OperateController {
         userId = role2user(roleid, id);
 
         User user = userService.selectByPrimaryKey(userId);
-        user.setForbidden(positive);
+        user.setForbidden(true);
         status = userService.updateByPrimaryKey(user);
 
         if (status > 0) {
@@ -151,7 +152,7 @@ public class OperateController {
      */
     @RequestMapping(value = "comfirmRegister", method = RequestMethod.GET)
     public @ResponseBody
-    Map<String,Object> comfirmRegister(@RequestParam("id") String id) {
+    Map<String,Object> comfirmRegister(@RequestParam("id") String id, @RequestParam("passFlag") String passFlag) {
         int status;
         Map<String, Object> result = new HashMap<String, Object>();
 
@@ -161,9 +162,17 @@ public class OperateController {
             result.put("msg", "未查到id=" + id + "的记录！");
             return result;
         }
+//        已经被check过
+        companyInfoBack.setChecked(true);
 
-//        更新审批状态
-        companyInfoBack.setConfirmpass(positive);
+        if (passFlag.equals("0")) {
+//            审批不通过
+            companyInfoBack.setPass(false);
+        } else {
+//            审批通过
+            companyInfoBack.setPass(true);
+        }
+
 //        更新数据库记录
         status = companyInfoService.updateByPrimaryKey(companyInfoBack);
 

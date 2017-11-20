@@ -1,22 +1,21 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50717
+Source Server         : localhost_3306
+Source Server Version : 50133
 Source Host           : localhost:3306
 Source Database       : fieldwork
 
 Target Server Type    : MYSQL
-Target Server Version : 50717
+Target Server Version : 50133
 File Encoding         : 65001
 
-Date: 2017-11-19 15:29:12
+Date: 2017-11-20 00:17:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
-
 -- ----------------------------
--- Table structure for approvalreport
+-- Table structure for `approvalreport`
 -- ----------------------------
 DROP TABLE IF EXISTS `approvalreport`;
 CREATE TABLE `approvalreport` (
@@ -39,7 +38,7 @@ CREATE TABLE `approvalreport` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for collectionrecruitment
+-- Table structure for `collectionrecruitment`
 -- ----------------------------
 DROP TABLE IF EXISTS `collectionrecruitment`;
 CREATE TABLE `collectionrecruitment` (
@@ -58,7 +57,7 @@ CREATE TABLE `collectionrecruitment` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for companyimage
+-- Table structure for `companyimage`
 -- ----------------------------
 DROP TABLE IF EXISTS `companyimage`;
 CREATE TABLE `companyimage` (
@@ -75,7 +74,7 @@ CREATE TABLE `companyimage` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for companyinfo
+-- Table structure for `companyinfo`
 -- ----------------------------
 DROP TABLE IF EXISTS `companyinfo`;
 CREATE TABLE `companyinfo` (
@@ -85,24 +84,25 @@ CREATE TABLE `companyinfo` (
   `userId` varchar(255) DEFAULT NULL COMMENT '负责人id',
   `createtime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `email` varchar(255) DEFAULT NULL COMMENT '邮件',
-  `status` varchar(255) DEFAULT NULL COMMENT '领域',
+  `type` varchar(255) DEFAULT NULL COMMENT '企业类型',
   `logo` varchar(255) DEFAULT NULL COMMENT '标志',
   `network` varchar(255) DEFAULT NULL COMMENT '网址',
   `size` varchar(255) DEFAULT NULL COMMENT '规模',
-  `nature` varchar(255) DEFAULT NULL COMMENT '性质',
-  `stage` varchar(255) DEFAULT NULL COMMENT ' 阶段',
+  `stage` varchar(255) DEFAULT NULL COMMENT '阶段',
   `slogans` varchar(255) DEFAULT NULL COMMENT '标语',
   `intruction` varchar(1255) DEFAULT NULL COMMENT '简介',
+  `checked` tinyint(1) DEFAULT '0' COMMENT '0代表未审批，1代表已审批',
+  `pass` tinyint(1) DEFAULT '0' COMMENT '0代表审批未通过，1代表审批通过',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of companyinfo
 -- ----------------------------
-INSERT INTO `companyinfo` VALUES ('1', ' 杭州富远有限公司', '杭州市江干区学正街204号', '4', '2017-10-24 14:42:38', null, null, null, null, null, null, null, null, null);
+INSERT INTO `companyinfo` VALUES ('1', '杭州富远有限公司', '杭州市江干区学正街204号', '4', '2017-10-24 14:42:38', null, null, null, null, null, null, null, null, '0', '1');
 
 -- ----------------------------
--- Table structure for companymark
+-- Table structure for `companymark`
 -- ----------------------------
 DROP TABLE IF EXISTS `companymark`;
 CREATE TABLE `companymark` (
@@ -117,7 +117,7 @@ CREATE TABLE `companymark` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for consulting
+-- Table structure for `consulting`
 -- ----------------------------
 DROP TABLE IF EXISTS `consulting`;
 CREATE TABLE `consulting` (
@@ -130,7 +130,7 @@ CREATE TABLE `consulting` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for dailycheck
+-- Table structure for `dailycheck`
 -- ----------------------------
 DROP TABLE IF EXISTS `dailycheck`;
 CREATE TABLE `dailycheck` (
@@ -148,7 +148,7 @@ CREATE TABLE `dailycheck` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for dynamicapproval
+-- Table structure for `dynamicapproval`
 -- ----------------------------
 DROP TABLE IF EXISTS `dynamicapproval`;
 CREATE TABLE `dynamicapproval` (
@@ -171,13 +171,14 @@ CREATE TABLE `dynamicapproval` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for image
+-- Table structure for `image`
 -- ----------------------------
 DROP TABLE IF EXISTS `image`;
 CREATE TABLE `image` (
-  `id` varchar(255) DEFAULT NULL,
+  `id` varchar(255) NOT NULL DEFAULT '',
   `reportId` varchar(255) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL COMMENT '图片url'
+  `url` varchar(255) DEFAULT NULL COMMENT '图片url',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -185,7 +186,7 @@ CREATE TABLE `image` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for monthstatistics
+-- Table structure for `monthstatistics`
 -- ----------------------------
 DROP TABLE IF EXISTS `monthstatistics`;
 CREATE TABLE `monthstatistics` (
@@ -201,7 +202,7 @@ CREATE TABLE `monthstatistics` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for recruitmentinfo
+-- Table structure for `recruitmentinfo`
 -- ----------------------------
 DROP TABLE IF EXISTS `recruitmentinfo`;
 CREATE TABLE `recruitmentinfo` (
@@ -231,7 +232,7 @@ CREATE TABLE `recruitmentinfo` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for report
+-- Table structure for `report`
 -- ----------------------------
 DROP TABLE IF EXISTS `report`;
 CREATE TABLE `report` (
@@ -253,7 +254,7 @@ CREATE TABLE `report` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for stuclub
+-- Table structure for `stuclub`
 -- ----------------------------
 DROP TABLE IF EXISTS `stuclub`;
 CREATE TABLE `stuclub` (
@@ -272,7 +273,7 @@ CREATE TABLE `stuclub` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for stuhonor
+-- Table structure for `stuhonor`
 -- ----------------------------
 DROP TABLE IF EXISTS `stuhonor`;
 CREATE TABLE `stuhonor` (
@@ -289,7 +290,7 @@ CREATE TABLE `stuhonor` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for stuinfo
+-- Table structure for `stuinfo`
 -- ----------------------------
 DROP TABLE IF EXISTS `stuinfo`;
 CREATE TABLE `stuinfo` (
@@ -311,10 +312,12 @@ CREATE TABLE `stuinfo` (
 -- ----------------------------
 -- Records of stuinfo
 -- ----------------------------
-INSERT INTO `stuinfo` VALUES ('1', '2', '1', '3', '1', '0', 'UI设计师', '1', '0', null, null, null);
+INSERT INTO `stuinfo` VALUES ('1', '2', '1', '2', '1', '0', 'UI设计师', '1', '0', null, null, '2017-11-06 18:12:43');
+INSERT INTO `stuinfo` VALUES ('2', '3', '1', '2', '0', '0', '', '1', '0', '', null, '2017-11-19 18:12:39');
+INSERT INTO `stuinfo` VALUES ('3', '4', '1', '2', '0', '0', null, '1', '0', null, null, '2017-11-15 18:12:54');
 
 -- ----------------------------
--- Table structure for stuproject
+-- Table structure for `stuproject`
 -- ----------------------------
 DROP TABLE IF EXISTS `stuproject`;
 CREATE TABLE `stuproject` (
@@ -335,7 +338,7 @@ CREATE TABLE `stuproject` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for sturecruitment
+-- Table structure for `sturecruitment`
 -- ----------------------------
 DROP TABLE IF EXISTS `sturecruitment`;
 CREATE TABLE `sturecruitment` (
@@ -351,7 +354,7 @@ CREATE TABLE `sturecruitment` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for stuskill
+-- Table structure for `stuskill`
 -- ----------------------------
 DROP TABLE IF EXISTS `stuskill`;
 CREATE TABLE `stuskill` (
@@ -365,7 +368,7 @@ CREATE TABLE `stuskill` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for summary
+-- Table structure for `summary`
 -- ----------------------------
 DROP TABLE IF EXISTS `summary`;
 CREATE TABLE `summary` (
@@ -387,7 +390,7 @@ CREATE TABLE `summary` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for teacherinfo
+-- Table structure for `teacherinfo`
 -- ----------------------------
 DROP TABLE IF EXISTS `teacherinfo`;
 CREATE TABLE `teacherinfo` (
@@ -402,10 +405,12 @@ CREATE TABLE `teacherinfo` (
 -- ----------------------------
 -- Records of teacherinfo
 -- ----------------------------
-INSERT INTO `teacherinfo` VALUES ('1', null, '0');
+INSERT INTO `teacherinfo` VALUES ('1', '5', '0');
+INSERT INTO `teacherinfo` VALUES ('2', '6', '0');
+INSERT INTO `teacherinfo` VALUES ('3', '7', '0');
 
 -- ----------------------------
--- Table structure for user
+-- Table structure for `user`
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -426,6 +431,9 @@ CREATE TABLE `user` (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', 'admin', '21232f297a57a5a743894a0e4a801fc3', '15967180225', 'baby', '1', '1', '2017-10-23 19:39:53', '1');
-INSERT INTO `user` VALUES ('2', '1511050124', '123456', '13587797198', '詹韩峰', '1', '2', '2017-10-23 19:39:52', '1');
-INSERT INTO `user` VALUES ('3', '11050146', '123456', '13968754020', '白求恩', '1', '3', '2017-10-23 19:40:56', '1');
-INSERT INTO `user` VALUES ('4', '849207436', '123456', '18867714413', '范某', '1', '4', '2017-10-23 19:42:37', '1');
+INSERT INTO `user` VALUES ('2', '1511050124', 'e10adc3949ba59abbe56e057f20f883e', '13587797198', '詹韩峰', '1', '2', '2017-11-19 18:09:48', '1');
+INSERT INTO `user` VALUES ('3', '11050146', 'e10adc3949ba59abbe56e057f20f883e', '13968754020', '白求恩', '1', '3', '2017-11-19 18:09:52', '1');
+INSERT INTO `user` VALUES ('4', '849207436', 'e10adc3949ba59abbe56e057f20f883e', '18867714413', '范某', '1', '4', '2017-11-19 18:10:30', '1');
+INSERT INTO `user` VALUES ('5', 'sawei', 'sdfsdfsa', '1567147836', 'hangsenjiang', '1', '3', '2017-11-16 21:43:42', '0');
+INSERT INTO `user` VALUES ('6', 'jiasd', '234', '234213', 'df', '1', '3', '2017-11-16 21:43:42', '0');
+INSERT INTO `user` VALUES ('7', 'sdf', '52435', '7483956', 'dsf', '1', '3', '2017-11-16 21:43:43', '0');

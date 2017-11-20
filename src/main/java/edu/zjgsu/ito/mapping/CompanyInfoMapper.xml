@@ -15,7 +15,8 @@
     <result column="stage" jdbcType="VARCHAR" property="stage" />
     <result column="slogans" jdbcType="VARCHAR" property="slogans" />
     <result column="intruction" jdbcType="VARCHAR" property="intruction" />
-    <result column="confirmpass" jdbcType="BIT" property="confirmpass" />
+    <result column="checked" jdbcType="BIT" property="checked" />
+    <result column="pass" jdbcType="BIT" property="pass" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -77,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, companyname, address, userId, createtime, email, type, logo, network, size, stage, 
-    slogans, intruction, confirmpass
+    slogans, intruction, checked, pass
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.CompanyInfoExample" resultMap="BaseResultMap">
     select
@@ -115,12 +116,12 @@
       userId, createtime, email, 
       type, logo, network, 
       size, stage, slogans, 
-      intruction, confirmpass)
+      intruction, checked, pass)
     values (#{id,jdbcType=VARCHAR}, #{companyname,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{userid,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, 
       #{type,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{network,jdbcType=VARCHAR}, 
       #{size,jdbcType=VARCHAR}, #{stage,jdbcType=VARCHAR}, #{slogans,jdbcType=VARCHAR}, 
-      #{intruction,jdbcType=VARCHAR}, #{confirmpass,jdbcType=BIT})
+      #{intruction,jdbcType=VARCHAR}, #{checked,jdbcType=BIT}, #{pass,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.CompanyInfo">
     insert into companyinfo
@@ -164,8 +165,11 @@
       <if test="intruction != null">
         intruction,
       </if>
-      <if test="confirmpass != null">
-        confirmpass,
+      <if test="checked != null">
+        checked,
+      </if>
+      <if test="pass != null">
+        pass,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -208,8 +212,11 @@
       <if test="intruction != null">
         #{intruction,jdbcType=VARCHAR},
       </if>
-      <if test="confirmpass != null">
-        #{confirmpass,jdbcType=BIT},
+      <if test="checked != null">
+        #{checked,jdbcType=BIT},
+      </if>
+      <if test="pass != null">
+        #{pass,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -261,8 +268,11 @@
       <if test="record.intruction != null">
         intruction = #{record.intruction,jdbcType=VARCHAR},
       </if>
-      <if test="record.confirmpass != null">
-        confirmpass = #{record.confirmpass,jdbcType=BIT},
+      <if test="record.checked != null">
+        checked = #{record.checked,jdbcType=BIT},
+      </if>
+      <if test="record.pass != null">
+        pass = #{record.pass,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -284,7 +294,8 @@
       stage = #{record.stage,jdbcType=VARCHAR},
       slogans = #{record.slogans,jdbcType=VARCHAR},
       intruction = #{record.intruction,jdbcType=VARCHAR},
-      confirmpass = #{record.confirmpass,jdbcType=BIT}
+      checked = #{record.checked,jdbcType=BIT},
+      pass = #{record.pass,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -328,8 +339,11 @@
       <if test="intruction != null">
         intruction = #{intruction,jdbcType=VARCHAR},
       </if>
-      <if test="confirmpass != null">
-        confirmpass = #{confirmpass,jdbcType=BIT},
+      <if test="checked != null">
+        checked = #{checked,jdbcType=BIT},
+      </if>
+      <if test="pass != null">
+        pass = #{pass,jdbcType=BIT},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -348,7 +362,8 @@
       stage = #{stage,jdbcType=VARCHAR},
       slogans = #{slogans,jdbcType=VARCHAR},
       intruction = #{intruction,jdbcType=VARCHAR},
-      confirmpass = #{confirmpass,jdbcType=BIT}
+      checked = #{checked,jdbcType=BIT},
+      pass = #{pass,jdbcType=BIT}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

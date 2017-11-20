@@ -29,7 +29,9 @@ public class CompanyInfo {
 
     private String intruction;
 
-    private Boolean confirmpass;
+    private Boolean checked;
+
+    private Boolean pass;
 
     public String getId() {
         return id;
@@ -135,11 +137,19 @@ public class CompanyInfo {
         this.intruction = intruction == null ? null : intruction.trim();
     }
 
-    public Boolean getConfirmpass() {
-        return confirmpass;
+    public Boolean getChecked() {
+        return checked;
     }
 
-    public void setConfirmpass(Boolean confirmpass) {
-        this.confirmpass = confirmpass;
+    public void setChecked(Boolean checked) {
+        this.checked = checked;
+    }
+
+    public Boolean getPass() {
+        return pass;
+    }
+
+    public void setPass(Boolean pass) {
+        this.pass = pass;
     }
 }
