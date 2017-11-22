@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.zjgsu.ito.dao.CompanyInfoMapper">
+  <resultMap id="BaseResultMap" type="edu.zjgsu.ito.model.CompanyInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="companyname" jdbcType="VARCHAR" property="companyname" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="network" jdbcType="VARCHAR" property="network" />
+    <result column="size" jdbcType="VARCHAR" property="size" />
+    <result column="stage" jdbcType="VARCHAR" property="stage" />
+    <result column="slogans" jdbcType="VARCHAR" property="slogans" />
+    <result column="intruction" jdbcType="VARCHAR" property="intruction" />
+    <result column="checked" jdbcType="BIT" property="checked" />
+    <result column="pass" jdbcType="BIT" property="pass" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, companyname, address, userId, createtime, email, type, logo, network, size, stage, 
+    slogans, intruction, checked, pass
+  </sql>
+  <select id="selectByExample" parameterType="edu.zjgsu.ito.model.CompanyInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from companyinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from companyinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from companyinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="edu.zjgsu.ito.model.CompanyInfoExample">
+    delete from companyinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="edu.zjgsu.ito.model.CompanyInfo">
+    insert into companyinfo (id, companyname, address, 
+      userId, createtime, email, 
+      type, logo, network, 
+      size, stage, slogans, 
+      intruction, checked, pass)
+    values (#{id,jdbcType=VARCHAR}, #{companyname,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{network,jdbcType=VARCHAR}, 
+      #{size,jdbcType=VARCHAR}, #{stage,jdbcType=VARCHAR}, #{slogans,jdbcType=VARCHAR}, 
+      #{intruction,jdbcType=VARCHAR}, #{checked,jdbcType=BIT}, #{pass,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.CompanyInfo">
+    insert into companyinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="companyname != null">
+        companyname,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+      <if test="network != null">
+        network,
+      </if>
+      <if test="size != null">
+        size,
+      </if>
+      <if test="stage != null">
+        stage,
+      </if>
+      <if test="slogans != null">
+        slogans,
+      </if>
+      <if test="intruction != null">
+        intruction,
+      </if>
+      <if test="checked != null">
+        checked,
+      </if>
+      <if test="pass != null">
+        pass,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="companyname != null">
+        #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="network != null">
+        #{network,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="stage != null">
+        #{stage,jdbcType=VARCHAR},
+      </if>
+      <if test="slogans != null">
+        #{slogans,jdbcType=VARCHAR},
+      </if>
+      <if test="intruction != null">
+        #{intruction,jdbcType=VARCHAR},
+      </if>
+      <if test="checked != null">
+        #{checked,jdbcType=BIT},
+      </if>
+      <if test="pass != null">
+        #{pass,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.zjgsu.ito.model.CompanyInfoExample" resultType="java.lang.Long">
+    select count(*) from companyinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update companyinfo
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyname != null">
+        companyname = #{record.companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null">
+        userId = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logo != null">
+        logo = #{record.logo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.network != null">
+        network = #{record.network,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null">
+        size = #{record.size,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stage != null">
+        stage = #{record.stage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.slogans != null">
+        slogans = #{record.slogans,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intruction != null">
+        intruction = #{record.intruction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checked != null">
+        checked = #{record.checked,jdbcType=BIT},
+      </if>
+      <if test="record.pass != null">
+        pass = #{record.pass,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update companyinfo
+    set id = #{record.id,jdbcType=VARCHAR},
+      companyname = #{record.companyname,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      userId = #{record.userid,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      email = #{record.email,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      logo = #{record.logo,jdbcType=VARCHAR},
+      network = #{record.network,jdbcType=VARCHAR},
+      size = #{record.size,jdbcType=VARCHAR},
+      stage = #{record.stage,jdbcType=VARCHAR},
+      slogans = #{record.slogans,jdbcType=VARCHAR},
+      intruction = #{record.intruction,jdbcType=VARCHAR},
+      checked = #{record.checked,jdbcType=BIT},
+      pass = #{record.pass,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.zjgsu.ito.model.CompanyInfo">
+    update companyinfo
+    <set>
+      <if test="companyname != null">
+        companyname = #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="network != null">
+        network = #{network,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="stage != null">
+        stage = #{stage,jdbcType=VARCHAR},
+      </if>
+      <if test="slogans != null">
+        slogans = #{slogans,jdbcType=VARCHAR},
+      </if>
+      <if test="intruction != null">
+        intruction = #{intruction,jdbcType=VARCHAR},
+      </if>
+      <if test="checked != null">
+        checked = #{checked,jdbcType=BIT},
+      </if>
+      <if test="pass != null">
+        pass = #{pass,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="edu.zjgsu.ito.model.CompanyInfo">
+    update companyinfo
+    set companyname = #{companyname,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      email = #{email,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      network = #{network,jdbcType=VARCHAR},
+      size = #{size,jdbcType=VARCHAR},
+      stage = #{stage,jdbcType=VARCHAR},
+      slogans = #{slogans,jdbcType=VARCHAR},
+      intruction = #{intruction,jdbcType=VARCHAR},
+      checked = #{checked,jdbcType=BIT},
+      pass = #{pass,jdbcType=BIT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
