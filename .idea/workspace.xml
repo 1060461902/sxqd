@@ -7,123 +7,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09f4d6c2-4f7f-4972-a58c-418c63860f22" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/CompanyInfoMapper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/RecruitmentInfoMapper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/StuInfoMapper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/TeacherInfoMapper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/mapping/CompanyInfoMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/mapping/RecruitmentInfoMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/mapping/StuInfoMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/mapping/TeacherInfoMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/CompanyInfo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/CompanyInfoExample.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/RecruitmentInfo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/RecruitmentInfoExample.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/StuInfo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/StuInfoExample.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/TeacherInfo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/TeacherInfoExample.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/dao/CompanyInfoMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/dao/RecruitmentInfoMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/dao/StuInfoMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/dao/TeacherInfoMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/mapping/CompanyInfoMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/mapping/RecruitmentInfoMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/mapping/StuInfoMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/mapping/TeacherInfoMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/CompanyInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/CompanyInfoExample$Criteria.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/CompanyInfoExample$Criterion.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/CompanyInfoExample$GeneratedCriteria.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/CompanyInfoExample.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/RecruitmentInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/RecruitmentInfoExample$Criteria.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/RecruitmentInfoExample$Criterion.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/RecruitmentInfoExample$GeneratedCriteria.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/RecruitmentInfoExample.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/StuInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/StuInfoExample$Criteria.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/StuInfoExample$Criterion.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/StuInfoExample$GeneratedCriteria.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/StuInfoExample.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/TeacherInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/TeacherInfoExample$Criteria.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/TeacherInfoExample$Criterion.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/TeacherInfoExample$GeneratedCriteria.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/TeacherInfoExample.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/service/CompanyInfoService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/service/Impl/CompanyInfoServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/service/Impl/StuInfoServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/service/Impl/TeacherInfoServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/service/StuInfoService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/service/TeacherInfoService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/vo/FrontTeacherInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/dao/CompanyInfoMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/dao/RecruitmentInfoMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/dao/StuInfoMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/dao/TeacherInfoMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/mapping/CompanyInfoMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/mapping/RecruitmentInfoMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/mapping/StuInfoMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/mapping/TeacherInfoMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/CompanyInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/CompanyInfoExample$Criteria.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/CompanyInfoExample$Criterion.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/CompanyInfoExample$GeneratedCriteria.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/CompanyInfoExample.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/RecruitmentInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/RecruitmentInfoExample$Criteria.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/RecruitmentInfoExample$Criterion.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/RecruitmentInfoExample$GeneratedCriteria.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/RecruitmentInfoExample.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/StuInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/StuInfoExample$Criteria.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/StuInfoExample$Criterion.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/StuInfoExample$GeneratedCriteria.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/StuInfoExample.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/TeacherInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/TeacherInfoExample$Criteria.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/TeacherInfoExample$Criterion.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/TeacherInfoExample$GeneratedCriteria.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/TeacherInfoExample.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/service/CompanyInfoService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/service/Impl/CompanyInfoServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/service/Impl/StuInfoServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/service/Impl/TeacherInfoServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/service/StuInfoService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/service/TeacherInfoService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/vo/FrontTeacherInfo.class" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/service/CompanyInfoService.java" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/service/CompanyService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/service/Impl/CompanyInfoServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/service/Impl/CompanyServiceImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/service/Impl/StuInfoServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/service/Impl/StudentServiceImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/service/Impl/TeacherInfoServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/service/Impl/TeacherServiceImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/service/StuInfoService.java" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/service/StudentService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/service/TeacherInfoService.java" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/service/TeacherService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/vo/FrontTeacherInfo.java" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/vo/FrontTeacher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/controller/UserController.class" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/controller/UserController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/controller/admin/OperateController.class" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/controller/admin/OperateController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/controller/admin/ViewController.class" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/controller/admin/ViewController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/User.class" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/User.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/UserExample$Criteria.class" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/UserExample$Criteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/UserExample$GeneratedCriteria.class" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/model/UserExample$GeneratedCriteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT.war" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/controller/UserController.class" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/controller/UserController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/controller/admin/OperateController.class" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/controller/admin/OperateController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/controller/admin/ViewController.class" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/controller/admin/ViewController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/User.class" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/User.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/UserExample$Criteria.class" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/UserExample$Criteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/UserExample$GeneratedCriteria.class" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/model/UserExample$GeneratedCriteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/controller/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/controller/UserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/controller/admin/OperateController.java" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/controller/admin/OperateController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/controller/admin/ViewController.java" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/controller/admin/ViewController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/mapping/UserMapper.xml" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/mapping/UserMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/User.java" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/UserExample.java" afterPath="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/UserExample.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/mapping/UserMapper.xml" afterPath="$PROJECT_DIR$/target/classes/edu/zjgsu/ito/mapping/UserMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/mapping/UserMapper.xml" afterPath="$PROJECT_DIR$/target/fieldManagement-0.0.1-SNAPSHOT/WEB-INF/classes/edu/zjgsu/ito/mapping/UserMapper.xml" />
-    </list>
+    <list default="true" id="09f4d6c2-4f7f-4972-a58c-418c63860f22" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$USER_HOME$/环保院/hhprojmgn/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -137,7 +21,18 @@
     <favorites_list name="fieldManagement" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="Company.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/Company.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="13" column="27" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -207,7 +102,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$USER_HOME$/环保院/hhprojmgn/src/main/java/cn/ito/zjgsu/web/controller/DepartmentPersonController.java" />
         <option value="$PROJECT_DIR$/web.xml" />
         <option value="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/service/UserService.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/service/CompanyInfoService.java" />
@@ -258,6 +152,7 @@
         <option value="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/TeacherMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/UserMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/controller/admin/OperateController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/mapping/TeacherMapper.xml" />
       </list>
     </option>
   </component>
@@ -787,10 +682,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114443000" />
+    <option name="totallyTimeSpent" value="114481000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -815,7 +711,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41254124" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14872068" sideWeight="0.49016392" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14872068" sideWeight="0.49016392" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2553305" sideWeight="0.5098361" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893288" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -871,20 +767,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/spring-mybatis.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="96" column="0" lean-forward="true" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/filter/GetJsonFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="31" column="46" lean-forward="true" selection-start-line="31" selection-start-column="46" selection-end-line="31" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -940,7 +822,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
           <caret line="52" column="20" lean-forward="true" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -959,13 +840,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/StuInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="25" column="19" lean-forward="false" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/StuInfo.java" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
@@ -988,48 +863,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/CompanyInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/CompanyInfoMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="8" column="11" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/StuInfoMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="8" column="11" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/TeacherInfoMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="8" column="11" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/RecruitmentInfoExample.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="9" column="22" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/RecruitmentInfoMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="8" column="11" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/CompanyInfo.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/CompanyInfoMapper.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/StuInfoMapper.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/TeacherInfoMapper.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/RecruitmentInfoExample.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/RecruitmentInfoMapper.java" />
     <entry file="file://$PROJECT_DIR$/.idea/vcs.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
@@ -1048,7 +887,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="70">
           <caret line="118" column="0" lean-forward="true" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1056,23 +894,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
           <caret line="13" column="32" lean-forward="true" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/RecruitmentInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-532">
-          <caret line="11" column="34" lean-forward="true" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/RecruitmentInfo.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="672">
           <caret line="24" column="43" lean-forward="false" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1224,17 +1053,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1611">
           <caret line="76" column="10" lean-forward="false" selection-start-line="76" selection-start-column="10" selection-end-line="76" selection-end-column="10" />
-          <folding>
-            <marker date="1511322717445" expanded="true" signature="9696:9891" ph="update user " />
-            <marker date="1511322717445" expanded="true" signature="9696:9902" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/CompanyMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="8" column="11" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
           <folding />
         </state>
       </provider>
@@ -1291,22 +1109,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/RecruitmentExample.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/Company.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="25" column="24" lean-forward="false" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/controller/admin/OperateController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-181">
@@ -1322,21 +1124,65 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/Recruitment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="15" column="27" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/mapping/TeacherMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/dao/CompanyMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-710">
-          <caret line="68" column="50" lean-forward="false" selection-start-line="68" selection-start-column="50" selection-end-line="68" selection-end-column="50" />
+        <state relative-caret-position="140">
+          <caret line="19" column="11" lean-forward="true" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
           <folding>
+            <element signature="e#1873#1889#0" expanded="true" />
             <element signature="e#3426#3442#0" expanded="true" />
             <element signature="e#3839#3855#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/Recruitment.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/RecruitmentExample.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="15" column="27" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="27" />
+        <state relative-caret-position="-700">
+          <caret line="13" column="31" lean-forward="true" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+          <folding>
+            <element signature="e#285#286#0" expanded="true" />
+            <element signature="e#341#342#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/CompanyExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1344">
+          <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/zjgsu/ito/model/Company.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="13" column="27" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="27" />
           <folding />
         </state>
       </provider>
