@@ -26,7 +26,7 @@
   </head>
   <body class="light-gray-bg hidden-scrolling">
     <div class="templatemo-content-widget text-center white-bg fullfill">
-      <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  企业列表</h5><hr>
+      <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  岗位列表</h5><hr>
         <div>
 <!--           <a href="#" title="导出表格" onclick="tableexport()"><i class="fa fa-toggle-up fa-3x float-right"></i> </a> -->
           <a href="#" title="批量导入" onclick="tableimport()"><i class="fa fa-toggle-down fa-3x float-right"></i></a> 
@@ -44,10 +44,11 @@
       <table class="table table-striped"  id="Result">
         <thead>
           <tr>
-            <th>企业名称</th>
-            <th>在招岗位/全部岗位</th>
-            <th>实习学生人数</th>   
-            <th>企业联系人</th>           
+            <th>岗位名称</th>
+            <th>招聘公司</th>
+            <th>招聘人数/已招人数</th>   
+            <th>招聘时间</th>
+            <th>工作地址</th>           
             <th width="20%">操作</th>
           </tr>
         </thead>
@@ -57,9 +58,9 @@
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
             <td>
-              <a href="#" title="重置密码" onclick="reset()"><i class="fa fa-repeat fa-2x"></i>&nbsp;&nbsp;</a>&nbsp;&nbsp;
-              &nbsp;&nbsp;<a href="#" title="禁用" onclick="forbidden()" id="forbidden"><i class="fa fa-ban fa-2x"></i></a>
+              <a href="#" title="禁用" onclick="forbidden()" id="forbidden"><i class="fa fa-ban fa-2x"></i></a>
             </td>
           </tr>
         </tbody>
