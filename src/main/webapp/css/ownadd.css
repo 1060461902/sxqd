@@ -208,6 +208,9 @@ input.search{
   margin-left: 1px !important;
   margin-right: 1px !important;
 }
+.height-660{
+  height: 660px;
+}
 #qyzc,#sxfb,#sydt{
   padding: 20px;
 }
@@ -235,6 +238,12 @@ table#sxxj  tr{
 table#sxxj tr th{
   text-align: right;
   width: 20%;
+}
+.sxxj-div1{
+  padding:10px 30px;
+}
+div#myTabContent>div#teacher,div#myTabContent>div#company{
+  padding: 30px;
 }
 .list-group-item{
   padding: 30px 50px;
