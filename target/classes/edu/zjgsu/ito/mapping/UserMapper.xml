@@ -3,13 +3,13 @@
 <mapper namespace="edu.zjgsu.ito.dao.UserMapper">
   <resultMap id="BaseResultMap" type="edu.zjgsu.ito.model.User">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-    <result column="deleteTag" jdbcType="BIT" property="deletetag" />
-    <result column="roleID" jdbcType="VARCHAR" property="roleid" />
-    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="delete_tag" jdbcType="BIT" property="deleteTag" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="forbidden" jdbcType="BIT" property="forbidden" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, phone, nickname, deleteTag, roleID, createtime, forbidden
+    id, user_name, password, phone, nick_name, delete_tag, role_id, create_time, forbidden
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.UserExample" resultMap="BaseResultMap">
     select
@@ -105,13 +105,13 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.User">
-    insert into user (id, username, password, 
-      phone, nickname, deleteTag, 
-      roleID, createtime, forbidden
+    insert into user (id, user_name, password, 
+      phone, nick_name, delete_tag, 
+      role_id, create_time, forbidden
       )
-    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{deletetag,jdbcType=BIT}, 
-      #{roleid,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{forbidden,jdbcType=BIT}
+    values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{deleteTag,jdbcType=BIT}, 
+      #{roleId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{forbidden,jdbcType=BIT}
       )
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.User">
@@ -120,8 +120,8 @@
       <if test="id != null">
         id,
       </if>
-      <if test="username != null">
-        username,
+      <if test="userName != null">
+        user_name,
       </if>
       <if test="password != null">
         password,
@@ -129,17 +129,17 @@
       <if test="phone != null">
         phone,
       </if>
-      <if test="nickname != null">
-        nickname,
+      <if test="nickName != null">
+        nick_name,
       </if>
-      <if test="deletetag != null">
-        deleteTag,
+      <if test="deleteTag != null">
+        delete_tag,
       </if>
-      <if test="roleid != null">
-        roleID,
+      <if test="roleId != null">
+        role_id,
       </if>
-      <if test="createtime != null">
-        createtime,
+      <if test="createTime != null">
+        create_time,
       </if>
       <if test="forbidden != null">
         forbidden,
@@ -149,8 +149,8 @@
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
@@ -158,17 +158,17 @@
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="nickname != null">
-        #{nickname,jdbcType=VARCHAR},
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
       </if>
-      <if test="deletetag != null">
-        #{deletetag,jdbcType=BIT},
+      <if test="deleteTag != null">
+        #{deleteTag,jdbcType=BIT},
       </if>
-      <if test="roleid != null">
-        #{roleid,jdbcType=VARCHAR},
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="forbidden != null">
         #{forbidden,jdbcType=BIT},
@@ -187,8 +187,8 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.username != null">
-        username = #{record.username,jdbcType=VARCHAR},
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
@@ -196,17 +196,17 @@
       <if test="record.phone != null">
         phone = #{record.phone,jdbcType=VARCHAR},
       </if>
-      <if test="record.nickname != null">
-        nickname = #{record.nickname,jdbcType=VARCHAR},
+      <if test="record.nickName != null">
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
       </if>
-      <if test="record.deletetag != null">
-        deleteTag = #{record.deletetag,jdbcType=BIT},
+      <if test="record.deleteTag != null">
+        delete_tag = #{record.deleteTag,jdbcType=BIT},
       </if>
-      <if test="record.roleid != null">
-        roleID = #{record.roleid,jdbcType=VARCHAR},
+      <if test="record.roleId != null">
+        role_id = #{record.roleId,jdbcType=VARCHAR},
       </if>
-      <if test="record.createtime != null">
-        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.forbidden != null">
         forbidden = #{record.forbidden,jdbcType=BIT},
@@ -219,13 +219,13 @@
   <update id="updateByExample" parameterType="map">
     update user
     set id = #{record.id,jdbcType=VARCHAR},
-      username = #{record.username,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
-      nickname = #{record.nickname,jdbcType=VARCHAR},
-      deleteTag = #{record.deletetag,jdbcType=BIT},
-      roleID = #{record.roleid,jdbcType=VARCHAR},
-      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      delete_tag = #{record.deleteTag,jdbcType=BIT},
+      role_id = #{record.roleId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
       forbidden = #{record.forbidden,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -234,8 +234,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="edu.zjgsu.ito.model.User">
     update user
     <set>
-      <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
@@ -243,17 +243,17 @@
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="nickname != null">
-        nickname = #{nickname,jdbcType=VARCHAR},
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
       </if>
-      <if test="deletetag != null">
-        deleteTag = #{deletetag,jdbcType=BIT},
+      <if test="deleteTag != null">
+        delete_tag = #{deleteTag,jdbcType=BIT},
       </if>
-      <if test="roleid != null">
-        roleID = #{roleid,jdbcType=VARCHAR},
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null">
-        createtime = #{createtime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="forbidden != null">
         forbidden = #{forbidden,jdbcType=BIT},
@@ -263,13 +263,13 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="edu.zjgsu.ito.model.User">
     update user
-    set username = #{username,jdbcType=VARCHAR},
+    set user_name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
-      nickname = #{nickname,jdbcType=VARCHAR},
-      deleteTag = #{deletetag,jdbcType=BIT},
-      roleID = #{roleid,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      delete_tag = #{deleteTag,jdbcType=BIT},
+      role_id = #{roleId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       forbidden = #{forbidden,jdbcType=BIT}
     where id = #{id,jdbcType=VARCHAR}
   </update>
