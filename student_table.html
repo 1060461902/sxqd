@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <meta name="description" content="">
+    <meta name="author" content="templatemo">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/templatemo-style.css" rel="stylesheet">
+    <link href="css/ownadd.css" rel="stylesheet">
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <script src="js/myjs/student_table.js"></script>      
+    <script  type="text/javascript" src="js/bootstrap.js"></script>
+    <!-- datatable -->
+    <link href="css/jquery.dataTables.min.css" rel="stylesheet"> 
+    <script src="js/jquery.dataTables.min.js"></script>   
+  </head>
+  <body class="light-gray-bg hidden-scrolling">
+    <div  class="templatemo-content-widget text-center white-bg fullfill" >
+      <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  学生列表</h5><hr>
+        <div>
+<!--           <a href="#" title="导出表格" onclick="tableexport()"><i class="fa fa-toggle-up fa-3x float-right"></i> </a> -->
+          <a href="#" title="批量导入" onclick="tableimport()"><i class="fa fa-toggle-down fa-3x float-right"></i></a> 
+          <form role="form">
+            <div class="form-group float-right">
+              <select class="form-control">
+                <option>未归档</option>
+                <option>已归档</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-default float-right search"><i class="fa fa-search"></i></button>            
+            <input type="text" class="form-control float-right search" id="name" placeholder="请输入搜索内容">
+          </form>
+        </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>学生姓名</th>
+            <th>学号</th>
+            <th>专业</th>
+            <th>班级</th>
+            <th>实习状态</th>
+            <th>指导老师</th>
+            <th>实习公司</th>
+            <th width="20%">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+<!--           <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <a href="#" title="重置密码" onclick="reset()"><i class="fa fa-repeat fa-2x"></i>&nbsp;&nbsp;</a>&nbsp;&nbsp;
+              &nbsp;&nbsp;<a href="#" title="禁用" onclick="forbidden()" id="forbidden"><i class="fa fa-ban fa-2x"></i></a>
+            </td>
+          </tr> -->
+        </tbody>
+      </table> 
+      <div id="Pagination" class="paging">
+                <ul class="pagination pagination-lg">
+                 <li><a href="#">&laquo;</a></li>
+                 <li><a href="#">1</a></li>
+                 <li><a href="#">2</a></li>
+                 <li><a href="#">3</a></li>
+                 <li><a href="#">4</a></li>
+                 <li><a href="#">5</a></li>
+                 <li><a href="#">&raquo;</a></li>
+               </ul> 
+    </div>
+   </div>
+  </body>
+</html>
