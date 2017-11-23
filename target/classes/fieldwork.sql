@@ -10,80 +10,62 @@ Target Server Type    : MYSQL
 Target Server Version : 50133
 File Encoding         : 65001
 
-Date: 2017-11-20 11:49:10
-
+Date: 2017-11-23 11:03:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
--- Table structure for `approvalreport`
+-- Table structure for `approve_report`
 -- ----------------------------
-DROP TABLE IF EXISTS `approvalreport`;
-CREATE TABLE `approvalreport` (
+DROP TABLE IF EXISTS `approve_report`;
+CREATE TABLE `approve_report` (
   `id` varchar(255) NOT NULL,
   `mark` int(11) DEFAULT NULL COMMENT '1表示周报，2月报',
-  `approvalTime` datetime DEFAULT NULL,
+  `approval_time` datetime DEFAULT NULL,
   `grade` int(11) DEFAULT NULL,
-  `userId` varchar(255) DEFAULT NULL,
-  `userIdentity` varchar(255) DEFAULT NULL,
-  `reportId` varchar(255) DEFAULT NULL,
+  `user_id` varchar(255) NOT NULL,
+  `user_identity` varchar(255) DEFAULT NULL,
+  `report_id` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`userId`),
-  KEY `report_id` (`reportId`),
-  CONSTRAINT `report_id` FOREIGN KEY (`reportId`) REFERENCES `report` (`id`),
-  CONSTRAINT `user_id` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
+  KEY `user_id` (`user_id`) USING BTREE,
+  KEY `report_id` (`report_id`) USING BTREE,
+  CONSTRAINT `approve_report_ibfk_1` FOREIGN KEY (`report_id`) REFERENCES `report` (`id`),
+  CONSTRAINT `approve_report_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of approvalreport
+-- Records of approve_report
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `collectionrecruitment`
+-- Table structure for `collection_recruitment`
 -- ----------------------------
-DROP TABLE IF EXISTS `collectionrecruitment`;
-CREATE TABLE `collectionrecruitment` (
+DROP TABLE IF EXISTS `collection_recruitment`;
+CREATE TABLE `collection_recruitment` (
   `id` varchar(255) NOT NULL,
-  `recruitmentId` varchar(255) DEFAULT NULL,
-  `userId` varchar(255) DEFAULT NULL,
+  `recruitment_id` varchar(255) NOT NULL,
+  `user_id` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `recruitement_id` (`recruitmentId`),
-  KEY `user_iid` (`userId`),
-  CONSTRAINT `recruitement_id` FOREIGN KEY (`recruitmentId`) REFERENCES `recruitmentinfo` (`id`),
-  CONSTRAINT `user_iid` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
+  KEY `recruitement_id` (`recruitment_id`) USING BTREE,
+  KEY `user_id` (`user_id`) USING BTREE,
+  CONSTRAINT `collection_recruitment_ibfk_1` FOREIGN KEY (`recruitment_id`) REFERENCES `recruitment` (`id`),
+  CONSTRAINT `collection_recruitment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of collectionrecruitment
+-- Records of collection_recruitment
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `companyimage`
+-- Table structure for `company`
 -- ----------------------------
-DROP TABLE IF EXISTS `companyimage`;
-CREATE TABLE `companyimage` (
+DROP TABLE IF EXISTS `company`;
+CREATE TABLE `company` (
   `id` varchar(255) NOT NULL,
-  `companyId` varchar(255) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `company_idd` (`companyId`),
-  CONSTRAINT `company_idd` FOREIGN KEY (`companyId`) REFERENCES `companyinfo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of companyimage
--- ----------------------------
-
--- ----------------------------
--- Table structure for `companyinfo`
--- ----------------------------
-DROP TABLE IF EXISTS `companyinfo`;
-CREATE TABLE `companyinfo` (
-  `id` varchar(255) NOT NULL,
-  `companyname` varchar(255) DEFAULT NULL,
+  `company_name` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `userId` varchar(255) DEFAULT NULL COMMENT '负责人id',
-  `createtime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `user_id` varchar(255) NOT NULL COMMENT '负责人id',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `email` varchar(255) DEFAULT NULL COMMENT '邮件',
   `type` varchar(255) DEFAULT NULL COMMENT '企业类型',
   `logo` varchar(255) DEFAULT NULL COMMENT '标志',
@@ -94,81 +76,105 @@ CREATE TABLE `companyinfo` (
   `intruction` varchar(1255) DEFAULT NULL COMMENT '简介',
   `checked` tinyint(1) DEFAULT '0' COMMENT '0代表未审批，1代表已审批',
   `pass` tinyint(1) DEFAULT '0' COMMENT '0代表审批未通过，1代表审批通过',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `company_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of companyinfo
+-- Records of company
 -- ----------------------------
-INSERT INTO `companyinfo` VALUES ('1', '杭州富远有限公司', '杭州市江干区学正街204号', '4', '2017-10-24 14:42:38', null, null, null, null, null, null, null, null, '1', '0');
+INSERT INTO `company` VALUES ('1', '杭州富远有限公司', '杭州市江干区学正街204号', '4', '2017-10-24 14:42:38', null, null, null, null, null, null, null, null, '1', '1');
 
 -- ----------------------------
--- Table structure for `companymark`
+-- Table structure for `company_image`
 -- ----------------------------
-DROP TABLE IF EXISTS `companymark`;
-CREATE TABLE `companymark` (
+DROP TABLE IF EXISTS `company_image`;
+CREATE TABLE `company_image` (
   `id` varchar(255) NOT NULL,
-  `companyId` varchar(255) DEFAULT NULL,
+  `company_id` varchar(255) NOT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `company_id` (`company_id`) USING BTREE,
+  CONSTRAINT `company_image_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of company_image
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `company_mark`
+-- ----------------------------
+DROP TABLE IF EXISTS `company_mark`;
+CREATE TABLE `company_mark` (
+  `id` varchar(255) NOT NULL,
+  `company_id` varchar(255) NOT NULL,
   `mark` varchar(255) DEFAULT NULL COMMENT '企业标签',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `company_id` (`company_id`),
+  CONSTRAINT `company_mark_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of companymark
+-- Records of company_mark
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `consulting`
+-- Table structure for `consult`
 -- ----------------------------
-DROP TABLE IF EXISTS `consulting`;
-CREATE TABLE `consulting` (
+DROP TABLE IF EXISTS `consult`;
+CREATE TABLE `consult` (
   `id` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of consulting
+-- Records of consult
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `dailycheck`
+-- Table structure for `daily_check`
 -- ----------------------------
-DROP TABLE IF EXISTS `dailycheck`;
-CREATE TABLE `dailycheck` (
+DROP TABLE IF EXISTS `daily_check`;
+CREATE TABLE `daily_check` (
   `id` varchar(11) NOT NULL,
-  `userId` varchar(255) DEFAULT NULL,
-  `startTime` datetime DEFAULT NULL,
-  `startCheck` tinyint(4) DEFAULT NULL,
-  `endTime` datetime DEFAULT NULL,
-  `endCheck` tinyint(4) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `user_id` varchar(255) NOT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `start_check` tinyint(4) DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `end_check` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `daily_check_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of dailycheck
+-- Records of daily_check
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `dynamicapproval`
+-- Table structure for `dynamic_approve`
 -- ----------------------------
-DROP TABLE IF EXISTS `dynamicapproval`;
-CREATE TABLE `dynamicapproval` (
+DROP TABLE IF EXISTS `dynamic_approve`;
+CREATE TABLE `dynamic_approve` (
   `id` varchar(255) NOT NULL,
   `title` varchar(255) DEFAULT NULL COMMENT '标题',
-  `imageUrl` varchar(255) DEFAULT NULL COMMENT '图片url',
+  `image_url` varchar(255) DEFAULT NULL COMMENT '图片url',
   `detail` varchar(1255) DEFAULT NULL COMMENT '文章内容',
-  `deleteTag` tinyint(1) DEFAULT '1' COMMENT '删除标志',
+  `delete_tag` tinyint(1) DEFAULT '1' COMMENT '删除标志',
   `passing` tinyint(1) DEFAULT '0' COMMENT '0未通过',
   `dopassing` tinyint(1) DEFAULT NULL COMMENT '是否被审批',
-  `user_id` varchar(255) DEFAULT NULL COMMENT '申请人id',
+  `user_id` varchar(255) NOT NULL COMMENT '申请人id',
   `phone` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `user` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `dynamic_approve_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of dynamicapproval
+-- Records of dynamic_approve
 -- ----------------------------
 
 -- ----------------------------
@@ -177,9 +183,11 @@ CREATE TABLE `dynamicapproval` (
 DROP TABLE IF EXISTS `image`;
 CREATE TABLE `image` (
   `id` varchar(255) NOT NULL DEFAULT '',
-  `reportId` varchar(255) DEFAULT NULL,
+  `report_id` varchar(255) NOT NULL,
   `url` varchar(255) DEFAULT NULL COMMENT '图片url',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `report_id` (`report_id`),
+  CONSTRAINT `image_ibfk_1` FOREIGN KEY (`report_id`) REFERENCES `report` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -187,38 +195,38 @@ CREATE TABLE `image` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `monthstatistics`
+-- Table structure for `month_statistics`
 -- ----------------------------
-DROP TABLE IF EXISTS `monthstatistics`;
-CREATE TABLE `monthstatistics` (
+DROP TABLE IF EXISTS `month_statistics`;
+CREATE TABLE `month_statistics` (
   `id` varchar(255) NOT NULL,
-  `companyCount` varchar(255) DEFAULT NULL COMMENT '企业注册数',
-  `recruitmentCount` varchar(255) DEFAULT NULL COMMENT '在招岗位数',
-  `recruitmentPeople` varchar(255) DEFAULT NULL COMMENT '招聘人数',
+  `company_count` varchar(255) DEFAULT NULL COMMENT '企业注册数',
+  `recruitment_count` varchar(255) DEFAULT NULL COMMENT '在招岗位数',
+  `recruitment_number` varchar(255) DEFAULT NULL COMMENT '招聘人数',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of monthstatistics
+-- Records of month_statistics
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `recruitmentinfo`
+-- Table structure for `recruitment`
 -- ----------------------------
-DROP TABLE IF EXISTS `recruitmentinfo`;
-CREATE TABLE `recruitmentinfo` (
+DROP TABLE IF EXISTS `recruitment`;
+CREATE TABLE `recruitment` (
   `id` varchar(255) NOT NULL,
-  `companyID` varchar(255) DEFAULT NULL COMMENT '公司id',
+  `company_id` varchar(255) NOT NULL COMMENT '公司id',
   `post` varchar(255) DEFAULT NULL COMMENT '招聘岗位',
-  `currentNumber` int(10) DEFAULT NULL COMMENT '现在招收人数',
-  `totalNumber` int(10) DEFAULT NULL COMMENT '总招募人数',
-  `postInfo` varchar(255) DEFAULT NULL COMMENT '职位信息',
+  `current_number` int(10) DEFAULT NULL COMMENT '现在招收人数',
+  `total_number` int(10) DEFAULT NULL COMMENT '总招募人数',
+  `post_info` varchar(255) DEFAULT NULL COMMENT '职位信息',
   `checked` tinyint(1) DEFAULT '0' COMMENT '0代表未审批，1代表已审批',
   `pass` tinyint(1) DEFAULT '0' COMMENT '0代表审批未通过，1代表审批通过',
-  `delete` tinyint(1) DEFAULT '0' COMMENT '标记删除，0-false，1-true',
+  `delete_tag` tinyint(1) DEFAULT '0' COMMENT '标记删除，0-false，1-true',
   `address` varchar(255) DEFAULT NULL COMMENT '地址',
-  `skillRequirement` varchar(255) DEFAULT NULL COMMENT '技能要求',
-  `postTime` datetime DEFAULT NULL COMMENT '招聘时间',
+  `skill_require` varchar(255) DEFAULT NULL COMMENT '技能要求',
+  `post_time` varchar(255) DEFAULT NULL COMMENT '招聘时间',
   `remove` tinyint(1) DEFAULT '0' COMMENT '是否被撤下0-false,1-true',
   `forbidden` tinyint(1) DEFAULT '0' COMMENT '0-没有被禁用，1-禁用',
   `salary` varchar(255) DEFAULT NULL COMMENT '薪资待遇',
@@ -226,12 +234,16 @@ CREATE TABLE `recruitmentinfo` (
   `phone` varchar(255) DEFAULT NULL COMMENT '电话',
   `email` varchar(255) DEFAULT NULL COMMENT '邮箱',
   `recruitment` tinyint(1) DEFAULT '1' COMMENT '招聘状态，1-招聘中，0-招聘结束',
-  `userId` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `user_id` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `company_id` (`company_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `recruitment_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`),
+  CONSTRAINT `recruitment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of recruitmentinfo
+-- Records of recruitment
 -- ----------------------------
 
 -- ----------------------------
@@ -240,16 +252,18 @@ CREATE TABLE `recruitmentinfo` (
 DROP TABLE IF EXISTS `report`;
 CREATE TABLE `report` (
   `id` varchar(255) DEFAULT NULL,
-  `userId` varchar(255) DEFAULT NULL,
-  `projectName` varchar(255) DEFAULT NULL,
-  `passingMark` varchar(255) DEFAULT NULL,
-  `createTime` datetime DEFAULT NULL,
-  `startTime` datetime DEFAULT NULL,
-  `endTime` datetime DEFAULT NULL,
+  `user_id` varchar(255) NOT NULL,
+  `project_name` varchar(255) DEFAULT NULL,
+  `passing_mark` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL COMMENT '存放地址',
-  `statusId` int(11) DEFAULT NULL COMMENT '1表示周报2表示月报',
+  `status_id` int(11) DEFAULT NULL COMMENT '1表示周报2表示月报',
   `content` varchar(15000) DEFAULT NULL,
-  KEY `id` (`id`)
+  KEY `id` (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `report_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -257,117 +271,133 @@ CREATE TABLE `report` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `stuclub`
+-- Table structure for `student`
 -- ----------------------------
-DROP TABLE IF EXISTS `stuclub`;
-CREATE TABLE `stuclub` (
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE `student` (
   `id` varchar(255) NOT NULL,
-  `clubName` varchar(255) DEFAULT NULL,
-  `indentity` varchar(255) DEFAULT NULL,
-  `startTime` datetime DEFAULT NULL,
-  `endTime` datetime DEFAULT NULL,
-  `instruction` varchar(1255) DEFAULT NULL,
-  `userId` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of stuclub
--- ----------------------------
-
--- ----------------------------
--- Table structure for `stuhonor`
--- ----------------------------
-DROP TABLE IF EXISTS `stuhonor`;
-CREATE TABLE `stuhonor` (
-  `id` varchar(255) NOT NULL,
-  `userId` varchar(255) DEFAULT NULL,
-  `time` datetime DEFAULT NULL,
-  `instruction` varchar(255) DEFAULT NULL,
-  `honorName` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of stuhonor
--- ----------------------------
-
--- ----------------------------
--- Table structure for `stuinfo`
--- ----------------------------
-DROP TABLE IF EXISTS `stuinfo`;
-CREATE TABLE `stuinfo` (
-  `id` varchar(255) NOT NULL,
-  `userID` varchar(255) DEFAULT NULL,
-  `companyID` varchar(255) DEFAULT NULL COMMENT '公司联系人代表公司id学生根据状态表示想去的公司',
-  `teacherID` varchar(255) DEFAULT NULL,
+  `user_id` varchar(255) NOT NULL,
+  `company_id` varchar(255) NOT NULL COMMENT '公司联系人代表公司id学生根据状态表示想去的公司',
+  `teacher_id` varchar(255) NOT NULL,
   `status` varchar(255) DEFAULT '0' COMMENT '实习状态0未实习1申请中2待实习3实习中4已结业',
-  `zipFile` tinyint(1) DEFAULT '0' COMMENT '0默认未归档1归档',
+  `zip_file` tinyint(1) DEFAULT '0' COMMENT '0默认未归档1归档',
   `post` varchar(255) DEFAULT NULL COMMENT '实习岗位',
-  `deleteTag` tinyint(1) DEFAULT '1' COMMENT '1存在 0删除 默认1',
+  `delete_tag` tinyint(1) DEFAULT '1' COMMENT '1存在 0删除 默认1',
   `sex` tinyint(1) DEFAULT '0' COMMENT '0男1女',
   `nation` varchar(255) DEFAULT NULL COMMENT '民族',
   `english` tinyint(1) DEFAULT NULL COMMENT '1熟练2一般',
-  `fallYear` datetime DEFAULT NULL COMMENT '毕业年份',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of stuinfo
--- ----------------------------
-INSERT INTO `stuinfo` VALUES ('1', '2', '1', '2', '1', '0', 'UI设计师', '1', '0', null, null, '2017-11-06 18:12:43');
-INSERT INTO `stuinfo` VALUES ('2', '3', '1', '2', '0', '0', '', '1', '0', '', null, '2017-11-19 18:12:39');
-INSERT INTO `stuinfo` VALUES ('3', '4', '1', '2', '0', '0', null, '1', '0', null, null, '2017-11-15 18:12:54');
-
--- ----------------------------
--- Table structure for `stuproject`
--- ----------------------------
-DROP TABLE IF EXISTS `stuproject`;
-CREATE TABLE `stuproject` (
-  `id` varchar(255) NOT NULL,
-  `projectName` varchar(255) DEFAULT NULL,
-  `identity` varchar(255) DEFAULT NULL,
-  `startTime` datetime DEFAULT NULL,
-  `endTime` datetime DEFAULT NULL,
-  `instruction` varchar(1255) DEFAULT NULL,
-  `userId` varchar(255) DEFAULT NULL,
+  `graduate_year` datetime DEFAULT NULL COMMENT '毕业年份',
   PRIMARY KEY (`id`),
-  KEY `userIdd` (`userId`),
-  CONSTRAINT `userIdd` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
+  KEY `user_id` (`user_id`),
+  KEY `company_id` (`company_id`),
+  KEY `teacher_id` (`teacher_id`),
+  CONSTRAINT `student_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `student_ibfk_2` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`),
+  CONSTRAINT `student_ibfk_3` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of stuproject
+-- Records of student
 -- ----------------------------
+INSERT INTO `student` VALUES ('1', '2', '1', '2', '1', '0', 'UI设计师', '1', '0', null, null, '2017-11-06 18:12:43');
+INSERT INTO `student` VALUES ('2', '3', '1', '2', '0', '0', '', '1', '0', '', null, '2017-11-19 18:12:39');
+INSERT INTO `student` VALUES ('3', '4', '1', '2', '0', '0', null, '1', '0', null, null, '2017-11-15 18:12:54');
 
 -- ----------------------------
--- Table structure for `sturecruitment`
+-- Table structure for `student_club`
 -- ----------------------------
-DROP TABLE IF EXISTS `sturecruitment`;
-CREATE TABLE `sturecruitment` (
+DROP TABLE IF EXISTS `student_club`;
+CREATE TABLE `student_club` (
   `id` varchar(255) NOT NULL,
-  `user_id` varchar(255) DEFAULT NULL,
-  `recruitmentId` varchar(255) DEFAULT NULL,
-  `passing` tinyint(4) DEFAULT NULL COMMENT '1审批通过，2审批未通过，3待审批',
-  PRIMARY KEY (`id`)
+  `club_name` varchar(255) DEFAULT NULL,
+  `indentity` varchar(255) DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `instruction` varchar(1255) DEFAULT NULL,
+  `user_id` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `student_club_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of sturecruitment
+-- Records of student_club
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `stuskill`
+-- Table structure for `student_honor`
 -- ----------------------------
-DROP TABLE IF EXISTS `stuskill`;
-CREATE TABLE `stuskill` (
+DROP TABLE IF EXISTS `student_honor`;
+CREATE TABLE `student_honor` (
+  `id` varchar(255) NOT NULL,
+  `user_id` varchar(255) NOT NULL,
+  `time` datetime DEFAULT NULL,
+  `instruction` varchar(255) DEFAULT NULL,
+  `honor_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `student_honor_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of student_honor
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `student_project`
+-- ----------------------------
+DROP TABLE IF EXISTS `student_project`;
+CREATE TABLE `student_project` (
+  `id` varchar(255) NOT NULL,
+  `project_name` varchar(255) DEFAULT NULL,
+  `identity` varchar(255) DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `instruction` varchar(1255) DEFAULT NULL,
+  `user_id` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`) USING BTREE,
+  CONSTRAINT `student_project_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of student_project
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `student_recruitment`
+-- ----------------------------
+DROP TABLE IF EXISTS `student_recruitment`;
+CREATE TABLE `student_recruitment` (
+  `id` varchar(255) NOT NULL,
+  `user_id` varchar(255) NOT NULL,
+  `recruitment_id` varchar(255) NOT NULL,
+  `passing` tinyint(4) DEFAULT NULL COMMENT '1审批通过，2审批未通过，3待审批',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `recruitment_id` (`recruitment_id`),
+  CONSTRAINT `student_recruitment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `student_recruitment_ibfk_2` FOREIGN KEY (`recruitment_id`) REFERENCES `recruitment` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of student_recruitment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `student_skill`
+-- ----------------------------
+DROP TABLE IF EXISTS `student_skill`;
+CREATE TABLE `student_skill` (
   `id` varchar(255) NOT NULL,
   `skill` varchar(255) DEFAULT NULL,
-  `userId` varchar(255) DEFAULT NULL
+  `user_id` varchar(255) NOT NULL,
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `student_skill_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of stuskill
+-- Records of student_skill
 -- ----------------------------
 
 -- ----------------------------
@@ -376,16 +406,18 @@ CREATE TABLE `stuskill` (
 DROP TABLE IF EXISTS `summary`;
 CREATE TABLE `summary` (
   `id` varchar(255) NOT NULL COMMENT '参考report表格',
-  `userId` varchar(255) DEFAULT NULL,
-  `projectName` varchar(255) DEFAULT NULL,
-  `passingMark` varchar(255) DEFAULT NULL,
-  `createTime` datetime DEFAULT NULL,
-  `startTime` datetime DEFAULT NULL,
-  `endTime` datetime DEFAULT NULL,
+  `user_id` varchar(255) NOT NULL,
+  `project_name` varchar(255) DEFAULT NULL,
+  `passing_mark` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL,
-  `statusId` int(11) DEFAULT NULL,
+  `status_id` int(11) DEFAULT NULL,
   `content` varchar(15000) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `summary_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -393,24 +425,24 @@ CREATE TABLE `summary` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `teacherinfo`
+-- Table structure for `teacher`
 -- ----------------------------
-DROP TABLE IF EXISTS `teacherinfo`;
-CREATE TABLE `teacherinfo` (
+DROP TABLE IF EXISTS `teacher`;
+CREATE TABLE `teacher` (
   `id` varchar(255) NOT NULL,
-  `userID` varchar(255) DEFAULT NULL,
+  `user_id` varchar(255) NOT NULL,
   `status` tinyint(1) DEFAULT '0' COMMENT '0未指导，1指导中',
   PRIMARY KEY (`id`),
-  KEY `userID` (`userID`),
-  CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `user` (`id`)
+  KEY `user_id` (`user_id`) USING BTREE,
+  CONSTRAINT `teacher_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of teacherinfo
+-- Records of teacher
 -- ----------------------------
-INSERT INTO `teacherinfo` VALUES ('1', '5', '0');
-INSERT INTO `teacherinfo` VALUES ('2', '6', '0');
-INSERT INTO `teacherinfo` VALUES ('3', '7', '0');
+INSERT INTO `teacher` VALUES ('1', '5', '0');
+INSERT INTO `teacher` VALUES ('2', '6', '0');
+INSERT INTO `teacher` VALUES ('3', '7', '0');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -418,16 +450,16 @@ INSERT INTO `teacherinfo` VALUES ('3', '7', '0');
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` varchar(255) NOT NULL,
-  `username` varchar(255) DEFAULT NULL,
+  `user_name` varchar(255) DEFAULT NULL,
   `password` varchar(1255) DEFAULT NULL COMMENT '密文',
   `phone` varchar(20) DEFAULT NULL,
-  `nickname` varchar(255) DEFAULT NULL,
-  `deleteTag` tinyint(1) DEFAULT '1' COMMENT '1存在0删除 默认1',
-  `roleID` varchar(255) DEFAULT NULL COMMENT '1.2.3.4管理员，学生，教师，公司',
-  `createtime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `nick_name` varchar(255) DEFAULT NULL,
+  `delete_tag` tinyint(1) DEFAULT '1' COMMENT '1存在0删除 默认1',
+  `role_id` varchar(255) NOT NULL COMMENT '1.2.3.4管理员，学生，教师，公司',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `forbidden` tinyint(1) DEFAULT '0' COMMENT '0-没有被禁用，1-禁用',
   PRIMARY KEY (`id`),
-  KEY `user_ibfk_2` (`roleID`)
+  KEY `user_ibfk_2` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

@@ -45,7 +45,7 @@ function validate_form()
       //               }
       //           })
     var info = new Object();  //alert(info);
-    info.username = $("#account").val();  //alert(info.username);
+    info.userName = $("#account").val();  //alert(info.username);
     info.password = $("#password").val();  //alert(info.password);  
      $.ajax({
        type: 'post',
