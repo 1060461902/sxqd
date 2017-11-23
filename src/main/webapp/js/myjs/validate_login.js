@@ -33,46 +33,40 @@ function validate_form()
   	{$("#password").focus();return false}
   else
     { 
-      $.getJSON("./js/json/validate1.json", function(data) {
-                    if (data.code == "200") {
-                         location.href="index.html"
-                    }
-                    else if(data.code == "500"){
-                         alert('帐号或密码错误');
-                    }
-                    else{
-                         alert("服务器异常");
-                    }
-                })
-    //   //getJson();
-    // var info = new Object();  // alert(info);
-    // info.username = $("#account").val(); //alert(info.username);
-    // info.password = $("#password").val();  //alert(info.password); 
-    // var event = new Object();
-    // event.code = 200; //alert(event);
-    // event.info = info; 
-    // alert(JSON.stringify(event));
-    //  $.ajax({
-    //    type: 'post',
-    //    url: 'js/json/validate1.json',
-    //    data: JSON.stringify(event),
-    //    async: true,
-    //    contentType: "application/json",
-    //    dateType: "json",
-    //    success: function(data){
-    //     if (data.info.action == "Successful"){
-    //       alert('登录成功');
-    //         // location.href='./index.html';
-    //     }
-    //     else if(data.info.action == "Fail"){
-    //     alert('帐号或密码错误');
-    //     }
-    //  },
-    //    error: function(){
-    //     alert('服务端异常');
-    //     }
-    // })
+      // $.getJSON("./js/json/validate1.json", function(data) {
+      //               if (data.code == "200") {
+      //                    location.href="index.html"
+      //               }
+      //               else if(data.code == "500"){
+      //                    alert('帐号或密码错误');
+      //               }
+      //               else{
+      //                    alert("服务器异常");
+      //               }
+      //           })
+    var info = new Object();  //alert(info);
+    info.userName = $("#account").val();  //alert(info.username);
+    info.password = $("#password").val();  //alert(info.password);  
+     $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/login',
+       data: JSON.stringify(info),
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+        if (data.code == "200"){
+           location.href='./index.html';
+        }
+        else if(data.code == "500"){
+        alert('帐号或密码错误');
+        }
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    })
 
-    //   return true;
-  }
+      return true;
+  } 
 }
