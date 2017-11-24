@@ -1,15 +1,14 @@
 package edu.zjgsu.ito.controller.admin;
 
 import edu.zjgsu.ito.model.*;
-import edu.zjgsu.ito.service.CompanyInfoService;
-import edu.zjgsu.ito.service.StuInfoService;
-import edu.zjgsu.ito.service.TeacherInfoService;
+import edu.zjgsu.ito.service.CompanyService;
+import edu.zjgsu.ito.service.StudentService;
+import edu.zjgsu.ito.service.TeacherService;
 import edu.zjgsu.ito.service.UserService;
 import edu.zjgsu.ito.utils.Constant;
 import edu.zjgsu.ito.utils.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -28,11 +27,11 @@ public class OperateController {
 //    @Autowired
 //
     @Autowired
-    CompanyInfoService companyInfoService;
+    CompanyService companyService;
     @Autowired
-    StuInfoService stuInfoService;
+    StudentService studentService;
     @Autowired
-    TeacherInfoService teacherInfoService;
+    TeacherService teacherService;
     @Autowired
     UserService userService;
 
@@ -42,17 +41,17 @@ public class OperateController {
 
         switch (roleid) {
             case "2":
-                StuInfo stuInfo = stuInfoService.selectByPrimaryKey(id);
-                userId.add(stuInfo.getUserid());
+                Student student = studentService.selectByPrimaryKey(id);
+                userId.add(student.getUserId());
                 break;
             case "3":
-                TeacherInfo teacherInfo = teacherInfoService.selectByPrimaryKey(id);
+                Teacher teacher = teacherService.selectByPrimaryKey(id);
 
-                userId.add(teacherInfo.getUserid());
+                userId.add(teacher.getUserId());
                 break;
             case "4":
-                CompanyInfo companyInfo = companyInfoService.selectByPrimaryKey(id);
-                userId.add(companyInfo.getUserid());
+                Company company = companyService.selectByPrimaryKey(id);
+                userId.add(company.getUserId());
                 break;
             default:
 //                System.out.println(""\);
@@ -60,25 +59,25 @@ public class OperateController {
         }
         return userId.get(0);
     }
-    @RequestMapping(value="/list", method=RequestMethod.POST)
+/*    @RequestMapping(value="/list", method=RequestMethod.POST)
     @ResponseBody
     public String requestList(@RequestParam("listParam[]") List<String> param) {
         return "Request successful. Post param : List<String> - " + param.toString();
-    }
+}*/
 
 
 
     @RequestMapping(value = "allocateStu2Teacher", method = RequestMethod.GET)
-    public @ResponseBody Map<String, Object> allocateStu2Teacher(@RequestParam(value = "studentIdList") List<String> studentIdList,
+    public @ResponseBody Map<String, Object> allocateStu2Teacher(@RequestParam(value = "studentIdList") List<String> StudentIdList,
                                                                  @RequestParam(value = "teacherId") String teacherId) {
         int status;
         Map<String, Object> result = new HashMap<String, Object>();
 
         for (String stuId:
-             studentIdList) {
-            StuInfo stuInfo = stuInfoService.selectByPrimaryKey(stuId);
-            stuInfo.setTeacherid(teacherId);
-            status = stuInfoService.updateByPrimaryKey(stuInfo);
+             StudentIdList) {
+            Student student = studentService.selectByPrimaryKey(stuId);
+            student.setTeacherId(teacherId);
+            status = studentService.updateByPrimaryKey(student);
             if (!(status > 0)) {
                 result.put("code", Constant.FAIL);
                 result.put("msg", "分配学生失败！");
@@ -92,14 +91,14 @@ public class OperateController {
 
 
     @RequestMapping(value = "forbidAccount", method = RequestMethod.GET)
-    public @ResponseBody Map<String, Object> forbidAccount(@RequestParam("roleid") String roleid,
+    public @ResponseBody Map<String, Object> forbidAccount(@RequestParam("roleId") String roleId,
                                                            @RequestParam("id") String id) {
         int status;
         String userId;
         Map<String, Object> result = new HashMap<String, Object>();
 
 //        根据角色的主键id查询userID
-        userId = role2user(roleid, id);
+        userId = role2user(roleId, id);
 
         User user = userService.selectByPrimaryKey(userId);
         user.setForbidden(true);
@@ -118,7 +117,7 @@ public class OperateController {
 
 
     @RequestMapping(value = "resetPwd", method = RequestMethod.GET)
-    public @ResponseBody Map<String, Object> resetPwd(@RequestParam("roleid") String roleid,
+    public @ResponseBody Map<String, Object> resetPwd(@RequestParam("roleId") String roleId,
                                                       @RequestParam("id") String id) {
         int status;
         String userId;
@@ -127,7 +126,7 @@ public class OperateController {
 
         md5Password = Md5Util.getMD5(defaultPwd);
 
-        userId = role2user(roleid, id);
+        userId = role2user(roleId, id);
 
 //                修改密码
         User user = userService.selectByPrimaryKey(userId);
@@ -146,7 +145,7 @@ public class OperateController {
     }
     /**
      *
-     * @param id 需要被审批的企业的id，即companyinfo的主键
+     * @param id 需要被审批的企业的id，即company的主键
      * @return code
      * @author saweis
      */
@@ -156,25 +155,25 @@ public class OperateController {
         int status;
         Map<String, Object> result = new HashMap<String, Object>();
 
-        CompanyInfo companyInfoBack = companyInfoService.selectByPrimaryKey(id);
-        if (companyInfoBack == null) {
+        Company companyBack = companyService.selectByPrimaryKey(id);
+        if (companyBack == null) {
             result.put("code", Constant.FAIL);
             result.put("msg", "未查到id=" + id + "的记录！");
             return result;
         }
 //        已经被check过
-        companyInfoBack.setChecked(true);
+        companyBack.setChecked(true);
 
         if (passFlag.equals("0")) {
 //            审批不通过
-            companyInfoBack.setPass(false);
+            companyBack.setPass(false);
         } else {
 //            审批通过
-            companyInfoBack.setPass(true);
+            companyBack.setPass(true);
         }
 
 //        更新数据库记录
-        status = companyInfoService.updateByPrimaryKey(companyInfoBack);
+        status = companyService.updateByPrimaryKey(companyBack);
 
         if (status > 0) {
             result.put("code", Constant.OK);

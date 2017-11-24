@@ -5,19 +5,19 @@ import java.util.Date;
 public class User {
     private String id;
 
-    private String username;
+    private String userName;
 
     private String password;
 
     private String phone;
 
-    private String nickname;
+    private String nickName;
 
-    private Boolean deletetag;
+    private Boolean deleteTag;
 
-    private String roleid;
+    private String roleId;
 
-    private Date createtime;
+    private Date createTime;
 
     private Boolean forbidden;
 
@@ -29,12 +29,12 @@ public class User {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getPassword() {
@@ -53,36 +53,36 @@ public class User {
         this.phone = phone == null ? null : phone.trim();
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname == null ? null : nickname.trim();
+    public void setNickName(String nickName) {
+        this.nickName = nickName == null ? null : nickName.trim();
     }
 
-    public Boolean getDeletetag() {
-        return deletetag;
+    public Boolean getDeleteTag() {
+        return deleteTag;
     }
 
-    public void setDeletetag(Boolean deletetag) {
-        this.deletetag = deletetag;
+    public void setDeleteTag(Boolean deleteTag) {
+        this.deleteTag = deleteTag;
     }
 
-    public String getRoleid() {
-        return roleid;
+    public String getRoleId() {
+        return roleId;
     }
 
-    public void setRoleid(String roleid) {
-        this.roleid = roleid == null ? null : roleid.trim();
+    public void setRoleId(String roleId) {
+        this.roleId = roleId == null ? null : roleId.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Boolean getForbidden() {
