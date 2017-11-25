@@ -11,6 +11,9 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/templatemo-style.css" rel="stylesheet">
     <link href="css/ownadd.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>      <!-- jQuery -->
+    <script  type="text/javascript" src="js/bootstrap.js"></script>
+    <script  type="text/javascript" src="js/myjs/student_table_details.js"></script>    
   </head>
   <body  class="light-gray-bg">  
       <!-- Main content --> 
@@ -31,6 +34,7 @@
                     <h3>基本信息</h3>
                     <img src="images/u520.png" class="img-circle" id="identification-photo">
                     <div class="basic-info">
+                      <div class="edit"><a href="#" data-toggle="modal" data-target="#student_Modal"><i class="fa fa-pencil fa-fw"></i>编辑</a></div>
                       <h5>name</h5>
                       <span>*</span> | <span>*</span> | <span>*</span> | <span>*</span>年<span>*</span>月 <br>
                       手机号码 ：<span>*</span><br>
@@ -65,10 +69,71 @@
                   </li>
                 </ul>
               </div>
+                            <!-- 模态框（Modal） -->
+<div class="modal fade" id="student_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">基本信息</h4>
+            </div>
+            <div class="modal-body" >
+              <table class="text-center" width="80%" id="student_details">
+                <tr>
+                  <th>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</th>
+                  <td colspan="2" width="60%">(陈琳睿)</td>
+                </tr>
+                <tr>
+                  <th>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</th>
+                  <td colspan="2">(财务工号)</td>
+                </tr>
+               <tr>
+                  <th rowspan="2">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</td>
+                  <td class="text-right">
+                    <button value="" id="male" class="btn btn-default">
+                      <i class="fa fa-mars fa-fw"></i>
+                    </button>&nbsp;&nbsp;
+                  </td>
+                  <td class="text-left">  
+                    &nbsp;&nbsp;<button value="" id="female" class="btn btn-default">
+                      <i class="fa fa-venus fa-fw"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                   <td class="text-right">男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;女</td>
+                </tr>
+                <tr>
+                  <th>民&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族</th>
+                  <td colspan="2">
+                    <select>
+                      <option value="">汉族</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th>出生年月</th>
+                  <td colspan="2"><input></td>
+                </tr>
+                <tr>
+                  <th>手机号码</th>
+                  <td colspan="2"><input  placeholder="请输入手机号"></td>
+                </tr>
+                <tr>
+                  <th>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</th>
+                  <td colspan="2"><input  placeholder="请输入常用邮箱"></td>
+                </tr>
+              </table>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">确认</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
             </div>
           </div> 
-    <!-- JS -->
-    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>      <!-- jQuery -->
     <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
   </body>
 </html>
