@@ -10,7 +10,7 @@ $(document).ready(function(){
            for ( var p in obj)
            {
                var td = tr.insertCell (tr.cells.length);//cells:返回包含行中所有已经存在的单元格的一个数组。insertCell: 在一行中的指定位置插入一个空的 <td> 元素。
-               td.innerHTML = '<a href = "student_table_details.html">'+obj[p]+'</a>';
+               td.innerHTML = '<a href = "teacher_table_details.html">'+obj[p]+'</a>';
                if (n==3) {
                 break;
                };
