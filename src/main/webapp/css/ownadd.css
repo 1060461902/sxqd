@@ -21,6 +21,11 @@
   font-style: italic;
   font-size: 180%;
 }
+span.delete{
+  display: none;
+  float: left;
+  padding-left:15px;
+}
 .approval-table{
   line-height:200%;
   text-align: center;

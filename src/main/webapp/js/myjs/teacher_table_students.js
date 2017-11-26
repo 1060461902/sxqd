@@ -7,6 +7,8 @@ $(document).ready(function(){
           var tr = table.insertRow(table.rows.length);
           var obj = data.students[i];
           var n=0;
+          var td = tr.insertCell (tr.cells.length);
+          td.innerHTML = '<input type="checkbox" value="0">';
            for ( var p in obj)
            {
                var td = tr.insertCell (tr.cells.length);//cells:返回包含行中所有已经存在的单元格的一个数组。insertCell: 在一行中的指定位置插入一个空的 <td> 元素。
