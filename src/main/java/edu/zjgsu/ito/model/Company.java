@@ -33,6 +33,12 @@ public class Company {
 
     private Boolean pass;
 
+    private String licence;
+
+    private String taxRegistration;
+
+    private String organizationCode;
+
     public String getId() {
         return id;
     }
@@ -151,5 +157,29 @@ public class Company {
 
     public void setPass(Boolean pass) {
         this.pass = pass;
+    }
+
+    public String getLicence() {
+        return licence;
+    }
+
+    public void setLicence(String licence) {
+        this.licence = licence == null ? null : licence.trim();
+    }
+
+    public String getTaxRegistration() {
+        return taxRegistration;
+    }
+
+    public void setTaxRegistration(String taxRegistration) {
+        this.taxRegistration = taxRegistration == null ? null : taxRegistration.trim();
+    }
+
+    public String getOrganizationCode() {
+        return organizationCode;
+    }
+
+    public void setOrganizationCode(String organizationCode) {
+        this.organizationCode = organizationCode == null ? null : organizationCode.trim();
     }
 }

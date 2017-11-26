@@ -43,10 +43,6 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public List<Company> selectByExample(CompanyExample example) {
         List<Company> companyList=CompanyMapper.selectByExample(example);
-        for(Company company:companyList){
-
-
-        }
         return companyList;
     }
 

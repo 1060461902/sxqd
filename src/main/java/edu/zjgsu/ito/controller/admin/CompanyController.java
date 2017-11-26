@@ -21,7 +21,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value ="admin")
-public class CompanyInfoController {
+public class CompanyController {
     //页大小
 //    public static final int pageSize=2;
     @Autowired
@@ -39,6 +39,8 @@ public class CompanyInfoController {
 * @author hanfeng
 * */
         Map<String, Object> result = new HashMap<String, Object>();
+//        Map<String, Object> companyPassList = new HashMap<String, Object>();
+
         CompanyExample CompanyExample=new CompanyExample();
        // CompanyExample.or().andIdIsNotNull();
 
@@ -56,14 +58,19 @@ public class CompanyInfoController {
             User user = userService.selectByPrimaryKey(company.getUserId());
             if (user == null) {
                 result.put("code", Constant.FAIL);
-                result.put("msg", "无法找到Teacher表userID=" + company.getUserId() + "对应的user！");
+                result.put("msg", "无法找到Company表userID=" + company.getUserId() + "对应的user！");
                 return result;
+            }
+            if(company.getPass() == true){
+
+                List<Company> companyPassList;
+
             }
 
         }
+
         result.put("code", Constant.OK);
         result.put("msg", "返回公司信息成功！");
-        result.put("companyList", companys);
 
         return result;
     }
