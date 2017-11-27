@@ -4,9 +4,7 @@ import edu.zjgsu.ito.model.Student;
 import edu.zjgsu.ito.model.StudentExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface StudentMapper {
     long countByExample(StudentExample example);
 

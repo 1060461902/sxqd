@@ -88,7 +88,6 @@
     <if test="distinct">
       distinct
     </if>
-    'true' as QUERYID,
     <include refid="Base_Column_List" />
     from company
     <if test="_parameter != null">
@@ -96,6 +95,14 @@
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -115,27 +122,28 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.Company">
-    insert into company (id, company_name, address, 
-      user_id, create_time, email, 
-      type, logo, network, 
-      size, stage, slogans, 
-      intruction, checked, pass, 
-      licence, tax_registration, organization_code
-      )
-    values (#{id,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{network,jdbcType=VARCHAR}, 
-      #{size,jdbcType=VARCHAR}, #{stage,jdbcType=VARCHAR}, #{slogans,jdbcType=VARCHAR}, 
-      #{intruction,jdbcType=VARCHAR}, #{checked,jdbcType=BIT}, #{pass,jdbcType=BIT}, 
-      #{licence,jdbcType=VARCHAR}, #{taxRegistration,jdbcType=VARCHAR}, #{organizationCode,jdbcType=VARCHAR}
-      )
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into company (company_name, address, user_id, 
+      create_time, email, type, 
+      logo, network, size, 
+      stage, slogans, intruction, 
+      checked, pass, licence, tax_registration, 
+      organization_code)
+    values (#{companyName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{logo,jdbcType=VARCHAR}, #{network,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, 
+      #{stage,jdbcType=VARCHAR}, #{slogans,jdbcType=VARCHAR}, #{intruction,jdbcType=VARCHAR}, 
+      #{checked,jdbcType=BIT}, #{pass,jdbcType=BIT}, #{licence,jdbcType=VARCHAR}, #{taxRegistration,jdbcType=VARCHAR}, 
+      #{organizationCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.Company">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into company
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="companyName != null">
         company_name,
       </if>
@@ -189,9 +197,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
       <if test="companyName != null">
         #{companyName,jdbcType=VARCHAR},
       </if>

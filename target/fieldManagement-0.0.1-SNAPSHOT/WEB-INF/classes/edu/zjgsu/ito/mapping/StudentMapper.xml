@@ -82,7 +82,6 @@
     <if test="distinct">
       distinct
     </if>
-    'true' as QUERYID,
     <include refid="Base_Column_List" />
     from student
     <if test="_parameter != null">
@@ -90,6 +89,14 @@
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -109,21 +116,24 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.Student">
-    insert into student (id, user_id, company_id, 
-      teacher_id, status, zip_file, 
-      post, delete_tag, sex, nation, 
-      english, graduate_year)
-    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, 
-      #{teacherId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{zipFile,jdbcType=BIT}, 
-      #{post,jdbcType=VARCHAR}, #{deleteTag,jdbcType=BIT}, #{sex,jdbcType=BIT}, #{nation,jdbcType=VARCHAR}, 
-      #{english,jdbcType=BIT}, #{graduateYear,jdbcType=TIMESTAMP})
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into student (user_id, company_id, teacher_id, 
+      status, zip_file, post, 
+      delete_tag, sex, nation, english, 
+      graduate_year)
+    values (#{userId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{teacherId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{zipFile,jdbcType=BIT}, #{post,jdbcType=VARCHAR}, 
+      #{deleteTag,jdbcType=BIT}, #{sex,jdbcType=BIT}, #{nation,jdbcType=VARCHAR}, #{english,jdbcType=BIT}, 
+      #{graduateYear,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.Student">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into student
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="userId != null">
         user_id,
       </if>
@@ -159,9 +169,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
       <if test="userId != null">
         #{userId,jdbcType=VARCHAR},
       </if>

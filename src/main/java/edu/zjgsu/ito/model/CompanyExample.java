@@ -11,6 +11,10 @@ public class CompanyExample {
 
     protected List<Criteria> oredCriteria;
 
+    private Integer limit;
+
+    private Integer offset;
+
     public CompanyExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
@@ -62,6 +66,22 @@ public class CompanyExample {
         oredCriteria.clear();
         orderByClause = null;
         distinct = false;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
+
+    public Integer getOffset() {
+        return offset;
     }
 
     protected abstract static class GeneratedCriteria {
@@ -1336,6 +1356,8 @@ public class CompanyExample {
         }
     }
 
+    /**
+     */
     public static class Criteria extends GeneratedCriteria {
 
         protected Criteria() {

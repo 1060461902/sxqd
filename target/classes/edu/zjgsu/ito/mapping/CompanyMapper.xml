@@ -17,6 +17,9 @@
     <result column="intruction" jdbcType="VARCHAR" property="intruction" />
     <result column="checked" jdbcType="BIT" property="checked" />
     <result column="pass" jdbcType="BIT" property="pass" />
+    <result column="licence" jdbcType="VARCHAR" property="licence" />
+    <result column="tax_registration" jdbcType="VARCHAR" property="taxRegistration" />
+    <result column="organization_code" jdbcType="VARCHAR" property="organizationCode" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -78,14 +81,13 @@
   </sql>
   <sql id="Base_Column_List">
     id, company_name, address, user_id, create_time, email, type, logo, network, size, 
-    stage, slogans, intruction, checked, pass
+    stage, slogans, intruction, checked, pass, licence, tax_registration, organization_code
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.CompanyExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
-    'true' as QUERYID,
     <include refid="Base_Column_List" />
     from company
     <if test="_parameter != null">
@@ -93,6 +95,14 @@
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -112,23 +122,28 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.Company">
-    insert into company (id, company_name, address, 
-      user_id, create_time, email, 
-      type, logo, network, 
-      size, stage, slogans, 
-      intruction, checked, pass)
-    values (#{id,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{network,jdbcType=VARCHAR}, 
-      #{size,jdbcType=VARCHAR}, #{stage,jdbcType=VARCHAR}, #{slogans,jdbcType=VARCHAR}, 
-      #{intruction,jdbcType=VARCHAR}, #{checked,jdbcType=BIT}, #{pass,jdbcType=BIT})
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into company (company_name, address, user_id, 
+      create_time, email, type, 
+      logo, network, size, 
+      stage, slogans, intruction, 
+      checked, pass, licence, tax_registration, 
+      organization_code)
+    values (#{companyName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{logo,jdbcType=VARCHAR}, #{network,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, 
+      #{stage,jdbcType=VARCHAR}, #{slogans,jdbcType=VARCHAR}, #{intruction,jdbcType=VARCHAR}, 
+      #{checked,jdbcType=BIT}, #{pass,jdbcType=BIT}, #{licence,jdbcType=VARCHAR}, #{taxRegistration,jdbcType=VARCHAR}, 
+      #{organizationCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.Company">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into company
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="companyName != null">
         company_name,
       </if>
@@ -171,11 +186,17 @@
       <if test="pass != null">
         pass,
       </if>
+      <if test="licence != null">
+        licence,
+      </if>
+      <if test="taxRegistration != null">
+        tax_registration,
+      </if>
+      <if test="organizationCode != null">
+        organization_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
       <if test="companyName != null">
         #{companyName,jdbcType=VARCHAR},
       </if>
@@ -217,6 +238,15 @@
       </if>
       <if test="pass != null">
         #{pass,jdbcType=BIT},
+      </if>
+      <if test="licence != null">
+        #{licence,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegistration != null">
+        #{taxRegistration,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationCode != null">
+        #{organizationCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -274,6 +304,15 @@
       <if test="record.pass != null">
         pass = #{record.pass,jdbcType=BIT},
       </if>
+      <if test="record.licence != null">
+        licence = #{record.licence,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxRegistration != null">
+        tax_registration = #{record.taxRegistration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationCode != null">
+        organization_code = #{record.organizationCode,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -295,7 +334,10 @@
       slogans = #{record.slogans,jdbcType=VARCHAR},
       intruction = #{record.intruction,jdbcType=VARCHAR},
       checked = #{record.checked,jdbcType=BIT},
-      pass = #{record.pass,jdbcType=BIT}
+      pass = #{record.pass,jdbcType=BIT},
+      licence = #{record.licence,jdbcType=VARCHAR},
+      tax_registration = #{record.taxRegistration,jdbcType=VARCHAR},
+      organization_code = #{record.organizationCode,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -345,6 +387,15 @@
       <if test="pass != null">
         pass = #{pass,jdbcType=BIT},
       </if>
+      <if test="licence != null">
+        licence = #{licence,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegistration != null">
+        tax_registration = #{taxRegistration,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationCode != null">
+        organization_code = #{organizationCode,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -363,7 +414,10 @@
       slogans = #{slogans,jdbcType=VARCHAR},
       intruction = #{intruction,jdbcType=VARCHAR},
       checked = #{checked,jdbcType=BIT},
-      pass = #{pass,jdbcType=BIT}
+      pass = #{pass,jdbcType=BIT},
+      licence = #{licence,jdbcType=VARCHAR},
+      tax_registration = #{taxRegistration,jdbcType=VARCHAR},
+      organization_code = #{organizationCode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
