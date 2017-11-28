@@ -2,8 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.zjgsu.ito.dao.CompanyViewMapper">
   <resultMap id="BaseResultMap" type="edu.zjgsu.ito.model.CompanyView">
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="mark" jdbcType="VARCHAR" property="mark" />
     <result column="id" jdbcType="VARCHAR" property="id" />
     <result column="company_name" jdbcType="VARCHAR" property="companyName" />
     <result column="address" jdbcType="VARCHAR" property="address" />
@@ -86,8 +84,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    url, mark, id, company_name, address, user_id, create_time, email, type, logo, network, 
-    size, stage, slogans, intruction, checked, pass, user_name, password, phone, nick_name, 
+    id, company_name, address, user_id, create_time, email, type, logo, network, size, 
+    stage, slogans, intruction, checked, pass, user_name, password, phone, nick_name, 
     delete_tag, role_id, forbidden
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.CompanyViewExample" resultMap="BaseResultMap">
@@ -122,20 +120,18 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into company_view (url, mark, company_name, 
-      address, user_id, create_time, 
-      email, type, logo, 
-      network, size, stage, 
-      slogans, intruction, checked, 
-      pass, user_name, password, 
+    insert into company_view (company_name, address, user_id, 
+      create_time, email, type, 
+      logo, network, size, 
+      stage, slogans, intruction, 
+      checked, pass, user_name, password, 
       phone, nick_name, delete_tag, 
       role_id, forbidden)
-    values (#{url,jdbcType=VARCHAR}, #{mark,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{email,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, 
-      #{network,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, #{stage,jdbcType=VARCHAR}, 
-      #{slogans,jdbcType=VARCHAR}, #{intruction,jdbcType=VARCHAR}, #{checked,jdbcType=BIT}, 
-      #{pass,jdbcType=BIT}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{companyName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{logo,jdbcType=VARCHAR}, #{network,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, 
+      #{stage,jdbcType=VARCHAR}, #{slogans,jdbcType=VARCHAR}, #{intruction,jdbcType=VARCHAR}, 
+      #{checked,jdbcType=BIT}, #{pass,jdbcType=BIT}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{deleteTag,jdbcType=BIT}, 
       #{roleId,jdbcType=VARCHAR}, #{forbidden,jdbcType=BIT})
   </insert>
@@ -145,12 +141,6 @@
     </selectKey>
     insert into company_view
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="url != null">
-        url,
-      </if>
-      <if test="mark != null">
-        mark,
-      </if>
       <if test="companyName != null">
         company_name,
       </if>
@@ -216,12 +206,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="url != null">
-        #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="mark != null">
-        #{mark,jdbcType=VARCHAR},
-      </if>
       <if test="companyName != null">
         #{companyName,jdbcType=VARCHAR},
       </if>
@@ -296,12 +280,6 @@
   <update id="updateByExampleSelective" parameterType="map">
     update company_view
     <set>
-      <if test="record.url != null">
-        url = #{record.url,jdbcType=VARCHAR},
-      </if>
-      <if test="record.mark != null">
-        mark = #{record.mark,jdbcType=VARCHAR},
-      </if>
       <if test="record.id != null">
         id = #{record.id,jdbcType=VARCHAR},
       </if>
@@ -375,9 +353,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update company_view
-    set url = #{record.url,jdbcType=VARCHAR},
-      mark = #{record.mark,jdbcType=VARCHAR},
-      id = #{record.id,jdbcType=VARCHAR},
+    set id = #{record.id,jdbcType=VARCHAR},
       company_name = #{record.companyName,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=VARCHAR},

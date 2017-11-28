@@ -7,13 +7,6 @@ import java.util.Date;
  * @author 
  */
 public class CompanyView implements Serializable {
-    private String url;
-
-    /**
-     * 企业标签
-     */
-    private String mark;
-
     private String id;
 
     private String companyName;
@@ -104,22 +97,6 @@ public class CompanyView implements Serializable {
     private Boolean forbidden;
 
     private static final long serialVersionUID = 1L;
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getMark() {
-        return mark;
-    }
-
-    public void setMark(String mark) {
-        this.mark = mark;
-    }
 
     public String getId() {
         return id;
@@ -309,9 +286,7 @@ public class CompanyView implements Serializable {
             return false;
         }
         CompanyView other = (CompanyView) that;
-        return (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
-            && (this.getMark() == null ? other.getMark() == null : this.getMark().equals(other.getMark()))
-            && (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getCompanyName() == null ? other.getCompanyName() == null : this.getCompanyName().equals(other.getCompanyName()))
             && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
             && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
@@ -339,8 +314,6 @@ public class CompanyView implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getUrl() == null) ? 0 : getUrl().hashCode());
-        result = prime * result + ((getMark() == null) ? 0 : getMark().hashCode());
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getCompanyName() == null) ? 0 : getCompanyName().hashCode());
         result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
@@ -372,8 +345,6 @@ public class CompanyView implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", url=").append(url);
-        sb.append(", mark=").append(mark);
         sb.append(", id=").append(id);
         sb.append(", companyName=").append(companyName);
         sb.append(", address=").append(address);

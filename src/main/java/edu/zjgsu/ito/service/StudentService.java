@@ -1,5 +1,4 @@
 package edu.zjgsu.ito.service;
-
 import edu.zjgsu.ito.model.Student;
 import edu.zjgsu.ito.model.StudentExample;
 import org.apache.ibatis.annotations.Param;
@@ -11,6 +10,7 @@ import java.util.List;
 public interface StudentService {
     long countByExample(StudentExample example);
 
+
     int deleteByExample(StudentExample example);
 
     int deleteByPrimaryKey(String id);
@@ -18,6 +18,7 @@ public interface StudentService {
     int insert(Student record);
 
     int insertSelective(Student record);
+
 
     List<Student> selectByExample(StudentExample example);
 

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface CompanyViewService {
+
     long countByExample(CompanyViewExample example);
 
     int deleteByExample(CompanyViewExample example);
@@ -20,5 +21,4 @@ public interface CompanyViewService {
     int updateByExampleSelective(@Param("record") CompanyView record, @Param("example") CompanyViewExample example);
 
     int updateByExample(@Param("record") CompanyView record, @Param("example") CompanyViewExample example);
-
 }

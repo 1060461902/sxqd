@@ -19,7 +19,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "admin")
-public class OperateController {
+public class ViewCompanyController {
     public static final String defaultPwd = "123456";
 
 //    private String userId;

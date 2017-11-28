@@ -1,11 +1,11 @@
 package edu.zjgsu.ito.service.Impl;
-
 import edu.zjgsu.ito.dao.CompanyViewMapper;
 import edu.zjgsu.ito.model.CompanyView;
 import edu.zjgsu.ito.model.CompanyViewExample;
 import edu.zjgsu.ito.service.CompanyViewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 

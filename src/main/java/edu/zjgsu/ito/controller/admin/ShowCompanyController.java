@@ -18,7 +18,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value ="admin")
-public class CompanyController {
+public class ShowCompanyController {
     //页大小
 //    public static final int pageSize=2;
     @Autowired
@@ -29,21 +29,30 @@ public class CompanyController {
     StudentService studentService;
     @Autowired
     CompanyViewService companyViewService;
+    @Autowired
+    CompanyImageService companyImageService;
+    @Autowired
+    CompanyMarkService companyMarkService;
 
 
     @RequestMapping(value ="showCompanies",method=RequestMethod.GET)
     public @ResponseBody
-    Map<String,Object> showCompanies() {
+    Map<String,Object> showCompanies(@RequestParam("type") String type) {
 /*
 * @param
 * @return
+* 查看已在系统内注册好的企业信息
 * @author hanfeng
 * */
         Map<String, Object> result = new HashMap<String, Object>();
         CompanyViewExample CompanyViewExample=new CompanyViewExample();
         CompanyViewExample CompanyExampleView;
-        CompanyViewExample.or().andPassEqualTo(true);
+        if(type.equals("企业类型")){
+            CompanyViewExample.or().andPassEqualTo(true);
 
+        }else {
+            CompanyViewExample.or().andPassEqualTo(true).andTypeEqualTo(type);
+        }
 
         List<CompanyView> companyViews=companyViewService.selectByExample(CompanyViewExample);
 
@@ -53,6 +62,8 @@ public class CompanyController {
             return result;
         }
         for(CompanyView companyView:companyViews){
+
+
             User user = userService.selectByPrimaryKey(companyView.getUserId());
             if (user == null) {
                 result.put("code", Constant.FAIL);
@@ -80,7 +91,7 @@ public class CompanyController {
         CompanyViewExample CompanyViewExample=new CompanyViewExample();
         CompanyViewExample CompanyExampleView;
 
-        CompanyViewExample.or().andPassEqualTo(false).andCheckedEqualTo(false);
+        CompanyViewExample.or().andCheckedEqualTo(false);
 
 
 
@@ -104,19 +115,22 @@ public class CompanyController {
         result.put("compamyViewList",companyViews);
         return result;
     }
-    @RequestMapping(value ="showCompanyDeails",method=RequestMethod.GET)
-    public @ResponseBody      Map<String,Object> showCompanyDeails() {
+    @RequestMapping(value ="showCompanyDetails",method=RequestMethod.GET)
+    public @ResponseBody
+    Map<String,Object> showCompanyDetails(@RequestParam("id") String id) {
 /*
 * @param
 * 查看公司详情
 * @return
 * @author hanfeng
 * */
+
         Map<String, Object> result = new HashMap<String, Object>();
+
         CompanyViewExample CompanyViewExample=new CompanyViewExample();
         CompanyViewExample CompanyExampleView;
 
-        CompanyViewExample.or().andIdIsNotNull();
+        CompanyViewExample.or().andIdEqualTo(id);
 
 
 
@@ -128,12 +142,17 @@ public class CompanyController {
             return result;
         }
         for(CompanyView companyView:companyViews){
+            CompanyImageExample CompanyImageExample=new CompanyImageExample();
+            CompanyImageExample.or().andCompanyIdEqualTo(companyView.getId());
+            List<CompanyImage> CompanyImages=companyImageService.selectByExample(CompanyImageExample);
+            result.put("Image",CompanyImages);
             User user = userService.selectByPrimaryKey(companyView.getUserId());
             if (user == null) {
                 result.put("code", Constant.FAIL);
                 result.put("msg", "无法找到Company表userID=" + companyView.getUserId() + "对应的user！");
                 return result;
             }
+
         }
         result.put("code", Constant.OK);
         result.put("msg", "返回公司信息成功！");
@@ -145,9 +164,10 @@ public class CompanyController {
 /*
 * @param
 * @return
+* 查看企业招聘岗位
 * @author hanfeng
 * */
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String,Object> result = new HashMap<String, Object>();
         CompanyViewExample CompanyViewExample=new CompanyViewExample();
         CompanyViewExample CompanyExampleView;
 
