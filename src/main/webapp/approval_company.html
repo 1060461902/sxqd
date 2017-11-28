@@ -11,6 +11,9 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/templatemo-style.css" rel="stylesheet">
     <link href="css/ownadd.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>      <!-- jQuery -->
+    <script  type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/myjs/approval_company.js"></script>
   </head>
   <body  class="light-gray-bg">  
       <!-- Main content --> 
@@ -22,18 +25,18 @@
                     <h3>基本信息</h3>
                     <img src="images/u520.png" class="img-circle" id="identification-photo">
                     <div class="basic-info">
-                      <h5>name</h5>
-                      <span>（行业）</span> | <span>（成长类型）</span> | <span>（规模）</span>  <br>
-                      企业标语 ：<span>*</span>
+                      <h4><span id="name"></span>&nbsp;&nbsp;<span id="network"></span></h4>
+                      <span id="type"></span> | <span id="stage"></span> | <span id="size"></span>  <br>
+                      企业标语 ：<span id="slogans"></span>
                     </div>
                   </li>
                   <li class="list-group-item">
                     <h3>企业标签</h3><br>
-                    <span class="label label-primary">主要标签</span>
+                    <span class="label label-primary" id="mark">主要标签</span>
                   </li>
                   <li class="list-group-item">
                     <h3>企业简介</h3><br>
-                    <p>(企业简介)</p>
+                    <p id='intruction'></p>
                   </li>
                   <li class="list-group-item">
                     <h3>企业相册</h3><br>
@@ -43,7 +46,7 @@
                   </li>
                   <li class="list-group-item">
                     <h3>企业地址</h3><br>
-                    <P>(详细地址)</P>
+                    <P id='address'></P>
                   </li>
                   <li class="list-group-item">
                     <h3>企业资质</h3><br>
@@ -58,12 +61,9 @@
                       </div>   
                   </li>
                 </ul><br>
-                <button type="button" class="btn btn-info approval-button">通过</button>
-                <button type="button" class="btn btn-danger approval-button">不通过</button><br><br>
+                <button type="button" class="btn btn-info approval-button" value="1" id="yes">通过</button>
+                <button type="button" class="btn btn-danger approval-button" value="0" data-toggle="modal" data-target="#content">不通过</button><br><br>
               </div>
           </div> 
-    <!-- JS -->
-    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>      <!-- jQuery -->
-    <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
   </body>
 </html>

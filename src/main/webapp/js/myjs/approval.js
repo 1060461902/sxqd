@@ -1,4 +1,5 @@
-$(document).ready(function(){ 
+$(document).ready(function(){
+  var type = "企业类型";
     $.getJSON("js/json/approval-1.json", function(data) {
        var tbody = document.getElementsByTagName ('tbody')[0];
        var len = data.compamyViewList.length;
@@ -26,9 +27,9 @@ $(document).ready(function(){
              nums+=1;
             }     
               var td = tr.insertCell (tr.cells.length);
-              td.innerHTML = '<a href="#">查看</a>';
+              td.innerHTML = '<a href="#" id="checkcompany">查看</a>';
          } //for
-         //未读消息(完成)
+         //未读消息
          if(nums!==0){
           $("span#qysp").html(nums);
          }
@@ -36,16 +37,23 @@ $(document).ready(function(){
          {
           $("span#qysp").css("display","none");
          }
-//筛选(完成)
+//筛选（需要表格重新导入）
   $("option").click(function(){
     var type = $(this).text();
 
   });
+
+//搜索企业名称（需要表格重新导入）
+  $("button").click(function(){
+    var type = $("input").val();
+
+
+  });
 //--------------点击查看------------------------
-// $("[href]#checkcompany").click(function(){
-//   var id = $(this).parent("td").parent('tr').val();
-//   location.href='./approval_company.html?id='+id;
-// });
+$("[href]#checkcompany").click(function(){
+  var id = $(this).parent("td").parent('tr').val();
+  location.href='./approval_company.html?id='+id;
+});
 //--------------------------全选checkbox--------------------------
 var m=0;
 $('th>input:checkbox').click(function() {
@@ -80,7 +88,7 @@ $('th>input:checkbox').click(function() {
         }
     });
    });
-//-----------点击通过-----------------
+//-----------点击通过（需要表格重新导入）-----------------
   $("span.operations").click(function(){
     var id = new Array();
     var a=0;
@@ -123,7 +131,7 @@ $('th>input:checkbox').click(function() {
              nums+=1;
             }   
               var td = tr.insertCell (tr.cells.length);
-              td.innerHTML = '<a href="#">查看</a>';
+              td.innerHTML = '<a href="#" id="checkcompany">查看</a>';
          } //for
         if(nums!==0){
           $("span#qysp").html(nums);
@@ -152,70 +160,5 @@ $('th>input:checkbox').click(function() {
    });
 });//getjson
 //------------------->
-//     var docrTable = $('#table-1').dataTable({
-//                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
-//                 "bFilter" : true, //是否启动过滤、搜索功能
-//                 "lengthChange" : false, 
-//                   "oLanguage": { //国际化配置  
-//                     "sProcessing" : "正在获取数据，请稍后...",    
-//                     "sLengthMenu" : "显示 _MENU_ 条",    
-//                     "sZeroRecords" : "没有您要搜索的内容",    
-//                     "sInfo" : "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",    
-//                     "sInfoEmpty" : "记录数为0",    
-//                     "sInfoFiltered" : "(全部记录数 _MAX_ 条)",    
-//                     "sInfoPostFix" : "",    
-//                     "sSearch" : "搜索",    
-//                     "sUrl" : "",    
-//                     "oPaginate": {    
-//                         "sFirst" : "第一页",    
-//                         "sPrevious" : "上一页",    
-//                         "sNext" : "下一页",    
-//                         "sLast" : "最后一页"    
-//                     }
-//                 },                            
-//               });  
-//     var docrTable = $('#table-2').dataTable({  
-//                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
-//                 "bFilter" : true, //是否启动过滤、搜索功能
-//                 "lengthChange" : false, 
-//                   "oLanguage": { //国际化配置  
-//                     "sProcessing" : "正在获取数据，请稍后...",    
-//                     "sLengthMenu" : "显示 _MENU_ 条",    
-//                     "sZeroRecords" : "没有您要搜索的内容",    
-//                     "sInfo" : "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",    
-//                     "sInfoEmpty" : "记录数为0",    
-//                     "sInfoFiltered" : "(全部记录数 _MAX_ 条)",    
-//                     "sInfoPostFix" : "",    
-//                     "sSearch" : "搜索",    
-//                     "sUrl" : "",    
-//                     "oPaginate": {    
-//                         "sFirst" : "第一页",    
-//                         "sPrevious" : "上一页",    
-//                         "sNext" : "下一页",    
-//                         "sLast" : "最后一页"    
-//                     }  
-//                 },                            
-//               });  
-//         var docrTable = $('#table-3').dataTable({  
-//                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
-//                 "bFilter" : true, //是否启动过滤、搜索功能
-//                 "lengthChange" : false, 
-//                   "oLanguage": { //国际化配置  
-//                     "sProcessing" : "正在获取数据，请稍后...",    
-//                     "sLengthMenu" : "显示 _MENU_ 条",    
-//                     "sZeroRecords" : "没有您要搜索的内容",    
-//                     "sInfo" : "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",    
-//                     "sInfoEmpty" : "记录数为0",    
-//                     "sInfoFiltered" : "(全部记录数 _MAX_ 条)",    
-//                     "sInfoPostFix" : "",    
-//                     "sSearch" : "搜索",    
-//                     "sUrl" : "",    
-//                     "oPaginate": {    
-//                         "sFirst" : "第一页",    
-//                         "sPrevious" : "上一页",    
-//                         "sNext" : "下一页",    
-//                         "sLast" : "最后一页"    
-//                     }  
-//                 },                            
-//               });  
+
  });//document
