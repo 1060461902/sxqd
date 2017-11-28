@@ -90,7 +90,7 @@ function validate_form()
        error: function(){
         alert('服务端异常');
         }
-    })
+    });
       return true;
     }
 }

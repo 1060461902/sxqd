@@ -1,3 +1,6 @@
+.86945{
+  background-color: red;
+}
 .hidden-scrolling{
   overflow:hidden;
 }
@@ -21,10 +24,10 @@
   font-style: italic;
   font-size: 180%;
 }
-span.delete{
+span.operations{
   display: none;
   float: left;
-  padding-left:15px;
+  padding-left: 27px;
 }
 .approval-table{
   line-height:200%;
