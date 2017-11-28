@@ -1,5 +1,6 @@
 $(document).ready(function(){ 
 	var id = window.location.href;
+  alert(id);
 	  // $.ajax({
    //     type: 'get',
    //     url: '/fieldManagement/admin/showCompanyDeails',
