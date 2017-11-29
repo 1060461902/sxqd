@@ -1,9 +1,8 @@
 $(document).ready(function(){ 
 	var id = window.location.href;
-  alert(id);
 	  // $.ajax({
    //     type: 'get',
-   //     url: '/fieldManagement/admin/showCompanyDeails',
+   //     url: '/fieldManagement/admin/showRecruitmentDetails',
    //     data: JSON.stringify(id),
    //     async: true,
    //     contentType: "application/json",
@@ -15,19 +14,20 @@ $(document).ready(function(){
    //      alert('服务端异常');
    //      }
    //  });
-	 $.getJSON("js/json/approval_company.json", function(data) {
-	 	window.comid =  data.compamyViewList[0].id;
-        var obj = data.compamyViewList[0];
-        $("span#name").text(obj.companyName);
-        $("span#network").text(obj.network);
+	 $.getJSON("js/json/approval_occupation.json", function(data) {
+	 	window.comid =  data.recruitmentDetails.id;
+        var obj = data.recruitmentDetails;
+        $("span#post").text(obj.post);
+        $("span#address").text(obj.address);
+        $("span#totalnumber").text(obj.totalnumber);
+        $("span#postTime").text(obj.postTime);
+        $("span#companyName").text(obj.companyName);
         $("span#type").text(obj.type);
-        $("span#stage").text(obj.stage);
         $("span#size").text(obj.size);
-        $("span#slogans").text(obj.slogans);
-        $("span#mark").text(obj.mark);
-        $("p#intruction").text(obj.intruction);
-        $("p#address").text(obj.address);
-        $("img#identification-photo").attr("src",obj.logo);
+        $("span#stage").text(obj.stage);
+        $("p#postInfo").text(obj.postInfo);
+        $("span#post").text(obj.post);
+        $("img#company_logo").attr("src",obj.logo);
 	 });
 	 //---------------通过/不通过------------------------
 $("button").click(function(){
@@ -38,7 +38,7 @@ $("button").click(function(){
       var info = new Object();
       info.id=id;
       info.passFlag=flag;//要传输的数据
-      location.href='./approval.html';
+      location.href='./approval-2.html';
     //<---------------------------------------表格重新导入
     }
     else if(flag=="0"){
@@ -47,7 +47,7 @@ $("button").click(function(){
       var info = new Object();
       info.id=id;
       info.passFlag=flag;
-      location.href='./approval.html';
+      location.href='./approval-2.html';
     }
    });
 });

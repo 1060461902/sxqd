@@ -24,6 +24,9 @@
   font-style: italic;
   font-size: 180%;
 }
+#companyName{
+  color: #199ED8;
+}
 span.operations{
   display: none;
   float: left;

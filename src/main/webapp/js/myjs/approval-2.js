@@ -1,6 +1,6 @@
 $(document).ready(function(){
   var type = "企业类型";
-    $.getJSON("js/json/approval-occupation.json", function(data) {
+    $.getJSON("js/json/approval-2.json", function(data) {
        var tbody = document.getElementsByTagName ('tbody')[0];
        var len = data.recruitmentApplyList.length;
        var nums=0;
