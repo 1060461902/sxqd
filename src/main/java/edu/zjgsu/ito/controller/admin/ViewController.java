@@ -96,7 +96,7 @@ public class ViewController {
         result.put("code", Constant.OK);
         result.put("msg", "返回老师信息成功！");
         result.put("teacherList", teacherList);
-
         return result;
+
     }
 }
