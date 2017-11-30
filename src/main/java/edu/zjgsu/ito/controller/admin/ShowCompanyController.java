@@ -38,12 +38,12 @@ public class ShowCompanyController {
     @RequestMapping(value ="showCompanies",method=RequestMethod.GET)
     public @ResponseBody
     Map<String,Object> showCompanies(@RequestParam("type") String type) {
-/*
-* @param
+/** @param
 * @return
 * 查看已在系统内注册好的企业信息
 * @author hanfeng
-* */
+**/
+
         Map<String, Object> result = new HashMap<String, Object>();
         CompanyViewExample CompanyViewExample=new CompanyViewExample();
         CompanyViewExample CompanyExampleView;
@@ -81,12 +81,12 @@ public class ShowCompanyController {
 
     @RequestMapping(value ="showCompanyRegisterApplyList",method=RequestMethod.GET)
     public @ResponseBody    Map<String,Object> showCompanyRegisterApplyList() {
-/*
-* @param
+
+/** @param
 * 查看企业注册信息
 * @return
 * @author hanfeng
-* */
+**/
         Map<String, Object> result = new HashMap<String, Object>();
         CompanyViewExample CompanyViewExample=new CompanyViewExample();
         CompanyViewExample CompanyExampleView;
@@ -120,12 +120,14 @@ public class ShowCompanyController {
     @RequestMapping(value ="showCompanyDetails",method=RequestMethod.GET)
     public @ResponseBody
     Map<String,Object> showCompanyDetails(@RequestParam("id") String id) {
+
 /*
 * @param
 * 查看公司详情
 * @return
 * @author hanfeng
-* */
+*
+*/
 
         Map<String, Object> result = new HashMap<String, Object>();
 
@@ -163,12 +165,12 @@ public class ShowCompanyController {
     }
     @RequestMapping(value ="showRegisteCompanies",method=RequestMethod.GET)
     public @ResponseBody      Map<String,Object> showRegisterCompanies() {
-/*
-* @param
+
+/** @param
 * @return
 * 查看企业招聘岗位
 * @author hanfeng
-* */
+**/
         Map<String,Object> result = new HashMap<String, Object>();
         CompanyViewExample CompanyViewExample=new CompanyViewExample();
         CompanyViewExample CompanyExampleView;
