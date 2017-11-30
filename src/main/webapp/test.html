@@ -1,143 +1,221 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta charset="UTF-8" />
-<title>MODEL PAGE</title>
-<script src="js/jquery-2.1.0.min.js"></script>
-<style type="text/css">
-table {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-CN">
+    <head>
+    
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">   <!-- 在IE运行最新的渲染模式 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">    <!-- 初始化移动浏览显示  -->
+        <meta name="Author" content="Dreamer-1.">        
+        
+        <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+        <script type="text/javascript" src="js/echarts.common.min.js"></script>
+    
+    <title>- 观测数据 -</title>
+    </head>
 
-td,th {
-    border: 1px solid black;
-}
-</style>
-<script type="text/javascript">
-function dolistpage(pagerow,pagenum,rowcount,pagecount){
- $("#pagemsg").html("每页显示"+pagerow+"条，当前" + pagenum + "/" +pagecount + "页 共" +rowcount + "条");
- if (pagenum == 1) {
-  $("#fpbtn").attr("disabled", true);
-  $("#rpbtn").attr("disabled", true);
- }else {
-  $("#fpbtn").removeAttr("disabled");
-  $("#rpbtn").removeAttr("disabled");
- }
- if (pagenum == pagecount) {
-  $("#npbtn").attr("disabled", true);
-  $("#lpbtn").attr("disabled", true);
- }else {
-  $("#npbtn").removeAttr("disabled");
-  $("#lpbtn").removeAttr("disabled");
- }
- $("#fpbtn").click(function(){
-  loadtpage(1);
- });
- $("#rpbtn").click(function(){
-  loadtpage(pagenum - 1);
- });
- $("#npbtn").click(function(){
-  if ((pagenum + 1) >= pagecount) 
-   loadtpage(pagecount);
-  else
-   loadtpage(pagenum + 1);
- });
- $("#lpbtn").click(function(){
-  loadtpage(pagecount);
- });
- $("#gpbtn").click(function(){
-  var tzys = $("#gpinput").val();
-  var re = /^[1-9]+[0-9]*$/;
-  if (tzys == null || tzys == undefined || tzys == '') {
-   alert("请输入跳转页数!");
-   $("#gpinput").focus();
-   return;
-  }
-  if (!re.test(tzys)) {
-   alert("请输入正确跳转页数!");
-   $("#gpinput").focus();
-   return;
-  }
-  if (tzys > pagecount) 
-   tzys = pagecount;
-  if (tzys <= 0) 
-   tzys = 1;
-  loadtpage(tzys);
- });
- $("#gpinput").val(pagenum);
-}
-</script>
-</head>
-<body>
-<table>
- <tfoot>
-  <tr>
-   <td colspan="11">
-    <span class="water-table-listbtn"></span>
-    <span class="water-table-page">
-     <span id="pagemsg" class="water-table-pagemsg">当前0/0页</span>
-     <input type="button" id="fpbtn" value="首页"/>
-     <input type="button" id="rpbtn" value="上页"/>
-     <input type="button" id="npbtn" value="下页"/>
-     <input type="button" id="lpbtn" value="尾页"/>
-     <span id="pagemsg" class="water-table-pagemsg">跳转
-     <input type="text" id="gpinput" size="3" value="0"/>页
-     </span>
-     <input type="button" id="gpbtn" value="跳转"/>
-    </span>
-   </td>
-  </tr>
- </tfoot>
-</table>
-</body>
-<script type="text/javascript">
-  $.ajax({
-            dataType: "json",
-            type: "get",
-            url: "../controller/productlist.php",
-            success: function(data) {
-                        if(data.code == 200){
-                           //$des = $("#sample-table-2>tbody");
-                            var datas = data.data;
-                            if(jQuery.isEmptyObject(datas) || datas.length == 0){
-                                alert("暂无数据");
-                            }
-                            for(var i=0;i<datas.length;i++){
-                                var tr = "<tr>";
-                                tr += '<td class="center"><label><input type="checkbox" class="ace" /><span class="lbl"></span></label></td>';
-                                tr += '<td class="center" id="hotelName">'+datas[i].productName+'</td>';
-                                tr += '<td class="hidden-480 center">'+datas[i].productBigKind+datas[i].productSmallKind+'</td>';
+    <body>
 
-                                tr += '<td class="center">'+datas[i].productLevel+'</td>';
-                                tr += '<td class="hidden-480 center" >'+datas[i].price+'</td>';
-                                tr += '<td class="hidden-480 center" >'+datas[i].storage+'</td>';
-                                tr += '<td class="hidden-480 center" >'+datas[i].storage+'</td>';
-                                tr += "</tr>";
+        <!-- 显示Echarts图表 -->
+        <div style="height:410px;min-height:100px;margin:0 auto;" id="main"></div>                        
+                    
+      
+  
+        <script type="text/javascript">
+            
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
 
-
-                                /*
-                                var tr = $("<tr></tr>").appendTo($des);
-                                var td1 = $('<td class="center"><label><input type="checkbox" class="ace" /><span class="lbl"></span></label></td>').appendTo(tr);
-                                var td2 = $('<td class="center" id="hotelName">'+datas[i].productName+'</td>').appendTo(tr);
-                                var td3 = $('<td class="hidden-480 center">'+datas[i].productBigKind+datas[i].productSmallKind+'</td>').appendTo(tr);
-                                var td4 = $('<td class=" center">'+datas[i].productLevel+'</td>').appendTo(tr);
-                                var td5 = $('<td class=" hidden-480 center">'+datas[i].price+'</td>').appendTo(tr);
-                                var td6 = $('<td class=" hidden-480 center">'+datas[i].storage+'</td>').appendTo(tr);
-
-                                var td7 = $('<td class="center"><div class="visible-md visible-lg visible-sm  action-buttons"><a  class="btn btn-xs btn-info"  role="button" href="editproduct.php?id='+datas[i].id+'" id="edit'+datas[i].id+'"><i class="icon-remove bigger-120">修改</i></a>  <a  class="btn btn-xs btn-warning"  role="button" id="delete'+datas[i].id+'"  onclick="deleteProduct('+datas[i].id+');"><i class="icon-remove bigger-120"  >删除</i></a></div></td>').appendTo(tr);
-                                */
-                                $("#sample-table-2 tbody").append(tr);
-
-                            }
-
-
-                            $("#sample-table-2").DataTable();
-                        }
+        // 指定图表的配置项和数据
+        var option = {
+            title: {    //图表标题
+                text: '过去五天数据图表'
             },
-            error: function(code,message,data) {
-                alert("发生错误："+message);
-            }
-        });
-</script>>
+            tooltip: {
+                trigger: 'axis', //坐标轴触发提示框，多用于柱状、折线图中
+                /*
+                 控制提示框内容输出格式
+                formatter: '{b0}<br/><font color=#FF3333>&nbsp;●&nbsp;</font>{a0} : {c0} ℃ ' + 
+                               '<br/><font color=#53FF53>●&nbsp;</font>{a1} : {c1} % ' +          
+                               '<br/><font color=#68CFE8>&nbsp;●&nbsp;</font>{a3} : {c3} mm ' +
+                               '<br/><font color=#FFDC35>&nbsp;●&nbsp;</font>{a4} : {c4} m/s ' +
+                               '<br/><font color=#B15BFF>&nbsp;&nbsp;&nbsp;&nbsp;●&nbsp;</font>{a2} : {c2} hPa ' 
+                */
+            },
+            dataZoom: [
+                 {
+                     type: 'slider',    //支持鼠标滚轮缩放
+                     start: 0,            //默认数据初始缩放范围为10%到90%
+                     end: 100
+                 },
+                 {
+                     type: 'inside',    //支持单独的滑动条缩放
+                     start: 0,            //默认数据初始缩放范围为10%到90%
+                     end: 100
+                 }
+            ],
+            legend: {    //图表上方的类别显示               
+                show:true,
+                data:['温度（℃）','湿度（%）','雨量（mm）','风速（m/s）','压强（hPa）']
+            },
+            color:[
+                   '#FF3333',    //温度曲线颜色
+                   '#53FF53',    //湿度曲线颜色
+                   '#B15BFF',    //压强图颜色
+                   '#68CFE8',    //雨量图颜色
+                   '#FFDC35'    //风速曲线颜色
+                   ],
+            toolbox: {    //工具栏显示             
+                show: true,
+                feature: {                
+                    saveAsImage: {}        //显示“另存为图片”工具
+                }
+            },
+            xAxis:  {    //X轴           
+                type : 'category',
+                data : []    //先设置数据值为空，后面用Ajax获取动态数据填入
+            },
+            yAxis : [    //Y轴（这里我设置了两个Y轴，左右各一个）
+                        {
+                            //第一个（左边）Y轴，yAxisIndex为0
+                             type : 'value',
+                             name : '温度',
+                             /* max: 120,
+                             min: -40, */
+                             axisLabel : {
+                                 formatter: '{value} ℃'    //控制输出格式
+                             }
+                         },
+                         {
+                            //第二个（右边）Y轴，yAxisIndex为1
+                             type : 'value',
+                             name : '压强',
+                             scale: true,
+                             axisLabel : {
+                                 formatter: '{value} hPa'
+                             }
+                         }
+                     
+            ],
+            series : [    //系列（内容）列表                      
+                        {
+                            name:'温度（℃）',
+                            type:'line',    //折线图表示（生成温度曲线）
+                            symbol:'emptycircle',    //设置折线图中表示每个坐标点的符号；emptycircle：空心圆；emptyrect：空心矩形；circle：实心圆；emptydiamond：菱形                        
+                            data:[]        //数据值通过Ajax动态获取
+                        },
+                        
+                        {
+                            name:'湿度（%）',
+                            type:'line',
+                            symbol:'emptyrect',
+                            data:[]
+                        },
+                        
+                        {
+                            name:'压强（hPa）',
+                            type:'line',
+                            symbol:'circle',    //标识符号为实心圆
+                            yAxisIndex: 1,        //与第二y轴有关
+                            data:[]
+                        },
+                        
+                        {
+                            name:'雨量（mm）',
+                            type:'bar',        //柱状图表示
+                            //barMinHeight: 10,    //柱条最小高度，可用于防止某数据项的值过小而影响交互
+                            /* label: {    //显示值
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            }, */
+                            data:[]
+                        },
+                        
+                        {
+                            name:'风速（m/s）',
+                            type:'line',
+                            symbol:'emptydiamond',
+                            data:[]
+                        }                
+            ]
+        };
+         
+        myChart.showLoading();    //数据加载完之前先显示一段简单的loading动画
+         
+         var tems=[];        //温度数组（存放服务器返回的所有温度值）
+         var hums=[];        //湿度数组
+         var pas=[];        //压强数组
+         var rains=[];        //雨量数组
+         var win_sps=[];    //风速数组
+         var dates=[];        //时间数组
+         
+         $.ajax({    //使用JQuery内置的Ajax方法
+         type : "post",        //post请求方式
+         async : true,        //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+         url : "ShowInfoIndexServlet",    //请求发送到ShowInfoIndexServlet处
+         data : {name:"A0001"},        //请求内包含一个key为name，value为A0001的参数；服务器接收到客户端请求时通过request.getParameter方法获取该参数值
+         dataType : "json",        //返回数据形式为json
+         success : function(result) {
+             //请求成功时执行该函数内容，result即为服务器返回的json对象
+             if (result != null && result.length > 0) {
+                    for(var i=0;i<result.length;i++){       
+                       tems.push(result[i].tem);        //挨个取出温度、湿度、压强等值并填入前面声明的温度、湿度、压强等数组
+                       hums.push(result[i].hum);
+                       pas.push(result[i].pa);
+                       rains.push(result[i].rain);
+                       win_sps.push(result[i].win_sp);
+                       dates.push(result[i].dateStr);
+                    }
+                    myChart.hideLoading();    //隐藏加载动画
+                    
+                    myChart.setOption({        //载入数据
+                        xAxis: {
+                            data: dates    //填入X轴数据
+                        },
+                        series: [    //填入系列（内容）数据
+                                      {
+                                    // 根据名字对应到相应的系列
+                                    name: '温度',
+                                    data: tems
+                                },
+                                      {
+                                    name: '湿度',
+                                    data: hums
+                                },
+                                    {
+                                    name: '压强',
+                                    data: pas
+                                },
+                                    {
+                                    name: '雨量',
+                                    data: rains
+                                },
+                                    {
+                                name: '风速',
+                                data: win_sps
+                               }
+                       ]
+                    });
+                    
+             }
+             else {
+                 //返回的数据为空时显示提示信息
+                 alert("图表请求数据为空，可能服务器暂未录入近五天的观测数据，您可以稍后再试！");
+                   myChart.hideLoading();
+             }
+         
+        },
+         error : function(errorMsg) {
+             //请求失败时执行该函数
+             alert("图表请求数据失败，可能是服务器开小差了");
+             myChart.hideLoading();        
+         }
+    })
+
+    myChart.setOption(option);    //载入图表
+         
+    </script>
+        
+    </body>
 </html>

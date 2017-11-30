@@ -50,7 +50,13 @@ table.approval-table>tbody>tr>td{
   text-align: left
 }
 .index-title{
-  margin-left: 10px;
+    color: #7F7F7F;
+    font-size: 1.7em;
+}
+.loginout{
+  position: absolute;
+  right: 0;
+  bottom: 12.5%;
 }
 iframe{
   height: 100%;
@@ -247,9 +253,6 @@ div.circle-area{
 }
 .float-left{
   float: left;
-}
-.loginout{
-  float: right !important;
 }
 .history-data{
   float: left;
