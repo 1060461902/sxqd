@@ -32,7 +32,6 @@ public class ViewController {
     UserService userService;
     @Autowired
     StudentService studentService;
-
     /**
      *
      * @param pageNum 页码
@@ -51,7 +50,7 @@ public class ViewController {
 
 //        分页查询Teacher表所有的记录
         TeacherExample TeacherExample = new TeacherExample();
-        TeacherExample.or().andIdIsNotNull();
+        TeacherExample.or().andIdIsNotNull().andStatusEqualTo(false);
 //        分页
         Page<Teacher> Teachers = PageHelper.startPage(pageNum,pageSize);
         teacherService.selectByExample(TeacherExample);
