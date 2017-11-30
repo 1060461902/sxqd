@@ -284,9 +284,9 @@ input.search{
 table.dataTable thead th,table.dataTable tbody td{
   border-bottom: 1px solid #DDD !important;
 }
-ul#myTab li{
+/*ul#myTab li{
   width: 17%;
-}
+}*/
 ul#studentTab li{
   width: 14%;
 

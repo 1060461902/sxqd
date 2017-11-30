@@ -1,4 +1,8 @@
-$(document).ready(function(){ 
+$(document).ready(function(){
+  $(".templatemo-left-nav a").click(function () {
+     $(".templatemo-left-nav a").css("background","#425FAF");
+     $(this).css("background","#324E8F");
+    });
     if ($(".badge").text()==0) {
       $(".badge").css("display","none")
     };

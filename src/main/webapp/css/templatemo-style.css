@@ -20,7 +20,7 @@ body {	font-size: 13px;}
 html, body {
     height: 100%;
 }
-body, .templatemo-left-nav { background: #1f2124; }
+body, .templatemo-left-nav { background: #425FAF; }
 h1, h2, h3 { margin: 0; }
 h2 { font-size: 1.6em; }
 h3 {
@@ -38,7 +38,7 @@ ul {
 }
 a:hover { text-decoration: none; }
 nav li {
-	font-size: 1.1em;
+	font-size: 1.2em;
 	list-style: none;	
 	text-transform: uppercase;
 }
@@ -73,7 +73,7 @@ nav li {
 }
 .blue-bg .fa-times { background-color: #6792C0; }
 .blue-bg .fa-times:hover { background-color: #2C639C; }
-.light-gray-bg { background-color: #efefef; }
+.light-gray-bg { background-color: #E6E9F0; }
 .padding-right-25 {	padding-right: 25px; }
 .margin-bottom-0 {	margin-bottom: 0; }
 .margin-bottom-5 {	margin-bottom: 5px; }
@@ -89,8 +89,8 @@ footer { padding: 15px; }
 
 /* 2. Left Column
 -----------------------------*/
-.templatemo-blank { height: 103.283px; background-color: #393D49;}
-.templatemo-sidebar { width: 190px; background-color: #1f2124;}
+.templatemo-blank { height: 103.283px; background-color: #4896E0;}
+.templatemo-sidebar { width: 190px; background-color: #425FAF;}/*#1f2124*/
 .square {
 	width: 25px;
 	height: 25px;
@@ -167,9 +167,13 @@ footer { padding: 15px; }
 .templatemo-left-nav li { font-weight: 300; }
 .templatemo-left-nav a.active,
 .templatemo-left-nav a:hover {
-	background: #18191b;
-	border-left: 8px solid #39ADB4;/*#13895F;*/
+	background: #324E8F;
+	border-left: 8px solid white;/*#13895F;*/
 }
+.current{
+	background: #324E8F;
+}
+
 .templatemo-left-nav a {
 	color: #e9e9ea;
 	display: block;
@@ -541,6 +545,7 @@ input[type="radio"]:checked + label span {
 	nav li { font-size: 1em; }
 	.templatemo-left-nav a { padding: 15px; }
 	.templatemo-top-nav a { padding: 0 30px; }
+/*	ul#myTab>li{ width: 20%;}*/
 /*	.templatemo-top-nav-container{ padding: 18px 50px;}*/
 
 }
