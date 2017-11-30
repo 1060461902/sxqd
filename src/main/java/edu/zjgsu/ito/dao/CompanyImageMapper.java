@@ -4,7 +4,9 @@ import edu.zjgsu.ito.model.CompanyImage;
 import edu.zjgsu.ito.model.CompanyImageExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CompanyImageMapper {
     long countByExample(CompanyImageExample example);
 

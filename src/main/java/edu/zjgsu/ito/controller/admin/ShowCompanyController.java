@@ -21,8 +21,8 @@ import java.util.Map;
 public class ShowCompanyController {
     //页大小
 //    public static final int pageSize=2;
-    @Autowired
-    CompanyService companyService;
+/*    @Autowired
+    CompanyService companyService;*/
     @Autowired
     UserService userService;
     @Autowired
@@ -31,8 +31,8 @@ public class ShowCompanyController {
     CompanyViewService companyViewService;
     @Autowired
     CompanyImageService companyImageService;
-    @Autowired
-    CompanyMarkService companyMarkService;
+/*    @Autowired
+    CompanyMarkService companyMarkService;*/
 
 
     @RequestMapping(value ="showCompanies",method=RequestMethod.GET)
