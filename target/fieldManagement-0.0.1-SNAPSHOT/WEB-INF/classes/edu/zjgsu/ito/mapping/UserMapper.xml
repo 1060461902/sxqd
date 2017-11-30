@@ -78,7 +78,6 @@
     <if test="distinct">
       distinct
     </if>
-    'true' as QUERYID,
     <include refid="Base_Column_List" />
     from user
     <if test="_parameter != null">
@@ -86,6 +85,14 @@
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -105,21 +112,22 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.User">
-    insert into user (id, user_name, password, 
-      phone, nick_name, delete_tag, 
-      role_id, create_time, forbidden
-      )
-    values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{deleteTag,jdbcType=BIT}, 
-      #{roleId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{forbidden,jdbcType=BIT}
-      )
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user (user_name, password, phone, 
+      nick_name, delete_tag, role_id, 
+      create_time, forbidden)
+    values (#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{nickName,jdbcType=VARCHAR}, #{deleteTag,jdbcType=BIT}, #{roleId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{forbidden,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.User">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="userName != null">
         user_name,
       </if>
@@ -146,9 +154,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>

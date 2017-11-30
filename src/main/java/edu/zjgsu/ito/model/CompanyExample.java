@@ -11,6 +11,10 @@ public class CompanyExample {
 
     protected List<Criteria> oredCriteria;
 
+    private Integer limit;
+
+    private Integer offset;
+
     public CompanyExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
@@ -62,6 +66,22 @@ public class CompanyExample {
         oredCriteria.clear();
         orderByClause = null;
         distinct = false;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
+
+    public Integer getOffset() {
+        return offset;
     }
 
     protected abstract static class GeneratedCriteria {
@@ -1124,8 +1144,220 @@ public class CompanyExample {
             addCriterion("pass not between", value1, value2, "pass");
             return (Criteria) this;
         }
+
+        public Criteria andLicenceIsNull() {
+            addCriterion("licence is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLicenceIsNotNull() {
+            addCriterion("licence is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLicenceEqualTo(String value) {
+            addCriterion("licence =", value, "licence");
+            return (Criteria) this;
+        }
+
+        public Criteria andLicenceNotEqualTo(String value) {
+            addCriterion("licence <>", value, "licence");
+            return (Criteria) this;
+        }
+
+        public Criteria andLicenceGreaterThan(String value) {
+            addCriterion("licence >", value, "licence");
+            return (Criteria) this;
+        }
+
+        public Criteria andLicenceGreaterThanOrEqualTo(String value) {
+            addCriterion("licence >=", value, "licence");
+            return (Criteria) this;
+        }
+
+        public Criteria andLicenceLessThan(String value) {
+            addCriterion("licence <", value, "licence");
+            return (Criteria) this;
+        }
+
+        public Criteria andLicenceLessThanOrEqualTo(String value) {
+            addCriterion("licence <=", value, "licence");
+            return (Criteria) this;
+        }
+
+        public Criteria andLicenceLike(String value) {
+            addCriterion("licence like", value, "licence");
+            return (Criteria) this;
+        }
+
+        public Criteria andLicenceNotLike(String value) {
+            addCriterion("licence not like", value, "licence");
+            return (Criteria) this;
+        }
+
+        public Criteria andLicenceIn(List<String> values) {
+            addCriterion("licence in", values, "licence");
+            return (Criteria) this;
+        }
+
+        public Criteria andLicenceNotIn(List<String> values) {
+            addCriterion("licence not in", values, "licence");
+            return (Criteria) this;
+        }
+
+        public Criteria andLicenceBetween(String value1, String value2) {
+            addCriterion("licence between", value1, value2, "licence");
+            return (Criteria) this;
+        }
+
+        public Criteria andLicenceNotBetween(String value1, String value2) {
+            addCriterion("licence not between", value1, value2, "licence");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaxRegistrationIsNull() {
+            addCriterion("tax_registration is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaxRegistrationIsNotNull() {
+            addCriterion("tax_registration is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaxRegistrationEqualTo(String value) {
+            addCriterion("tax_registration =", value, "taxRegistration");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaxRegistrationNotEqualTo(String value) {
+            addCriterion("tax_registration <>", value, "taxRegistration");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaxRegistrationGreaterThan(String value) {
+            addCriterion("tax_registration >", value, "taxRegistration");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaxRegistrationGreaterThanOrEqualTo(String value) {
+            addCriterion("tax_registration >=", value, "taxRegistration");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaxRegistrationLessThan(String value) {
+            addCriterion("tax_registration <", value, "taxRegistration");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaxRegistrationLessThanOrEqualTo(String value) {
+            addCriterion("tax_registration <=", value, "taxRegistration");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaxRegistrationLike(String value) {
+            addCriterion("tax_registration like", value, "taxRegistration");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaxRegistrationNotLike(String value) {
+            addCriterion("tax_registration not like", value, "taxRegistration");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaxRegistrationIn(List<String> values) {
+            addCriterion("tax_registration in", values, "taxRegistration");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaxRegistrationNotIn(List<String> values) {
+            addCriterion("tax_registration not in", values, "taxRegistration");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaxRegistrationBetween(String value1, String value2) {
+            addCriterion("tax_registration between", value1, value2, "taxRegistration");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaxRegistrationNotBetween(String value1, String value2) {
+            addCriterion("tax_registration not between", value1, value2, "taxRegistration");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationCodeIsNull() {
+            addCriterion("organization_code is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationCodeIsNotNull() {
+            addCriterion("organization_code is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationCodeEqualTo(String value) {
+            addCriterion("organization_code =", value, "organizationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationCodeNotEqualTo(String value) {
+            addCriterion("organization_code <>", value, "organizationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationCodeGreaterThan(String value) {
+            addCriterion("organization_code >", value, "organizationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("organization_code >=", value, "organizationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationCodeLessThan(String value) {
+            addCriterion("organization_code <", value, "organizationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationCodeLessThanOrEqualTo(String value) {
+            addCriterion("organization_code <=", value, "organizationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationCodeLike(String value) {
+            addCriterion("organization_code like", value, "organizationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationCodeNotLike(String value) {
+            addCriterion("organization_code not like", value, "organizationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationCodeIn(List<String> values) {
+            addCriterion("organization_code in", values, "organizationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationCodeNotIn(List<String> values) {
+            addCriterion("organization_code not in", values, "organizationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationCodeBetween(String value1, String value2) {
+            addCriterion("organization_code between", value1, value2, "organizationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationCodeNotBetween(String value1, String value2) {
+            addCriterion("organization_code not between", value1, value2, "organizationCode");
+            return (Criteria) this;
+        }
     }
 
+    /**
+     */
     public static class Criteria extends GeneratedCriteria {
 
         protected Criteria() {

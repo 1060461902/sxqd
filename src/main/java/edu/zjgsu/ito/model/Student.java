@@ -1,38 +1,71 @@
 package edu.zjgsu.ito.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Student {
+/**
+ * @author 
+ */
+public class Student implements Serializable {
     private String id;
 
     private String userId;
 
+    /**
+     * 公司联系人代表公司id学生根据状态表示想去的公司
+     */
     private String companyId;
 
     private String teacherId;
 
+    /**
+     * 实习状态0未实习1申请中2待实习3实习中4已结业
+     */
     private String status;
 
+    /**
+     * 0默认未归档1归档
+     */
     private Boolean zipFile;
 
+    /**
+     * 实习岗位
+     */
     private String post;
 
+    /**
+     * 1存在 0删除 默认1
+     */
     private Boolean deleteTag;
 
+    /**
+     * 0男1女
+     */
     private Boolean sex;
 
+    /**
+     * 民族
+     */
     private String nation;
 
+    /**
+     * 1熟练2一般
+     */
     private Boolean english;
 
+    /**
+     * 毕业年份
+     */
     private Date graduateYear;
+
+    private static final long serialVersionUID = 1L;
 
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+        this.id = id;
     }
 
     public String getUserId() {
@@ -40,7 +73,7 @@ public class Student {
     }
 
     public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+        this.userId = userId;
     }
 
     public String getCompanyId() {
@@ -48,7 +81,7 @@ public class Student {
     }
 
     public void setCompanyId(String companyId) {
-        this.companyId = companyId == null ? null : companyId.trim();
+        this.companyId = companyId;
     }
 
     public String getTeacherId() {
@@ -56,7 +89,7 @@ public class Student {
     }
 
     public void setTeacherId(String teacherId) {
-        this.teacherId = teacherId == null ? null : teacherId.trim();
+        this.teacherId = teacherId;
     }
 
     public String getStatus() {
@@ -64,7 +97,7 @@ public class Student {
     }
 
     public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+        this.status = status;
     }
 
     public Boolean getZipFile() {
@@ -80,7 +113,7 @@ public class Student {
     }
 
     public void setPost(String post) {
-        this.post = post == null ? null : post.trim();
+        this.post = post;
     }
 
     public Boolean getDeleteTag() {
@@ -104,7 +137,7 @@ public class Student {
     }
 
     public void setNation(String nation) {
-        this.nation = nation == null ? null : nation.trim();
+        this.nation = nation;
     }
 
     public Boolean getEnglish() {
@@ -121,5 +154,73 @@ public class Student {
 
     public void setGraduateYear(Date graduateYear) {
         this.graduateYear = graduateYear;
+    }
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        Student other = (Student) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+            && (this.getCompanyId() == null ? other.getCompanyId() == null : this.getCompanyId().equals(other.getCompanyId()))
+            && (this.getTeacherId() == null ? other.getTeacherId() == null : this.getTeacherId().equals(other.getTeacherId()))
+            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
+            && (this.getZipFile() == null ? other.getZipFile() == null : this.getZipFile().equals(other.getZipFile()))
+            && (this.getPost() == null ? other.getPost() == null : this.getPost().equals(other.getPost()))
+            && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()))
+            && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
+            && (this.getNation() == null ? other.getNation() == null : this.getNation().equals(other.getNation()))
+            && (this.getEnglish() == null ? other.getEnglish() == null : this.getEnglish().equals(other.getEnglish()))
+            && (this.getGraduateYear() == null ? other.getGraduateYear() == null : this.getGraduateYear().equals(other.getGraduateYear()));
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getCompanyId() == null) ? 0 : getCompanyId().hashCode());
+        result = prime * result + ((getTeacherId() == null) ? 0 : getTeacherId().hashCode());
+        result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
+        result = prime * result + ((getZipFile() == null) ? 0 : getZipFile().hashCode());
+        result = prime * result + ((getPost() == null) ? 0 : getPost().hashCode());
+        result = prime * result + ((getDeleteTag() == null) ? 0 : getDeleteTag().hashCode());
+        result = prime * result + ((getSex() == null) ? 0 : getSex().hashCode());
+        result = prime * result + ((getNation() == null) ? 0 : getNation().hashCode());
+        result = prime * result + ((getEnglish() == null) ? 0 : getEnglish().hashCode());
+        result = prime * result + ((getGraduateYear() == null) ? 0 : getGraduateYear().hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", userId=").append(userId);
+        sb.append(", companyId=").append(companyId);
+        sb.append(", teacherId=").append(teacherId);
+        sb.append(", status=").append(status);
+        sb.append(", zipFile=").append(zipFile);
+        sb.append(", post=").append(post);
+        sb.append(", deleteTag=").append(deleteTag);
+        sb.append(", sex=").append(sex);
+        sb.append(", nation=").append(nation);
+        sb.append(", english=").append(english);
+        sb.append(", graduateYear=").append(graduateYear);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

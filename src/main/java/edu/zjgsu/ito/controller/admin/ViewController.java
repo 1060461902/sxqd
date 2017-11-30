@@ -35,13 +35,13 @@ public class ViewController {
 
     /**
      *
-     * @param pageNum 页码
+     * @param
      * @return
      * @author sawei
      */
     @RequestMapping(value = "showTeachers", method = RequestMethod.GET)
     public @ResponseBody
-    Map<String, Object> showTeachers(@RequestParam("pageNum") int pageNum) {
+    Map<String, Object> showTeachers() {
 
 
         FrontTeacher FrontTeacherTemp = null;
@@ -53,24 +53,22 @@ public class ViewController {
         TeacherExample TeacherExample = new TeacherExample();
         TeacherExample.or().andIdIsNotNull();
 //        分页
-        Page<Teacher> Teachers = PageHelper.startPage(pageNum,pageSize);
-        teacherService.selectByExample(TeacherExample);
-        if (Teachers == null) {
+//        List<Teacher> teachers;
+        List<Teacher> teachers=teacherService.selectByExample(TeacherExample);
+        if (teachers == null) {
             result.put("code", Constant.FAIL);
             result.put("msg", "无法从Teacher表里查到记录！");
             return result;
         }
-
 //        查找Teachers的每一个元素的全部信息
-        for (Teacher Teacher:
-             Teachers) {
+        for (Teacher teacher:
+             teachers) {
             FrontTeacherTemp = new FrontTeacher();
-
 //            得到老师对应的user
-            User user = userService.selectByPrimaryKey(Teacher.getUserId());
+            User user = userService.selectByPrimaryKey(teacher.getUserId());
             if (user == null) {
                 result.put("code", Constant.FAIL);
-                result.put("msg", "无法找到Teacher表userID=" + Teacher.getUserId() + "对应的user！");
+                result.put("msg", "无法找到Teacher表userID=" + teacher.getUserId() + "对应的user！");
                 return result;
             }
 
@@ -84,10 +82,10 @@ public class ViewController {
 //            }
 
 //            设置返回给前端的对象的属性
-            FrontTeacherTemp.setId(Teacher.getId());
+            FrontTeacherTemp.setId(teacher.getId());
             FrontTeacherTemp.setnickName(user.getNickName());
             FrontTeacherTemp.setuserName(user.getUserName());
-            FrontTeacherTemp.setStatus(Teacher.getStatus());
+            FrontTeacherTemp.setStatus(teacher.getStatus());
             FrontTeacherTemp.setPhone(user.getPhone());
             FrontTeacherTemp.setForbidden(user.getForbidden());
 
