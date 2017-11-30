@@ -91,4 +91,53 @@ function dolistpage(pagerow,pagenum,rowcount,pagecount){
  </tfoot>
 </table>
 </body>
+<script type="text/javascript">
+  $.ajax({
+            dataType: "json",
+            type: "get",
+            url: "../controller/productlist.php",
+            success: function(data) {
+                        if(data.code == 200){
+                           //$des = $("#sample-table-2>tbody");
+                            var datas = data.data;
+                            if(jQuery.isEmptyObject(datas) || datas.length == 0){
+                                alert("暂无数据");
+                            }
+                            for(var i=0;i<datas.length;i++){
+                                var tr = "<tr>";
+                                tr += '<td class="center"><label><input type="checkbox" class="ace" /><span class="lbl"></span></label></td>';
+                                tr += '<td class="center" id="hotelName">'+datas[i].productName+'</td>';
+                                tr += '<td class="hidden-480 center">'+datas[i].productBigKind+datas[i].productSmallKind+'</td>';
+
+                                tr += '<td class="center">'+datas[i].productLevel+'</td>';
+                                tr += '<td class="hidden-480 center" >'+datas[i].price+'</td>';
+                                tr += '<td class="hidden-480 center" >'+datas[i].storage+'</td>';
+                                tr += '<td class="hidden-480 center" >'+datas[i].storage+'</td>';
+                                tr += "</tr>";
+
+
+                                /*
+                                var tr = $("<tr></tr>").appendTo($des);
+                                var td1 = $('<td class="center"><label><input type="checkbox" class="ace" /><span class="lbl"></span></label></td>').appendTo(tr);
+                                var td2 = $('<td class="center" id="hotelName">'+datas[i].productName+'</td>').appendTo(tr);
+                                var td3 = $('<td class="hidden-480 center">'+datas[i].productBigKind+datas[i].productSmallKind+'</td>').appendTo(tr);
+                                var td4 = $('<td class=" center">'+datas[i].productLevel+'</td>').appendTo(tr);
+                                var td5 = $('<td class=" hidden-480 center">'+datas[i].price+'</td>').appendTo(tr);
+                                var td6 = $('<td class=" hidden-480 center">'+datas[i].storage+'</td>').appendTo(tr);
+
+                                var td7 = $('<td class="center"><div class="visible-md visible-lg visible-sm  action-buttons"><a  class="btn btn-xs btn-info"  role="button" href="editproduct.php?id='+datas[i].id+'" id="edit'+datas[i].id+'"><i class="icon-remove bigger-120">修改</i></a>  <a  class="btn btn-xs btn-warning"  role="button" id="delete'+datas[i].id+'"  onclick="deleteProduct('+datas[i].id+');"><i class="icon-remove bigger-120"  >删除</i></a></div></td>').appendTo(tr);
+                                */
+                                $("#sample-table-2 tbody").append(tr);
+
+                            }
+
+
+                            $("#sample-table-2").DataTable();
+                        }
+            },
+            error: function(code,message,data) {
+                alert("发生错误："+message);
+            }
+        });
+</script>>
 </html>

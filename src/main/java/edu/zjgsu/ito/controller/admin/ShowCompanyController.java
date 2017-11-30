@@ -80,7 +80,7 @@ public class ShowCompanyController {
     }
 
     @RequestMapping(value ="showCompanyRegisterApplyList",method=RequestMethod.GET)
-    public @ResponseBody      Map<String,Object> showCompanyRegisterApplyList() {
+    public @ResponseBody    Map<String,Object> showCompanyRegisterApplyList() {
 /*
 * @param
 * 查看企业注册信息
@@ -115,6 +115,8 @@ public class ShowCompanyController {
         result.put("compamyViewList",companyViews);
         return result;
     }
+
+
     @RequestMapping(value ="showCompanyDetails",method=RequestMethod.GET)
     public @ResponseBody
     Map<String,Object> showCompanyDetails(@RequestParam("id") String id) {

@@ -11,21 +11,20 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/templatemo-style.css" rel="stylesheet">
     <link href="css/ownadd.css" rel="stylesheet">
-    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>      <!-- jQuery -->
+        <!-- JS -->
+    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
     <script  type="text/javascript" src="js/bootstrap.js"></script>
-    <script  type="text/javascript" src="js/myjs/student_table_details.js"></script>    
+    <script src="js/myjs/teacher_table_details.js"></script> 
   </head>
   <body  class="light-gray-bg">  
       <!-- Main content --> 
-          <div  class="templatemo-content-widget text-center white-bg" >
-            <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  <a href="student_table.html">学生列表</a> > 学生简历</h5><hr>
+          <div  class="templatemo-content-widget text-center white-bg height-660" >
+            <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  <a href="teacher_table.html">老师列表</a> > 老师简历</h5><hr>
             <ul class="nav nav-tabs" id="studentTab">
               <li class="active">
-                <a href="#qyzc" >学生简历</a>
+                <a href="#qyzc" >老师信息</a>
               </li>
-              <li><a href="student_table_jobs.html">求职之路</a></li>
-<!--               <li><a href="student_table_clock.html">考勤情况</a></li>
-              <li><a href="student_table_progress.html">实习考核</a></li>    -->           
+              <li><a href="teacher_table_students.html">指导学生</a></li>              
             </ul><br>
             <div id="myTabContent" class="tab-content">             
               <div class="panel panel-default">
@@ -34,43 +33,17 @@
                     <h3>基本信息</h3>
                     <img src="images/u520.png" class="img-circle" id="identification-photo">
                     <div class="basic-info">
-                      <div class="edit"><a href="#" data-toggle="modal" data-target="#student_Modal"><i class="fa fa-pencil fa-fw"></i>编辑</a></div>
-                      <h5>name</h5>
-                      <span>*</span> | <span>*</span> | <span>*</span> | <span>*</span>年<span>*</span>月 <br>
+                      <div class="edit"><a href="#" data-toggle="modal" data-target="#teacher_Modal"><i class="fa fa-pencil fa-fw"></i>编辑</a></div>
+                      <h5>（姓名）</h5>
+                      <span>（财务工号）</span> | <span>（男）</span> | <span>（汉族）</span> <br>
                       手机号码 ：<span>*</span><br>
                       邮箱 ： <span>*</span><br>
                     </div>
                   </li>
-                  <li class="list-group-item">
-                    <h3>项目经历</h3><span class="time">2017.11</span><br>
-                    <p>1</p>
-                    <p>2</p>
-                    <p>(项目说明)</p>
-                  </li>
-                  <li class="list-group-item">
-                    <h3>社团经历</h3><span class="time">2017.11</span><br>
-                    <p>1</p>
-                    <p>2</p>
-                    <p>(工作说明)</p>
-                  </li>
-                  <li class="list-group-item">
-                    <h3>所获荣誉</h3><span class="time">2017.11</span><br>
-                    <p>1</p>
-                    <p>2</p>
-                    <p>(荣誉说明)</p>
-                  </li>
-                  <li class="list-group-item">
-                    <h3>技能特长</h3><br>
-                    <span class="label label-primary">主要标签</span>
-                  </li>
-                  <li class="list-group-item">
-                    <h3>英语水平</h3><br>
-                    <p>詹韩峰</p>
-                  </li>
                 </ul>
               </div>
-                            <!-- 模态框（Modal） -->
-<div class="modal fade" id="student_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <!-- 模态框（Modal） -->
+<div class="modal fade" id="teacher_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content text-center">
             <div class="modal-header">
@@ -78,17 +51,17 @@
                 <h4 class="modal-title" id="myModalLabel">基本信息</h4>
             </div>
             <div class="modal-body" >
-              <table class="text-center" width="80%" id="student_details">
+              <table class="text-center" width="80%" id="teacher_details">
                 <tr>
-                  <th>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</th>
-                  <td colspan="2" width="60%">(陈琳睿)</td>
+                  <th>姓名</th>
+                  <td colspan="2" width="60%">(谢波)</td>
                 </tr>
                 <tr>
-                  <th>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</th>
+                  <th>财务工号</th>
                   <td colspan="2">(财务工号)</td>
                 </tr>
                <tr>
-                  <th rowspan="2">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</td>
+                  <th rowspan="2">性别</td>
                   <td class="text-right">
                     <button value="" id="male" class="btn btn-default">
                       <i class="fa fa-mars fa-fw"></i>
@@ -104,23 +77,23 @@
                    <td class="text-right">男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;女</td>
                 </tr>
                 <tr>
-                  <th>民&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族</th>
+                  <th>专业</th>
                   <td colspan="2">
                     <select>
-                      <option value="">汉族</option>
+                      <option value="">软件工程</option>
                     </select>
                   </td>
                 </tr>
                 <tr>
-                  <th>出生年月</th>
-                  <td colspan="2"><input></td>
+                  <th>职称</th>
+                  <td colspan="2"><input  placeholder="请输入职称"></td>
                 </tr>
                 <tr>
                   <th>手机号码</th>
                   <td colspan="2"><input  placeholder="请输入手机号"></td>
                 </tr>
                 <tr>
-                  <th>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</th>
+                  <th>邮箱</th>
                   <td colspan="2"><input  placeholder="请输入常用邮箱"></td>
                 </tr>
               </table>
@@ -134,6 +107,7 @@
 </div>
             </div>
           </div> 
+          <!-- jQuery -->
     <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
   </body>
 </html>

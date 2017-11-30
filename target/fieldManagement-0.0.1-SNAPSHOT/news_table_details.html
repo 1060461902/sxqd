@@ -11,29 +11,38 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/templatemo-style.css" rel="stylesheet">
     <link href="css/ownadd.css" rel="stylesheet">
-
+    <script src="js/jquery-2.1.0.min.js"></script>      <!-- jQuery -->
+    <script src="js/myjs/news_table_details.js"></script>  
   </head>
   <body  class="light-gray-bg hidden-scrolling">  
       <!-- Main content --> 
           <div  class="templatemo-content-widget text-center white-bg fullfill" >
-            <h5 class="iframe-title"><a href="approval.html"> 审批</a> > 新闻动态详情</h5><hr>
-              <div class="templatemo-content-widget white-bg col-1 text-center approval-news">
-                <table width="100%" class="approval-table">
+            <h5 class="iframe-title"><a href="btn_table.html">信息列表</a> > <a href="news_table.html">新闻动态列表</a> > 新闻详情</h5><hr>
+              <div class="templatemo-content-widget white-bg col-1 approval-news">
+                <table width="90%" class="approval-table">
                   <tr>
                     <th>新闻标题</th>   
                     <td>*</td>
                   </tr>
                   <tr>
                     <th>文章配图</th>   
-                    <td><img src=""></img>(pic hrer)</td>
+                    <td><img src=""></img>(pic here)</td>
                   </tr>
                   <tr>
                     <th>文章内容</th>   
                     <td>*</td>
                   </tr>
+                  <tr>
+                    <th>展示状态</th>   
+                    <td id="switch" value="1">展示中 <a href="#"><img src="images/switch-on.png"></a></td>
+                  </tr>
+                  <tr>
+                    <th>展示时间</th>   
+                    <td id="date">*</td>
+                  </tr>
                 </table>
                   <hr>
-                <table width="100%" class="approval-table">  
+                <table width="90%" class="approval-table">  
                   <tr>
                     <th>联系人</th>   
                     <td>*</td>
@@ -49,12 +58,8 @@
                     </td>
                   </tr>           
                 </table>
-              </div>
-            <button type="button" class="btn btn-info approval-button">&nbsp;通过&nbsp;</button>
-            <button type="button" class="btn btn-danger approval-button">不通过</button>           
+              </div>           
           </div> 
-    <!-- JS -->
-    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>      <!-- jQuery -->
     <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
   </body>
 </html>
