@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <title>浙江工商大学学生集中实习管理与服务平台 </title>
+    <meta name="description" content="">
+    <meta name="author" content="templatemo">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/templatemo-style.css" rel="stylesheet">
+    <link href="css/ownadd.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>      <!-- jQuery -->
+    <script  type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/myjs/approval_company.js"></script>
+  </head>
+  <body  class="light-gray-bg">  
+      <!-- Main content --> 
+          <div  class="templatemo-content-widget text-center white-bg" >
+            <h5 class="iframe-title"><a href="approval.html">审批</a>  >   企业详情</h5><hr>            
+              <div class="panel panel-default">
+                <ul class="list-group" id="xsjl">
+                  <li class="list-group-item">
+                    <h3>基本信息</h3>
+                    <img src="images/u520.png" class="img-circle" id="identification-photo">
+                    <div class="basic-info">
+                      <h4><span id="name"></span>&nbsp;&nbsp;<span id="network"></span></h4>
+                      <span id="type"></span> | <span id="stage"></span> | <span id="size"></span>  <br>
+                      企业标语 ：<span id="slogans"></span>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <h3>企业标签</h3><br>
+                    <span class="label label-primary" id="mark">主要标签</span>
+                  </li>
+                  <li class="list-group-item">
+                    <h3>企业简介</h3><br>
+                    <p id='intruction'></p>
+                  </li>
+                  <li class="list-group-item">
+                    <h3>企业相册</h3><br>
+                      <div class="profile-photo-container">
+                        <img src="images/logo.gif" alt="album Photo" class="img-responsive">  
+                      </div> 
+                  </li>
+                  <li class="list-group-item">
+                    <h3>企业地址</h3><br>
+                    <P id='address'></P>
+                  </li>
+                  <li class="list-group-item">
+                    <h3>企业资质</h3><br>
+                      <div class="profile-photo-container photo-inline-block">
+                        <img src="#" alt="营业执照" class="img-responsive">  
+                      </div>
+                      <div class="profile-photo-container photo-inline-block">
+                        <img src="#" alt="营业执照税务登记证" class="img-responsive">  
+                      </div>
+                      <div class="profile-photo-container photo-inline-block" >
+                        <img src="#" alt="组织机构代码证" class="img-responsive">  
+                      </div>   
+                  </li>
+                </ul><br>
+                <button type="button" class="btn btn-info approval-button" value="1" id="yes">通过</button>
+                <button type="button" class="btn btn-danger approval-button" value="0" data-toggle="modal" data-target="#content">不通过</button><br><br>
+              </div>
+          </div> 
+  </body>
+</html>
