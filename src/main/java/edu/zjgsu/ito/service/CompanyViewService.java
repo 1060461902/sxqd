@@ -18,6 +18,8 @@ public interface CompanyViewService {
 
     List<CompanyView> selectByExample(CompanyViewExample example);
 
+    CompanyView selectByKey(String id);
+
     int updateByExampleSelective(@Param("record") CompanyView record, @Param("example") CompanyViewExample example);
 
     int updateByExample(@Param("record") CompanyView record, @Param("example") CompanyViewExample example);

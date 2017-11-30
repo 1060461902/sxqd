@@ -3,7 +3,6 @@ package edu.zjgsu.ito.service.Impl;
 import edu.zjgsu.ito.dao.CompanyMapper;
 import edu.zjgsu.ito.model.CompanyExample;
 import edu.zjgsu.ito.model.Company;
-import edu.zjgsu.ito.model.CompanyExample;
 import edu.zjgsu.ito.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

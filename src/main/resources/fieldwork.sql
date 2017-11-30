@@ -1,21 +1,23 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 50133
+Source Server         : localhost
+Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : fieldwork
 
 Target Server Type    : MYSQL
-Target Server Version : 50133
+Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-11-30 11:46:48
+
+Date: 2017-11-30 12:17:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
 -- ----------------------------
--- Table structure for `approve_report`
+-- Table structure for approve_report
 -- ----------------------------
 DROP TABLE IF EXISTS `approve_report`;
 CREATE TABLE `approve_report` (
@@ -38,7 +40,7 @@ CREATE TABLE `approve_report` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `collection_recruitment`
+-- Table structure for collection_recruitment
 -- ----------------------------
 DROP TABLE IF EXISTS `collection_recruitment`;
 CREATE TABLE `collection_recruitment` (
@@ -57,7 +59,7 @@ CREATE TABLE `collection_recruitment` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `company`
+-- Table structure for company
 -- ----------------------------
 DROP TABLE IF EXISTS `company`;
 CREATE TABLE `company` (
@@ -75,6 +77,9 @@ CREATE TABLE `company` (
   `intruction` varchar(1255) DEFAULT NULL COMMENT '简介',
   `checked` tinyint(1) DEFAULT '0' COMMENT '0代表未审批，1代表已审批',
   `pass` tinyint(1) DEFAULT '0' COMMENT '0代表审批未通过，1代表审批通过',
+  `licence` varchar(255) DEFAULT NULL,
+  `tax_registration` varchar(255) DEFAULT NULL,
+  `organization_code` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `company_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
@@ -83,10 +88,13 @@ CREATE TABLE `company` (
 -- ----------------------------
 -- Records of company
 -- ----------------------------
-INSERT INTO `company` VALUES ('1', '杭州富远有限公司', '杭州市江干区学正街204号', '4', '2017-10-24 14:42:38', null, null, null, null, null, null, null, '1', '1');
+
+INSERT INTO `company` VALUES ('1', '杭州新东方有限公司', '杭州市江干区学正街204号', '4', '2017-11-29 20:03:37', '135@163.com', '餐饮', '1', 'www.baidu.com', '20人不到', '初创阶段', '粒粒皆辛苦', '公司主要从事餐饮方面', '1', '1', null, null, null);
+INSERT INTO `company` VALUES ('2', '天娱传媒', '杭州上城区501号', '8', '2017-11-29 20:03:40', '789@qq.com', '广告', '2', 'www.123.com', '200多人', '大型公司', '好好炒作', '公司喜欢打明星', '1', '1', null, null, null);
+INSERT INTO `company` VALUES ('3', '陈氏豆腐乳', '天津一号', '9', '2017-11-25 14:51:40', '146@email.com', '食品', '351', 'www.hao.com', '50多人', '中等公司', '二和', '产品好吃不臭', '1', '0', null, null, null);
 
 -- ----------------------------
--- Table structure for `company_image`
+-- Table structure for company_image
 -- ----------------------------
 DROP TABLE IF EXISTS `company_image`;
 CREATE TABLE `company_image` (
@@ -101,9 +109,12 @@ CREATE TABLE `company_image` (
 -- ----------------------------
 -- Records of company_image
 -- ----------------------------
+INSERT INTO `company_image` VALUES ('1', '1', 'enen');
+INSERT INTO `company_image` VALUES ('2', '2', '2');
+INSERT INTO `company_image` VALUES ('3', '2', '3');
 
 -- ----------------------------
--- Table structure for `company_mark`
+-- Table structure for company_mark
 -- ----------------------------
 DROP TABLE IF EXISTS `company_mark`;
 CREATE TABLE `company_mark` (
@@ -118,9 +129,12 @@ CREATE TABLE `company_mark` (
 -- ----------------------------
 -- Records of company_mark
 -- ----------------------------
+INSERT INTO `company_mark` VALUES ('1', '1', 'sd');
+INSERT INTO `company_mark` VALUES ('2', '2', 'duidui ');
+INSERT INTO `company_mark` VALUES ('3', '2', 'frfr');
 
 -- ----------------------------
--- Table structure for `consult`
+-- Table structure for consult
 -- ----------------------------
 DROP TABLE IF EXISTS `consult`;
 CREATE TABLE `consult` (
@@ -133,7 +147,7 @@ CREATE TABLE `consult` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `daily_check`
+-- Table structure for daily_check
 -- ----------------------------
 DROP TABLE IF EXISTS `daily_check`;
 CREATE TABLE `daily_check` (
@@ -154,7 +168,7 @@ CREATE TABLE `daily_check` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `dynamic_approve`
+-- Table structure for dynamic_approve
 -- ----------------------------
 DROP TABLE IF EXISTS `dynamic_approve`;
 CREATE TABLE `dynamic_approve` (
@@ -178,7 +192,7 @@ CREATE TABLE `dynamic_approve` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `image`
+-- Table structure for image
 -- ----------------------------
 DROP TABLE IF EXISTS `image`;
 CREATE TABLE `image` (
@@ -195,7 +209,7 @@ CREATE TABLE `image` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `month_statistics`
+-- Table structure for month_statistics
 -- ----------------------------
 DROP TABLE IF EXISTS `month_statistics`;
 CREATE TABLE `month_statistics` (
@@ -211,7 +225,7 @@ CREATE TABLE `month_statistics` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `recruitment`
+-- Table structure for recruitment
 -- ----------------------------
 DROP TABLE IF EXISTS `recruitment`;
 CREATE TABLE `recruitment` (
@@ -223,7 +237,7 @@ CREATE TABLE `recruitment` (
   `post_info` varchar(255) DEFAULT NULL COMMENT '职位信息',
   `checked` tinyint(1) DEFAULT '0' COMMENT '0代表未审批，1代表已审批',
   `pass` tinyint(1) DEFAULT '0' COMMENT '0代表审批未通过，1代表审批通过',
-  `delete_tag` tinyint(1) DEFAULT '0' COMMENT '标记删除，0-false，1-true',
+  `delete_tag` tinyint(1) DEFAULT '1' COMMENT '标记删除，0-false，1-true',
   `address` varchar(255) DEFAULT NULL COMMENT '地址',
   `skill_require` varchar(255) DEFAULT NULL COMMENT '技能要求',
   `end_time` varchar(255) DEFAULT NULL COMMENT '招聘时间',
@@ -244,10 +258,12 @@ CREATE TABLE `recruitment` (
 -- ----------------------------
 -- Records of recruitment
 -- ----------------------------
-INSERT INTO `recruitment` VALUES ('1', '1', null, null, null, null, '0', '0', '0', null, null, null, null, '0', '0', null, null, null, null, '1', null);
+
+INSERT INTO `recruitment` VALUES ('1', '1', '厨师', '5', '8', '要新东方毕业', '0', '0', '1', '江干区钱江湾生活区', '刀工5级', '11.24-11.30', '0', '0', '50000', '金秀波', '13587794512', '815027104@qq.com', '1', '1');
+INSERT INTO `recruitment` VALUES ('2', '2', '码畜', '1', '4', '要每天1500代码行', '0', '0', '1', '3', '代码8级', '11.12-11.18', '0', '0', '600000', '詹韩峰', '15967180225', '156@163.com', '1', '2');
 
 -- ----------------------------
--- Table structure for `report`
+-- Table structure for report
 -- ----------------------------
 DROP TABLE IF EXISTS `report`;
 CREATE TABLE `report` (
@@ -271,7 +287,7 @@ CREATE TABLE `report` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `student`
+-- Table structure for student
 -- ----------------------------
 DROP TABLE IF EXISTS `student`;
 CREATE TABLE `student` (
@@ -307,7 +323,7 @@ INSERT INTO `student` VALUES ('2', '3', '1', '2', '0', '0', '', '1', '0', '', nu
 INSERT INTO `student` VALUES ('3', '4', '1', '2', '0', '0', null, '1', '0', null, null, null, '2017-11-15 18:12:54', null, null);
 
 -- ----------------------------
--- Table structure for `student_club`
+-- Table structure for student_club
 -- ----------------------------
 DROP TABLE IF EXISTS `student_club`;
 CREATE TABLE `student_club` (
@@ -328,7 +344,7 @@ CREATE TABLE `student_club` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `student_honor`
+-- Table structure for student_honor
 -- ----------------------------
 DROP TABLE IF EXISTS `student_honor`;
 CREATE TABLE `student_honor` (
@@ -347,7 +363,7 @@ CREATE TABLE `student_honor` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `student_project`
+-- Table structure for student_project
 -- ----------------------------
 DROP TABLE IF EXISTS `student_project`;
 CREATE TABLE `student_project` (
@@ -368,7 +384,7 @@ CREATE TABLE `student_project` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `student_recruitment`
+-- Table structure for student_recruitment
 -- ----------------------------
 DROP TABLE IF EXISTS `student_recruitment`;
 CREATE TABLE `student_recruitment` (
@@ -388,7 +404,7 @@ CREATE TABLE `student_recruitment` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `student_skill`
+-- Table structure for student_skill
 -- ----------------------------
 DROP TABLE IF EXISTS `student_skill`;
 CREATE TABLE `student_skill` (
@@ -404,7 +420,7 @@ CREATE TABLE `student_skill` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `summary`
+-- Table structure for summary
 -- ----------------------------
 DROP TABLE IF EXISTS `summary`;
 CREATE TABLE `summary` (
@@ -428,13 +444,12 @@ CREATE TABLE `summary` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `teacher`
+-- Table structure for teacher
 -- ----------------------------
 DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE `teacher` (
   `id` varchar(255) NOT NULL,
   `user_id` varchar(255) NOT NULL,
-  `status` tinyint(1) DEFAULT '0' COMMENT '0未指导，1指导中',
   `major` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`) USING BTREE,
@@ -449,7 +464,7 @@ INSERT INTO `teacher` VALUES ('2', '6', '0', null);
 INSERT INTO `teacher` VALUES ('3', '7', '0', null);
 
 -- ----------------------------
--- Table structure for `user`
+-- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -471,42 +486,19 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'admin', '21232f297a57a5a743894a0e4a801fc3', null, '15967180225', 'baby', '1', '1', '2017-10-23 19:39:53', '1', null);
-INSERT INTO `user` VALUES ('10', '1130047', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('11', '1130137', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('12', '1130075', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('13', '3090001', null, null, null, '袴껪', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('14', '1130116', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('15', '1130065', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('16', '1130005', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('17', '1130146', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('18', '1130088', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('19', '1130076', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('2', '1511050124', 'e10adc3949ba59abbe56e057f20f883e', null, '13587797198', '詹韩峰', '1', '2', '2017-11-19 18:09:48', '1', null);
-INSERT INTO `user` VALUES ('20', '1130081', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('21', '1130051', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('22', '1130091', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('23', '1130022', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('24', '1130044', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('25', '1130132', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('26', '1130080', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('27', '1130096', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('28', '1010099', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('29', '1130107', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('3', '11050146', 'e10adc3949ba59abbe56e057f20f883e', null, '13968754020', '白求恩', '1', '3', '2017-11-19 18:09:52', '1', null);
-INSERT INTO `user` VALUES ('30', '1130067', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('31', '1130122', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('32', '1130121', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('33', '1130118', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('34', '1130115', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('35', '1130055', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('36', '1130033', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('37', '1010053', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('38', '1010027', null, null, null, '���F', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('39', '1010036', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('4', '849207436', 'e10adc3949ba59abbe56e057f20f883e', null, '18867714413', '范某', '1', '4', '2017-11-19 18:10:30', '1', null);
-INSERT INTO `user` VALUES ('5', 'sawei', 'sdfsdfsa', null, '1567147836', 'hangsenjiang', '1', '3', '2017-11-16 21:43:42', '0', null);
-INSERT INTO `user` VALUES ('6', 'jiasd', '234', null, '234213', 'df', '1', '3', '2017-11-16 21:43:42', '0', null);
-INSERT INTO `user` VALUES ('7', 'sdf', '52435', null, '7483956', 'dsf', '1', '3', '2017-11-16 21:43:43', '0', null);
-INSERT INTO `user` VALUES ('8', '1130077', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
-INSERT INTO `user` VALUES ('9', '1130079', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+
+INSERT INTO `user` VALUES ('1', 'admin', '21232f297a57a5a743894a0e4a801fc3', '15967180225', 'baby', '1', '1', '2017-10-23 19:39:53', '1');
+INSERT INTO `user` VALUES ('2', '1511050124', 'e10adc3949ba59abbe56e057f20f883e', '13587797198', '詹韩峰', '1', '2', '2017-11-19 18:09:48', '1');
+INSERT INTO `user` VALUES ('3', '11050146', 'e10adc3949ba59abbe56e057f20f883e', '13968754020', '白求恩', '1', '3', '2017-11-19 18:09:52', '1');
+INSERT INTO `user` VALUES ('4', '849207436', 'e10adc3949ba59abbe56e057f20f883e', '18867714413', '范某', '1', '4', '2017-11-19 18:10:30', '1');
+INSERT INTO `user` VALUES ('5', 'sawei', 'sdfsdfsa', '1567147836', 'hangsenjiang', '1', '3', '2017-11-25 13:35:00', '1');
+INSERT INTO `user` VALUES ('6', 'jiasd', '234', '234213', 'df', '1', '3', '2017-11-25 13:35:00', '1');
+INSERT INTO `user` VALUES ('7', 'sdf', '52435', '7483956', 'dsf', '1', '3', '2017-11-25 13:35:01', '1');
+INSERT INTO `user` VALUES ('8', 'tianyu', '21232f297a57a5a743894a0e4a801fc3', '13568779461', '天宇', '1', '4', '2017-11-25 13:36:56', '1');
+INSERT INTO `user` VALUES ('9', 'fuckchen', '21232f297a57a5a743894a0e4a801fc3', '110', '陈狗', '1', '4', '2017-11-25 13:37:26', '1');
+
+-- ----------------------------
+-- View structure for company_view
+-- ----------------------------
+DROP VIEW IF EXISTS `company_view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `company_view` AS select `company`.`id` AS `id`,`company`.`company_name` AS `company_name`,`company`.`address` AS `address`,`company`.`user_id` AS `user_id`,`company`.`create_time` AS `create_time`,`company`.`email` AS `email`,`company`.`type` AS `type`,`company`.`logo` AS `logo`,`company`.`network` AS `network`,`company`.`size` AS `size`,`company`.`stage` AS `stage`,`company`.`slogans` AS `slogans`,`company`.`intruction` AS `intruction`,`company`.`checked` AS `checked`,`company`.`pass` AS `pass`,`user`.`user_name` AS `user_name`,`user`.`password` AS `password`,`user`.`phone` AS `phone`,`user`.`nick_name` AS `nick_name`,`user`.`delete_tag` AS `delete_tag`,`user`.`role_id` AS `role_id`,`user`.`forbidden` AS `forbidden` from (`company` join `user` on((`company`.`user_id` = `user`.`id`))) where (`user`.`role_id` = 4) ;

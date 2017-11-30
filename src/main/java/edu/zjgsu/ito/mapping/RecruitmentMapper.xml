@@ -13,7 +13,7 @@
     <result column="delete_tag" jdbcType="BIT" property="deleteTag" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="skill_require" jdbcType="VARCHAR" property="skillRequire" />
-    <result column="post_time" jdbcType="TIMESTAMP" property="postTime" />
+    <result column="post_time" jdbcType="VARCHAR" property="postTime" />
     <result column="remove" jdbcType="BIT" property="remove" />
     <result column="forbidden" jdbcType="BIT" property="forbidden" />
     <result column="salary" jdbcType="VARCHAR" property="salary" />
@@ -91,7 +91,6 @@
     <if test="distinct">
       distinct
     </if>
-    'true' as QUERYID,
     <include refid="Base_Column_List" />
     from recruitment
     <if test="_parameter != null">
@@ -99,6 +98,14 @@
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -118,27 +125,30 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.Recruitment">
-    insert into recruitment (id, company_id, post, 
-      current_number, total_number, post_info, 
-      checked, pass, delete_tag, address, 
-      skill_require, post_time, remove, 
-      forbidden, salary, contact, 
-      phone, email, recruitment, 
-      user_id)
-    values (#{id,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{post,jdbcType=VARCHAR}, 
-      #{currentNumber,jdbcType=INTEGER}, #{totalNumber,jdbcType=INTEGER}, #{postInfo,jdbcType=VARCHAR}, 
-      #{checked,jdbcType=BIT}, #{pass,jdbcType=BIT}, #{deleteTag,jdbcType=BIT}, #{address,jdbcType=VARCHAR}, 
-      #{skillRequire,jdbcType=VARCHAR}, #{postTime,jdbcType=TIMESTAMP}, #{remove,jdbcType=BIT}, 
-      #{forbidden,jdbcType=BIT}, #{salary,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{recruitment,jdbcType=BIT}, 
-      #{userId,jdbcType=VARCHAR})
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into recruitment (company_id, post, current_number, 
+      total_number, post_info, checked, 
+      pass, delete_tag, address, skill_require, 
+      post_time, remove, forbidden, 
+      salary, contact, phone, 
+      email, recruitment, user_id
+      )
+    values (#{companyId,jdbcType=VARCHAR}, #{post,jdbcType=VARCHAR}, #{currentNumber,jdbcType=INTEGER}, 
+      #{totalNumber,jdbcType=INTEGER}, #{postInfo,jdbcType=VARCHAR}, #{checked,jdbcType=BIT}, 
+      #{pass,jdbcType=BIT}, #{deleteTag,jdbcType=BIT}, #{address,jdbcType=VARCHAR}, #{skillRequire,jdbcType=VARCHAR}, 
+      #{postTime,jdbcType=VARCHAR}, #{remove,jdbcType=BIT}, #{forbidden,jdbcType=BIT}, 
+      #{salary,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{recruitment,jdbcType=BIT}, #{userId,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.Recruitment">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into recruitment
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="companyId != null">
         company_id,
       </if>
@@ -198,9 +208,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
       <if test="companyId != null">
         #{companyId,jdbcType=VARCHAR},
       </if>
@@ -232,7 +239,7 @@
         #{skillRequire,jdbcType=VARCHAR},
       </if>
       <if test="postTime != null">
-        #{postTime,jdbcType=TIMESTAMP},
+        #{postTime,jdbcType=VARCHAR},
       </if>
       <if test="remove != null">
         #{remove,jdbcType=BIT},
@@ -303,7 +310,7 @@
         skill_require = #{record.skillRequire,jdbcType=VARCHAR},
       </if>
       <if test="record.postTime != null">
-        post_time = #{record.postTime,jdbcType=TIMESTAMP},
+        post_time = #{record.postTime,jdbcType=VARCHAR},
       </if>
       <if test="record.remove != null">
         remove = #{record.remove,jdbcType=BIT},
@@ -347,7 +354,7 @@
       delete_tag = #{record.deleteTag,jdbcType=BIT},
       address = #{record.address,jdbcType=VARCHAR},
       skill_require = #{record.skillRequire,jdbcType=VARCHAR},
-      post_time = #{record.postTime,jdbcType=TIMESTAMP},
+      post_time = #{record.postTime,jdbcType=VARCHAR},
       remove = #{record.remove,jdbcType=BIT},
       forbidden = #{record.forbidden,jdbcType=BIT},
       salary = #{record.salary,jdbcType=VARCHAR},
@@ -394,7 +401,7 @@
         skill_require = #{skillRequire,jdbcType=VARCHAR},
       </if>
       <if test="postTime != null">
-        post_time = #{postTime,jdbcType=TIMESTAMP},
+        post_time = #{postTime,jdbcType=VARCHAR},
       </if>
       <if test="remove != null">
         remove = #{remove,jdbcType=BIT},
@@ -435,7 +442,7 @@
       delete_tag = #{deleteTag,jdbcType=BIT},
       address = #{address,jdbcType=VARCHAR},
       skill_require = #{skillRequire,jdbcType=VARCHAR},
-      post_time = #{postTime,jdbcType=TIMESTAMP},
+      post_time = #{postTime,jdbcType=VARCHAR},
       remove = #{remove,jdbcType=BIT},
       forbidden = #{forbidden,jdbcType=BIT},
       salary = #{salary,jdbcType=VARCHAR},

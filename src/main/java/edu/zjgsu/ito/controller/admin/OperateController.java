@@ -1,10 +1,7 @@
 package edu.zjgsu.ito.controller.admin;
 
 import edu.zjgsu.ito.model.*;
-import edu.zjgsu.ito.service.CompanyService;
-import edu.zjgsu.ito.service.StudentService;
-import edu.zjgsu.ito.service.TeacherService;
-import edu.zjgsu.ito.service.UserService;
+import edu.zjgsu.ito.service.*;
 import edu.zjgsu.ito.utils.Constant;
 import edu.zjgsu.ito.utils.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +16,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "admin")
-public class ViewCompanyController {
+public class OperateController {
     public static final String defaultPwd = "123456";
 
 //    private String userId;
@@ -34,6 +31,7 @@ public class ViewCompanyController {
     TeacherService teacherService;
     @Autowired
     UserService userService;
+
 
     //通过不同角色的主键id查到其user的userID
     public String role2user(String roleid, String id) {
@@ -139,48 +137,6 @@ public class ViewCompanyController {
         } else {
             result.put("code", Constant.FAIL);
             result.put("msg", "修改密码失败！");
-        }
-
-        return result;
-    }
-    /**
-     *
-     * @param id 需要被审批的企业的id，即company的主键
-     * @return code
-     * @author saweis
-     */
-    @RequestMapping(value = "comfirmRegister", method = RequestMethod.GET)
-    public @ResponseBody
-    Map<String,Object> comfirmRegister(@RequestParam("id") String id, @RequestParam("passFlag") String passFlag) {
-        int status;
-        Map<String, Object> result = new HashMap<String, Object>();
-
-        Company companyBack = companyService.selectByPrimaryKey(id);
-        if (companyBack == null) {
-            result.put("code", Constant.FAIL);
-            result.put("msg", "未查到id=" + id + "的记录！");
-            return result;
-        }
-//        已经被check过
-        companyBack.setChecked(true);
-
-        if (passFlag.equals("0")) {
-//            审批不通过
-            companyBack.setPass(false);
-        } else {
-//            审批通过
-            companyBack.setPass(true);
-        }
-
-//        更新数据库记录
-        status = companyService.updateByPrimaryKey(companyBack);
-
-        if (status > 0) {
-            result.put("code", Constant.OK);
-            result.put("msg", "审批成功！");
-        } else {
-            result.put("code", Constant.FAIL);
-            result.put("msg", "审批失败！更新数据库失败");
         }
 
         return result;
