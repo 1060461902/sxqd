@@ -1,4 +1,5 @@
 package edu.zjgsu.ito.service.Impl;
+
 import edu.zjgsu.ito.dao.CompanyViewMapper;
 import edu.zjgsu.ito.model.CompanyView;
 import edu.zjgsu.ito.model.CompanyViewExample;
@@ -42,6 +43,11 @@ public class CompanyViewServiceImpl implements CompanyViewService{
         return  companyViewList;
 
      }
+
+    @Override
+    public CompanyView selectByKey(String id) {
+        return null;
+    }
 
     @Override
     public int updateByExampleSelective(CompanyView record, CompanyViewExample example) {
