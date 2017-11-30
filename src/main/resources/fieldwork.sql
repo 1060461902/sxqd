@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50133
 File Encoding         : 65001
 
-Date: 2017-11-23 11:03:59
+Date: 2017-11-30 11:46:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -44,12 +44,12 @@ DROP TABLE IF EXISTS `collection_recruitment`;
 CREATE TABLE `collection_recruitment` (
   `id` varchar(255) NOT NULL,
   `recruitment_id` varchar(255) NOT NULL,
-  `user_id` varchar(255) NOT NULL,
+  `student_id` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `recruitement_id` (`recruitment_id`) USING BTREE,
-  KEY `user_id` (`user_id`) USING BTREE,
+  KEY `student_id` (`student_id`),
   CONSTRAINT `collection_recruitment_ibfk_1` FOREIGN KEY (`recruitment_id`) REFERENCES `recruitment` (`id`),
-  CONSTRAINT `collection_recruitment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  CONSTRAINT `collection_recruitment_ibfk_3` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -66,7 +66,6 @@ CREATE TABLE `company` (
   `address` varchar(255) DEFAULT NULL,
   `user_id` varchar(255) NOT NULL COMMENT '负责人id',
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `email` varchar(255) DEFAULT NULL COMMENT '邮件',
   `type` varchar(255) DEFAULT NULL COMMENT '企业类型',
   `logo` varchar(255) DEFAULT NULL COMMENT '标志',
   `network` varchar(255) DEFAULT NULL COMMENT '网址',
@@ -84,7 +83,7 @@ CREATE TABLE `company` (
 -- ----------------------------
 -- Records of company
 -- ----------------------------
-INSERT INTO `company` VALUES ('1', '杭州富远有限公司', '杭州市江干区学正街204号', '4', '2017-10-24 14:42:38', null, null, null, null, null, null, null, null, '1', '1');
+INSERT INTO `company` VALUES ('1', '杭州富远有限公司', '杭州市江干区学正街204号', '4', '2017-10-24 14:42:38', null, null, null, null, null, null, null, '1', '1');
 
 -- ----------------------------
 -- Table structure for `company_image`
@@ -144,6 +143,7 @@ CREATE TABLE `daily_check` (
   `start_check` tinyint(4) DEFAULT NULL,
   `end_time` datetime DEFAULT NULL,
   `end_check` tinyint(4) DEFAULT NULL,
+  `company_id` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `daily_check_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
@@ -226,25 +226,25 @@ CREATE TABLE `recruitment` (
   `delete_tag` tinyint(1) DEFAULT '0' COMMENT '标记删除，0-false，1-true',
   `address` varchar(255) DEFAULT NULL COMMENT '地址',
   `skill_require` varchar(255) DEFAULT NULL COMMENT '技能要求',
-  `post_time` varchar(255) DEFAULT NULL COMMENT '招聘时间',
+  `end_time` varchar(255) DEFAULT NULL COMMENT '招聘时间',
+  `start_time` varchar(255) DEFAULT NULL COMMENT '招聘时间',
   `remove` tinyint(1) DEFAULT '0' COMMENT '是否被撤下0-false,1-true',
   `forbidden` tinyint(1) DEFAULT '0' COMMENT '0-没有被禁用，1-禁用',
   `salary` varchar(255) DEFAULT NULL COMMENT '薪资待遇',
   `contact` varchar(255) DEFAULT NULL COMMENT '联系人',
   `phone` varchar(255) DEFAULT NULL COMMENT '电话',
   `email` varchar(255) DEFAULT NULL COMMENT '邮箱',
-  `recruitment` tinyint(1) DEFAULT '1' COMMENT '招聘状态，1-招聘中，0-招聘结束',
-  `user_id` varchar(255) NOT NULL,
+  `recruit_status` tinyint(1) DEFAULT '1' COMMENT '招聘状态，1-招聘中，0-招聘结束',
+  `release_time` datetime DEFAULT NULL COMMENT '审批通过时间',
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `recruitment_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`),
-  CONSTRAINT `recruitment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  CONSTRAINT `recruitment_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of recruitment
 -- ----------------------------
+INSERT INTO `recruitment` VALUES ('1', '1', null, null, null, null, '0', '0', '0', null, null, null, null, '0', '0', null, null, null, null, '1', null);
 
 -- ----------------------------
 -- Table structure for `report`
@@ -286,7 +286,10 @@ CREATE TABLE `student` (
   `sex` tinyint(1) DEFAULT '0' COMMENT '0男1女',
   `nation` varchar(255) DEFAULT NULL COMMENT '民族',
   `english` tinyint(1) DEFAULT NULL COMMENT '1熟练2一般',
-  `graduate_year` datetime DEFAULT NULL COMMENT '毕业年份',
+  `major` varchar(255) DEFAULT NULL,
+  `grade` varchar(255) DEFAULT NULL COMMENT '年级（例如2015级...）',
+  `clss` varchar(255) DEFAULT NULL COMMENT '班级',
+  `birth_date` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `company_id` (`company_id`),
@@ -299,9 +302,9 @@ CREATE TABLE `student` (
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-INSERT INTO `student` VALUES ('1', '2', '1', '2', '1', '0', 'UI设计师', '1', '0', null, null, '2017-11-06 18:12:43');
-INSERT INTO `student` VALUES ('2', '3', '1', '2', '0', '0', '', '1', '0', '', null, '2017-11-19 18:12:39');
-INSERT INTO `student` VALUES ('3', '4', '1', '2', '0', '0', null, '1', '0', null, null, '2017-11-15 18:12:54');
+INSERT INTO `student` VALUES ('1', '2', '1', '2', '1', '0', 'UI设计师', '1', '0', null, null, null, '2017-11-06 18:12:43', null, null);
+INSERT INTO `student` VALUES ('2', '3', '1', '2', '0', '0', '', '1', '0', '', null, null, '2017-11-19 18:12:39', null, null);
+INSERT INTO `student` VALUES ('3', '4', '1', '2', '0', '0', null, '1', '0', null, null, null, '2017-11-15 18:12:54', null, null);
 
 -- ----------------------------
 -- Table structure for `student_club`
@@ -310,7 +313,7 @@ DROP TABLE IF EXISTS `student_club`;
 CREATE TABLE `student_club` (
   `id` varchar(255) NOT NULL,
   `club_name` varchar(255) DEFAULT NULL,
-  `indentity` varchar(255) DEFAULT NULL,
+  `role` varchar(255) DEFAULT NULL,
   `start_time` datetime DEFAULT NULL,
   `end_time` datetime DEFAULT NULL,
   `instruction` varchar(1255) DEFAULT NULL,
@@ -350,7 +353,7 @@ DROP TABLE IF EXISTS `student_project`;
 CREATE TABLE `student_project` (
   `id` varchar(255) NOT NULL,
   `project_name` varchar(255) DEFAULT NULL,
-  `identity` varchar(255) DEFAULT NULL,
+  `role` varchar(255) DEFAULT NULL COMMENT '担任的角色',
   `start_time` datetime DEFAULT NULL,
   `end_time` datetime DEFAULT NULL,
   `instruction` varchar(1255) DEFAULT NULL,
@@ -370,13 +373,13 @@ CREATE TABLE `student_project` (
 DROP TABLE IF EXISTS `student_recruitment`;
 CREATE TABLE `student_recruitment` (
   `id` varchar(255) NOT NULL,
-  `user_id` varchar(255) NOT NULL,
+  `student_id` varchar(255) NOT NULL,
   `recruitment_id` varchar(255) NOT NULL,
   `passing` tinyint(4) DEFAULT NULL COMMENT '1审批通过，2审批未通过，3待审批',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
   KEY `recruitment_id` (`recruitment_id`),
-  CONSTRAINT `student_recruitment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  KEY `student_id` (`student_id`),
+  CONSTRAINT `student_recruitment_ibfk_3` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`),
   CONSTRAINT `student_recruitment_ibfk_2` FOREIGN KEY (`recruitment_id`) REFERENCES `recruitment` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -432,6 +435,7 @@ CREATE TABLE `teacher` (
   `id` varchar(255) NOT NULL,
   `user_id` varchar(255) NOT NULL,
   `status` tinyint(1) DEFAULT '0' COMMENT '0未指导，1指导中',
+  `major` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`) USING BTREE,
   CONSTRAINT `teacher_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
@@ -440,9 +444,9 @@ CREATE TABLE `teacher` (
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
-INSERT INTO `teacher` VALUES ('1', '5', '0');
-INSERT INTO `teacher` VALUES ('2', '6', '0');
-INSERT INTO `teacher` VALUES ('3', '7', '0');
+INSERT INTO `teacher` VALUES ('1', '5', '1', null);
+INSERT INTO `teacher` VALUES ('2', '6', '0', null);
+INSERT INTO `teacher` VALUES ('3', '7', '0', null);
 
 -- ----------------------------
 -- Table structure for `user`
@@ -452,12 +456,14 @@ CREATE TABLE `user` (
   `id` varchar(255) NOT NULL,
   `user_name` varchar(255) DEFAULT NULL,
   `password` varchar(1255) DEFAULT NULL COMMENT '密文',
+  `email` varchar(255) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `nick_name` varchar(255) DEFAULT NULL,
   `delete_tag` tinyint(1) DEFAULT '1' COMMENT '1存在0删除 默认1',
-  `role_id` varchar(255) NOT NULL COMMENT '1.2.3.4管理员，学生，教师，公司',
+  `role_id` varchar(255) DEFAULT NULL COMMENT '1.2.3.4管理员，学生，教师，公司',
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `forbidden` tinyint(1) DEFAULT '0' COMMENT '0-没有被禁用，1-禁用',
+  `image` varchar(255) DEFAULT NULL COMMENT '图片url',
   PRIMARY KEY (`id`),
   KEY `user_ibfk_2` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -465,10 +471,42 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'admin', '21232f297a57a5a743894a0e4a801fc3', '15967180225', 'baby', '1', '1', '2017-10-23 19:39:53', '1');
-INSERT INTO `user` VALUES ('2', '1511050124', 'e10adc3949ba59abbe56e057f20f883e', '13587797198', '詹韩峰', '1', '2', '2017-11-19 18:09:48', '1');
-INSERT INTO `user` VALUES ('3', '11050146', 'e10adc3949ba59abbe56e057f20f883e', '13968754020', '白求恩', '1', '3', '2017-11-19 18:09:52', '1');
-INSERT INTO `user` VALUES ('4', '849207436', 'e10adc3949ba59abbe56e057f20f883e', '18867714413', '范某', '1', '4', '2017-11-19 18:10:30', '1');
-INSERT INTO `user` VALUES ('5', 'sawei', 'sdfsdfsa', '1567147836', 'hangsenjiang', '1', '3', '2017-11-16 21:43:42', '0');
-INSERT INTO `user` VALUES ('6', 'jiasd', '234', '234213', 'df', '1', '3', '2017-11-16 21:43:42', '0');
-INSERT INTO `user` VALUES ('7', 'sdf', '52435', '7483956', 'dsf', '1', '3', '2017-11-16 21:43:43', '0');
+INSERT INTO `user` VALUES ('1', 'admin', '21232f297a57a5a743894a0e4a801fc3', null, '15967180225', 'baby', '1', '1', '2017-10-23 19:39:53', '1', null);
+INSERT INTO `user` VALUES ('10', '1130047', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('11', '1130137', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('12', '1130075', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('13', '3090001', null, null, null, '袴껪', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('14', '1130116', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('15', '1130065', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('16', '1130005', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('17', '1130146', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('18', '1130088', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('19', '1130076', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('2', '1511050124', 'e10adc3949ba59abbe56e057f20f883e', null, '13587797198', '詹韩峰', '1', '2', '2017-11-19 18:09:48', '1', null);
+INSERT INTO `user` VALUES ('20', '1130081', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('21', '1130051', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('22', '1130091', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('23', '1130022', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('24', '1130044', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('25', '1130132', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('26', '1130080', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('27', '1130096', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('28', '1010099', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('29', '1130107', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('3', '11050146', 'e10adc3949ba59abbe56e057f20f883e', null, '13968754020', '白求恩', '1', '3', '2017-11-19 18:09:52', '1', null);
+INSERT INTO `user` VALUES ('30', '1130067', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('31', '1130122', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('32', '1130121', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('33', '1130118', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('34', '1130115', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('35', '1130055', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('36', '1130033', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('37', '1010053', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('38', '1010027', null, null, null, '���F', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('39', '1010036', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('4', '849207436', 'e10adc3949ba59abbe56e057f20f883e', null, '18867714413', '范某', '1', '4', '2017-11-19 18:10:30', '1', null);
+INSERT INTO `user` VALUES ('5', 'sawei', 'sdfsdfsa', null, '1567147836', 'hangsenjiang', '1', '3', '2017-11-16 21:43:42', '0', null);
+INSERT INTO `user` VALUES ('6', 'jiasd', '234', null, '234213', 'df', '1', '3', '2017-11-16 21:43:42', '0', null);
+INSERT INTO `user` VALUES ('7', 'sdf', '52435', null, '7483956', 'dsf', '1', '3', '2017-11-16 21:43:43', '0', null);
+INSERT INTO `user` VALUES ('8', '1130077', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
+INSERT INTO `user` VALUES ('9', '1130079', null, null, null, '', '1', null, '2017-11-25 11:00:23', '0', null);
