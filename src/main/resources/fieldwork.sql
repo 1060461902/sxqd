@@ -89,9 +89,9 @@ CREATE TABLE `company` (
 -- Records of company
 -- ----------------------------
 
-INSERT INTO `company` VALUES ('1', '杭州新东方有限公司', '杭州市江干区学正街204号', '4', '2017-11-29 20:03:37', '135@163.com', '餐饮', '1', 'www.baidu.com', '20人不到', '初创阶段', '粒粒皆辛苦', '公司主要从事餐饮方面', '1', '1', null, null, null);
-INSERT INTO `company` VALUES ('2', '天娱传媒', '杭州上城区501号', '8', '2017-11-29 20:03:40', '789@qq.com', '广告', '2', 'www.123.com', '200多人', '大型公司', '好好炒作', '公司喜欢打明星', '1', '1', null, null, null);
-INSERT INTO `company` VALUES ('3', '陈氏豆腐乳', '天津一号', '9', '2017-11-25 14:51:40', '146@email.com', '食品', '351', 'www.hao.com', '50多人', '中等公司', '二和', '产品好吃不臭', '1', '0', null, null, null);
+INSERT INTO `company` VALUES ('1', '杭州新东方有限公司', '杭州市江干区学正街204号', '4', '2017-11-29 20:03:37', '餐饮', '1', 'www.baidu.com', '20人不到', '初创阶段', '粒粒皆辛苦', '公司主要从事餐饮方面', '1', '1', null, null, null);
+INSERT INTO `company` VALUES ('2', '天娱传媒', '杭州上城区501号', '8', '2017-11-29 20:03:40','广告',   '2', 'www.123.com', '200多人', '大型公司', '好好炒作', '公司喜欢打明星', '1', '1', null, null, null);
+INSERT INTO `company` VALUES ('3', '陈氏豆腐乳', '天津一号', '9', '2017-11-25 14:51:40', '食品',  '351', 'www.hao.com', '50多人', '中等公司', '二和', '产品好吃不臭', '1', '0', null, null, null);
 
 -- ----------------------------
 -- Table structure for company_image
@@ -259,8 +259,8 @@ CREATE TABLE `recruitment` (
 -- Records of recruitment
 -- ----------------------------
 
-INSERT INTO `recruitment` VALUES ('1', '1', '厨师', '5', '8', '要新东方毕业', '0', '0', '1', '江干区钱江湾生活区', '刀工5级', '11.24-11.30', '0', '0', '50000', '金秀波', '13587794512', '815027104@qq.com', '1', '1');
-INSERT INTO `recruitment` VALUES ('2', '2', '码畜', '1', '4', '要每天1500代码行', '0', '0', '1', '3', '代码8级', '11.12-11.18', '0', '0', '600000', '詹韩峰', '15967180225', '156@163.com', '1', '2');
+/*INSERT INTO `recruitment` VALUES ('1', '1', '厨师', '5', '8', '要新东方毕业', '0', '0', '1', '江干区钱江湾生活区', '刀工5级', '11.24','11.30', '0', '0', '50000', '金秀波', '13587794512', '815027104@qq.com', '1', '1');
+INSERT INTO `recruitment` VALUES ('2', '2', '码畜', '1', '4', '要每天1500代码行', '0', '0', '1', '江干区钱江湾生活区', '代码8级', '11.12','11.18', '0', '0', '600000', '詹韩峰', '15967180225', '156@163.com', '1', '2');*/
 
 -- ----------------------------
 -- Table structure for report
@@ -459,9 +459,9 @@ CREATE TABLE `teacher` (
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
-INSERT INTO `teacher` VALUES ('1', '5', '1', null);
+/*INSERT INTO `teacher` VALUES ('1', '5', '1', null);
 INSERT INTO `teacher` VALUES ('2', '6', '0', null);
-INSERT INTO `teacher` VALUES ('3', '7', '0', null);
+INSERT INTO `teacher` VALUES ('3', '7', '0', null);*/
 
 -- ----------------------------
 -- Table structure for user
@@ -487,18 +487,18 @@ CREATE TABLE `user` (
 -- Records of user
 -- ----------------------------
 
-INSERT INTO `user` VALUES ('1', 'admin', '21232f297a57a5a743894a0e4a801fc3', '15967180225', 'baby', '1', '1', '2017-10-23 19:39:53', '1');
-INSERT INTO `user` VALUES ('2', '1511050124', 'e10adc3949ba59abbe56e057f20f883e', '13587797198', '詹韩峰', '1', '2', '2017-11-19 18:09:48', '1');
-INSERT INTO `user` VALUES ('3', '11050146', 'e10adc3949ba59abbe56e057f20f883e', '13968754020', '白求恩', '1', '3', '2017-11-19 18:09:52', '1');
-INSERT INTO `user` VALUES ('4', '849207436', 'e10adc3949ba59abbe56e057f20f883e', '18867714413', '范某', '1', '4', '2017-11-19 18:10:30', '1');
-INSERT INTO `user` VALUES ('5', 'sawei', 'sdfsdfsa', '1567147836', 'hangsenjiang', '1', '3', '2017-11-25 13:35:00', '1');
-INSERT INTO `user` VALUES ('6', 'jiasd', '234', '234213', 'df', '1', '3', '2017-11-25 13:35:00', '1');
-INSERT INTO `user` VALUES ('7', 'sdf', '52435', '7483956', 'dsf', '1', '3', '2017-11-25 13:35:01', '1');
-INSERT INTO `user` VALUES ('8', 'tianyu', '21232f297a57a5a743894a0e4a801fc3', '13568779461', '天宇', '1', '4', '2017-11-25 13:36:56', '1');
-INSERT INTO `user` VALUES ('9', 'fuckchen', '21232f297a57a5a743894a0e4a801fc3', '110', '陈狗', '1', '4', '2017-11-25 13:37:26', '1');
+INSERT INTO `user` VALUES ('1', 'admin', '21232f297a57a5a743894a0e4a801fc3', '159@','15967180225', 'baby', '1', '1', '2017-10-23 19:39:53', '1', '159@');
+INSERT INTO `user` VALUES ('2', '1511050124', 'e10adc3949ba59abbe56e057f20f883e','159@', '13587797198', '詹韩峰', '1', '2', '2017-11-19 18:09:48', '1', '159@');
+INSERT INTO `user` VALUES ('3', '11050146', 'e10adc3949ba59abbe56e057f20f883e','159@', '13968754020', '白求恩', '1', '3', '2017-11-19 18:09:52', '1', '159@');
+INSERT INTO `user` VALUES ('4', '849207436', 'e10adc3949ba59abbe56e057f20f883e','159@', '18867714413', '范某', '1', '4', '2017-11-19 18:10:30', '1', '159@');
+INSERT INTO `user` VALUES ('5', 'sawei', 'sdfsdfsa','159@', '1567147836', 'hangsenjiang', '1', '3', '2017-11-25 13:35:00', '1', '159@');
+INSERT INTO `user` VALUES ('6', 'jiasd', '234', '159@','234213', 'df', '1', '3', '2017-11-25 13:35:00', '1', '159@');
+INSERT INTO `user` VALUES ('7', 'sdf', '52435', '159@','7483956', 'dsf', '1', '3', '2017-11-25 13:35:01', '1', '159@');
+INSERT INTO `user` VALUES ('8', 'tianyu', '21232f297a57a5a743894a0e4a801fc3','159@', '13568779461', '天宇', '1', '4', '2017-11-25 13:36:56', '1', '159@');
+INSERT INTO `user` VALUES ('9', 'fuckchen', '21232f297a57a5a743894a0e4a801fc3', '159@','110', '陈狗', '1', '4', '2017-11-25 13:37:26', '1', '159@');
 
 -- ----------------------------
 -- View structure for company_view
 -- ----------------------------
 DROP VIEW IF EXISTS `company_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `company_view` AS select `company`.`id` AS `id`,`company`.`company_name` AS `company_name`,`company`.`address` AS `address`,`company`.`user_id` AS `user_id`,`company`.`create_time` AS `create_time`,`company`.`email` AS `email`,`company`.`type` AS `type`,`company`.`logo` AS `logo`,`company`.`network` AS `network`,`company`.`size` AS `size`,`company`.`stage` AS `stage`,`company`.`slogans` AS `slogans`,`company`.`intruction` AS `intruction`,`company`.`checked` AS `checked`,`company`.`pass` AS `pass`,`user`.`user_name` AS `user_name`,`user`.`password` AS `password`,`user`.`phone` AS `phone`,`user`.`nick_name` AS `nick_name`,`user`.`delete_tag` AS `delete_tag`,`user`.`role_id` AS `role_id`,`user`.`forbidden` AS `forbidden` from (`company` join `user` on((`company`.`user_id` = `user`.`id`))) where (`user`.`role_id` = 4) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `company_view` AS select `company`.`id` AS `id`,`company`.`company_name` AS `company_name`,`company`.`address` AS `address`,`company`.`user_id` AS `user_id`,`company`.`create_time` AS `create_time`,`user`.`email` AS `email`,`company`.`type` AS `type`,`company`.`logo` AS `logo`,`company`.`network` AS `network`,`company`.`size` AS `size`,`company`.`stage` AS `stage`,`company`.`slogans` AS `slogans`,`company`.`intruction` AS `intruction`,`company`.`checked` AS `checked`,`company`.`pass` AS `pass`,`user`.`user_name` AS `user_name`,`user`.`password` AS `password`,`user`.`phone` AS `phone`,`user`.`nick_name` AS `nick_name`,`user`.`delete_tag` AS `delete_tag`,`user`.`role_id` AS `role_id`,`user`.`forbidden` AS `forbidden` from (`company` join `user` on((`company`.`user_id` = `user`.`id`))) where (`user`.`role_id` = 4) ;
