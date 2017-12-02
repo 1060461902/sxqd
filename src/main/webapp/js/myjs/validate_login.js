@@ -4,6 +4,11 @@
 * @Last Modified by:   chenzexiao
 * @Last Modified time: 2017-10-26 14:55:51
 */
+// $(document).ready(function(){
+//    $('button').click(function(){
+//             alert($(':file').val());
+//     })
+// });
 function validate_account(account,alerttxt)
 {
   if (account==null||account=="")

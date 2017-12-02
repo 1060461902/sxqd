@@ -20,5 +20,5 @@ $(document).ready(function(){
                         "sLast" : "最后一页"
                     }  
                 },                            
-              });    
+              });
 });

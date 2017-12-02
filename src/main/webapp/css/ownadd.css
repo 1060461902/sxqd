@@ -1,4 +1,4 @@
-.86945{
+setDiv-1.86945{
   background-color: red;
 }
 .hidden-scrolling{
@@ -53,14 +53,26 @@ img#imageUrl{
   cursor:pointer; 
   display: inline-block;
 }
+.album{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+  border-left:2px solid #ddd;
+  border-right:2px solid #ddd;
+  width:75%;
+}
 .album-1{
-  position: relative;
-  left: 5%;
+  width: 100%;
   margin-bottom: 20px;
+  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
 }
 .album-2{
   background-color: #F8F8FF;
   padding:10px;
+  display: block;
 }
 #companyName{
   color: #199ED8;
@@ -68,7 +80,9 @@ img#imageUrl{
 span.operations{
   display: none;
   float: left;
-  padding-left: 27px;
+  padding-left: 44px;
+  position: relative;
+  top: -30px;
 }
 .approval-table{
   line-height:200%;
@@ -218,12 +232,24 @@ margin-left: 80px;
 #fixed{
   width: 150px;
 }
-.settitle{
-  padding-left: 109px;
+h2.settitle{
+  padding-left: 110px;
+  display: inline-block;
+}
+h3.settitle{
+    padding: 15px 110px;
+}
+h5.settitle{
+  display: inline-block;
+  padding-left: 29px;
+  color: #169BD5;
 }
 .setform{
   padding-top: 25px;
-  padding-left: 25px;
+  padding-left: 109px;
+}
+input#oldpsw,input#newpsw,input#newpsw2{
+  max-width: 300px;
 }
 #pswbtn{
   margin-top: 9px;
@@ -395,15 +421,13 @@ table#teacher_details tr,table#student_details tr{
     left: 0;
     right: 0;
     }
-.setDiv-1{
-   width:45%;
-   position:relative;
-   top: -200px;
-   display: inline-block;;
+.setDiv{
+   display: flex;
+   justify-content:center;
+    flex-wrap: wrap;
 }
-.setDiv-2{
-   width:50%;
-   display: inline-block;
+.setDiv>div{
+  padding: 10px 80px;
 }
 @media  (min-width: 768px)  {
       .titletop {
