@@ -1,12 +1,10 @@
 package edu.zjgsu.ito.controller.admin;
 
-import com.alibaba.fastjson.JSONObject;
 import edu.zjgsu.ito.model.*;
 import edu.zjgsu.ito.service.CompanyService;
 import edu.zjgsu.ito.service.CompanyViewService;
 import edu.zjgsu.ito.service.RecruitmentService;
 import edu.zjgsu.ito.utils.Constant;
-import edu.zjgsu.ito.vo.RecruitmentDetail;
 import edu.zjgsu.ito.vo.RecruitmentVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +25,6 @@ public class ShowRecruitmentController {
     RecruitmentService recruitmentService;
     @Autowired
     CompanyService companyService;
-
     @RequestMapping(value = "showRecruitment", method = RequestMethod.GET)
     public @ResponseBody
     Map<String, Object> showRegisterCompanies() {
@@ -48,8 +45,6 @@ public class ShowRecruitmentController {
 
         List<Recruitment> Recruitments = recruitmentService.selectByExample(recruitmentExample);
 
-
-
         if (Recruitments == null) {
             result.put("code", Constant.FAIL);
             result.put("msg", "无法从Company表里查到记录！");
@@ -59,15 +54,9 @@ public class ShowRecruitmentController {
             recruitmentVo=new RecruitmentVo();
             CompanyView companyView = companyViewService.selectByKey(recruitment.getCompanyId());
 
-            System.out.println("!!!");
-            System.out.println(companyView);
-            System.out.println("!!!");
-
             recruitmentVo.setPost(recruitment.getPost());
             recruitmentVo.setAddress(recruitment.getAddress());
-
             recruitmentVo.setCompanyName(companyView.getCompanyName());
-
             recruitmentVo.setPostTime(recruitment.getPostTime());
             recruitmentVo.setCurrentNumber(recruitment.getCurrentNumber());
             recruitmentVo.setTotalNumber(recruitment.getTotalNumber());
@@ -118,7 +107,6 @@ public class ShowRecruitmentController {
             for (Recruitment recruitment : Recruitments) {
                 companyView = companyViewService.selectByKey(recruitment.getCompanyId());
                 recruitmentVo=new RecruitmentVo();
-
                 recruitmentVo.setPost(recruitment.getPost());
                 recruitmentVo.setAddress(recruitment.getAddress());
                 recruitmentVo.setCompanyName(companyView.getCompanyName());

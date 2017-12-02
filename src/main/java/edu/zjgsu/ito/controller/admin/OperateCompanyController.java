@@ -6,10 +6,7 @@ import edu.zjgsu.ito.service.CompanyService;
 import edu.zjgsu.ito.service.CompanyViewService;
 import edu.zjgsu.ito.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Map;
 
