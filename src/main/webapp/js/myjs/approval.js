@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  var type = "企业类型";
+  var type = "企业类型";//第一次导入时默认全部企业类型
     $.getJSON("js/json/approval-1.json", function(data) {
        var tbody = document.getElementsByTagName ('tbody')[0];
        var len = data.compamyViewList.length;

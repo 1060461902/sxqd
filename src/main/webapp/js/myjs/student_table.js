@@ -38,7 +38,7 @@ $(document).ready(function(){
   $("span.delete").click(function(){
     var r=confirm("是否删除该学生");
       if(r==true){
-        alert("删除成功"); 
+        alert("删除成功");
       }
    });
          } //for
