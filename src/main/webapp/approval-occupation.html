@@ -79,9 +79,36 @@
                  </div>                 
               </div>
             </div>
-            <button type="button" class="btn btn-info approval-button" value="1">&nbsp;通过&nbsp;</button>
-            <button type="button" class="btn btn-danger approval-button" value="0">不通过</button>           
-          </div> 
+            <button type="button" class="btn btn-info approval-button" id="pass-button" value="1">&nbsp;通过&nbsp;</button>
+            <button type="button" class="btn btn-danger approval-button" data-toggle="modal" data-target="#passcontent">不通过</button>           
+          </div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="passcontent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:500px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+              <label for="name">请填写不通过的理由</label>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+            <div class="form-group">
+              <textarea class="form-control" rows="3" id="name"></textarea>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="pass-button" value="0">
+          确认
+        </button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal -->
+</div> 
     <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
   </body>
 </html>

@@ -7,6 +7,10 @@
 .hidden{
   display: none;
 }
+img{
+  max-height: 500px;
+  max-width: 750px;
+}
 .photo-inline-block{
   display:inline-block;
   width: 30%;
@@ -23,6 +27,35 @@
 .score{
   font-style: italic;
   font-size: 180%;
+}
+.flex-center{
+  display: flex;
+ justify-content: center;
+}
+.pic-frame{
+  width: 40%;
+  padding: 8px;
+  background-color: white;
+   display: flex;
+    justify-content: center;
+}
+.pic-frame img{
+  width: 150px;
+  max-height: 120px;
+}
+.inline-pic{
+  margin: 5px;
+  cursor:pointer; 
+}
+.album-1{
+  display: inline-block;
+  position: relative;
+  left: 5%;
+}
+.album-2{
+  background-color: #F8F8FF;
+  padding:10px;
+  display: inline-block;
 }
 #companyName{
   color: #199ED8;
@@ -50,7 +83,13 @@ table.approval-table>tbody>tr>td{
   text-align: left
 }
 .index-title{
-  margin-left: 10px;
+    color: #7F7F7F;
+    font-size: 1.7em;
+}
+.loginout{
+  position: absolute;
+  right: 0;
+  bottom: 12.5%;
 }
 iframe{
   height: 100%;
@@ -248,9 +287,6 @@ div.circle-area{
 .float-left{
   float: left;
 }
-.loginout{
-  float: right !important;
-}
 .history-data{
   float: left;
   margin-right: 30px;
@@ -281,9 +317,9 @@ input.search{
 table.dataTable thead th,table.dataTable tbody td{
   border-bottom: 1px solid #DDD !important;
 }
-ul#myTab li{
+/*ul#myTab li{
   width: 17%;
-}
+}*/
 ul#studentTab li{
   width: 14%;
 

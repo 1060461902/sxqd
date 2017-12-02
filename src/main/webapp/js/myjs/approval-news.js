@@ -1,5 +1,6 @@
 $(document).ready(function(){ 
 	var id = window.location.href;
+  //alert(id);
 	  // $.ajax({
    //     type: 'get',
    //     url: '/fieldManagement/admin/showRecruitmentDetails',
@@ -14,20 +15,15 @@ $(document).ready(function(){
    //      alert('服务端异常');
    //      }
    //  });
-	 $.getJSON("js/json/approval_occupation.json", function(data) {
-	 	window.comid =  data.recruitmentDetails.id;
-        var obj = data.recruitmentDetails;
-        $("span#post").text(obj.post);
-        $("span#address").text(obj.address);
-        $("span#totalnumber").text(obj.totalnumber);
-        $("span#postTime").text(obj.postTime);
-        $("span#companyName").text(obj.companyName);
-        $("span#type").text(obj.type);
-        $("span#size").text(obj.size);
-        $("span#stage").text(obj.stage);
-        $("p#postInfo").text(obj.postInfo);
-        $("span#post").text(obj.post);
-        $("img#company_logo").attr("src",obj.logo);
+	 $.getJSON("js/json/approval-news.json", function(data) {
+	 	window.comid =  data.dynamicNewsDetails.id;
+        var obj = data.dynamicNewsDetails;
+        $("td#title").text(obj.title);
+        $("td img").attr("src","imageUrl");
+        $("td#detail").text(obj.detail);
+        $("td#nickName").text(obj.nickName);
+        $("td#phone").text(obj.phone);
+        $("td#email").text(obj.email);
 	 });
 	 //---------------通过/不通过------------------------
 $("button#pass-button").click(function(){
@@ -38,7 +34,7 @@ $("button#pass-button").click(function(){
       var info = new Object();
       info.id=id;
       info.passFlag=flag;//要传输的数据
-      location.href='./approval-2.html';
+      location.href='./approval-3.html';
     //<---------------------------------------表格重新导入
     }
     else if(flag=="0"){
@@ -47,7 +43,8 @@ $("button#pass-button").click(function(){
       var info = new Object();
       info.id=id;
       info.passFlag=flag;
-      location.href='./approval-2.html';
+      info.content=$('textarea').val();
+      location.href='./approval-3.html';
     }
    });
 });

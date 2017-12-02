@@ -1,54 +1,39 @@
 $(document).ready(function(){
-  var type = "企业类型";//第一次导入时默认全部企业类型
-    $.getJSON("js/json/approval-1.json", function(data) {
+    $.getJSON("js/json/approval-3.json", function(data) {
        var tbody = document.getElementsByTagName ('tbody')[0];
-       var len = data.compamyViewList.length;
+       var len = data.dynamicNewApplyList.length;
        var nums=0;
        for ( var i = 0; i < len; i++)
        {
-          var obj = data.compamyViewList[i];
+          var obj = data.dynamicNewApplyList[i];
             var tr = tbody.insertRow(tbody.rows.length);
             var j=i+1;
             $("tr:eq("+j+")").val(obj.id);//对当前行赋值
-            //alert($("tr").val());
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = '<input type="checkbox">';
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.companyName;
+            td.innerHTML = obj.title;
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.type;
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.address;
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.nickName;
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.phone;
+            td.innerHTML = '<div class="pic-frame"><img src="'+obj.imageUrl+'" class="img-responsive"></img></div>';
             if(obj.checked!=="false"){
              nums+=1;
-            }     
+            } 
+            var m=i+1;
+              $('tr:eq('+m+') td:eq(2)').addClass('flex-center');  
               var td = tr.insertCell (tr.cells.length);
-              // alert($("tr:eq("+j+")").val());
-              td.innerHTML = '<a href="./approval_company.html?id='+$("tr:eq("+j+")").val()+'">查看</a>';
+              td.innerHTML = '<a href="./approval-news.html?id='+$("tr:eq("+j+")").val()+'">查看</a>';
          } //for
          //未读消息
          if(nums!==0){
-          $("span#qysp").html(nums);
+          $("span#sydtsp").html(nums);
          }
          else if(nums==0)
          {
-          $("span#qysp").css("display","none");
+          $("span#sydtsp").css("display","none");
          }
-//筛选（需要表格重新导入）
-  $("option").click(function(){
-    var type = $(this).text();
-
-  });
-
 //搜索企业名称（需要表格重新导入）
   $("button").click(function(){
     var type = $("input").val();
-
-
   });
 //--------------点击查看------------------------
 // $("[href]#checkcompany").click(function(){
@@ -103,50 +88,44 @@ $('th>input:checkbox').click(function() {
     info.id=id;
     info.passFlag='1';//要传输的数据
     //<---------------------------------------表格重新导入
-    $.getJSON("js/json/approval-1.json", function(data) {
+    $.getJSON("js/json/approval-3.json", function(data) {
       $("tbody").empty();
       $('th>input:checkbox').attr("checked",false);
       $("span.operations").css("display","none");
-      var tbody = document.getElementsByTagName ('tbody')[0];
-       var len = data.compamyViewList.length;
+       var tbody = document.getElementsByTagName ('tbody')[0];
+       var len = data.dynamicNewApplyList.length;
        var nums=0;
-        for ( var i = 0; i < len; i++)
+       for ( var i = 0; i < len; i++)
        {
-          var obj = data.compamyViewList[i];
-          //alert(obj.id);
+          var obj = data.dynamicNewApplyList[i];
             var tr = tbody.insertRow(tbody.rows.length);
             var j=i+1;
-            $("tr:eq("+j+")").val(obj.id);
+            $("tr:eq("+j+")").val(obj.id);//对当前行赋值
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = '<input type="checkbox">';
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.companyName;
+            td.innerHTML = obj.title;
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.type;
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.address;
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.nickName;
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.phone;
+            td.innerHTML = '<img src="'+obj.title+'"></img>';
             if(obj.checked!=="false"){
              nums+=1;
             }   
               var td = tr.insertCell (tr.cells.length);
-              td.innerHTML = '<a href="./approval_company.html?id='+$("tr:eq("+j+")").val()+'">查看</a>';
+              td.innerHTML = '<a href="./approval-news.html?id='+$("tr:eq("+j+")").val()+'">查看</a>';
          } //for
         if(nums!==0){
-          $("span#qysp").html(nums);
+          $("span#sydtsp").html(nums);
          }
          else if(nums==0)
          {
-          $("span#qysp").css("display","none");
+          $("span#sydtsp").css("display","none");
          }
+
         $("td>input:checkbox").click(function(){
         var mm=0;
        $('input:checkbox').each(function() {
         if ($(this).attr('checked') =='checked') {
-          mm++;     
+          mm++;
         }
         if(mm>0)
         {
