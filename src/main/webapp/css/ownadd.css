@@ -32,6 +32,11 @@ img{
   display: flex;
  justify-content: center;
 }
+img#imageUrl{
+  max-height: 300px;
+  max-width: 400px;
+  padding: 20px auto;
+}
 .pic-frame{
   width: 40%;
   padding: 8px;
@@ -46,16 +51,16 @@ img{
 .inline-pic{
   margin: 5px;
   cursor:pointer; 
+  display: inline-block;
 }
 .album-1{
-  display: inline-block;
   position: relative;
   left: 5%;
+  margin-bottom: 20px;
 }
 .album-2{
   background-color: #F8F8FF;
   padding:10px;
-  display: inline-block;
 }
 #companyName{
   color: #199ED8;

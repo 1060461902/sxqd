@@ -19,7 +19,7 @@ $(document).ready(function(){
              nums+=1;
             } 
             var m=i+1;
-              $('tr:eq('+m+') td:eq(2)').addClass('flex-center');  
+              $('tr:eq('+m+') td:eq(2)').addClass('flex-center');
               var td = tr.insertCell (tr.cells.length);
               td.innerHTML = '<a href="./approval-news.html?id='+$("tr:eq("+j+")").val()+'">查看</a>';
          } //for
@@ -106,10 +106,12 @@ $('th>input:checkbox').click(function() {
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = obj.title;
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<img src="'+obj.title+'"></img>';
+            td.innerHTML = '<div class="pic-frame"><img src="'+obj.imageUrl+'" class="img-responsive"></img></div>';
             if(obj.checked!=="false"){
              nums+=1;
-            }   
+            } 
+              m=i+1;
+              $('tr:eq('+m+') td:eq(2)').addClass('flex-center');
               var td = tr.insertCell (tr.cells.length);
               td.innerHTML = '<a href="./approval-news.html?id='+$("tr:eq("+j+")").val()+'">查看</a>';
          } //for

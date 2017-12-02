@@ -99,7 +99,7 @@ $('th>input:checkbox').click(function() {
     info.id=id;
     info.passFlag='1';//要传输的数据
     //<---------------------------------------表格重新导入
-    $.getJSON("js/json/approval-occupation.json", function(data) {
+    $.getJSON("js/json/approval-2.json", function(data) {
       $("tbody").empty();
       $('th>input:checkbox').attr("checked",false);
       $("span.operations").css("display","none");
@@ -125,7 +125,7 @@ $('th>input:checkbox').click(function() {
               n++;
             }
               var td = tr.insertCell (tr.cells.length);
-              td.innerHTML = '<a href="./approval-occupation.html?id='+$("tr:eq("+j+")").val()+'">查看</a>';
+              td.innerHTML = '<a href="./approval-occupation.html?id='+$("tr:eq("+j+")").val()+'">查看1</a>';
             if(obj.checked!=="false"){
              nums+=1;
             }  

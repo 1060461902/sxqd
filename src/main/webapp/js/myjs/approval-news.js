@@ -19,7 +19,7 @@ $(document).ready(function(){
 	 	window.comid =  data.dynamicNewsDetails.id;
         var obj = data.dynamicNewsDetails;
         $("td#title").text(obj.title);
-        $("td img").attr("src","imageUrl");
+        $("td img").attr("src",obj.imageUrl);
         $("td#detail").text(obj.detail);
         $("td#nickName").text(obj.nickName);
         $("td#phone").text(obj.phone);
