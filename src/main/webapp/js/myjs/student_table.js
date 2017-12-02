@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $.getJSON("js/json/student_table.json", function(data) {
+    $.getJSON("js/json/student_table.json", function(data) {
        var table = document.getElementsByTagName ('table')[0];
        var nums = data.students.length;
        for ( var i = 0; i < data.students.length; i++)
@@ -7,9 +7,12 @@ $(document).ready(function(){
           var tr = table.insertRow(table.rows.length);
           var obj = data.students[i];
           var n=0;
+          var td = tr.insertCell (tr.cells.length);
+          td.innerHTML = '<input type="checkbox" value="0">';
            for ( var p in obj)
            {
                var td = tr.insertCell (tr.cells.length);//cells:返回包含行中所有已经存在的单元格的一个数组。insertCell: 在一行中的指定位置插入一个空的 <td> 元素。
+               //td.innerHTML = '<a href = "student_table_details.html">'+obj[p]+'</a>';
                td.innerHTML = '<a href = "student_table_details.html">'+obj[p]+'</a>';
                if (n==6) {
                 break;
@@ -17,19 +20,31 @@ $(document).ready(function(){
                n++;
            }         
               var td = tr.insertCell (tr.cells.length);
-              td.innerHTML = '<a href = "javascript:;" title="重置密码" onclick="reset()"><i class="fa fa-repeat fa-2x"></i>&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" title="禁用" onclick="forbidden()" id="forbidden"><i class="fa fa-ban fa-2x"></i></a>';
+              td.innerHTML = '<a href = "javascript:;" title="重置密码" onclick="reset()"><i class="fa fa-repeat fa-2x"></i></a>&nbsp;&nbsp;&nbsp;<a href="javascript:;" title="禁用" onclick="forbidden()" id="forbidden"><i class="fa fa-ban fa-2x"></i></a>';
               if(data.students[i].forbidden==1)
                 {
-                 $('table tr:eq('+i+') td:eq(7)').find("#forbidden").css("color","#337ab7");
+                 $('table tr:eq('+i+') td:eq(8)').find("#forbidden").css("color","#337ab7");
 
                 }
               else if(data.students[i].forbidden==0)
                 {
-                 $('table tr:eq('+i+') td:eq(7)').find("#forbidden").css("color","red");
+                 $('table tr:eq('+i+') td:eq(8)').find("#forbidden").css("color","red");
                 }
-         }
-           
-  })
+
+  $(":checkbox").click(function(){
+    $("span.delete").css("display","block");
+  });
+
+  $("span.delete").click(function(){
+    var r=confirm("是否删除该学生");
+      if(r==true){
+        alert("删除成功"); 
+      }
+   });
+         } //for
+
+  });// getJSON 
+
 });
 function reset()
 {

@@ -4,7 +4,9 @@ import edu.zjgsu.ito.model.Teacher;
 import edu.zjgsu.ito.model.TeacherExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TeacherMapper {
     long countByExample(TeacherExample example);
 

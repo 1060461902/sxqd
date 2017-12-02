@@ -4,7 +4,9 @@ import edu.zjgsu.ito.model.Company;
 import edu.zjgsu.ito.model.CompanyExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CompanyMapper {
     long countByExample(CompanyExample example);
 
