@@ -71,7 +71,7 @@ public class UserController {
 
 //        建立example
         UserExample userExample = new UserExample();
-        userExample.or().andUsernameEqualTo(user.getUsername())
+        userExample.or().andUserNameEqualTo(user.getUserName())
                 .andPasswordEqualTo(Md5Util.getMD5(user.getPassword()));
 //        根据example查找
         List<User> userList = userService.selectByExample(userExample);
@@ -123,7 +123,7 @@ public class UserController {
 
 //        得到admin账号
         UserExample userExample = new UserExample();
-        userExample.or().andUsernameEqualTo("admin");
+        userExample.or().andUserNameEqualTo("admin");
         List<User> userList = userService.selectByExample(userExample);
         User backUser = userList.get(0);
 

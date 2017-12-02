@@ -56,8 +56,9 @@
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
 		<property name="mapperLocations" value="classpath:edu/zjgsu/ito/mapping/*.xml" />
+		<!--<property name="mapperLocations" value="classpath:/mapper/*.xml" />-->
         <!--设置pageHelper-->
-        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+        <property name="configLocation" value="classpath:/mybatis-config.xml"></property>
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -72,7 +73,7 @@
 	</bean>
 
 	<!-- 注解方式配置事物 -->
-	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+	 <tx:annotation-driven transaction-manager="transactionManager" />
 
 	<!-- 拦截器方式配置事物 -->
 	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
