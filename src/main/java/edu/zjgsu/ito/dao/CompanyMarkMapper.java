@@ -4,9 +4,7 @@ import edu.zjgsu.ito.model.CompanyMark;
 import edu.zjgsu.ito.model.CompanyMarkExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface CompanyMarkMapper {
     long countByExample(CompanyMarkExample example);
 

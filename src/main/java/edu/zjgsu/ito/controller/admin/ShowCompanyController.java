@@ -19,8 +19,8 @@ import java.util.Map;
 public class ShowCompanyController {
     //页大小
 //    public static final int pageSize=2;
-/*    @Autowired
-    CompanyService companyService;*/
+    @Autowired
+    CompanyService companyService;
     @Autowired
     UserService userService;
     @Autowired
@@ -49,7 +49,6 @@ public class ShowCompanyController {
             e.printStackTrace();
         }
         System.out.println(type);
-
 
         Map<String, Object> result = new HashMap<String, Object>();
         CompanyViewExample CompanyViewExample=new CompanyViewExample();
@@ -86,13 +85,13 @@ public class ShowCompanyController {
     }
 
     @RequestMapping(value ="showCompanyRegisterApplyList",method=RequestMethod.GET)
-    public @ResponseBody    Map<String,Object> showCompanyRegisterApplyList() {
-
-/** @param
+    public @ResponseBody      Map<String,Object> showCompanyRegisterApplyList() {
+/*
+* @param
 * 查看企业注册信息
 * @return
 * @author hanfeng
-**/
+* */
         Map<String, Object> result = new HashMap<String, Object>();
         CompanyViewExample CompanyViewExample=new CompanyViewExample();
 
@@ -120,19 +119,15 @@ public class ShowCompanyController {
         result.put("compamyViewList",companyViews);
         return result;
     }
-
-
     @RequestMapping(value ="showCompanyDetails",method=RequestMethod.GET)
     public @ResponseBody
     Map<String,Object> showCompanyDetails(@RequestParam("id") String id) {
-
 /*
 * @param
 * 查看企业详情
 * @return
 * @author hanfeng
-*
-*/
+* */
 
         Map<String, Object> result = new HashMap<String, Object>();
 

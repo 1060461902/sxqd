@@ -32,6 +32,7 @@ public class ViewController {
     UserService userService;
     @Autowired
     StudentService studentService;
+
     /**
      *
      * @param
@@ -50,7 +51,7 @@ public class ViewController {
 
 //        分页查询Teacher表所有的记录
         TeacherExample TeacherExample = new TeacherExample();
-        TeacherExample.or().andIdIsNotNull().andStatusEqualTo(false);
+        TeacherExample.or().andIdIsNotNull();
 //        分页
 //        List<Teacher> teachers;
         List<Teacher> teachers=teacherService.selectByExample(TeacherExample);
