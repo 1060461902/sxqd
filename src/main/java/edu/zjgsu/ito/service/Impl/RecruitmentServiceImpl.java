@@ -46,6 +46,12 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     }
 
     @Override
+    public List<Recruitment> selectByCompanyId(String companyId) {
+        List<Recruitment> recruitmentList= recruitmentMapper.selectByCompanyId(companyId);
+        return recruitmentList;
+    }
+
+    @Override
     public int updateByExampleSelective(Recruitment record, RecruitmentExample example) {
         return 0;
     }

@@ -380,10 +380,23 @@
     </if>
   </update>
 
-  <select id="selectByKey" resultType="edu.zjgsu.ito.model.CompanyView">
+  <select id="selectByKey"  resultMap="BaseResultMap">
     SELECT
-    id, company_name, address, user_id, create_time, email, type
+    <include refid="Base_Column_List"/>
     FROM company_view
     WHERE id = #{id}
   </select>
+
+  <select id="selectByName" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+      FROM company_view
+      WHERE company_name=#{companyName}
+  </select>
+  <!--
+
+    id, company_name, address, user_id, create_time, email, type, logo, network, size,
+    stage, slogans, intruction, checked, pass, user_name, password, phone, nick_name,
+    delete_tag, role_id, forbidden
+    -->
 </mapper>
