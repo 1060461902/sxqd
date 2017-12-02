@@ -1,6 +1,5 @@
 $(document).ready(function(){ 
 	var id = window.location.href;
-  alert(id);
 	  // $.ajax({
    //     type: 'get',
    //     url: '/fieldManagement/admin/showCompanyDeails',
@@ -23,11 +22,20 @@ $(document).ready(function(){
         $("span#type").text(obj.type);
         $("span#stage").text(obj.stage);
         $("span#size").text(obj.size);
-        $("span#slogans").text(obj.slogans);
         $("span#mark").text(obj.mark);
         $("p#intruction").text(obj.intruction);
         $("p#address").text(obj.address);
-        $("img#identification-photo").attr("src",obj.logo);
+
+        var album = data.Image;
+        var length = data.Image.length;
+        for(var n=0;n<length;n++)
+        {
+          $('div.album-2').append("<div class="+" inline-pic"+"><img src="+album[n].url+" alt="+"Photo"+" class="+"img-responsive width="+"60px"+"></div>");
+        };
+        $('.album-1 img').attr("src",album[0].url);
+        $('img').click(function(){
+          $('.album-1 img').attr("src",$(this).attr("src"));
+        });
 	 });
 	 //---------------通过/不通过------------------------
 $("button").click(function(){
