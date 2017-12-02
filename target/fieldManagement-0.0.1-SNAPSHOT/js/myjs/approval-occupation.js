@@ -30,7 +30,7 @@ $(document).ready(function(){
         $("img#company_logo").attr("src",obj.logo);
 	 });
 	 //---------------通过/不通过------------------------
-$("button").click(function(){
+$("button#pass-button").click(function(){
 	var flag = this.value;
 	if(flag=="1"){
       var id = new Array();

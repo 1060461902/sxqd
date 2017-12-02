@@ -5,6 +5,7 @@ import edu.zjgsu.ito.model.UserExample;
 import edu.zjgsu.ito.service.UserService;
 import edu.zjgsu.ito.utils.Constant;
 import edu.zjgsu.ito.utils.Md5Util;
+import edu.zjgsu.ito.vo.ResetPwdUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -116,20 +117,24 @@ public class UserController {
 
     @RequestMapping(value = "admin/modifyPwd", method = RequestMethod.POST)
     public @ResponseBody
-    Map<String, Object> modifyPwd(@RequestBody User frontUser) {
+    Map<String, Object> modifyPwd(@RequestBody ResetPwdUser frontUser) {
         int status;
-        String md5Password;
+        String md5NewPassword;
+        String md5OldPassword;
         Map<String, Object> result = new HashMap<String, Object>();//返回的信息保存在result里
 
-//        得到admin账号
+
+//        先验证账号密码是否正确
+        md5OldPassword = Md5Util.getMD5(frontUser.getOldPassword());
         UserExample userExample = new UserExample();
-        userExample.or().andUserNameEqualTo("admin");
+        userExample.or().andUserNameEqualTo(frontUser.getUserName()).andPasswordEqualTo(md5OldPassword);
+
         List<User> userList = userService.selectByExample(userExample);
         User backUser = userList.get(0);
 
 //        修改密码
-        md5Password = Md5Util.getMD5(frontUser.getPassword());
-        backUser.setPassword(md5Password);
+        md5NewPassword = Md5Util.getMD5(frontUser.getNewPassword());
+        backUser.setPassword(md5NewPassword);
 
 
 //        修改database中记录

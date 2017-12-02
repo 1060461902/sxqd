@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  var type = "企业类型";
+  var type = "企业类型";//第一次导入时默认全部企业类型
     $.getJSON("js/json/approval-2.json", function(data) {
        var tbody = document.getElementsByTagName ('tbody')[0];
        var len = data.recruitmentApplyList.length;
@@ -31,11 +31,11 @@ $(document).ready(function(){
          } //for
          //未读消息
          if(nums!==0){
-          $("span#qysp").html(nums);
+          $("span#sxfbsp").html(nums);
          }
          else if(nums==0)
          {
-          $("span#qysp").css("display","none");
+          $("span#sxfbsp").css("display","none");
          }
 //筛选（需要表格重新导入）
   $("option").click(function(){

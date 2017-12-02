@@ -69,9 +69,9 @@ function validate_form()
          //            }
          //        })
     var info = new Object();  // alert(info);
-    info.username = "admin"; //alert(info.username);
-    info.oldpassword= oldpsw; //alert(info.oldpassword);
-    info.newpassword = newpsw;  //alert(info.newpassword); 
+    info.userName = "admin"; //alert(info.username);
+    info.oldPassword= oldpsw; //alert(info.oldpassword);
+    info.newPassword = newpsw;  //alert(info.newpassword);
      $.ajax({
        type: 'post',
        url: '/fieldManagement/admin/modifyPwd',
