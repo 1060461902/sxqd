@@ -7,7 +7,7 @@ import java.util.Date;
  * @author 
  */
 public class Company implements Serializable {
-    private String id;
+    private Integer id;
 
     private String companyName;
 
@@ -16,7 +16,7 @@ public class Company implements Serializable {
     /**
      * 负责人id
      */
-    private String userId;
+    private Integer userId;
 
     private Date createTime;
 
@@ -78,11 +78,11 @@ public class Company implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -102,11 +102,11 @@ public class Company implements Serializable {
         this.address = address;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

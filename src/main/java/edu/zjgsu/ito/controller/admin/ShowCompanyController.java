@@ -1,5 +1,6 @@
 package edu.zjgsu.ito.controller.admin;
-
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import edu.zjgsu.ito.model.*;
 import edu.zjgsu.ito.service.*;
 import edu.zjgsu.ito.utils.Constant;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +37,7 @@ public class ShowCompanyController {
     DynamicApproveService dynamicApproveService;
 
     @RequestMapping(value ="showCompanies",method=RequestMethod.GET)
-    public @ResponseBody Map<String,Object> showCompanies(@RequestParam("type") String type) {
+    public @ResponseBody Map<String,Object> showCompanies(@RequestParam("name") String name) {
 
 /*
 * @param
@@ -44,20 +46,19 @@ public class ShowCompanyController {
 * @author hanfeng
 * */
         try {
-            type= new String(type .getBytes("iso8859-1"),"utf-8");
+            name= new String(name .getBytes("iso8859-1"),"utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        System.out.println(type);
 
         Map<String, Object> result = new HashMap<String, Object>();
         CompanyViewExample CompanyViewExample=new CompanyViewExample();
 
-        if(type.equals("企业类型")){
+        if(name.equals("企业名称")){
             CompanyViewExample.or().andPassEqualTo(true);
 
         }else {
-            CompanyViewExample.or().andPassEqualTo(true).andTypeEqualTo(type);
+            CompanyViewExample.or().andPassEqualTo(true).andCompanyNameEqualTo(name);
         }
 
         List<CompanyView> companyViews=companyViewService.selectByExample(CompanyViewExample);
@@ -85,18 +86,28 @@ public class ShowCompanyController {
     }
 
     @RequestMapping(value ="showCompanyRegisterApplyList",method=RequestMethod.GET)
-    public @ResponseBody      Map<String,Object> showCompanyRegisterApplyList() {
+    public @ResponseBody
+    Map<String,Object> showCompanyRegisterApplyList(@RequestParam("type") String type) {
 /*
 * @param
 * 查看企业注册信息
 * @return
 * @author hanfeng
 * */
+        try {
+            type= new String(type .getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        System.out.println(type);
+
         Map<String, Object> result = new HashMap<String, Object>();
         CompanyViewExample CompanyViewExample=new CompanyViewExample();
-
-        CompanyViewExample.or().andCheckedEqualTo(false);
-
+        if(type.equals("企业类型")){
+            CompanyViewExample.or().andPassEqualTo(false);
+        }else {
+            CompanyViewExample.or().andPassEqualTo(false).andTypeEqualTo(type);
+        }
 
 
         List<CompanyView> companyViews=companyViewService.selectByExample(CompanyViewExample);
@@ -121,7 +132,7 @@ public class ShowCompanyController {
     }
     @RequestMapping(value ="showCompanyDetails",method=RequestMethod.GET)
     public @ResponseBody
-    Map<String,Object> showCompanyDetails(@RequestParam("id") String id) {
+    Map<String,Object> showCompanyDetails(@RequestParam("id") Integer id) {
 /*
 * @param
 * 查看企业详情
@@ -148,6 +159,10 @@ public class ShowCompanyController {
             List<CompanyImage> CompanyImages=companyImageService.selectByExample(CompanyImageExample);
             result.put("Image",CompanyImages);
 
+            CompanyMarkExample CompanyMarkExample=new CompanyMarkExample();
+            CompanyMarkExample.or().andCompanyIdEqualTo(companyView.getId());
+            List<CompanyMark> CompanyMarks=companyMarkService.selectByExample(CompanyMarkExample);
+            result.put("Mark",CompanyMarks);
 
 
             User user = userService.selectByPrimaryKey(companyView.getUserId());
@@ -168,7 +183,7 @@ public class ShowCompanyController {
     Map<String,Object> showDynamicNewsApplyList() {
 /*
 * @param
-* 查看动态列表
+* 查看首页动态申请列表
 * @return
 * @author hanfeng
 * */
@@ -176,7 +191,7 @@ public class ShowCompanyController {
         Map<String, Object> result = new HashMap<String, Object>();
 
         DynamicApproveExample dynamicApproveExample=new DynamicApproveExample();
-
+        dynamicApproveExample.or().andDopassingEqualTo(false);
         List<DynamicApprove> dynamicApproves=dynamicApproveService.selectByExample(dynamicApproveExample);
 
         if(dynamicApproves == null){
@@ -186,12 +201,13 @@ public class ShowCompanyController {
         }else {
             for (DynamicApprove dynamicApprove : dynamicApproves) {
 
-                User user = userService.selectByPrimaryKey(dynamicApprove.getUserId());
-                frontDynadic.setName(user.);
+                User user = userService.selectByPrimaryKey(dynamicApprove.getCompanyId());
+
+//                frontDynadic.setName(user.);
 
                 if (user == null) {
                     result.put("code", Constant.FAIL);
-                    result.put("msg", "无法找到DynamicApprove表userID=" + dynamicApprove.getUserId() + "对应的user！");
+                    result.put("msg", "无法找到DynamicApprove表userID=" + dynamicApprove.getCompanyId() + "对应的user！");
                     return result;
                 }
 
@@ -203,18 +219,20 @@ public class ShowCompanyController {
         return result;
 
     }
-    @RequestMapping(value ="showDynamicNewsDetails",method=RequestMethod.GET)
+    @RequestMapping(value ="showDynamicNewsList",method=RequestMethod.GET)
     public @ResponseBody
-    Map<String,Object> showDynamicNewsDetails() {
+    Map<String,Object> showDynamicNewsList() {
 /*
 * @param
-* 查看首页动态详情
+* 查看首页动态列表
 * @return
 * @author hanfeng
 * */
         Map<String, Object> result = new HashMap<String, Object>();
 
         DynamicApproveExample dynamicApproveExample=new DynamicApproveExample();
+        dynamicApproveExample.or().andPassingEqualTo(true).andDeleteTagEqualTo(true);
+
 
         List<DynamicApprove> dynamicApproves=dynamicApproveService.selectByExample(dynamicApproveExample);
 
@@ -225,10 +243,10 @@ public class ShowCompanyController {
         }else {
             for (DynamicApprove dynamicApprove : dynamicApproves) {
 
-                User user = userService.selectByPrimaryKey(dynamicApprove.getUserId());
+                User user = userService.selectByPrimaryKey(dynamicApprove.getCompanyId());
                 if (user == null) {
                     result.put("code", Constant.FAIL);
-                    result.put("msg", "无法找到Company表userID=" + dynamicApprove.getUserId() + "对应的user！");
+                    result.put("msg", "无法找到dynamicApprove表userID=" + dynamicApprove.getCompanyId() + "对应的user！");
                     return result;
                 }
 
@@ -238,6 +256,54 @@ public class ShowCompanyController {
             result.put("dynamicApproves", dynamicApproves);
         }
         return result;
+    }
+    @RequestMapping(value ="showDynamicNewsDetails",method=RequestMethod.GET)
+    public @ResponseBody
+    Map<String,Object> showDynamicNewsDetails(@RequestParam("id") Integer id) {
+/*
+* 查看动态详情
+* @return
+* @author hanfeng
+* */
+        Map<String, Object> result = new HashMap<String, Object>();
+        DynamicApproveExample dynamicApproveExample=new DynamicApproveExample();
+        dynamicApproveExample.or().andIdEqualTo(id);
+        DynamicApprove dynamicApprove=dynamicApproveService.selectByPrimaryKey(id);
 
+        if(dynamicApprove == null){
+            result.put("code", Constant.FAIL);
+            result.put("msg", "无法从DynamicApprove表里查到记录！");
+            return result;
+        }else {
+                User user = userService.selectByPrimaryKey(dynamicApprove.getCompanyId());
+                if (user == null) {
+                    result.put("code", Constant.FAIL);
+                    result.put("msg", "无法找到dynamicApprove表userID=" + dynamicApprove.getCompanyId() + "对应的user！");
+                    return result;
+            }
+            result.put("code", Constant.OK);
+            result.put("msg", "返回动态信息成功！");
+            result.put("user",user);
+            result.put("dynamicApproves", dynamicApprove);
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "showCompanynames",method=RequestMethod.GET)
+    public @ResponseBody
+    Map<String,Object> showCompanynames(){
+        Map<String, Object> result = new HashMap<String, Object>();
+        CompanyExample companyExample=new CompanyExample();
+        companyExample.or().andPassEqualTo(true);
+        List<Company> companies=companyService.selectByExample(companyExample);
+        JSONArray objects = new JSONArray();
+        for(Company company:companies){
+            JSONObject obj = new JSONObject();
+            obj.put("companyName",company.getCompanyName());
+            objects.add(obj);
+            result.put("obj",obj);
+        }
+
+        return result;
     }
     }

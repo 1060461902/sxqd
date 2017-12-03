@@ -19,7 +19,7 @@ public class CompanyMarkServiceImpl implements CompanyMarkService {
     }
 
     @Override
-    public int deleteByPrimaryKey(String id) {
+    public int deleteByPrimaryKey(Integer id) {
         return 0;
     }
 
@@ -39,7 +39,7 @@ public class CompanyMarkServiceImpl implements CompanyMarkService {
     }
 
     @Override
-    public CompanyMark selectByPrimaryKey(String id) {
+    public CompanyMark selectByPrimaryKey(Integer id) {
         return null;
     }
 

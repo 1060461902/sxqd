@@ -25,7 +25,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public int deleteByPrimaryKey(String id) {
+    public int deleteByPrimaryKey(Integer id) {
         return 0;
     }
 
@@ -46,7 +46,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Company selectByPrimaryKey(String id) {
+    public Company selectByPrimaryKey(Integer id) {
         Company Company = CompanyMapper.selectByPrimaryKey(id);
         return Company;
     }

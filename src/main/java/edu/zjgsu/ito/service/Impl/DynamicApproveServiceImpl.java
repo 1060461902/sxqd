@@ -23,7 +23,7 @@ public class DynamicApproveServiceImpl implements DynamicApproveService{
     }
 
     @Override
-    public int deleteByPrimaryKey(String id) {
+    public int deleteByPrimaryKey(Integer id) {
         return 0;
     }
 
@@ -44,8 +44,9 @@ public class DynamicApproveServiceImpl implements DynamicApproveService{
     }
 
     @Override
-    public DynamicApprove selectByPrimaryKey(String id) {
-        return null;
+    public DynamicApprove selectByPrimaryKey(Integer id) {
+            DynamicApprove dynamicApprove=dynamicApproveMapper.selectByPrimaryKey(id);
+            return dynamicApprove;
     }
 
     @Override
@@ -65,6 +66,10 @@ public class DynamicApproveServiceImpl implements DynamicApproveService{
 
     @Override
     public int updateByPrimaryKey(DynamicApprove record) {
-        return 0;
+        int status;
+
+        status = dynamicApproveMapper.updateByPrimaryKey(record);
+
+        return status;
     }
 }

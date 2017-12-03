@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,9 +71,9 @@ public class ShowRecruitmentController {
         return result;
     }
 
-    @RequestMapping(value = "showRecruitmentApplyList",method = RequestMethod.POST)
+    @RequestMapping(value = "showRecruitmentApplyList",method = RequestMethod.GET)
     public @ResponseBody
-    Map<String, Object> showRecruitmentApplyList(@RequestBody String companyName) {
+    Map<String, Object> showRecruitmentApplyList(@RequestParam("companyName") String companyName) {
 
 /** @param
 * @return
@@ -80,7 +81,12 @@ public class ShowRecruitmentController {
 * @author hanfeng
 * */
 
-            Map<String, Object> result = new HashMap<String, Object>();
+        try {
+            companyName= new String(companyName .getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Map<String, Object> result = new HashMap<String, Object>();
             RecruitmentExample recruitmentExample = new RecruitmentExample();
             recruitmentExample.or().andCheckedEqualTo(true).andPassEqualTo(true).andRemoveEqualTo(false);
 
@@ -94,7 +100,7 @@ public class ShowRecruitmentController {
                 Recruitments = recruitmentService.selectByExample(recruitmentExample);
             }else {
                 companyView=companyViewService.selectByName(companyName);
-                String company_id=companyView.getId();
+                Integer company_id=companyView.getId();
                 Recruitments = recruitmentService.selectByCompanyId(company_id);
             }
 
@@ -117,7 +123,7 @@ public class ShowRecruitmentController {
 
                 if (companyView == null) {
                     result.put("code", Constant.FAIL);
-                    result.put("msg", "无法找到Company表userID=" + recruitment.getUserId() + "对应的user！");
+                    result.put("msg", "无法找到Company表userID=" + recruitment.getCompanyId() + "对应的user！");
                     return result;
                 }
 

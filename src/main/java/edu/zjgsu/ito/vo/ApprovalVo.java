@@ -1,14 +1,23 @@
 package edu.zjgsu.ito.vo;
 
 public class ApprovalVo {
-    String[] ids;
+    Integer[] ids;
     Boolean passFlag;
+    String meg;
 
-    public String[] getIds() {
+    public String getMeg() {
+        return meg;
+    }
+
+    public void setMeg(String meg) {
+        this.meg = meg;
+    }
+
+    public Integer[] getIds() {
         return ids;
     }
 
-    public void setIds(String[] ids) {
+    public void setIds(Integer[] ids) {
         this.ids = ids;
     }
 

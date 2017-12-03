@@ -1,3 +1,4 @@
+/*
 package edu.zjgsu.ito.controller.admin;
 
 import edu.zjgsu.ito.model.*;
@@ -34,7 +35,7 @@ public class OperateController {
 
 
     //通过不同角色的主键id查到其user的userID
-    public String role2user(String roleid, String id) {
+    public String role2user(String roleid, Integer id) {
         List<String> userId = new ArrayList<String>();
 
         switch (roleid) {
@@ -57,11 +58,13 @@ public class OperateController {
         }
         return userId.get(0);
     }
+*/
 /*    @RequestMapping(value="/list", method=RequestMethod.POST)
     @ResponseBody
     public String requestList(@RequestParam("listParam[]") List<String> param) {
         return "Request successful. Post param : List<String> - " + param.toString();
-}*/
+}*//*
+
 
 
 
@@ -116,9 +119,9 @@ public class OperateController {
 
     @RequestMapping(value = "resetPwd", method = RequestMethod.GET)
     public @ResponseBody Map<String, Object> resetPwd(@RequestParam("roleId") String roleId,
-                                                      @RequestParam("id") String id) {
+                                                      @RequestParam("id") Integer id) {
         int status;
-        String userId;
+        Integer userId;
         String md5Password;
         Map<String, Object> result = new HashMap<String, Object>();
 
@@ -142,3 +145,4 @@ public class OperateController {
         return result;
     }
 }
+*/

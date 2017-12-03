@@ -11,7 +11,7 @@ public interface TeacherService {
 
     int deleteByExample(TeacherExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Teacher record);
 
@@ -19,7 +19,7 @@ public interface TeacherService {
 
     List<Teacher> selectByExample(TeacherExample example);
 
-    Teacher selectByPrimaryKey(String id);
+    Teacher selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Teacher record, @Param("example") TeacherExample example);
 

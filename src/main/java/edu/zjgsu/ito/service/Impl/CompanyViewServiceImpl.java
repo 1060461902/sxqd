@@ -51,7 +51,7 @@ public class CompanyViewServiceImpl implements CompanyViewService{
      }
 
     @Override
-    public CompanyView selectByKey(String id) {
+    public CompanyView selectByKey(Integer id) {
         CompanyView companyView=companyViewMapper.selectByKey(id);
         return companyView;
     }

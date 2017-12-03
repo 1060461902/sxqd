@@ -10,7 +10,7 @@ public interface DynamicApproveMapper {
 
     int deleteByExample(DynamicApproveExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(DynamicApprove record);
 
@@ -18,7 +18,7 @@ public interface DynamicApproveMapper {
 
     List<DynamicApprove> selectByExample(DynamicApproveExample example);
 
-    DynamicApprove selectByPrimaryKey(String id);
+    DynamicApprove selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") DynamicApprove record, @Param("example") DynamicApproveExample example);
 

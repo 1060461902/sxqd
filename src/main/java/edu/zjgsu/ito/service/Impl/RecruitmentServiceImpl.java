@@ -20,7 +20,7 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     }
 
     @Override
-    public int deleteByPrimaryKey(String id) {
+    public int deleteByPrimaryKey(Integer id) {
         return 0;
     }
 
@@ -41,12 +41,14 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     }
 
     @Override
-    public Recruitment selectByPrimaryKey(String id) {
+    public Recruitment selectByPrimaryKey(Integer id) {
         return null;
     }
 
+
+
     @Override
-    public List<Recruitment> selectByCompanyId(String companyId) {
+    public List<Recruitment> selectByCompanyId(Integer companyId) {
         List<Recruitment> recruitmentList= recruitmentMapper.selectByCompanyId(companyId);
         return recruitmentList;
     }

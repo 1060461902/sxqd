@@ -6,12 +6,14 @@ import java.io.Serializable;
  * @author 
  */
 public class Recruitment implements Serializable {
-    private String id;
+    private Integer id;
 
     /**
      * 公司id
      */
-    private String companyId;
+    private Integer companyId;
+
+    private Integer studentId;
 
     /**
      * 招聘岗位
@@ -98,24 +100,32 @@ public class Recruitment implements Serializable {
      */
     private Boolean recruitment;
 
-    private String userId;
+    private String why;
 
     private static final long serialVersionUID = 1L;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getCompanyId() {
+    public Integer getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(String companyId) {
+    public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
+    }
+
+    public Integer getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 
     public String getPost() {
@@ -254,12 +264,12 @@ public class Recruitment implements Serializable {
         this.recruitment = recruitment;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getWhy() {
+        return why;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setWhy(String why) {
+        this.why = why;
     }
 
     @Override
@@ -276,6 +286,7 @@ public class Recruitment implements Serializable {
         Recruitment other = (Recruitment) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getCompanyId() == null ? other.getCompanyId() == null : this.getCompanyId().equals(other.getCompanyId()))
+            && (this.getStudentId() == null ? other.getStudentId() == null : this.getStudentId().equals(other.getStudentId()))
             && (this.getPost() == null ? other.getPost() == null : this.getPost().equals(other.getPost()))
             && (this.getCurrentNumber() == null ? other.getCurrentNumber() == null : this.getCurrentNumber().equals(other.getCurrentNumber()))
             && (this.getTotalNumber() == null ? other.getTotalNumber() == null : this.getTotalNumber().equals(other.getTotalNumber()))
@@ -293,7 +304,7 @@ public class Recruitment implements Serializable {
             && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
             && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
             && (this.getRecruitment() == null ? other.getRecruitment() == null : this.getRecruitment().equals(other.getRecruitment()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()));
+            && (this.getWhy() == null ? other.getWhy() == null : this.getWhy().equals(other.getWhy()));
     }
 
     @Override
@@ -302,6 +313,7 @@ public class Recruitment implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getCompanyId() == null) ? 0 : getCompanyId().hashCode());
+        result = prime * result + ((getStudentId() == null) ? 0 : getStudentId().hashCode());
         result = prime * result + ((getPost() == null) ? 0 : getPost().hashCode());
         result = prime * result + ((getCurrentNumber() == null) ? 0 : getCurrentNumber().hashCode());
         result = prime * result + ((getTotalNumber() == null) ? 0 : getTotalNumber().hashCode());
@@ -319,7 +331,7 @@ public class Recruitment implements Serializable {
         result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
         result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
         result = prime * result + ((getRecruitment() == null) ? 0 : getRecruitment().hashCode());
-        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getWhy() == null) ? 0 : getWhy().hashCode());
         return result;
     }
 
@@ -331,6 +343,7 @@ public class Recruitment implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", companyId=").append(companyId);
+        sb.append(", studentId=").append(studentId);
         sb.append(", post=").append(post);
         sb.append(", currentNumber=").append(currentNumber);
         sb.append(", totalNumber=").append(totalNumber);
@@ -348,7 +361,7 @@ public class Recruitment implements Serializable {
         sb.append(", phone=").append(phone);
         sb.append(", email=").append(email);
         sb.append(", recruitment=").append(recruitment);
-        sb.append(", userId=").append(userId);
+        sb.append(", why=").append(why);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

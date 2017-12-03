@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author 
  */
 public class DynamicApprove implements Serializable {
-    private String id;
+    private Integer id;
 
     /**
      * 标题
@@ -41,19 +41,28 @@ public class DynamicApprove implements Serializable {
     /**
      * 申请人id
      */
-    private String userId;
+    private Integer companyId;
 
     private String phone;
 
     private String email;
 
+    private String why;
+
+    private Boolean showStatus;
+
+    /**
+     * 开始展示的时间
+     */
+    private String startTime;
+
     private static final long serialVersionUID = 1L;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -105,12 +114,12 @@ public class DynamicApprove implements Serializable {
         this.dopassing = dopassing;
     }
 
-    public String getUserId() {
-        return userId;
+    public Integer getCompanyId() {
+        return companyId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
 
     public String getPhone() {
@@ -127,6 +136,30 @@ public class DynamicApprove implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getWhy() {
+        return why;
+    }
+
+    public void setWhy(String why) {
+        this.why = why;
+    }
+
+    public Boolean getShowStatus() {
+        return showStatus;
+    }
+
+    public void setShowStatus(Boolean showStatus) {
+        this.showStatus = showStatus;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
     @Override
@@ -148,9 +181,12 @@ public class DynamicApprove implements Serializable {
             && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()))
             && (this.getPassing() == null ? other.getPassing() == null : this.getPassing().equals(other.getPassing()))
             && (this.getDopassing() == null ? other.getDopassing() == null : this.getDopassing().equals(other.getDopassing()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+            && (this.getCompanyId() == null ? other.getCompanyId() == null : this.getCompanyId().equals(other.getCompanyId()))
             && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
-            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()));
+            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
+            && (this.getWhy() == null ? other.getWhy() == null : this.getWhy().equals(other.getWhy()))
+            && (this.getShowStatus() == null ? other.getShowStatus() == null : this.getShowStatus().equals(other.getShowStatus()))
+            && (this.getStartTime() == null ? other.getStartTime() == null : this.getStartTime().equals(other.getStartTime()));
     }
 
     @Override
@@ -164,9 +200,12 @@ public class DynamicApprove implements Serializable {
         result = prime * result + ((getDeleteTag() == null) ? 0 : getDeleteTag().hashCode());
         result = prime * result + ((getPassing() == null) ? 0 : getPassing().hashCode());
         result = prime * result + ((getDopassing() == null) ? 0 : getDopassing().hashCode());
-        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getCompanyId() == null) ? 0 : getCompanyId().hashCode());
         result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
         result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
+        result = prime * result + ((getWhy() == null) ? 0 : getWhy().hashCode());
+        result = prime * result + ((getShowStatus() == null) ? 0 : getShowStatus().hashCode());
+        result = prime * result + ((getStartTime() == null) ? 0 : getStartTime().hashCode());
         return result;
     }
 
@@ -183,9 +222,12 @@ public class DynamicApprove implements Serializable {
         sb.append(", deleteTag=").append(deleteTag);
         sb.append(", passing=").append(passing);
         sb.append(", dopassing=").append(dopassing);
-        sb.append(", userId=").append(userId);
+        sb.append(", companyId=").append(companyId);
         sb.append(", phone=").append(phone);
         sb.append(", email=").append(email);
+        sb.append(", why=").append(why);
+        sb.append(", showStatus=").append(showStatus);
+        sb.append(", startTime=").append(startTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
