@@ -565,6 +565,7 @@ input[type="radio"]:checked + label span {
     .templatemo-content-container {	padding: 10px; }
     .fa-angle-right{ display: none; }
     .well-1{ margin: 45px 20px !important;}
+    .album { border: none !important; }
 }
 
 @media screen and (max-width: 992px) and (min-width: 768px) {
@@ -592,7 +593,7 @@ input[type="radio"]:checked + label span {
 	.templatemo-left-nav a { padding: 15px 10px; }	
 	.well1{ margin: 30px;}
 	.pagination { margin-left: 40px;}
-	.settitle{ padding-left: 32px;}
+	.settitle{ padding-left: 32px !important;}
     .setform{ padding-top: 15px;
      padding-left: 30px;}
      #wall-2{padding: 20px !important;}   	 

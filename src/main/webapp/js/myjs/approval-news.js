@@ -19,7 +19,7 @@ $(document).ready(function(){
 	 	window.comid =  data.dynamicNewsDetails.id;
         var obj = data.dynamicNewsDetails;
         $("td#title").text(obj.title);
-        $("td img").attr("src","imageUrl");
+        $("td img").attr("src",obj.imageUrl);
         $("td#detail").text(obj.detail);
         $("td#nickName").text(obj.nickName);
         $("td#phone").text(obj.phone);
@@ -43,7 +43,7 @@ $("button#pass-button").click(function(){
       var info = new Object();
       info.id=id;
       info.passFlag=flag;
-      info.content=$('textarea').val();
+      info.msg = $('textarea').val();
       location.href='./approval-3.html';
     }
    });

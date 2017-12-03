@@ -1,3 +1,6 @@
+setDiv-1.86945{
+  background-color: red;
+}
 .hidden-scrolling{
   overflow:hidden;
 }
@@ -12,6 +15,17 @@ img{
   display:inline-block;
   width: 30%;
   border:1px solid #DDD;
+  padding: 20px;
+}
+.mark-content{
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  flex-wrap:wrap;
+}
+span#mark{
+  margin:20px;
+  padding: 8px 20px;
+  font-size: 1.1em; 
 }
 .red{
   color: red;
@@ -29,6 +43,11 @@ img{
   display: flex;
  justify-content: center;
 }
+img#imageUrl{
+  max-height: 300px;
+  max-width: 400px;
+  padding: 20px auto;
+}
 .pic-frame{
   width: 40%;
   padding: 8px;
@@ -43,16 +62,28 @@ img{
 .inline-pic{
   margin: 5px;
   cursor:pointer; 
+  display: inline-block;
+}
+.album{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+  border-left:2px solid #ddd;
+  border-right:2px solid #ddd;
+  width:75%;
 }
 .album-1{
-  display: inline-block;
-  position: relative;
-  left: 5%;
+  width: 100%;
+  margin-bottom: 20px;
+  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
 }
 .album-2{
   background-color: #F8F8FF;
   padding:10px;
-  display: inline-block;
+  display: block;
 }
 #companyName{
   color: #199ED8;
@@ -60,7 +91,9 @@ img{
 span.operations{
   display: none;
   float: left;
-  padding-left: 27px;
+  padding-left: 44px;
+  position: relative;
+  top: -30px;
 }
 .approval-table{
   line-height:200%;
@@ -204,12 +237,24 @@ margin-left: 80px;
 #fixed{
   width: 150px;
 }
-.settitle{
-  padding-left: 109px;
+h2.settitle{
+  padding-left: 110px;
+  display: inline-block;
+}
+h3.settitle{
+    padding: 15px 110px;
+}
+h5.settitle{
+  display: inline-block;
+  padding-left: 29px;
+  color: #169BD5;
 }
 .setform{
   padding-top: 25px;
-  padding-left: 25px;
+  padding-left: 109px;
+}
+input#oldpsw,input#newpsw,input#newpsw2{
+  max-width: 300px;
 }
 #pswbtn{
   margin-top: 9px;
@@ -326,25 +371,22 @@ table#table-zb>tbody>tr>td:nth-child(3){
     left: 0;
     right: 0;
     }
-    #tc2{
-    width: 120px;
-    height:150px;
-    margin: 25px -5px;
-    }
-    #stu2{
-    width: 120px;
-    height:150px;
-    margin:25px -5px;
-    }
-.setDiv-1{
-   width:45%;
-   position:relative;
-   top: -200px;
-   display: inline-block;;
+.setDiv{
+   display: flex;
+   justify-content:center;
+    flex-wrap: wrap;
 }
-.setDiv-2{
-   width:50%;
-   display: inline-block;
+.setDiv>div{
+  display: flex;
+  justify-content:space-around;
+  flex-wrap: wrap;
+}
+.setDiv>div>div{
+   display: flex;
+  justify-content:center;
+}
+button#qzbtn{
+  margin-left: 110px;
 }
 @media  (min-width: 768px)  {
       .titletop {

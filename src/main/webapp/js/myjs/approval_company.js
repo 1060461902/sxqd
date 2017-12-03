@@ -1,6 +1,6 @@
-$(document).ready(function(){ 
+$(document).ready(function(){
 	var id = window.location.href;
-	  // $.ajax({
+	 // $.ajax({
    //     type: 'get',
    //     url: '/fieldManagement/admin/showCompanyDeails',
    //     data: JSON.stringify(id),
@@ -22,10 +22,19 @@ $(document).ready(function(){
         $("span#type").text(obj.type);
         $("span#stage").text(obj.stage);
         $("span#size").text(obj.size);
-        $("span#mark").text(obj.mark);
         $("p#intruction").text(obj.intruction);
         $("p#address").text(obj.address);
-
+        $('div.profile-photo-container>img:eq(0)').attr("src",obj.licence);
+        $('div.profile-photo-container>img:eq(1)').attr("src",obj.tax_registration);
+        $('div.profile-photo-container>img:eq(2)').attr("src",obj.organization_code);
+        //标签
+        var mark =data.mark;
+        var marklength = data.mark.length;
+        for(var n=0;n<marklength;n++)
+        {
+          $('div.mark-content').append('<span class="label label-primary" id="mark">'+mark[n].mark+'</span>');
+        };
+        // 相册
         var album = data.Image;
         var length = data.Image.length;
         for(var n=0;n<length;n++)
@@ -44,8 +53,9 @@ $("button").click(function(){
       var id = new Array();
       id[0] = comid;
       var info = new Object();
-      info.id=id;
-      info.passFlag=flag;//要传输的数据
+      info.id = id;
+      info.passFlag = flag;//要传输的数据
+      info.msg = null; 
       location.href='./approval.html';
     //<---------------------------------------表格重新导入
     }
@@ -55,6 +65,7 @@ $("button").click(function(){
       var info = new Object();
       info.id=id;
       info.passFlag=flag;
+      info.msg = null;
       location.href='./approval.html';
     }
    });
