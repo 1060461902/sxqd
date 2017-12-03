@@ -66,7 +66,6 @@ public class OperateController {
         Map<String, Object> result = new HashMap<String, Object>();
 
 //        根据角色的主键id查询userID
-
         userId = commonService.role2user(roleId, id);
 
         User user = userService.selectByPrimaryKey(userId);

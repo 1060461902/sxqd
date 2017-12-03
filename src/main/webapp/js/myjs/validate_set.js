@@ -89,7 +89,9 @@ function validate_form()
                     else{
                          alert("服务器异常");
                     }
-                })
+                }, error: function(){
+          alert('服务端异常');
+      }})
     // var info = new Object();  // alert(info);
     // info.oldpsw = oldpsw.value; //alert(info.username);
     // info.newpsw = newpsw.value;  //alert(info.password); 
