@@ -7,7 +7,6 @@ public class FrontTeacher {
     private String nickName;
     private String userName;
     private Boolean status;
-//    private List<String> studentList;
     private String phone;
     private Boolean forbidden;
 
@@ -35,22 +34,6 @@ public class FrontTeacher {
         this.userName = userName;
     }
 
-    public String getnickName() {
-        return nickName;
-    }
-
-    public void setnickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getuserName() {
-        return userName;
-    }
-
-    public void setuserName(String userName) {
-        this.userName = userName;
-    }
-
 
 
     public Boolean getStatus() {
@@ -61,8 +44,6 @@ public class FrontTeacher {
         this.status = status;
     }
 
-
-
     public String getPhone() {
         return phone;
     }
@@ -70,11 +51,6 @@ public class FrontTeacher {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-
-
-
-
     public Boolean getForbidden() {
         return forbidden;
     }

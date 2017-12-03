@@ -27,6 +27,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public int deleteByPrimaryKey(Integer id) {
+        return 0;
+    }
+
+    @Override
     public int insert(Student record) {
         int status;
         status = studentMapper.insert(record);
@@ -42,11 +47,6 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> selectByExample(StudentExample example) {
         return null;
-    }
-
-    @Override
-    public int deleteByPrimaryKey(Integer id) {
-        return 0;
     }
 
     @Override

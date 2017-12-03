@@ -19,4 +19,9 @@ public interface CompanyViewMapper {
     int updateByExampleSelective(@Param("record") CompanyView record, @Param("example") CompanyViewExample example);
 
     int updateByExample(@Param("record") CompanyView record, @Param("example") CompanyViewExample example);
+
+    CompanyView selectByKey(Integer id);
+
+    CompanyView selectByName(String companyName);
+
 }

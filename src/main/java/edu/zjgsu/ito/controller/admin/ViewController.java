@@ -1,18 +1,17 @@
 package edu.zjgsu.ito.controller.admin;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import edu.zjgsu.ito.model.*;
-import edu.zjgsu.ito.vo.FrontTeacher;
+import edu.zjgsu.ito.model.Teacher;
+import edu.zjgsu.ito.model.TeacherExample;
+import edu.zjgsu.ito.model.User;
 import edu.zjgsu.ito.service.StudentService;
 import edu.zjgsu.ito.service.TeacherService;
 import edu.zjgsu.ito.service.UserService;
 import edu.zjgsu.ito.utils.Constant;
+import edu.zjgsu.ito.vo.FrontTeacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -20,12 +19,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/*
 @Controller
 @RequestMapping(value = "admin")
 public class ViewController {
 //    页大小
-    public static final int pageSize = 2;
 
     @Autowired
     TeacherService teacherService;
@@ -33,13 +30,12 @@ public class ViewController {
     UserService userService;
     @Autowired
     StudentService studentService;
-    */
-/**
+    /*
      *
      * @param
      * @return
-     * @author sawei
-     *//*
+     * @author sawei*/
+
 
     @RequestMapping(value = "showTeachers", method = RequestMethod.GET)
     public @ResponseBody
@@ -53,7 +49,7 @@ public class ViewController {
 
 //        分页查询Teacher表所有的记录
         TeacherExample TeacherExample = new TeacherExample();
-        TeacherExample.or().andIdIsNotNull().andStatusEqualTo(false);
+        TeacherExample.or().andIdIsNotNull();
 //        分页
 //        List<Teacher> teachers;
         List<Teacher> teachers=teacherService.selectByExample(TeacherExample);
@@ -84,9 +80,9 @@ public class ViewController {
 //            }
 
 //            设置返回给前端的对象的属性
-            FrontTeacherTemp.setId(teacher.getId());
-            FrontTeacherTemp.setnickName(user.getNickName());
-            FrontTeacherTemp.setuserName(user.getUserName());
+            FrontTeacherTemp.setId(teacher.getUserId());
+            FrontTeacherTemp.setNickName(user.getNickName());
+            FrontTeacherTemp.setUserName(user.getUserName());
             FrontTeacherTemp.setStatus(teacher.getStatus());
             FrontTeacherTemp.setPhone(user.getPhone());
             FrontTeacherTemp.setForbidden(user.getForbidden());
@@ -94,12 +90,10 @@ public class ViewController {
 //            加到list里面
             teacherList.add(FrontTeacherTemp);
         }
-
         result.put("code", Constant.OK);
         result.put("msg", "返回老师信息成功！");
         result.put("teacherList", teacherList);
         return result;
-
     }
+
 }
-*/

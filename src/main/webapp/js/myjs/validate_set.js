@@ -54,7 +54,7 @@ function validate_form()
   	{$("#newpsw").focus();return false}
   else if(validate_newpsw2(newpsw2,"请再次填写您的新密码")==false)
   	{$("#newpsw2").focus();return false}
-  else if(newpsw!=newpsw2)
+  else if(newpsw.value!==newpsw2.value)
     {alert("两次密码不相符！");return false}
   else{
          // $.getJSON("./js/json/validate1.json", function(data) {
@@ -86,11 +86,37 @@ function validate_form()
                     else if(data.code == "500"){
                          alert('原密码错误');
                     }
-     },
-       error: function(){
-        alert('服务端异常');
-        }
-    });
-      return true;
+                    else{
+                         alert("服务器异常");
+                    }
+                })
+    // var info = new Object();  // alert(info);
+    // info.oldpsw = oldpsw.value; //alert(info.username);
+    // info.newpsw = newpsw.value;  //alert(info.password); 
+    // var event = new Object();
+    // event.code = 200; //alert(event);
+    // event.info = info; 
+    // alert(JSON.stringify(event));
+    //  $.ajax({
+    //    type: 'post',
+    //    url: '/',
+    //    data: JSON.stringify(event),
+    //    async: true,
+    //    contentType: "application/json",
+    //    dateType: "json",
+    //    success: function(data){
+    //     if (data.info.action == "Successful"){
+    //        alert('操作成功');
+    //         // location.href='./index.html';
+    //     }
+    //     else if(data.info.action == "Fail"){
+    //     alert('原密码错误');
+    //     }
+    //  },
+    //    error: function(){
+    //     alert('服务端异常');
+    //     }
+    // })
+    //   return true;
     }
 }

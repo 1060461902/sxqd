@@ -11,7 +11,7 @@ public interface CompanyService {
 
     int deleteByExample(CompanyExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Company record);
 

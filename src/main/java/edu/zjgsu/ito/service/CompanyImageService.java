@@ -11,7 +11,7 @@ public interface CompanyImageService {
 
     int deleteByExample(CompanyImageExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(CompanyImage record);
 
@@ -19,7 +19,7 @@ public interface CompanyImageService {
 
     List<CompanyImage> selectByExample(CompanyImageExample example);
 
-    CompanyImage selectByPrimaryKey(String id);
+    CompanyImage selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") CompanyImage record, @Param("example") CompanyImageExample example);
 

@@ -33,12 +33,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User selectByPrimaryKey(Integer id) {
-        User user = userMapper.selectByPrimaryKey(id);
-        return user;
-    }
-
-    @Override
     public int insert(User record) {
         int count = userMapper.insert(record);
         return count;
@@ -53,6 +47,12 @@ public class UserServiceImpl implements UserService {
     public List<User> selectByExample(UserExample example) {
         List<User> userList = userMapper.selectByExample(example);
         return userList;
+    }
+
+    @Override
+    public User selectByPrimaryKey(Integer id) {
+        User user = userMapper.selectByPrimaryKey(id);
+        return user;
     }
 
     @Override

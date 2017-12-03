@@ -17,7 +17,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-/*
 //登录注册登出
 @Controller
 //@RequestMapping(value = "admin")
@@ -27,15 +26,11 @@ public class UserController {
     private UserService userService;
 
 
-*/
-/*    *//*
-*/
+
 /**
      *
-     * @return code
-     *//*
-*/
-/*
+     * @return code*/
+
     @RequestMapping(value = "admin/register",method = RequestMethod.GET)
     public @ResponseBody
     Map<String,Object> register(@RequestBody User user) {
@@ -48,7 +43,8 @@ public class UserController {
         user.setPassword(md5Password);
 
         UserExample userExample = new UserExample();
-        userExample.or().andUsernameEqualTo(user.getUsername());
+
+        userExample.or().andUserNameEqualTo(user.getUserName());
         status = userService.updateByExample(user, userExample);
 
         if (status > 0) {
@@ -58,18 +54,19 @@ public class UserController {
         }
 
         return result;
-    }*//*
+    }
 
 
 
-    */
-/**
+/*
+*
      *
      * @param request
      * @param user 保存前端传过来的账号和密码
      * @return status code
      * @author sawei
-     *//*
+*/
+
 
     @RequestMapping(value = "admin/login", method = RequestMethod.POST)
     public @ResponseBody
@@ -99,23 +96,16 @@ public class UserController {
 
         return result;
     }//login
-    //    @RequestMapping(value = "/logout", method = RequestMethod.POST)
-//    public @ResponseBody
-//    Map<String, Object> logout(HttpServletRequest request) {
-//        Map<String, Object> result = new HashMap<String, Object>();//返回的信息保存在result里
-//        HttpSession session = request.getSession();
-//        String tmp = (String) session.getAttribute("loginFlag");
-//        System.out.println(tmp);
-//        return result;
-//    }
 
-    */
-/**
+
+/*
+*
      *
      * @param request
      * @return status code
      * @author sawei
-     *//*
+*/
+
 
     @RequestMapping(value = "admin/logout", method = RequestMethod.POST)
     public @ResponseBody
@@ -147,7 +137,6 @@ public class UserController {
         md5NewPassword = Md5Util.getMD5(frontUser.getNewPassword());
         backUser.setPassword(md5NewPassword);
 
-
 //        修改database中记录
 
         status = userService.updateByExample(backUser, userExample);
@@ -157,8 +146,6 @@ public class UserController {
         } else {
             result.put("code", Constant.FAIL);
         }
-
         return result;
     }
 }
-*/

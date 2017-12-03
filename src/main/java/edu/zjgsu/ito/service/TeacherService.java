@@ -11,7 +11,7 @@ public interface TeacherService {
 
     int deleteByExample(TeacherExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Teacher record);
 

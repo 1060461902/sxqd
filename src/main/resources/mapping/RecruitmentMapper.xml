@@ -468,4 +468,12 @@
       why = #{why,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByCompanyId" resultType="edu.zjgsu.ito.model.Recruitment">
+    SELECT
+    id, company_id, post, current_number, total_number, post_info, checked, pass, delete_tag,
+    address, skill_require, post_time, remove, forbidden, salary, contact, phone, email,
+    recruitment, user_id
+    FROM recruitment
+    WHERE company_id = #{companyId}
+  </select>
 </mapper>

@@ -37,6 +37,12 @@ public class CompanyViewServiceImpl implements CompanyViewService{
     }
 
     @Override
+    public CompanyView selectByName(String companyName) {
+        CompanyView companyView=companyViewMapper.selectByName(companyName);
+        return companyView;
+    }
+
+    @Override
     public List<CompanyView> selectByExample(CompanyViewExample example) {
 
         List<CompanyView> companyViewList = companyViewMapper.selectByExample(example);
@@ -45,8 +51,9 @@ public class CompanyViewServiceImpl implements CompanyViewService{
      }
 
     @Override
-    public CompanyView selectByKey(String id) {
-        return null;
+    public CompanyView selectByKey(Integer id) {
+        CompanyView companyView=companyViewMapper.selectByKey(id);
+        return companyView;
     }
 
     @Override

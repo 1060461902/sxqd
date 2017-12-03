@@ -10,7 +10,7 @@ public interface CompanyMarkService {
 
     int deleteByExample(CompanyMarkExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(edu.zjgsu.ito.model.CompanyMark record);
 
@@ -18,7 +18,7 @@ public interface CompanyMarkService {
 
     List<edu.zjgsu.ito.model.CompanyMark> selectByExample(CompanyMarkExample example);
 
-    edu.zjgsu.ito.model.CompanyMark selectByPrimaryKey(String id);
+    edu.zjgsu.ito.model.CompanyMark selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") edu.zjgsu.ito.model.CompanyMark record, @Param("example") CompanyMarkExample example);
 
