@@ -43,7 +43,7 @@ $("button#pass-button").click(function(){
       var info = new Object();
       info.id=id;
       info.passFlag=flag;
-      info.content=$('textarea').val();
+      info.msg = $('textarea').val();
       location.href='./approval-3.html';
     }
    });

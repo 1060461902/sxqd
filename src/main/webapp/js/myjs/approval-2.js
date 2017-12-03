@@ -97,7 +97,8 @@ $('th>input:checkbox').click(function() {
     });
     var info = new Object();
     info.id=id;
-    info.passFlag='1';//要传输的数据
+    info.passFlag='1';
+    info.msg = null;
     //<---------------------------------------表格重新导入
     $.getJSON("js/json/approval-2.json", function(data) {
       $("tbody").empty();

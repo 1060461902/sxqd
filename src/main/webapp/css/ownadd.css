@@ -15,6 +15,17 @@ img{
   display:inline-block;
   width: 30%;
   border:1px solid #DDD;
+  padding: 20px;
+}
+.mark-content{
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  flex-wrap:wrap;
+}
+span#mark{
+  margin:20px;
+  padding: 8px 20px;
+  font-size: 1.1em; 
 }
 .red{
   color: red;
@@ -427,7 +438,16 @@ table#teacher_details tr,table#student_details tr{
     flex-wrap: wrap;
 }
 .setDiv>div{
-  padding: 10px 80px;
+  display: flex;
+  justify-content:space-around;
+  flex-wrap: wrap;
+}
+..setDiv>div>div{
+   display: flex;
+  justify-content:center;
+}
+button#qzbtn{
+  margin-left: 110px;
 }
 @media  (min-width: 768px)  {
       .titletop {

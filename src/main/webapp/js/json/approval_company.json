@@ -24,7 +24,42 @@
       "nickName": "天宇",
       "deleteTag": true,
       "roleId": "4",
+      "licence": "images/timg2.jpg",
+      "tax_registration": "images/ali.jpg",
+      "organization_code": "images/timg.jpg",
       "forbidden": true
+    }
+  ],
+    "mark": [
+        {
+      "id": "2",
+      "company_Id": "2",
+      "mark": "世界五百强"
+    },
+          {
+      "id": "2",
+      "company_Id": "2",
+      "mark": "bb"
+    },
+          {
+      "id": "2",
+      "company_Id": "2",
+      "mark": "cc"
+    },
+          {
+      "id": "2",
+      "company_Id": "2",
+      "mark": "dd"
+    },
+      {
+      "id": "2",
+      "company_Id": "2",
+      "mark": "ee"
+    },
+        {
+      "id": "2",
+      "company_Id": "2",
+      "mark": "ff"
     }
   ],
   "Image": [

@@ -38,6 +38,7 @@ $("button#pass-button").click(function(){
       var info = new Object();
       info.id=id;
       info.passFlag=flag;//要传输的数据
+      info.msg = null;
       location.href='./approval-2.html';
     //<---------------------------------------表格重新导入
     }
@@ -47,6 +48,7 @@ $("button#pass-button").click(function(){
       var info = new Object();
       info.id=id;
       info.passFlag=flag;
+      info.msg = $('textarea').val();
       location.href='./approval-2.html';
     }
    });
