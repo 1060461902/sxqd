@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.zjgsu.ito.dao.UserMapper">
   <resultMap id="BaseResultMap" type="edu.zjgsu.ito.model.User">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     <result column="delete_tag" jdbcType="BIT" property="deleteTag" />
-    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="forbidden" jdbcType="BIT" property="forbidden" />
   </resultMap>
@@ -95,15 +95,15 @@
       </if>
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="edu.zjgsu.ito.model.UserExample">
     delete from user
@@ -111,19 +111,21 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+
   <insert id="insert" parameterType="edu.zjgsu.ito.model.User">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user (user_name, password, phone, 
+    insert into user (user_name, password, phone,
       nick_name, delete_tag, role_id, 
       create_time, forbidden)
     values (#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{nickName,jdbcType=VARCHAR}, #{deleteTag,jdbcType=BIT}, #{roleId,jdbcType=VARCHAR}, 
+      #{nickName,jdbcType=VARCHAR}, #{deleteTag,jdbcType=BIT}, #{roleId,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{forbidden,jdbcType=BIT})
   </insert>
+
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.User">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into user
@@ -170,7 +172,7 @@
         #{deleteTag,jdbcType=BIT},
       </if>
       <if test="roleId != null">
-        #{roleId,jdbcType=VARCHAR},
+        #{roleId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -190,7 +192,7 @@
     update user
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
+        id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.userName != null">
         user_name = #{record.userName,jdbcType=VARCHAR},
@@ -208,7 +210,7 @@
         delete_tag = #{record.deleteTag,jdbcType=BIT},
       </if>
       <if test="record.roleId != null">
-        role_id = #{record.roleId,jdbcType=VARCHAR},
+        role_id = #{record.roleId,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -223,13 +225,13 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update user
-    set id = #{record.id,jdbcType=VARCHAR},
+    set id = #{record.id,jdbcType=INTEGER},
       user_name = #{record.userName,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       nick_name = #{record.nickName,jdbcType=VARCHAR},
       delete_tag = #{record.deleteTag,jdbcType=BIT},
-      role_id = #{record.roleId,jdbcType=VARCHAR},
+      role_id = #{record.roleId,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       forbidden = #{record.forbidden,jdbcType=BIT}
     <if test="_parameter != null">
@@ -255,7 +257,7 @@
         delete_tag = #{deleteTag,jdbcType=BIT},
       </if>
       <if test="roleId != null">
-        role_id = #{roleId,jdbcType=VARCHAR},
+        role_id = #{roleId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -264,7 +266,7 @@
         forbidden = #{forbidden,jdbcType=BIT},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="edu.zjgsu.ito.model.User">
     update user
@@ -273,9 +275,9 @@
       phone = #{phone,jdbcType=VARCHAR},
       nick_name = #{nickName,jdbcType=VARCHAR},
       delete_tag = #{deleteTag,jdbcType=BIT},
-      role_id = #{roleId,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       forbidden = #{forbidden,jdbcType=BIT}
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

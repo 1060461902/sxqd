@@ -27,7 +27,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public int deleteByPrimaryKey(String id) {
+    public int deleteByPrimaryKey(Integer id) {
         return 0;
     }
 
@@ -47,7 +47,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student selectByPrimaryKey(String id) {
+    public Student selectByPrimaryKey(Integer id) {
         Student Student = studentMapper.selectByPrimaryKey(id);
 
         return Student;

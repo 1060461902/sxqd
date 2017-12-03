@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.zjgsu.ito.dao.CompanyViewMapper">
   <resultMap id="BaseResultMap" type="edu.zjgsu.ito.model.CompanyView">
-    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="id" jdbcType="INTEGER" property="id" />
     <result column="company_name" jdbcType="VARCHAR" property="companyName" />
     <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="type" jdbcType="VARCHAR" property="type" />
@@ -22,8 +22,11 @@
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     <result column="delete_tag" jdbcType="BIT" property="deleteTag" />
-    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
     <result column="forbidden" jdbcType="BIT" property="forbidden" />
+    <result column="licence" jdbcType="VARCHAR" property="licence" />
+    <result column="tax_registration" jdbcType="VARCHAR" property="taxRegistration" />
+    <result column="organization_code" jdbcType="VARCHAR" property="organizationCode" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -86,7 +89,7 @@
   <sql id="Base_Column_List">
     id, company_name, address, user_id, create_time, email, type, logo, network, size, 
     stage, slogans, intruction, checked, pass, user_name, password, phone, nick_name, 
-    delete_tag, role_id, forbidden
+    delete_tag, role_id, forbidden, licence, tax_registration, organization_code
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.CompanyViewExample" resultMap="BaseResultMap">
     select
@@ -117,7 +120,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.CompanyView">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into company_view (company_name, address, user_id, 
@@ -126,17 +129,19 @@
       stage, slogans, intruction, 
       checked, pass, user_name, password, 
       phone, nick_name, delete_tag, 
-      role_id, forbidden)
-    values (#{companyName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      role_id, forbidden, licence, 
+      tax_registration, organization_code)
+    values (#{companyName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
       #{logo,jdbcType=VARCHAR}, #{network,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, 
       #{stage,jdbcType=VARCHAR}, #{slogans,jdbcType=VARCHAR}, #{intruction,jdbcType=VARCHAR}, 
       #{checked,jdbcType=BIT}, #{pass,jdbcType=BIT}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{deleteTag,jdbcType=BIT}, 
-      #{roleId,jdbcType=VARCHAR}, #{forbidden,jdbcType=BIT})
+      #{roleId,jdbcType=INTEGER}, #{forbidden,jdbcType=BIT}, #{licence,jdbcType=VARCHAR}, 
+      #{taxRegistration,jdbcType=VARCHAR}, #{organizationCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.CompanyView">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into company_view
@@ -204,6 +209,15 @@
       <if test="forbidden != null">
         forbidden,
       </if>
+      <if test="licence != null">
+        licence,
+      </if>
+      <if test="taxRegistration != null">
+        tax_registration,
+      </if>
+      <if test="organizationCode != null">
+        organization_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="companyName != null">
@@ -213,7 +227,7 @@
         #{address,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -264,10 +278,19 @@
         #{deleteTag,jdbcType=BIT},
       </if>
       <if test="roleId != null">
-        #{roleId,jdbcType=VARCHAR},
+        #{roleId,jdbcType=INTEGER},
       </if>
       <if test="forbidden != null">
         #{forbidden,jdbcType=BIT},
+      </if>
+      <if test="licence != null">
+        #{licence,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegistration != null">
+        #{taxRegistration,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationCode != null">
+        #{organizationCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -281,7 +304,7 @@
     update company_view
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
+        id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.companyName != null">
         company_name = #{record.companyName,jdbcType=VARCHAR},
@@ -290,7 +313,7 @@
         address = #{record.address,jdbcType=VARCHAR},
       </if>
       <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=VARCHAR},
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -341,10 +364,19 @@
         delete_tag = #{record.deleteTag,jdbcType=BIT},
       </if>
       <if test="record.roleId != null">
-        role_id = #{record.roleId,jdbcType=VARCHAR},
+        role_id = #{record.roleId,jdbcType=INTEGER},
       </if>
       <if test="record.forbidden != null">
         forbidden = #{record.forbidden,jdbcType=BIT},
+      </if>
+      <if test="record.licence != null">
+        licence = #{record.licence,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxRegistration != null">
+        tax_registration = #{record.taxRegistration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationCode != null">
+        organization_code = #{record.organizationCode,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -353,10 +385,10 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update company_view
-    set id = #{record.id,jdbcType=VARCHAR},
+    set id = #{record.id,jdbcType=INTEGER},
       company_name = #{record.companyName,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
-      user_id = #{record.userId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       email = #{record.email,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=VARCHAR},
@@ -373,8 +405,11 @@
       phone = #{record.phone,jdbcType=VARCHAR},
       nick_name = #{record.nickName,jdbcType=VARCHAR},
       delete_tag = #{record.deleteTag,jdbcType=BIT},
-      role_id = #{record.roleId,jdbcType=VARCHAR},
-      forbidden = #{record.forbidden,jdbcType=BIT}
+      role_id = #{record.roleId,jdbcType=INTEGER},
+      forbidden = #{record.forbidden,jdbcType=BIT},
+      licence = #{record.licence,jdbcType=VARCHAR},
+      tax_registration = #{record.taxRegistration,jdbcType=VARCHAR},
+      organization_code = #{record.organizationCode,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -390,13 +425,7 @@
   <select id="selectByName" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
-      FROM company_view
-      WHERE company_name=#{companyName}
+    FROM company_view
+    WHERE company_name=#{companyName}
   </select>
-  <!--
-
-    id, company_name, address, user_id, create_time, email, type, logo, network, size,
-    stage, slogans, intruction, checked, pass, user_name, password, phone, nick_name,
-    delete_tag, role_id, forbidden
-    -->
 </mapper>

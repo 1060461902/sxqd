@@ -23,7 +23,7 @@ public class CompanyImageServiceImpl implements CompanyImageService{
     }
 
     @Override
-    public int deleteByPrimaryKey(String id) {
+    public int deleteByPrimaryKey(Integer id) {
         return 0;
     }
 
@@ -44,7 +44,7 @@ public class CompanyImageServiceImpl implements CompanyImageService{
     }
 
     @Override
-    public CompanyImage selectByPrimaryKey(String id) {
+    public CompanyImage selectByPrimaryKey(Integer id) {
         return null;
     }
 

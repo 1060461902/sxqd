@@ -7,7 +7,7 @@ import java.util.Date;
  * @author 
  */
 public class User implements Serializable {
-    private String id;
+    private Integer id;
 
     private String userName;
 
@@ -28,7 +28,7 @@ public class User implements Serializable {
     /**
      * 1.2.3.4管理员，学生，教师，公司
      */
-    private String roleId;
+    private Integer roleId;
 
     private Date createTime;
 
@@ -39,11 +39,11 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -87,11 +87,11 @@ public class User implements Serializable {
         this.deleteTag = deleteTag;
     }
 
-    public String getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 

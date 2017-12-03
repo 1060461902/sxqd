@@ -82,9 +82,9 @@ public class ViewController {
 //            }
 
 //            设置返回给前端的对象的属性
-            FrontTeacherTemp.setId(teacher.getId());
-            FrontTeacherTemp.setnickName(user.getNickName());
-            FrontTeacherTemp.setuserName(user.getUserName());
+            FrontTeacherTemp.setId(teacher.getUserId());
+            FrontTeacherTemp.setNickName(user.getNickName());
+            FrontTeacherTemp.setUserName(user.getUserName());
             FrontTeacherTemp.setStatus(teacher.getStatus());
             FrontTeacherTemp.setPhone(user.getPhone());
             FrontTeacherTemp.setForbidden(user.getForbidden());
@@ -92,11 +92,10 @@ public class ViewController {
 //            加到list里面
             teacherList.add(FrontTeacherTemp);
         }
-
         result.put("code", Constant.OK);
         result.put("msg", "返回老师信息成功！");
         result.put("teacherList", teacherList);
         return result;
-
     }
+
 }

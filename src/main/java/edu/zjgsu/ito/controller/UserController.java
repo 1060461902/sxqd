@@ -130,8 +130,6 @@ public class UserController {
 //        修改密码
         md5Password = Md5Util.getMD5(frontUser.getPassword());
         backUser.setPassword(md5Password);
-
-
 //        修改database中记录
 
         status = userService.updateByExample(backUser, userExample);
@@ -141,7 +139,6 @@ public class UserController {
         } else {
             result.put("code", Constant.FAIL);
         }
-
         return result;
     }
 }

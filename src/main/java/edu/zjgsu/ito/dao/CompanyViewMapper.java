@@ -1,6 +1,5 @@
 package edu.zjgsu.ito.dao;
 
-import edu.zjgsu.ito.model.Company;
 import edu.zjgsu.ito.model.CompanyView;
 import edu.zjgsu.ito.model.CompanyViewExample;
 import java.util.List;
@@ -17,12 +16,12 @@ public interface CompanyViewMapper {
 
     List<CompanyView> selectByExample(CompanyViewExample example);
 
-    CompanyView selectByKey(String id);
-
-    CompanyView selectByName(String companyName);
-
-
     int updateByExampleSelective(@Param("record") CompanyView record, @Param("example") CompanyViewExample example);
 
     int updateByExample(@Param("record") CompanyView record, @Param("example") CompanyViewExample example);
+
+    CompanyView selectByKey(Integer id);
+
+    CompanyView selectByName(String companyName);
+
 }

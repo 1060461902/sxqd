@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.zjgsu.ito.dao.CompanyMarkMapper">
   <resultMap id="BaseResultMap" type="edu.zjgsu.ito.model.CompanyMark">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
     <result column="mark" jdbcType="VARCHAR" property="mark" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -89,15 +89,15 @@
       </if>
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from company_mark
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from company_mark
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="edu.zjgsu.ito.model.CompanyMarkExample">
     delete from company_mark
@@ -106,14 +106,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.CompanyMark">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into company_mark (company_id, mark)
-    values (#{companyId,jdbcType=VARCHAR}, #{mark,jdbcType=VARCHAR})
+    values (#{companyId,jdbcType=INTEGER}, #{mark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.CompanyMark">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into company_mark
@@ -127,7 +127,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="companyId != null">
-        #{companyId,jdbcType=VARCHAR},
+        #{companyId,jdbcType=INTEGER},
       </if>
       <if test="mark != null">
         #{mark,jdbcType=VARCHAR},
@@ -144,10 +144,10 @@
     update company_mark
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
+        id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.companyId != null">
-        company_id = #{record.companyId,jdbcType=VARCHAR},
+        company_id = #{record.companyId,jdbcType=INTEGER},
       </if>
       <if test="record.mark != null">
         mark = #{record.mark,jdbcType=VARCHAR},
@@ -159,8 +159,8 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update company_mark
-    set id = #{record.id,jdbcType=VARCHAR},
-      company_id = #{record.companyId,jdbcType=VARCHAR},
+    set id = #{record.id,jdbcType=INTEGER},
+      company_id = #{record.companyId,jdbcType=INTEGER},
       mark = #{record.mark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -170,18 +170,18 @@
     update company_mark
     <set>
       <if test="companyId != null">
-        company_id = #{companyId,jdbcType=VARCHAR},
+        company_id = #{companyId,jdbcType=INTEGER},
       </if>
       <if test="mark != null">
         mark = #{mark,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="edu.zjgsu.ito.model.CompanyMark">
     update company_mark
-    set company_id = #{companyId,jdbcType=VARCHAR},
+    set company_id = #{companyId,jdbcType=INTEGER},
       mark = #{mark,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

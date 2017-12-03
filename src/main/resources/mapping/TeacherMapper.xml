@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="edu.zjgsu.ito.dao.CompanyImageMapper">
-  <resultMap id="BaseResultMap" type="edu.zjgsu.ito.model.CompanyImage">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
+<mapper namespace="edu.zjgsu.ito.dao.TeacherMapper">
+  <resultMap id="BaseResultMap" type="edu.zjgsu.ito.model.Teacher">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="status" jdbcType="BIT" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, company_id, url
+    id, user_id, status
   </sql>
-  <select id="selectByExample" parameterType="edu.zjgsu.ito.model.CompanyImageExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="edu.zjgsu.ito.model.TeacherExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from company_image
+    from teacher
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,68 +89,68 @@
       </if>
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from company_image
-    where id = #{id,jdbcType=VARCHAR}
+    from teacher
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from company_image
-    where id = #{id,jdbcType=VARCHAR}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from teacher
+    where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="edu.zjgsu.ito.model.CompanyImageExample">
-    delete from company_image
+  <delete id="deleteByExample" parameterType="edu.zjgsu.ito.model.TeacherExample">
+    delete from teacher
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="edu.zjgsu.ito.model.CompanyImage">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+  <insert id="insert" parameterType="edu.zjgsu.ito.model.Teacher">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into company_image (company_id, url)
-    values (#{companyId,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR})
+    insert into teacher (user_id, status)
+    values (#{userId,jdbcType=INTEGER}, #{status,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.CompanyImage">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+  <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.Teacher">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into company_image
+    insert into teacher
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="companyId != null">
-        company_id,
+      <if test="userId != null">
+        user_id,
       </if>
-      <if test="url != null">
-        url,
+      <if test="status != null">
+        status,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="companyId != null">
-        #{companyId,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
       </if>
-      <if test="url != null">
-        #{url,jdbcType=VARCHAR},
+      <if test="status != null">
+        #{status,jdbcType=BIT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="edu.zjgsu.ito.model.CompanyImageExample" resultType="java.lang.Long">
-    select count(*) from company_image
+  <select id="countByExample" parameterType="edu.zjgsu.ito.model.TeacherExample" resultType="java.lang.Long">
+    select count(*) from teacher
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update company_image
+    update teacher
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
+        id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.companyId != null">
-        company_id = #{record.companyId,jdbcType=VARCHAR},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.url != null">
-        url = #{record.url,jdbcType=VARCHAR},
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -158,30 +158,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update company_image
-    set id = #{record.id,jdbcType=VARCHAR},
-      company_id = #{record.companyId,jdbcType=VARCHAR},
-      url = #{record.url,jdbcType=VARCHAR}
+    update teacher
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="edu.zjgsu.ito.model.CompanyImage">
-    update company_image
+  <update id="updateByPrimaryKeySelective" parameterType="edu.zjgsu.ito.model.Teacher">
+    update teacher
     <set>
-      <if test="companyId != null">
-        company_id = #{companyId,jdbcType=VARCHAR},
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="url != null">
-        url = #{url,jdbcType=VARCHAR},
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="edu.zjgsu.ito.model.CompanyImage">
-    update company_image
-    set company_id = #{companyId,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="edu.zjgsu.ito.model.Teacher">
+    update teacher
+    set user_id = #{userId,jdbcType=INTEGER},
+      status = #{status,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
