@@ -168,7 +168,7 @@ public class AdminOperateServiceImpl implements AdminOperateService {
                 student.setMajor(String.valueOf(record.get(2)));
                 student.setClss(String.valueOf(record.get(3)));
                 status = studentService.insert(student);
-
+                
 
             }
 
