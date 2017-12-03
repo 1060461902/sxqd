@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="edu.zjgsu.ito.dao.CompanyMapper">
-  <resultMap id="BaseResultMap" type="edu.zjgsu.ito.model.Company">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+<mapper namespace="edu.zjgsu.ito.dao.CompanyViewMapper">
+  <resultMap id="BaseResultMap" type="edu.zjgsu.ito.model.CompanyView">
+    <result column="id" jdbcType="INTEGER" property="id" />
     <result column="company_name" jdbcType="VARCHAR" property="companyName" />
     <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="type" jdbcType="VARCHAR" property="type" />
@@ -17,6 +17,13 @@
     <result column="intruction" jdbcType="VARCHAR" property="intruction" />
     <result column="checked" jdbcType="BIT" property="checked" />
     <result column="pass" jdbcType="BIT" property="pass" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="delete_tag" jdbcType="BIT" property="deleteTag" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="forbidden" jdbcType="BIT" property="forbidden" />
     <result column="licence" jdbcType="VARCHAR" property="licence" />
     <result column="tax_registration" jdbcType="VARCHAR" property="taxRegistration" />
     <result column="organization_code" jdbcType="VARCHAR" property="organizationCode" />
@@ -81,15 +88,16 @@
   </sql>
   <sql id="Base_Column_List">
     id, company_name, address, user_id, create_time, email, type, logo, network, size, 
-    stage, slogans, intruction, checked, pass, licence, tax_registration, organization_code
+    stage, slogans, intruction, checked, pass, user_name, password, phone, nick_name, 
+    delete_tag, role_id, forbidden, licence, tax_registration, organization_code
   </sql>
-  <select id="selectByExample" parameterType="edu.zjgsu.ito.model.CompanyExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="edu.zjgsu.ito.model.CompanyViewExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from company
+    from company_view
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -105,44 +113,38 @@
       </if>
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from company
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from company
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="edu.zjgsu.ito.model.CompanyExample">
-    delete from company
+  <delete id="deleteByExample" parameterType="edu.zjgsu.ito.model.CompanyViewExample">
+    delete from company_view
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="edu.zjgsu.ito.model.Company">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+  <insert id="insert" parameterType="edu.zjgsu.ito.model.CompanyView">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into company (company_name, address, user_id, 
+    insert into company_view (company_name, address, user_id, 
       create_time, email, type, 
       logo, network, size, 
       stage, slogans, intruction, 
-      checked, pass, licence, tax_registration, 
-      organization_code)
-    values (#{companyName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      checked, pass, user_name, password, 
+      phone, nick_name, delete_tag, 
+      role_id, forbidden, licence, 
+      tax_registration, organization_code)
+    values (#{companyName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
       #{logo,jdbcType=VARCHAR}, #{network,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, 
       #{stage,jdbcType=VARCHAR}, #{slogans,jdbcType=VARCHAR}, #{intruction,jdbcType=VARCHAR}, 
-      #{checked,jdbcType=BIT}, #{pass,jdbcType=BIT}, #{licence,jdbcType=VARCHAR}, #{taxRegistration,jdbcType=VARCHAR}, 
-      #{organizationCode,jdbcType=VARCHAR})
+      #{checked,jdbcType=BIT}, #{pass,jdbcType=BIT}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{deleteTag,jdbcType=BIT}, 
+      #{roleId,jdbcType=INTEGER}, #{forbidden,jdbcType=BIT}, #{licence,jdbcType=VARCHAR}, 
+      #{taxRegistration,jdbcType=VARCHAR}, #{organizationCode,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.Company">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+  <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.CompanyView">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into company
+    insert into company_view
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="companyName != null">
         company_name,
@@ -186,6 +188,27 @@
       <if test="pass != null">
         pass,
       </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="deleteTag != null">
+        delete_tag,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="forbidden != null">
+        forbidden,
+      </if>
       <if test="licence != null">
         licence,
       </if>
@@ -204,7 +227,7 @@
         #{address,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -239,6 +262,27 @@
       <if test="pass != null">
         #{pass,jdbcType=BIT},
       </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTag != null">
+        #{deleteTag,jdbcType=BIT},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="forbidden != null">
+        #{forbidden,jdbcType=BIT},
+      </if>
       <if test="licence != null">
         #{licence,jdbcType=VARCHAR},
       </if>
@@ -250,17 +294,17 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="edu.zjgsu.ito.model.CompanyExample" resultType="java.lang.Long">
-    select count(*) from company
+  <select id="countByExample" parameterType="edu.zjgsu.ito.model.CompanyViewExample" resultType="java.lang.Long">
+    select count(*) from company_view
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update company
+    update company_view
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
+        id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.companyName != null">
         company_name = #{record.companyName,jdbcType=VARCHAR},
@@ -269,7 +313,7 @@
         address = #{record.address,jdbcType=VARCHAR},
       </if>
       <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=VARCHAR},
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -304,6 +348,27 @@
       <if test="record.pass != null">
         pass = #{record.pass,jdbcType=BIT},
       </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickName != null">
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteTag != null">
+        delete_tag = #{record.deleteTag,jdbcType=BIT},
+      </if>
+      <if test="record.roleId != null">
+        role_id = #{record.roleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.forbidden != null">
+        forbidden = #{record.forbidden,jdbcType=BIT},
+      </if>
       <if test="record.licence != null">
         licence = #{record.licence,jdbcType=VARCHAR},
       </if>
@@ -319,11 +384,11 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update company
-    set id = #{record.id,jdbcType=VARCHAR},
+    update company_view
+    set id = #{record.id,jdbcType=INTEGER},
       company_name = #{record.companyName,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
-      user_id = #{record.userId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       email = #{record.email,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=VARCHAR},
@@ -335,89 +400,18 @@
       intruction = #{record.intruction,jdbcType=VARCHAR},
       checked = #{record.checked,jdbcType=BIT},
       pass = #{record.pass,jdbcType=BIT},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      delete_tag = #{record.deleteTag,jdbcType=BIT},
+      role_id = #{record.roleId,jdbcType=INTEGER},
+      forbidden = #{record.forbidden,jdbcType=BIT},
       licence = #{record.licence,jdbcType=VARCHAR},
       tax_registration = #{record.taxRegistration,jdbcType=VARCHAR},
       organization_code = #{record.organizationCode,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="edu.zjgsu.ito.model.Company">
-    update company
-    <set>
-      <if test="companyName != null">
-        company_name = #{companyName,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="logo != null">
-        logo = #{logo,jdbcType=VARCHAR},
-      </if>
-      <if test="network != null">
-        network = #{network,jdbcType=VARCHAR},
-      </if>
-      <if test="size != null">
-        size = #{size,jdbcType=VARCHAR},
-      </if>
-      <if test="stage != null">
-        stage = #{stage,jdbcType=VARCHAR},
-      </if>
-      <if test="slogans != null">
-        slogans = #{slogans,jdbcType=VARCHAR},
-      </if>
-      <if test="intruction != null">
-        intruction = #{intruction,jdbcType=VARCHAR},
-      </if>
-      <if test="checked != null">
-        checked = #{checked,jdbcType=BIT},
-      </if>
-      <if test="pass != null">
-        pass = #{pass,jdbcType=BIT},
-      </if>
-      <if test="licence != null">
-        licence = #{licence,jdbcType=VARCHAR},
-      </if>
-      <if test="taxRegistration != null">
-        tax_registration = #{taxRegistration,jdbcType=VARCHAR},
-      </if>
-      <if test="organizationCode != null">
-        organization_code = #{organizationCode,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="edu.zjgsu.ito.model.Company">
-    update company
-    set company_name = #{companyName,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      email = #{email,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR},
-      logo = #{logo,jdbcType=VARCHAR},
-      network = #{network,jdbcType=VARCHAR},
-      size = #{size,jdbcType=VARCHAR},
-      stage = #{stage,jdbcType=VARCHAR},
-      slogans = #{slogans,jdbcType=VARCHAR},
-      intruction = #{intruction,jdbcType=VARCHAR},
-      checked = #{checked,jdbcType=BIT},
-      pass = #{pass,jdbcType=BIT},
-      licence = #{licence,jdbcType=VARCHAR},
-      tax_registration = #{taxRegistration,jdbcType=VARCHAR},
-      organization_code = #{organizationCode,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

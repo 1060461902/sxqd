@@ -6,23 +6,20 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-//@Repository
 public interface StudentService {
     long countByExample(StudentExample example);
 
-
     int deleteByExample(StudentExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Student record);
 
     int insertSelective(Student record);
 
-
     List<Student> selectByExample(StudentExample example);
 
-    Student selectByPrimaryKey(String id);
+    Student selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Student record, @Param("example") StudentExample example);
 

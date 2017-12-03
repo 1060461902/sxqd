@@ -7,71 +7,43 @@ import edu.zjgsu.ito.utils.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import edu.zjgsu.ito.service.Impl.CommonServiceImpl;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 @Controller
 @RequestMapping(value = "admin")
 public class OperateController {
     public static final String defaultPwd = "123456";
 
-//    private String userId;
-
-//    @Autowired
-//
-    @Autowired
-    CompanyService companyService;
     @Autowired
     StudentService studentService;
     @Autowired
-    TeacherService teacherService;
-    @Autowired
     UserService userService;
+    @Autowired
+    CommonService commonService;
 
+    @Autowired
+    AdminOperateService adminOperateService;
 
-    //通过不同角色的主键id查到其user的userID
-    public String role2user(String roleid, String id) {
-        List<String> userId = new ArrayList<String>();
-
-        switch (roleid) {
-            case "2":
-                Student student = studentService.selectByPrimaryKey(id);
-                userId.add(student.getUserId());
-                break;
-            case "3":
-                Teacher teacher = teacherService.selectByPrimaryKey(id);
-
-                userId.add(teacher.getUserId());
-                break;
-            case "4":
-                Company company = companyService.selectByPrimaryKey(id);
-                userId.add(company.getUserId());
-                break;
-            default:
-//                System.out.println(""\);
-                break;
-        }
-        return userId.get(0);
+    @RequestMapping(value = "uploadStudentExcel", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody Map<String, Object> uploadStudentExcel(HttpServletRequest request, HttpServletResponse response) {
+        return adminOperateService.studentBatchRegister(request);
     }
-/*    @RequestMapping(value="/list", method=RequestMethod.POST)
-    @ResponseBody
-    public String requestList(@RequestParam("listParam[]") List<String> param) {
-        return "Request successful. Post param : List<String> - " + param.toString();
-}*/
-
 
 
     @RequestMapping(value = "allocateStu2Teacher", method = RequestMethod.GET)
-    public @ResponseBody Map<String, Object> allocateStu2Teacher(@RequestParam(value = "studentIdList") List<String> StudentIdList,
-                                                                 @RequestParam(value = "teacherId") String teacherId) {
+    public @ResponseBody Map<String, Object> allocateStu2Teacher(@RequestParam(value = "studentIdList") List<Integer> StudentIdList,
+                                                                 @RequestParam(value = "teacherId") Integer teacherId) {
         int status;
         Map<String, Object> result = new HashMap<String, Object>();
 
-        for (String stuId:
+        for (Integer stuId:
              StudentIdList) {
             Student student = studentService.selectByPrimaryKey(stuId);
             student.setTeacherId(teacherId);
@@ -89,14 +61,15 @@ public class OperateController {
 
 
     @RequestMapping(value = "forbidAccount", method = RequestMethod.GET)
-    public @ResponseBody Map<String, Object> forbidAccount(@RequestParam("roleId") String roleId,
-                                                           @RequestParam("id") String id) {
+    public @ResponseBody Map<String, Object> forbidAccount(@RequestParam("roleId") Integer roleId,
+                                                           @RequestParam("id") Integer id) {
         int status;
-        String userId;
+        Integer userId;
         Map<String, Object> result = new HashMap<String, Object>();
 
 //        根据角色的主键id查询userID
-        userId = role2user(roleId, id);
+
+        userId = commonService.role2user(roleId, id);
 
         User user = userService.selectByPrimaryKey(userId);
         user.setForbidden(true);
@@ -114,17 +87,18 @@ public class OperateController {
     }
 
 
+
     @RequestMapping(value = "resetPwd", method = RequestMethod.GET)
-    public @ResponseBody Map<String, Object> resetPwd(@RequestParam("roleId") String roleId,
-                                                      @RequestParam("id") String id) {
+    public @ResponseBody Map<String, Object> resetPwd(@RequestParam("roleId") Integer roleId,
+                                                      @RequestParam("id") Integer id) {
         int status;
-        String userId;
+        Integer userId;
         String md5Password;
         Map<String, Object> result = new HashMap<String, Object>();
 
         md5Password = Md5Util.getMD5(defaultPwd);
 
-        userId = role2user(roleId, id);
+        userId = commonService.role2user(roleId, id);
 
 //                修改密码
         User user = userService.selectByPrimaryKey(userId);

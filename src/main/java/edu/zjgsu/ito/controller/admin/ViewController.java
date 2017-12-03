@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/*
 @Controller
 @RequestMapping(value = "admin")
 public class ViewController {
@@ -32,12 +33,14 @@ public class ViewController {
     UserService userService;
     @Autowired
     StudentService studentService;
-    /**
+    */
+/**
      *
      * @param
      * @return
      * @author sawei
-     */
+     *//*
+
     @RequestMapping(value = "showTeachers", method = RequestMethod.GET)
     public @ResponseBody
     Map<String, Object> showTeachers() {
@@ -99,3 +102,4 @@ public class ViewController {
 
     }
 }
+*/

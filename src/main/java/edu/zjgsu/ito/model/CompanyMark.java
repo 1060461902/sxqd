@@ -6,9 +6,9 @@ import java.io.Serializable;
  * @author 
  */
 public class CompanyMark implements Serializable {
-    private String id;
+    private Integer id;
 
-    private String companyId;
+    private Integer companyId;
 
     /**
      * 企业标签
@@ -17,19 +17,19 @@ public class CompanyMark implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getCompanyId() {
+    public Integer getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(String companyId) {
+    public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
     }
 

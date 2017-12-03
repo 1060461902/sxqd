@@ -7,16 +7,16 @@ import java.util.Date;
  * @author 
  */
 public class Student implements Serializable {
-    private String id;
+    private Integer id;
 
-    private String userId;
+    private Integer userId;
 
     /**
      * 公司联系人代表公司id学生根据状态表示想去的公司
      */
-    private String companyId;
+    private Integer companyId;
 
-    private String teacherId;
+    private Integer teacherId;
 
     /**
      * 实习状态0未实习1申请中2待实习3实习中4已结业
@@ -58,37 +58,41 @@ public class Student implements Serializable {
      */
     private Date graduateYear;
 
+    private String major;
+
+    private String clss;
+
     private static final long serialVersionUID = 1L;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    public String getCompanyId() {
+    public Integer getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(String companyId) {
+    public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
     }
 
-    public String getTeacherId() {
+    public Integer getTeacherId() {
         return teacherId;
     }
 
-    public void setTeacherId(String teacherId) {
+    public void setTeacherId(Integer teacherId) {
         this.teacherId = teacherId;
     }
 
@@ -156,6 +160,22 @@ public class Student implements Serializable {
         this.graduateYear = graduateYear;
     }
 
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getClss() {
+        return clss;
+    }
+
+    public void setClss(String clss) {
+        this.clss = clss;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -179,7 +199,9 @@ public class Student implements Serializable {
             && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
             && (this.getNation() == null ? other.getNation() == null : this.getNation().equals(other.getNation()))
             && (this.getEnglish() == null ? other.getEnglish() == null : this.getEnglish().equals(other.getEnglish()))
-            && (this.getGraduateYear() == null ? other.getGraduateYear() == null : this.getGraduateYear().equals(other.getGraduateYear()));
+            && (this.getGraduateYear() == null ? other.getGraduateYear() == null : this.getGraduateYear().equals(other.getGraduateYear()))
+            && (this.getMajor() == null ? other.getMajor() == null : this.getMajor().equals(other.getMajor()))
+            && (this.getClss() == null ? other.getClss() == null : this.getClss().equals(other.getClss()));
     }
 
     @Override
@@ -198,6 +220,8 @@ public class Student implements Serializable {
         result = prime * result + ((getNation() == null) ? 0 : getNation().hashCode());
         result = prime * result + ((getEnglish() == null) ? 0 : getEnglish().hashCode());
         result = prime * result + ((getGraduateYear() == null) ? 0 : getGraduateYear().hashCode());
+        result = prime * result + ((getMajor() == null) ? 0 : getMajor().hashCode());
+        result = prime * result + ((getClss() == null) ? 0 : getClss().hashCode());
         return result;
     }
 
@@ -219,6 +243,8 @@ public class Student implements Serializable {
         sb.append(", nation=").append(nation);
         sb.append(", english=").append(english);
         sb.append(", graduateYear=").append(graduateYear);
+        sb.append(", major=").append(major);
+        sb.append(", clss=").append(clss);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

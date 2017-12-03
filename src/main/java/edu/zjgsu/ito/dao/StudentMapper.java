@@ -4,15 +4,13 @@ import edu.zjgsu.ito.model.Student;
 import edu.zjgsu.ito.model.StudentExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface StudentMapper {
     long countByExample(StudentExample example);
 
     int deleteByExample(StudentExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Student record);
 
@@ -20,7 +18,7 @@ public interface StudentMapper {
 
     List<Student> selectByExample(StudentExample example);
 
-    Student selectByPrimaryKey(String id);
+    Student selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Student record, @Param("example") StudentExample example);
 

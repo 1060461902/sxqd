@@ -23,14 +23,17 @@ public class OperateCompanyController {
     CompanyService companyService;
 
 
-    /**
+/*
+*
      *
      * @param
      * @return code
      * 企业注册单个审批操作
      * @author hanfeng
-     */
-/*    @RequestMapping(value = "link",method = RequestMethod.POST)
+*/
+
+
+    @RequestMapping(value = "link",method = RequestMethod.POST)
     @ResponseBody
     public  Map<String,Object> getArray(String[] ids, String passFlag){
 
@@ -43,7 +46,8 @@ public class OperateCompanyController {
         Map<String, Object> result = new HashMap<String, Object>();
 
         for(String id:ids) {
-            Company companyBack = companyService.selectByPrimaryKey(id);
+//            Company companyBack = companyService.selectByPrimaryKey(id);
+            Company companyBack = new Company();
             if (companyBack == null) {
                 result.put("code", Constant.FAIL);
                 result.put("msg", "未查到id=" + id + "的记录！");
@@ -73,7 +77,8 @@ public class OperateCompanyController {
             }
         }
         return result;
-    }*/
+    }
+
     @RequestMapping(value = "comfirmRegister", method = RequestMethod.POST)
     public @ResponseBody
     Map<String,Object> comfirmRegister(@RequestBody ApprovalVo approvalVo) {
@@ -89,7 +94,7 @@ public class OperateCompanyController {
         Map<String, Object> result = new HashMap<String, Object>();
 
         for(String id:ids) {
-            Company companyBack = companyService.selectByPrimaryKey(id);
+            Company companyBack = companyService.selectByPrimaryKey(1);
             if (companyBack == null) {
                 result.put("code", Constant.FAIL);
                 result.put("msg", "未查到id=" + id + "的记录！");

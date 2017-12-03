@@ -17,6 +17,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/*
 //登录注册登出
 @Controller
 //@RequestMapping(value = "admin")
@@ -26,10 +27,15 @@ public class UserController {
     private UserService userService;
 
 
-/*    *//**
+*/
+/*    *//*
+*/
+/**
      *
      * @return code
      *//*
+*/
+/*
     @RequestMapping(value = "admin/register",method = RequestMethod.GET)
     public @ResponseBody
     Map<String,Object> register(@RequestBody User user) {
@@ -52,16 +58,19 @@ public class UserController {
         }
 
         return result;
-    }*/
+    }*//*
 
 
-    /**
+
+    */
+/**
      *
      * @param request
      * @param user 保存前端传过来的账号和密码
      * @return status code
      * @author sawei
-     */
+     *//*
+
     @RequestMapping(value = "admin/login", method = RequestMethod.POST)
     public @ResponseBody
     Map<String, Object> login(HttpServletRequest request, @RequestBody User user) {
@@ -100,12 +109,14 @@ public class UserController {
 //        return result;
 //    }
 
-    /**
+    */
+/**
      *
      * @param request
      * @return status code
      * @author sawei
-     */
+     *//*
+
     @RequestMapping(value = "admin/logout", method = RequestMethod.POST)
     public @ResponseBody
     Map<String, Object> logout(HttpServletRequest request) {
@@ -150,3 +161,4 @@ public class UserController {
         return result;
     }
 }
+*/

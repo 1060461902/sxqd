@@ -10,7 +10,7 @@ public interface RecruitmentMapper {
 
     int deleteByExample(RecruitmentExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Recruitment record);
 
@@ -18,7 +18,7 @@ public interface RecruitmentMapper {
 
     List<Recruitment> selectByExample(RecruitmentExample example);
 
-    Recruitment selectByPrimaryKey(String id);
+    Recruitment selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Recruitment record, @Param("example") RecruitmentExample example);
 

@@ -46,10 +46,12 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Teacher selectByPrimaryKey(String id) {
+    public Teacher selectByPrimaryKey(Integer id) {
         Teacher Teacher = teacherMapper.selectByPrimaryKey(id);
         return Teacher;
     }
+
+
 
     @Override
     public int updateByExampleSelective(Teacher record, TeacherExample example) {
