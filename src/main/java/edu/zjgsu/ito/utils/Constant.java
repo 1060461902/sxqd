@@ -12,7 +12,7 @@ public class Constant {
 	 * 成功返回码
 	 */
 	public final static int OK = 200;
-	
+
 	/**
 	 * 失败返回码
 	 */
@@ -22,7 +22,20 @@ public class Constant {
 	 * 文件随机部分长度
 	 */
 	public final static int FILE_RAND_LENGTH = 4;
-	
+
+
+	/**
+	 * 1.2.3.4管理员，学生，教师，公司
+	 */
+
+	public final static Integer ADMIN =  1;
+	public final static Integer STUDENT =  2;
+	public final static Integer TEACHER =  3;
+	public final static Integer COMPANY =  4;
+
+    public final static String excel2003L =".xls";    //2003- 版本的excel
+    public final static String excel2007U =".xlsx";   //2007+ 版本的excel
+
 	/**
 	 * 登录成功
 	 */

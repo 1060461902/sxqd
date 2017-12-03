@@ -46,10 +46,12 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Company selectByPrimaryKey(String id) {
+    public Company selectByPrimaryKey(Integer id) {
         Company Company = CompanyMapper.selectByPrimaryKey(id);
         return Company;
     }
+
+
 
     @Override
     public int updateByExampleSelective(Company record, CompanyExample example) {

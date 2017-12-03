@@ -20,8 +20,9 @@ import java.util.Map;
 public class ShowCompanyController {
     //页大小
 //    public static final int pageSize=2;
-/*    @Autowired
-    CompanyService companyService;*/
+    @Autowired
+    CompanyService companyService;
+
     @Autowired
     UserService userService;
     @Autowired
@@ -30,8 +31,9 @@ public class ShowCompanyController {
     CompanyViewService companyViewService;
     @Autowired
     CompanyImageService companyImageService;
-/*    @Autowired
-    CompanyMarkService companyMarkService;*/
+    @Autowired
+    CompanyMarkService companyMarkService;
+
 
 
     @RequestMapping(value ="showCompanies",method=RequestMethod.GET)
@@ -42,6 +44,7 @@ public class ShowCompanyController {
 * 查看已在系统内注册好的企业信息
 * @author hanfeng
 **/
+
 
         Map<String, Object> result = new HashMap<String, Object>();
         CompanyViewExample CompanyViewExample=new CompanyViewExample();
@@ -81,11 +84,14 @@ public class ShowCompanyController {
     @RequestMapping(value ="showCompanyRegisterApplyList",method=RequestMethod.GET)
     public @ResponseBody    Map<String,Object> showCompanyRegisterApplyList() {
 
-/** @param
+/*
+* @param
 * 查看企业注册信息
 * @return
 * @author hanfeng
-**/
+*
+*/
+
         Map<String, Object> result = new HashMap<String, Object>();
         CompanyViewExample CompanyViewExample=new CompanyViewExample();
         CompanyViewExample CompanyExampleView;
@@ -133,7 +139,7 @@ public class ShowCompanyController {
         CompanyViewExample CompanyViewExample=new CompanyViewExample();
         CompanyViewExample CompanyExampleView;
 
-        CompanyViewExample.or().andIdEqualTo(id);
+//        CompanyViewExample.or().andIdEqualTo(id);
 
 
 

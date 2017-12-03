@@ -12,7 +12,6 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
@@ -29,15 +28,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int deleteByPrimaryKey(String id) {
+    public int deleteByPrimaryKey(Integer id) {
         return 0;
     }
 
     @Override
+    public User selectByPrimaryKey(Integer id) {
+        User user = userMapper.selectByPrimaryKey(id);
+        return user;
+    }
+
+    @Override
     public int insert(User record) {
-//        int count = userMapper.insert(record);
-//        return count;
-        return 0;
+        int count = userMapper.insert(record);
+        return count;
     }
 
     @Override
@@ -49,12 +53,6 @@ public class UserServiceImpl implements UserService {
     public List<User> selectByExample(UserExample example) {
         List<User> userList = userMapper.selectByExample(example);
         return userList;
-    }
-
-    @Override
-    public User selectByPrimaryKey(String id) {
-        User user = userMapper.selectByPrimaryKey(id);
-        return user;
     }
 
     @Override
@@ -81,4 +79,5 @@ public class UserServiceImpl implements UserService {
         status = userMapper.updateByPrimaryKey(record);
         return status;
     }
+
 }

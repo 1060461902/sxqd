@@ -4,15 +4,13 @@ import edu.zjgsu.ito.model.CompanyMark;
 import edu.zjgsu.ito.model.CompanyMarkExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface CompanyMarkMapper {
     long countByExample(CompanyMarkExample example);
 
     int deleteByExample(CompanyMarkExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(CompanyMark record);
 
@@ -20,7 +18,7 @@ public interface CompanyMarkMapper {
 
     List<CompanyMark> selectByExample(CompanyMarkExample example);
 
-    CompanyMark selectByPrimaryKey(String id);
+    CompanyMark selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") CompanyMark record, @Param("example") CompanyMarkExample example);
 

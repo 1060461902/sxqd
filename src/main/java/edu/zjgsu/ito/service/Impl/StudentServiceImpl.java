@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import edu.zjgsu.ito.dao.StudentMapper;
+
 @Service
 public class StudentServiceImpl implements StudentService {
     @Autowired
@@ -27,13 +27,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public int deleteByPrimaryKey(String id) {
-        return 0;
-    }
-
-    @Override
     public int insert(Student record) {
-        return 0;
+        int status;
+        status = studentMapper.insert(record);
+
+        return status;
     }
 
     @Override
@@ -47,10 +45,15 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student selectByPrimaryKey(String id) {
-        Student Student = studentMapper.selectByPrimaryKey(id);
+    public int deleteByPrimaryKey(Integer id) {
+        return 0;
+    }
 
-        return Student;
+    @Override
+    public Student selectByPrimaryKey(Integer id) {
+        Student student = studentMapper.selectByPrimaryKey(id);
+
+        return student;
     }
 
     @Override

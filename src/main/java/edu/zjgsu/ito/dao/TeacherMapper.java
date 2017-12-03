@@ -4,15 +4,13 @@ import edu.zjgsu.ito.model.Teacher;
 import edu.zjgsu.ito.model.TeacherExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface TeacherMapper {
     long countByExample(TeacherExample example);
 
     int deleteByExample(TeacherExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Teacher record);
 
@@ -20,7 +18,7 @@ public interface TeacherMapper {
 
     List<Teacher> selectByExample(TeacherExample example);
 
-    Teacher selectByPrimaryKey(String id);
+    Teacher selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Teacher record, @Param("example") TeacherExample example);
 

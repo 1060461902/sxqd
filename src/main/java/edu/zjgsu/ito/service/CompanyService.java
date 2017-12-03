@@ -19,7 +19,7 @@ public interface CompanyService {
 
     List<Company> selectByExample(CompanyExample example);
 
-    Company selectByPrimaryKey(String id);
+    Company selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Company record, @Param("example") CompanyExample example);
 

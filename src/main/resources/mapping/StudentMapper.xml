@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.zjgsu.ito.dao.StudentMapper">
   <resultMap id="BaseResultMap" type="edu.zjgsu.ito.model.Student">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
-    <result column="teacher_id" jdbcType="VARCHAR" property="teacherId" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="teacher_id" jdbcType="INTEGER" property="teacherId" />
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="zip_file" jdbcType="BIT" property="zipFile" />
     <result column="post" jdbcType="VARCHAR" property="post" />
@@ -14,6 +14,8 @@
     <result column="nation" jdbcType="VARCHAR" property="nation" />
     <result column="english" jdbcType="BIT" property="english" />
     <result column="graduate_year" jdbcType="TIMESTAMP" property="graduateYear" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result column="clss" jdbcType="VARCHAR" property="clss" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -75,7 +77,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, user_id, company_id, teacher_id, status, zip_file, post, delete_tag, sex, nation, 
-    english, graduate_year
+    english, graduate_year, major, clss
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.StudentExample" resultMap="BaseResultMap">
     select
@@ -99,15 +101,15 @@
       </if>
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from student
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from student
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="edu.zjgsu.ito.model.StudentExample">
     delete from student
@@ -116,20 +118,22 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.Student">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into student (user_id, company_id, teacher_id, 
       status, zip_file, post, 
       delete_tag, sex, nation, english, 
-      graduate_year)
-    values (#{userId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{teacherId,jdbcType=VARCHAR}, 
+      graduate_year, major, clss
+      )
+    values (#{userId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}, 
       #{status,jdbcType=VARCHAR}, #{zipFile,jdbcType=BIT}, #{post,jdbcType=VARCHAR}, 
       #{deleteTag,jdbcType=BIT}, #{sex,jdbcType=BIT}, #{nation,jdbcType=VARCHAR}, #{english,jdbcType=BIT}, 
-      #{graduateYear,jdbcType=TIMESTAMP})
+      #{graduateYear,jdbcType=TIMESTAMP}, #{major,jdbcType=VARCHAR}, #{clss,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.Student">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into student
@@ -167,16 +171,22 @@
       <if test="graduateYear != null">
         graduate_year,
       </if>
+      <if test="major != null">
+        major,
+      </if>
+      <if test="clss != null">
+        clss,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="companyId != null">
-        #{companyId,jdbcType=VARCHAR},
+        #{companyId,jdbcType=INTEGER},
       </if>
       <if test="teacherId != null">
-        #{teacherId,jdbcType=VARCHAR},
+        #{teacherId,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
@@ -202,6 +212,12 @@
       <if test="graduateYear != null">
         #{graduateYear,jdbcType=TIMESTAMP},
       </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="clss != null">
+        #{clss,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="edu.zjgsu.ito.model.StudentExample" resultType="java.lang.Long">
@@ -214,16 +230,16 @@
     update student
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
+        id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=VARCHAR},
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.companyId != null">
-        company_id = #{record.companyId,jdbcType=VARCHAR},
+        company_id = #{record.companyId,jdbcType=INTEGER},
       </if>
       <if test="record.teacherId != null">
-        teacher_id = #{record.teacherId,jdbcType=VARCHAR},
+        teacher_id = #{record.teacherId,jdbcType=INTEGER},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=VARCHAR},
@@ -249,6 +265,12 @@
       <if test="record.graduateYear != null">
         graduate_year = #{record.graduateYear,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.major != null">
+        major = #{record.major,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clss != null">
+        clss = #{record.clss,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -256,10 +278,10 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update student
-    set id = #{record.id,jdbcType=VARCHAR},
-      user_id = #{record.userId,jdbcType=VARCHAR},
-      company_id = #{record.companyId,jdbcType=VARCHAR},
-      teacher_id = #{record.teacherId,jdbcType=VARCHAR},
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      company_id = #{record.companyId,jdbcType=INTEGER},
+      teacher_id = #{record.teacherId,jdbcType=INTEGER},
       status = #{record.status,jdbcType=VARCHAR},
       zip_file = #{record.zipFile,jdbcType=BIT},
       post = #{record.post,jdbcType=VARCHAR},
@@ -267,7 +289,9 @@
       sex = #{record.sex,jdbcType=BIT},
       nation = #{record.nation,jdbcType=VARCHAR},
       english = #{record.english,jdbcType=BIT},
-      graduate_year = #{record.graduateYear,jdbcType=TIMESTAMP}
+      graduate_year = #{record.graduateYear,jdbcType=TIMESTAMP},
+      major = #{record.major,jdbcType=VARCHAR},
+      clss = #{record.clss,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -276,13 +300,13 @@
     update student
     <set>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
+        user_id = #{userId,jdbcType=INTEGER},
       </if>
       <if test="companyId != null">
-        company_id = #{companyId,jdbcType=VARCHAR},
+        company_id = #{companyId,jdbcType=INTEGER},
       </if>
       <if test="teacherId != null">
-        teacher_id = #{teacherId,jdbcType=VARCHAR},
+        teacher_id = #{teacherId,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=VARCHAR},
@@ -308,14 +332,20 @@
       <if test="graduateYear != null">
         graduate_year = #{graduateYear,jdbcType=TIMESTAMP},
       </if>
+      <if test="major != null">
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="clss != null">
+        clss = #{clss,jdbcType=VARCHAR},
+      </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="edu.zjgsu.ito.model.Student">
     update student
-    set user_id = #{userId,jdbcType=VARCHAR},
-      company_id = #{companyId,jdbcType=VARCHAR},
-      teacher_id = #{teacherId,jdbcType=VARCHAR},
+    set user_id = #{userId,jdbcType=INTEGER},
+      company_id = #{companyId,jdbcType=INTEGER},
+      teacher_id = #{teacherId,jdbcType=INTEGER},
       status = #{status,jdbcType=VARCHAR},
       zip_file = #{zipFile,jdbcType=BIT},
       post = #{post,jdbcType=VARCHAR},
@@ -323,7 +353,9 @@
       sex = #{sex,jdbcType=BIT},
       nation = #{nation,jdbcType=VARCHAR},
       english = #{english,jdbcType=BIT},
-      graduate_year = #{graduateYear,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=VARCHAR}
+      graduate_year = #{graduateYear,jdbcType=TIMESTAMP},
+      major = #{major,jdbcType=VARCHAR},
+      clss = #{clss,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

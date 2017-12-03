@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/*
 @Controller
 @RequestMapping(value = "admin")
 public class ShowRecruitmentController {
@@ -29,12 +30,14 @@ public class ShowRecruitmentController {
     @RequestMapping(value ="showRecruitment",method= RequestMethod.GET)
     public @ResponseBody
     Map<String,Object> showRegisterCompanies() {
+*/
 /*
 * @param
 * @return
 * 查看企业招聘岗位
 * @author hanfeng
-* */
+* *//*
+
         Map<String,Object> result = new HashMap<String, Object>();
         RecruitmentExample recruitmentExample=new RecruitmentExample();
         recruitmentExample.or().andCheckedEqualTo(true);
@@ -60,3 +63,4 @@ public class ShowRecruitmentController {
         return result;
     }
 }
+*/
