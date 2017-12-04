@@ -1,5 +1,13 @@
 $(document).ready(function(){
   var type = "企业类型";//第一次导入时默认全部企业类型
+  var info = new Object();
+  info.companyName = type;
+    $.getJSON("js/json/approval-2-companyname.json", function(data) {
+        var namelength = data.compamyNameList.length;
+        for ( var i = 0; i < namelength; i++){
+        $('select').append('<option>'+data.compamyNameList[i].companyName+'</option>');
+       }
+  });
     $.getJSON("js/json/approval-2.json", function(data) {
        var tbody = document.getElementsByTagName ('tbody')[0];
        var len = data.recruitmentApplyList.length;
@@ -22,7 +30,6 @@ $(document).ready(function(){
               td.innerHTML = obj[p];
               n++;
             }
-
             if(obj.checked!=="false"){
              nums+=1;
             }   
@@ -40,6 +47,8 @@ $(document).ready(function(){
 //筛选（需要表格重新导入）
   $("option").click(function(){
     var type = $(this).text();
+    var info = new Object();
+    info.companyName = type;
   });
 
 ////搜索企业名称（需要表格重新导入）
@@ -73,7 +82,7 @@ $('th>input:checkbox').click(function() {
     var mm=0;
     $('input:checkbox').each(function() {
         if ($(this).attr('checked') =='checked') {
-          mm++;     
+          mm++;
         }
         if(mm>0)
         {
@@ -99,62 +108,8 @@ $('th>input:checkbox').click(function() {
     info.id=id;
     info.passFlag='1';
     info.msg = null;
-    //<---------------------------------------表格重新导入
-    $.getJSON("js/json/approval-2.json", function(data) {
-      $("tbody").empty();
-      $('th>input:checkbox').attr("checked",false);
-      $("span.operations").css("display","none");
-      var tbody = document.getElementsByTagName ('tbody')[0];
-       var len = data.recruitmentApplyList.length;
-       var nums=0;
-       for ( var i = 0; i < len; i++)
-       {
-          var obj = data.recruitmentApplyList[i];
-            var tr = tbody.insertRow(tbody.rows.length);
-            var j=i+1;
-            $("tr:eq("+j+")").val(obj.id);//对当前行赋值
-            //alert($("tr").val());
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<input type="checkbox">';
-            var n=0;
-            for(var p in obj){
-              if(n==4){
-                break;
-              }
-              var td = tr.insertCell (tr.cells.length);
-              td.innerHTML = obj[p];
-              n++;
-            }
-              var td = tr.insertCell (tr.cells.length);
-              td.innerHTML = '<a href="./approval-occupation.html?id='+$("tr:eq("+j+")").val()+'">查看1</a>';
-            if(obj.checked!=="false"){
-             nums+=1;
-            }  
-         } //for
-        if(nums!==0){
-          $("span#sxfbsp").html(nums);
-         }
-         else if(nums==0)
-         {
-          $("span#sxfbsp").css("display","none");
-         }
-        $("td>input:checkbox").click(function(){
-        var mm=0;
-       $('input:checkbox').each(function() {
-        if ($(this).attr('checked') =='checked') {
-          mm++;     
-        }
-        if(mm>0)
-        {
-          $("span.operations").css("display","block");
-        }
-        else
-        {
-          $("span.operations").css("display","none");
-        }
-    });
-   });
-        });//geijson 
+    $('th>input:checkbox').attr('checked',false);
+    location.reload();
    });
       var docrTable = $('#table-2').dataTable({
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   

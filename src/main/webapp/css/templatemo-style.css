@@ -85,7 +85,7 @@ nav li {
 .width-100 { width: 100%; }
 .no-border { border: none; }
 .border-radius-10 { border-radius: 10px; }
-footer { padding: 15px; }
+footer { padding: 5px 15px; }
 
 /* 2. Left Column
 -----------------------------*/
@@ -214,6 +214,7 @@ footer { padding: 15px; }
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
+	flex-wrap: nowrap;
 }
 .col-1 {
 	-webkit-flex: 1;
@@ -399,6 +400,8 @@ input[type="radio"]:checked + label span {
 
 /* 6. Manage Users
 ------------------------------*/
+.wideone { width:66%; }
+.narrowone { width:33%; }
 .templatemo-sort-by:hover {	color: #ded9d9; }
 .templatemo-edit-btn {
 	border: 1px solid #ddd;
@@ -547,7 +550,7 @@ input[type="radio"]:checked + label span {
 }
 
 @media screen and (max-width: 1199px) {
-	.templatemo-flex-row.flex-content-row { display: block;	}
+/*	.templatemo-flex-row.flex-content-row { display: block;	}*/
     .history-data{float: left;margin-right: 30px;padding-left:10px;line-height:100% !important; width:20% !important;margin-bottom:-20px;}
     .templatemo-content-container {	padding: 10px; }
     .fa-angle-right{ display: none; }
@@ -599,6 +602,8 @@ input[type="radio"]:checked + label span {
 	.templatemo-left-nav {	display: block !important; }
 }
 @media screen and (max-width: 767px) {
+	.wideone { width : 100%; }
+    .narrowone { width : 100%; }
 	.templatemo-flex-row { display: block; }
 	.templatemo-site-header { margin: 20px 15px; }
 	.templatemo-search-form { margin: 10px; }

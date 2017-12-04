@@ -88,59 +88,8 @@ $('th>input:checkbox').click(function() {
     info.id=id;
     info.passFlag='1';
     info.msg = null;
-    //<---------------------------------------表格重新导入
-    $.getJSON("js/json/approval-3.json", function(data) {
-      $("tbody").empty();
-      $('th>input:checkbox').attr("checked",false);
-      $("span.operations").css("display","none");
-       var tbody = document.getElementsByTagName ('tbody')[0];
-       var len = data.dynamicNewApplyList.length;
-       var nums=0;
-       for ( var i = 0; i < len; i++)
-       {
-          var obj = data.dynamicNewApplyList[i];
-            var tr = tbody.insertRow(tbody.rows.length);
-            var j=i+1;
-            $("tr:eq("+j+")").val(obj.id);//对当前行赋值
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<input type="checkbox">';
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.title;
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<div class="pic-frame"><img src="'+obj.imageUrl+'" class="img-responsive"></img></div>';
-            if(obj.checked!=="false"){
-             nums+=1;
-            } 
-              m=i+1;
-              $('tr:eq('+m+') td:eq(2)').addClass('flex-center');
-              var td = tr.insertCell (tr.cells.length);
-              td.innerHTML = '<a href="./approval-news.html?id='+$("tr:eq("+j+")").val()+'">查看</a>';
-         } //for
-        if(nums!==0){
-          $("span#sydtsp").html(nums);
-         }
-         else if(nums==0)
-         {
-          $("span#sydtsp").css("display","none");
-         }
-
-        $("td>input:checkbox").click(function(){
-        var mm=0;
-       $('input:checkbox').each(function() {
-        if ($(this).attr('checked') =='checked') {
-          mm++;
-        }
-        if(mm>0)
-        {
-          $("span.operations").css("display","block");
-        }
-        else
-        {
-          $("span.operations").css("display","none");
-        }
-    });
-   });
-        });//geijson 
+    $('th>input:checkbox').attr('checked',false);
+    location.reload();
    });
       var docrTable = $('#table-3').dataTable({
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
@@ -164,7 +113,7 @@ $('th>input:checkbox').click(function() {
                         "sNext" : "下一页",
                         "sLast" : "最后一页"
                     }  
-                },                            
+                },
               });
 });//getjson
 //------------------->

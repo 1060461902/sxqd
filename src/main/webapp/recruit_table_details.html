@@ -12,88 +12,84 @@
     <link href="css/templatemo-style.css" rel="stylesheet">
     <link href="css/ownadd.css" rel="stylesheet">
     <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>      <!-- jQuery -->
-    <script src="js/myjs/occupation_table_details.js"></script> 
+    <script src="js/myjs/recruit_table_details.js"></script> 
   </head>
-  <body  class="light-gray-bg hidden-scrolling">  
+  <body  class="light-gray-bg">  
       <!-- Main content --> 
-          <div  class="templatemo-content-widget text-center white-bg fullfill" >
-            <h5 class="iframe-title"><a href="btn_table.html"> 信息列表</a> > <a href="occupation_table.html">招聘信息列表</a> >  岗位详情</h5><hr>
-            <div class="templatemo-flex-row flex-content-row"> 
-              <div class="templatemo-content-widget white-bg col-1 text-center">
+          <div  class="templatemo-content-widget text-center white-bg" >
+            <h5 class="iframe-title"><a href="btn_table.html"> 信息列表</a> > <a href="recruit_table.html">招聘信息列表</a> >  岗位详情</h5><hr>
+            <div class="templatemo-flex-row"> 
+              <div class="templatemo-content-widget white-bg text-center wideone">
                 <div class="float-left" >
                   <h3><i class="fa fa-envelope-square fa-fw  fa-2x"></i>招聘信息</h3>
                 </div><br>
                 <hr>
-                <table width="80%" class="approval-table">
+                <table width="80%" class="approval-table hightr">
                   <tr>
                     <th>招聘岗位</th>   
-                    <td>*</td>
+                    <td><span id="post"></span></td>
                   </tr>
                   <tr>
                     <th>工作地址</th>   
-                    <td><i class="fa fa-map-marker fa-fw" style="color:#01AAED"></i>*</td>
+                    <td><i class="fa fa-map-marker fa-fw" style="color:#01AAED"></i><span id="address"></span></td>
                   </tr>
                   <tr>
                     <th>招聘人数</th>   
-                    <td><i class="fa fa-user fa-fw"></i><span>*</span>人</td>
+                    <td><i class="fa fa-user fa-fw"></i><span id="totalnumber">*</span>人</td>
                   </tr>
                   <tr>
                     <th>招聘时间</th>   
-                    <td><span>*</span>~<span>*</span></span></td>
-                  </tr>
-                  <tr >
-                    <th>技能要求</th>   
-                    <td><span class="label label-default">TypeScript</span>
-                      <span class="label label-default">JavaScript</span>
-                    </td>
-                  </tr>         
+                    <td><span id="postTime"></span></td>
+                  </tr>        
                 </table>
               </div>
-              <div class="templatemo-content-widget white-bg col-1 text-center">
+              <div class="templatemo-content-widget white-bg text-center narrowone">
                 <div class="float-left">
                   <h3><i class="fa fa-file-text-o fa-fw  fa-2x"></i>公司概况</h3>
                 </div><br>
                 <hr>
-                <img src="#">(pic here)</img> 
+                <img src="#" id="company_logo"></img> 
                 <table width="80%" class="approval-table">
                   <tr>
                     <th>公司名称</th>   
-                    <td><span>*</span></td>
+                    <td><span  id="companyName"></span></td>
                   </tr>
                   <tr>
                     <th>领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域</th>   
-                    <td><span>*</span></td>
+                    <td><span id="type"></span></td>
                   </tr>
                   <tr>
                     <th>规&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;模</th>   
-                    <td><span>*</span></td>
+                    <td><span id="size">*</span></td>
                   </tr>
                   <tr>
                     <th>阶&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;段</th>   
-                    <td><span>*</span></td>
+                    <td><span id="stage">*</span></td>
                   </tr>        
                 </table> 
               </div>
             </div>
-            <div class="templatemo-flex-row flex-content-row"> 
+            <div class="templatemo-flex-row"> 
               <div class="templatemo-content-widget white-bg col-1" >
                 <div class="float-left">
                   <h3><i class="fa fa-suitcase fa-fw  fa-2x"></i>工作描述</h3>
                 </div><br><hr>
                  <div class="">
-                   *
+                   <p id="postInfo"></p>
                  </div>                 
               </div>
             </div>
-            <div class="templatemo-flex-row flex-content-row"> 
+            <div class="templatemo-flex-row"> 
               <div class="templatemo-content-widget white-bg col-1" >
                 <div class="float-left">
                   <h3><i class="fa fa-file fa-fw  fa-2x"></i>咨询板</h3>
                 </div><br><hr>
                  <div class="float-left">
-                  <div>问题一</div>
-                  <div>问题二</div>
-                 </div>                 
+                  <img src="images/timg.jpg" class="img-circle" width="100px">
+                  <div class="inline">学生姓名</div>
+                  <div  class="inline">这里是咨询的问题</div>
+                 </div>
+                 <span class="float-right">咨询时间</span>                 
               </div>
             </div>        
           </div> 

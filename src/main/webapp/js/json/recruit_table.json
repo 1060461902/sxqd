@@ -1,0 +1,50 @@
+{
+"msg": "返回公司信息成功！",
+"RecruitmentList":[
+{
+"id": "111",
+"companyName": "杭州新东方有限公司",
+"companyId" : "123",
+"address": "江干区钱江湾生活区",
+"postTime": "11.24-11.30",
+"totalNumber": 8,
+"post": "厨师",
+"forbidden": false,
+"currentNumber": 5
+},
+{
+"id": "211",
+"companyName": "天娱传媒",
+"companyId" : "321",
+"address": "3",
+"postTime": "11.12-11.18",
+"totalNumber": 4,
+"post": "码畜",
+"forbidden": true,
+"currentNumber": 1
+},
+{
+"id": "111",
+"companyName": "杭州新东方有限公司",
+"companyId" : "123",
+"address": "江干区钱江湾生活区",
+"postTime": "11.24-11.30",
+"totalNumber": 8,
+"post": "厨师",
+"forbidden": false,
+"currentNumber": 5
+},
+{
+"id": "211",
+"companyName": "天娱传媒",
+"companyId" : "321",
+"address": "3",
+"postTime": "11.12-11.18",
+"totalNumber": 4,
+"post": "码畜",
+"forbidden": true,
+"currentNumber": 1
+}
+],
+"code": 200
+}

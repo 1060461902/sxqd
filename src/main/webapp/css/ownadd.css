@@ -11,11 +11,22 @@ img{
   max-height: 500px;
   max-width: 750px;
 }
+#company_logo{
+  max-width: 120px;
+  float:left;
+  margin:  auto auto 25px 25px;
+}
 .photo-inline-block{
   display:inline-block;
   width: 30%;
   border:1px solid #DDD;
   padding: 20px;
+  height: 200px;
+}
+.photo-inline-block img{
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
 }
 .mark-content{
   display: -webkit-flex; /* Safari */
@@ -89,11 +100,19 @@ img#imageUrl{
   color: #199ED8;
 }
 span.operations{
+  color: #337AB7;
+  cursor:pointer; 
   display: none;
   float: left;
   padding-left: 44px;
   position: relative;
   top: -30px;
+}
+table.approval-table tr{
+    height: 35px;
+}
+table.hightr tr{
+    height: 55px;
 }
 .approval-table{
   line-height:200%;
@@ -104,7 +123,7 @@ span.operations{
   margin: 0px 10px;
 }
 .approval-news{
-  margin:50px 70px;
+  margin:25px 50px;
 }
 table.approval-table>tbody>tr>th{
   width: 20%;
@@ -433,18 +452,17 @@ table#teacher_details tr,table#student_details tr{
     right: 0;
     }
 .setDiv{
+  margin:25px 0px 20px 110px; 
    display: flex;
-   justify-content:center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 .setDiv>div{
   display: flex;
   justify-content:space-around;
   flex-wrap: wrap;
 }
-..setDiv>div>div{
-   display: flex;
-  justify-content:center;
+.setDiv>div>div>input{
+   width: 100px;
 }
 button#qzbtn{
   margin-left: 110px;
