@@ -1,10 +1,9 @@
 package edu.zjgsu.ito.service.Impl;
 
-import edu.zjgsu.ito.model.Student;
-import edu.zjgsu.ito.model.User;
-import edu.zjgsu.ito.model.UserExample;
+import edu.zjgsu.ito.model.*;
 import edu.zjgsu.ito.service.AdminOperateService;
 import edu.zjgsu.ito.service.StudentService;
+import edu.zjgsu.ito.service.TeacherService;
 import edu.zjgsu.ito.service.UserService;
 import edu.zjgsu.ito.utils.Constant;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -34,12 +33,16 @@ public class AdminOperateServiceImpl implements AdminOperateService {
     UserService userService;
     @Autowired
     StudentService studentService;
+    @Autowired
+    TeacherService teacherService;
 
-/*    *
-     * 描述：对表格中数值进行格式化
+
+    /**
+     * 对表中数值格式化
      * @param cell
-     * @return*/
-
+     * @return
+     * @author sawei
+     */
     @Override
     public  Object getCellValue(Cell cell){
         Object value = null;
@@ -72,8 +75,15 @@ public class AdminOperateServiceImpl implements AdminOperateService {
         return value;
     }
 
+    /**
+     *读取Excel
+     * @param is 文件流
+     * @param fileName 文件名
+     * @return
+     * @author sawei
+     */
     @Override
-    public List<List<Object>> readExcel(InputStream is, String fileName) {
+    public List<List<Object>> readExcel(InputStream is, String fileName, Integer roleId) {
         Workbook wb = null;
         Sheet sheet = null;
         Row row = null;
@@ -86,20 +96,21 @@ public class AdminOperateServiceImpl implements AdminOperateService {
         fileType = fileName.substring(fileName.lastIndexOf("."));
 //            根据类型new
         try {
-            wb = Constant.excel2003L.equals(fileType) ? new HSSFWorkbook(is) : new XSSFWorkbook(is);
+            wb = Constant.EXCEL2003L.equals(fileType) ? new HSSFWorkbook(is) : new XSSFWorkbook(is);
 
             data = new ArrayList<List<Object>>();
+
 //            遍历每一页
             for (int index = 0; index < wb.getNumberOfSheets(); index++) {
                 sheet = wb.getSheetAt(index);
+                String sheetName = sheet.getSheetName();
 
 //            遍历当前页的每一行
                 for (int i = sheet.getFirstRowNum(); i <= sheet.getLastRowNum() ; i++) {
                     row = sheet.getRow(i);
-
 //                当sheet没有数据时，row = null，报nullPointerException
-//                row.getFirstCellNum() == i:去掉第一行的记录
-                    if(row == null || row.getFirstCellNum() == i) {
+//                row.getFirstRowNum() == i:去掉第一行的记录
+                    if(row == null || i == sheet.getFirstRowNum()) {
                         continue;
                     }
 
@@ -113,6 +124,7 @@ public class AdminOperateServiceImpl implements AdminOperateService {
                     }
 //                System.out.println("");
                     data.add(record);
+
                 }//            for (int i = sheet.getFirstRowNum(); i <= sheet.getLastRowNum() ; i++) {
             }//        for (int index = 0; index < wb.getNumberOfSheets(); index++) {
 
@@ -121,56 +133,134 @@ public class AdminOperateServiceImpl implements AdminOperateService {
             e.printStackTrace();
         }
 
-
         return data;
     }
 
+    /**
+     * 添加一条user表记录，并返回最新记录的id
+     * @param user
+     * @return
+     * @author sawei
+     */
     @Override
-    public Map<String, Object> studentBatchRegister(HttpServletRequest request) {
+    public Integer userRegister(User user) {
+        int userId;
+        UserExample userExample = new UserExample();
+        userService.insert(user);
+        //                找到刚刚插入的那条记录
+        userExample.setOrderByClause("id DESC");
+        userExample.setLimit(1);
+
+        userId = userService.selectByExample(userExample).get(0).getId();
+
+        return userId;
+    }
+
+    /**
+     * 学生注册
+     * @param userName
+     * @param nickName
+     * @param major
+     * @param clss
+     * @return
+     * @author sawei
+     */
+    @Override
+    public Integer studentRegister(String userName, String nickName, String major, String clss) {
+        int status;
+        User user = new User();
+        Student student = new Student();
+
+        user.setUserName(userName);
+        user.setNickName(nickName);
+        user.setPassword(Constant.DEFAULTPWD);
+        user.setRoleId(Constant.STUDENT);
+
+        student.setUserId(userRegister(user));
+        student.setMajor(major);
+        student.setClss(clss);
+
+        status = studentService.insert(student);
+        return status;
+    }
+
+    /**
+     * 老师注册
+     * @param userName
+     * @param nickName
+     * @param major
+     * @return
+     * @author sawei
+     */
+    @Override
+    public Integer teacherRegister(String userName, String nickName, String major) {
+        int status;
+        User user = new User();
+        Teacher teacher = new Teacher();
+
+        user.setUserName(userName);
+        user.setNickName(nickName);
+        user.setPassword(Constant.DEFAULTPWD);
+        user.setRoleId(Constant.STUDENT);
+
+        teacher.setUserId(userRegister(user));
+        teacher.setMajor(major);
+
+        status = teacherService.insert(teacher);
+        return status;
+    }
+
+//    public Integer companyRegister(Company company) {
+//
+//    }
+
+
+    /**
+     * 学生或者老师批量注册
+     * @param request
+     * @param roleId 角色id
+     * @return
+     * @author sawei
+     */
+    @Override
+    public Map<String, Object> batchRegister(HttpServletRequest request, Integer roleId) {
         int status = 0;
-        User user = null;
         InputStream is = null;
-        Student student = null;
         List<Object> record = null;
         List<List<Object>> data = null;
-        UserExample userExample = new UserExample();
         Map<String, Object> result = new HashMap<String, Object>();
 
 //        接收文件
         MultipartHttpServletRequest multipartRequest = multipartRequest = (MultipartHttpServletRequest) request;
-        MultipartFile file = multipartRequest.getFile("upFile");
-
+        MultipartFile file = multipartRequest.getFile("excelFile");
 
         try {
             is = file.getInputStream();
 //            读取Excel文件
-            data = readExcel(is, file.getOriginalFilename());
+            data = readExcel(is, file.getOriginalFilename(), roleId);
             is.close();
 
             for (int i = 0; i < data.size(); i++) {
 
-                user = new User();
-                student = new Student();
-
+//                判断是学生还是教师
+                if (roleId.equals(Constant.STUDENT)) {
 //                获取一行记录
-                record = data.get(i);
-
-                user.setNickName(String.valueOf(record.get(0)));
-                user.setUserName(String.valueOf(record.get(1)));
-                user.setRoleId(Constant.STUDENT);
-
-                userService.insert(user);
-
-//                找到刚刚插入的那条记录
-                userExample.setOrderByClause("id DESC");
-                userExample.setLimit(1);
-                student.setUserId(userService.selectByExample(userExample).get(0).getId());
-                student.setMajor(String.valueOf(record.get(2)));
-                student.setClss(String.valueOf(record.get(3)));
-                status = studentService.insert(student);
-
-
-            }
+                    record = data.get(i);
+//                    学生注册
+                    status = studentRegister(String.valueOf(record.get(1)), String.valueOf(record.get(0)),
+                            String.valueOf(record.get(2)), String.valueOf(record.get(3)));
+                } else if (roleId.equals(Constant.TEACHER)) {
+//                获取一行记录
+                    record = data.get(i);
+//                    老师注册
+                    status = teacherRegister(String.valueOf(record.get(0)), String.valueOf(record.get(1)),
+                            String.valueOf(record.get(2)));
+                } else {
+                    result.put("code", Constant.FAIL);
+                    result.put("msg", "roleId错误");
+                    return result;
+                }
+            }//            for (int i = 0; i < data.size(); i++) {
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -189,11 +279,4 @@ public class AdminOperateServiceImpl implements AdminOperateService {
         return result;
     }
 
-
-    @Override
-    public Map<String, Object> teacherBatchRegister(String filePath) {
-        Map<String, Object> result = new HashMap<String, Object>();
-
-        return result;
-    }
 }

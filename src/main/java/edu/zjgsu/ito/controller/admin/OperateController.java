@@ -4,6 +4,7 @@ import edu.zjgsu.ito.model.*;
 import edu.zjgsu.ito.service.*;
 import edu.zjgsu.ito.utils.Constant;
 import edu.zjgsu.ito.utils.Md5Util;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,6 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "admin")
 public class OperateController {
-    public static final String defaultPwd = "123456";
 
     @Autowired
     StudentService studentService;
@@ -29,11 +29,65 @@ public class OperateController {
     @Autowired
     AdminOperateService adminOperateService;
 
-    @RequestMapping(value = "uploadStudentExcel", method = {RequestMethod.GET, RequestMethod.POST})
-    public @ResponseBody Map<String, Object> uploadStudentExcel(HttpServletRequest request, HttpServletResponse response) {
-        return adminOperateService.studentBatchRegister(request);
+    /**
+     * 上传Excel，批量注册学生和老师
+     * @param request
+     * @param roleId
+     * @return
+     * @author sawei
+     */
+    @RequestMapping(value = "uploadExcel", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody Map<String, Object> uploadExcel(HttpServletRequest request, @RequestParam("roleId") Integer roleId) {
+        return adminOperateService.batchRegister(request, roleId);
     }
 
+    /**
+     *学生注册
+     * @param temp
+     * @return
+     * @author sawei
+     */
+    @RequestMapping(value = "studentRegister", method = RequestMethod.POST )
+    public @ResponseBody Map<String, Object> studentRegister(@RequestBody StudentRegisterView temp) {
+        int status;
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        status = adminOperateService.studentRegister(temp.getUserName(), temp.getNickName(), temp.getMajor(), temp.getClss());
+
+        if (status > 0) {
+            result.put("code", Constant.OK);
+            result.put("msg", "学生注册成功");
+        } else {
+            result.put("code", Constant.FAIL);
+            result.put("msg", "学生注册失败");
+        }
+
+        return result;
+    }
+
+    /**
+     * 老师注册
+     * @param temp
+     * @return
+     * @author sawei
+     */
+    @RequestMapping(value = "teacherRegister", method = RequestMethod.POST )
+    public @ResponseBody Map<String, Object> teacherRegister(@RequestBody TeacherRegisterView temp) {
+        int status;
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        status = adminOperateService.teacherRegister(temp.getUserName(), temp.getNickName(), temp.getMajor());
+
+        if (status > 0) {
+            result.put("code", Constant.OK);
+            result.put("msg", "教师注册成功！");
+        } else {
+            result.put("code", Constant.FAIL);
+            result.put("msg", "教师注册失败！");
+        }
+
+        return result;
+    }
 
     @RequestMapping(value = "allocateStu2Teacher", method = RequestMethod.GET)
     public @ResponseBody Map<String, Object> allocateStu2Teacher(@RequestParam(value = "studentIdList") List<Integer> StudentIdList,
@@ -84,7 +138,13 @@ public class OperateController {
     }
 
 
-
+    /**
+     * 管理员重新设置密码
+     * @param roleId
+     * @param id
+     * @return
+     * @author sawei
+     */
     @RequestMapping(value = "resetPwd", method = RequestMethod.GET)
     public @ResponseBody Map<String, Object> resetPwd(@RequestParam("roleId") Integer roleId,
                                                       @RequestParam("id") Integer id) {
@@ -93,7 +153,7 @@ public class OperateController {
         String md5Password;
         Map<String, Object> result = new HashMap<String, Object>();
 
-        md5Password = Md5Util.getMD5(defaultPwd);
+        md5Password = Md5Util.getMD5(Constant.DEFAULTPWD);
 
         userId = commonService.role2user(roleId, id);
 

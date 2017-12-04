@@ -1,5 +1,8 @@
 package edu.zjgsu.ito.service;
 
+import edu.zjgsu.ito.model.Student;
+import edu.zjgsu.ito.model.Teacher;
+import edu.zjgsu.ito.model.User;
 import org.apache.poi.ss.usermodel.Cell;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,11 +12,15 @@ import java.util.Map;
 
 public interface AdminOperateService {
 
-    Map<String, Object> studentBatchRegister(HttpServletRequest request);
-    Map<String, Object> teacherBatchRegister(String filePath);
+    Map<String, Object> batchRegister(HttpServletRequest request, Integer roleId);
 
-    List<List<Object>> readExcel(InputStream is, String fileName);
+    List<List<Object>> readExcel(InputStream is, String fileName, Integer roleId);
 
     Object getCellValue(Cell cell);
 
+    Integer userRegister(User user);
+
+    Integer teacherRegister(String userName, String nickName, String major);
+
+    Integer studentRegister(String userName, String nickName, String major, String clss);
 }

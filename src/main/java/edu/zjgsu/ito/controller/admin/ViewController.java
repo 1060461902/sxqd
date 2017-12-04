@@ -83,7 +83,7 @@ public class ViewController {
             FrontTeacherTemp.setId(teacher.getUserId());
             FrontTeacherTemp.setNickName(user.getNickName());
             FrontTeacherTemp.setUserName(user.getUserName());
-            FrontTeacherTemp.setStatus(teacher.getStatus());
+
             FrontTeacherTemp.setPhone(user.getPhone());
             FrontTeacherTemp.setForbidden(user.getForbidden());
 

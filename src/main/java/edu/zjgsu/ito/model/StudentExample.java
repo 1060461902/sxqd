@@ -815,63 +815,63 @@ public class StudentExample {
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearIsNull() {
-            addCriterion("graduate_year is null");
+        public Criteria andGradeIsNull() {
+            addCriterion("grade is null");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearIsNotNull() {
-            addCriterion("graduate_year is not null");
+        public Criteria andGradeIsNotNull() {
+            addCriterion("grade is not null");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearEqualTo(Date value) {
-            addCriterion("graduate_year =", value, "graduateYear");
+        public Criteria andGradeEqualTo(Date value) {
+            addCriterion("grade =", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearNotEqualTo(Date value) {
-            addCriterion("graduate_year <>", value, "graduateYear");
+        public Criteria andGradeNotEqualTo(Date value) {
+            addCriterion("grade <>", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearGreaterThan(Date value) {
-            addCriterion("graduate_year >", value, "graduateYear");
+        public Criteria andGradeGreaterThan(Date value) {
+            addCriterion("grade >", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearGreaterThanOrEqualTo(Date value) {
-            addCriterion("graduate_year >=", value, "graduateYear");
+        public Criteria andGradeGreaterThanOrEqualTo(Date value) {
+            addCriterion("grade >=", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearLessThan(Date value) {
-            addCriterion("graduate_year <", value, "graduateYear");
+        public Criteria andGradeLessThan(Date value) {
+            addCriterion("grade <", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearLessThanOrEqualTo(Date value) {
-            addCriterion("graduate_year <=", value, "graduateYear");
+        public Criteria andGradeLessThanOrEqualTo(Date value) {
+            addCriterion("grade <=", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearIn(List<Date> values) {
-            addCriterion("graduate_year in", values, "graduateYear");
+        public Criteria andGradeIn(List<Date> values) {
+            addCriterion("grade in", values, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearNotIn(List<Date> values) {
-            addCriterion("graduate_year not in", values, "graduateYear");
+        public Criteria andGradeNotIn(List<Date> values) {
+            addCriterion("grade not in", values, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearBetween(Date value1, Date value2) {
-            addCriterion("graduate_year between", value1, value2, "graduateYear");
+        public Criteria andGradeBetween(Date value1, Date value2) {
+            addCriterion("grade between", value1, value2, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearNotBetween(Date value1, Date value2) {
-            addCriterion("graduate_year not between", value1, value2, "graduateYear");
+        public Criteria andGradeNotBetween(Date value1, Date value2) {
+            addCriterion("grade not between", value1, value2, "grade");
             return (Criteria) this;
         }
 

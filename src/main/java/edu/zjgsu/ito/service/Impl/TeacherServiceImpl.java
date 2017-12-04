@@ -31,7 +31,9 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public int insert(Teacher record) {
-        return 0;
+        int status;
+        status = teacherMapper.insert(record);
+        return status;
     }
 
     @Override
