@@ -24,20 +24,20 @@
               <li class="active">
                 <a href="#qyzc" >老师信息</a>
               </li>
-              <li><a href="teacher_table_students.html">指导学生</a></li>              
+              <li><a href="teacher_table_students.html" id="stu">指导学生</a></li>              
             </ul><br>
             <div id="myTabContent" class="tab-content">             
               <div class="panel panel-default">
                 <ul class="list-group" id="xsjl">
                   <li class="list-group-item">
                     <h3>基本信息</h3>
-                    <img src="images/u520.png" class="img-circle" id="identification-photo">
+                    <img src="#" class="img-circle" id="identification-photo">
                     <div class="basic-info">
                       <div class="edit"><a href="#" data-toggle="modal" data-target="#teacher_Modal"><i class="fa fa-pencil fa-fw"></i>编辑</a></div>
-                      <h5>（姓名）</h5>
-                      <span>（财务工号）</span> | <span>（男）</span> | <span>（汉族）</span> <br>
-                      手机号码 ：<span>*</span><br>
-                      邮箱 ： <span>*</span><br>
+                      <h5 id="nickName"></h5>
+                      <span id="userName"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="sex"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="rank"></span><br>
+                      手机号码 ：<span id="phone"></span><br>
+                      邮箱 ： <span id="email"></span><br>
                     </div>
                   </li>
                 </ul>
@@ -54,11 +54,11 @@
               <table class="text-center" width="80%" id="teacher_details">
                 <tr>
                   <th>姓名</th>
-                  <td colspan="2" width="60%">(谢波)</td>
+                  <td colspan="2" width="60%" id="nickName"></td>
                 </tr>
                 <tr>
                   <th>财务工号</th>
-                  <td colspan="2">(财务工号)</td>
+                  <td colspan="2" id="userName">(财务工号)</td>
                 </tr>
                <tr>
                   <th rowspan="2">性别</td>
@@ -80,21 +80,21 @@
                   <th>专业</th>
                   <td colspan="2">
                     <select>
-                      <option value="">软件工程</option>
+                      
                     </select>
                   </td>
                 </tr>
                 <tr>
                   <th>职称</th>
-                  <td colspan="2"><input  placeholder="请输入职称"></td>
+                  <td colspan="2"><input  placeholder="请输入职称" id="rank"></td>
                 </tr>
                 <tr>
                   <th>手机号码</th>
-                  <td colspan="2"><input  placeholder="请输入手机号"></td>
+                  <td colspan="2"><input  placeholder="请输入手机号" id="phone"></td>
                 </tr>
                 <tr>
                   <th>邮箱</th>
-                  <td colspan="2"><input  placeholder="请输入常用邮箱"></td>
+                  <td colspan="2"><input  placeholder="请输入常用邮箱" id="email"></td>
                 </tr>
               </table>
             </div>

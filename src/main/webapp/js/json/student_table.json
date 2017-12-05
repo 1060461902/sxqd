@@ -1,44 +1,37 @@
 {
-	"students": [
-            {
-				"id": "85679",
-				"nickname": "wIHKZr6Otb",
-				"username": "jDETsGXjKu",
-				"status": "qb3BStyWqO",
-				"companyname": "wXvM6LMyZc",
-				"teacher": "hE2j5FN19r",
-			    "companynames": "wXvM6LMyZc",
-				"forbidden": "1"
-			},
-            {
-				"id": "85679",
-				"nickname": "wIHKZr6Otb",
-				"username": "jDETsGXjKu",
-				"status": "qb3BStyWqO",
-				"companyname": "wXvM6LMyZc",
-				"teacher": "hE2j5FN19r",
-			    "companynames": "wXvM6LMyZc",
-				"forbidden": "1"
-			},
-            {
-				"id": "85679",
-				"nickname": "wIHKZr6Otb",
-				"username": "jDETsGXjKu",
-				"status": "qb3BStyWqO",
-				"companyname": "wXvM6LMyZc",
-				"teacher": "hE2j5FN19r",
-			    "companynames": "wXvM6LMyZc",
-				"forbidden": "0"
-			},
-            {
-				"id": "85679",
-				"nickname": "wIHKZr6Otb",
-				"username": "jDETsGXjKu",
-				"status": "qb3BStyWqO",
-				"companyname": "wXvM6LMyZc",
-				"teacher": "hE2j5FN19r",
-			    "companynames": "wXvM6LMyZc",
-				"forbidden": "1"
-			}
+	"studentList": [
+		{
+			"id": "94557",
+			"nickName": "jHwhMRO3oy",
+			"userName": "FVj45NHiS9",
+			"status": "LWq3XaSckD",
+			"companyName": "kcuZVXle8S",
+			"teacherName": "tsQQdcz61W",
+			"forbidden": "1u3VyibtpJ",
+			"major": "cPb5jLSoLf",
+			"class": "WjtWXwMM6i"
+		},
+		{
+			"id": "95434",
+			"nickName": "pD3q0X9i0Y",
+			"userName": "cawzd6IAhP",
+			"status": "8ilIAHfYuu",
+			"companyName": "MFlrVqbAY9",
+			"teacherName": "45erl8MZJc",
+			"forbidden": "pkzfSsHOFH",
+			"major": "qiyIHHwRaj",
+			"class": "BR4d0sM5Ku"
+		},
+		{
+			"id": "96003",
+			"nickName": "9B4eC8paqe",
+			"userName": "zYoo4XsC68",
+			"status": "wcXWdqyB4X",
+			"companyName": "3tw5GvvU8T",
+			"teacherName": "sE8vYYxes4",
+			"forbidden": "IDw3aoiNhJ",
+			"major": "86oeDE7971",
+			"class": "4cAeKEBCJf"
+		}
 	]
 }

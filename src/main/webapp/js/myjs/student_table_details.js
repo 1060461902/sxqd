@@ -1,4 +1,5 @@
 $(document).ready(function(){  
+	//alert(window.location.href);
 $("button#male").click(function(){
   $("button#male").css("background-color","#09C");
     $("button#female").css("background-color","#FFF");

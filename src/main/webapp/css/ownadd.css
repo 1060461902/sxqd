@@ -1,11 +1,21 @@
 setDiv-1.86945{
   background-color: red;
 }
+.dataTables_filter{
+
+  margin-top: -20px;
+}
 .hidden-scrolling{
   overflow:hidden;
 }
 .hidden{
   display: none;
+}
+.pointer{
+  cursor:pointer; 
+}
+.modal-footer {
+    text-align: center !important;
 }
 img{
   max-height: 500px;
@@ -98,6 +108,10 @@ img#imageUrl{
 }
 #companyName{
   color: #199ED8;
+}
+.showlist{
+  cursor:pointer; 
+  color: #337ab7;
 }
 span.operations{
   color: #337AB7;

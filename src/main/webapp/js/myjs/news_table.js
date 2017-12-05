@@ -71,6 +71,8 @@ $('th>input:checkbox').click(function() {
     });
     var info = new Object();
     info.id=id;
+    info.operationType ="3";
+    info.roleId = "6";
     alert("删除成功");
     $('th>input:checkbox').attr('checked',false);
     location.reload();

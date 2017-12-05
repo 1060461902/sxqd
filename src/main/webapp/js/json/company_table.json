@@ -1,0 +1,22 @@
+{
+"msg": "返回公司信息成功！",
+"code": 200,
+"compamyViewList":[
+{
+"id": 3,
+"companyName": "陈氏豆腐乳",
+"nowIntership": 0,
+"allIntership": 0,
+"studentNumber": 0,
+"contact": "陈琳睿"
+},
+{
+"id": 2,
+"companyName": "陈氏臭豆腐",
+"nowIntership": 0,
+"allIntership": 0,
+"studentNumber": 0,
+"contact": "陈琳睿"
+}
+]
+}

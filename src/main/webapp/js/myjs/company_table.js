@@ -1,37 +1,58 @@
 $(document).ready(function(){
-    $.getJSON("js/json/recruit_table.json", function(data) {
+  var type = '实习学生人数';
+    $.getJSON("js/json/company_table.json", function(data) {
        var tbody = document.getElementsByTagName ('tbody')[0];
-       var len = data.RecruitmentList.length;
+       var len = data.compamyViewList.length;
        for ( var i = 0; i < len; i++)
       {
-          var obj = data.RecruitmentList[i];
+          var obj = data.compamyViewList[i];
             var tr = tbody.insertRow(tbody.rows.length);
             var j=i+1;
             $("tr:eq("+j+")").val(obj.id);//对当前行赋值
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = '<input type="checkbox">';
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<a href="recruit_table_details.html?id='+obj.id+'">'+obj.post;+'</a>';
+            td.innerHTML = '<a href="company_table_details.html?id='+obj.id+'">'+obj.companyName;+'</a>';
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<a href="company_table_details.html?id='+obj.companyId+'">'+obj.companyName+'</a>'
+            td.innerHTML = '<a href="company_table_jobs.html?id='+obj.id+'">'+obj.nowIntership+'/'+obj.allIntership+'</a>';
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<a href="#">'+obj.totalNumber+'/'+obj.currentNumber+'<i class="fa fa-sort-desc fa-fw"></i></a>';
+            td.innerHTML = '<a href="company_table_students.html?id='+obj.id+'">'+obj.studentNumber+'</a><i class="showlist fa fa-fw fa-sort-desc"></i>';
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.postTime;
+            td.innerHTML = obj.contact;
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.address;
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML='<a href="#" title="禁用/解禁" class="forbidden" id="'+obj.id+'" value='+obj.forbidden+'><i class="fa fa-ban fa-2x"></i>';
+            td.innerHTML='<a href="#" title="重置密码" class="reset"  id="'+obj.id+'"><i class="fa fa-repeat fa-2x"></i></a>&nbsp;&nbsp;<a href="#" title="禁用/解禁" class="forbidden" id="'+obj.id+'" value='+obj.forbidden+'><i class="fa fa-ban fa-2x"></i>';
             if(obj.forbidden==true){
               $('tr:eq('+j+') td:eq(6) a').css("color","red");
             }
       } //for
+//-------------下拉---------
+              $('.showlist').click(function(){
+                if($(this).parent("td").children("i").attr("class")=="showlist fa fa-fw fa-sort-desc"){
+                  $(this).parent("td").parent("tr").css("height","500px");
+                  $(this).parent("td").children("i").removeClass("fa-sort-desc");
+                  $(this).parent("td").children("i").addClass("fa-sort-up");
+                  }
+                else if($(this).parent("td").children("i").attr("class")=="showlist fa fa-fw fa-sort-up"){
+                  $(this).parent("td").parent("tr").css("height","44px");
+                  $(this).parent("td").children("i").removeClass("fa-sort-up");
+                  $(this).parent("td").children("i").addClass("fa-sort-desc");
+                  }
+
+              });
+//-------------重置密码------
+$('.reset').click(function(){
+   var info = new Object();
+   info.id = $(this).attr("id");//alert(info.id);
+   info.operationType ="1";
+   info.roleId = "4";
+   alert('重置成功');
+});
 // -------------禁用--------------
 $('.forbidden').click(function(){
 // alert($(this).attr("id")+'+'+$(this).attr("value"));
  var info = new Object();
  info.id = $(this).attr("id");
- info.roleId = "5";
+ info.roleId = "4";
  if($(this).attr("value")=='true'){
    var r=confirm("是否解禁该用户");
       if (r==true)
@@ -46,7 +67,7 @@ $('.forbidden').click(function(){
        var r=confirm("是否禁用该用户");
       if (r==true)
       { 
-        info.operationType ="4";
+        info.operationType ="2";
         alert("禁用成功");
         $(this).css("color","red");
         $(this).attr("value",'true');
@@ -57,7 +78,7 @@ $('.forbidden').click(function(){
 var m=0;
 $('th>input:checkbox').click(function() {
       m+=1;
-      if(m%2==1){     
+      if(m%2==1){            
         $('input:checkbox').each(function() {
         $(this).attr('checked', true);
         $("span.operations").css("display","block");
@@ -77,6 +98,7 @@ $('th>input:checkbox').click(function() {
         if ($(this).attr('checked') =='checked') {
           mm++;
         }
+    });
         if(mm>0)
         {
           $("span.operations").css("display","block");
@@ -85,7 +107,7 @@ $('th>input:checkbox').click(function() {
         {
           $("span.operations").css("display","none");
         }
-    });
+
    });
 //-----------点击删除（需要表格重新导入）-----------------
   $("span.operations").click(function(){
@@ -105,7 +127,7 @@ $('th>input:checkbox').click(function() {
    // alert(info.id);
     //<---------------------------------------表格重新导入
    });
-      var docrTable = $('#table-2').dataTable({
+      var docrTable = $('#table-3').dataTable({
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
                 "bFilter" : true, //是否启动过滤、搜索功能
                 "info": false,

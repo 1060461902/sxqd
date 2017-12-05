@@ -15,6 +15,7 @@ $(document).ready(function(){
    //  });
 	 $.getJSON("js/json/approval_company.json", function(data) {
 	 	window.comid =  data.compamyViewList[0].id;
+    $('a#jobs').attr("href",'company_table_jobs.html?id='+comid);
         var obj = data.compamyViewList[0];
         $("span#name").text(obj.companyName);
         $("span#network").text(obj.network);
