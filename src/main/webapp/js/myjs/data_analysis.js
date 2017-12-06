@@ -4,14 +4,14 @@ $(document).ready(function(){
     };
     $.getJSON("js/json/data_analysis.json", function(data) {
          var obj = data.DataList;
-         $("b#a").text(obj.a);
-         $("b#b").text(obj.b);
+         $("span#a").text(obj.a);
+         $("span#b").text(obj.b);
          $("h1#total-num").text(obj.c);
-         $("b#d").text(obj.d);
-         $("b#e").text(obj.e);
-         $("b#f").text(obj.f);
-         $("b#g").text(obj.g);
-         $("b#h").text(obj.h);
+         $("span#d").text(obj.d);
+         $("span#e").text(obj.e);
+         $("span#f").text(obj.f);
+         $("span#g").text(obj.g);
+         $("span#h").text(obj.h);
     });
           // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('all'));

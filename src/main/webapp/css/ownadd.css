@@ -1,9 +1,30 @@
-setDiv-1.86945{
+opsetDiv-1.86945{
   background-color: red;
 }
 .dataTables_filter{
-
   margin-top: -20px;
+}
+.data_analysis{
+  color:#6c6c6c;
+  font-weight: 600;
+}
+.data_analysis i{
+  color: #3399FF;
+}
+#a,#b,#c,#d,#e,#f,#g,#h{
+font-family: 'Comic Sans MS Normal', 'Comic Sans MS';
+font-weight: 400;
+font-style: normal;
+font-size: 28px;
+color: #3399FF;
+line-height: 2.5em;
+}
+#total-num{
+    font-family: 'Comic Sans MS Normal', 'Comic Sans MS';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 36px;
+    color: #3399FF;
 }
 .hidden-scrolling{
   overflow:hidden;
@@ -113,14 +134,12 @@ img#imageUrl{
   cursor:pointer; 
   color: #337ab7;
 }
-span.operations{
-  color: #337AB7;
-  cursor:pointer; 
+button.operations{
   display: none;
   float: left;
-  padding-left: 44px;
+  margin-left: 31.5px;
   position: relative;
-  top: -30px;
+  top: -29px;
 }
 table.approval-table tr{
     height: 35px;
@@ -141,9 +160,6 @@ table.hightr tr{
 }
 table.approval-table>tbody>tr>th{
   width: 20%;
-}
-table.approval-table>tbody>tr>td{
-  text-align: left
 }
 .index-title{
     color: #7F7F7F;

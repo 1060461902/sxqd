@@ -146,13 +146,13 @@ $('th>input:checkbox').click(function() {
       if(m%2==1){            
         $('input:checkbox').each(function() {
         $(this).attr('checked', true);
-        $("span.operations").css("display","block");
+        $(".operations").css("display","block");
        });
       }
       else if(m%2==0){
         $('input:checkbox').each(function () {
         $(this).attr('checked',false);
-        $("span.operations").css("display","none");
+        $(".operations").css("display","none");
 });
       }
 });
@@ -166,15 +166,15 @@ $('th>input:checkbox').click(function() {
     });
         if(mm>0)
         {
-          $("span.operations").css("display","block");
+          $(".operations").css("display","block");
         }
         else
         {
-          $("span.operations").css("display","none");
+          $(".operations").css("display","none");
         }
    });
 //-----------点击删除（需要表格重新导入）-----------------
-  $("span.operations").click(function(){
+  $(".operations").click(function(){
     var id = new Array();
     var a=0;
     $('td>input:checkbox').each(function() {

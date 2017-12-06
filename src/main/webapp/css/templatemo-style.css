@@ -25,7 +25,7 @@ h1, h2, h3 { margin: 0; }
 h2 { font-size: 1.6em; }
 h3 {
 	color: #7f7f7f;
-	font-size: 1.4em;
+	font-size: 1.3em;
 }
 h4{
 	color: #7f7f7f;
@@ -171,6 +171,7 @@ footer { padding: 5px 15px; }
 	border-left: 8px solid white;/*#13895F;*/
 }
 .templatemo-left-nav a {
+	word-spacing:3px;
 	color: #e9e9ea;
 	display: block;
 	padding: 30px;
