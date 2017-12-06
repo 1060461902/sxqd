@@ -22,8 +22,8 @@ $(document).ready(function(){
             } 
             var m=i+1;
               $('tr:eq('+m+') td:eq(2)').addClass('flex-center');
-              var td = tr.insertCell (tr.cells.length);
-              td.innerHTML = '<a href="./approval-news.html?id='+$("tr:eq("+j+")").val()+'">查看</a>';
+              // var td = tr.insertCell (tr.cells.length);
+              // td.innerHTML = '<a href="./approval-news.html?id='+$("tr:eq("+j+")").val()+'">查看</a>';
          } //for
          //未读消息
          if(nums!==0){

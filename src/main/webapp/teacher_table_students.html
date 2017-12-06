@@ -23,7 +23,7 @@
         <a href="teacher_table.html">老师列表</a> > 指导学生列表</h5><hr>
         <div>
           <form role="form" class="form-inline">
-            <div class="form-group float-right">
+            <div class="form-group float-left">
               <select class="form-control">
                 <option>全部</option>
                 <option>计算机与科学</option>
@@ -44,17 +44,12 @@
                 <option>已结业</option>
                 <option>申请中</option>
               </select>
-            </div>
-            <input type="text" class="form-control float-left search" id="name" placeholder="请输入搜索内容">
-            <button type="submit" class="btn btn-default float-left search"><i class="fa fa-search"></i></button>            
+            </div>            
           </form>
         </div>
-      <table class="table table-striped">
+      <table class="table table-striped" id="table">
         <thead>
           <tr>
-            <th>
-              <input type="checkbox" >
-            </th> 
             <th>学生姓名</th>
             <th>学号</th>
             <th>专业</th>
