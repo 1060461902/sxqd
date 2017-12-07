@@ -36,13 +36,6 @@ $(document).ready(function(){
               // td.innerHTML = '<a href="./approval-occupation.html?id='+$("tr:eq("+j+")").val()+'">'++'</a>';
          } //for
          //未读消息
-         if(nums!==0){
-          $("span#sxfbsp").html(nums);
-         }
-         else if(nums==0)
-         {
-          $("span#sxfbsp").css("display","none");
-         }
 //筛选（需要表格重新导入）
   $("option").click(function(){
     var type = $(this).text();

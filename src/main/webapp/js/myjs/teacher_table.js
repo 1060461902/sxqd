@@ -1,5 +1,6 @@
 $(document).ready(function(){
-  var major = '全部';
+  var info = new Object();
+  info.major = null;
   $.getJSON("js/json/teacher_table_name.json", function(data) {
         var namelength = data.majorNameList.length;
         for ( var i = 0; i < namelength; i++){

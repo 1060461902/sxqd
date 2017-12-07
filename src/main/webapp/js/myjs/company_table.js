@@ -1,5 +1,6 @@
 $(document).ready(function(){
-  var type = '实习学生人数';
+  var info =new Object();
+  info.type = '实习学生人数';
     $.getJSON("js/json/company_table.json", function(data) {
        var tbody = document.getElementsByTagName ('tbody')[0];
        var len = data.compamyViewList.length;
@@ -22,7 +23,7 @@ $(document).ready(function(){
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML='<a href="#" title="重置密码" class="reset"  id="'+obj.id+'"><i class="fa fa-repeat fa-2x"></i></a>&nbsp;&nbsp;<a href="#" title="禁用/解禁" class="forbidden" id="'+obj.id+'" value='+obj.forbidden+'><i class="fa fa-ban fa-2x"></i>';
             if(obj.forbidden==true){
-              $('tr:eq('+j+') td:eq(6) a').css("color","red");
+              $('tr:eq('+j+') td:eq(5) a.forbidden').css("color","red");
             }
       } //for
 //-------------下拉---------

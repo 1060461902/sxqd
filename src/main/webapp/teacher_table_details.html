@@ -19,7 +19,7 @@
   <body  class="light-gray-bg">  
       <!-- Main content --> 
           <div  class="templatemo-content-widget text-center white-bg height-660" >
-            <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  <a href="teacher_table.html">老师列表</a> > 老师简历</h5><hr>
+            <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  <a href="teacher_table.html">老师列表</a> > 老师简历</h5><br><hr>
             <ul class="nav nav-tabs" id="studentTab">
               <li class="active">
                 <a href="#qyzc" >老师信息</a>
@@ -30,14 +30,14 @@
               <div class="panel panel-default">
                 <ul class="list-group" id="xsjl">
                   <li class="list-group-item">
-                    <h3>基本信息</h3>
+                    <h2>基本信息</h2>
                     <img src="#" class="img-circle" id="identification-photo">
                     <div class="basic-info">
                       <div class="edit"><a href="#" data-toggle="modal" data-target="#teacher_Modal"><i class="fa fa-pencil fa-fw"></i>编辑</a></div>
-                      <h5 id="nickName"></h5>
-                      <span id="userName"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="sex"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="rank"></span><br>
+                      <h4 id="nickName"></h4>
+                      <h3><span id="userName"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="sex"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="rank"></span><br>
                       手机号码 ：<span id="phone"></span><br>
-                      邮箱 ： <span id="email"></span><br>
+                      邮箱 ： <span id="email"></span><br></h3>
                     </div>
                   </li>
                 </ul>
@@ -79,8 +79,7 @@
                 <tr>
                   <th>专业</th>
                   <td colspan="2">
-                    <select>
-                      
+                    <select id="major">                      
                     </select>
                   </td>
                 </tr>
@@ -100,7 +99,7 @@
             </div>
             <div class="modal-footer text-center">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">确认</button>
+                <button type="button" class="btn btn-primary" id="edit">确认</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->

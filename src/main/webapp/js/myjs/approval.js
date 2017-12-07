@@ -30,14 +30,6 @@ $(document).ready(function(){
               // // alert($("tr:eq("+j+")").val());
               // td.innerHTML = '<a href="./approval_company.html?id='+$("tr:eq("+j+")").val()+'">'+obj.companyName+'</a>';
          } //for
-         //未读消息
-         if(nums!==0){
-          $("span#qysp").html(nums);
-         }
-         else if(nums==0)
-         {
-          $("span#qysp").css("display","none");
-         }
 //筛选（需要表格重新导入）
   $("option").click(function(){
     var type = $(this).text();

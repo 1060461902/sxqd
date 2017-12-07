@@ -12,7 +12,7 @@ $(document).ready(function(){
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = '<input type="checkbox">';
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.title;
+            td.innerHTML = '<a href="approval-news.html?id="+'+obj.id+'>'+obj.title+'</a>';
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = '<div class="pic-frame"><img src="'+obj.imageUrl+'" class="img-responsive"></img></div>';
             var td = tr.insertCell (tr.cells.length);
@@ -25,14 +25,6 @@ $(document).ready(function(){
               // var td = tr.insertCell (tr.cells.length);
               // td.innerHTML = '<a href="./approval-news.html?id='+$("tr:eq("+j+")").val()+'">查看</a>';
          } //for
-         //未读消息
-         if(nums!==0){
-          $("span#sydtsp").html(nums);
-         }
-         else if(nums==0)
-         {
-          $("span#sydtsp").css("display","none");
-         }
 // //搜索企业名称（需要表格重新导入）
 //   $("button").click(function(){
 //     var type = $("input").val();

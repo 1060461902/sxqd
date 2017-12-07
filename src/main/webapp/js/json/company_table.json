@@ -8,7 +8,8 @@
 "nowIntership": 0,
 "allIntership": 0,
 "studentNumber": 0,
-"contact": "陈琳睿"
+"contact": "陈琳睿",
+"forbidden" : true
 },
 {
 "id": 2,
@@ -16,7 +17,8 @@
 "nowIntership": 0,
 "allIntership": 0,
 "studentNumber": 0,
-"contact": "陈琳睿"
+"contact": "陈琳睿",
+"forbidden" : false
 }
 ]
 }

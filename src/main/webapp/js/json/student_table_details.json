@@ -1,0 +1,61 @@
+{
+	"studentResume": {
+		"projectName": "智能客服saas系统",
+		"pRole": "产品经理",
+		"pInstruction": "优秀",
+		"pStartTime": "2017.06",
+		"pEndTime": "2017.08",
+		"clubName": "浙商大信息学院学生组织联席会",
+		"cRole": "权益部部长",
+		"cInstruction": "这是工作说明",
+		"cStartTime": "2016.09",
+		"cEndTime": "2017.06",
+		"honorName": "学习突出单项奖学金",
+		"hInstruction": "15-16学年",
+		"time": "1512614952923",
+		"skill": [
+        {
+      "id": "2",
+      "company_Id": "2",
+      "skill": "钢琴"
+    },
+          {
+      "id": "2",
+      "company_Id": "2",
+      "skill": "h5"
+    },
+          {
+      "id": "2",
+      "company_Id": "2",
+      "skill": "css3"
+    },
+          {
+      "id": "2",
+      "company_Id": "2",
+      "skill": "jquery"
+    },
+      {
+      "id": "2",
+      "company_Id": "2",
+      "skill": "bootstrap"
+    },
+        {
+      "id": "2",
+      "company_Id": "2",
+      "skill": "echarts"
+    }
+  ],
+		"english": "詹韩峰",
+		"basicInfo": {
+			"id": "94222",
+			"userName": "ioeZUbrzzL",
+			"sex": false,
+			"nation": "汉族",
+			"birthDate": "1512615320752",
+			"phone": "0pUZjtAfYV",
+			"email": "ZPw7vFkkI@lm2oW.ixt",
+			"nickName": "陈琳睿",
+			"imageUrl": "images/u520.png"
+		}
+	}
+}

@@ -5,7 +5,8 @@
 * @Last Modified time: 2017-12-04 19:51:28
 */
 $(document).ready(function(){
-	var id =window.location.href;
+	  var info =new Object();
+  info.id = window.location.href;
     $.getJSON("js/json/company_table_jobs.json", function(data) {
        var tbody = document.getElementsByTagName ('tbody')[0];
        var len = data.recruitmentList.length;

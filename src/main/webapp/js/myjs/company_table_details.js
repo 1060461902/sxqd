@@ -1,4 +1,6 @@
 $(document).ready(function(){
+  var info =new Object();
+  info.id = window.location.href;
 	 // $.ajax({
    //     type: 'get',
    //     url: '/fieldManagement/admin/showCompanyDeails',
@@ -22,8 +24,8 @@ $(document).ready(function(){
         $("span#type").text(obj.type);
         $("span#stage").text(obj.stage);
         $("span#size").text(obj.size);
-        $("p#intruction").text(obj.intruction);
-        $("p#address").text(obj.address);
+        $("h3#intruction").text(obj.intruction);
+        $("h3#address").text(obj.address);
         $('div.profile-photo-container>img:eq(0)').attr("src",obj.licence);
         $('div.profile-photo-container>img:eq(1)').attr("src",obj.tax_registration);
         $('div.profile-photo-container>img:eq(2)').attr("src",obj.organization_code);

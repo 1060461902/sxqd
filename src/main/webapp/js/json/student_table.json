@@ -1,37 +1,40 @@
 {
 	"studentList": [
 		{
-			"id": "94557",
-			"nickName": "jHwhMRO3oy",
-			"userName": "FVj45NHiS9",
-			"status": "LWq3XaSckD",
-			"companyName": "kcuZVXle8S",
-			"teacherName": "tsQQdcz61W",
-			"forbidden": "1u3VyibtpJ",
-			"major": "cPb5jLSoLf",
-			"class": "WjtWXwMM6i"
+			"id": "98768",
+			"nickName": "SrQCOM2H0d",
+			"userName": "陈泽潇",
+			"status": "实习中",
+			"companyName": "阿里",
+			"teacherName": "谢波",
+			"teacherId": "123",
+			"forbidden": true,
+			"major": "软件工程",
+			"clss": "软件1501"
 		},
 		{
-			"id": "95434",
-			"nickName": "pD3q0X9i0Y",
-			"userName": "cawzd6IAhP",
-			"status": "8ilIAHfYuu",
-			"companyName": "MFlrVqbAY9",
-			"teacherName": "45erl8MZJc",
-			"forbidden": "pkzfSsHOFH",
-			"major": "qiyIHHwRaj",
-			"class": "BR4d0sM5Ku"
+			"id": "99172",
+			"nickName": "IFZqo9j3oT",
+			"userName": "Cg46rPMuSO",
+			"status": "gJI2KVPP76",
+			"companyName": "QgW9GB4gI4",
+			"teacherName": "W1c6GWGwKT",
+			"teacherId": "323",
+			"forbidden": true,
+			"major": "83XR3rX9MF",
+			"clss": "PXVQcikZsj"
 		},
 		{
-			"id": "96003",
-			"nickName": "9B4eC8paqe",
-			"userName": "zYoo4XsC68",
-			"status": "wcXWdqyB4X",
-			"companyName": "3tw5GvvU8T",
-			"teacherName": "sE8vYYxes4",
-			"forbidden": "IDw3aoiNhJ",
-			"major": "86oeDE7971",
-			"class": "4cAeKEBCJf"
+			"id": "99717",
+			"nickName": "fSTc3vigjT",
+			"userName": "v3noU1f9NF",
+			"status": "hEWsqSDfrV",
+			"companyName": "G6b76LbIeF",
+			"teacherName": "jcSkXCn4SP",
+			"teacherId": "223",
+			"forbidden": false,
+			"major": "zBdRvIU2A5",
+			"clss": "nzCLx7uXKg"
 		}
 	]
 }

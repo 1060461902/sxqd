@@ -16,7 +16,7 @@ TABLE OF CONTENT
 /* 1. Universal Styles
 ----------------------------------------------*/
 * {	font-family: 'Open Sans', sans-serif; }
-body {	font-size: 13px;}
+body { font-size: 15px;color: #4f4f4f;}
 html, body {
     height: 100%;
 }
@@ -25,11 +25,15 @@ h1, h2, h3 { margin: 0; }
 h2 { font-size: 1.6em; }
 h3 {
 	color: #7f7f7f;
-	font-size: 1.3em;
+	font-size: 1.15em;
+	line-height:150%;	
 }
 h4{
-	color: #7f7f7f;
+	color: #5b5b5b;
 	line-height:150%;	
+}
+h5{
+	line-height:200%;	
 }
 ul {
 	list-style-type: none;
@@ -90,7 +94,7 @@ footer { padding: 5px 15px; }
 /* 2. Left Column
 -----------------------------*/
 .templatemo-blank { height: 103.283px; background-color: #4896E0;}
-.templatemo-sidebar { width: 190px; background-color: #425FAF;}/*#1f2124*/
+.templatemo-sidebar { width: 200px; background-color: #425FAF;}/*#1f2124*/
 .square {
 	width: 25px;
 	height: 25px;
@@ -551,6 +555,7 @@ input[type="radio"]:checked + label span {
 }
 
 @media screen and (max-width: 1199px) {
+	body { font-size: 13px;}
 /*	.templatemo-flex-row.flex-content-row { display: block;	}*/
     .history-data{float: left;margin-right: 30px;padding-left:10px;line-height:100% !important; width:20% !important;margin-bottom:-20px;}
     .templatemo-content-container {	padding: 10px; }

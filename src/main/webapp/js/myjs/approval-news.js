@@ -1,5 +1,6 @@
-$(document).ready(function(){ 
-	var id = window.location.href;
+$(document).ready(function(){
+  var info =new Object();
+	info.id = window.location.href;
   //alert(id);
 	  // $.ajax({
    //     type: 'get',

@@ -59,12 +59,12 @@ img{
   max-width: 100%;
   max-height: 100%;
 }
-.mark-content{
+.mark-content,.skill-content{
   display: -webkit-flex; /* Safari */
   display: flex;
   flex-wrap:wrap;
 }
-span#mark{
+span#mark,span#skill{
   margin:20px;
   padding: 8px 20px;
   font-size: 1.1em; 
@@ -142,13 +142,13 @@ button.operations{
   top: -29px;
 }
 table.approval-table tr{
-    height: 35px;
+    height: 30px;
 }
 table.hightr tr{
-    height: 55px;
+    height: 58px !important;
 }
 .approval-table{
-  line-height:200%;
+  line-height:180%;
   text-align: center;
 }
 .approval-button{
@@ -325,9 +325,13 @@ margin: 30px;
   margin-top: -80px;
   width: 100px;
 }
+#identification-photo-2{
+  margin-top: -30px;
+  width: 100px;
+}
 .basic-info{
   display:inline-block;
-  padding: 60px 80px;
+  padding: 40px 80px;
 }
 .nav-stacked{
   width:100px;
@@ -351,7 +355,6 @@ margin: 30px;
   -moz-border-radius: 50%;
   border-radius: 50%; 
   border: 0;
-  width: 140px;
   height: 140px; 
   background-color: #e2e2e2;
 }
@@ -415,9 +418,12 @@ ul#studentTab li{
   width: 14%;
 
 }
-ul#xsjl li{
+ul#xsjl>li.list-group-item{
+  padding-left: 75px;
   text-align: left;
-   line-height: 2.5;
+}
+ul#xsjl>li.list-group-item>h4{
+  padding-left: 2px;
 }
 table#sxxj {
   width: 100%;
