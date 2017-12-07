@@ -5,12 +5,12 @@ $(document).ready(function(){
 	info.id = studentid;
 	//ajax
 	$.getJSON("js/json/student_table_details.json", function(data) {
-		var obj =data.studentResume;
-		$('h4#nickName').text(obj.basicInfo.nickName);
-		$('table#student_details tr:eq(0) td').text(obj.basicInfo.nickName);
-		$('span#userName').text(obj.basicInfo.userName);
-		$('table#student_details tr:eq(1) td').text(obj.basicInfo.userName);
-		if(obj.basicInfo.sex==false||obj.basicInfo.sex==0||obj.basicInfo.sex=='0'){
+		var obj =data.student;
+		$('h4#nickName').text(obj.nickname);
+		$('table#student_details tr:eq(0) td').text(obj.nickname);
+		$('span#userName').text(obj.username);
+		$('table#student_details tr:eq(1) td').text(obj.username);
+		if(obj.sex==false||obj.sex==0||obj.sex=='0'){
 		$('span#sex').text('男');
 		$("button#male").css("background-color","#09C");
 		window.sex =false;	
@@ -20,37 +20,58 @@ $(document).ready(function(){
 	    $("button#male").css("background-color","pink");
 	    window.sex =true;
 	    }	
-		$('span#nation').text(obj.basicInfo.nation);
-		$('span#birthDate').text(obj.basicInfo.birthDate);
-		$('table#student_details tr:eq(5) input').val(obj.basicInfo.birthDate);
-		$('span#phone').text(obj.basicInfo.phone);
-		$('table#student_details tr:eq(6) input').val(obj.basicInfo.phone);
-		$('span#email').text(obj.basicInfo.email);
-		$('table#student_details tr:eq(7) input').val(obj.basicInfo.email);
-		$('img').attr('src',obj.basicInfo.imageUrl);
+		$('span#nation').text(obj.national);
+		$('span#birthDate').text(obj.birthdate);
+		$('table#student_details tr:eq(5) input').val(obj.birthdate);
+		$('span#phone').text(obj.phone);
+		$('table#student_details tr:eq(6) input').val(obj.phone);
+		$('span#email').text(obj.email);
+		$('table#student_details tr:eq(7) input').val(obj.email);
+		$('img').attr('src',obj.photo);
+		//英语水平
+        $('h4#english').text(obj.english);	
 		//项目经历
-		$('li.list-group-item span.time:eq(0)').text(obj.pStartTime+'------'+obj.pEndTime);
-		$('h4#projectName').text(obj.projectName);
-		$('h4#pRole').text(obj.pRole);
-		$('h4#pInstruction').text(obj.pInstruction);
+		var obj2 = data.ProjectList;
+		var length2 = obj2.length;
+		for(var n=0;n<length2;n++)
+		{
+	   $('li.list-group-item:eq(1)').append('<div><span class="time float-right"></span><br><h4 id="projectName"></h4><h4 id="identity"></h4><h4 id="instruction"></h4></div><br>');
+		// $('li.list-group-item span.time:eq(0)').text(obj.pStartTime+'------'+obj.pEndTime);
+		$('li.list-group-item:eq(1) div:eq('+n+') h4#projectName').text(obj2[n].Project.projectName);
+		$('li.list-group-item:eq(1) div:eq('+n+') h4#identity').text(obj2[n].Project.identity);
+		$('li.list-group-item:eq(1) div:eq('+n+') h4#instruction').text(obj2[n].Project.instruction);
+		$('li.list-group-item:eq(1) div:eq('+n+') span.time').text(obj2[n].Project.startTime+'------'+obj2[n].Project.endTime);
+	    }
 		//所获荣誉
-		$('li.list-group-item span.time:eq(1)').text(obj.time);
-	    $('h4#honorName').text(obj.honorName);
-		$('h4#hInstruction').text(obj.hInstruction);
+		var obj3 = data.HonorList;
+		var length3 = obj3.length;
+		for(var n=0;n<length3;n++)
+		{
+	   $('li.list-group-item:eq(2)').append('<div><span class="time float-right"></span><h4 id="honorName"></h4><h4 id="instruction"></h4></div><br>');
+		// $('li.list-group-item span.time:eq(0)').text(obj.pStartTime+'------'+obj.pEndTime);
+		$('li.list-group-item:eq(2) div:eq('+n+') h4#honorName').text(obj3[n].Honor.honorName);
+		$('li.list-group-item:eq(2) div:eq('+n+') h4#instruction').text(obj3[n].Honor.instruction);
+		$('li.list-group-item:eq(2) div:eq('+n+') span.time').text(obj3[n].Honor.time);
+	    }
 		//社团经历
-		$('li.list-group-item span.time:eq(2)').text(obj.cStartTime+'------'+obj.cEndTime);
-		$('h4#clubName').text(obj.clubName);
-		$('h4#cRole').text(obj.cRole);
-		$('h4#cInstruction').text(obj.cInstruction);
+        var obj4 = data.ClubList;
+		var length4 = obj4.length;
+		for(var n=0;n<length4;n++)
+		{
+	   $('li.list-group-item:eq(3)').append('<div><span class="time float-right"></span><h4 id="clubName"></h4><h4 id="indentity"></h4><h4 id="instruction"></h4></div><br>');
+		// $('li.list-group-item span.time:eq(0)').text(obj.pStartTime+'------'+obj.pEndTime);
+		$('li.list-group-item:eq(3) div:eq('+n+') h4#clubName').text(obj4[n].Club.clubName);
+		$('li.list-group-item:eq(3) div:eq('+n+') h4#indentity').text(obj4[n].Club.indentity);
+		$('li.list-group-item:eq(3) div:eq('+n+') h4#instruction').text(obj4[n].Club.instruction);
+		$('li.list-group-item:eq(3) div:eq('+n+') span.time').text(obj4[n].Club.startTime+'------'+obj4[n].Club.endTime);
+	    }
 		//标签
-		var skill =obj.skill;
-        var skilllength = obj.skill.length;
+		var skill =data.skill;
+        var skilllength = data.skill.length;
         for(var n=0;n<skilllength;n++)
         {
-          $('div.skill-content').append('<span class="label label-primary" id="skill">'+skill[n].skill+'</span>');
+          $('div.skill-content').append('<span class="label label-primary" id="skill">'+skill[n]+'</span>');
         };
-        //英语水平
-        $('h4#english').text(obj.english);	
 	});
 //-------------编辑--------------
 $('button#edit').click(function(){

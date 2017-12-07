@@ -1,61 +1,82 @@
-{
-	"studentResume": {
-		"projectName": "智能客服saas系统",
-		"pRole": "产品经理",
-		"pInstruction": "优秀",
-		"pStartTime": "2017.06",
-		"pEndTime": "2017.08",
-		"clubName": "浙商大信息学院学生组织联席会",
-		"cRole": "权益部部长",
-		"cInstruction": "这是工作说明",
-		"cStartTime": "2016.09",
-		"cEndTime": "2017.06",
-		"honorName": "学习突出单项奖学金",
-		"hInstruction": "15-16学年",
-		"time": "1512614952923",
-		"skill": [
-        {
-      "id": "2",
-      "company_Id": "2",
-      "skill": "钢琴"
-    },
-          {
-      "id": "2",
-      "company_Id": "2",
-      "skill": "h5"
-    },
-          {
-      "id": "2",
-      "company_Id": "2",
-      "skill": "css3"
-    },
-          {
-      "id": "2",
-      "company_Id": "2",
-      "skill": "jquery"
-    },
-      {
-      "id": "2",
-      "company_Id": "2",
-      "skill": "bootstrap"
-    },
-        {
-      "id": "2",
-      "company_Id": "2",
-      "skill": "echarts"
-    }
+  {
+  "student":{
+  "id": 1,
+  "userId": 2,
+  "companyId": 1,
+  "teacherId": 2,
+  "status": "2",
+  "zipFile": false,
+  "photo" : "images/ali.jpg",
+  "post": "UI设计师",
+  "deleteTag": true,
+  "sex": false,
+  "nation": null,
+  "english": "low",
+  "grade": "2017",
+  "major": "软件",
+  "clss": "软件1501",
+  "forbidden": null,  
+  "phone": "13587797198",
+  "nickname": "詹韩峰",
+  "username": "1511050124",
+  "email" : "836613736@qq.com",
+  "national" : "汉族",
+  "birthdate": "1997年5月"
+  },
+    "skill": [
+      "java",
+      "b-box",
+      "node.js"
+    ],
+  "ProjectList":[
+  { 
+  "Project":{
+  "id": 1,
+  "projectName": "大嘘声实习管理服务平台",
+  "identity": "后台",
+  "startTime": 1513581377000,
+  "endTime": 1518506181000, 
+  "instruction": "每天起床敲代码",
+  "studentId": 1,
+  "deleteTag": true}
+  }
   ],
-		"english": "詹韩峰",
-		"basicInfo": {
-			"id": "94222",
-			"userName": "ioeZUbrzzL",
-			"sex": false,
-			"nation": "汉族",
-			"birthDate": "1512615320752",
-			"phone": "0pUZjtAfYV",
-			"email": "ZPw7vFkkI@lm2oW.ixt",
-			"nickName": "陈琳睿",
-			"imageUrl": "images/u520.png"
-		}
-	}
+  
+  "HonorList":[
+  {
+  "Honor":{
+  "id": 1,
+  "studentId": 1,
+  "time": 1510557339000,
+  "instruction": "加油",
+  "honorName": "软件外包服务竞赛",
+  "deleteTag": true
+  }
+  }
+  ],
+  "ClubList":[
+  {
+  "Club":{
+  "id": 1,
+  "clubName": "青年志愿者",
+  "indentity": "副部长",
+  "startTime": 1512371668000,
+  "endTime": 1513062873000,
+  "instruction": "很辛苦",
+  "studentId": 1,
+  "delectTag": true}
+  },
+  {
+  "Club":{
+  "id": 2,
+  "clubName": "学生会",
+  "indentity": "干事长",
+  "startTime": 1512458115000,
+  "endTime": 1513754112000,
+  "instruction": "哈哈哈",
+  "studentId": 1,
+  "delectTag": true
+  }
+  }
+  ]
 }

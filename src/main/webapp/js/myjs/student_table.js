@@ -34,7 +34,7 @@ $(document).ready(function(){
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = obj.status;
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<a href="teacher_table_details.html?id='+obj.teacherId+'">'+obj.nickName+'</a>';
+            td.innerHTML = '<a href="teacher_table_details.html?id='+obj.teacherId+'">'+obj.teacherName+'</a>';
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML='<a href="#" title="重置密码" class="reset"  id="'+obj.id+'"><i class="fa fa-repeat fa-2x"></i></a>&nbsp;&nbsp;<a href="#" title="禁用/解禁" class="forbidden" id="'+obj.id+'" value='+obj.forbidden+'><i class="fa fa-ban fa-2x"></i></a>';
             if(obj.forbidden==true){
