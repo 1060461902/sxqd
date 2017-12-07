@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import edu.zjgsu.ito.model.*;
 import edu.zjgsu.ito.service.*;
 import edu.zjgsu.ito.utils.Constant;
+import edu.zjgsu.ito.vo.CompanyVo;
 import edu.zjgsu.ito.vo.FrontDynadic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.sun.tools.doclint.Entity.and;
 
 
 @Controller
@@ -35,9 +38,13 @@ public class ShowCompanyController {
     CompanyMarkService companyMarkService;
     @Autowired
     DynamicApproveService dynamicApproveService;
+    @Autowired
+    RecruitmentService recruitmentService;
 
     @RequestMapping(value ="showCompanies",method=RequestMethod.GET)
-    public @ResponseBody Map<String,Object> showCompanies(@RequestParam("name") String name) {
+    public @ResponseBody Map<String,Object> showCompanies(
+            /*@RequestParam("size") String size*/
+    ) {
 
 /*
 * @param
@@ -45,32 +52,51 @@ public class ShowCompanyController {
 * 查看已在系统内注册好的企业信息
 * @author hanfeng
 * */
-        try {
-            name= new String(name .getBytes("iso8859-1"),"utf-8");
+        /*try {
+            size= new String(size .getBytes("iso8859-1"),"utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
+*/
         Map<String, Object> result = new HashMap<String, Object>();
         CompanyViewExample CompanyViewExample=new CompanyViewExample();
 
-        if(name.equals("企业名称")){
+      /*  if(size.equals("企业名称")){*/
             CompanyViewExample.or().andPassEqualTo(true);
 
-        }else {
-            CompanyViewExample.or().andPassEqualTo(true).andCompanyNameEqualTo(name);
-        }
+       /* }else {
+            CompanyViewExample.or().andPassEqualTo(true).andCompanyNameEqualTo(size);
+        }*/
 
         List<CompanyView> companyViews=companyViewService.selectByExample(CompanyViewExample);
+        CompanyVo companyVo;
+        List<CompanyVo> companyVoList=new ArrayList<>();
 
         if(companyViews == null){
             result.put("code", Constant.FAIL);
             result.put("msg", "无法从Company表里查到记录！");
             return result;
         }
+        System.out.println(companyViews);
         for(CompanyView companyView:companyViews){
             User user = userService.selectByPrimaryKey(companyView.getUserId());
-            companyView.setPassword(null);
+            companyVo =new CompanyVo();
+            companyVo.setContact(user.getNickName());
+            companyVo.setCompanyName(companyView.getCompanyName());
+            companyVo.setId(companyView.getId());
+
+            RecruitmentExample recruitmentExample=new RecruitmentExample();
+            recruitmentExample.or().andCompanyIdEqualTo(companyView.getId()).andForbiddenEqualTo(false);
+            companyVo.setNowIntership(recruitmentService.countByExample(recruitmentExample));
+
+            RecruitmentExample irecruitmentExample=new RecruitmentExample();
+            irecruitmentExample.or().andCompanyIdEqualTo(companyView.getId());
+            companyVo.setAllIntership(recruitmentService.countByExample(irecruitmentExample));
+
+            StudentExample studentExample=new StudentExample();
+            studentExample.or().andCompanyIdEqualTo(companyView.getId());
+            companyVo.setStudentNumber(studentService.countByExample(studentExample));
+            companyVoList.add(companyVo);
             if (user == null) {
                 result.put("code", Constant.FAIL);
                 result.put("msg", "无法找到Company表userID=" + companyView.getUserId() + "对应的user！");
@@ -81,7 +107,7 @@ public class ShowCompanyController {
         }
         result.put("code", Constant.OK);
         result.put("msg", "返回公司信息成功！");
-        result.put("compamyViewList",companyViews);
+        result.put("compamyViewList",companyVoList);
         return result;
     }
 
@@ -242,7 +268,6 @@ public class ShowCompanyController {
             return result;
         }else {
             for (DynamicApprove dynamicApprove : dynamicApproves) {
-
                 User user = userService.selectByPrimaryKey(dynamicApprove.getCompanyId());
                 if (user == null) {
                     result.put("code", Constant.FAIL);
@@ -301,8 +326,8 @@ public class ShowCompanyController {
             JSONObject obj = new JSONObject();
             obj.put("companyName",company.getCompanyName());
             objects.add(obj);
-            result.put("obj",obj);
         }
+        result.put("Names",objects);
 
         return result;
     }

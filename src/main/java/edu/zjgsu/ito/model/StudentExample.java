@@ -1,7 +1,6 @@
 package edu.zjgsu.ito.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class StudentExample {
@@ -815,63 +814,73 @@ public class StudentExample {
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearIsNull() {
-            addCriterion("graduate_year is null");
+        public Criteria andGradeIsNull() {
+            addCriterion("grade is null");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearIsNotNull() {
-            addCriterion("graduate_year is not null");
+        public Criteria andGradeIsNotNull() {
+            addCriterion("grade is not null");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearEqualTo(Date value) {
-            addCriterion("graduate_year =", value, "graduateYear");
+        public Criteria andGradeEqualTo(String value) {
+            addCriterion("grade =", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearNotEqualTo(Date value) {
-            addCriterion("graduate_year <>", value, "graduateYear");
+        public Criteria andGradeNotEqualTo(String value) {
+            addCriterion("grade <>", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearGreaterThan(Date value) {
-            addCriterion("graduate_year >", value, "graduateYear");
+        public Criteria andGradeGreaterThan(String value) {
+            addCriterion("grade >", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearGreaterThanOrEqualTo(Date value) {
-            addCriterion("graduate_year >=", value, "graduateYear");
+        public Criteria andGradeGreaterThanOrEqualTo(String value) {
+            addCriterion("grade >=", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearLessThan(Date value) {
-            addCriterion("graduate_year <", value, "graduateYear");
+        public Criteria andGradeLessThan(String value) {
+            addCriterion("grade <", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearLessThanOrEqualTo(Date value) {
-            addCriterion("graduate_year <=", value, "graduateYear");
+        public Criteria andGradeLessThanOrEqualTo(String value) {
+            addCriterion("grade <=", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearIn(List<Date> values) {
-            addCriterion("graduate_year in", values, "graduateYear");
+        public Criteria andGradeLike(String value) {
+            addCriterion("grade like", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearNotIn(List<Date> values) {
-            addCriterion("graduate_year not in", values, "graduateYear");
+        public Criteria andGradeNotLike(String value) {
+            addCriterion("grade not like", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearBetween(Date value1, Date value2) {
-            addCriterion("graduate_year between", value1, value2, "graduateYear");
+        public Criteria andGradeIn(List<String> values) {
+            addCriterion("grade in", values, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andGraduateYearNotBetween(Date value1, Date value2) {
-            addCriterion("graduate_year not between", value1, value2, "graduateYear");
+        public Criteria andGradeNotIn(List<String> values) {
+            addCriterion("grade not in", values, "grade");
+            return (Criteria) this;
+        }
+
+        public Criteria andGradeBetween(String value1, String value2) {
+            addCriterion("grade between", value1, value2, "grade");
+            return (Criteria) this;
+        }
+
+        public Criteria andGradeNotBetween(String value1, String value2) {
+            addCriterion("grade not between", value1, value2, "grade");
             return (Criteria) this;
         }
 
@@ -1012,6 +1021,76 @@ public class StudentExample {
 
         public Criteria andClssNotBetween(String value1, String value2) {
             addCriterion("clss not between", value1, value2, "clss");
+            return (Criteria) this;
+        }
+
+        public Criteria andHaveteacherIsNull() {
+            addCriterion("haveteacher is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHaveteacherIsNotNull() {
+            addCriterion("haveteacher is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHaveteacherEqualTo(String value) {
+            addCriterion("haveteacher =", value, "haveteacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andHaveteacherNotEqualTo(String value) {
+            addCriterion("haveteacher <>", value, "haveteacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andHaveteacherGreaterThan(String value) {
+            addCriterion("haveteacher >", value, "haveteacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andHaveteacherGreaterThanOrEqualTo(String value) {
+            addCriterion("haveteacher >=", value, "haveteacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andHaveteacherLessThan(String value) {
+            addCriterion("haveteacher <", value, "haveteacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andHaveteacherLessThanOrEqualTo(String value) {
+            addCriterion("haveteacher <=", value, "haveteacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andHaveteacherLike(String value) {
+            addCriterion("haveteacher like", value, "haveteacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andHaveteacherNotLike(String value) {
+            addCriterion("haveteacher not like", value, "haveteacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andHaveteacherIn(List<String> values) {
+            addCriterion("haveteacher in", values, "haveteacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andHaveteacherNotIn(List<String> values) {
+            addCriterion("haveteacher not in", values, "haveteacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andHaveteacherBetween(String value1, String value2) {
+            addCriterion("haveteacher between", value1, value2, "haveteacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andHaveteacherNotBetween(String value1, String value2) {
+            addCriterion("haveteacher not between", value1, value2, "haveteacher");
             return (Criteria) this;
         }
     }

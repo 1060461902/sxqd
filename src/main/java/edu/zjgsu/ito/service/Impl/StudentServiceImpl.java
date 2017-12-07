@@ -17,8 +17,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
 
     public long countByExample(StudentExample example) {
+        long count;
+        count=studentMapper.countByExample(example);
+        return count;
 
-        return 0;
     }
 
     @Override
@@ -43,7 +45,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> selectByExample(StudentExample example) {
-        return null;
+        List<Student> students=studentMapper.selectByExample(example);
+        return students;
     }
 
     @Override
@@ -74,4 +77,5 @@ public class StudentServiceImpl implements StudentService {
         status = studentMapper.updateByPrimaryKey(record);
         return status;
     }
+
 }

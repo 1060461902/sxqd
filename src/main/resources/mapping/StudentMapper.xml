@@ -13,9 +13,10 @@
     <result column="sex" jdbcType="BIT" property="sex" />
     <result column="nation" jdbcType="VARCHAR" property="nation" />
     <result column="english" jdbcType="BIT" property="english" />
-    <result column="graduate_year" jdbcType="TIMESTAMP" property="graduateYear" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
     <result column="major" jdbcType="VARCHAR" property="major" />
     <result column="clss" jdbcType="VARCHAR" property="clss" />
+    <result column="haveteacher" jdbcType="VARCHAR" property="haveteacher" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -77,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, user_id, company_id, teacher_id, status, zip_file, post, delete_tag, sex, nation, 
-    english, graduate_year, major, clss
+    english, grade, major, clss, haveteacher
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.StudentExample" resultMap="BaseResultMap">
     select
@@ -124,13 +125,13 @@
     insert into student (user_id, company_id, teacher_id, 
       status, zip_file, post, 
       delete_tag, sex, nation, english, 
-      graduate_year, major, clss
-      )
+      grade, major, clss, 
+      haveteacher)
     values (#{userId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}, 
       #{status,jdbcType=VARCHAR}, #{zipFile,jdbcType=BIT}, #{post,jdbcType=VARCHAR}, 
       #{deleteTag,jdbcType=BIT}, #{sex,jdbcType=BIT}, #{nation,jdbcType=VARCHAR}, #{english,jdbcType=BIT}, 
-      #{graduateYear,jdbcType=TIMESTAMP}, #{major,jdbcType=VARCHAR}, #{clss,jdbcType=VARCHAR}
-      )
+      #{grade,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{clss,jdbcType=VARCHAR}, 
+      #{haveteacher,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.Student">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -168,14 +169,17 @@
       <if test="english != null">
         english,
       </if>
-      <if test="graduateYear != null">
-        graduate_year,
+      <if test="grade != null">
+        grade,
       </if>
       <if test="major != null">
         major,
       </if>
       <if test="clss != null">
         clss,
+      </if>
+      <if test="haveteacher != null">
+        haveteacher,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -209,14 +213,17 @@
       <if test="english != null">
         #{english,jdbcType=BIT},
       </if>
-      <if test="graduateYear != null">
-        #{graduateYear,jdbcType=TIMESTAMP},
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
       </if>
       <if test="major != null">
         #{major,jdbcType=VARCHAR},
       </if>
       <if test="clss != null">
         #{clss,jdbcType=VARCHAR},
+      </if>
+      <if test="haveteacher != null">
+        #{haveteacher,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -262,14 +269,17 @@
       <if test="record.english != null">
         english = #{record.english,jdbcType=BIT},
       </if>
-      <if test="record.graduateYear != null">
-        graduate_year = #{record.graduateYear,jdbcType=TIMESTAMP},
+      <if test="record.grade != null">
+        grade = #{record.grade,jdbcType=VARCHAR},
       </if>
       <if test="record.major != null">
         major = #{record.major,jdbcType=VARCHAR},
       </if>
       <if test="record.clss != null">
         clss = #{record.clss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.haveteacher != null">
+        haveteacher = #{record.haveteacher,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -289,9 +299,10 @@
       sex = #{record.sex,jdbcType=BIT},
       nation = #{record.nation,jdbcType=VARCHAR},
       english = #{record.english,jdbcType=BIT},
-      graduate_year = #{record.graduateYear,jdbcType=TIMESTAMP},
+      grade = #{record.grade,jdbcType=VARCHAR},
       major = #{record.major,jdbcType=VARCHAR},
-      clss = #{record.clss,jdbcType=VARCHAR}
+      clss = #{record.clss,jdbcType=VARCHAR},
+      haveteacher = #{record.haveteacher,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -329,14 +340,17 @@
       <if test="english != null">
         english = #{english,jdbcType=BIT},
       </if>
-      <if test="graduateYear != null">
-        graduate_year = #{graduateYear,jdbcType=TIMESTAMP},
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
       </if>
       <if test="major != null">
         major = #{major,jdbcType=VARCHAR},
       </if>
       <if test="clss != null">
         clss = #{clss,jdbcType=VARCHAR},
+      </if>
+      <if test="haveteacher != null">
+        haveteacher = #{haveteacher,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -353,9 +367,10 @@
       sex = #{sex,jdbcType=BIT},
       nation = #{nation,jdbcType=VARCHAR},
       english = #{english,jdbcType=BIT},
-      graduate_year = #{graduateYear,jdbcType=TIMESTAMP},
+      grade = #{grade,jdbcType=VARCHAR},
       major = #{major,jdbcType=VARCHAR},
-      clss = #{clss,jdbcType=VARCHAR}
+      clss = #{clss,jdbcType=VARCHAR},
+      haveteacher = #{haveteacher,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

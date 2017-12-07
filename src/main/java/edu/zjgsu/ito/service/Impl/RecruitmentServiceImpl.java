@@ -42,7 +42,8 @@ public class RecruitmentServiceImpl implements RecruitmentService {
 
     @Override
     public Recruitment selectByPrimaryKey(Integer id) {
-        return null;
+        Recruitment recruitment=recruitmentMapper.selectByPrimaryKey(id);
+        return recruitment;
     }
 
 
@@ -70,11 +71,18 @@ public class RecruitmentServiceImpl implements RecruitmentService {
 
     @Override
     public int updateByPrimaryKey(Recruitment record) {
-        return 0;
+        int status;
+
+        status = recruitmentMapper.updateByPrimaryKey(record);
+
+        return status;
     }
 
     @Override
     public long countByExample(RecruitmentExample example) {
-        return 0;
+        long count;
+        count = recruitmentMapper.countByExample(example);
+
+        return count;
     }
 }

@@ -188,14 +188,19 @@ public class OperateCompanyController {
                 result.put("msg", "未查到id=" + id + "的记录！");
                 return result;
             }
-            if (showStatus.equals(false)) {
+            if (showStatus.equals(0)) {
                 dynamicApproveOne.setShowStatus(false);
-            } else {
-                dynamicApproveOne.setShowStatus(true);
                 Date date=new Date();
                 DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String time=format.format(date);
-                //dynamicApproveOne.setstartTime(time);
+                dynamicApproveOne.setEndTime(time);
+            } else {
+                dynamicApproveOne.setShowStatus(true);
+
+                Date date=new Date();
+                DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String time=format.format(date);
+                dynamicApproveOne.setStartTime(time);
             }
 
 //        更新数据库记录
