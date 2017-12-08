@@ -13,6 +13,12 @@ $(document).ready(function(){
         $('td#teacherName').text(data.teacherName);
         $('td#email').text(data.email);
         $('td#phone').text(data.phone);
+        $('td#cReadoverTime').text(data.cReadoverTime);
+        $('td#cScore').text(data.cScore);
+        $('td#cComment').text(data.cComment);
+        $('td#cName').text(data.cName);
+        $('td#cEmail').text(data.cEmail);
+        $('td#cPhone').text(data.cPhone);
       });
 //ajax
 });

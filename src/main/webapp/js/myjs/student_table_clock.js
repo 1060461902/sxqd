@@ -4,6 +4,7 @@ $(document).ready(function(){
     info.date = "全部时段";
     //ajax
     $.getJSON("js/json/student_table_clock.json", function(data){
+        $('a#progress').attr('href','student_table_progress.html?id='+data.id);
         var obj1 = data.month;
         var length1 = data.month.length;
         for(var n=0;n<length1;n++){
@@ -52,5 +53,4 @@ $('option').click(function(){
                 },                            
               });
    });
-
 });

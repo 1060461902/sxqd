@@ -1,5 +1,27 @@
-$(document).ready(function(){ 
-    var docrTable = $('#table-zb').dataTable({  
+$(document).ready(function(){
+    var info =new Object();
+    info.id = window.location.href;
+      $.getJSON("js/json/student_zb.json", function(data) {
+        var obj = data.weeklyList;
+        var length = data.weeklyList.length;
+        var tbody = document.getElementsByTagName ('tbody')[0];
+        for (var i = 0; i <length; i++) {
+            var obj = data.weeklyList[i];
+            var tr = tbody.insertRow(tbody.rows.length);
+            var j=i+1;
+            $("tr:eq("+j+")").val(obj.id);//对当前行赋值
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = obj.week;
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = obj.teacherScore;
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = obj.companyScore;
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = obj.datetime;
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = '<a href="student_table_zbyl.html?id='+obj.id+'" target="iFrame1">查看</a>';
+        }
+        var docrTable = $('#table-zb').dataTable({  
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
                 "bFilter" : false, //是否启动过滤、搜索功能
                 "lengthChange" : false, 
@@ -21,5 +43,7 @@ $(document).ready(function(){
                         "sLast" : "最后一页"    
                     }  
                 },                            
-              });    
+              });    //table
+    });
 });
+    

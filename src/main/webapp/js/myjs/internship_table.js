@@ -6,6 +6,41 @@ $(document).ready(function(){
   info.clss = null;
   info.company = null;
   // ajax
+  //--------获取老师的列表
+  $.getJSON("js/json/teacher_table.json", function(data) {
+    var obj = data.teacherList;
+    var length = obj.length;
+    for (var i = 0; i < length; i++) {
+      $('ul').append('<li>'+obj[i].userName+'</li>');
+      $('li:eq('+i+')').val(obj[i].id);
+    };
+    $('li').click(function(){
+      $('span#checkone').html($(this).text()+'<span style="float:right" class="aaa"><i class="fa fa-times-circle fa-fw"></i></span>');
+      $('ul').css('display','none');
+      $('span#description').text('已分配');
+      window.teacherId = $(this).val();
+    $('span>span>i').click(function(){
+      $('span#description').text('未分配');
+      $('span#checkone').empty();
+      $('ul').css('display','block');
+    });
+    });
+  });
+  //提交学生分配
+  $('button#distribute').click(function(){
+     var id = new Array();
+    $('td>input:checkbox').each(function() {
+        if ($(this).attr('checked') =='checked') {
+          id[a]=$(this).parent('td').parent('tr').val();
+          a++;
+        }
+    });
+    var info = new Object();
+    info.ids = id;
+    info.teacherId = teacherId;
+    alert(info.teacherId);
+  });
+  
   //---------获取筛选内容
   $.getJSON("js/json/internship_table.json", function(data) {
         var namelength = data.majorNameList.length;
@@ -47,9 +82,12 @@ $('option').click(function(){
 //ajax
 });
 //-------------点击---------
-$('tr').click(function(){
-  var href ="./student_table_clock.html?id="+$(this).val();
+$('tbody>tr>td').click(function(){
+  var col = $(this).index(); // 列位置 
+  if(col!=0){
+  var href ="./student_table_clock.html?id="+$(this).parent('tr').val();
   location.href=href;
+ }
 });
 //--------------------------全选checkbox--------------------------
 var m=0;
