@@ -3,6 +3,7 @@ $(document).ready(function(){
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
                 "bFilter" : false, //是否启动过滤、搜索功能
                 "lengthChange" : false, 
+                "pageLength": 6,
                   "oLanguage": { //国际化配置  
                     "sProcessing" : "正在获取数据，请稍后...",    
                     "sLengthMenu" : "显示 _MENU_ 条",    

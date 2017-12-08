@@ -1,6 +1,15 @@
 .dataTables_filter{
   margin-top: -20px;
 }
+.add-symbol{
+  font-family: 'HYQiHei 105JF Bold', 'HYQiHei 105JF Regular', 'HYQiHei 105JF';
+  font-weight: 700;
+  font-size: 36px;
+  color: #3399FF;
+  position: absolute;
+  left: -50px;
+  top: 85px;
+}
 .data_analysis{
   color:#6c6c6c;
   font-weight: 600;
@@ -67,7 +76,7 @@ span#mark,span#skill{
   font-size: 1.1em; 
 }
 .red{
-  color: red;
+  color: red !important;
 }
 .edit{
   position: absolute;
@@ -77,6 +86,7 @@ span#mark,span#skill{
 .score{
   font-style: italic;
   font-size: 200%;
+  color: #3399FF;
 }
 .flex-center{
   display: flex;
@@ -448,18 +458,26 @@ div#myTabContent>div#teacher,div#myTabContent>div#company{
   padding: 20px;
 }
 .sxcj-div2{
-  display: inline-block;
   border:1px dashed #DDD;
-  width:20%;
   padding:20px 10px;
+  margin: 10px;
 }
 .sxcj-div3{
-  display: inline-block;
   border:1px dashed #DDD;
-  height: 50px;
   padding:10px;
   margin: 10px;
-  width: 60%;
+}
+.sxcj-div4{
+  display: inline-block;
+  border:1px dashed #DDD;
+  padding:30px 60px;
+  margin: 20px;
+}
+.sxcj-div5{
+  border:1px dashed #DDD;
+  padding:20px 50px;
+  margin: 10px;
+  width: 37.5%
 }
 .list-group-item{
   padding: 30px 50px;
@@ -489,6 +507,7 @@ table#teacher_details tr,table#student_details tr{
     display: flex;
     flex-wrap: nowrap;
     align-items:center;
+    justify-content:center;
 }
 .setDiv{
   margin:25px 0px 20px 110px; 

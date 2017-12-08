@@ -1,6 +1,6 @@
 $(document).ready(function(){ 
-	var id = window.location.href;
-	  // $.ajax({
+	var info =new Object();
+  info.id = window.location.href;	  // $.ajax({
    //     type: 'get',
    //     url: '/fieldManagement/admin/showRecruitmentDetails',
    //     data: JSON.stringify(id),
