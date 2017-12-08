@@ -585,6 +585,7 @@ input[type="radio"]:checked + label span {
 	
 
 @media screen and (max-width: 992px) {
+	.setDiv {margin: 10px;}
 	.add-symbol { display: none; }
 	nav li { font-size: 1em; }
 	.templatemo-left-nav a { padding: 15px 10px; }	

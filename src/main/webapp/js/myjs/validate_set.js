@@ -4,10 +4,21 @@
 * @Last Modified by:   chenzexiao
 * @Last Modified time: 2017-10-26 15:24:38
 */
-$(document).ready(function(){  
-    if ($(".badge").text()==0) {
-      $(".badge").css("display","none")
-    };
+$(document).ready(function(){
+  $('button#qzbtn').click(function(){
+    if(parseInt($('.setDiv input#a:eq(0)').val())+parseInt($('.setDiv input#a:eq(1)').val())!=100){
+      alert("请使老师权重和企业权重之和为100");
+      $('.setDiv input#a:eq(0)').focus();
+    }
+    else if(parseInt($('.setDiv input#b:eq(0)').val())+parseInt($('.setDiv input#b:eq(1)').val())+parseInt($('.setDiv input#b:eq(2)').val())!=100){
+      alert("请使老师评分下三项之和为100");
+      $('.setDiv input#b:eq(0)').focus();
+    }
+    else if(parseInt($('.setDiv input#c:eq(0)').val())+parseInt($('.setDiv input#c:eq(1)').val())!=100){
+      alert("请使企业评分下两项之和为100");
+      $($('.setDiv input#c:eq(0)')).focus();
+    }
+  });
 });
 function validate_oldpsw(oldpsw,alerttxt1)
 {

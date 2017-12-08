@@ -23,9 +23,6 @@ $(document).ready(function(){
             td.innerHTML = obj.nickName;
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = obj.phone;
-            if(obj.checked!=="false"){
-             nums+=1;
-            }     
               // var td = tr.insertCell (tr.cells.length);
               // // alert($("tr:eq("+j+")").val());
               // td.innerHTML = '<a href="./approval_company.html?id='+$("tr:eq("+j+")").val()+'">'+obj.companyName+'</a>';

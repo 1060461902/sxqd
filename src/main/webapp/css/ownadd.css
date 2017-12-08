@@ -20,14 +20,14 @@
 .data_analysis i{
   color: #3399FF;
 }
-#a,#b,#c,#d,#e,#f,#g,#h{
+/*#a,#b,#c,#d,#e,#f,#g,#h{
 font-family: 'Comic Sans MS Normal', 'Comic Sans MS';
 font-weight: 400;
 font-style: normal;
 font-size: 28px;
 color: #3399FF;
 line-height: 2.5em;
-}
+}*/
 #total-num{
     font-family: 'Comic Sans MS Normal', 'Comic Sans MS';
     font-weight: 400;
@@ -451,7 +451,7 @@ table#sxxj tr th{
 }
 
 div#myTabContent>div#teacher,div#myTabContent>div#company{
-  padding: 30px;
+  padding: 20px;
 }
 .sxcj-div1{
   border:1px solid #DDD;
@@ -519,6 +519,7 @@ table#teacher_details tr,table#student_details tr{
   display: flex;
   justify-content:space-around;
   flex-wrap: wrap;
+  font-size: 1.1em;
 }
 .setDiv>div>div>input{
    width: 100px;

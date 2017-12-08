@@ -29,8 +29,9 @@ $(document).ready(function(){
   //提交学生分配
   $('button#distribute').click(function(){
      var id = new Array();
+     var a = 0;
     $('td>input:checkbox').each(function() {
-        if ($(this).attr('checked') =='checked') {
+        if ($(this).attr('checked') =='checked') {      
           id[a]=$(this).parent('td').parent('tr').val();
           a++;
         }
@@ -38,7 +39,7 @@ $(document).ready(function(){
     var info = new Object();
     info.ids = id;
     info.teacherId = teacherId;
-    alert(info.teacherId);
+    //ajax
   });
   
   //---------获取筛选内容
