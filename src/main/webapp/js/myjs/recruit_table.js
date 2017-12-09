@@ -16,7 +16,7 @@ $(document).ready(function(){
             td.innerHTML = '<a href="company_table_details.html?id='+obj.companyId+'">'+obj.companyName+'</a>';
             var td = tr.insertCell (tr.cells.length);
             if(obj.currentNumber >0){
-            td.innerHTML = '<a href="#">'+obj.currentNumber+'/'+obj.totalNumber+'</a><i class="showlist fa fa-fw fa-sort-desc" data-toggle="collapse" data-target="#demo'+j+'"></i><div id="demo'+j+'" class="collapse">Nihil</div>';
+            td.innerHTML = '<a href="#">'+obj.currentNumber+'/'+obj.totalNumber+'</a><i class="showlist fa fa-fw fa-sort-desc" data-toggle="collapse" data-target="#demo'+j+'"></i><div id="demo'+j+'" class="collapse"><ul></ul></div>';
           }
             else if(obj.currentNumber == 0){
             td.innerHTML = '0/'+obj.totalNumber+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';

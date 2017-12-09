@@ -1,16 +1,16 @@
 $(document).ready(function(){
   var id = window.location.href;
-   $.getJSON("js/json/approval-news.json", function(data) {
-    window.comid =  data.dynamicNewsDetails.id;
-        var obj = data.dynamicNewsDetails;
+   $.getJSON("js/json/news_table_details.json", function(data) {
+    window.comid =  data.dynamicApproves.id;
+        var obj = data.dynamicApproves;
         $("td#title").text(obj.title);
         $("td img#imageUrl").attr("src",obj.imageUrl);
         $("td#detail").text(obj.detail);
-        $("td#date").text(obj.startTime+"~");
+        $("td#date").text(obj.startTime+"~"+obj.endTime);
         $("td#nickName").text(obj.nickName);
         $("td#phone").text(obj.phone);
         $("td#email").text(obj.email);
-        if(obj.showstatus=='0'){
+        if(obj.showstatus== false){
           $("td#switch").html("已撤下<a href="+"#"+"><img src="+"images/switch-off.png"+"></a>");
           $("td#switch").attr("value","0");
           $("td#switch").css("color","red");

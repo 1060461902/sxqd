@@ -5,7 +5,7 @@ $(document).ready(function(){
       	$('b#title').text(data.title);
         $('span#name').text(data.name);
         $('span#publishedDate').text(data.publishedDate);
-        $('span#stage').text(data.stage);
+        $('span#stage').text(data.startTime+'-'+data.endTime);
         $('div#content').text(data.content);
         $('td#readoverTime').text(data.readoverTime);
         $('td#score').text(data.score);

@@ -14,8 +14,9 @@ $(document).ready(function(){
       {
           var obj = data.teacherList[i];
             var tr = tbody.insertRow(tbody.rows.length);
-            var j=i+1;
+            window.j=i+1;
             $("tr:eq("+j+")").val(obj.id);//对当前行赋值
+            //alert($("tr:eq("+j+")").val());
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = '<input type="checkbox">';
             var td = tr.insertCell (tr.cells.length);
@@ -26,7 +27,16 @@ $(document).ready(function(){
             td.innerHTML = obj.major;
             var td = tr.insertCell (tr.cells.length);
             if(obj.count>0){
-              td.innerHTML = '<a href="teacher_table_students.html?id="'+obj.id+'>'+obj.count+'</a><i class="showlist fa fa-fw fa-sort-desc" data-toggle="collapse" data-target="#demo'+j+'"></i><div id="demo'+j+'" class="collapse">Nihil</div>';
+              td.innerHTML = '<a href="teacher_table_students.html?id="'+obj.id+'>'+obj.count+'</a><i class="showlist fa fa-fw fa-sort-desc" data-toggle="collapse" data-target="#demo'+j+'"></i><div id="demo'+j+'" class="collapse"><ul></ul></div>';
+             $.getJSON("js/json/teacherStudentName.json", function(data) {
+              var id = obj.id;
+              var obj2 = data.Names;
+              var len2 = data.Names.length;
+              for(var n =0;n<len2;n++){
+                var m=i-1;
+                $("tr:eq("+m+")").find('ul').append('<a href="student_table_details.html?id='+obj2[n].id+'">'+obj2[n].name+'</a>&nbsp;');
+              }
+             });
             }
             else if(obj.count==0)
             {

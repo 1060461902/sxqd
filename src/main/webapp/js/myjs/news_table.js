@@ -1,11 +1,11 @@
 $(document).ready(function(){
     $.getJSON("js/json/news_table.json", function(data) {
        var tbody = document.getElementsByTagName ('tbody')[0];
-       var len = data.dynamicNewApplyList.length;
+       var len = data.dynamicApproves.length;
        var nums=0;
        for ( var i = 0; i < len; i++)
        {
-          var obj = data.dynamicNewApplyList[i];
+          var obj = data.dynamicApproves[i];
             var tr = tbody.insertRow(tbody.rows.length);
             var j=i+1;
             $("tr:eq("+j+")").val(obj.id);//对当前行赋值
@@ -18,9 +18,9 @@ $(document).ready(function(){
             var m=i+1;
               $('tr:eq('+m+') td:eq(2)').addClass('flex-center');
               var td = tr.insertCell (tr.cells.length);
-            if(obj.showstatus=="1")
+            if(obj.showStatus==true)
             td.innerHTML = '展示中';
-            else if(obj.showstatus=="0") 
+            else if(obj.showStatus==false) 
             td.innerHTML = '已撤下';
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = '<a href="./news_table_details.html?id='+$("tr:eq("+j+")").val()+'">查看</a>';

@@ -1,24 +1,7 @@
 {
 "msg": "返回动态信息成功！",
 "code": 200,
-"dynamicApproves":[
-{
-"id": 1,
-"title": "多家外媒报道【即刻】的一个小产品",
-"imageUrl": "images/ali.jpg",
-"detail": "这里是文章内容",
-"deleteTag": true,
-"passing": true,
-"dopassing": true,
-"companyId": 1,
-"phone": "15967180225",
-"email": "815027104@qq.com",
-"why": "嘿嘿",
-"showStatus": true,
-"startTime": "2017-12-04 14:09:55",
-"endTime": null
-},
-{
+"dynamicApproves":{
 "id": 2,
 "title": "不懂事的傻逼孩子你们也该醒了",
 "imageUrl": "images/timg2.jpg",
@@ -33,6 +16,15 @@
 "showStatus": true,
 "startTime": null,
 "endTime": null
+},
+"user":{
+"id": 2,
+"userName": "1511050124",
+"password": "e10adc3949ba59abbe56e057f20f883e",
+"phone": "13587797198",
+"nickName": "詹韩峰",
+"deleteTag": true,
+"roleId": 2,
+"createTime": 1511086188000
 }
-]
 }

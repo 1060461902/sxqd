@@ -20,13 +20,14 @@ $(document).ready(function(){
     }
     else {
       var info = new Object();
-      info.teacherWeight = $('.setDiv input#a:eq(0)').val();
-      info.companyWeight = $('.setDiv input#a:eq(1)').val();
-      info.tWeekReport = $('.setDiv input#b:eq(0)').val();
-      info.tSummary = $('.setDiv input#b:eq(1)').val();
-      info.tFinalReport = $('.setDiv input#b:eq(2)').val();
-      info.cWeekReport = $('.setDiv input#b:eq(0)').val();
-      info.cAttendance = $('.setDiv input#b:eq(2)').val();
+      info.teacherWeight = '0.'+ $('.setDiv input#a:eq(0)').val();
+      info.companyWeight = '0.'+ $('.setDiv input#a:eq(1)').val();
+      info.tWeekReport = '0.'+ $('.setDiv input#b:eq(0)').val();
+      info.tSummary = '0.'+ $('.setDiv input#b:eq(1)').val();
+      info.tFinalReport = '0.'+ $('.setDiv input#b:eq(2)').val();
+      info.cWeekReport = '0.'+ $('.setDiv input#c:eq(0)').val();
+      info.cAttendance = '0.'+ $('.setDiv input#c:eq(1)').val();
+      alert(info.cAttendance);
       $.ajax({
        type: 'post',
        url: '/fieldworkmanage/admin/weight',
