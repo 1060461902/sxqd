@@ -1,13 +1,16 @@
 {
-    "compamyNameList": [
-        {
-      "companyName": "XJUoCYbW4j"
-    },
-          {
-      "companyName": "nujtMcqXAs"
-    },
-        {
-      "companyName": "PtxPrxLl0a"
-    }
-  ]
+"Names":[
+{
+"companyName": "杭州新东方有限公司",
+"id": 1
+},
+{
+"companyName": "天娱传媒",
+"id": 2
+},
+{
+"companyName": "陈氏豆腐乳",
+"id": 3
+}
+]
 }

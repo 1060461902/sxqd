@@ -4,11 +4,11 @@ $(document).ready(function(){
     $.getJSON("js/json/company_table.json", function(data) {
        var tbody = document.getElementsByTagName ('tbody')[0];
        var len = data.compamyViewList.length;
+       var j =0;
        for ( var i = 0; i < len; i++)
-      {
+      {   var j = i+1;
           var obj = data.compamyViewList[i];
             var tr = tbody.insertRow(tbody.rows.length);
-            var j=i+1;
             $("tr:eq("+j+")").val(obj.id);//对当前行赋值
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = '<input type="checkbox">';
@@ -17,24 +17,27 @@ $(document).ready(function(){
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = '<a href="company_table_jobs.html?id='+obj.id+'">'+obj.nowIntership+'/'+obj.allIntership+'</a>';
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<a href="company_table_students.html?id='+obj.id+'">'+obj.studentNumber+'</a><i class="showlist fa fa-fw fa-sort-desc"></i>';
+            if(obj.studentNumber>0){
+              td.innerHTML = '<a href="company_table_students.html?id='+obj.id+'">'+obj.studentNumber+'</a><i class="showlist fa fa-fw fa-sort-desc" data-toggle="collapse" data-target="#demo'+j+'"></i><div id="demo'+j+'" class="collapse">Nihil</div>';
+            }
+            else{
+              td.innerHTML = 0+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+            }
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = obj.contact;
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML='<a href="#" title="重置密码" class="reset"  id="'+obj.id+'"><i class="fa fa-repeat fa-2x"></i></a>&nbsp;&nbsp;<a href="#" title="禁用/解禁" class="forbidden" id="'+obj.id+'" value='+obj.forbidden+'><i class="fa fa-ban fa-2x"></i>';
+            td.innerHTML='<a href="#" title="重置密码" class="reset"  id="'+obj.id+'"><i class="fa fa-repeat fa-lg"></i></a>&nbsp;&nbsp;<a href="#" title="禁用/解禁" class="forbidden" id="'+obj.id+'" value='+obj.forbidden+'><i class="fa fa-ban fa-lg"></i>';
             if(obj.forbidden==true){
               $('tr:eq('+j+') td:eq(5) a.forbidden').css("color","red");
             }
       } //for
 //-------------下拉---------
               $('.showlist').click(function(){
-                if($(this).parent("td").children("i").attr("class")=="showlist fa fa-fw fa-sort-desc"){
-                  $(this).parent("td").parent("tr").css("height","500px");
+                if($(this).parent("td").children("i").hasClass("fa-sort-desc")){
                   $(this).parent("td").children("i").removeClass("fa-sort-desc");
                   $(this).parent("td").children("i").addClass("fa-sort-up");
                   }
-                else if($(this).parent("td").children("i").attr("class")=="showlist fa fa-fw fa-sort-up"){
-                  $(this).parent("td").parent("tr").css("height","44px");
+                else if($(this).parent("td").children("i").hasClass("fa-sort-up")){
                   $(this).parent("td").children("i").removeClass("fa-sort-up");
                   $(this).parent("td").children("i").addClass("fa-sort-desc");
                   }
@@ -132,7 +135,7 @@ $('th>input:checkbox').click(function() {
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
                 "bFilter" : true, //是否启动过滤、搜索功能
                 "info": false,
-                 "pageLength": 8,
+                 "pageLength": 6,
                 "lengthChange" : false, 
                   "oLanguage": { //国际化配置
                     "sProcessing" : "正在获取数据，请稍后...",

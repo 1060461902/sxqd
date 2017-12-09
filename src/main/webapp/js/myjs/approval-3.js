@@ -1,5 +1,11 @@
 $(document).ready(function(){
-    $.getJSON("js/json/approval-3.json", function(data) {
+     $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/showDynamicNewsApplyList',
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
        var tbody = document.getElementsByTagName ('tbody')[0];
        var len = data.dynamicNewApplyList.length;
        var nums=0;
@@ -17,23 +23,11 @@ $(document).ready(function(){
             td.innerHTML = '<div class="pic-frame"><img src="'+obj.imageUrl+'" class="img-responsive"></img></div>';
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = obj.startTime;
-            if(obj.checked!=="false"){
-             nums+=1;
-            } 
             var m=i+1;
               $('tr:eq('+m+') td:eq(2)').addClass('flex-center');
               // var td = tr.insertCell (tr.cells.length);
               // td.innerHTML = '<a href="./approval-news.html?id='+$("tr:eq("+j+")").val()+'">查看</a>';
          } //for
-// //搜索企业名称（需要表格重新导入）
-//   $("button").click(function(){
-//     var type = $("input").val();
-//   });
-//--------------点击查看------------------------
-// $("[href]#checkcompany").click(function(){
-//   var id = $(this).parent("td").parent('tr').val();
-//   location.href='./approval_company.html?id='+id;
-// });
 //--------------------------全选checkbox--------------------------
 var m=0;
 $('th>input:checkbox').click(function() {
@@ -82,8 +76,21 @@ $('th>input:checkbox').click(function() {
     info.id=id;
     info.passFlag='1';
     info.msg = null;
-    $('th>input:checkbox').attr('checked',false);
-    location.reload();
+    $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/comfirmDynamicNews',
+       data: JSON.stringify(info),
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+         $('th>input:checkbox').attr('checked',false);
+          location.reload();
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
    });
       var docrTable = $('#table-3').dataTable({
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
@@ -109,6 +116,13 @@ $('th>input:checkbox').click(function() {
                     }  
                 },
               });
-});//getjson
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
+//     $.getJSON("js/json/approval-3.json", function(data) {
+
+// });//getjson
 //------------------->
 });//document

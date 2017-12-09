@@ -78,6 +78,9 @@ span#mark,span#skill{
   padding: 8px 20px;
   font-size: 1.1em; 
 }
+.folding{
+  border:none; 
+}
 .red{
   color: red !important;
 }

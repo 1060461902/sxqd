@@ -15,7 +15,12 @@ $(document).ready(function(){
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = '<a href="company_table_details.html?id='+obj.companyId+'">'+obj.companyName+'</a>';
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<a href="#">'+obj.totalNumber+'/'+obj.currentNumber+'<i class="fa fa-sort-desc fa-fw"></i></a>';
+            if(obj.currentNumber >0){
+            td.innerHTML = '<a href="#">'+obj.currentNumber+'/'+obj.totalNumber+'</a><i class="showlist fa fa-fw fa-sort-desc" data-toggle="collapse" data-target="#demo'+j+'"></i><div id="demo'+j+'" class="collapse">Nihil</div>';
+          }
+            else if(obj.currentNumber == 0){
+            td.innerHTML = '0/'+obj.totalNumber+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+          }
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = obj.postTime;
             var td = tr.insertCell (tr.cells.length);
@@ -26,6 +31,18 @@ $(document).ready(function(){
               $('tr:eq('+j+') td:eq(6) a').css("color","red");
             }
       } //for
+//-------------下拉---------
+              $('.showlist').click(function(){
+                if($(this).parent("td").children("i").hasClass("fa-sort-desc")){
+                  $(this).parent("td").children("i").removeClass("fa-sort-desc");
+                  $(this).parent("td").children("i").addClass("fa-sort-up");
+                  }
+                else if($(this).parent("td").children("i").hasClass("fa-sort-up")){
+                  $(this).parent("td").children("i").removeClass("fa-sort-up");
+                  $(this).parent("td").children("i").addClass("fa-sort-desc");
+                  }
+
+              });
 // -------------禁用--------------
 $('.forbidden').click(function(){
 // alert($(this).attr("id")+'+'+$(this).attr("value"));

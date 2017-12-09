@@ -1,6 +1,14 @@
 $(document).ready(function(){
+  var info = new Object();
   var type = "企业类型";//第一次导入时默认全部企业类型
-    $.getJSON("js/json/approval-1.json", function(data) {
+       $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/showCompanyRegisterApplyList',
+       data: JSON.stringify(info),
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
        var tbody = document.getElementsByTagName ('tbody')[0];
        var len = data.compamyViewList.length;
        var nums=0;
@@ -27,30 +35,9 @@ $(document).ready(function(){
               // // alert($("tr:eq("+j+")").val());
               // td.innerHTML = '<a href="./approval_company.html?id='+$("tr:eq("+j+")").val()+'">'+obj.companyName+'</a>';
          } //for
-//筛选（需要表格重新导入）
-  $("option").click(function(){
-    var type = $(this).text();
-
-  });
-//--------------------------全选checkbox--------------------------
-var m=0;
-$('th>input:checkbox').click(function() {
-      m+=1;
-      if(m%2==1){
-        $('input:checkbox').each(function() {
-        $(this).attr('checked', true);
-        $(".operations").css("display","block");
-       });
-      }
-      else if(m%2==0){
-        $('input:checkbox').each(function () {
-        $(this).attr('checked',false);
-        $(".operations").css("display","none");
-});
-      }
-});
-//--------------部分选择通过checkbox--------------------------------
+         //--------------部分选择通过checkbox--------------------------------
    $("td>input:checkbox").click(function(){
+    alert('1');
     var mm=0;
     $('input:checkbox').each(function() {
         if ($(this).attr('checked') =='checked') {
@@ -65,24 +52,6 @@ $('th>input:checkbox').click(function() {
           $(".operations").css("display","none");
         }
     });
-   });
-//-----------点击通过（需要表格重新导入）-----------------
-  $(".operations").click(function(){
-    var id = new Array();
-    var a=0;
-    $('td>input:checkbox').each(function() {
-        if ($(this).attr('checked') =='checked') {
-          id[a]=$(this).parent('td').parent('tr').val();
-          a++;
-        }
-    });
-    var info = new Object();
-    info.id=id;
-    //alert(info.id);
-    info.passFlag='1';
-    info.msg = null;
-    $('th>input:checkbox').attr('checked',false);
-    location.reload();
    });
       var docrTable = $('#table-1').dataTable({
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
@@ -108,6 +77,66 @@ $('th>input:checkbox').click(function() {
                     }
                 },                       
               });
-});//getjson
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
+//     $.getJSON("js/json/approval-1.json", function(data) {
+
+// });//getjson
+//--------------------筛选（需要表格重新导入）
+  $("option").click(function(){
+    var info = new Object();
+    type = $(this).text();
+
+  });
+//--------------------------全选checkbox--------------------------
+var m=0;
+$('th>input:checkbox').click(function() {
+      m+=1;
+      if(m%2==1){
+        $('input:checkbox').each(function() {
+        $(this).attr('checked', true);
+        $(".operations").css("display","block");
+       });
+      }
+      else if(m%2==0){
+        $('input:checkbox').each(function () {
+        $(this).attr('checked',false);
+        $(".operations").css("display","none");
+});
+      }
+});
+//-----------点击通过（需要表格重新导入）-----------------
+  $(".operations").click(function(){
+    var id = new Array();
+    var a=0;
+    $('td>input:checkbox').each(function() {
+        if ($(this).attr('checked') =='checked') {
+          id[a]=$(this).parent('td').parent('tr').val();alert(id[a]);
+          a++;
+        }
+    });
+    var info = new Object();
+    info.id=id;
+    info.passFlag='1';
+    info.msg = null;
+      $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/comfirmCompanyRegister',
+       data: JSON.stringify(info),
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+         $('th>input:checkbox').attr('checked',false);
+          location.reload();
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
+   });
 //------------------->
 });//document

@@ -10,17 +10,17 @@ $(document).ready(function(){
         for(var n=0;n<length1;n++){
             $('select').append('<option>'+obj1[n].month+'</option>');
         }
-        var obj2 = data.checkonWorkList;
-        var length2 = data.checkonWorkList.length;
+        var obj2 = data.date;
+        var length2 = data.date.length;
         for( var i=0;i<length2;i++){
             var tbody = document.getElementsByTagName ('tbody')[0];
             var tr = tbody.insertRow(tbody.rows.length);
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = obj2[i].date;
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj2[i].gotoWork;
+            td.innerHTML = obj2[i].startTime;
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj2[i].comeoffWork;
+            td.innerHTML = obj2[i].endTime;
         }
         //--------筛选-----------
 $('option').click(function(){

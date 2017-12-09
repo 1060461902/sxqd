@@ -18,6 +18,35 @@ $(document).ready(function(){
       alert("请使企业评分下两项之和为100");
       $($('.setDiv input#c:eq(0)')).focus();
     }
+    else {
+      var info = new Object();
+      info.teacherWeight = $('.setDiv input#a:eq(0)').val();
+      info.companyWeight = $('.setDiv input#a:eq(1)').val();
+      info.tWeekReport = $('.setDiv input#b:eq(0)').val();
+      info.tSummary = $('.setDiv input#b:eq(1)').val();
+      info.tFinalReport = $('.setDiv input#b:eq(2)').val();
+      info.cWeekReport = $('.setDiv input#b:eq(0)').val();
+      info.cAttendance = $('.setDiv input#b:eq(2)').val();
+      $.ajax({
+       type: 'post',
+       url: '/fieldworkmanage/admin/weight',
+       data: JSON.stringify(info),
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+                    if (data.code == "200") {
+                         alert('操作成功');
+                    }
+                    else if(data.code == "500"){
+                         alert('操作异常');
+                    }
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
+    }
   });
 });
 function validate_oldpsw(oldpsw,alerttxt1)

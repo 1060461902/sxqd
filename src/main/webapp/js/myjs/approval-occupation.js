@@ -1,22 +1,15 @@
 $(document).ready(function(){ 
 	  var info =new Object();
   info.id = window.location.href;
-	  // $.ajax({
-   //     type: 'get',
-   //     url: '/fieldManagement/admin/showRecruitmentDetails',
-   //     data: JSON.stringify(id),
-   //     async: true,
-   //     contentType: "application/json",
-   //     dateType: "json",
-   //     success: function(data){
-
-   //   },
-   //     error: function(){
-   //      alert('服务端异常');
-   //      }
-   //  });
-	 $.getJSON("js/json/approval_occupation.json", function(data) {
-	 	window.comid =  data.recruitmentDetails.id;
+	  $.ajax({
+       type: 'get',
+       url: '/fieldManagement/admin/showRecruitmentDetails',
+       data: JSON.stringify(id),
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+        window.comid =  data.recruitmentDetails.id;
         var obj = data.recruitmentDetails;
         $("span#post").text(obj.post);
         $("span#address").text(obj.address);
@@ -29,7 +22,13 @@ $(document).ready(function(){
         $("p#postInfo").text(obj.postInfo);
         $("span#post").text(obj.post);
         $("img#company_logo").attr("src",obj.logo);
-	 });
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
+	 // $.getJSON("js/json/approval_occupation.json", function(data) {
+	 // });
 	 //---------------通过/不通过------------------------
 $("button#pass-button").click(function(){
 	var flag = this.value;
@@ -40,8 +39,20 @@ $("button#pass-button").click(function(){
       info.id=id;
       info.passFlag=flag;//要传输的数据
       info.msg = null;
-      location.href='./approval-2.html';
-    //<---------------------------------------表格重新导入
+      $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/comfirmInternship',
+       data: JSON.stringify(info),
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+         location.href='./approval-2.html';
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
     }
     else if(flag=="0"){
       var id = new Array();
@@ -50,7 +61,20 @@ $("button#pass-button").click(function(){
       info.id=id;
       info.passFlag=flag;
       info.msg = $('textarea').val();
-      location.href='./approval-2.html';
+      $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/comfirmInternship',
+       data: JSON.stringify(info),
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+        location.href='./approval-2.html';
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
     }
    });
 });

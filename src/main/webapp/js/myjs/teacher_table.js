@@ -25,7 +25,13 @@ $(document).ready(function(){
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = obj.major;
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<a href="teacher_table_students.html?id="'+obj.id+'>'+obj.count+'</a><i class="showlist fa fa-fw fa-sort-desc"></i>';
+            if(obj.count>0){
+              td.innerHTML = '<a href="teacher_table_students.html?id="'+obj.id+'>'+obj.count+'</a><i class="showlist fa fa-fw fa-sort-desc" data-toggle="collapse" data-target="#demo'+j+'"></i><div id="demo'+j+'" class="collapse">Nihil</div>';
+            }
+            else if(obj.count==0)
+            {
+              td.innerHTML = 0+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+            }
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML='<a href="#" title="重置密码" class="reset"  id="'+obj.id+'"><i class="fa fa-repeat fa-2x"></i></a>';
             // if(obj.forbidden==true){
@@ -40,13 +46,11 @@ $('option').click(function(){
 });
 //-------------下拉---------
               $('.showlist').click(function(){
-                if($(this).parent("td").children("i").attr("class")=="showlist fa fa-fw fa-sort-desc"){
-                  $(this).parent("td").parent("tr").css("height","500px");
+                if($(this).parent("td").children("i").hasClass("fa-sort-desc")){
                   $(this).parent("td").children("i").removeClass("fa-sort-desc");
                   $(this).parent("td").children("i").addClass("fa-sort-up");
                   }
-                else if($(this).parent("td").children("i").attr("class")=="showlist fa fa-fw fa-sort-up"){
-                  $(this).parent("td").parent("tr").css("height","44px");
+                else if($(this).parent("td").children("i").hasClass("fa-sort-up")){
                   $(this).parent("td").children("i").removeClass("fa-sort-up");
                   $(this).parent("td").children("i").addClass("fa-sort-desc");
                   }
@@ -196,7 +200,7 @@ $('th>input:checkbox').click(function() {
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
                 "bFilter" : true, //是否启动过滤、搜索功能
                 "info": false,
-                 "pageLength": 8,
+                 "pageLength": 6,
                 "lengthChange" : false, 
                   "oLanguage": { //国际化配置
                     "sProcessing" : "正在获取数据，请稍后...",

@@ -10,22 +10,17 @@
 			"month": "JEyUQtpKlh"
 		}
 	],
-	"checkonWorkList": [
-		{
-			"date": "1512726646736",
-			"gotoWork": "5b4CNg0dEj",
-			"comeoffWork": "HmDRYNuyPb"
-		},
-		{
-			"date": "1512726739841",
-			"gotoWork": "QnQV4BqvBK",
-			"comeoffWork": "A3JkkV1RGO"
-		},
-		{
-			"date": "1512726927912",
-			"gotoWork": "s9xyLYxpcC",
-			"comeoffWork": "dTEnqdkIXN"
-		}
-	],
+"date":[
+{
+"date": "2017/12/09",
+"startTime": "12:19:17",
+"endTime": "12:19:17"
+},
+{
+"date": "2017/12/10",
+"startTime": "12:27:53",
+"endTime": "12:27:53"
+}
+],
 	"id": "98221"
 }

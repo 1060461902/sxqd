@@ -16,7 +16,7 @@ TABLE OF CONTENT
 /* 1. Universal Styles
 ----------------------------------------------*/
 * {	font-family: 'Open Sans', sans-serif; }
-body { font-size: 15px;color: #4f4f4f;}
+body { font-size: 14px;color: #4f4f4f;}
 html, body {
     height: 100%;
 }
@@ -33,7 +33,7 @@ h4{
 	line-height:150%;	
 }
 h5{
-	line-height:200%;
+	line-height:110%;
 	font-size: 16px;	
 }
 ul {

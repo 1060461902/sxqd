@@ -1,22 +1,15 @@
 $(document).ready(function(){
 	  var info =new Object();
   info.id = window.location.href;
-	 // $.ajax({
-   //     type: 'get',
-   //     url: '/fieldManagement/admin/showCompanyDeails',
-   //     data: JSON.stringify(id),
-   //     async: true,
-   //     contentType: "application/json",
-   //     dateType: "json",
-   //     success: function(data){
-
-   //   },
-   //     error: function(){
-   //      alert('服务端异常');
-   //      }
-   //  });
-	 $.getJSON("js/json/approval_company.json", function(data) {
-	 	window.comid =  data.compamyViewList[0].id;
+	 $.ajax({
+       type: 'get',
+       url: '/fieldManagement/admin/showCompanyDeails',
+       data: JSON.stringify(info),
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+        window.comid =  data.compamyViewList[0].id;
         var obj = data.compamyViewList[0];
         $("span#name").text(obj.companyName);
         $("span#network").text(obj.network);
@@ -46,28 +39,36 @@ $(document).ready(function(){
         $('img').click(function(){
           $('.album-1 img').attr("src",$(this).attr("src"));
         });
-	 });
+
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
+	 // $.getJSON("js/json/approval_company.json", function(data) {
+	 // });
 	 //---------------通过/不通过------------------------
 $("button").click(function(){
 	var flag = this.value;
-	if(flag=="1"){
       var id = new Array();
       id[0] = comid;
       var info = new Object();
       info.id = id;
       info.passFlag = flag;//要传输的数据
-      info.msg = null; 
-      location.href='./approval.html';
-    //<---------------------------------------表格重新导入
-    }
-    else if(flag=="0"){
-      var id = new Array();
-      id[0] = comid;
-      var info = new Object();
-      info.id=id;
-      info.passFlag=flag;
-      info.msg = null;
-      location.href='./approval.html';
-    }
+      $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/comfirmCompanyRegister',
+       data: JSON.stringify(info),
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+         $('th>input:checkbox').attr('checked',false);
+         location.href='./approval.html';
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
    });
 });
