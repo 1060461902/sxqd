@@ -10,7 +10,6 @@
     <result column="delete_tag" jdbcType="BIT" property="deleteTag" />
     <result column="role_id" jdbcType="INTEGER" property="roleId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="forbidden" jdbcType="BIT" property="forbidden" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_name, password, phone, nick_name, delete_tag, role_id, create_time, forbidden
+    id, user_name, password, phone, nick_name, delete_tag, role_id, create_time
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.UserExample" resultMap="BaseResultMap">
     select
@@ -111,19 +110,17 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-
   <insert id="insert" parameterType="edu.zjgsu.ito.model.User">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user (user_name, password, phone,
+    insert into user (user_name, password, phone, 
       nick_name, delete_tag, role_id, 
-      create_time, forbidden)
+      create_time)
     values (#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{nickName,jdbcType=VARCHAR}, #{deleteTag,jdbcType=BIT}, #{roleId,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{forbidden,jdbcType=BIT})
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
-
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.User">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
@@ -151,9 +148,6 @@
       <if test="createTime != null">
         create_time,
       </if>
-      <if test="forbidden != null">
-        forbidden,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userName != null">
@@ -176,9 +170,6 @@
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="forbidden != null">
-        #{forbidden,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -215,9 +206,6 @@
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.forbidden != null">
-        forbidden = #{record.forbidden,jdbcType=BIT},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -232,8 +220,7 @@
       nick_name = #{record.nickName,jdbcType=VARCHAR},
       delete_tag = #{record.deleteTag,jdbcType=BIT},
       role_id = #{record.roleId,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      forbidden = #{record.forbidden,jdbcType=BIT}
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -262,9 +249,6 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="forbidden != null">
-        forbidden = #{forbidden,jdbcType=BIT},
-      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -276,8 +260,7 @@
       nick_name = #{nickName,jdbcType=VARCHAR},
       delete_tag = #{deleteTag,jdbcType=BIT},
       role_id = #{roleId,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      forbidden = #{forbidden,jdbcType=BIT}
+      create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

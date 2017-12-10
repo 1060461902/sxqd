@@ -1334,6 +1334,66 @@ public class CompanyExample {
             addCriterion("organization_code not between", value1, value2, "organizationCode");
             return (Criteria) this;
         }
+
+        public Criteria andForbiddenIsNull() {
+            addCriterion("forbidden is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andForbiddenIsNotNull() {
+            addCriterion("forbidden is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andForbiddenEqualTo(Boolean value) {
+            addCriterion("forbidden =", value, "forbidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andForbiddenNotEqualTo(Boolean value) {
+            addCriterion("forbidden <>", value, "forbidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andForbiddenGreaterThan(Boolean value) {
+            addCriterion("forbidden >", value, "forbidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andForbiddenGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("forbidden >=", value, "forbidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andForbiddenLessThan(Boolean value) {
+            addCriterion("forbidden <", value, "forbidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andForbiddenLessThanOrEqualTo(Boolean value) {
+            addCriterion("forbidden <=", value, "forbidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andForbiddenIn(List<Boolean> values) {
+            addCriterion("forbidden in", values, "forbidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andForbiddenNotIn(List<Boolean> values) {
+            addCriterion("forbidden not in", values, "forbidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andForbiddenBetween(Boolean value1, Boolean value2) {
+            addCriterion("forbidden between", value1, value2, "forbidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andForbiddenNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("forbidden not between", value1, value2, "forbidden");
+            return (Criteria) this;
+        }
     }
 
     /**

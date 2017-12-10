@@ -21,6 +21,8 @@ public class Teacher implements Serializable {
 
     private String email;
 
+    private Boolean forbidden;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -71,6 +73,14 @@ public class Teacher implements Serializable {
         this.email = email;
     }
 
+    public Boolean getForbidden() {
+        return forbidden;
+    }
+
+    public void setForbidden(Boolean forbidden) {
+        this.forbidden = forbidden;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -88,7 +98,8 @@ public class Teacher implements Serializable {
             && (this.getMajor() == null ? other.getMajor() == null : this.getMajor().equals(other.getMajor()))
             && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
             && (this.getPhoto() == null ? other.getPhoto() == null : this.getPhoto().equals(other.getPhoto()))
-            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()));
+            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
+            && (this.getForbidden() == null ? other.getForbidden() == null : this.getForbidden().equals(other.getForbidden()));
     }
 
     @Override
@@ -101,6 +112,7 @@ public class Teacher implements Serializable {
         result = prime * result + ((getSex() == null) ? 0 : getSex().hashCode());
         result = prime * result + ((getPhoto() == null) ? 0 : getPhoto().hashCode());
         result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
+        result = prime * result + ((getForbidden() == null) ? 0 : getForbidden().hashCode());
         return result;
     }
 
@@ -116,6 +128,7 @@ public class Teacher implements Serializable {
         sb.append(", sex=").append(sex);
         sb.append(", photo=").append(photo);
         sb.append(", email=").append(email);
+        sb.append(", forbidden=").append(forbidden);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

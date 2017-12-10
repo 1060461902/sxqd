@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping(value ="admin")
@@ -35,6 +32,9 @@ public class TeacherController {
     StudentService studentService;
 
     @RequestMapping(value = "showTeachers", method = RequestMethod.GET)
+    /*
+    * 查看老师列表
+    * */
     public @ResponseBody
     Map<String, Object> showTeachers(@RequestParam("major") String major) {
 
@@ -81,7 +81,7 @@ public class TeacherController {
             FrontTeacherTemp.setUserName(user.getUserName());
             FrontTeacherTemp.setMajor(teacher.getMajor());
             FrontTeacherTemp.setPhone(user.getPhone());
-            FrontTeacherTemp.setForbidden(user.getForbidden());
+            FrontTeacherTemp.setForbidden(teacher.getForbidden());
 
             teacherList.add(FrontTeacherTemp);
         }
@@ -92,7 +92,10 @@ public class TeacherController {
     }
     @RequestMapping(value = "teacherStudentName", method = RequestMethod.GET)
     public @ResponseBody
-    Map<String, Object> teacherStudentName(@RequestParam("id") Integer id) {
+    /*查看老师名下学生
+    * @author hanfeng*/
+    Map<String, Object> teacherStudentName(@RequestParam("id") Integer id
+                                           ) {
         Map<String, Object> result = new HashMap<String, Object>();
 
         StudentExample studentExample=new StudentExample();
@@ -118,6 +121,8 @@ public class TeacherController {
 
     @RequestMapping(value = "teacherDetail", method = RequestMethod.GET)
     public @ResponseBody
+    /*查看老师详情
+    * @author hanfeng*/
     Map<String, Object> teacherDetail(@RequestParam("id") Integer id) {
         TeacherDetail teacherDetail = null;
         Map<String, Object> result = new HashMap<String, Object>();
@@ -147,5 +152,58 @@ public class TeacherController {
         result.put("teacherDetail", teacherDetail);
         return result;
     }
+    @RequestMapping(value = "forbiddenTeacher", method = RequestMethod.GET)
+    /*
+    * author hanfeng
+    * 禁用老师
+    * */
+    public @ResponseBody
+    Map<String, Object> forbiddenTeacher(@RequestParam("id") Integer id,
+                                         @RequestParam("forbidden") boolean forbidden
+                                         ) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        int one;
+        Teacher teacher=teacherService.selectByPrimaryKey(id);
+
+        if(teacher ==null){
+            result.put("code",Constant.FAIL);
+            result.put("msg", "未查到id=" + id + "的记录！");
+            return result;
+        }
+        teacher.setForbidden(forbidden);
+        one=teacherService.updateByPrimaryKey(teacher);
+        if(one>0){
+            result.put("code", Constant.OK);
+            result.put("msg", "审批成功！");
+        }else{
+            result.put("code", Constant.FAIL);
+            result.put("msg", "审批失败！更新数据库失败");
+            return result;
+        }
+        return result;
+    }
+    @RequestMapping(value = "teacherMajor", method = RequestMethod.GET)
+    public @ResponseBody
+    /*
+    * 获取老师专业列表
+    * @author hanfeng
+    * */
+    Map<String, Object> teacherMajor() {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        TeacherExample teacherExample=new TeacherExample();
+        List<Teacher> teachers=teacherService.selectByExample(teacherExample);
+        JSONArray objects=new JSONArray();
+        for(Teacher teacher:teachers){
+            JSONObject obj=new JSONObject();
+            obj.put("major",teacher.getMajor());
+            objects.add(obj);
+            }
+            Set set=new HashSet(objects);
+            result.put("major",set);
+            return result;
+    }
+
+
 
 }

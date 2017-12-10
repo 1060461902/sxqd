@@ -13,8 +13,6 @@ public class Recruitment implements Serializable {
      */
     private Integer companyId;
 
-    private Integer studentId;
-
     /**
      * 招聘岗位
      */
@@ -118,14 +116,6 @@ public class Recruitment implements Serializable {
 
     public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
-    }
-
-    public Integer getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
     }
 
     public String getPost() {
@@ -286,7 +276,6 @@ public class Recruitment implements Serializable {
         Recruitment other = (Recruitment) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getCompanyId() == null ? other.getCompanyId() == null : this.getCompanyId().equals(other.getCompanyId()))
-            && (this.getStudentId() == null ? other.getStudentId() == null : this.getStudentId().equals(other.getStudentId()))
             && (this.getPost() == null ? other.getPost() == null : this.getPost().equals(other.getPost()))
             && (this.getCurrentNumber() == null ? other.getCurrentNumber() == null : this.getCurrentNumber().equals(other.getCurrentNumber()))
             && (this.getTotalNumber() == null ? other.getTotalNumber() == null : this.getTotalNumber().equals(other.getTotalNumber()))
@@ -313,7 +302,6 @@ public class Recruitment implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getCompanyId() == null) ? 0 : getCompanyId().hashCode());
-        result = prime * result + ((getStudentId() == null) ? 0 : getStudentId().hashCode());
         result = prime * result + ((getPost() == null) ? 0 : getPost().hashCode());
         result = prime * result + ((getCurrentNumber() == null) ? 0 : getCurrentNumber().hashCode());
         result = prime * result + ((getTotalNumber() == null) ? 0 : getTotalNumber().hashCode());
@@ -343,7 +331,6 @@ public class Recruitment implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", companyId=").append(companyId);
-        sb.append(", studentId=").append(studentId);
         sb.append(", post=").append(post);
         sb.append(", currentNumber=").append(currentNumber);
         sb.append(", totalNumber=").append(totalNumber);

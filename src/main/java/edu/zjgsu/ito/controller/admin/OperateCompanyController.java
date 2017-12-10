@@ -2,6 +2,7 @@ package edu.zjgsu.ito.controller.admin;
 
 import edu.zjgsu.ito.model.DynamicApprove;
 import edu.zjgsu.ito.model.Recruitment;
+import edu.zjgsu.ito.model.Student;
 import edu.zjgsu.ito.service.DynamicApproveService;
 import edu.zjgsu.ito.service.RecruitmentService;
 import edu.zjgsu.ito.vo.ApprovalVo;
@@ -214,6 +215,71 @@ public class OperateCompanyController {
                 result.put("msg", "审批失败！更新数据库失败");
                 return result;
             }
+        return result;
+    }
+    @RequestMapping(value = "deleteshow", method = RequestMethod.GET)
+    public @ResponseBody
+    /*
+    * @author hanfeng
+    * @首页动态删除
+    * */
+
+    Map<String,Object> deleteshow(@RequestParam ("id") Integer id
+                                  ) {
+        int status;
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        DynamicApprove dynamicApproveOne=dynamicApproveService.selectByPrimaryKey(id);
+
+        if (dynamicApproveOne == null) {
+            result.put("code", Constant.FAIL);
+            result.put("msg", "未查到id=" + id + "的记录！");
+            return result;
+        }
+
+            dynamicApproveOne.setDeleteTag(false);
+
+//        更新数据库记录
+        status=dynamicApproveService.updateByPrimaryKey(dynamicApproveOne);
+
+        if (status > 0) {
+            result.put("code", Constant.OK);
+            result.put("msg", "删除成功！");
+        } else {
+            result.put("code", Constant.FAIL);
+            result.put("msg", "删除失败！更新数据库失败");
+            return result;
+        }
+        return result;
+    }
+    @RequestMapping(value = "forbiddenCompany", method = RequestMethod.GET)
+    /*
+    * author hanfeng
+    * 禁用学生
+    * */
+    public @ResponseBody
+    Map<String, Object> forbiddenCompany(@RequestParam("id") Integer id,
+                                         @RequestParam("forbidden") boolean forbidden
+    ) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        int one;
+        Company company=companyService.selectByPrimaryKey(id);
+
+        if(company ==null){
+            result.put("code", Constant.FAIL);
+            result.put("msg", "未查到id=" + id + "的记录！");
+            return result;
+        }
+        company.setForbidden(forbidden);
+        one=companyService.updateByPrimaryKey(company);
+        if(one>0){
+            result.put("code", Constant.OK);
+            result.put("msg", "审批成功！");
+        }else{
+            result.put("code", Constant.FAIL);
+            result.put("msg", "审批失败！更新数据库失败");
+            return result;
+        }
         return result;
     }
 }

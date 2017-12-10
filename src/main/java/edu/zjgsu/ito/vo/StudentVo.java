@@ -7,8 +7,17 @@ public class StudentVo {
     String clss;
     String status;
     String teacherName;
-    Integer studentId;
+    Integer Id;
     String grade;
+    Integer teacherId;
+
+    public Integer getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
+    }
 
     public String getGrade() {
         return grade;
@@ -66,11 +75,11 @@ public class StudentVo {
         this.teacherName = teacherName;
     }
 
-    public Integer getStudentId() {
-        return studentId;
+    public Integer getId() {
+        return Id;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+    public void setId(Integer id) {
+        Id = id;
     }
 }

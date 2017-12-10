@@ -8,6 +8,7 @@
     <result column="sex" jdbcType="VARCHAR" property="sex" />
     <result column="photo" jdbcType="VARCHAR" property="photo" />
     <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="forbidden" jdbcType="BIT" property="forbidden" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, major, sex, photo, email
+    id, user_id, major, sex, photo, email, forbidden
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.TeacherExample" resultMap="BaseResultMap">
     select
@@ -113,9 +114,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into teacher (user_id, major, sex, 
-      photo, email)
+      photo, email, forbidden
+      )
     values (#{userId,jdbcType=INTEGER}, #{major,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
-      #{photo,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR})
+      #{photo,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{forbidden,jdbcType=BIT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.Teacher">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -138,6 +141,9 @@
       <if test="email != null">
         email,
       </if>
+      <if test="forbidden != null">
+        forbidden,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -154,6 +160,9 @@
       </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="forbidden != null">
+        #{forbidden,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -184,6 +193,9 @@
       <if test="record.email != null">
         email = #{record.email,jdbcType=VARCHAR},
       </if>
+      <if test="record.forbidden != null">
+        forbidden = #{record.forbidden,jdbcType=BIT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -196,7 +208,8 @@
       major = #{record.major,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=VARCHAR},
       photo = #{record.photo,jdbcType=VARCHAR},
-      email = #{record.email,jdbcType=VARCHAR}
+      email = #{record.email,jdbcType=VARCHAR},
+      forbidden = #{record.forbidden,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -219,6 +232,9 @@
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
+      <if test="forbidden != null">
+        forbidden = #{forbidden,jdbcType=BIT},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -228,7 +244,8 @@
       major = #{major,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
       photo = #{photo,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR}
+      email = #{email,jdbcType=VARCHAR},
+      forbidden = #{forbidden,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

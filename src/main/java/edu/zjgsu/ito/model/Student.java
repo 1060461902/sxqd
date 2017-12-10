@@ -48,7 +48,7 @@ public class Student implements Serializable {
     private String nation;
 
     /**
-     * 1熟练2一般
+     * 0不熟练1熟练
      */
     private Boolean english;
 
@@ -61,7 +61,15 @@ public class Student implements Serializable {
 
     private String clss;
 
-    private String haveteacher;
+    private Boolean forbidden;
+
+    private Boolean deletetag;
+
+    private String birthday;
+
+    private String national;
+
+    private String email;
 
     private static final long serialVersionUID = 1L;
 
@@ -177,12 +185,44 @@ public class Student implements Serializable {
         this.clss = clss;
     }
 
-    public String getHaveteacher() {
-        return haveteacher;
+    public Boolean getForbidden() {
+        return forbidden;
     }
 
-    public void setHaveteacher(String haveteacher) {
-        this.haveteacher = haveteacher;
+    public void setForbidden(Boolean forbidden) {
+        this.forbidden = forbidden;
+    }
+
+    public Boolean getDeletetag() {
+        return deletetag;
+    }
+
+    public void setDeletetag(Boolean deletetag) {
+        this.deletetag = deletetag;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getNational() {
+        return national;
+    }
+
+    public void setNational(String national) {
+        this.national = national;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -211,7 +251,11 @@ public class Student implements Serializable {
             && (this.getGrade() == null ? other.getGrade() == null : this.getGrade().equals(other.getGrade()))
             && (this.getMajor() == null ? other.getMajor() == null : this.getMajor().equals(other.getMajor()))
             && (this.getClss() == null ? other.getClss() == null : this.getClss().equals(other.getClss()))
-            && (this.getHaveteacher() == null ? other.getHaveteacher() == null : this.getHaveteacher().equals(other.getHaveteacher()));
+            && (this.getForbidden() == null ? other.getForbidden() == null : this.getForbidden().equals(other.getForbidden()))
+            && (this.getDeletetag() == null ? other.getDeletetag() == null : this.getDeletetag().equals(other.getDeletetag()))
+            && (this.getBirthday() == null ? other.getBirthday() == null : this.getBirthday().equals(other.getBirthday()))
+            && (this.getNational() == null ? other.getNational() == null : this.getNational().equals(other.getNational()))
+            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()));
     }
 
     @Override
@@ -232,7 +276,11 @@ public class Student implements Serializable {
         result = prime * result + ((getGrade() == null) ? 0 : getGrade().hashCode());
         result = prime * result + ((getMajor() == null) ? 0 : getMajor().hashCode());
         result = prime * result + ((getClss() == null) ? 0 : getClss().hashCode());
-        result = prime * result + ((getHaveteacher() == null) ? 0 : getHaveteacher().hashCode());
+        result = prime * result + ((getForbidden() == null) ? 0 : getForbidden().hashCode());
+        result = prime * result + ((getDeletetag() == null) ? 0 : getDeletetag().hashCode());
+        result = prime * result + ((getBirthday() == null) ? 0 : getBirthday().hashCode());
+        result = prime * result + ((getNational() == null) ? 0 : getNational().hashCode());
+        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
         return result;
     }
 
@@ -256,7 +304,11 @@ public class Student implements Serializable {
         sb.append(", grade=").append(grade);
         sb.append(", major=").append(major);
         sb.append(", clss=").append(clss);
-        sb.append(", haveteacher=").append(haveteacher);
+        sb.append(", forbidden=").append(forbidden);
+        sb.append(", deletetag=").append(deletetag);
+        sb.append(", birthday=").append(birthday);
+        sb.append(", national=").append(national);
+        sb.append(", email=").append(email);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

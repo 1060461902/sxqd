@@ -4,7 +4,6 @@
   <resultMap id="BaseResultMap" type="edu.zjgsu.ito.model.Recruitment">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="company_id" jdbcType="INTEGER" property="companyId" />
-    <result column="student_id" jdbcType="INTEGER" property="studentId" />
     <result column="post" jdbcType="VARCHAR" property="post" />
     <result column="current_number" jdbcType="INTEGER" property="currentNumber" />
     <result column="total_number" jdbcType="INTEGER" property="totalNumber" />
@@ -83,9 +82,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, company_id, student_id, post, current_number, total_number, post_info, checked, 
-    pass, delete_tag, address, skill_require, post_time, remove, forbidden, salary, contact, 
-    phone, email, recruitment, why
+    id, company_id, post, current_number, total_number, post_info, checked, pass, delete_tag, 
+    address, skill_require, post_time, remove, forbidden, salary, contact, phone, email, 
+    recruitment, why
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.RecruitmentExample" resultMap="BaseResultMap">
     select
@@ -129,20 +128,20 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into recruitment (company_id, student_id, post, 
-      current_number, total_number, post_info, 
-      checked, pass, delete_tag, address, 
-      skill_require, post_time, remove, 
-      forbidden, salary, contact, 
-      phone, email, recruitment, 
-      why)
-    values (#{companyId,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{post,jdbcType=VARCHAR}, 
-      #{currentNumber,jdbcType=INTEGER}, #{totalNumber,jdbcType=INTEGER}, #{postInfo,jdbcType=VARCHAR}, 
-      #{checked,jdbcType=BIT}, #{pass,jdbcType=BIT}, #{deleteTag,jdbcType=BIT}, #{address,jdbcType=VARCHAR}, 
-      #{skillRequire,jdbcType=VARCHAR}, #{postTime,jdbcType=VARCHAR}, #{remove,jdbcType=BIT}, 
-      #{forbidden,jdbcType=BIT}, #{salary,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{recruitment,jdbcType=BIT}, 
-      #{why,jdbcType=VARCHAR})
+    insert into recruitment (company_id, post, current_number, 
+      total_number, post_info, checked, 
+      pass, delete_tag, address, skill_require, 
+      post_time, remove, forbidden, 
+      salary, contact, phone, 
+      email, recruitment, why
+      )
+    values (#{companyId,jdbcType=INTEGER}, #{post,jdbcType=VARCHAR}, #{currentNumber,jdbcType=INTEGER}, 
+      #{totalNumber,jdbcType=INTEGER}, #{postInfo,jdbcType=VARCHAR}, #{checked,jdbcType=BIT}, 
+      #{pass,jdbcType=BIT}, #{deleteTag,jdbcType=BIT}, #{address,jdbcType=VARCHAR}, #{skillRequire,jdbcType=VARCHAR}, 
+      #{postTime,jdbcType=VARCHAR}, #{remove,jdbcType=BIT}, #{forbidden,jdbcType=BIT}, 
+      #{salary,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{recruitment,jdbcType=BIT}, #{why,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.Recruitment">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -152,9 +151,6 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="companyId != null">
         company_id,
-      </if>
-      <if test="studentId != null">
-        student_id,
       </if>
       <if test="post != null">
         post,
@@ -214,9 +210,6 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="companyId != null">
         #{companyId,jdbcType=INTEGER},
-      </if>
-      <if test="studentId != null">
-        #{studentId,jdbcType=INTEGER},
       </if>
       <if test="post != null">
         #{post,jdbcType=VARCHAR},
@@ -289,9 +282,6 @@
       <if test="record.companyId != null">
         company_id = #{record.companyId,jdbcType=INTEGER},
       </if>
-      <if test="record.studentId != null">
-        student_id = #{record.studentId,jdbcType=INTEGER},
-      </if>
       <if test="record.post != null">
         post = #{record.post,jdbcType=VARCHAR},
       </if>
@@ -355,7 +345,6 @@
     update recruitment
     set id = #{record.id,jdbcType=INTEGER},
       company_id = #{record.companyId,jdbcType=INTEGER},
-      student_id = #{record.studentId,jdbcType=INTEGER},
       post = #{record.post,jdbcType=VARCHAR},
       current_number = #{record.currentNumber,jdbcType=INTEGER},
       total_number = #{record.totalNumber,jdbcType=INTEGER},
@@ -383,9 +372,6 @@
     <set>
       <if test="companyId != null">
         company_id = #{companyId,jdbcType=INTEGER},
-      </if>
-      <if test="studentId != null">
-        student_id = #{studentId,jdbcType=INTEGER},
       </if>
       <if test="post != null">
         post = #{post,jdbcType=VARCHAR},
@@ -447,7 +433,6 @@
   <update id="updateByPrimaryKey" parameterType="edu.zjgsu.ito.model.Recruitment">
     update recruitment
     set company_id = #{companyId,jdbcType=INTEGER},
-      student_id = #{studentId,jdbcType=INTEGER},
       post = #{post,jdbcType=VARCHAR},
       current_number = #{currentNumber,jdbcType=INTEGER},
       total_number = #{totalNumber,jdbcType=INTEGER},
@@ -468,12 +453,10 @@
       why = #{why,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
   <select id="selectByCompanyId" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
     FROM recruitment
     WHERE company_id = #{companyId}
   </select>
-
 </mapper>

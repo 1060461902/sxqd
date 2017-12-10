@@ -217,7 +217,7 @@ public class ShowCompanyController {
         Map<String, Object> result = new HashMap<String, Object>();
 
         DynamicApproveExample dynamicApproveExample=new DynamicApproveExample();
-        dynamicApproveExample.or().andDopassingEqualTo(false);
+        dynamicApproveExample.or().andDopassingEqualTo(false).andDeleteTagEqualTo(true);
         List<DynamicApprove> dynamicApproves=dynamicApproveService.selectByExample(dynamicApproveExample);
 
         if(dynamicApproves == null){
@@ -228,8 +228,6 @@ public class ShowCompanyController {
             for (DynamicApprove dynamicApprove : dynamicApproves) {
 
                 User user = userService.selectByPrimaryKey(dynamicApprove.getCompanyId());
-
-//                frontDynadic.setName(user.);
 
                 if (user == null) {
                     result.put("code", Constant.FAIL);
@@ -324,6 +322,7 @@ public class ShowCompanyController {
         JSONArray objects = new JSONArray();
         for(Company company:companies){
             JSONObject obj = new JSONObject();
+            obj.put("id",company.getId());
             obj.put("companyName",company.getCompanyName());
             objects.add(obj);
         }

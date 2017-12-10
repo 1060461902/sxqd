@@ -32,11 +32,6 @@ public class User implements Serializable {
 
     private Date createTime;
 
-    /**
-     * 0-没有被禁用，1-禁用
-     */
-    private Boolean forbidden;
-
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -103,14 +98,6 @@ public class User implements Serializable {
         this.createTime = createTime;
     }
 
-    public Boolean getForbidden() {
-        return forbidden;
-    }
-
-    public void setForbidden(Boolean forbidden) {
-        this.forbidden = forbidden;
-    }
-
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -130,8 +117,7 @@ public class User implements Serializable {
             && (this.getNickName() == null ? other.getNickName() == null : this.getNickName().equals(other.getNickName()))
             && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()))
             && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()))
-            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
-            && (this.getForbidden() == null ? other.getForbidden() == null : this.getForbidden().equals(other.getForbidden()));
+            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()));
     }
 
     @Override
@@ -146,7 +132,6 @@ public class User implements Serializable {
         result = prime * result + ((getDeleteTag() == null) ? 0 : getDeleteTag().hashCode());
         result = prime * result + ((getRoleId() == null) ? 0 : getRoleId().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
-        result = prime * result + ((getForbidden() == null) ? 0 : getForbidden().hashCode());
         return result;
     }
 
@@ -164,7 +149,6 @@ public class User implements Serializable {
         sb.append(", deleteTag=").append(deleteTag);
         sb.append(", roleId=").append(roleId);
         sb.append(", createTime=").append(createTime);
-        sb.append(", forbidden=").append(forbidden);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
