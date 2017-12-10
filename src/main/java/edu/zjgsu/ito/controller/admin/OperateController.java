@@ -1,8 +1,10 @@
 package edu.zjgsu.ito.controller.admin;
 
+import edu.zjgsu.ito.dao.WeightMapper;
 import edu.zjgsu.ito.model.*;
 import edu.zjgsu.ito.service.*;
 import edu.zjgsu.ito.utils.Constant;
+import edu.zjgsu.ito.utils.FileUtil;
 import edu.zjgsu.ito.utils.Md5Util;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,9 +29,24 @@ public class OperateController {
     UserService userService;
     @Autowired
     CommonService commonService;
-
     @Autowired
     AdminOperateService adminOperateService;
+
+
+    /**
+     *导出学生成绩Excel
+     * @param grade 年级
+     * @return
+     * @sawei
+     */
+    @RequestMapping(value = "export2Excel", method = RequestMethod.GET )
+    public @ResponseBody Map<String, Object> export2Excel(@RequestParam("grade") String grade) {
+
+        adminOperateService.writeToExcel(grade, "Sheet1");
+
+        return null;
+    }
+
 
     /**
      * 上传Excel，批量注册学生和老师
@@ -123,7 +142,7 @@ public class OperateController {
         userId = commonService.role2user(roleId, id);
 
         User user = userService.selectByPrimaryKey(userId);
-        user.setForbidden(true);
+//        user.setForbidden(true);
         status = userService.updateByPrimaryKey(user);
 
         if (status > 0) {

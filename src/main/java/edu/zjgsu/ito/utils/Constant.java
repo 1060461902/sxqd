@@ -36,6 +36,8 @@ public class Constant {
     public final static String EXCEL2003L =".xls";    //2003- 版本的excel
     public final static String EXCEL2007L =".xlsx";   //2007+ 版本的excel
 
+    public final static String fontName ="宋体";   //2007+ 版本的excel
+
 
 	public static final String DEFAULTPWD = Md5Util.getMD5("123456");
 
@@ -72,8 +74,8 @@ public class Constant {
 	/**
 	 * 文件上传路径
 	 */
-	public final static String UPLOAD_DIR = System.getProperty("user.dir").replace("\\", "/").replace("bin", "");
-	
+	public final static String UPLOAD_DIR = System.getProperty("user.dir").replace("\\", "/") + "\\excelFiles";
+
 	/**
 	 * 党员照片存放文件夹
 	 */

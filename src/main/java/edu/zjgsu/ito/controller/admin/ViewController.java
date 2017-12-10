@@ -85,7 +85,7 @@ public class ViewController {
             FrontTeacherTemp.setUserName(user.getUserName());
 
             FrontTeacherTemp.setPhone(user.getPhone());
-            FrontTeacherTemp.setForbidden(user.getForbidden());
+//            FrontTeacherTemp.setForbidden(user.getForbidden());
 
 //            加到list里面
             teacherList.add(FrontTeacherTemp);

@@ -35,7 +35,17 @@ public class FileUtil {
 		PrintStream ps = new PrintStream(new FileOutputStream(file));
 		ps.println(str);
 	}
-	
+
+    /**
+     *返回文件名
+     * @param grade
+     * @return
+     * @author sawei
+     */
+    public static String getFileName(String grade) {
+        return "计算机与信息工程学院" + grade + "学生毕业实习成绩.xls";
+    }
+
 	/**
 	 * 保存文件
 	 * @param srcPath
