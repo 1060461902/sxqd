@@ -1,10 +1,18 @@
 $(document).ready(function(){  
 	//alert(window.location.href);
-    window.studentid = window.location.href;
+    //window.studentid = window.location.href;
+    window.studentid = window.location.href.split('=');
 	var info = new Object();
-	info.id = studentid;
-	//ajax
-	$.getJSON("js/json/student_table_details.json", function(data) {
+	info.id = studentid[1];
+	$('a#qzzl').attr("href",'student_table_jobs.html?id='+info.id+'');
+     $.ajax({
+       type: 'get',
+       url: '/fieldManagement/admin/showStudentDetail',
+       async: true,
+       contentType: "application/json",
+       data: JSON.stringify(info),
+       dateType: "json",
+       success: function(data){
 		var obj =data.student;
 		$('h4#nickName').text(obj.nickname);
 		$('table#student_details tr:eq(0) td').text(obj.nickname);
@@ -67,12 +75,18 @@ $(document).ready(function(){
 	    }
 		//标签
 		var skill =data.skill;
-        var skilllength = data.skill.length;
+        var skilllength = data.SkillList.length;
         for(var n=0;n<skilllength;n++)
         {
           $('div.skill-content').append('<span class="label label-primary" id="skill">'+skill[n]+'</span>');
         };
-	});
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
+	// $.getJSON("js/json/student_table_details.json", function(data) {
+	// });
 //-------------编辑--------------
 $('button#edit').click(function(){
   var studentBasicInfo = new Object();
@@ -82,6 +96,21 @@ $('button#edit').click(function(){
   studentBasicInfo.birthDate= $('table#student_details tr:eq(5) input').val();
   studentBasicInfo.phone= $('table#student_details tr:eq(6) input').val();
   studentBasicInfo.email= $('table#student_details tr:eq(7) input').val();
+     $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/editStudent',
+       async: true,
+       contentType: "application/json",
+       data: JSON.stringify(studentBasicInfo),
+       dateType: "json",
+       success: function(data){
+       alert('操作成功');
+       location.reload();
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
 });
 //性别
 $("button#male").click(function(){

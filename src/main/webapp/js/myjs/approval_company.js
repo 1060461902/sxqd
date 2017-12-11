@@ -3,7 +3,7 @@ $(document).ready(function(){
   info.id = window.location.href;
 	 $.ajax({
        type: 'get',
-       url: '/fieldManagement/admin/showCompanyDeails',
+       url: '/fieldManagement/admin/showCompanyDetails',
        data: JSON.stringify(info),
        async: true,
        contentType: "application/json",
@@ -55,9 +55,10 @@ $("button").click(function(){
       var info = new Object();
       info.id = id;
       info.passFlag = flag;//要传输的数据
+      info.meg =null;
       $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/comfirmCompanyRegister',
+       url: '/fieldManagement/admin/comfirmRegister',
        data: JSON.stringify(info),
        async: true,
        contentType: "application/json",

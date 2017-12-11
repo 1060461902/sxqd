@@ -1,7 +1,4 @@
 $(document).ready(function(){    
-    if ($(".badge").text()==0) {
-      $(".badge").css("display","none");
-    };
     $.getJSON("js/json/data_analysis.json", function(data) {
          var obj = data.DataList;
          $("span#a").text(obj.a);

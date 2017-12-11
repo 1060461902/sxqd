@@ -1,13 +1,90 @@
 $(document).ready(function(){
-  var info = new Object();
-  info.grade = null;
-  info.teacher = null;
-  info.status = null
-  info.clss = null;
-  info.company = null;
-  // ajax
+  //筛选的一系列操作
+      $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/',
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+       var namelength = data.Names.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#company').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
+       }
+       var namelength = data.Names.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#class').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
+       }
+       var namelength = data.Names.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#grade').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
+       }       
+       //筛选（需要表格重新导入）
+  $("option").click(function(){
+    var info = new Object();
+    info.grade = $('select#grade').val();
+    info.clss = $('select#class').val();    
+    info.company = $('select#company').val();
+    info.status = $('select.status').val();
+    info.teacher = $('select#teacher').val();
+      $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/',
+       data: JSON.stringify(info),
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+     $('#table').dataTable().fnClearTable(); //清除表格内
+     $('#table').dataTable().fnDestroy();
+      writein(data);
+      trclick();//-------------点击---------
+      checked();//--------------部分选择操作checkbox----------------------
+      gd();
+            var docrTable = $('#table').dataTable({
+                "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
+                "bFilter" : true, //是否启动过滤、搜索功能
+                "info": false,
+                 "pageLength": 7,
+                "lengthChange" : false,
+                  "oLanguage": { //国际化配置
+                    "sProcessing" : "正在获取数据，请稍后...",
+                    "sLengthMenu" : "显示 _MENU_ 条",
+                    "sZeroRecords" : "没有您要搜索的内容",
+                    "sInfo" : "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+                    "sInfoEmpty" : "记录数为0",
+                    "sInfoFiltered" : "(全部记录数 _MAX_ 条)",
+                    "sInfoPostFix" : "",
+                    "sSearch" : "搜索",
+                    "sUrl" : "",
+                    "oPaginate": {
+                        "sFirst" : "第一页",
+                        "sPrevious" : "上一页",
+                        "sNext" : "下一页",
+                        "sLast" : "最后一页"
+                    }
+                },
+              });
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });//ajax
+  });
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });//ajax
   //--------获取老师的列表
-  $.getJSON("js/json/teacher_table.json", function(data) {
+     $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/',
+       async: true,
+       contentType: "application/json",
+       data: JSON.stringify(info),
+       dateType: "json",
+       success: function(data){
     var obj = data.teacherList;
     var length = obj.length;
     for (var i = 0; i < length; i++) {
@@ -25,7 +102,30 @@ $(document).ready(function(){
       $('ul').css('display','block');
     });
     });
-  });
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });//ajax
+  // $.getJSON("js/json/teacher_table.json", function(data) {
+  //   var obj = data.teacherList;
+  //   var length = obj.length;
+  //   for (var i = 0; i < length; i++) {
+  //     $('ul').append('<li>'+obj[i].userName+'</li>');
+  //     $('li:eq('+i+')').val(obj[i].id);
+  //   };
+  //   $('li').click(function(){
+  //     $('span#checkone').html($(this).text()+'<span style="float:right" class="aaa"><i class="fa fa-times-circle fa-fw"></i></span>');
+  //     $('ul').css('display','none');
+  //     $('span#description').text('已分配');
+  //     window.teacherId = $(this).val();
+  //   $('span>span>i').click(function(){
+  //     $('span#description').text('未分配');
+  //     $('span#checkone').empty();
+  //     $('ul').css('display','block');
+  //   });
+  //   });
+  // });
   //提交学生分配
   $('button#distribute').click(function(){
      var id = new Array();
@@ -39,17 +139,76 @@ $(document).ready(function(){
     var info = new Object();
     info.ids = id;
     info.teacherId = teacherId;
+    $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/',
+       async: true,
+       contentType: "application/json",
+       data: JSON.stringify(info),
+       dateType: "json",
+       success: function(data){
+       alert('提交成功');
+       location.reload();
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
     //ajax
-  });
-  
-  //---------获取筛选内容
-  $.getJSON("js/json/internship_table.json", function(data) {
-        var namelength = data.majorNameList.length;
-        for ( var i = 0; i < namelength; i++){
-        $('select').append('<option>'+data.majorNameList[i].majorName+'</option>');
-       }
-  });
-    $.getJSON("js/json/internship_table.json", function(data) {
+  }); 
+  //----------第一次写入表格-------------------
+  var info = new Object();
+  info.grade = null;
+  info.teacher = null;
+  info.status = null
+  info.clss = null;
+  info.company = null;
+     $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/',
+       async: true,
+       contentType: "application/json",
+       data: JSON.stringify(info),
+       dateType: "json",
+       success: function(data){
+      writein(data);
+      trclick();//-------------点击---------
+      checked();//--------------部分选择操作checkbox----------------------
+      gd();
+      var docrTable = $('#table').dataTable({
+                "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
+                "bFilter" : true, //是否启动过滤、搜索功能
+                "info": false,
+                 "pageLength": 8,
+                "lengthChange" : false, 
+                  "oLanguage": { //国际化配置
+                    "sProcessing" : "正在获取数据，请稍后...",
+                    "sLengthMenu" : "显示 _MENU_ 条",
+                    "sZeroRecords" : "没有您要搜索的内容",
+                    "sInfo" : "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+                    "sInfoEmpty" : "记录数为0",
+                    "sInfoFiltered" : "(全部记录数 _MAX_ 条)",
+                    "sInfoPostFix" : "",
+                    "sSearch" : "搜索",
+                    "sUrl" : "",
+                    "oPaginate": {
+                        "sFirst" : "第一页",
+                        "sPrevious" : "上一页",
+                        "sNext" : "下一页",
+                        "sLast" : "最后一页"
+                    }
+                },
+              });
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
+//     $.getJSON("js/json/internship_table.json", function(data) {
+
+// });//getjson
+//------------------->
+function writein(data){
        var tbody = document.getElementsByTagName ('tbody')[0];
        var len = data.internship.length;
        for ( var i = 0; i < len; i++)
@@ -76,13 +235,8 @@ $(document).ready(function(){
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = '<a href="teacher_table_details.html?id="'+obj.companyId+'>'+obj.teacherName+'</a>';
       } //for
-//--------筛选-----------
-$('option').click(function(){
-   var info = new Object();
-   info.major= $(this).text();
-//ajax
-});
-//-------------点击---------
+}
+function trclick () {
 $('tbody>tr>td').click(function(){
   var col = $(this).index(); // 列位置 
   if(col!=0){
@@ -90,6 +244,7 @@ $('tbody>tr>td').click(function(){
   location.href=href;
  }
 });
+}
 //--------------------------全选checkbox--------------------------
 var m=0;
 $('th>input:checkbox').click(function() {
@@ -123,7 +278,7 @@ $('th>input:checkbox').click(function() {
 });
       }
 });
-//--------------部分选择操作checkbox--------------------------------
+function checked(){
    $("td>input:checkbox").click(function(){
     var mm=0;
     $('input:checkbox').each(function() {
@@ -156,13 +311,15 @@ $('th>input:checkbox').click(function() {
         $('button#fp').css("display","none");
         }
    });
+}
+function gd(){
 //-----------点击归档（需要表格重新导入）-----------------
   $("button#gd").click(function(){
     var id = new Array();
     var a=0;
     $('td>input:checkbox').each(function() {
         if ($(this).attr('checked') =='checked') {
-          id[a]=$(this).parent('td').parent('tr').val();  alert(id[a]);
+          id[a]=$(this).parent('td').parent('tr').val();  //alert(id[a]);
           a++;
         }
     });
@@ -172,32 +329,6 @@ $('th>input:checkbox').click(function() {
     $('th>input:checkbox').attr('checked',false);
     location.reload();
    // alert(info.id);
-    //<---------------------------------------表格重新导入
    });
-      var docrTable = $('#table').dataTable({
-                "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
-                "bFilter" : true, //是否启动过滤、搜索功能
-                "info": false,
-                 "pageLength": 8,
-                "lengthChange" : false, 
-                  "oLanguage": { //国际化配置
-                    "sProcessing" : "正在获取数据，请稍后...",
-                    "sLengthMenu" : "显示 _MENU_ 条",
-                    "sZeroRecords" : "没有您要搜索的内容",
-                    "sInfo" : "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
-                    "sInfoEmpty" : "记录数为0",
-                    "sInfoFiltered" : "(全部记录数 _MAX_ 条)",
-                    "sInfoPostFix" : "",
-                    "sSearch" : "搜索",
-                    "sUrl" : "",
-                    "oPaginate": {
-                        "sFirst" : "第一页",
-                        "sPrevious" : "上一页",
-                        "sNext" : "下一页",
-                        "sLast" : "最后一页"
-                    }
-                },
-              });
-});//getjson
-//------------------->
+}
 });//document

@@ -24,15 +24,13 @@
         <div>
           <form role="form" class="form-inline" >
             <div class="form-group">
-              <select class="form-control">
+              <select class="form-control" id="grade">
                 <option>全部</option>
-                <option>2015级</option>
               </select>
-              <select class="form-control">
+              <select class="form-control" id="class">
                 <option>全部</option>
-                <option>计科1051</option>
               </select>
-              <select class="form-control">
+              <select class="form-control" id="company">
                 <option>全部</option>
                 <option>实习公司</option>
               </select>
@@ -42,14 +40,12 @@
                 <option val="实习中">实习中</option>
                 <option val="已结业">已结业</option>
               </select>
-               <select class="form-control">
+               <select class="form-control" id="teacher">
                 <option>有无指导老师</option>
                 <option>有指导老师</option>
                 <option>无指导老师</option>
               </select>
-            </div>           
-          <input type="text" class="form-control float-left search " id="name" placeholder="请输入名称">
-          <button type="submit" class="btn btn-default float-left search"><i class="fa fa-search"></i></button>     
+            </div>            
           </form>
         </div>
       <table class="table table-hover text-center" id="table">
@@ -71,7 +67,7 @@
         </tbody>
       </table> 
       <button type="button" class="btn btn-primary operations" id="fp"  data-toggle="modal" data-target="#fpModal">分配</button>
-      <button type="button" class="btn btn-primary operations" id="gg">更改</button>
+      <button type="button" class="btn btn-primary operations" id="gg"  data-toggle="modal" data-target="#fpModal">更改</button>
       <button type="button" class="btn btn-primary operations" id="gd">归档</button>
    </div>
 <!-- 模态框（Modal） -->

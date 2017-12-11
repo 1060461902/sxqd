@@ -3,26 +3,14 @@ $(document).ready(function(){
      $(".templatemo-left-nav a").css("background","#425FAF");
      $(this).css("background","#324E8F");
     });
-    if ($(".badge").text()==0) {
-      $(".badge").css("display","none")
-    };
   $("[href='data_analysis.html']").click(function(){
     $(".nav-title").text("数据分析");
-    if ($(".badge").text()==0) {
-      $(".badge").css("display","none")
-    };
   });
   $("[href='approval.html']").click(function(){
     $(".nav-title").text("审批");
-    if ($(".badge").text()==0) {
-      $(".badge").css("display","none")
-    };
   });
   $("[href='btn_table.html']").click(function(){
     $(".nav-title").text("信息列表");
-    if ($(".badge").text()==0) {
-      $(".badge").css("display","none")
-    };
   }); 
   $("[href='set.html']").click(function(){
     if ($(".badge").text()==0) {
