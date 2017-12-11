@@ -5,10 +5,12 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="major" jdbcType="VARCHAR" property="major" />
-    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="sex" jdbcType="BIT" property="sex" />
     <result column="photo" jdbcType="VARCHAR" property="photo" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="forbidden" jdbcType="BIT" property="forbidden" />
+    <result column="rank" jdbcType="VARCHAR" property="rank" />
+    <result column="delete_tag" jdbcType="BIT" property="deleteTag" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, major, sex, photo, email, forbidden
+    id, user_id, major, sex, photo, email, forbidden, rank, delete_tag
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.TeacherExample" resultMap="BaseResultMap">
     select
@@ -114,11 +116,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into teacher (user_id, major, sex, 
-      photo, email, forbidden
-      )
-    values (#{userId,jdbcType=INTEGER}, #{major,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
-      #{photo,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{forbidden,jdbcType=BIT}
-      )
+      photo, email, forbidden, 
+      rank, delete_tag)
+    values (#{userId,jdbcType=INTEGER}, #{major,jdbcType=VARCHAR}, #{sex,jdbcType=BIT}, 
+      #{photo,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{forbidden,jdbcType=BIT}, 
+      #{rank,jdbcType=VARCHAR}, #{deleteTag,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.Teacher">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -144,6 +146,12 @@
       <if test="forbidden != null">
         forbidden,
       </if>
+      <if test="rank != null">
+        rank,
+      </if>
+      <if test="deleteTag != null">
+        delete_tag,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -153,7 +161,7 @@
         #{major,jdbcType=VARCHAR},
       </if>
       <if test="sex != null">
-        #{sex,jdbcType=VARCHAR},
+        #{sex,jdbcType=BIT},
       </if>
       <if test="photo != null">
         #{photo,jdbcType=VARCHAR},
@@ -163,6 +171,12 @@
       </if>
       <if test="forbidden != null">
         #{forbidden,jdbcType=BIT},
+      </if>
+      <if test="rank != null">
+        #{rank,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTag != null">
+        #{deleteTag,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -185,7 +199,7 @@
         major = #{record.major,jdbcType=VARCHAR},
       </if>
       <if test="record.sex != null">
-        sex = #{record.sex,jdbcType=VARCHAR},
+        sex = #{record.sex,jdbcType=BIT},
       </if>
       <if test="record.photo != null">
         photo = #{record.photo,jdbcType=VARCHAR},
@@ -195,6 +209,12 @@
       </if>
       <if test="record.forbidden != null">
         forbidden = #{record.forbidden,jdbcType=BIT},
+      </if>
+      <if test="record.rank != null">
+        rank = #{record.rank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteTag != null">
+        delete_tag = #{record.deleteTag,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -206,10 +226,12 @@
     set id = #{record.id,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       major = #{record.major,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=BIT},
       photo = #{record.photo,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
-      forbidden = #{record.forbidden,jdbcType=BIT}
+      forbidden = #{record.forbidden,jdbcType=BIT},
+      rank = #{record.rank,jdbcType=VARCHAR},
+      delete_tag = #{record.deleteTag,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -224,7 +246,7 @@
         major = #{major,jdbcType=VARCHAR},
       </if>
       <if test="sex != null">
-        sex = #{sex,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=BIT},
       </if>
       <if test="photo != null">
         photo = #{photo,jdbcType=VARCHAR},
@@ -235,6 +257,12 @@
       <if test="forbidden != null">
         forbidden = #{forbidden,jdbcType=BIT},
       </if>
+      <if test="rank != null">
+        rank = #{rank,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTag != null">
+        delete_tag = #{deleteTag,jdbcType=BIT},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -242,10 +270,12 @@
     update teacher
     set user_id = #{userId,jdbcType=INTEGER},
       major = #{major,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=BIT},
       photo = #{photo,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      forbidden = #{forbidden,jdbcType=BIT}
+      forbidden = #{forbidden,jdbcType=BIT},
+      rank = #{rank,jdbcType=VARCHAR},
+      delete_tag = #{deleteTag,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

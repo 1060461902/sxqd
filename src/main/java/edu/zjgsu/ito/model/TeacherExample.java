@@ -324,62 +324,52 @@ public class TeacherExample {
             return (Criteria) this;
         }
 
-        public Criteria andSexEqualTo(String value) {
+        public Criteria andSexEqualTo(Boolean value) {
             addCriterion("sex =", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexNotEqualTo(String value) {
+        public Criteria andSexNotEqualTo(Boolean value) {
             addCriterion("sex <>", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexGreaterThan(String value) {
+        public Criteria andSexGreaterThan(Boolean value) {
             addCriterion("sex >", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexGreaterThanOrEqualTo(String value) {
+        public Criteria andSexGreaterThanOrEqualTo(Boolean value) {
             addCriterion("sex >=", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexLessThan(String value) {
+        public Criteria andSexLessThan(Boolean value) {
             addCriterion("sex <", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexLessThanOrEqualTo(String value) {
+        public Criteria andSexLessThanOrEqualTo(Boolean value) {
             addCriterion("sex <=", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexLike(String value) {
-            addCriterion("sex like", value, "sex");
-            return (Criteria) this;
-        }
-
-        public Criteria andSexNotLike(String value) {
-            addCriterion("sex not like", value, "sex");
-            return (Criteria) this;
-        }
-
-        public Criteria andSexIn(List<String> values) {
+        public Criteria andSexIn(List<Boolean> values) {
             addCriterion("sex in", values, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexNotIn(List<String> values) {
+        public Criteria andSexNotIn(List<Boolean> values) {
             addCriterion("sex not in", values, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexBetween(String value1, String value2) {
+        public Criteria andSexBetween(Boolean value1, Boolean value2) {
             addCriterion("sex between", value1, value2, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexNotBetween(String value1, String value2) {
+        public Criteria andSexNotBetween(Boolean value1, Boolean value2) {
             addCriterion("sex not between", value1, value2, "sex");
             return (Criteria) this;
         }
@@ -581,6 +571,136 @@ public class TeacherExample {
 
         public Criteria andForbiddenNotBetween(Boolean value1, Boolean value2) {
             addCriterion("forbidden not between", value1, value2, "forbidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andRankIsNull() {
+            addCriterion("rank is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRankIsNotNull() {
+            addCriterion("rank is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRankEqualTo(String value) {
+            addCriterion("rank =", value, "rank");
+            return (Criteria) this;
+        }
+
+        public Criteria andRankNotEqualTo(String value) {
+            addCriterion("rank <>", value, "rank");
+            return (Criteria) this;
+        }
+
+        public Criteria andRankGreaterThan(String value) {
+            addCriterion("rank >", value, "rank");
+            return (Criteria) this;
+        }
+
+        public Criteria andRankGreaterThanOrEqualTo(String value) {
+            addCriterion("rank >=", value, "rank");
+            return (Criteria) this;
+        }
+
+        public Criteria andRankLessThan(String value) {
+            addCriterion("rank <", value, "rank");
+            return (Criteria) this;
+        }
+
+        public Criteria andRankLessThanOrEqualTo(String value) {
+            addCriterion("rank <=", value, "rank");
+            return (Criteria) this;
+        }
+
+        public Criteria andRankLike(String value) {
+            addCriterion("rank like", value, "rank");
+            return (Criteria) this;
+        }
+
+        public Criteria andRankNotLike(String value) {
+            addCriterion("rank not like", value, "rank");
+            return (Criteria) this;
+        }
+
+        public Criteria andRankIn(List<String> values) {
+            addCriterion("rank in", values, "rank");
+            return (Criteria) this;
+        }
+
+        public Criteria andRankNotIn(List<String> values) {
+            addCriterion("rank not in", values, "rank");
+            return (Criteria) this;
+        }
+
+        public Criteria andRankBetween(String value1, String value2) {
+            addCriterion("rank between", value1, value2, "rank");
+            return (Criteria) this;
+        }
+
+        public Criteria andRankNotBetween(String value1, String value2) {
+            addCriterion("rank not between", value1, value2, "rank");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagIsNull() {
+            addCriterion("delete_tag is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagIsNotNull() {
+            addCriterion("delete_tag is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagEqualTo(Boolean value) {
+            addCriterion("delete_tag =", value, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagNotEqualTo(Boolean value) {
+            addCriterion("delete_tag <>", value, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagGreaterThan(Boolean value) {
+            addCriterion("delete_tag >", value, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("delete_tag >=", value, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagLessThan(Boolean value) {
+            addCriterion("delete_tag <", value, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagLessThanOrEqualTo(Boolean value) {
+            addCriterion("delete_tag <=", value, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagIn(List<Boolean> values) {
+            addCriterion("delete_tag in", values, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagNotIn(List<Boolean> values) {
+            addCriterion("delete_tag not in", values, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagBetween(Boolean value1, Boolean value2) {
+            addCriterion("delete_tag between", value1, value2, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("delete_tag not between", value1, value2, "deleteTag");
             return (Criteria) this;
         }
     }

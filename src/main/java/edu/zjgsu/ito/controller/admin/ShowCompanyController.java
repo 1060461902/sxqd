@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +35,8 @@ public class ShowCompanyController {
     CompanyViewService companyViewService;
     @Autowired
     CompanyImageService companyImageService;
+    @Autowired
+    TeacherService teacherService;
     @Autowired
     CompanyMarkService companyMarkService;
     @Autowired
@@ -62,7 +65,7 @@ public class ShowCompanyController {
         CompanyViewExample CompanyViewExample=new CompanyViewExample();
 
       /*  if(size.equals("企业名称")){*/
-            CompanyViewExample.or().andPassEqualTo(true);
+            CompanyViewExample.or().andPassEqualTo(true).andDeleteTagEqualTo(true);
 
        /* }else {
             CompanyViewExample.or().andPassEqualTo(true).andCompanyNameEqualTo(size);
@@ -306,14 +309,27 @@ public class ShowCompanyController {
             }
             result.put("code", Constant.OK);
             result.put("msg", "返回动态信息成功！");
-            result.put("user",user);
-            result.put("dynamicApproves", dynamicApprove);
+            JSONObject obj=new JSONObject();
+            obj.put("id",dynamicApprove.getId());
+            obj.put("title",dynamicApprove.getTitle());
+            obj.put("imageUrl",dynamicApprove.getImageUrl());
+            obj.put("detail",dynamicApprove.getDetail());
+            obj.put("nickName",user.getNickName());
+            obj.put("phone",dynamicApprove.getPhone());
+            obj.put("email",dynamicApprove.getEmail());
+            obj.put("startTime",dynamicApprove.getStartTime());
+            obj.put("showstatus",dynamicApprove.getShowStatus());
+            result.put("dynamicNewsDetails", obj);
         }
         return result;
     }
 
     @RequestMapping(value = "showCompanynames",method=RequestMethod.GET)
     public @ResponseBody
+    /*
+    * 获取所有注册企业名字
+    * author hanfeng
+    * */
     Map<String,Object> showCompanynames(){
         Map<String, Object> result = new HashMap<String, Object>();
         CompanyExample companyExample=new CompanyExample();
@@ -330,4 +346,132 @@ public class ShowCompanyController {
 
         return result;
     }
+    @RequestMapping(value = "showCompanyRecruitment", method = RequestMethod.GET)
+    public @ResponseBody
+    Map<String, Object> showRecruitment(@RequestParam("id") Integer id
+    ) {
+
+
+/*
+* @param
+* @return
+* 查看企业的招聘岗位
+* @author hanfeng
+* */
+
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        CompanyExample companyExample=new CompanyExample();
+
+        RecruitmentExample recruitmentExample = new RecruitmentExample();
+        recruitmentExample.or().andCompanyIdEqualTo(id);
+        List<Recruitment> recruitments = recruitmentService.selectByExample(recruitmentExample);
+
+        if (recruitments == null) {
+            result.put("code", Constant.FAIL);
+            result.put("msg", "无法从Recruitment表里查到记录！");
+            return result;
+        }
+
+        JSONArray objs=new JSONArray();
+        for(Recruitment recruitment:recruitments){
+            JSONObject object=new JSONObject();
+            object.put("id",recruitment.getId());
+            object.put("post",recruitment.getPost());
+            object.put("totalNumber",recruitment.getTotalNumber());
+            object.put("currentNumber",recruitment.getCurrentNumber());
+            object.put("startTime",new SimpleDateFormat("yyyy/MM").format(recruitment.getStarttime()));
+            object.put("endTime",new SimpleDateFormat("yyyy/MM").format(recruitment.getEndtime()));
+            object.put("release_time",new SimpleDateFormat("yyyy/MM").format(recruitment.getReleaseTime()));
+            object.put("address",recruitment.getAddress());
+            Company company=companyService.selectByPrimaryKey(recruitment.getCompanyId());
+            object.put("companyName",company.getCompanyName());
+            object.put("forbidden",recruitment.getForbidden());
+            objs.add(object);
+        }
+        result.put("recruitmentList",objs);
+        result.put("code", Constant.OK);
+        return result;
+    }
+    @RequestMapping(value = "showCompanyStudent", method = RequestMethod.GET)
+    public @ResponseBody
+    /*查看公司名下学生
+    * @author hanfeng
+    * */
+    Map<String, Object> showCompanyStudent(@RequestParam("id") Integer id,
+                                           @RequestParam("major") String major,
+                                           @RequestParam("clss") String clss,
+                                           @RequestParam("status") String status
+    ) {
+        try {
+            major= new String(major .getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            clss= new String(clss .getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            status= new String(status .getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        StudentExample studentExample=new StudentExample();
+
+        if(major.equals("专业")){
+            studentExample.or().andCompanyIdEqualTo(id).andDeleteTagEqualTo(true);
+
+        }else{
+            studentExample.or().andMajorEqualTo(major);
+        }
+        if(clss.equals("班级")){
+            studentExample.or();
+        }else{
+            studentExample.or().andClssEqualTo(clss);
+        }
+        if(status.equals("实习状态")){
+            studentExample.or();
+        }else{
+            studentExample.or().andStatusEqualTo(status);
+        }
+
+
+        List<Student> students=studentService.selectByExample(studentExample);
+
+        JSONArray objects=new JSONArray();
+        System.out.println(students);
+        for(Student student:students){
+            JSONObject obj=new JSONObject();
+            obj.put("id",student.getId());
+            User user=userService.selectByPrimaryKey(student.getUserId());
+            obj.put("nickName",user.getNickName());
+            obj.put("userName",user.getUserName());
+            obj.put("status",student.getStatus());
+            Company company=companyService.selectByPrimaryKey(student.getCompanyId());
+            obj.put("companyName",company.getCompanyName());
+            Teacher teacher=teacherService.selectByPrimaryKey(student.getTeacherId());
+           User user2=userService.selectByPrimaryKey(teacher.getUserId());
+            obj.put("teacherName",user2.getNickName());
+            obj.put("major",student.getMajor());
+            obj.put("clss",student.getClss());
+            obj.put("forbidden",student.getForbidden());
+            obj.put("companyId",student.getCompanyId());
+
+            if (user == null) {
+                result.put("code", Constant.FAIL);
+//                result.put("msg", "无法找到Teacher表userID=" + id + "对应的user！");
+                return result;
+            }
+            objects.add(obj);
+        }
+        result.put("students",objects);
+        return result;
+    }
+
+
     }

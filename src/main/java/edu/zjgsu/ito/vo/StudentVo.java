@@ -10,6 +10,15 @@ public class StudentVo {
     Integer Id;
     String grade;
     Integer teacherId;
+    boolean forbidden;
+
+    public boolean isForbidden() {
+        return forbidden;
+    }
+
+    public void setForbidden(boolean forbidden) {
+        this.forbidden = forbidden;
+    }
 
     public Integer getTeacherId() {
         return teacherId;

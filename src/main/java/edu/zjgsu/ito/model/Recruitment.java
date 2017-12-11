@@ -1,6 +1,7 @@
 package edu.zjgsu.ito.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author 
@@ -99,6 +100,14 @@ public class Recruitment implements Serializable {
     private Boolean recruitment;
 
     private String why;
+
+    private Date starttime;
+
+    private Date endtime;
+
+    private String city;
+
+    private Date releaseTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -262,6 +271,38 @@ public class Recruitment implements Serializable {
         this.why = why;
     }
 
+    public Date getStarttime() {
+        return starttime;
+    }
+
+    public void setStarttime(Date starttime) {
+        this.starttime = starttime;
+    }
+
+    public Date getEndtime() {
+        return endtime;
+    }
+
+    public void setEndtime(Date endtime) {
+        this.endtime = endtime;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Date getReleaseTime() {
+        return releaseTime;
+    }
+
+    public void setReleaseTime(Date releaseTime) {
+        this.releaseTime = releaseTime;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -293,7 +334,11 @@ public class Recruitment implements Serializable {
             && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
             && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
             && (this.getRecruitment() == null ? other.getRecruitment() == null : this.getRecruitment().equals(other.getRecruitment()))
-            && (this.getWhy() == null ? other.getWhy() == null : this.getWhy().equals(other.getWhy()));
+            && (this.getWhy() == null ? other.getWhy() == null : this.getWhy().equals(other.getWhy()))
+            && (this.getStarttime() == null ? other.getStarttime() == null : this.getStarttime().equals(other.getStarttime()))
+            && (this.getEndtime() == null ? other.getEndtime() == null : this.getEndtime().equals(other.getEndtime()))
+            && (this.getCity() == null ? other.getCity() == null : this.getCity().equals(other.getCity()))
+            && (this.getReleaseTime() == null ? other.getReleaseTime() == null : this.getReleaseTime().equals(other.getReleaseTime()));
     }
 
     @Override
@@ -320,6 +365,10 @@ public class Recruitment implements Serializable {
         result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
         result = prime * result + ((getRecruitment() == null) ? 0 : getRecruitment().hashCode());
         result = prime * result + ((getWhy() == null) ? 0 : getWhy().hashCode());
+        result = prime * result + ((getStarttime() == null) ? 0 : getStarttime().hashCode());
+        result = prime * result + ((getEndtime() == null) ? 0 : getEndtime().hashCode());
+        result = prime * result + ((getCity() == null) ? 0 : getCity().hashCode());
+        result = prime * result + ((getReleaseTime() == null) ? 0 : getReleaseTime().hashCode());
         return result;
     }
 
@@ -349,6 +398,10 @@ public class Recruitment implements Serializable {
         sb.append(", email=").append(email);
         sb.append(", recruitment=").append(recruitment);
         sb.append(", why=").append(why);
+        sb.append(", starttime=").append(starttime);
+        sb.append(", endtime=").append(endtime);
+        sb.append(", city=").append(city);
+        sb.append(", releaseTime=").append(releaseTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

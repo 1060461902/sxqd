@@ -44,10 +44,16 @@ public class ShowRecruitmentController {
     TeacherService teacherService;
     @Autowired
     SummaryService summaryService;
+    @Autowired
+    ImageService imageService;
+    @Autowired
+    ScoreService scoreService;
 
     @RequestMapping(value = "showRecruitment", method = RequestMethod.GET)
     public @ResponseBody
-    Map<String, Object> showRegisterCompanies(@RequestParam("companyName") String companyName) {
+    Map<String, Object> showRecruitment(@RequestParam("companyName") String companyName,
+                                              @RequestParam("status") String status
+                                              ) {
 
         RecruitmentVo recruitmentVo=null;
         List<RecruitmentVo> recruitmentVoList = new ArrayList<RecruitmentVo>();
@@ -55,19 +61,47 @@ public class ShowRecruitmentController {
 /*
 * @param
 * @return
-* 查看企业招聘
+* 查看招聘信息列表
 * @author hanfeng
 * */
         Map<String, Object> result = new HashMap<String, Object>();
+        try {
+            companyName= new String(companyName .getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            status= new String(status .getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
+        CompanyExample companyExample=new CompanyExample();
+        List<Recruitment> Recruitments=null;
+        System.out.println(companyName);
         RecruitmentExample recruitmentExample = new RecruitmentExample();
-        recruitmentExample.or().andCheckedEqualTo(false);
 
-        List<Recruitment> Recruitments = recruitmentService.selectByExample(recruitmentExample);
+        if(companyName.equals("招聘公司")){
+            recruitmentExample.or().andPassEqualTo(true);
+        }else{
+            companyExample.or().andPassEqualTo(true).andDeleteTagEqualTo(true).andCompanyNameEqualTo(companyName);
+            List<Company> companies=companyService.selectByExample(companyExample);
+            for(Company company:companies){
+                recruitmentExample.or().andPassEqualTo(true).andCompanyIdEqualTo(company.getId());
+            }
+        }
+        if(status.equals("招聘状态")){
+            recruitmentExample.or();
+        }else if(status.equals("招聘中")){
+            recruitmentExample.or().andRecruitmentEqualTo(true);
+        }else if(status.equals("已过期")){
+            recruitmentExample.or().andRecruitmentEqualTo(false);
+        }
+            Recruitments = recruitmentService.selectByExample(recruitmentExample);
 
         if (Recruitments == null) {
             result.put("code", Constant.FAIL);
-            result.put("msg", "无法从Company表里查到记录！");
+            result.put("msg", "无法从Recruitment表里查到记录！");
             return result;
         }
         for (Recruitment recruitment : Recruitments) {
@@ -89,11 +123,12 @@ public class ShowRecruitmentController {
         result.put("code", Constant.OK);
         result.put("RecruitmentList", recruitmentVoList);
         return result;
+
     }
 
     @RequestMapping(value = "showRecruitmentApplyList",method = RequestMethod.GET)
     public @ResponseBody
-    Map<String, Object> showRecruitmentApplyList(@RequestParam("companyName") String companyName) {
+    Map<String, Object> showRecruitmentApplyList(@RequestParam("companyId") Integer companyId) {
 
 /** @param
 * @return
@@ -101,40 +136,39 @@ public class ShowRecruitmentController {
 * @author hanfeng
 * */
 
-        try {
-            companyName= new String(companyName .getBytes("iso8859-1"),"utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            companyName= new String(companyName .getBytes("iso8859-1"),"utf-8");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
 
-        System.out.println(companyName);
+
         Map<String, Object> result = new HashMap<String, Object>();
-            RecruitmentExample recruitmentExample = new RecruitmentExample();
-//            recruitmentExample.or().andCheckedEqualTo(true).andPassEqualTo(true).andRemoveEqualTo(false);
-        recruitmentExample.or().andCheckedEqualTo(false);
+        RecruitmentExample recruitmentExample = new RecruitmentExample();
+
+        if (companyId==0){
+            recruitmentExample.or().andCheckedEqualTo(false);
+
+        }else{
+            recruitmentExample.or().andCheckedEqualTo(false).andCompanyIdEqualTo(companyId);
+        }
 
             RecruitmentVo recruitmentVo;
             List<RecruitmentVo> recruitmentVoList = new ArrayList<RecruitmentVo>();
 
             List<Recruitment> Recruitments;
-            CompanyView companyView;
-
-            if (companyName == null) {
-                Recruitments = recruitmentService.selectByExample(recruitmentExample);
-            }else {
-                companyView=companyViewService.selectByName(companyName);
-                Integer company_id=companyView.getId();
-                Recruitments = recruitmentService.selectByCompanyId(company_id);
-            }
+            Recruitments = recruitmentService.selectByExample(recruitmentExample);
 
             if (Recruitments == null) {
                 result.put("code", Constant.FAIL);
                 result.put("msg", "无法从Company表里查到记录！");
                 return result;
             }
-            System.out.println(Recruitments);
+
+        System.out.println(Recruitments);
+
             for (Recruitment recruitment : Recruitments) {
-                companyView = companyViewService.selectByKey(recruitment.getCompanyId());
+                CompanyView companyView = companyViewService.selectByKey(recruitment.getCompanyId());
                 recruitmentVo=new RecruitmentVo();
                 recruitmentVo.setPost(recruitment.getPost());
                 recruitmentVo.setAddress(recruitment.getAddress());
@@ -145,11 +179,10 @@ public class ShowRecruitmentController {
                 recruitmentVo.setCompanyId(recruitment.getCompanyId());
                 recruitmentVoList.add(recruitmentVo);
 
-
             }
             result.put("code", Constant.OK);
             result.put("msg", "返回公司信息成功！");
-            result.put("recruitmentVoList", recruitmentVoList);
+            result.put("recruitmentApplyList", recruitmentVoList);
             return result;
         }
     @RequestMapping(value = "showRecruitmentStudent",method = RequestMethod.GET)
@@ -180,6 +213,7 @@ public class ShowRecruitmentController {
         }
             return result;
 }
+
     @RequestMapping(value = "forbiddenRecruitment", method = RequestMethod.GET)
     /*
     * author hanfeng
@@ -419,16 +453,13 @@ public class ShowRecruitmentController {
          * */
         Map<String, Object> result = new HashMap<String, Object>();
         DailyCheckExample dailyCheckExample=new DailyCheckExample();
-
         dailyCheckExample.or().andStudentIdEqualTo(id);
         List<DailyCheck> dailyChecks=dailyCheckService.selectByExample(dailyCheckExample);
-
         JSONArray ovjects=new JSONArray();
-
         for(DailyCheck dailyCheck:dailyChecks){
             JSONObject ovj=new JSONObject();
             String four=new SimpleDateFormat("yyyy/MM").format(dailyCheck.getStartTime());
-            ovj.put("screen",four);
+            ovj.put("screens",four);
             ovjects.add(ovj);
         }
 
@@ -464,9 +495,10 @@ public class ShowRecruitmentController {
             object.put("teacherScore",report.getScore());
             object.put("companyScore",report.getcScore());
             object.put("id",report.getId());
-            object.put("datetime",report.getPublishedDate());
+            object.put("datetime",new SimpleDateFormat("yyyy-MM-dd").format(report.getPublishedDate()));
             objects.add(object);
         }
+        result.put("studentId",id);
         result.put("weeklyList",objects);
         return result;
     }
@@ -493,35 +525,41 @@ public class ShowRecruitmentController {
             object.put("Score",report.getScore());
             object.put("cScore",report.getcScore());
             object.put("id",report.getId());
-            object.put("publishedDate",report.getPublishedDate());
+            object.put("publishedDate",new SimpleDateFormat("yyyy-MM-dd").format(report.getPublishedDate()));
             object.put("title",report.getTitle());
             Student student=studentService.selectByPrimaryKey(report.getStudentId());
             User user=userService.selectByPrimaryKey(student.getUserId());
             object.put("name",user.getNickName());
-            object.put("startTime",report.getStartTime());
-            object.put("endTime",report.getEndTime());
+            object.put("startTime",new SimpleDateFormat("yyyy-MM-dd").format(report.getStartTime()));
+            object.put("endTime",new SimpleDateFormat("yyyy-MM-dd").format(report.getEndTime()));
             object.put("content",report.getContent());
-            object.put("readoverTime",report.getReadoverTime());
+            object.put("readoverTime",new SimpleDateFormat("yyyy-MM-dd").format(report.getReadoverTime()));
             object.put("comment",report.getComment());
             User user2=userService.selectByPrimaryKey(student.getTeacherId());
             object.put("teacherName",user2.getNickName());
             object.put("eamil",student.getEmail());
             object.put("phone",user.getPhone());
-            object.put("cReadoverTime",report.getcReadoverTime());
+            object.put("cReadoverTime",new SimpleDateFormat("yyyy-MM-dd").format(report.getcReadoverTime()));
             object.put("cComment",report.getcComment());
             Company company =companyService.selectByPrimaryKey(student.getCompanyId());
             object.put("cName",company.getCompanyName());
             object.put("cEmail",company.getEmail());
             User user3=userService.selectByPrimaryKey(company.getUserId());
+            ImageExample imageExample=new ImageExample();
+            imageExample.or().andReportIdEqualTo(report.getId());
+            List<Image> images=imageService.selectByExample(imageExample);
+            object.put("photp",images);
             object.put("cPhone",user3.getPhone());
+
             objects.add(object);
         }
+        result.put("studentId",id);
         result.put("weeklyList",objects);
         return result;
     }
-    @RequestMapping(value = "showSummaryDetail",method = RequestMethod.GET)
+    @RequestMapping(value = "showSummary",method = RequestMethod.GET)
     public @ResponseBody
-    Map<String, Object> showSummaryDetail(@RequestParam("id") Integer id) {
+    Map<String, Object> showSummary(@RequestParam("id") Integer id) {
         /** @param
          * @return
          * 查看小结详情
@@ -540,24 +578,212 @@ public class ShowRecruitmentController {
             JSONObject object=new JSONObject();
             object.put("Score",summary.getScore());
             object.put("id",summary.getId());
-            object.put("publishedDate",summary.getPublishedDate());
+            object.put("publishedDate",new SimpleDateFormat("yyyy-MM-dd").format(summary.getPublishedDate()));
             object.put("title",summary.getTitle());
             Student student=studentService.selectByPrimaryKey(summary.getStudentId());
             User user=userService.selectByPrimaryKey(student.getUserId());
             object.put("name",user.getNickName());
-            object.put("startTime",summary.getStartTime());
-            object.put("endTime",summary.getEndTime());
+
+            object.put("startTime",new SimpleDateFormat("yyyy-MM-dd").format(summary.getStartTime()));
+
+            object.put("endTime",new SimpleDateFormat("yyyy-MM-dd").format(summary.getEndTime()));
             object.put("content",summary.getContent());
-            object.put("readoverTime",summary.getReadoverTime());
+            object.put("readoverTime",new SimpleDateFormat("yyyy-MM-dd").format(summary.getReadoverTime()));
             object.put("comment",summary.getComment());
             User user2=userService.selectByPrimaryKey(student.getTeacherId());
             object.put("teacherName",user2.getNickName());
-            object.put("eamil",student.getEmail());
+            object.put("email",student.getEmail());
             object.put("phone",user.getPhone());
             objects.add(object);
         }
-        result.put("weeklyList",objects);
+        result.put("studentId",id);
+        result.put("summary",objects);
         return result;
+    }
+    @RequestMapping(value = "showSummaryDetail",method = RequestMethod.GET)
+    public @ResponseBody
+    Map<String, Object> showSummaryDetail(@RequestParam("id") Integer id) {
+        /** @param
+         * @return
+         * 查看报告详情
+         * @author hanfeng
+         * */
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        SummaryExample summaryExample=new SummaryExample();
+
+        summaryExample.or().andStudentIdEqualTo(id).andStatusIdEqualTo(false);
+
+        List<Summary> summaries=summaryService.selectByExample(summaryExample);
+
+        JSONArray objects=new JSONArray();
+        for(Summary summary:summaries){
+            JSONObject object=new JSONObject();
+            object.put("Score",summary.getScore());
+            object.put("id",summary.getId());
+            object.put("publishedDate",new SimpleDateFormat("yyyy-MM-dd").format(summary.getPublishedDate()));
+            object.put("title",summary.getTitle());
+            Student student=studentService.selectByPrimaryKey(summary.getStudentId());
+            User user=userService.selectByPrimaryKey(student.getUserId());
+            object.put("name",user.getNickName());
+            object.put("startTime",new SimpleDateFormat("yyyy-MM-dd").format(summary.getStartTime()));
+            object.put("endTime",new SimpleDateFormat("yyyy-MM-dd").format(summary.getEndTime()));
+            object.put("content",summary.getContent());
+            object.put("readoverTime",new SimpleDateFormat("yyyy-MM-dd").format(summary.getReadoverTime()));
+            object.put("comment",summary.getComment());
+            User user2=userService.selectByPrimaryKey(student.getTeacherId());
+            object.put("teacherName",user2.getNickName());
+            object.put("email",student.getEmail());
+            object.put("phone",user.getPhone());
+            objects.add(object);
+        }
+        result.put("studentId",id);
+        result.put("summary",objects);
+        return result;
+    }
+    @RequestMapping(value = "showScore",method = RequestMethod.GET)
+    public @ResponseBody
+    Map<String, Object> showScore(@RequestParam("id") Integer id) {
+        /** @param
+         * @return
+         * 查看实习成绩详情
+         * @author hanfeng
+         * */
+        Map<String, Object> result = new HashMap<String, Object>();
+        ScoreExample scoreExample=new ScoreExample();
+        scoreExample.or().andStudentIdEqualTo(id);
+        List<Score> scores=scoreService.selectByExample(scoreExample);
+        result.put("score",scores);
+        return result;
+    }
+    @RequestMapping(value = "showCompanyRecruitment", method = RequestMethod.GET)
+    public @ResponseBody
+    Map<String, Object> showCompanyRecruitment(@RequestParam("companyId") Integer companyId,
+                                               @RequestParam("month") String month) {
+
+        RecruitmentVo recruitmentVo=null;
+        List<RecruitmentVo> recruitmentVoList = new ArrayList<RecruitmentVo>();
+
+        /*
+        * @param
+        * @return
+        * 查看某个企业招聘信息
+        * @author hanfeng
+        * */
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        RecruitmentExample recruitmentExample = new RecruitmentExample();
+        recruitmentExample.or().andPassEqualTo(true).andCompanyIdEqualTo(companyId);
+
+        List<Recruitment> Recruitments = recruitmentService.selectByExample(recruitmentExample);
+
+        if (Recruitments == null) {
+            result.put("code", Constant.FAIL);
+            result.put("msg", "无法从Recruitments表里查到记录！");
+            return result;
+        }
+        for (Recruitment recruitment : Recruitments) {
+            recruitmentVo=new RecruitmentVo();
+            CompanyView companyView = companyViewService.selectByKey(recruitment.getCompanyId());
+            recruitmentVo.setContact(recruitment.getContact());
+            recruitmentVo.setPost(recruitment.getPost());
+            recruitmentVo.setAddress(recruitment.getAddress());
+            recruitmentVo.setCompanyName(companyView.getCompanyName());
+            recruitmentVo.setPostTime(recruitment.getPostTime());
+            recruitmentVo.setCurrentNumber(recruitment.getCurrentNumber());
+            recruitmentVo.setTotalNumber(recruitment.getTotalNumber());
+            recruitmentVo.setId(recruitment.getId());
+            recruitmentVo.setCompanyId(recruitment.getCompanyId());
+            recruitmentVoList.add(recruitmentVo);
+        }
+        result.put("code", Constant.OK);
+        result.put("RecruitmentList", recruitmentVoList);
+        return result;
+    }
+
+    @RequestMapping(value = "showRecruitmentScreen",method = RequestMethod.GET)
+    public @ResponseBody
+    Map<String, Object> showRecruitmentScreen(@RequestParam("id") Integer id) {
+        /** @param
+         * @return
+         * 查看某个公司招聘岗位的筛选条件
+         * @author hanfeng
+         * */
+        Map<String, Object> result = new HashMap<String, Object>();
+         RecruitmentExample recruitmentExample=new RecruitmentExample();
+
+        recruitmentExample.or().andCompanyIdEqualTo(id);
+        List<Recruitment> recruitments = recruitmentService.selectByExample(recruitmentExample);
+        if (recruitments == null) {
+            result.put("code", Constant.FAIL);
+            result.put("msg", "无法从Recruitments表里查到记录！");
+            return result;
+        }
+
+
+        JSONArray ovjects=new JSONArray();
+
+        for(Recruitment recruitment:recruitments){
+            JSONObject ovj=new JSONObject();
+            String four=new SimpleDateFormat("yyyy/MM").format(recruitment.getStarttime());
+            ovj.put("screen",four);
+            ovjects.add(ovj);
+        }
+
+        //Set set=new TreeSet();
+        System.out.println(ovjects);
+        Set set=new HashSet(ovjects);
+        System.out.println(set);
+
+        result.put("id",id);
+        result.put("month",set);
+        return result;
+    }
+    @RequestMapping(value = "showRecruitmentDetails", method = RequestMethod.GET)
+    public @ResponseBody
+    Map<String, Object> showRecruitmentDetails(@RequestParam("id") Integer id
+
+    ) {
+
+        RecruitmentVo recruitmentVo=null;
+/*
+* @param
+* @return
+* 查看企业招聘详情
+* @author hanfeng
+* */
+        Map<String, Object> result = new HashMap<String, Object>();
+        CompanyExample companyExample=new CompanyExample();
+        List<Recruitment> Recruitments=null;
+        RecruitmentExample recruitmentExample = new RecruitmentExample();
+
+        Recruitment recruitment = recruitmentService.selectByPrimaryKey(id);
+
+        if (Recruitments == null) {
+            result.put("code", Constant.FAIL);
+            result.put("msg", "无法从Recruitment表里查到记录！");
+            return result;
+        }
+            recruitmentVo=new RecruitmentVo();
+            CompanyView companyView = companyViewService.selectByKey(recruitment.getCompanyId());
+            JSONObject object=new JSONObject();
+            object.put("post",recruitment.getPost());
+            object.put("totalnumber",recruitment.getTotalNumber());
+            object.put("postTime",recruitment.getPostTime());
+            object.put("address",recruitment.getAddress());
+            object.put("skillRequire",recruitment.getSkillRequire());
+            Company company=companyService.selectByPrimaryKey(recruitment.getCompanyId());
+            object.put("companyName",company.getCompanyName());
+            object.put("logo",company.getLogo());
+            object.put("type",company.getType());
+            object.put("size",company.getSize());
+            object.put("stage",company.getStage());
+            object.put("postInfo",recruitment.getPostInfo());
+            object.put("id",recruitment.getId());
+            result.put("code", Constant.OK);
+            result.put("recruitmentDetails", object);
+            return result;
+
     }
 }
 

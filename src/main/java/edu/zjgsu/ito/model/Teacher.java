@@ -15,13 +15,17 @@ public class Teacher implements Serializable {
      */
     private String major;
 
-    private String sex;
+    private Boolean sex;
 
     private String photo;
 
     private String email;
 
     private Boolean forbidden;
+
+    private String rank;
+
+    private Boolean deleteTag;
 
     private static final long serialVersionUID = 1L;
 
@@ -49,11 +53,11 @@ public class Teacher implements Serializable {
         this.major = major;
     }
 
-    public String getSex() {
+    public Boolean getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(Boolean sex) {
         this.sex = sex;
     }
 
@@ -81,6 +85,22 @@ public class Teacher implements Serializable {
         this.forbidden = forbidden;
     }
 
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
+    }
+
+    public Boolean getDeleteTag() {
+        return deleteTag;
+    }
+
+    public void setDeleteTag(Boolean deleteTag) {
+        this.deleteTag = deleteTag;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -99,7 +119,9 @@ public class Teacher implements Serializable {
             && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
             && (this.getPhoto() == null ? other.getPhoto() == null : this.getPhoto().equals(other.getPhoto()))
             && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
-            && (this.getForbidden() == null ? other.getForbidden() == null : this.getForbidden().equals(other.getForbidden()));
+            && (this.getForbidden() == null ? other.getForbidden() == null : this.getForbidden().equals(other.getForbidden()))
+            && (this.getRank() == null ? other.getRank() == null : this.getRank().equals(other.getRank()))
+            && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()));
     }
 
     @Override
@@ -113,6 +135,8 @@ public class Teacher implements Serializable {
         result = prime * result + ((getPhoto() == null) ? 0 : getPhoto().hashCode());
         result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
         result = prime * result + ((getForbidden() == null) ? 0 : getForbidden().hashCode());
+        result = prime * result + ((getRank() == null) ? 0 : getRank().hashCode());
+        result = prime * result + ((getDeleteTag() == null) ? 0 : getDeleteTag().hashCode());
         return result;
     }
 
@@ -129,6 +153,8 @@ public class Teacher implements Serializable {
         sb.append(", photo=").append(photo);
         sb.append(", email=").append(email);
         sb.append(", forbidden=").append(forbidden);
+        sb.append(", rank=").append(rank);
+        sb.append(", deleteTag=").append(deleteTag);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

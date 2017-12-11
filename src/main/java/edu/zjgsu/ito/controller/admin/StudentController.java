@@ -5,10 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import edu.zjgsu.ito.model.*;
 import edu.zjgsu.ito.service.*;
 import edu.zjgsu.ito.utils.Constant;
-import edu.zjgsu.ito.vo.AssignedStudent;
-import edu.zjgsu.ito.vo.ScreeningVo;
-import edu.zjgsu.ito.vo.StudentDetail;
-import edu.zjgsu.ito.vo.StudentVo;
+import edu.zjgsu.ito.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -60,7 +57,7 @@ public class StudentController {
         StudentExample studentExample=new StudentExample();
 
         if(grade==null){
-            studentExample.or();
+            studentExample.or().andDeleteTagEqualTo(true);
         }else{
             studentExample.or().andGradeEqualTo(grade);
         }
@@ -97,6 +94,7 @@ public class StudentController {
             studentVO.setId(student.getId());
             studentVO.setTeacherName(userone.getNickName());
             studentVO.setTeacherId(student.getTeacherId());
+            studentVO.setForbidden(student.getForbidden());
             studentVos.add(studentVO);
         }
         result.put("students",studentVos);
@@ -131,6 +129,36 @@ public class StudentController {
         }else{
             result.put("code", Constant.FAIL);
             result.put("msg", "审批失败！更新数据库失败");
+            return result;
+        }
+        return result;
+    }
+    @RequestMapping(value = "deleteStudent", method = RequestMethod.GET)
+    /*
+    * author hanfeng
+    * 删除学生
+    * */
+    public @ResponseBody
+    Map<String, Object> deleteStudent(@RequestParam("id") Integer id
+    ) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        int one;
+        Student student=studentService.selectByPrimaryKey(id);
+
+
+        if(student ==null){
+            result.put("code", Constant.FAIL);
+            result.put("msg", "未查到id=" + id + "的记录！");
+            return result;
+        }
+        student.setDeleteTag(false);
+        one=studentService.updateByPrimaryKey(student);
+        if(one>0){
+            result.put("code", Constant.OK);
+            result.put("msg", "删除成功！");
+        }else{
+            result.put("code", Constant.FAIL);
+            result.put("msg", "删除失败！更新数据库失败");
             return result;
         }
         return result;
@@ -309,6 +337,51 @@ public class StudentController {
             result.put("msg", "审批成功！");
             return result;
     }
+    @RequestMapping(value = "updateStudent", method = RequestMethod.POST)
+    /*
+    * author hanfeng
+    * 管理员修改老师
+    * */
+    public @ResponseBody
+    Map<String, Object> updateStudent(@RequestBody StudentBaseVo studentBaseVo
+    ) {
 
+        Map<String, Object> result = new HashMap<String, Object>();
 
+        Integer id=studentBaseVo.getId();
+        Integer sex=studentBaseVo.getSex();
+        String nation=studentBaseVo.getNation();
+        String birthday=studentBaseVo.getBirthday();
+        String phone=studentBaseVo.getPhone();
+        String email=studentBaseVo.getEmail();
+
+        Student student=studentService.selectByPrimaryKey(id);
+
+        if(student ==null){
+            result.put("code",Constant.FAIL);
+            result.put("msg", "未查到id=" + id + "的记录！");
+            return result;
+        }
+        if(sex==0){
+            student.setSex(false);
+        }else{
+            student.setSex(true);
+        }
+        student.setEmail(email);
+        student.setNation(nation);
+        student.setBirthday(birthday);
+        User user=userService.selectByPrimaryKey(student.getUserId());
+        user.setPhone(phone);
+        int one=studentService.updateByPrimaryKey(student);
+        int two=userService.updateByPrimaryKey(user);
+        if(one>0&&two>0){
+            result.put("code", Constant.OK);
+            result.put("msg", "审批成功！");
+        }else{
+            result.put("code", Constant.FAIL);
+            result.put("msg", "审批失败！更新数据库失败");
+            return result;
+        }
+        return result;
+    }
 }

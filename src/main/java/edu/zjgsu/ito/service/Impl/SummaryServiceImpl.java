@@ -1,12 +1,17 @@
 package edu.zjgsu.ito.service.Impl;
 
+import edu.zjgsu.ito.dao.SummaryMapper;
 import edu.zjgsu.ito.model.Summary;
 import edu.zjgsu.ito.model.SummaryExample;
 import edu.zjgsu.ito.service.SummaryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class SummaryServiceImpl implements SummaryService {
+    @Autowired
+    SummaryMapper summaryMapper;
     @Override
     public long countByExample(SummaryExample example) {
         return 0;
@@ -34,7 +39,8 @@ public class SummaryServiceImpl implements SummaryService {
 
     @Override
     public List<Summary> selectByExample(SummaryExample example) {
-        return null;
+            List<Summary>  summaries=summaryMapper.selectByExample(example);
+            return summaries;
     }
 
     @Override

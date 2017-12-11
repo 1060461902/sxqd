@@ -1,13 +1,17 @@
 package edu.zjgsu.ito.service.Impl;
 
+import edu.zjgsu.ito.dao.CompanyMarkMapper;
 import edu.zjgsu.ito.model.CompanyMark;
 import edu.zjgsu.ito.model.CompanyMarkExample;
 import edu.zjgsu.ito.service.CompanyMarkService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class CompanyMarkServiceImpl implements CompanyMarkService {
+    @Autowired
+    CompanyMarkMapper companyMarkMapper;
     @Override
     public long countByExample(CompanyMarkExample example) {
         return 0;
@@ -35,7 +39,8 @@ public class CompanyMarkServiceImpl implements CompanyMarkService {
 
     @Override
     public List<CompanyMark> selectByExample(CompanyMarkExample example) {
-        return null;
+        List<CompanyMark> companyMarks=companyMarkMapper.selectByExample(example);
+        return companyMarks;
     }
 
     @Override
