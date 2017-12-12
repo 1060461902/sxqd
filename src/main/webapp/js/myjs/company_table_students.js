@@ -1,17 +1,25 @@
 $(document).ready(function(){
   window.companyName = window.location.href;
+  var info = new Object();
+  info.status ='实习状态';
+  info.class ='班级';
+  info.major ='专业';
+  info.id=companyName;
     $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/showCompanyStudnetScreening',
        async: true,
+       data: JSON.stringify(info),
        contentType: "application/json",
        dateType: "json",
        success: function(data){
-       var namelength = data.Names.length;
+       var namelength = data.major.length;
        for ( var i = 0; i < namelength; i++){
-        $('select#major').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
-        $('select#class').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
-        $('select#status').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
+        $('select#major').append('<option>'+data.major[i]+'</option>');
+       }
+       var namelength = data.clss.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#class').append('<option>'+data.clss[i]+'</option>');
        }
        //筛选（需要表格重新导入）
   $("option").click(function(){
@@ -19,10 +27,10 @@ $(document).ready(function(){
     info.status = $('select#status').val();
     info.class = $('select#class').val();
     info.major = $('select#major').val();
-    info.companyName = companyName;
+    info.id = companyName;
       $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/showCompanyStudent',
        data: JSON.stringify(info),
        async: true,
        contentType: "application/json",
@@ -61,7 +69,31 @@ $(document).ready(function(){
        error: function(){
         alert('服务端异常');
         }
-    });
+    });//ajax
+     $('select#class').empty();
+     $('select#major').empty();
+  //重新获得筛选条件
+    $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/showCompanyStudnetScreening',
+       async: true,
+       data: JSON.stringify(info),
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+       var namelength = data.major.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#major').append('<option>'+data.major[i]+'</option>');
+       }
+       var namelength = data.clss.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#class').append('<option>'+data.clss[i]+'</option>');
+       }
+       },
+        error: function(){
+        alert('服务端异常');
+        }
+        });//ajax  
     //$.getJSON("js/json/approval-2.json", function(data) {
          // });
   });
@@ -72,13 +104,13 @@ $(document).ready(function(){
     });
   //点一次导入表格
   var info = new Object();
-  info.status ='全部';
-  info.class ='全部';
-  info.major ='全部';
-  info.companyName =companyName;
+  info.status ='实习状态';
+  info.class ='班级';
+  info.major ='专业';
+  info.id =companyName;
      $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/showCompanyStudent',
        async: true,
        contentType: "application/json",
        data: JSON.stringify(info),

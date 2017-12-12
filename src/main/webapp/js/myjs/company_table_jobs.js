@@ -29,7 +29,7 @@ $(document).ready(function(){
     info.id =id;
       $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/showCompanyRecruitment',
+       url: '/fieldManagement/admin/showCompanyRecruitments',
        data: JSON.stringify(info),
        async: true,
        contentType: "application/json",
@@ -80,7 +80,7 @@ $(document).ready(function(){
 
     $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/showCompanyRecruitment',
+       url: '/fieldManagement/admin/showCompanyRecruitments',
        async: true,
        contentType: "application/json",
        data: JSON.stringify(info),
@@ -207,15 +207,15 @@ $('.forbidden').click(function(){
 // alert($(this).attr("id")+'+'+$(this).attr("value"));
  var info = new Object();
  info.id = $(this).attr("id");
- info.roleId = "5";
+
  if($(this).attr("value")=='true'){
    var r=confirm("是否解禁该用户");
       if (r==true)
       { 
-        info.operationType ="4";
+       info.forbidden = 1;
     $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/forbiddenRecruitment',
        async: true,
        contentType: "application/json",
        data: JSON.stringify(info),
@@ -235,10 +235,10 @@ $('.forbidden').click(function(){
        var r=confirm("是否禁用该用户");
       if (r==true)
       { 
-        info.operationType ="4";
+        info.forbidden = 0;
     $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/forbiddenRecruitment',
        async: true,
        contentType: "application/json",
        data: JSON.stringify(info),

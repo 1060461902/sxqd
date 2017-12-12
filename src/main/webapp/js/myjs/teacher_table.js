@@ -224,11 +224,14 @@ $('button#drls').click(function(){
    }
    else//ajax
    {
+    var info = new Object();
+    info.excelFile = new FormData($('#uploadForm')[0]);
+    info.roleId = 3;
     $.ajax({
       type: 'post',
       url: '/fieldManagement/admin/uploadStudentExcel',
       cache: false,
-      data: new FormData($('#uploadForm')[0]),
+      data: info,
       async: true,
       processData: false,
       contentType: false,

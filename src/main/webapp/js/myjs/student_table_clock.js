@@ -1,8 +1,10 @@
 $(document).ready(function(){
 //筛选
+    var info = new Object();
+    info.id = window.location.href;
       $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/showCheckScreening',
        async: true,
        contentType: "application/json",
        data: JSON.stringify(info),
@@ -11,15 +13,15 @@ $(document).ready(function(){
         var obj1 = data.month;
         var length1 = data.month.length;
         for(var n=0;n<length1;n++){
-            $('select').append('<option>'+obj1[n].month+'</option>');
+            $('select').append('<option>'+obj1[n].screens+'</option>');
         }
   $("option").click(function(){
-    var type = $(this).text();
     var info = new Object();
-    info.month = type;
+    info.month =  $(this).text();
+    info.id = window.location.href;
       $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/showCheck',
        data: JSON.stringify(info),
        async: true,
        contentType: "application/json",
@@ -67,10 +69,10 @@ $(document).ready(function(){
     });   
     var info = new Object();
     info.id = window.location.href;
-    info.date = "全部时段";
+    info.month = "全部时段";
     $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/showCheck',
        async: true,
        contentType: "application/json",
        data: JSON.stringify(info),

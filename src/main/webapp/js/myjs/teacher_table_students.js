@@ -1,17 +1,26 @@
 $(document).ready(function(){
   // 筛选的一系列操作
+window.teacherId = window.location.href;
+var info = new Object();
+info.id = teacherId;
+info.grade = '年级';
+info.clss = '班级';
+info.status = '实习状态';
      $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/showTeacherStudentScreen',
        async: true,
+       data: JSON.stringify(info),
        contentType: "application/json",
        dateType: "json",
        success: function(data){
-       var namelength = data.Names.length;
+       var namelength = data.clss.length;
        for ( var i = 0; i < namelength; i++){
-        $('select#major').append('<option>'+data.Names[i].companyName+'</option>');
-        $('select#class').append('<option>'+data.Names[i].companyName+'</option>');
-        $('select#status').append('<option>'+data.Names[i].companyName+'</option>');
+        $('select#class').append('<option>'+data.clss[i]+'</option>');
+       }
+       var namelength = data.major.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#major').append('<option>'+data.major[i]+'</option>');
        }
        //筛选（需要表格重新导入）
   $("option").click(function(){
@@ -60,6 +69,29 @@ $(document).ready(function(){
         alert('服务端异常');
         }
     });//ajax
+     $('select#class').empty();
+     $('select#major').empty();
+    $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/showTeacherStudentScreen',
+       async: true,
+       data: JSON.stringify(info),
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+       var namelength = data.major.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#major').append('<option>'+data.major[i]+'</option>');
+       }
+       var namelength = data.clss.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#class').append('<option>'+data.clss[i]+'</option>');
+       }
+       },
+        error: function(){
+        alert('服务端异常');
+        }
+        });//ajax  
   });//option
      },
        error: function(){
@@ -70,6 +102,9 @@ $(document).ready(function(){
   // });
     var info= new Object(); 
     info.id= window.location.href;
+    info.grade = '年级';
+    info.clss = '班级';
+    info.status = '实习状态';
 //第一次导入表格
      $.ajax({
        type: 'post',

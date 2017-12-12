@@ -274,7 +274,7 @@ function fold(){
                   info.id = $(this).parents('tr').val();
      $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/showCompanyStudentName',
        async: true,
        contentType: "application/json",
        data: JSON.stringify(info),

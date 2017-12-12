@@ -1,12 +1,16 @@
 $(document).ready(function(){
-
+  var info = new Object();
+  info.grade = '年级';
+  info.major = '专业';
+  info.status = '实习状态';
+  info.clss = '班级';
   //---------获取筛选内容
      $.ajax({
        type: 'post',
        url: '/fieldManagement/admin/showScreening',
        async: true,
-       contentType: "application/json",
        data: JSON.stringify(info),
+       contentType: "application/json",
        dateType: "json",
        success: function(data){
         var namelength = data.grade.length;
@@ -73,6 +77,34 @@ $(document).ready(function(){
         alert('服务端异常');
         }
     });//ajax
+// 更新筛选内容
+     $('select#grade').empty();
+     $('select#class').empty();
+     $('select#major').empty();
+     $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/showScreening',
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+        var namelength = data.grade.length;
+        for ( var i = 0; i < namelength; i++){
+        $('select#grade').append('<option>'+data.grade[i]+'</option>');
+       }
+        var namelength = data.major.length;
+        for ( var i = 0; i < namelength; i++){
+        $('select#major').append('<option>'+data.major[i]+'</option>');
+       }
+        var namelength = data.clss.length;
+        for ( var i = 0; i < namelength; i++){
+        $('select#class').append('<option>'+data.clss[i]+'</option>');
+       }
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });//ajax     
 //     $.getJSON("js/json/student_table.json", function(data) {
 
 // });//getjson    
@@ -86,10 +118,10 @@ $(document).ready(function(){
 
 // });
   var info = new Object();
-  info.grade = null;
-  info.major = null;
-  info.status = null
-  info.clss = null;
+  info.grade = '年级';
+  info.major = '专业';
+  info.status = '实习状态';
+  info.clss = '班级';
 //第一次导入表格
      $.ajax({
        type: 'post',
@@ -231,11 +263,14 @@ $('button#drls').click(function(){
    }
    else//ajax
    {
+    var info =new Object();
+    info.excelFile =  new FormData($('#uploadForm')[0]);
+    info.roleid = 2;
     $.ajax({
       type: 'post',
       url: '/fieldManagement/admin/uploadStudentExcel',
       cache: false,
-      data: new FormData($('#uploadForm')[0]),
+      data: info,
       async: true,
       processData: false,
       contentType: false,

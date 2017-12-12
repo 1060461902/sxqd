@@ -2,7 +2,7 @@ $(document).ready(function(){
   //筛选的一系列操作
       $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/showCompanyNames',
        async: true,
        contentType: "application/json",
        dateType: "json",
@@ -11,23 +11,19 @@ $(document).ready(function(){
        for ( var i = 0; i < namelength; i++){
         $('select#company').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
        }
-       var namelength = data.Names.length;
-       for ( var i = 0; i < namelength; i++){
-        $('select#address').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
-       }
-       var namelength = data.Names.length;
-       for ( var i = 0; i < namelength; i++){
-        $('select#status').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
-       }       
+       // var namelength = data.Names.length;
+       // for ( var i = 0; i < namelength; i++){
+       //  $('select#address').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
+       // }     
        //筛选（需要表格重新导入）
   $("option").click(function(){
     var info = new Object();
     info.status = $('select#status').val();
-    info.company = $('select#company').val();
-    info.address = $('select#address').val();
+    info.companyName = $('select#company').val();
+    //info.address = $('select#address').val();
       $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/showRecruitment',
        data: JSON.stringify(info),
        async: true,
        contentType: "application/json",
@@ -76,9 +72,12 @@ $(document).ready(function(){
         }
     });//ajax
   //导入表格
+    var info = new Object();
+    info.status = '招聘状态';
+    info.companyName = '招聘公司';
      $.ajax({
-       type: 'post',
-       url: '/fieldManagement/admin/',
+       type: 'get',
+       url: '/fieldManagement/admin/showRecruitment',
        async: true,
        contentType: "application/json",
        dateType: "json",
@@ -198,8 +197,8 @@ function showlist(){
                   var info = new Object();
                   info.id = $(this).parents('tr').val();
      $.ajax({
-       type: 'post',
-       url: '/fieldManagement/admin/',
+       type: 'get',
+       url: '/fieldManagement/admin/showRecruitmentStudent',
        async: true,
        contentType: "application/json",
        data: JSON.stringify(info),
@@ -208,7 +207,7 @@ function showlist(){
               var obj2 = data.Names;
               var len2 = data.Names.length;
               for(var n =0;n<len2;n++){
-                $("tr:eq("+y+")").find('ul').append('<a href="student_table_details.html?id='+obj2[n].id+'">'+obj2[n].name+'</a>&nbsp;');
+                $("tr:eq("+y+")").find('ul').append('<a href="student_table_details.html?id='+obj2[n].id+'">'+obj2[n].studentName+'</a>&nbsp;');
                // alert($("tr:eq("+y+")").val());
               }
      },
@@ -226,15 +225,14 @@ $('.forbidden').click(function(){
 // alert($(this).attr("id")+'+'+$(this).attr("value"));
  var info = new Object();
  info.id = $(this).attr("id");
- info.roleId = "5";
  if($(this).attr("value")=='true'){
    var r=confirm("是否解禁该用户");
       if (r==true)
       { 
-        info.operationType ="4";
+        info.forbidden =0;
      $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/forbiddenRecruitment',
        async: true,
        contentType: "application/json",
        data: JSON.stringify(info),
@@ -254,10 +252,10 @@ $('.forbidden').click(function(){
        var r=confirm("是否禁用该用户");
       if (r==true)
       { 
-        info.operationType ="2";
+        info.forbidden =1;
      $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/forbiddenRecruitment',
        async: true,
        contentType: "application/json",
        data: JSON.stringify(info),
@@ -305,11 +303,9 @@ function deleterecruit(){
     });
     var info = new Object();
     info.id=id;
-    info.operationType ="3";
-    info.roleId = "5";
      $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/deleteRecruitment',
        async: true,
        contentType: "application/json",
        data: JSON.stringify(info),

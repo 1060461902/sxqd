@@ -1,35 +1,42 @@
 $(document).ready(function(){
   //筛选的一系列操作
+  var info = new Object();
+  info.grade = '年级';
+  info.iteacher = '有无指导老师';
+  info.status = '实习状态';
+  info.clss = '班级';
+  info.company = null;
       $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/showRecruitmentScreening',
        async: true,
+       data: JSON.stringify(info),
        contentType: "application/json",
        dateType: "json",
        success: function(data){
-       var namelength = data.Names.length;
+       var namelength = data.companyName.length;
        for ( var i = 0; i < namelength; i++){
-        $('select#company').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
+        $('select#company').append('<option id='+data.company[i].id+'>'+data.company[i].company+'</option>');
        }
-       var namelength = data.Names.length;
+       var namelength = data.clss.length;
        for ( var i = 0; i < namelength; i++){
-        $('select#class').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
+        $('select#class').append('<option>'+data.clss[i]+'</option>');
        }
-       var namelength = data.Names.length;
+       var namelength = data.grade.length;
        for ( var i = 0; i < namelength; i++){
-        $('select#grade').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
+        $('select#grade').append('<option>'+data.grade[i]+'</option>');
        }       
        //筛选（需要表格重新导入）
   $("option").click(function(){
     var info = new Object();
     info.grade = $('select#grade').val();
     info.clss = $('select#class').val();    
-    info.company = $('select#company').val();
+    info.company = $('select#company').attr('id');
     info.status = $('select.status').val();
     info.teacher = $('select#teacher').val();
       $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/showInternships',
        data: JSON.stringify(info),
        async: true,
        contentType: "application/json",
@@ -70,6 +77,35 @@ $(document).ready(function(){
         alert('服务端异常');
         }
     });//ajax
+     $('select#class').empty();
+     $('select#grade').empty();
+     $('select#company').empty();
+  //重新获得筛选条件
+    $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/showRecruitmentScreening',
+       async: true,
+       data: JSON.stringify(info),
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+       var namelength = data.companyName.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#company').append('<option id='+data.company[i].id+'>'+data.company[i].company+'</option>');
+       }
+       var namelength = data.clss.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#class').append('<option>'+data.clss[i]+'</option>');
+       }
+       var namelength = data.grade.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#grade').append('<option>'+data.grade[i]+'</option>');
+       }
+       },
+        error: function(){
+        alert('服务端异常');
+        }
+        });//ajax  
   });
      },
        error: function(){
@@ -77,9 +113,11 @@ $(document).ready(function(){
         }
     });//ajax
   //--------获取老师的列表
+  var info = new Object();
+  info.major = '专业';
      $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/showTeachers',
        async: true,
        contentType: "application/json",
        data: JSON.stringify(info),
@@ -88,7 +126,7 @@ $(document).ready(function(){
     var obj = data.teacherList;
     var length = obj.length;
     for (var i = 0; i < length; i++) {
-      $('ul').append('<li>'+obj[i].userName+'</li>');
+      $('ul').append('<li>'+obj[i].nickName+'</li>');
       $('li:eq('+i+')').val(obj[i].id);
     };
     $('li').click(function(){
@@ -141,7 +179,7 @@ $(document).ready(function(){
     info.teacherId = teacherId;
     $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/assignedStudent',
        async: true,
        contentType: "application/json",
        data: JSON.stringify(info),
@@ -158,14 +196,14 @@ $(document).ready(function(){
   }); 
   //----------第一次写入表格-------------------
   var info = new Object();
-  info.grade = null;
-  info.teacher = null;
-  info.status = null
-  info.clss = null;
+  info.grade = '年级';
+  info.iteacher = '有无指导老师';
+  info.status = '实习状态';
+  info.clss = '班级';
   info.company = null;
      $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/',
+       url: '/fieldManagement/admin/showInternship',
        async: true,
        contentType: "application/json",
        data: JSON.stringify(info),
@@ -216,12 +254,12 @@ function writein(data){
           var obj = data.internship[i];
             var tr = tbody.insertRow(tbody.rows.length);
             var j=i+1;
-            $("tr:eq("+j+")").val(obj.id);//对当前行赋值
+            $("tr:eq("+j+")").val(obj.studentId);//对当前行赋值
             $('tr').addClass('pointer');
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = '<input type="checkbox">';
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<a href="student_table_details.html?id="'+obj.id+'">'+obj.nickName+'</a>';
+            td.innerHTML = '<a href="student_table_details.html?id="'+obj.studentId+'">'+obj.nickName+'</a>';
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = obj.clss;
             var td = tr.insertCell (tr.cells.length);
@@ -233,7 +271,7 @@ function writein(data){
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = obj.stages;
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<a href="teacher_table_details.html?id="'+obj.companyId+'>'+obj.teacherName+'</a>';
+            td.innerHTML = '<a href="teacher_table_details.html?id="'+obj.teacherId+'>'+obj.teacherName+'</a>';
       } //for
 }
 function trclick () {

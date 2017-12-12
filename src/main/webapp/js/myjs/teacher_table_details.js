@@ -16,7 +16,16 @@ $(document).ready(function(){
 	$('td#nickName').text(obj.nickName);
 	$('span#userName').text(obj.userName);
 	$('td#userName').text(obj.userName);
-	$('span#sex').text(obj.sex);
+  if(obj.sex==true||obj.sex==1||obj.sex=='1'){
+    $('span#sex').text('男');
+    $("button#male").css("background-color","#09C");
+    window.sex =true; 
+    }
+      else if(obj.sex==false||obj.sex==0||obj.sex=='0'){
+      $('span#sex').text('女');
+      $("button#male").css("background-color","pink");
+      window.sex =false;
+      } 
 	$('span#rank').text(obj.rank);
 	$('span#phone').text(obj.phone);
 	$('span#email').text(obj.email);
@@ -24,14 +33,6 @@ $(document).ready(function(){
 	$('input#email').val(obj.email);
 	$('input#phone').val(obj.phone);
 	$('input#rank').val(obj.rank);
-	if(obj.sex=='男'){
-		$("button#male").css("background-color","#09C");
-		window.sex ='男';	
-	}
-	else if(obj.sex=='女'){
-		$("button#male").css("background-color","pink");
-		window.sex ='女';
-	}
      },
        error: function(){
         alert('服务端异常');
@@ -50,10 +51,10 @@ $('button#edit').click(function(){
   teacherBasicInfo.email= $('input#email').val();  
      $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/editTeacher',
+       url: '/fieldManagement/admin/updateTeacher',
        async: true,
        contentType: "application/json",
-       data: JSON.stringify(info),
+       data: JSON.stringify(teacherBasicInfo),
        dateType: "json",
        success: function(data){
        alert('操作成功');
@@ -67,12 +68,12 @@ $('button#edit').click(function(){
 $("button#male").click(function(){
   $("button#male").css("background-color","#09C");
     $("button#female").css("background-color","#FFF");
-    sex='男';
+    sex=true;
 });
 $("button#female").click(function(){
   $("button#female").css("background-color","pink");
     $("button#male").css("background-color","#FFF");
-    sex='女';
+    sex=false;
 });
 
 });

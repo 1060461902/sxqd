@@ -18,15 +18,15 @@ $(document).ready(function(){
 		$('table#student_details tr:eq(0) td').text(obj.nickname);
 		$('span#userName').text(obj.username);
 		$('table#student_details tr:eq(1) td').text(obj.username);
-		if(obj.sex==false||obj.sex==0||obj.sex=='0'){
+		if(obj.sex==true||obj.sex==1||obj.sex=='1'){
 		$('span#sex').text('男');
 		$("button#male").css("background-color","#09C");
-		window.sex =false;	
+		window.sex =true;	
 		}
-	    else if(obj.basicInfo.sex==true||obj.basicInfo.sex==1||obj.basicInfo.sex=='1'){
+	    else if(obj.sex==false||obj.sex==0||obj.sex=='0'){
 	    $('span#sex').text('女');
 	    $("button#male").css("background-color","pink");
-	    window.sex =true;
+	    window.sex =false;
 	    }	
 		$('span#nation').text(obj.national);
 		$('span#birthDate').text(obj.birthdate);
@@ -98,7 +98,7 @@ $('button#edit').click(function(){
   studentBasicInfo.email= $('table#student_details tr:eq(7) input').val();
      $.ajax({
        type: 'post',
-       url: '/fieldManagement/admin/editStudent',
+       url: '/fieldManagement/admin/updateStudent',
        async: true,
        contentType: "application/json",
        data: JSON.stringify(studentBasicInfo),
@@ -116,12 +116,12 @@ $('button#edit').click(function(){
 $("button#male").click(function(){
   $("button#male").css("background-color","#09C");
     $("button#female").css("background-color","#FFF");
-    sex =false;
+    sex =true;
 });
 $("button#female").click(function(){
   $("button#female").css("background-color","pink");
     $("button#male").css("background-color","#FFF");
-    sex =true;
+    sex =false;
 });
 
   
