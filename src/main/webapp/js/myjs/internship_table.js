@@ -47,7 +47,7 @@ $(document).ready(function(){
       writein(data);
       trclick();//-------------点击---------
       checked();//--------------部分选择操作checkbox----------------------
-      gd();
+      //gd();
             var docrTable = $('#table').dataTable({
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
                 "bFilter" : true, //是否启动过滤、搜索功能
@@ -212,7 +212,7 @@ $(document).ready(function(){
       writein(data);
       trclick();//-------------点击---------
       checked();//--------------部分选择操作checkbox----------------------
-      gd();
+      //gd();
       var docrTable = $('#table').dataTable({
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
                 "bFilter" : true, //是否启动过滤、搜索功能
@@ -293,25 +293,25 @@ $('th>input:checkbox').click(function() {
        });
         if($('select.status').val()=='待实习'){
             $('button#gg').css("display","none");
-            $('button#gd').css("display","none");
+           // $('button#gd').css("display","none");
             $('button#fp').css("display","block");
           }
           else if($('select.status').val()=='实习中'){
             $('button#fp').css("display","none");
-            $('button#gd').css("display","none");
+            //$('button#gd').css("display","none");
             $('button#gg').css("display","block");
           }
           else if($('select.status').val()=='已结业'){
             $('button#fp').css("display","none");
             $('button#gg').css("display","none");
-            $('button#gd').css("display","block");
+            //$('button#gd').css("display","block");
           }
       }
       else if(m%2==0){
         $('input:checkbox').each(function () {
         $(this).attr('checked',false);
         $('button#gg').css("display","none");
-        $('button#gd').css("display","none");
+       // $('button#gd').css("display","none");
         $('button#fp').css("display","none");
 });
       }
@@ -328,45 +328,27 @@ function checked(){
         {
           if($('select.status').val()=='待实习'){
             $('button#gg').css("display","none");
-            $('button#gd').css("display","none");
+            // $('button#gd').css("display","none");
             $('button#fp').css("display","block");
           }
           else if($('select.status').val()=='实习中'){
             $('button#fp').css("display","none");
-            $('button#gd').css("display","none");
+            //$('button#gd').css("display","none");
             $('button#gg').css("display","block");
           }
           else if($('select.status').val()=='已结业'){
             $('button#fp').css("display","none");
             $('button#gg').css("display","none");
-            $('button#gd').css("display","block");
+           // $('button#gd').css("display","block");
           }
         }
         else
         {
         $('button#gg').css("display","none");
-        $('button#gd').css("display","none");
+       // $('button#gd').css("display","none");
         $('button#fp').css("display","none");
         }
    });
 }
-function gd(){
-//-----------点击归档（需要表格重新导入）-----------------
-  $("button#gd").click(function(){
-    var id = new Array();
-    var a=0;
-    $('td>input:checkbox').each(function() {
-        if ($(this).attr('checked') =='checked') {
-          id[a]=$(this).parent('td').parent('tr').val();  //alert(id[a]);
-          a++;
-        }
-    });
-    var info = new Object();
-    info.id=id;
-    //ajax
-    $('th>input:checkbox').attr('checked',false);
-    location.reload();
-   // alert(info.id);
-   });
-}
+
 });//document

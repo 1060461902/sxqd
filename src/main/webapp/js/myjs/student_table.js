@@ -48,6 +48,7 @@ $(document).ready(function(){
       resetpsw();//-------------重置密码------
       checked();//--------------部分选择删除checkbox--------------------------------
       deletestudent();//-----------点击删除（需要表格重新导入）-----------------
+      gd();
       var docrTable = $('#table-stu').dataTable({
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
                 "bFilter" : true, //是否启动过滤、搜索功能
@@ -138,6 +139,7 @@ $(document).ready(function(){
       resetpsw();//-------------重置密码------
       checked();//--------------部分选择删除checkbox--------------------------------
       deletestudent();//-----------点击删除（需要表格重新导入）-----------------
+      gd();
       var docrTable = $('#table-stu').dataTable({
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
                 "bFilter" : true, //是否启动过滤、搜索功能
@@ -381,6 +383,7 @@ function checked(){
    });
 }
 function deletestudent(){
+
   $(".operations").click(function(){
     var id = new Array();
     var a=0;
@@ -408,6 +411,26 @@ function deletestudent(){
         alert('服务端异常');
         }
     });//ajax
+   // alert(info.id);
+   });
+}
+function gd(){
+//-----------点击归档（需要表格重新导入）-----------------
+ alert('1');
+  $("button#gd").click(function(){
+    var id = new Array();
+    var a=0;
+    $('td>input:checkbox').each(function() {
+        if ($(this).attr('checked') =='checked') {
+          id[a]=$(this).parent('td').parent('tr').val();  //alert(id[a]);
+          a++;
+        }
+    });
+    var info = new Object();
+    info.id=id;
+    //ajax
+    $('th>input:checkbox').attr('checked',false);
+    location.reload();
    // alert(info.id);
    });
 }
