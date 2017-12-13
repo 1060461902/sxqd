@@ -7,7 +7,7 @@ $(document).ready(function(){
        // }
   // });
     $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showCompanynames',
        async: true,
        contentType: "application/json",

@@ -2,7 +2,7 @@ $(document).ready(function(){
 	  var info =new Object();
   info.id = window.location.href;
 	  $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showRecruitmentDetails',
        data: JSON.stringify(id),
        async: true,

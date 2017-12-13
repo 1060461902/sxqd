@@ -11,7 +11,7 @@ $(document).ready(function(){
   info.month = '招聘时间';
 //筛选的一系列操作-------------------------------------------------------------------------
     $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showRecruitmentScreening',
        async: true,
        data : JSON.stringify(info),
@@ -28,7 +28,7 @@ $(document).ready(function(){
     info.month = $(this).text();
     info.id =id;
       $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showCompanyRecruitments',
        data: JSON.stringify(info),
        async: true,
@@ -79,7 +79,7 @@ $(document).ready(function(){
 //第一次导入-------------------------------
 
     $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showCompanyRecruitments',
        async: true,
        contentType: "application/json",
@@ -214,7 +214,7 @@ $('.forbidden').click(function(){
       { 
        info.forbidden = 1;
     $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/forbiddenRecruitment',
        async: true,
        contentType: "application/json",
@@ -237,7 +237,7 @@ $('.forbidden').click(function(){
       { 
         info.forbidden = 0;
     $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/forbiddenRecruitment',
        async: true,
        contentType: "application/json",

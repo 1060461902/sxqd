@@ -6,7 +6,7 @@ $(document).ready(function(){
   info.major ='专业';
   info.id=companyName;
     $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showCompanyStudnetScreening',
        async: true,
        data: JSON.stringify(info),
@@ -29,7 +29,7 @@ $(document).ready(function(){
     info.major = $('select#major').val();
     info.id = companyName;
       $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showCompanyStudent',
        data: JSON.stringify(info),
        async: true,
@@ -74,7 +74,7 @@ $(document).ready(function(){
      $('select#major').empty();
   //重新获得筛选条件
     $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showCompanyStudnetScreening',
        async: true,
        data: JSON.stringify(info),
@@ -109,7 +109,7 @@ $(document).ready(function(){
   info.major ='专业';
   info.id =companyName;
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showCompanyStudent',
        async: true,
        contentType: "application/json",
@@ -214,7 +214,7 @@ $('.reset').click(function(){
    info.operationType ="1";
    info.roleId = "4";
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/',
        async: true,
        contentType: "application/json",
@@ -242,7 +242,7 @@ $('.forbidden').click(function(){
       { 
         info.operationType ="4";
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/',
        async: true,
        contentType: "application/json",
@@ -265,7 +265,7 @@ $('.forbidden').click(function(){
       { 
         info.operationType ="2";
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/',
        async: true,
        contentType: "application/json",

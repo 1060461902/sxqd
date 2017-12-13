@@ -2,7 +2,7 @@ $(document).ready(function(){
   var info = new Object();
   info.type = "企业类型";//第一次导入时默认全部企业类型
       $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showCompanyRegisterApplyList',
        data: JSON.stringify(info),
        async: true,
@@ -47,7 +47,7 @@ $(document).ready(function(){
     var info = new Object();
     info.type = $(this).text();
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showCompanyRegisterApplyList',
        data: JSON.stringify(info),
        async: true,

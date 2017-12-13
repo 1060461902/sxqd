@@ -1,22 +1,11 @@
 $(document).ready(function(){
   // 导入筛选以及筛选操作
-     $.ajax({
-       type: 'post',
-       url: '/fieldManagement/admin/',
-       async: true,
-       contentType: "application/json",
-       dateType: "json",
-       success: function(data){
-       var namelength = data.Names.length;
-       for ( var i = 0; i < namelength; i++){
-        $('select').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
-       }
+
  $("option").click(function(){
-    var type = $(this).text();
     var info = new Object();
-    info.companyName = type;
+    info.number = $(this).val();
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showCompanies',
        async: true,
        contentType: "application/json",
@@ -94,12 +83,7 @@ $(document).ready(function(){
      //            },
      //          });
      // });
-   }); 
-     },
-       error: function(){
-        alert('服务端异常');
-        }
-    });
+   });
 
  //    $.getJSON("js/json/approval-2-companyname.json", function(data) {
  //       var namelength = data.Names.length;
@@ -181,9 +165,9 @@ $(document).ready(function(){
 // });//getjson
 // -------------第一次写入表格 
   var info =new Object();
-  info.number = '实习学生人数';
+  info.number = '0';
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showCompanies',
        async: true,
        contentType: "application/json",
@@ -273,7 +257,7 @@ function fold(){
                   var info = new Object();
                   info.id = $(this).parents('tr').val();
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showCompanyStudentName',
        async: true,
        contentType: "application/json",
@@ -307,7 +291,7 @@ $('.reset').click(function(){
    info.id = $(this).attr("id");//alert(info.id);
    info.roleId = "4";
     $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/resetPwd',
        async: true,
        contentType: "application/json",
@@ -357,7 +341,7 @@ $('.forbidden').click(function(){
       { 
         info.forbidden = 0;
     $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/forbiddenCompany',
        async: true,
        contentType: "application/json",
@@ -427,7 +411,7 @@ function deleted(){
     var info = new Object();
     info.id=id;
     $.ajax({
-       type: 'get',
+       type: 'post',
        url: '/fieldManagement/admin/deleteCompany',
        async: true,
        contentType: "application/json",

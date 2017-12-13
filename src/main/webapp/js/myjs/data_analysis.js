@@ -11,7 +11,7 @@ $(document).ready(function(){
     //      $("span#h").text(obj.h);
     // });
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/index',
        async: true,
        contentType: "application/json",
