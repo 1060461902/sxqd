@@ -7,6 +7,42 @@ public class RecruitmentVo {
         private String PostTime;
         private int CurrentNumber;
         private int TotalNumber;
+        private  String contact;
+        private int id;
+        private int companyId;
+        private  boolean forbidden;
+
+    public boolean isForbidden() {
+        return forbidden;
+    }
+
+    public void setForbidden(boolean forbidden) {
+        this.forbidden = forbidden;
+    }
+
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
 
     public String getPost() {
         return Post;

@@ -76,6 +76,10 @@ public class Company implements Serializable {
 
     private String organizationCode;
 
+    private Boolean forbidden;
+
+    private Boolean deleteTag;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -222,6 +226,22 @@ public class Company implements Serializable {
         this.organizationCode = organizationCode;
     }
 
+    public Boolean getForbidden() {
+        return forbidden;
+    }
+
+    public void setForbidden(Boolean forbidden) {
+        this.forbidden = forbidden;
+    }
+
+    public Boolean getDeleteTag() {
+        return deleteTag;
+    }
+
+    public void setDeleteTag(Boolean deleteTag) {
+        this.deleteTag = deleteTag;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -251,7 +271,9 @@ public class Company implements Serializable {
             && (this.getPass() == null ? other.getPass() == null : this.getPass().equals(other.getPass()))
             && (this.getLicence() == null ? other.getLicence() == null : this.getLicence().equals(other.getLicence()))
             && (this.getTaxRegistration() == null ? other.getTaxRegistration() == null : this.getTaxRegistration().equals(other.getTaxRegistration()))
-            && (this.getOrganizationCode() == null ? other.getOrganizationCode() == null : this.getOrganizationCode().equals(other.getOrganizationCode()));
+            && (this.getOrganizationCode() == null ? other.getOrganizationCode() == null : this.getOrganizationCode().equals(other.getOrganizationCode()))
+            && (this.getForbidden() == null ? other.getForbidden() == null : this.getForbidden().equals(other.getForbidden()))
+            && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()));
     }
 
     @Override
@@ -276,6 +298,8 @@ public class Company implements Serializable {
         result = prime * result + ((getLicence() == null) ? 0 : getLicence().hashCode());
         result = prime * result + ((getTaxRegistration() == null) ? 0 : getTaxRegistration().hashCode());
         result = prime * result + ((getOrganizationCode() == null) ? 0 : getOrganizationCode().hashCode());
+        result = prime * result + ((getForbidden() == null) ? 0 : getForbidden().hashCode());
+        result = prime * result + ((getDeleteTag() == null) ? 0 : getDeleteTag().hashCode());
         return result;
     }
 
@@ -303,6 +327,8 @@ public class Company implements Serializable {
         sb.append(", licence=").append(licence);
         sb.append(", taxRegistration=").append(taxRegistration);
         sb.append(", organizationCode=").append(organizationCode);
+        sb.append(", forbidden=").append(forbidden);
+        sb.append(", deleteTag=").append(deleteTag);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

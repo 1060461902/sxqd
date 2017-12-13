@@ -4,16 +4,17 @@ import com.alibaba.fastjson.JSONObject;
 import edu.zjgsu.ito.model.*;
 import edu.zjgsu.ito.service.*;
 import edu.zjgsu.ito.utils.Constant;
+import edu.zjgsu.ito.vo.CompanyVo;
 import edu.zjgsu.ito.vo.FrontDynadic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import static com.sun.tools.doclint.Entity.and;
 
 
 @Controller
@@ -32,12 +33,18 @@ public class ShowCompanyController {
     @Autowired
     CompanyImageService companyImageService;
     @Autowired
+    TeacherService teacherService;
+    @Autowired
     CompanyMarkService companyMarkService;
     @Autowired
     DynamicApproveService dynamicApproveService;
+    @Autowired
+    RecruitmentService recruitmentService;
 
     @RequestMapping(value ="showCompanies",method=RequestMethod.GET)
-    public @ResponseBody Map<String,Object> showCompanies(@RequestParam("name") String name) {
+    public @ResponseBody Map<String,Object> showCompanies(
+            /*@RequestParam("size") String size*/
+    ) {
 
 /*
 * @param
@@ -45,32 +52,51 @@ public class ShowCompanyController {
 * 查看已在系统内注册好的企业信息
 * @author hanfeng
 * */
-        try {
-            name= new String(name .getBytes("iso8859-1"),"utf-8");
+        /*try {
+            size= new String(size .getBytes("iso8859-1"),"utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
+*/
         Map<String, Object> result = new HashMap<String, Object>();
         CompanyViewExample CompanyViewExample=new CompanyViewExample();
 
-        if(name.equals("企业名称")){
-            CompanyViewExample.or().andPassEqualTo(true);
+      /*  if(size.equals("企业名称")){*/
+            CompanyViewExample.or().andPassEqualTo(true).andDeleteTagEqualTo(true);
 
-        }else {
-            CompanyViewExample.or().andPassEqualTo(true).andCompanyNameEqualTo(name);
-        }
+       /* }else {
+            CompanyViewExample.or().andPassEqualTo(true).andCompanyNameEqualTo(size);
+        }*/
 
         List<CompanyView> companyViews=companyViewService.selectByExample(CompanyViewExample);
+        CompanyVo companyVo;
+        List<CompanyVo> companyVoList=new ArrayList<>();
 
         if(companyViews == null){
             result.put("code", Constant.FAIL);
             result.put("msg", "无法从Company表里查到记录！");
             return result;
         }
+        System.out.println(companyViews);
         for(CompanyView companyView:companyViews){
             User user = userService.selectByPrimaryKey(companyView.getUserId());
-            companyView.setPassword(null);
+            companyVo =new CompanyVo();
+            companyVo.setContact(user.getNickName());
+            companyVo.setCompanyName(companyView.getCompanyName());
+            companyVo.setId(companyView.getId());
+
+            RecruitmentExample recruitmentExample=new RecruitmentExample();
+            recruitmentExample.or().andCompanyIdEqualTo(companyView.getId()).andForbiddenEqualTo(false);
+            companyVo.setNowIntership(recruitmentService.countByExample(recruitmentExample));
+
+            RecruitmentExample irecruitmentExample=new RecruitmentExample();
+            irecruitmentExample.or().andCompanyIdEqualTo(companyView.getId());
+            companyVo.setAllIntership(recruitmentService.countByExample(irecruitmentExample));
+
+            StudentExample studentExample=new StudentExample();
+            studentExample.or().andCompanyIdEqualTo(companyView.getId());
+            companyVo.setStudentNumber(studentService.countByExample(studentExample));
+            companyVoList.add(companyVo);
             if (user == null) {
                 result.put("code", Constant.FAIL);
                 result.put("msg", "无法找到Company表userID=" + companyView.getUserId() + "对应的user！");
@@ -81,7 +107,7 @@ public class ShowCompanyController {
         }
         result.put("code", Constant.OK);
         result.put("msg", "返回公司信息成功！");
-        result.put("compamyViewList",companyViews);
+        result.put("compamyViewList",companyVoList);
         return result;
     }
 
@@ -191,7 +217,7 @@ public class ShowCompanyController {
         Map<String, Object> result = new HashMap<String, Object>();
 
         DynamicApproveExample dynamicApproveExample=new DynamicApproveExample();
-        dynamicApproveExample.or().andDopassingEqualTo(false);
+        dynamicApproveExample.or().andDopassingEqualTo(false).andDeleteTagEqualTo(true);
         List<DynamicApprove> dynamicApproves=dynamicApproveService.selectByExample(dynamicApproveExample);
 
         if(dynamicApproves == null){
@@ -202,8 +228,6 @@ public class ShowCompanyController {
             for (DynamicApprove dynamicApprove : dynamicApproves) {
 
                 User user = userService.selectByPrimaryKey(dynamicApprove.getCompanyId());
-
-//                frontDynadic.setName(user.);
 
                 if (user == null) {
                     result.put("code", Constant.FAIL);
@@ -242,7 +266,6 @@ public class ShowCompanyController {
             return result;
         }else {
             for (DynamicApprove dynamicApprove : dynamicApproves) {
-
                 User user = userService.selectByPrimaryKey(dynamicApprove.getCompanyId());
                 if (user == null) {
                     result.put("code", Constant.FAIL);
@@ -283,15 +306,28 @@ public class ShowCompanyController {
             }
             result.put("code", Constant.OK);
             result.put("msg", "返回动态信息成功！");
-            result.put("user",user);
-            result.put("dynamicApproves", dynamicApprove);
+            JSONObject obj=new JSONObject();
+            obj.put("id",dynamicApprove.getId());
+            obj.put("title",dynamicApprove.getTitle());
+            obj.put("imageUrl",dynamicApprove.getImageUrl());
+            obj.put("detail",dynamicApprove.getDetail());
+            obj.put("nickName",user.getNickName());
+            obj.put("phone",dynamicApprove.getPhone());
+            obj.put("email",dynamicApprove.getEmail());
+            obj.put("startTime",dynamicApprove.getStartTime());
+            obj.put("showstatus",dynamicApprove.getShowStatus());
+            result.put("dynamicNewsDetails", obj);
         }
         return result;
     }
 
-    @RequestMapping(value = "showCompanynames",method=RequestMethod.GET)
+    @RequestMapping(value = "showCompanyNames",method=RequestMethod.GET)
     public @ResponseBody
-    Map<String,Object> showCompanynames(){
+    /*
+    * 获取所有注册企业名字
+    * author hanfeng
+    * */
+    Map<String,Object> showCompanyNames(){
         Map<String, Object> result = new HashMap<String, Object>();
         CompanyExample companyExample=new CompanyExample();
         companyExample.or().andPassEqualTo(true);
@@ -299,11 +335,233 @@ public class ShowCompanyController {
         JSONArray objects = new JSONArray();
         for(Company company:companies){
             JSONObject obj = new JSONObject();
+            obj.put("id",company.getId());
             obj.put("companyName",company.getCompanyName());
             objects.add(obj);
-            result.put("obj",obj);
         }
+        result.put("Names",objects);
 
         return result;
     }
+    @RequestMapping(value = "showCompanyRecruitment", method = RequestMethod.GET)
+    public @ResponseBody
+    Map<String, Object> showRecruitment(@RequestParam("id") Integer id
+    ) {
+
+
+/*
+* @param
+* @return
+* 查看企业的招聘岗位
+* @author hanfeng
+* */
+
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        CompanyExample companyExample=new CompanyExample();
+
+        RecruitmentExample recruitmentExample = new RecruitmentExample();
+        recruitmentExample.or().andCompanyIdEqualTo(id);
+        List<Recruitment> recruitments = recruitmentService.selectByExample(recruitmentExample);
+
+        if (recruitments == null) {
+            result.put("code", Constant.FAIL);
+            result.put("msg", "无法从Recruitment表里查到记录！");
+            return result;
+        }
+
+        JSONArray objs=new JSONArray();
+        for(Recruitment recruitment:recruitments){
+            JSONObject object=new JSONObject();
+            object.put("id",recruitment.getId());
+            object.put("post",recruitment.getPost());
+            object.put("totalNumber",recruitment.getTotalNumber());
+            object.put("currentNumber",recruitment.getCurrentNumber());
+            object.put("startTime",new SimpleDateFormat("yyyy/MM").format(recruitment.getStarttime()));
+            object.put("endTime",new SimpleDateFormat("yyyy/MM").format(recruitment.getEndtime()));
+            object.put("release_time",new SimpleDateFormat("yyyy/MM").format(recruitment.getReleaseTime()));
+            object.put("address",recruitment.getAddress());
+            Company company=companyService.selectByPrimaryKey(recruitment.getCompanyId());
+            object.put("companyName",company.getCompanyName());
+            object.put("forbidden",recruitment.getForbidden());
+            objs.add(object);
+        }
+        result.put("recruitmentList",objs);
+        result.put("code", Constant.OK);
+        return result;
+    }
+    @RequestMapping(value = "showCompanyStudentScreen", method = RequestMethod.GET)
+    public @ResponseBody
+    /*查看公司名下学生的筛选条件
+    * @author hanfeng
+    * */
+    Map<String, Object> showCompanyStudentScreen(@RequestParam("id") Integer id,
+                                                 @RequestParam("major") String major,
+                                                 @RequestParam("clss") String clss,
+                                                 @RequestParam("status") String status
+    ) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        try {
+            major= new String(major.getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            clss= new String(clss.getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            status= new String(status.getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+
+        StudentExample studentExample1=new StudentExample();
+        studentExample1.or().andCompanyIdEqualTo(id);
+        List<Student> students1=studentService.selectByExample(studentExample1);
+        Set set1=new TreeSet();
+        for(Student student:students1){
+            set1.add(student.getMajor());
+        }
+        result.put("major",set1);
+
+
+        StudentExample studentExample2=new StudentExample();
+        StudentExample.Criteria criteria=studentExample2.or().andCompanyIdEqualTo(id);
+        if(major.equals("专业")){
+
+        }else{
+            criteria.equals(major);
+        }
+        List<Student> students2=studentService.selectByExample(studentExample2);
+        Set set2=new TreeSet();
+        for(Student student:students2){
+            set2.add(student.getClss());
+        }
+        result.put("clss",set2);
+
+        return result;
+    }
+
+    @RequestMapping(value = "showCompanyStudent", method = RequestMethod.GET)
+    public @ResponseBody
+    /*查看公司名下学生
+    * @author hanfeng
+    * */
+    Map<String, Object> showCompanyStudent(@RequestParam("id") Integer id,
+                                           @RequestParam("major") String major,
+                                           @RequestParam("clss") String clss,
+                                           @RequestParam("status") String status
+    ) {
+        try {
+            major= new String(major .getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            clss= new String(clss .getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            status= new String(status .getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        StudentExample studentExample=new StudentExample();
+        StudentExample.Criteria criteria=studentExample.or();
+
+        if(major.equals("专业")){
+            criteria.andCompanyIdEqualTo(id).andDeleteTagEqualTo(true);
+
+        }else{
+            criteria.andMajorEqualTo(major);
+        }
+        if(clss.equals("班级")){
+
+        }else{
+            criteria.andClssEqualTo(clss);
+        }
+        if(status.equals("实习状态")){
+
+        }else{
+            criteria.andStatusEqualTo(status);
+        }
+
+
+        List<Student> students=studentService.selectByExample(studentExample);
+
+        JSONArray objects=new JSONArray();
+        System.out.println(students);
+        for(Student student:students){
+            JSONObject obj=new JSONObject();
+            obj.put("id",student.getId());
+            User user=userService.selectByPrimaryKey(student.getUserId());
+            obj.put("nickName",user.getNickName());
+            obj.put("userName",user.getUserName());
+            obj.put("status",student.getStatus());
+            Company company=companyService.selectByPrimaryKey(student.getCompanyId());
+            obj.put("companyName",company.getCompanyName());
+            Teacher teacher=teacherService.selectByPrimaryKey(student.getTeacherId());
+           User user2=userService.selectByPrimaryKey(teacher.getUserId());
+            obj.put("teacherName",user2.getNickName());
+            obj.put("major",student.getMajor());
+            obj.put("clss",student.getClss());
+            obj.put("forbidden",student.getForbidden());
+            obj.put("companyId",student.getCompanyId());
+
+            if (user == null) {
+                result.put("code", Constant.FAIL);
+//                result.put("msg", "无法找到Teacher表userID=" + id + "对应的user！");
+                return result;
+            }
+            objects.add(obj);
+        }
+        result.put("students",objects);
+        return result;
+    }
+
+    @RequestMapping(value = "showCompanyStudentName", method = RequestMethod.GET)
+    public @ResponseBody
+    /*查看公司名下学生
+    * @author hanfeng
+    * */
+    Map<String, Object> showCompanyStudentName(@RequestParam("id") Integer id
+
+    ) {
+
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        StudentExample studentExample=new StudentExample();
+        studentExample.or().andCompanyIdEqualTo(id);
+
+
+
+        List<Student> students=studentService.selectByExample(studentExample);
+
+        JSONArray objects=new JSONArray();
+        System.out.println(students);
+        for(Student student:students){
+            JSONObject obj=new JSONObject();
+            obj.put("id",student.getId());
+            User user=userService.selectByPrimaryKey(student.getUserId());
+            obj.put("nickName",user.getNickName());
+
+            if (user == null) {
+                result.put("code", Constant.FAIL);
+//                result.put("msg", "无法找到Teacher表userID=" + id + "对应的user！");
+                return result;
+            }
+            objects.add(obj);
+        }
+        result.put("Names",objects);
+        return result;
+    }
+
+
     }

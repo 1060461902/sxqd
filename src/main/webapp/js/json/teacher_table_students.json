@@ -1,0 +1,37 @@
+{
+	"students": [
+		{
+			"id": "64168",
+			"nickName": "陈泽潇",
+			"userName": "1512190303",
+			"status": "帅气",
+			"companyName": "网易",
+			"teacherName": "谢波",
+			"forbidden": "VGyMfKYPr1",
+			"major": "软件工程",
+			"class": "软件1501"
+		},
+		{
+			"id": "64700",
+			"nickName": "11qKwlKg8L",
+			"userName": "XJOG7KdJBQ",
+			"status": "dSssEU7mEZ",
+			"companyName": "STSaChd1vd",
+			"teacherName": "JVMYbTQCE3",
+			"forbidden": "lKo9DSiv5S",
+			"major": "QCwfsWk2a5",
+			"class": "C7VnXVSTgB"
+		},
+		{
+			"id": "65587",
+			"nickName": "7OFoplDlWr",
+			"userName": "OTt3tknJPd",
+			"status": "Ai45hisAkN",
+			"companyName": "JQrxwPI90O",
+			"teacherName": "duTXRtCy92",
+			"forbidden": "rzZ4ikhq61",
+			"major": "gDqRgcovb4",
+			"class": "GyC3bFR3WV"
+		}
+	]
+}

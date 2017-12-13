@@ -1,7 +1,6 @@
 package edu.zjgsu.ito.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author 
@@ -49,18 +48,28 @@ public class Student implements Serializable {
     private String nation;
 
     /**
-     * 1熟练2一般
+     * 0不熟练1熟练
      */
     private Boolean english;
 
     /**
      * 毕业年份
      */
-    private Date graduateYear;
+    private String grade;
 
     private String major;
 
     private String clss;
+
+    private Boolean forbidden;
+
+    private Boolean deletetag;
+
+    private String birthday;
+
+    private String national;
+
+    private String email;
 
     private static final long serialVersionUID = 1L;
 
@@ -152,12 +161,12 @@ public class Student implements Serializable {
         this.english = english;
     }
 
-    public Date getGraduateYear() {
-        return graduateYear;
+    public String getGrade() {
+        return grade;
     }
 
-    public void setGraduateYear(Date graduateYear) {
-        this.graduateYear = graduateYear;
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 
     public String getMajor() {
@@ -174,6 +183,46 @@ public class Student implements Serializable {
 
     public void setClss(String clss) {
         this.clss = clss;
+    }
+
+    public Boolean getForbidden() {
+        return forbidden;
+    }
+
+    public void setForbidden(Boolean forbidden) {
+        this.forbidden = forbidden;
+    }
+
+    public Boolean getDeletetag() {
+        return deletetag;
+    }
+
+    public void setDeletetag(Boolean deletetag) {
+        this.deletetag = deletetag;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getNational() {
+        return national;
+    }
+
+    public void setNational(String national) {
+        this.national = national;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -199,9 +248,14 @@ public class Student implements Serializable {
             && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
             && (this.getNation() == null ? other.getNation() == null : this.getNation().equals(other.getNation()))
             && (this.getEnglish() == null ? other.getEnglish() == null : this.getEnglish().equals(other.getEnglish()))
-            && (this.getGraduateYear() == null ? other.getGraduateYear() == null : this.getGraduateYear().equals(other.getGraduateYear()))
+            && (this.getGrade() == null ? other.getGrade() == null : this.getGrade().equals(other.getGrade()))
             && (this.getMajor() == null ? other.getMajor() == null : this.getMajor().equals(other.getMajor()))
-            && (this.getClss() == null ? other.getClss() == null : this.getClss().equals(other.getClss()));
+            && (this.getClss() == null ? other.getClss() == null : this.getClss().equals(other.getClss()))
+            && (this.getForbidden() == null ? other.getForbidden() == null : this.getForbidden().equals(other.getForbidden()))
+            && (this.getDeletetag() == null ? other.getDeletetag() == null : this.getDeletetag().equals(other.getDeletetag()))
+            && (this.getBirthday() == null ? other.getBirthday() == null : this.getBirthday().equals(other.getBirthday()))
+            && (this.getNational() == null ? other.getNational() == null : this.getNational().equals(other.getNational()))
+            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()));
     }
 
     @Override
@@ -219,9 +273,14 @@ public class Student implements Serializable {
         result = prime * result + ((getSex() == null) ? 0 : getSex().hashCode());
         result = prime * result + ((getNation() == null) ? 0 : getNation().hashCode());
         result = prime * result + ((getEnglish() == null) ? 0 : getEnglish().hashCode());
-        result = prime * result + ((getGraduateYear() == null) ? 0 : getGraduateYear().hashCode());
+        result = prime * result + ((getGrade() == null) ? 0 : getGrade().hashCode());
         result = prime * result + ((getMajor() == null) ? 0 : getMajor().hashCode());
         result = prime * result + ((getClss() == null) ? 0 : getClss().hashCode());
+        result = prime * result + ((getForbidden() == null) ? 0 : getForbidden().hashCode());
+        result = prime * result + ((getDeletetag() == null) ? 0 : getDeletetag().hashCode());
+        result = prime * result + ((getBirthday() == null) ? 0 : getBirthday().hashCode());
+        result = prime * result + ((getNational() == null) ? 0 : getNational().hashCode());
+        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
         return result;
     }
 
@@ -242,9 +301,14 @@ public class Student implements Serializable {
         sb.append(", sex=").append(sex);
         sb.append(", nation=").append(nation);
         sb.append(", english=").append(english);
-        sb.append(", graduateYear=").append(graduateYear);
+        sb.append(", grade=").append(grade);
         sb.append(", major=").append(major);
         sb.append(", clss=").append(clss);
+        sb.append(", forbidden=").append(forbidden);
+        sb.append(", deletetag=").append(deletetag);
+        sb.append(", birthday=").append(birthday);
+        sb.append(", national=").append(national);
+        sb.append(", email=").append(email);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

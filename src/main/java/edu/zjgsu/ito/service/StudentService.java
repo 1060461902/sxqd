@@ -2,14 +2,12 @@ package edu.zjgsu.ito.service;
 import edu.zjgsu.ito.model.Student;
 import edu.zjgsu.ito.model.StudentExample;
 import org.apache.ibatis.annotations.Param;
-//import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 //@Repository
 public interface StudentService {
     long countByExample(StudentExample example);
-
 
     int deleteByExample(StudentExample example);
 
@@ -18,7 +16,6 @@ public interface StudentService {
     int insert(Student record);
 
     int insertSelective(Student record);
-
 
     List<Student> selectByExample(StudentExample example);
 

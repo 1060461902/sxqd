@@ -22,112 +22,57 @@
   <body class="light-gray-bg hidden-scrolling ">  
       <!-- Main content -->      
           <div class="templatemo-content-widget white-bg fullfill text-center">  
-            <h5 class="iframe-title"> 审批</h5><hr>                
+            <h5 class="iframe-title"> 审批</h5><br><hr>                
             <ul id="myTab" class="nav nav-tabs">
               <li class="active">
                 <a href="#qyzc" data-toggle="tab">
-                企业注册审批 <span class="badge" id="qysq">0</span>
+                企业注册审批
                 </a>
               </li>
-              <li><a href="#sxfb" data-toggle="tab">实习发布审批  <span class="badge" id="sxfbsp">0</span></a></li>
-              <li><a href="#sydt" data-toggle="tab">动态新闻审批  <span class="badge" id="sydtsp">3</span></a></li>
+              <li><a href="approval-2.html">实习发布审批 </a></li>
+              <li><a href="approval-3.html">动态新闻审批 </a></li>
             </ul>
             <div id="myTabContent" class="tab-content">
             <!--             PART 1                  -->
             <div class="tab-pane fade in active" id="qyzc">
-             <table id="table-1" class="table table-striped">
+            <form role="form" class="form-inline">
+            <div class="form-group float-left">
               <select class="float-left">
-                <option selected="selected" >---企业类型---</option>
-                <option value="">政府组织</option>
-                <option value="">IT/互联网</option>
-                <option value="">传媒设计</option>
+                <option selected="selected">企业类型</option>
+                <option>IT/互联网</option>
+                <option>政府组织/NGO</option>
+                <option>餐饮旅游</option>
+                <option>医疗化工</option>
+                <option>机械制造</option>
+                <option>教育/翻译</option>
+                <option>地产物业</option>
+                <option>传媒设计</option>
+                <option>消费品</option>
+                <option>人事行政</option>
+                <option>市场商务</option>
+                <option>财经法务</option>
+                <option>电子电气</option>
+                <option>其它</option>
               </select>
+            </div>
+            </form>
+             <table id="table-1" class="table">
                <thead>
                  <tr>
+                   <th width="80px">
+                     <input type="checkbox" >
+                   </th> 
                    <th>企业名称</th>
                    <th>企业类型</th>
                    <th>企业地址</th>
                    <th>企业联系人</th>
                    <th>Tel</th>
-                   <th>操作</th>
                  </tr>
                </thead>
                <tbody>
-                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a href="#" title="重置密码" onclick="admit()">通过</a></td>
-                 </tr>
-                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a href="#" title="重置密码" onclick="admit()">通过</a></td>
-                 </tr>
                </tbody>
              </table>
-            </div>
-              <!--             PART 2                   -->
-            <div class="tab-pane fade" id="sxfb">
-              <table id="table-2" class="table table-striped">
-              <select class="float-left">
-                <option disabled="disabled" >---企业名称---</option>
-              </select>
-               <thead>
-                 <tr>
-                   <th>招聘岗位</th>
-                   <th>企业名称</th>
-                   <th>招聘人数</th>
-                   <th>企业联系人</th>
-                   <th>招聘详情</th>
-                 </tr>
-               </thead>
-               <tbody>
-                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a href="approval-occupation.html">查看</a></td>
-                 </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a href="approval-occupation.html">查看</a></td>
-                 </tr>
-               </tbody>
-             </table>
-            </div>
-              <!--             PART 3                   -->
-            <div class="tab-pane fade" id="sydt">
-             <table id="table-3" class="table table-striped">
-               <thead>
-                 <tr>
-                   <th>新闻标题</th>
-                   <th>展示图片</th>
-                   <th>详情</th>
-                 </tr>
-               </thead>
-               <tbody>
-                 <tr>
-                    <td></td>
-                    <td><img src=""></img></td>
-                    <td><a href="approval-news.html">查看</a></td>
-                 </tr>
-                 <tr>
-                    <td></td>
-                    <td><img src=""></img></td>
-                    <td><a href="approval-news.html">查看</a></td>
-                 </tr>
-               </tbody>
-             </table>
+             <button type="button" class="btn btn-primary operations">通过</button>
             </div>
             </div>
           </div>  

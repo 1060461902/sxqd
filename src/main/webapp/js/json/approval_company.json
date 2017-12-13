@@ -1,0 +1,112 @@
+{
+  "msg": "返回公司信息成功！",
+  "code": 200,
+  "compamyViewList": [
+    {
+      "id": "2",
+      "companyName": "天娱传媒",
+      "address": "杭州上城区501号",
+      "userId": "8",
+      "createTime": 1511957020000,
+      "email": "789@qq.com",
+      "type": "广告",
+      "logo": "2",
+      "network": "www.123.com",
+      "size": "200多人",
+      "stage": "大型公司",
+      "slogans": "好好炒作",
+      "intruction": "公司喜欢打明星",
+      "checked": true,
+      "pass": true,
+      "userName": "tianyu",
+      "password": "21232f297a57a5a743894a0e4a801fc3",
+      "phone": "13568779461",
+      "nickName": "天宇",
+      "deleteTag": true,
+      "roleId": "4",
+      "licence": "images/timg2.jpg",
+      "tax_registration": "images/ali.jpg",
+      "organization_code": "images/timg.jpg",
+      "forbidden": true
+    }
+  ],
+    "mark": [
+        {
+      "id": "2",
+      "company_Id": "2",
+      "mark": "世界五百强"
+    },
+          {
+      "id": "2",
+      "company_Id": "2",
+      "mark": "bb"
+    },
+          {
+      "id": "2",
+      "company_Id": "2",
+      "mark": "cc"
+    },
+          {
+      "id": "2",
+      "company_Id": "2",
+      "mark": "dd"
+    },
+      {
+      "id": "2",
+      "company_Id": "2",
+      "mark": "ee"
+    },
+        {
+      "id": "2",
+      "company_Id": "2",
+      "mark": "ff"
+    }
+  ],
+  "Image": [
+        {
+      "id": "2",
+      "companyId": "2",
+      "url": "images/ali.jpg"
+    },
+          {
+      "id": "2",
+      "companyId": "2",
+      "url": "images/ali.jpg"
+    },
+          {
+      "id": "2",
+      "companyId": "2",
+      "url": "images/timg2.jpg"
+    },
+          {
+      "id": "2",
+      "companyId": "2",
+      "url": "images/timg.jpg"
+    },
+      {
+      "id": "2",
+      "companyId": "2",
+      "url": "images/timg3.jpg"
+    },
+        {
+      "id": "2",
+      "companyId": "2",
+      "url": "images/timg2.jpg"
+    },
+        {
+      "id": "2",
+      "companyId": "2",
+      "url": "images/timg.jpg"
+    },
+    {
+      "id": "2",
+      "companyId": "2",
+      "url": "images/timg2.jpg"
+    },
+    {
+      "id": "3",
+      "companyId": "2",
+      "url": "images/timg3.jpg"
+    }
+  ]
+}

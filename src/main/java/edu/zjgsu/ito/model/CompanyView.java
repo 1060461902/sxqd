@@ -91,16 +91,13 @@ public class CompanyView implements Serializable {
      */
     private Integer roleId;
 
-    /**
-     * 0-没有被禁用，1-禁用
-     */
-    private Boolean forbidden;
-
     private String licence;
 
     private String taxRegistration;
 
     private String organizationCode;
+
+    private Boolean forbidden;
 
     private static final long serialVersionUID = 1L;
 
@@ -272,14 +269,6 @@ public class CompanyView implements Serializable {
         this.roleId = roleId;
     }
 
-    public Boolean getForbidden() {
-        return forbidden;
-    }
-
-    public void setForbidden(Boolean forbidden) {
-        this.forbidden = forbidden;
-    }
-
     public String getLicence() {
         return licence;
     }
@@ -302,6 +291,14 @@ public class CompanyView implements Serializable {
 
     public void setOrganizationCode(String organizationCode) {
         this.organizationCode = organizationCode;
+    }
+
+    public Boolean getForbidden() {
+        return forbidden;
+    }
+
+    public void setForbidden(Boolean forbidden) {
+        this.forbidden = forbidden;
     }
 
     @Override
@@ -337,10 +334,10 @@ public class CompanyView implements Serializable {
             && (this.getNickName() == null ? other.getNickName() == null : this.getNickName().equals(other.getNickName()))
             && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()))
             && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()))
-            && (this.getForbidden() == null ? other.getForbidden() == null : this.getForbidden().equals(other.getForbidden()))
             && (this.getLicence() == null ? other.getLicence() == null : this.getLicence().equals(other.getLicence()))
             && (this.getTaxRegistration() == null ? other.getTaxRegistration() == null : this.getTaxRegistration().equals(other.getTaxRegistration()))
-            && (this.getOrganizationCode() == null ? other.getOrganizationCode() == null : this.getOrganizationCode().equals(other.getOrganizationCode()));
+            && (this.getOrganizationCode() == null ? other.getOrganizationCode() == null : this.getOrganizationCode().equals(other.getOrganizationCode()))
+            && (this.getForbidden() == null ? other.getForbidden() == null : this.getForbidden().equals(other.getForbidden()));
     }
 
     @Override
@@ -368,10 +365,10 @@ public class CompanyView implements Serializable {
         result = prime * result + ((getNickName() == null) ? 0 : getNickName().hashCode());
         result = prime * result + ((getDeleteTag() == null) ? 0 : getDeleteTag().hashCode());
         result = prime * result + ((getRoleId() == null) ? 0 : getRoleId().hashCode());
-        result = prime * result + ((getForbidden() == null) ? 0 : getForbidden().hashCode());
         result = prime * result + ((getLicence() == null) ? 0 : getLicence().hashCode());
         result = prime * result + ((getTaxRegistration() == null) ? 0 : getTaxRegistration().hashCode());
         result = prime * result + ((getOrganizationCode() == null) ? 0 : getOrganizationCode().hashCode());
+        result = prime * result + ((getForbidden() == null) ? 0 : getForbidden().hashCode());
         return result;
     }
 
@@ -402,10 +399,10 @@ public class CompanyView implements Serializable {
         sb.append(", nickName=").append(nickName);
         sb.append(", deleteTag=").append(deleteTag);
         sb.append(", roleId=").append(roleId);
-        sb.append(", forbidden=").append(forbidden);
         sb.append(", licence=").append(licence);
         sb.append(", taxRegistration=").append(taxRegistration);
         sb.append(", organizationCode=").append(organizationCode);
+        sb.append(", forbidden=").append(forbidden);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
