@@ -3,7 +3,7 @@ $(document).ready(function(){
     var info = new Object();
     info.id = window.location.href;
       $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showCheckScreening',
        async: true,
        contentType: "application/json",
@@ -20,7 +20,7 @@ $(document).ready(function(){
     info.month =  $(this).text();
     info.id = window.location.href;
       $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showCheck',
        data: JSON.stringify(info),
        async: true,
@@ -71,7 +71,7 @@ $(document).ready(function(){
     info.id = window.location.href;
     info.month = "全部时段";
     $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showCheck',
        async: true,
        contentType: "application/json",

@@ -3,7 +3,7 @@ $(document).ready(function(){
   var info = new Object();
   info.id = id;
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showDynamicNewsDetails',
        data: JSON.stringify(info),
        async: true,
@@ -41,7 +41,7 @@ $(document).ready(function(){
       info.id=id;
       info.showStatus=$("td#switch").attr("value");
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/comfirmshow',
        data: JSON.stringify(info),
        async: true,
@@ -66,7 +66,7 @@ $(document).ready(function(){
       info.id=id;
       info.showStatus=$("td#switch").attr("value");
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/comfirmshow',
        data: JSON.stringify(info),
        async: true,
