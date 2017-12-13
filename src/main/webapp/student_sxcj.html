@@ -13,47 +13,56 @@
     <link href="css/ownadd.css" rel="stylesheet">
     <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>      <!-- jQuery -->    
     <script  type="text/javascript" src="js/bootstrap.js"></script>
-    <script src="js/myjs/student_sxxj.js"></script> 
+    <script src="js/myjs/student_sxcj.js"></script> 
   </head>
-  <body  class="light-gray-bg hidden-scrolling">  
+  <body  class="light-gray-bg">  
       <!-- Main content --> 
-        <div  class="templatemo-content-widget white-bg fullfill text-center height-660">
-              <h2><b>实习成绩<b><span>A</span></h2>
-          <div style="border:1px solid #DDD;margin:30px 10px;padding: 20px">
-            <h3><b>老师评分</b></h3><br>
-            <div style="display: inline-block;border:1px dashed #DDD;width:22%;padding:20px 10px;">
-              周报<br><br><h2>A</h2>
-            </div>
-            <div style="display: inline-block;border:1px dashed #DDD;width:22%;padding:20px 10px;">
-              月报<br><br><h2>A</h2>
-            </div>
-            <div style="display: inline-block;border:1px dashed #DDD;width:150px;padding:20px 10px;">
-              实习小结 <br><br><h2>A</h2>
-            </div>
-            <div style="display: inline-block;border:1px dashed #DDD;width:22%;padding:20px 10px;">
-              实习报告<br><br><h2>A</h2>
-            </div>
-            <div style="border:1px dashed #DDD;height: 50px;padding:10px;margin: 10px;">
-              老师总评<h2>A</h2>
-            </div>                                         
+        <div  class="templatemo-content-widget white-bg text-center">
+          <h2><b>实习成绩<b>&nbsp;&nbsp;<span class="score red" id="totalScore"></span>&nbsp;&nbsp;分</h2>
+   <div class="row sxcj-div1">
+    <h2><b>老师评分</b></h2>
+    <div class="row">
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-sm-3 sxcj-div2">
+            周报<br><br><h2 class="score" id="tWeekly"></h2>
           </div>
-          <div style="border:1px solid #DDD;margin:30px 10px;padding: 20px;">
-            <h3><b>企业评分</b></h3><br>
-            <div style="display: inline-block;border:1px dashed #DDD;width:22%;padding:20px 10px;">
-              周报<br><br><h2>A</h2>
-            </div>
-            <div style="display: inline-block;border:1px dashed #DDD;width:22%;padding:20px 10px;">
-              月报<br><br><h2>A</h2>
-            </div>
-            <div style="display: inline-block;border:1px dashed #DDD;width:150px;padding:20px 10px;">
-              实习小结 <br><br><h2>A</h2>
-            </div>
-            <div style="display: inline-block;border:1px dashed #DDD;width:22%;padding:20px 10px;">
-              实习报告<br><br><h2>A</h2>
-            </div>
-            <div style="border:1px dashed #DDD;height: 50px;padding:10px;margin: 10px;">
-              企业总评<h2>A</h2>
-            </div> 
+          <div class="col-sm-3 sxcj-div2">
+            实习小结 <br><br><h2 class="score" id="summary"></h2>
+          </div>
+          <div class="col-sm-3 sxcj-div2">
+            实习报告<br><br><h2 class="score" id="report"></h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-10 sxcj-div2">
+            <h3>加权分数&nbsp;&nbsp;<span class="score" id="Weighting"></span></h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 sxcj-div2">
+        <br><br><span class="add-symbol">+</span><h3>附加分</h3><br><br><h2 class="score" id="additionalPoints"><br><br></h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-11 sxcj-div3">
+        <h2>老师总评&nbsp;&nbsp;<span class="score" id="ttotalScore"></span></h2>
+      </div>
+    </div>
+   </div>
+          <div class="sxcj-div1">
+            <h2><b>企业评分</b></h2>
+                <div class="sxcj-div4">
+                  周报<br><br><h2 class="score" id="cWeekly"></h2>
+                </div>
+                <div class="sxcj-div4">
+                  考勤 <br><br><h2 class="score" id="checkonWork"></h2>
+                </div>
+                <div class="setDiv-2">
+                <div class="sxcj-div5">
+                  <h3>企业总评&nbsp;&nbsp;<span class="score" id="ctotalScore">&nbsp;</span>分</h3>
+                </div>
+                </div>
           </div>
         </div> 
     <!-- JS -->

@@ -1,0 +1,43 @@
+{
+	"internship": [
+		{
+			"nickName": "陈泽潇",
+			"clss": "软件1501",
+			"company": "阿里巴巴",
+			"companyId": "59470",
+			"post": "前端工程师",
+			"status": "待实习",
+			"stages": "2017/12/7—2017/12/10",
+			"teacherName": "谢波老师",
+			"teacherId": "59720",
+			"score" : "100",
+			"id": "59768"
+		},
+		{
+			"nickName": "iuP8ud19Fc",
+			"clss": "Kx49JuqVEH",
+			"company": "wEK9BEr7xs",
+			"companyId": "59936",
+			"post": "7URYOmmeLZ",
+			"status": "s9c4QorsIg",
+			"stages": "HKXnZw5ocV",
+			"teacherName": "uNPVRTaxfu",
+			"teacherId": "60039",
+			"score" : "80",
+			"id": "60198"
+		},
+		{
+			"nickName": "LY1OVWSVN2",
+			"clss": "g3i1xRt6df",
+			"company": "DFUFv6uLdM",
+			"companyId": "60324",
+			"post": "2t1ts6OV81",
+			"status": "wdBwOUGv0U",
+			"stages": "GjSJalJsbo",
+			"teacherName": "XcGdKmFadY",
+			"teacherId": "61055",
+			"score" : "90",
+			"id": "72007"
+		}
+	]
+}

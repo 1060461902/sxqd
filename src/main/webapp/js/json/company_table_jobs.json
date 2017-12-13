@@ -1,0 +1,40 @@
+{
+	"recruitmentList": [
+		{
+			"id" : "123",
+			"post": "ZLSJ4ybnAH",
+			"totalNumber": "4",
+			"currentNumber": "0",
+			"startTime": "1512384466414",
+			"endTime": "1512383575700",
+			"release_time": "1512384124908",
+			"address": "dI6gXLM7Qu",
+			"companyName": "e59PC1vsIt",
+			"forbidden": true
+		},
+		{
+			"id" : "223",
+			"post": "7stWNbdnL3",
+			"totalNumber": "5",
+			"currentNumber": "2",
+			"startTime": "1512384352137",
+			"endTime": "1512384505758",
+			"release_time": "1512382668504",
+			"address": "cD3QiDMX9Y",
+			"companyName": "hkO8JxtdyC",
+			"forbidden": false
+		},
+		{
+			"id" : "323",
+			"post": "nBZkVgorHP",
+			"totalNumber": "7",
+			"currentNumber": "3",
+			"startTime": "1512384274879",
+			"endTime": "1512383264344",
+			"release_time": "1512383868654",
+			"address": "Qo8eLXoA5x",
+			"companyName": "gEnA5DmjBV",
+			"forbidden": true
+		}
+	]
+}

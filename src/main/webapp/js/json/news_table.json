@@ -1,0 +1,38 @@
+{
+"msg": "返回动态信息成功！",
+"code": 200,
+"dynamicApproves":[
+{
+"id": 1,
+"title": "多家外媒报道【即刻】的一个小产品",
+"imageUrl": "images/ali.jpg",
+"detail": "这里是文章内容",
+"deleteTag": true,
+"passing": true,
+"dopassing": true,
+"companyId": 1,
+"phone": "15967180225",
+"email": "815027104@qq.com",
+"why": "嘿嘿",
+"showStatus": true,
+"startTime": "2017-12-04 14:09:55",
+"endTime": null
+},
+{
+"id": 2,
+"title": "不懂事的傻逼孩子你们也该醒了",
+"imageUrl": "images/timg2.jpg",
+"detail": "时间不会让我热情熄了火",
+"deleteTag": true,
+"passing": true,
+"dopassing": true,
+"companyId": 2,
+"phone": "110",
+"email": "chengou@qq.com",
+"why": "嘿嘿",
+"showStatus": true,
+"startTime": null,
+"endTime": null
+}
+]
+}

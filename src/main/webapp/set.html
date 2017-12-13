@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+x<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -29,8 +29,8 @@
   </head>
   <body class="light-gray-bg hidden-scrolling">
       <!-- Main content -->
-        <div class="templatemo-content-widget white-bg  flex-content">
-          <h5 class="iframe-title">设置</h5><hr>
+        <div class="templatemo-content-widget white-bg fullfill">
+          <h5 class="iframe-title">设置</h5><br><hr>
             <h2 class="settitle">个人密码重置</h2>
             <h5 class="settitle">该操作可以重置登录密码</h5>
             <form action="" class="templatemo-login-form setform "enctype="multipart/form-data">
@@ -56,41 +56,42 @@
             </form>
           <hr>
             <h2 class="margin-bottom-10 settitle">学生成绩权重设置</h2>
-            <h5 class="margin-bottom-10 settitle">该操作可以设置学生成绩权重</h5>
-            <h3 class="settitle">学生最终成绩为一下权重百分比之和(单位：%)</h3>
+            <h5 class="margin-bottom-10 settitle">该操作可以设置学生成绩权重，学生最终成绩为一下权重百分比之和(单位：%)</h5>
           <div class="setDiv">
           <div>
-            <div style="width:100%;text-align:center">
-              <input placeholder="老师评分" id="">
+            <div style="width:100%;text-align:center;padding-bottom: 20px;">
+              <input placeholder="老师评分" id="x">%
               <h5>老师评分权重</h5>
             </div>
             <div class="inline">
-              <input placeholder="周报">
+              <input placeholder="周报" id="y">%
               <h5>周报权重</h5>
-            </div>
+            </div>+
             <div class="inline">
-              <input placeholder="实习小结">
+              <input placeholder="实习小结" id="y">%
               <h5>实习小结权重</h5>
-            </div>
+            </div>+
             <div class="inline">
-              <input placeholder="实习报告">
+              <input placeholder="实习报告" id="y">%
               <h5>实习报告权重</h5>
-            </div>
+            </div>= 100%
           </div>
+          <div><h2>+</h2></div>
           <div>
-            <div style="width:100%;text-align:center">
-              <input placeholder="企业评分" >
+            <div style="width:100%;text-align:center;padding-bottom: 20px;">
+              <input placeholder="企业评分" id="x">%
               <h5>企业评分权重</h5>
             </div>
             <div class="inline">
-              <input placeholder="周报权重">
+              <input placeholder="周报权重" id="z">%
               <h5>周报权重</h5>
-            </div>
+            </div>+
             <div class="inline">
-              <input placeholder="考勤权重">
+              <input placeholder="考勤权重" id="z">%
               <h5>考勤权重</h5>
-            </div>
-           </div> 
+            </div>= 100%
+           </div>
+           <div><h3>= 100%</h3></div> 
           </div>
           <button type="button" class="btn btn-primary btn-lg" id="qzbtn">保存</button> 
         </div>

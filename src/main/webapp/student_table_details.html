@@ -15,56 +15,168 @@
   <body  class="light-gray-bg">  
       <!-- Main content --> 
           <div  class="templatemo-content-widget text-center white-bg" >
-            <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  <a href="student_table.html">学生列表</a> > 学生简历</h5><hr>
+            <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  <a href="student_table.html">学生列表</a> > 学生简历</h5><br><hr>
             <ul class="nav nav-tabs" id="studentTab">
               <li class="active">
                 <a href="#qyzc" >学生简历</a>
               </li>
-              <li><a href="student_table_jobs.html">求职之路</a></li>
-              <li><a href="student_table_clock.html">考勤情况</a></li>
-              <li><a href="student_table_progress.html">实习考核</a></li>              
+              <li><a href="student_table_jobs.html" id="qzzl">求职之路</a></li>
+<!--               <li><a href="student_table_clock.html">考勤情况</a></li>
+              <li><a href="student_table_progress.html">实习考核</a></li>    -->           
             </ul><br>
             <div id="myTabContent" class="tab-content">             
               <div class="panel panel-default">
                 <ul class="list-group" id="xsjl">
                   <li class="list-group-item">
-                    <h3>基本信息</h3>
-                    <img src="images/u520.png" class="img-circle" id="identification-photo">
+                    <h2>基本信息</h2>
+                    <img src="#" class="img-circle" id="identification-photo">
                     <div class="basic-info">
-                      <h5>name</h5>
-                      <span>*</span> | <span>*</span> | <span>*</span> | <span>*</span>年<span>*</span>月 <br>
-                      手机号码 ：<span>*</span><br>
-                      邮箱 ： <span>*</span><br>
+                      <div class="edit"><a href="#" data-toggle="modal" data-target="#student_Modal"><i class="fa fa-pencil fa-fw"></i>编辑</a></div>
+                      <h4 id="nickName"></h4>
+                      <h3>
+                      <span id="userName"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="sex"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="nation"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="birthDate"></span> <br>
+                      手机号码 ：<span id="phone"></span><br>
+                      邮箱 ： <span id="email">*</span><br></h3>
                     </div>
                   </li>
                   <li class="list-group-item">
-                    <h3>项目经历</h3><span class="time">2017.11</span><br>
-                    <p>1</p>
-                    <p>2</p>
-                    <p>(项目说明)</p>
+                    <h2>项目经历</h2>
                   </li>
                   <li class="list-group-item">
-                    <h3>社团经历</h3><span class="time">2017.11</span><br>
-                    <p>1</p>
-                    <p>2</p>
-                    <p>(工作说明)</p>
+                    <h2>所获荣誉</h2><br>
                   </li>
                   <li class="list-group-item">
-                    <h3>所获荣誉</h3><span class="time">2017.11</span><br>
-                    <p>1</p>
-                    <p>2</p>
-                    <p>(荣誉说明)</p>
+                    <h2>社团经历</h2><br>
                   </li>
                   <li class="list-group-item">
-                    <h3>技能特长</h3><br>
-                    <span class="label label-primary">主要标签</span>
+                    <h2>技能特长</h2><br>
+                    <div class="skill-content"></div>
                   </li>
                   <li class="list-group-item">
-                    <h3>英语水平</h3><br>
-                    <p>詹韩峰</p>
+                    <h2>英语水平</h2><br>
+                    <h4 id="english"></h4>
                   </li>
                 </ul>
               </div>
+                            <!-- 模态框（Modal） -->
+<div class="modal fade" id="student_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">基本信息</h4>
+            </div>
+            <div class="modal-body" >
+              <table class="text-center" width="80%" id="student_details">
+                <tr>
+                  <th>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</th>
+                  <td colspan="2" width="60%"></td>
+                </tr>
+                <tr>
+                  <th>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</th>
+                  <td colspan="2"></td>
+                </tr>
+               <tr>
+                  <th rowspan="2">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</td>
+                  <td class="text-right">
+                    <button value="" id="male" class="btn btn-default">
+                      <i class="fa fa-mars fa-fw"></i>
+                    </button>&nbsp;&nbsp;
+                  </td>
+                  <td class="text-left">  
+                    &nbsp;&nbsp;<button value="" id="female" class="btn btn-default">
+                      <i class="fa fa-venus fa-fw"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                   <td class="text-right">男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;女</td>
+                </tr>
+                <tr>
+                  <th>民&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族</th>
+                  <td colspan="2">             
+    <select id="nation">  
+        <option>汉族</option>  
+        <option>蒙古族</option>  
+        <option>回族</option>  
+        <option>藏族</option>  
+        <option>维吾尔族</option>  
+        <option>苗族</option>  
+        <option>彝族</option>  
+        <option>壮族</option>  
+        <option>布依族</option>  
+        <option>朝鲜族</option>  
+        <option>满族</option>  
+        <option>侗族</option>  
+        <option >瑶族</option>  
+        <option >白族</option>  
+        <option >土家族</option>  
+        <option >哈尼族</option>  
+        <option >哈萨克族</option>  
+        <option >傣族</option>  
+        <option >黎族</option>  
+        <option >傈僳族</option>  
+        <option >佤族</option>  
+        <option >畲族</option>  
+        <option >高山族</option>  
+        <option >拉祜族</option>  
+        <option >水族</option>  
+        <option >东乡族</option>  
+        <option >纳西族</option>  
+        <option>景颇族</option>  
+        <option>柯尔克孜族</option>  
+        <option>土族</option>  
+        <option >达斡尔族</option>  
+        <option >仫佬族</option>  
+        <option >羌族</option>  
+        <option >布朗族</option>  
+        <option >撒拉族</option>  
+        <option >毛南族</option>  
+        <option >仡佬族</option>  
+        <option >锡伯族</option>  
+        <option >阿昌族</option>  
+        <option >普米族</option>  
+        <option >塔吉克族</option>  
+        <option >怒族</option>  
+        <option >乌孜别克族</option>  
+        <option >俄罗斯族</option>  
+        <option >鄂温克族</option>  
+        <option >德昂族</option>  
+        <option >保安族</option>  
+        <option >裕固族</option>  
+        <option >京族</option>  
+        <option >塔塔尔族</option>  
+        <option >独龙族</option>  
+        <option >鄂伦春族</option>  
+        <option >赫哲族</option>  
+        <option >门巴族</option>  
+        <option >珞巴族</option>  
+        <option >基诺族</option>
+        <option >其它</option>  
+       </select>  
+                  </td>
+                </tr>
+                <tr>
+                  <th>出生年月</th>
+                  <td colspan="2"><input></td>
+                </tr>
+                <tr>
+                  <th>手机号码</th>
+                  <td colspan="2"><input  placeholder="请输入手机号"></td>
+                </tr>
+                <tr>
+                  <th>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</th>
+                  <td colspan="3"><input  placeholder="请输入常用邮箱"></td>
+                </tr>
+              </table>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id='edit'>确认</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
             </div>
           </div> 
     <!-- JS -->
