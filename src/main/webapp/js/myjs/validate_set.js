@@ -5,29 +5,57 @@
 * @Last Modified time: 2017-10-26 15:24:38
 */
 $(document).ready(function(){
+    // $.getJSON("js/json/weight.json", function(data) {
+    //   $('.setDiv input#a:eq(0)').val(data.teacherWeight);
+    //   $('.setDiv input#a:eq(1)').val(data.companyWeight);
+    //   $('.setDiv input#b:eq(0)').val(data.tWeekReport);
+    //   $('.setDiv input#b:eq(1)').val(data.tSummary);
+    //   $('.setDiv input#b:eq(2)').val(data.tFinalReport );
+    //   $('.setDiv input#c:eq(0)').val(data.cWeekReport);
+    //   $('.setDiv input#c:eq(1)').val(data.cAttendance);
+    // });
+      $.ajax({
+       type: 'get',
+       url: '/fieldworkmanage/admin/weight',
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+      $('.setDiv input#x:eq(0)').val(data.teacherWeight);
+      $('.setDiv input#x:eq(1)').val(data.companyWeight);
+      $('.setDiv input#y:eq(0)').val(data.tWeekReport);
+      $('.setDiv input#y:eq(1)').val(data.tSummary);
+      $('.setDiv input#y:eq(2)').val(data.tFinalReport );
+      $('.setDiv input#z:eq(0)').val(data.cWeekReport);
+      $('.setDiv input#z:eq(1)').val(data.cAttendance);
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
   $('button#qzbtn').click(function(){
-    if(parseInt($('.setDiv input#a:eq(0)').val())+parseInt($('.setDiv input#a:eq(1)').val())!=100){
+    if(parseInt($('.setDiv input#x:eq(0)').val())+parseInt($('.setDiv input#x:eq(1)').val())!=100){
       alert("请使老师权重和企业权重之和为100");
       $('.setDiv input#a:eq(0)').focus();
     }
-    else if(parseInt($('.setDiv input#b:eq(0)').val())+parseInt($('.setDiv input#b:eq(1)').val())+parseInt($('.setDiv input#b:eq(2)').val())!=100){
+    else if(parseInt($('.setDiv input#y:eq(0)').val())+parseInt($('.setDiv input#y:eq(1)').val())+parseInt($('.setDiv input#y:eq(2)').val())!=100){
       alert("请使老师评分下三项之和为100");
       $('.setDiv input#b:eq(0)').focus();
     }
-    else if(parseInt($('.setDiv input#c:eq(0)').val())+parseInt($('.setDiv input#c:eq(1)').val())!=100){
+    else if(parseInt($('.setDiv input#z:eq(0)').val())+parseInt($('.setDiv input#z:eq(1)').val())!=100){
       alert("请使企业评分下两项之和为100");
       $($('.setDiv input#c:eq(0)')).focus();
     }
     else {
       var info = new Object();
-      info.teacherWeight = '0.'+ $('.setDiv input#a:eq(0)').val();
-      info.companyWeight = '0.'+ $('.setDiv input#a:eq(1)').val();
-      info.tWeekReport = '0.'+ $('.setDiv input#b:eq(0)').val();
-      info.tSummary = '0.'+ $('.setDiv input#b:eq(1)').val();
-      info.tFinalReport = '0.'+ $('.setDiv input#b:eq(2)').val();
-      info.cWeekReport = '0.'+ $('.setDiv input#c:eq(0)').val();
-      info.cAttendance = '0.'+ $('.setDiv input#c:eq(1)').val();
-      alert(info.cAttendance);
+      info.teacherWeight = '0.'+ $('.setDiv input#x:eq(0)').val();
+      info.companyWeight = '0.'+ $('.setDiv input#x:eq(1)').val();
+      info.tWeekReport = '0.'+ $('.setDiv input#y:eq(0)').val();
+      info.tSummary = '0.'+ $('.setDiv input#y:eq(1)').val();
+      info.tFinalReport = '0.'+ $('.setDiv input#y:eq(2)').val();
+      info.cWeekReport = '0.'+ $('.setDiv input#z:eq(0)').val();
+      info.cAttendance = '0.'+ $('.setDiv input#z:eq(1)').val();
+      //alert(info.cAttendance);
       $.ajax({
        type: 'post',
        url: '/fieldworkmanage/admin/weight',

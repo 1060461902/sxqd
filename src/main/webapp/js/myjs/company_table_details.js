@@ -1,23 +1,16 @@
 $(document).ready(function(){
   var info =new Object();
   info.id = window.location.href;
-	 // $.ajax({
-   //     type: 'get',
-   //     url: '/fieldManagement/admin/showCompanyDeails',
-   //     data: JSON.stringify(id),
-   //     async: true,
-   //     contentType: "application/json",
-   //     dateType: "json",
-   //     success: function(data){
-
-   //   },
-   //     error: function(){
-   //      alert('服务端异常');
-   //      }
-   //  });
-	 $.getJSON("js/json/approval_company.json", function(data) {
-	 	window.comid =  data.compamyViewList[0].id;
-    $('a#jobs').attr("href",'company_table_jobs.html?id='+comid);
+	 $.ajax({
+       type: 'get',
+       url: '/fieldManagement/admin/showCompanyDetails',
+       data: JSON.stringify(info),
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+        window.comid =  data.compamyViewList[0].id;
+        $('a#jobs').attr("href",'company_table_jobs.html?id='+comid);
         var obj = data.compamyViewList[0];
         $("span#name").text(obj.companyName);
         $("span#network").text(obj.network);
@@ -47,5 +40,12 @@ $(document).ready(function(){
         $('img').click(function(){
           $('.album-1 img').attr("src",$(this).attr("src"));
         });
-	 });
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
+	 // $.getJSON("js/json/approval_company.json", function(data) {
+
+	 // });
 });

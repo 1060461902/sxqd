@@ -23,7 +23,7 @@
   "national" : "汉族",
   "birthdate": "1997年5月"
   },
-    "skill": [
+    "SkillList": [
       "java",
       "b-box",
       "node.js"

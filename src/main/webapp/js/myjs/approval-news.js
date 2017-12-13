@@ -5,7 +5,7 @@ $(document).ready(function(){
 	  $.ajax({
        type: 'get',
        url: '/fieldManagement/admin/showDynamicNewsDetails',
-       data: JSON.stringify(id),
+       data: JSON.stringify(info),
        async: true,
        contentType: "application/json",
        dateType: "json",
@@ -35,7 +35,7 @@ $("button#pass-button").click(function(){
       var info = new Object();
       info.id=id;
       info.passFlag=flag;//要传输的数据
-      info.msg = null;
+      info.meg = null;
     $.ajax({
        type: 'post',
        url: '/fieldManagement/admin/comfirmDynamicNews',
@@ -59,7 +59,7 @@ $("button#pass-button").click(function(){
       var info = new Object();
       info.id=id;
       info.passFlag=flag;
-      info.msg = $('textarea').val();
+      info.meg = $('textarea').val();
     $.ajax({
        type: 'post',
        url: '/fieldManagement/admin/comfirmDynamicNews',

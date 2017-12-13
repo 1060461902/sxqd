@@ -1,6 +1,6 @@
 $(document).ready(function(){
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showDynamicNewsApplyList',
        async: true,
        contentType: "application/json",
@@ -75,7 +75,7 @@ $('th>input:checkbox').click(function() {
     var info = new Object();
     info.id=id;
     info.passFlag='1';
-    info.msg = null;
+    info.meg = null;
     $.ajax({
        type: 'post',
        url: '/fieldManagement/admin/comfirmDynamicNews',

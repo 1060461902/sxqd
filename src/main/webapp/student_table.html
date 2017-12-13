@@ -24,20 +24,17 @@
         <div>
           <form role="form" class="form-inline" >
             <div class="form-group">
-              <select class="form-control">
-                <option selected = "selected">请选择年级</option>
-                <option>2015级</option>
+              <select class="form-control" id="grade">
+                <option selected = "selected">年级</option>
+              </select>
+              <select class="form-control" id="major">
+                <option selected = "selected">专业</option>
+              </select>
+              <select class="form-control" id="class">
+                <option selected = "selected">班级</option>
               </select>
               <select class="form-control">
-                <option selected = "selected">请选择专业</option>
-                <option>软件工程</option>
-              </select>
-              <select class="form-control">
-                <option selected = "selected">请选择班级</option>
-                <option>软件1501</option>
-              </select>
-              <select class="form-control">
-                <option selected = "selected" value="">请选择实习状态</option>
+                <option selected = "selected" id="status">实习状态</option>
                 <option value="">未实习</option>
                 <option value="">待实习</option>
                 <option value="">实习中</option>
@@ -46,6 +43,7 @@
               </select>
               <a href="#" data-toggle="modal" data-target="#drxs"><button class="btn btn-primary">导入</button></a>    
               <a href="#" data-toggle="modal" data-target="#add"><button class="btn btn-primary">新增</button></a>
+              <button type="button" class="btn btn-primary" id="gd">归档</button>
             </div>
           </form>
         </div>
@@ -110,11 +108,11 @@
               <table width="80%" id="student_details">
                 <tr>
                   <th>姓名</th>
-                  <td width="60%"><input  placeholder="请输入姓名"></td>
+                  <td width="60%"><input  placeholder="请输入姓名" id="nickName"></td>
                 </tr>
                 <tr>
                   <th>学号</th>
-                  <td><input  placeholder="请输入姓名"></td>
+                  <td><input  placeholder="请输入学号" id="userName"></td>
                 </tr>
                 <tr>
                   <th>专业</th>

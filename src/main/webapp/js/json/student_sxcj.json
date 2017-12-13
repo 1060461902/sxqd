@@ -1,4 +1,5 @@
 {
+  "score":{
 	"totalScore": 69,
 	"tWeekly": 38,
 	"summary": 17,
@@ -9,4 +10,5 @@
 	"checkonWork": 83,
 	"ctotalScore": 23,
 	"additionalPoints": 11
+   }
 }

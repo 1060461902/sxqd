@@ -24,17 +24,14 @@
         <div>
           <form role="form" class="form-inline" >
             <div class="form-group">
-              <select class="form-control">
-                <option>全部</option>
-                <option>2015级</option>
+              <select class="form-control" id="grade">
+                <option>年级</option>
               </select>
-              <select class="form-control">
-                <option>全部</option>
-                <option>计科1051</option>
+              <select class="form-control" id="class">
+                <option>班级</option>
               </select>
-              <select class="form-control">
-                <option>全部</option>
-                <option>实习公司</option>
+              <select class="form-control" id="company">
+                <option id="null">公司</option>
               </select>
               <select class="form-control status">
                 <option>全部</option>
@@ -42,14 +39,13 @@
                 <option val="实习中">实习中</option>
                 <option val="已结业">已结业</option>
               </select>
-               <select class="form-control">
+               <select class="form-control" id="teacher">
                 <option>有无指导老师</option>
                 <option>有指导老师</option>
                 <option>无指导老师</option>
               </select>
-            </div>           
-          <input type="text" class="form-control float-left search " id="name" placeholder="请输入名称">
-          <button type="submit" class="btn btn-default float-left search"><i class="fa fa-search"></i></button>     
+            </div>
+            <button type="button" class="btn btn-primary">导出成绩</button>            
           </form>
         </div>
       <table class="table table-hover text-center" id="table">
@@ -65,14 +61,15 @@
             <th>实习状态</th>
             <th>实习时段</th>
             <th>指导老师</th>
+            <th>实习成绩</th>
           </tr>
         </thead>
         <tbody>
         </tbody>
       </table> 
       <button type="button" class="btn btn-primary operations" id="fp"  data-toggle="modal" data-target="#fpModal">分配</button>
-      <button type="button" class="btn btn-primary operations" id="gg">更改</button>
-      <button type="button" class="btn btn-primary operations" id="gd">归档</button>
+      <button type="button" class="btn btn-primary operations" id="gg"  data-toggle="modal" data-target="#fpModal">更改</button>
+      <!-- <button type="button" class="btn btn-primary operations" id="gd">归档</button> -->
    </div>
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="fpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -89,7 +86,7 @@
       <div class="modal-body">
           <form role="form" class="inline">            
             <input type="text" class="form-control modal-search inline" id="name" placeholder="请输入名称">
-            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+            <!-- <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button> -->
             &nbsp;&nbsp;<span id="description">未分配</span><br>    
           </form>
           <div class="setDiv-2">

@@ -1,9 +1,10 @@
 {
 	"recruitmentList": [
 		{
+			"id" : "123",
 			"post": "ZLSJ4ybnAH",
-			"totalNumber": "j34coOMOn6",
-			"currentNumber": "pT5OOPKx0T",
+			"totalNumber": "4",
+			"currentNumber": "0",
 			"startTime": "1512384466414",
 			"endTime": "1512383575700",
 			"release_time": "1512384124908",
@@ -12,9 +13,10 @@
 			"forbidden": true
 		},
 		{
+			"id" : "223",
 			"post": "7stWNbdnL3",
-			"totalNumber": "ZfWV1srUdA",
-			"currentNumber": "tlnH5qrVGP",
+			"totalNumber": "5",
+			"currentNumber": "2",
 			"startTime": "1512384352137",
 			"endTime": "1512384505758",
 			"release_time": "1512382668504",
@@ -23,9 +25,10 @@
 			"forbidden": false
 		},
 		{
+			"id" : "323",
 			"post": "nBZkVgorHP",
-			"totalNumber": "hhXDgrRBHD",
-			"currentNumber": "gUdTCzezn9",
+			"totalNumber": "7",
+			"currentNumber": "3",
 			"startTime": "1512384274879",
 			"endTime": "1512383264344",
 			"release_time": "1512383868654",
