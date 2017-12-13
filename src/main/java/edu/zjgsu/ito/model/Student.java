@@ -55,7 +55,6 @@ public class Student implements Serializable {
     /**
      * 毕业年份
      */
-
     private String grade;
 
     private String major;
@@ -161,7 +160,6 @@ public class Student implements Serializable {
     public void setEnglish(Boolean english) {
         this.english = english;
     }
-
 
     public String getGrade() {
         return grade;

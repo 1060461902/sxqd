@@ -137,7 +137,7 @@ public class OperateController {
         Map<String, Object> result = new HashMap<String, Object>();
 
         for (Integer stuId:
-             StudentIdList) {
+                StudentIdList) {
             Student student = studentService.selectByPrimaryKey(stuId);
             student.setTeacherId(teacherId);
             status = studentService.updateByPrimaryKey(student);

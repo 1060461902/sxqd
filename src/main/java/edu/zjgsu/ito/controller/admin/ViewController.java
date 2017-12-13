@@ -30,11 +30,11 @@ public class ViewController {
     UserService userService;
     @Autowired
     StudentService studentService;
-    /*
+   /* *//*
      *
      * @param
      * @return
-     * @author sawei*/
+     * @author sawei*//*
 
 
     @RequestMapping(value = "showTeachers", method = RequestMethod.GET)
@@ -94,6 +94,6 @@ public class ViewController {
         result.put("msg", "返回老师信息成功！");
         result.put("teacherList", teacherList);
         return result;
-    }
+    }*/
 
 }

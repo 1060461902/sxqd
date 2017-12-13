@@ -1405,66 +1405,6 @@ public class CompanyViewExample {
             return (Criteria) this;
         }
 
-        public Criteria andDeleteTagIsNull() {
-            addCriterion("delete_tag is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteTagIsNotNull() {
-            addCriterion("delete_tag is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteTagEqualTo(Boolean value) {
-            addCriterion("delete_tag =", value, "deleteTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteTagNotEqualTo(Boolean value) {
-            addCriterion("delete_tag <>", value, "deleteTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteTagGreaterThan(Boolean value) {
-            addCriterion("delete_tag >", value, "deleteTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteTagGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("delete_tag >=", value, "deleteTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteTagLessThan(Boolean value) {
-            addCriterion("delete_tag <", value, "deleteTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteTagLessThanOrEqualTo(Boolean value) {
-            addCriterion("delete_tag <=", value, "deleteTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteTagIn(List<Boolean> values) {
-            addCriterion("delete_tag in", values, "deleteTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteTagNotIn(List<Boolean> values) {
-            addCriterion("delete_tag not in", values, "deleteTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteTagBetween(Boolean value1, Boolean value2) {
-            addCriterion("delete_tag between", value1, value2, "deleteTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteTagNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("delete_tag not between", value1, value2, "deleteTag");
-            return (Criteria) this;
-        }
-
         public Criteria andRoleIdIsNull() {
             addCriterion("role_id is null");
             return (Criteria) this;
@@ -1792,6 +1732,66 @@ public class CompanyViewExample {
 
         public Criteria andForbiddenNotBetween(Boolean value1, Boolean value2) {
             addCriterion("forbidden not between", value1, value2, "forbidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagIsNull() {
+            addCriterion("delete_tag is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagIsNotNull() {
+            addCriterion("delete_tag is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagEqualTo(Boolean value) {
+            addCriterion("delete_tag =", value, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagNotEqualTo(Boolean value) {
+            addCriterion("delete_tag <>", value, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagGreaterThan(Boolean value) {
+            addCriterion("delete_tag >", value, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("delete_tag >=", value, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagLessThan(Boolean value) {
+            addCriterion("delete_tag <", value, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagLessThanOrEqualTo(Boolean value) {
+            addCriterion("delete_tag <=", value, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagIn(List<Boolean> values) {
+            addCriterion("delete_tag in", values, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagNotIn(List<Boolean> values) {
+            addCriterion("delete_tag not in", values, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagBetween(Boolean value1, Boolean value2) {
+            addCriterion("delete_tag between", value1, value2, "deleteTag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteTagNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("delete_tag not between", value1, value2, "deleteTag");
             return (Criteria) this;
         }
     }

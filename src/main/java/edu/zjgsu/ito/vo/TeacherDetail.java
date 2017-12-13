@@ -13,7 +13,7 @@ public class TeacherDetail {
 
     String nickName;
     String userName;
-    Boolean sex;
+    String sex;
     String phone;
     String email;
     String photo;
@@ -43,11 +43,11 @@ public class TeacherDetail {
         this.userName = userName;
     }
 
-    public Boolean getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 

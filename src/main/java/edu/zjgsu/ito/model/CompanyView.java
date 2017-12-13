@@ -82,11 +82,6 @@ public class CompanyView implements Serializable {
     private String nickName;
 
     /**
-     * 1存在0删除 默认1
-     */
-    private Boolean deleteTag;
-
-    /**
      * 1.2.3.4管理员，学生，教师，公司
      */
     private Integer roleId;
@@ -98,6 +93,8 @@ public class CompanyView implements Serializable {
     private String organizationCode;
 
     private Boolean forbidden;
+
+    private Boolean deleteTag;
 
     private static final long serialVersionUID = 1L;
 
@@ -253,14 +250,6 @@ public class CompanyView implements Serializable {
         this.nickName = nickName;
     }
 
-    public Boolean getDeleteTag() {
-        return deleteTag;
-    }
-
-    public void setDeleteTag(Boolean deleteTag) {
-        this.deleteTag = deleteTag;
-    }
-
     public Integer getRoleId() {
         return roleId;
     }
@@ -301,6 +290,14 @@ public class CompanyView implements Serializable {
         this.forbidden = forbidden;
     }
 
+    public Boolean getDeleteTag() {
+        return deleteTag;
+    }
+
+    public void setDeleteTag(Boolean deleteTag) {
+        this.deleteTag = deleteTag;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -332,12 +329,12 @@ public class CompanyView implements Serializable {
             && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
             && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
             && (this.getNickName() == null ? other.getNickName() == null : this.getNickName().equals(other.getNickName()))
-            && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()))
             && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()))
             && (this.getLicence() == null ? other.getLicence() == null : this.getLicence().equals(other.getLicence()))
             && (this.getTaxRegistration() == null ? other.getTaxRegistration() == null : this.getTaxRegistration().equals(other.getTaxRegistration()))
             && (this.getOrganizationCode() == null ? other.getOrganizationCode() == null : this.getOrganizationCode().equals(other.getOrganizationCode()))
-            && (this.getForbidden() == null ? other.getForbidden() == null : this.getForbidden().equals(other.getForbidden()));
+            && (this.getForbidden() == null ? other.getForbidden() == null : this.getForbidden().equals(other.getForbidden()))
+            && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()));
     }
 
     @Override
@@ -363,12 +360,12 @@ public class CompanyView implements Serializable {
         result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
         result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
         result = prime * result + ((getNickName() == null) ? 0 : getNickName().hashCode());
-        result = prime * result + ((getDeleteTag() == null) ? 0 : getDeleteTag().hashCode());
         result = prime * result + ((getRoleId() == null) ? 0 : getRoleId().hashCode());
         result = prime * result + ((getLicence() == null) ? 0 : getLicence().hashCode());
         result = prime * result + ((getTaxRegistration() == null) ? 0 : getTaxRegistration().hashCode());
         result = prime * result + ((getOrganizationCode() == null) ? 0 : getOrganizationCode().hashCode());
         result = prime * result + ((getForbidden() == null) ? 0 : getForbidden().hashCode());
+        result = prime * result + ((getDeleteTag() == null) ? 0 : getDeleteTag().hashCode());
         return result;
     }
 
@@ -397,12 +394,12 @@ public class CompanyView implements Serializable {
         sb.append(", password=").append(password);
         sb.append(", phone=").append(phone);
         sb.append(", nickName=").append(nickName);
-        sb.append(", deleteTag=").append(deleteTag);
         sb.append(", roleId=").append(roleId);
         sb.append(", licence=").append(licence);
         sb.append(", taxRegistration=").append(taxRegistration);
         sb.append(", organizationCode=").append(organizationCode);
         sb.append(", forbidden=").append(forbidden);
+        sb.append(", deleteTag=").append(deleteTag);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -81,7 +81,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, company_id, teacher_id, status, zip_file, post, delete_tag, sex, nation,
+    id, user_id, company_id, teacher_id, status, zip_file, post, delete_tag, sex, nation, 
     english, grade, major, clss, forbidden, deleteTag, birthday, national, email
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.StudentExample" resultMap="BaseResultMap">
@@ -128,7 +128,7 @@
     </selectKey>
     insert into student (user_id, company_id, teacher_id, 
       status, zip_file, post, 
-      delete_tag, sex, nation, english,
+      delete_tag, sex, nation, english, 
       grade, major, clss, 
       forbidden, deleteTag, birthday, 
       national, email)

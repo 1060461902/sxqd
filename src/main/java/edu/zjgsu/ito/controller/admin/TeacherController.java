@@ -376,7 +376,7 @@ public class TeacherController {
         Map<String, Object> result = new HashMap<String, Object>();
 
         Integer id=teacherVo.getId();
-        Boolean sex=teacherVo.getSex();
+        String sex=teacherVo.getSex();
         String major=teacherVo.getMajor();
         String rank=teacherVo.getRank();
         String phone=teacherVo.getPhone();

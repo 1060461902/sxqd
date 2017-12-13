@@ -15,7 +15,7 @@ public class Teacher implements Serializable {
      */
     private String major;
 
-    private Boolean sex;
+    private String sex;
 
     private String photo;
 
@@ -53,11 +53,11 @@ public class Teacher implements Serializable {
         this.major = major;
     }
 
-    public Boolean getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -115,7 +115,6 @@ public class Teacher implements Serializable {
         Teacher other = (Teacher) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-
             && (this.getMajor() == null ? other.getMajor() == null : this.getMajor().equals(other.getMajor()))
             && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
             && (this.getPhoto() == null ? other.getPhoto() == null : this.getPhoto().equals(other.getPhoto()))
@@ -132,7 +131,6 @@ public class Teacher implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
         result = prime * result + ((getMajor() == null) ? 0 : getMajor().hashCode());
-
         result = prime * result + ((getSex() == null) ? 0 : getSex().hashCode());
         result = prime * result + ((getPhoto() == null) ? 0 : getPhoto().hashCode());
         result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
@@ -151,7 +149,6 @@ public class Teacher implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", userId=").append(userId);
         sb.append(", major=").append(major);
-
         sb.append(", sex=").append(sex);
         sb.append(", photo=").append(photo);
         sb.append(", email=").append(email);

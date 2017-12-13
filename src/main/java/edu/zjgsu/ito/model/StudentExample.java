@@ -824,36 +824,30 @@ public class StudentExample {
             return (Criteria) this;
         }
 
-
         public Criteria andGradeEqualTo(String value) {
             addCriterion("grade =", value, "grade");
             return (Criteria) this;
         }
-
 
         public Criteria andGradeNotEqualTo(String value) {
             addCriterion("grade <>", value, "grade");
             return (Criteria) this;
         }
 
-
         public Criteria andGradeGreaterThan(String value) {
             addCriterion("grade >", value, "grade");
             return (Criteria) this;
         }
-
 
         public Criteria andGradeGreaterThanOrEqualTo(String value) {
             addCriterion("grade >=", value, "grade");
             return (Criteria) this;
         }
 
-
         public Criteria andGradeLessThan(String value) {
             addCriterion("grade <", value, "grade");
             return (Criteria) this;
         }
-
 
         public Criteria andGradeLessThanOrEqualTo(String value) {
             addCriterion("grade <=", value, "grade");
