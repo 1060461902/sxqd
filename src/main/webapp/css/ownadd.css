@@ -171,7 +171,6 @@ table.hightr tr{
 .approval-news{
   margin:25px 50px;
 }
-
 table.approval-table>tbody>tr>th{
   width: 20%;
 }
@@ -269,12 +268,12 @@ ul.teacherlist{
   text-align: center;
   height: 400px;
 }
-.well-2{
+/*.well-2{
   margin: 30px 30px 20px;
   display: inline-block;
   width: 40%;
   height: 475px; 
-}
+}*/
 .fullfill{
   height: 100%;
 }
@@ -348,6 +347,23 @@ margin: 30px;
   display:inline-block;
   padding: 40px 80px;
 }
+.nav-stacked{
+  width:100px;
+  position: absolute;
+  top: 135px;
+  right: 20px;
+}
+.time-div{
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.time-div:hover{
+  position: relative;
+  left: -5px;
+  top: -5px;
+  border: 1.5px solid #01AAED;
+  box-shadow: 10px 10px 5px #DDD;
+}
 .circle-btn{
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -355,10 +371,23 @@ margin: 30px;
   border: 0;
   height: 140px; 
   background-color: #e2e2e2;
-}  
+}
+.circle-area{
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%; 
+  width: 24px;
+  height: 24px; 
+  border:1px solid #DDD;
+  background-color: white;
+}
+div.circle-area{
+  position: relative;
+  left: 10px;
+}    
 .well1-btn{
   display:inline-block;
-  margin: 100px 30px;
+  margin: 60px 60px;
 }
 .select{
   width:100px;
@@ -401,6 +430,7 @@ table.dataTable thead th,table.dataTable tbody td{
 }*/
 ul#studentTab li{
   width: 14%;
+
 }
 ul#xsjl>li.list-group-item{
   padding-left: 75px;
@@ -422,6 +452,7 @@ table#sxxj tr th{
 .sxxj-div1{
   padding:10px 30px;
 }
+
 div#myTabContent>div#teacher,div#myTabContent>div#company{
   padding: 20px;
 }
@@ -463,6 +494,9 @@ table#table-yb>tbody>tr>td:nth-child(3),
 table#table-zb>tbody>tr>td:nth-child(2),
 table#table-zb>tbody>tr>td:nth-child(3){
   color: red;
+}
+table#teacher_details tr,table#student_details tr{
+  height: 35px;
 }
     #all{
     width: 800px;
@@ -506,4 +540,4 @@ button#qzbtn{
         font: 25px/ 1.5 Microsoft YaHei, Helvitica, Verdana, Arial, san-serif;
      }
   }
-
+}

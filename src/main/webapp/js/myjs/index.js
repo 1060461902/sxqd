@@ -18,18 +18,34 @@ $(document).ready(function(){
     };
     $(".nav-title").text("设置");
   });   
-
       $(".loginout").click(function(){
-            $.getJSON("./js/json/validate1.json", function(data) {
-                    if (data.code == "200") {
-                         location.href="admin-login.html"
-                    }
-                    else if(data.code == "500"){
-                         alert('请再次尝试');
-                    }
-                    else{
-                         alert("服务器异常");
-                    }
-                })
+            // $.getJSON("./js/json/validate1.json", function(data) {
+            //         if (data.code == "200") {
+            //              location.href="admin-login.html"
+            //         }
+            //         else if(data.code == "500"){
+            //              alert('请再次尝试');
+            //         }
+            //         else{
+            //              alert("服务器异常");
+            //         }
+            //     })
+    $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/logout',
+       async: true,
+       contentType: "application/json",
+       success: function(data){
+        if (data.code == "200"){
+           location.href='./admin-login.html';
+        }
+        else if(data.code == "500"){
+        alert('帐号或密码错误');
+        }
+     },
+       error: function(){
+        alert('服务端异常');
+        }
     });
+  });
 });

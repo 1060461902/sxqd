@@ -105,27 +105,7 @@ $('th>input:checkbox').click(function() {
         $(this).attr('checked',false);
         $(".operations").css("display","none");
 });
-function admit()
-{
-var r=confirm("是否允许该公司注册");
-if (r==true)
-  {
-  alert("注册成功");
-  }
-}
-function submit(){
-	alert("您的操作已提交！");
-}
-$(document).ready(function(){    
-    if ($("#qysq").text()==0) {
-      $("#qysq").css("display","none")
-    };
-    if ($("#sxfbsp").text()==0) {
-      $("#sxfbsp").css("display","none")
-    };
-    if ($("#sydtsp").text()==0) {
-      $("#sydtsp").css("display","none")
-    };
+      }
 });
 //-----------点击通过（需要表格重新导入）-----------------
   $(".operations").click(function(){
