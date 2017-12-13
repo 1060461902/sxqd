@@ -1,13 +1,37 @@
 package edu.zjgsu.ito.vo;
 
+
+import edu.zjgsu.ito.model.Student;
+
 import java.util.List;
 
 public class FrontTeacher {
     private Integer id;
     private String nickName;
     private String userName;
+
+    private String major;
     private String phone;
     private Boolean forbidden;
+   private  long count;
+
+    public long getCount() {
+        return count;
+    }
+
+    public void setCount(long count) {
+        this.count = count;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+
 
     public Integer getId() {
         return id;
@@ -32,8 +56,6 @@ public class FrontTeacher {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
-
 
 
     public String getPhone() {

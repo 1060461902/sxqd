@@ -22,6 +22,4 @@ public interface CompanyViewMapper {
 
     CompanyView selectByKey(Integer id);
 
-    CompanyView selectByName(String companyName);
-
-}
+    CompanyView selectByName(String companyName);}

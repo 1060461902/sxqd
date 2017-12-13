@@ -10,6 +10,9 @@
     <result column="additional_score" jdbcType="REAL" property="additionalScore" />
     <result column="c_week_report" jdbcType="REAL" property="cWeekReport" />
     <result column="c_attendance" jdbcType="REAL" property="cAttendance" />
+    <result column="score_a" jdbcType="REAL" property="scoreA" />
+    <result column="score_b" jdbcType="REAL" property="scoreB" />
+    <result column="final_score" jdbcType="REAL" property="finalScore" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, student_id, t_week_report, t_summary, t_final_report, additional_score, c_week_report, 
-    c_attendance
+    id, student_id, t_week_report, t_summary, t_final_report, additional_score, c_week_report,
+    c_attendance, score_a, score_b, final_score
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.ScoreExample" resultMap="BaseResultMap">
     select
@@ -116,11 +119,13 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into score (student_id, t_week_report, t_summary, 
-      t_final_report, additional_score, c_week_report, 
-      c_attendance)
+      t_final_report, additional_score, c_week_report,
+      c_attendance, score_a, score_b, 
+      final_score)
     values (#{studentId,jdbcType=INTEGER}, #{tWeekReport,jdbcType=REAL}, #{tSummary,jdbcType=REAL}, 
       #{tFinalReport,jdbcType=REAL}, #{additionalScore,jdbcType=REAL}, #{cWeekReport,jdbcType=REAL}, 
-      #{cAttendance,jdbcType=REAL})
+      #{cAttendance,jdbcType=REAL}, #{scoreA,jdbcType=REAL}, #{scoreB,jdbcType=REAL}, 
+      #{finalScore,jdbcType=REAL})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.Score">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -149,6 +154,15 @@
       <if test="cAttendance != null">
         c_attendance,
       </if>
+      <if test="scoreA != null">
+        score_a,
+      </if>
+      <if test="scoreB != null">
+        score_b,
+      </if>
+      <if test="finalScore != null">
+        final_score,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="studentId != null">
@@ -171,6 +185,15 @@
       </if>
       <if test="cAttendance != null">
         #{cAttendance,jdbcType=REAL},
+      </if>
+      <if test="scoreA != null">
+        #{scoreA,jdbcType=REAL},
+      </if>
+      <if test="scoreB != null">
+        #{scoreB,jdbcType=REAL},
+      </if>
+      <if test="finalScore != null">
+        #{finalScore,jdbcType=REAL},
       </if>
     </trim>
   </insert>
@@ -207,6 +230,15 @@
       <if test="record.cAttendance != null">
         c_attendance = #{record.cAttendance,jdbcType=REAL},
       </if>
+      <if test="record.scoreA != null">
+        score_a = #{record.scoreA,jdbcType=REAL},
+      </if>
+      <if test="record.scoreB != null">
+        score_b = #{record.scoreB,jdbcType=REAL},
+      </if>
+      <if test="record.finalScore != null">
+        final_score = #{record.finalScore,jdbcType=REAL},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -221,7 +253,10 @@
       t_final_report = #{record.tFinalReport,jdbcType=REAL},
       additional_score = #{record.additionalScore,jdbcType=REAL},
       c_week_report = #{record.cWeekReport,jdbcType=REAL},
-      c_attendance = #{record.cAttendance,jdbcType=REAL}
+      c_attendance = #{record.cAttendance,jdbcType=REAL},
+      score_a = #{record.scoreA,jdbcType=REAL},
+      score_b = #{record.scoreB,jdbcType=REAL},
+      final_score = #{record.finalScore,jdbcType=REAL}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -250,6 +285,15 @@
       <if test="cAttendance != null">
         c_attendance = #{cAttendance,jdbcType=REAL},
       </if>
+      <if test="scoreA != null">
+        score_a = #{scoreA,jdbcType=REAL},
+      </if>
+      <if test="scoreB != null">
+        score_b = #{scoreB,jdbcType=REAL},
+      </if>
+      <if test="finalScore != null">
+        final_score = #{finalScore,jdbcType=REAL},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -261,7 +305,16 @@
       t_final_report = #{tFinalReport,jdbcType=REAL},
       additional_score = #{additionalScore,jdbcType=REAL},
       c_week_report = #{cWeekReport,jdbcType=REAL},
-      c_attendance = #{cAttendance,jdbcType=REAL}
+      c_attendance = #{cAttendance,jdbcType=REAL},
+      score_a = #{scoreA,jdbcType=REAL},
+      score_b = #{scoreB,jdbcType=REAL},
+      final_score = #{finalScore,jdbcType=REAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByStudent" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM score
+    WHERE student_id=#{studentId}
+  </select>
 </mapper>

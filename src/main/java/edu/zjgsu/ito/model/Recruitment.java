@@ -1,6 +1,7 @@
 package edu.zjgsu.ito.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author 
@@ -12,8 +13,6 @@ public class Recruitment implements Serializable {
      * 公司id
      */
     private Integer companyId;
-
-    private Integer studentId;
 
     /**
      * 招聘岗位
@@ -102,6 +101,14 @@ public class Recruitment implements Serializable {
 
     private String why;
 
+    private Date starttime;
+
+    private Date endtime;
+
+    private String city;
+
+    private Date releaseTime;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -118,14 +125,6 @@ public class Recruitment implements Serializable {
 
     public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
-    }
-
-    public Integer getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
     }
 
     public String getPost() {
@@ -272,6 +271,38 @@ public class Recruitment implements Serializable {
         this.why = why;
     }
 
+    public Date getStarttime() {
+        return starttime;
+    }
+
+    public void setStarttime(Date starttime) {
+        this.starttime = starttime;
+    }
+
+    public Date getEndtime() {
+        return endtime;
+    }
+
+    public void setEndtime(Date endtime) {
+        this.endtime = endtime;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Date getReleaseTime() {
+        return releaseTime;
+    }
+
+    public void setReleaseTime(Date releaseTime) {
+        this.releaseTime = releaseTime;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -286,7 +317,6 @@ public class Recruitment implements Serializable {
         Recruitment other = (Recruitment) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getCompanyId() == null ? other.getCompanyId() == null : this.getCompanyId().equals(other.getCompanyId()))
-            && (this.getStudentId() == null ? other.getStudentId() == null : this.getStudentId().equals(other.getStudentId()))
             && (this.getPost() == null ? other.getPost() == null : this.getPost().equals(other.getPost()))
             && (this.getCurrentNumber() == null ? other.getCurrentNumber() == null : this.getCurrentNumber().equals(other.getCurrentNumber()))
             && (this.getTotalNumber() == null ? other.getTotalNumber() == null : this.getTotalNumber().equals(other.getTotalNumber()))
@@ -304,7 +334,11 @@ public class Recruitment implements Serializable {
             && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
             && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
             && (this.getRecruitment() == null ? other.getRecruitment() == null : this.getRecruitment().equals(other.getRecruitment()))
-            && (this.getWhy() == null ? other.getWhy() == null : this.getWhy().equals(other.getWhy()));
+            && (this.getWhy() == null ? other.getWhy() == null : this.getWhy().equals(other.getWhy()))
+            && (this.getStarttime() == null ? other.getStarttime() == null : this.getStarttime().equals(other.getStarttime()))
+            && (this.getEndtime() == null ? other.getEndtime() == null : this.getEndtime().equals(other.getEndtime()))
+            && (this.getCity() == null ? other.getCity() == null : this.getCity().equals(other.getCity()))
+            && (this.getReleaseTime() == null ? other.getReleaseTime() == null : this.getReleaseTime().equals(other.getReleaseTime()));
     }
 
     @Override
@@ -313,7 +347,6 @@ public class Recruitment implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getCompanyId() == null) ? 0 : getCompanyId().hashCode());
-        result = prime * result + ((getStudentId() == null) ? 0 : getStudentId().hashCode());
         result = prime * result + ((getPost() == null) ? 0 : getPost().hashCode());
         result = prime * result + ((getCurrentNumber() == null) ? 0 : getCurrentNumber().hashCode());
         result = prime * result + ((getTotalNumber() == null) ? 0 : getTotalNumber().hashCode());
@@ -332,6 +365,10 @@ public class Recruitment implements Serializable {
         result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
         result = prime * result + ((getRecruitment() == null) ? 0 : getRecruitment().hashCode());
         result = prime * result + ((getWhy() == null) ? 0 : getWhy().hashCode());
+        result = prime * result + ((getStarttime() == null) ? 0 : getStarttime().hashCode());
+        result = prime * result + ((getEndtime() == null) ? 0 : getEndtime().hashCode());
+        result = prime * result + ((getCity() == null) ? 0 : getCity().hashCode());
+        result = prime * result + ((getReleaseTime() == null) ? 0 : getReleaseTime().hashCode());
         return result;
     }
 
@@ -343,7 +380,6 @@ public class Recruitment implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", companyId=").append(companyId);
-        sb.append(", studentId=").append(studentId);
         sb.append(", post=").append(post);
         sb.append(", currentNumber=").append(currentNumber);
         sb.append(", totalNumber=").append(totalNumber);
@@ -362,6 +398,10 @@ public class Recruitment implements Serializable {
         sb.append(", email=").append(email);
         sb.append(", recruitment=").append(recruitment);
         sb.append(", why=").append(why);
+        sb.append(", starttime=").append(starttime);
+        sb.append(", endtime=").append(endtime);
+        sb.append(", city=").append(city);
+        sb.append(", releaseTime=").append(releaseTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -1,12 +1,18 @@
 package edu.zjgsu.ito.service.Impl;
 
+
+import edu.zjgsu.ito.dao.WeightMapper;
 import edu.zjgsu.ito.model.Weight;
 import edu.zjgsu.ito.model.WeightExample;
 import edu.zjgsu.ito.service.WeightService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class WeightServiceImpl implements WeightService{
+    @Autowired
+    WeightMapper weightMapper;
     @Override
     public long countByExample(WeightExample example) {
         return 0;
@@ -39,7 +45,9 @@ public class WeightServiceImpl implements WeightService{
 
     @Override
     public Weight selectByPrimaryKey(Integer id) {
-        return null;
+
+        Weight weight=weightMapper.selectByPrimaryKey(id);
+        return weight;
     }
 
     @Override

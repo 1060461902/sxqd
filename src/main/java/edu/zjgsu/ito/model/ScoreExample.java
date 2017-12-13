@@ -603,6 +603,186 @@ public class ScoreExample {
             addCriterion("c_attendance not between", value1, value2, "cAttendance");
             return (Criteria) this;
         }
+
+        public Criteria andScoreAIsNull() {
+            addCriterion("score_a is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreAIsNotNull() {
+            addCriterion("score_a is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreAEqualTo(Float value) {
+            addCriterion("score_a =", value, "scoreA");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreANotEqualTo(Float value) {
+            addCriterion("score_a <>", value, "scoreA");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreAGreaterThan(Float value) {
+            addCriterion("score_a >", value, "scoreA");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreAGreaterThanOrEqualTo(Float value) {
+            addCriterion("score_a >=", value, "scoreA");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreALessThan(Float value) {
+            addCriterion("score_a <", value, "scoreA");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreALessThanOrEqualTo(Float value) {
+            addCriterion("score_a <=", value, "scoreA");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreAIn(List<Float> values) {
+            addCriterion("score_a in", values, "scoreA");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreANotIn(List<Float> values) {
+            addCriterion("score_a not in", values, "scoreA");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreABetween(Float value1, Float value2) {
+            addCriterion("score_a between", value1, value2, "scoreA");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreANotBetween(Float value1, Float value2) {
+            addCriterion("score_a not between", value1, value2, "scoreA");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreBIsNull() {
+            addCriterion("score_b is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreBIsNotNull() {
+            addCriterion("score_b is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreBEqualTo(Float value) {
+            addCriterion("score_b =", value, "scoreB");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreBNotEqualTo(Float value) {
+            addCriterion("score_b <>", value, "scoreB");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreBGreaterThan(Float value) {
+            addCriterion("score_b >", value, "scoreB");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreBGreaterThanOrEqualTo(Float value) {
+            addCriterion("score_b >=", value, "scoreB");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreBLessThan(Float value) {
+            addCriterion("score_b <", value, "scoreB");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreBLessThanOrEqualTo(Float value) {
+            addCriterion("score_b <=", value, "scoreB");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreBIn(List<Float> values) {
+            addCriterion("score_b in", values, "scoreB");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreBNotIn(List<Float> values) {
+            addCriterion("score_b not in", values, "scoreB");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreBBetween(Float value1, Float value2) {
+            addCriterion("score_b between", value1, value2, "scoreB");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreBNotBetween(Float value1, Float value2) {
+            addCriterion("score_b not between", value1, value2, "scoreB");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalScoreIsNull() {
+            addCriterion("final_score is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalScoreIsNotNull() {
+            addCriterion("final_score is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalScoreEqualTo(Float value) {
+            addCriterion("final_score =", value, "finalScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalScoreNotEqualTo(Float value) {
+            addCriterion("final_score <>", value, "finalScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalScoreGreaterThan(Float value) {
+            addCriterion("final_score >", value, "finalScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalScoreGreaterThanOrEqualTo(Float value) {
+            addCriterion("final_score >=", value, "finalScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalScoreLessThan(Float value) {
+            addCriterion("final_score <", value, "finalScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalScoreLessThanOrEqualTo(Float value) {
+            addCriterion("final_score <=", value, "finalScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalScoreIn(List<Float> values) {
+            addCriterion("final_score in", values, "finalScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalScoreNotIn(List<Float> values) {
+            addCriterion("final_score not in", values, "finalScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalScoreBetween(Float value1, Float value2) {
+            addCriterion("final_score between", value1, value2, "finalScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalScoreNotBetween(Float value1, Float value2) {
+            addCriterion("final_score not between", value1, value2, "finalScore");
+            return (Criteria) this;
+        }
     }
 
     /**

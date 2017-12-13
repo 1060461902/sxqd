@@ -56,6 +56,8 @@ public class DynamicApprove implements Serializable {
      */
     private String startTime;
 
+    private String endTime;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -162,6 +164,14 @@ public class DynamicApprove implements Serializable {
         this.startTime = startTime;
     }
 
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -186,7 +196,8 @@ public class DynamicApprove implements Serializable {
             && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
             && (this.getWhy() == null ? other.getWhy() == null : this.getWhy().equals(other.getWhy()))
             && (this.getShowStatus() == null ? other.getShowStatus() == null : this.getShowStatus().equals(other.getShowStatus()))
-            && (this.getStartTime() == null ? other.getStartTime() == null : this.getStartTime().equals(other.getStartTime()));
+            && (this.getStartTime() == null ? other.getStartTime() == null : this.getStartTime().equals(other.getStartTime()))
+            && (this.getEndTime() == null ? other.getEndTime() == null : this.getEndTime().equals(other.getEndTime()));
     }
 
     @Override
@@ -206,6 +217,7 @@ public class DynamicApprove implements Serializable {
         result = prime * result + ((getWhy() == null) ? 0 : getWhy().hashCode());
         result = prime * result + ((getShowStatus() == null) ? 0 : getShowStatus().hashCode());
         result = prime * result + ((getStartTime() == null) ? 0 : getStartTime().hashCode());
+        result = prime * result + ((getEndTime() == null) ? 0 : getEndTime().hashCode());
         return result;
     }
 
@@ -228,6 +240,7 @@ public class DynamicApprove implements Serializable {
         sb.append(", why=").append(why);
         sb.append(", showStatus=").append(showStatus);
         sb.append(", startTime=").append(startTime);
+        sb.append(", endTime=").append(endTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

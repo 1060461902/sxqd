@@ -22,6 +22,12 @@ public class Score implements Serializable {
 
     private Float cAttendance;
 
+    private Float scoreA;
+
+    private Float scoreB;
+
+    private Float finalScore;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -88,6 +94,33 @@ public class Score implements Serializable {
         this.cAttendance = cAttendance;
     }
 
+<<<<<<< HEAD
+=======
+    public Float getScoreA() {
+        return scoreA;
+    }
+
+    public void setScoreA(Float scoreA) {
+        this.scoreA = scoreA;
+    }
+
+    public Float getScoreB() {
+        return scoreB;
+    }
+
+    public void setScoreB(Float scoreB) {
+        this.scoreB = scoreB;
+    }
+
+    public Float getFinalScore() {
+        return finalScore;
+    }
+
+    public void setFinalScore(Float finalScore) {
+        this.finalScore = finalScore;
+    }
+
+>>>>>>> zhf
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -107,7 +140,14 @@ public class Score implements Serializable {
             && (this.gettFinalReport() == null ? other.gettFinalReport() == null : this.gettFinalReport().equals(other.gettFinalReport()))
             && (this.getAdditionalScore() == null ? other.getAdditionalScore() == null : this.getAdditionalScore().equals(other.getAdditionalScore()))
             && (this.getcWeekReport() == null ? other.getcWeekReport() == null : this.getcWeekReport().equals(other.getcWeekReport()))
+<<<<<<< HEAD
             && (this.getcAttendance() == null ? other.getcAttendance() == null : this.getcAttendance().equals(other.getcAttendance()));
+=======
+            && (this.getcAttendance() == null ? other.getcAttendance() == null : this.getcAttendance().equals(other.getcAttendance()))
+            && (this.getScoreA() == null ? other.getScoreA() == null : this.getScoreA().equals(other.getScoreA()))
+            && (this.getScoreB() == null ? other.getScoreB() == null : this.getScoreB().equals(other.getScoreB()))
+            && (this.getFinalScore() == null ? other.getFinalScore() == null : this.getFinalScore().equals(other.getFinalScore()));
+>>>>>>> zhf
     }
 
     @Override
@@ -122,6 +162,12 @@ public class Score implements Serializable {
         result = prime * result + ((getAdditionalScore() == null) ? 0 : getAdditionalScore().hashCode());
         result = prime * result + ((getcWeekReport() == null) ? 0 : getcWeekReport().hashCode());
         result = prime * result + ((getcAttendance() == null) ? 0 : getcAttendance().hashCode());
+<<<<<<< HEAD
+=======
+        result = prime * result + ((getScoreA() == null) ? 0 : getScoreA().hashCode());
+        result = prime * result + ((getScoreB() == null) ? 0 : getScoreB().hashCode());
+        result = prime * result + ((getFinalScore() == null) ? 0 : getFinalScore().hashCode());
+>>>>>>> zhf
         return result;
     }
 
@@ -139,6 +185,12 @@ public class Score implements Serializable {
         sb.append(", additionalScore=").append(additionalScore);
         sb.append(", cWeekReport=").append(cWeekReport);
         sb.append(", cAttendance=").append(cAttendance);
+<<<<<<< HEAD
+=======
+        sb.append(", scoreA=").append(scoreA);
+        sb.append(", scoreB=").append(scoreB);
+        sb.append(", finalScore=").append(finalScore);
+>>>>>>> zhf
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

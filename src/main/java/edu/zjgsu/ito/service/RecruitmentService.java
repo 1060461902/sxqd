@@ -3,9 +3,10 @@ package edu.zjgsu.ito.service;
 import edu.zjgsu.ito.model.Recruitment;
 import edu.zjgsu.ito.model.RecruitmentExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public interface RecruitmentService{
     long countByExample(RecruitmentExample example);
 
