@@ -7,7 +7,7 @@ info.grade = '年级';
 info.clss = '班级';
 info.status = '实习状态';
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showTeacherStudentScreen',
        async: true,
        data: JSON.stringify(info),
@@ -29,7 +29,7 @@ info.status = '实习状态';
     info.clss = $('select#class').val();
     info.status = $('select#status').val();
       $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showTeacherStudent',
        data: JSON.stringify(info),
        async: true,
@@ -72,7 +72,7 @@ info.status = '实习状态';
      $('select#class').empty();
      $('select#major').empty();
     $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showTeacherStudentScreen',
        async: true,
        data: JSON.stringify(info),
@@ -107,7 +107,7 @@ info.status = '实习状态';
     info.status = '实习状态';
 //第一次导入表格
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showTeacherStudent',
        async: true,
        contentType: "application/json",

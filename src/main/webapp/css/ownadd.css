@@ -376,14 +376,18 @@ margin: 30px;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%; 
-  width: 24px;
-  height: 24px; 
+  width: 25.5px;
+  height: 25.5px; 
   border:1px solid #DDD;
   background-color: white;
 }
 div.circle-area{
   position: relative;
   left: 10px;
+}
+.actionName{
+    line-height: 20px;    
+    font-size: 17px;  
 }    
 .well1-btn{
   display:inline-block;

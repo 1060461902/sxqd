@@ -57,7 +57,7 @@ $(document).ready(function(){
       info.cAttendance = '0.'+ $('.setDiv input#z:eq(1)').val();
       //alert(info.cAttendance);
       $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldworkmanage/admin/weight',
        data: JSON.stringify(info),
        async: true,

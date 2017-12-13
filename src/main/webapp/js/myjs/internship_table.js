@@ -7,7 +7,7 @@ $(document).ready(function(){
   info.clss = '班级';
   info.company = null;
       $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showRecruitmentScreening',
        async: true,
        data: JSON.stringify(info),
@@ -35,7 +35,7 @@ $(document).ready(function(){
     info.status = $('select.status').val();
     info.teacher = $('select#teacher').val();
       $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showInternships',
        data: JSON.stringify(info),
        async: true,
@@ -47,6 +47,7 @@ $(document).ready(function(){
       writein(data);
       trclick();//-------------点击---------
       checked();//--------------部分选择操作checkbox----------------------
+      dccj();
       //gd();
             var docrTable = $('#table').dataTable({
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
@@ -82,7 +83,7 @@ $(document).ready(function(){
      $('select#company').empty();
   //重新获得筛选条件
     $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showRecruitmentScreening',
        async: true,
        data: JSON.stringify(info),
@@ -116,7 +117,7 @@ $(document).ready(function(){
   var info = new Object();
   info.major = '专业';
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showTeachers',
        async: true,
        contentType: "application/json",
@@ -178,7 +179,7 @@ $(document).ready(function(){
     info.ids = id;
     info.teacherId = teacherId;
     $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/assignedStudent',
        async: true,
        contentType: "application/json",
@@ -202,7 +203,7 @@ $(document).ready(function(){
   info.clss = '班级';
   info.company = null;
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showInternship',
        async: true,
        contentType: "application/json",
@@ -212,7 +213,7 @@ $(document).ready(function(){
       writein(data);
       trclick();//-------------点击---------
       checked();//--------------部分选择操作checkbox----------------------
-      //gd();
+      dccj();
       var docrTable = $('#table').dataTable({
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
                 "bFilter" : true, //是否启动过滤、搜索功能
@@ -350,5 +351,32 @@ function checked(){
         }
    });
 }
-
+function dccj(){
+  $('button#dccj').click(function(){
+     var id = new Array();
+     var a = 0;
+    $('td>input:checkbox').each(function() {
+        if ($(this).attr('checked') =='checked') {      
+          id[a]=$(this).parent('td').parent('tr').val();
+          a++;
+        }
+    });    
+    var info = new Object();
+    info.studentIdList =id;
+     $.ajax({
+       type: 'get',
+       url: '/fieldManagement/admin/export2Exce',
+       async: true,
+       contentType: "application/json",
+       data: JSON.stringify(info),
+       dateType: "json",
+       success: function(data){
+       alert("操作成功");
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });//ajax
+  });
+}
 });//document

@@ -1,7 +1,7 @@
 $(document).ready(function(){
   //筛选的一系列操作
       $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showCompanyNames',
        async: true,
        contentType: "application/json",
@@ -22,7 +22,7 @@ $(document).ready(function(){
     info.companyName = $('select#company').val();
     //info.address = $('select#address').val();
       $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showRecruitment',
        data: JSON.stringify(info),
        async: true,
@@ -231,7 +231,7 @@ $('.forbidden').click(function(){
       { 
         info.forbidden =0;
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/forbiddenRecruitment',
        async: true,
        contentType: "application/json",
@@ -254,7 +254,7 @@ $('.forbidden').click(function(){
       { 
         info.forbidden =1;
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/forbiddenRecruitment',
        async: true,
        contentType: "application/json",

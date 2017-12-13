@@ -21,7 +21,7 @@ $(document).ready(function(){
   $("option").click(function(){
     var type = $(this).attr("id");
     var info = new Object();
-    info.companyName = type;
+    info.companyId = type;
       $.ajax({
        type: 'post',
        url: '/fieldManagement/admin/showRecruitmentApplyList',
@@ -73,7 +73,7 @@ $(document).ready(function(){
     });
 //-----------------------获取表格信息---------------------
   var info = new Object();
-  info.companyId = 0;
+  info.companyId = '0';
       $.ajax({
        type: 'post',
        url: '/fieldManagement/admin/showRecruitmentApplyList',
