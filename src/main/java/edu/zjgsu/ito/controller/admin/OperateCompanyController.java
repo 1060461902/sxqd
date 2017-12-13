@@ -170,7 +170,7 @@ public class OperateCompanyController {
         return result;
     }
 
-    @RequestMapping(value = "comfirmshow", method = RequestMethod.GET)
+    @RequestMapping(value = "comfirmShow", method = RequestMethod.GET)
     public @ResponseBody
     /*
     * @author hanfeng

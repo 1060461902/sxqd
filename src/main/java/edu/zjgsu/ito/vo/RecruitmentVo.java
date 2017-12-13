@@ -10,6 +10,15 @@ public class RecruitmentVo {
         private  String contact;
         private int id;
         private int companyId;
+        private  boolean forbidden;
+
+    public boolean isForbidden() {
+        return forbidden;
+    }
+
+    public void setForbidden(boolean forbidden) {
+        this.forbidden = forbidden;
+    }
 
     public int getCompanyId() {
         return companyId;

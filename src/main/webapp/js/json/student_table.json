@@ -1,44 +1,40 @@
 {
 	"students": [
-            {
-				"id": "85679",
-				"nickname": "wIHKZr6Otb",
-				"username": "jDETsGXjKu",
-				"status": "qb3BStyWqO",
-				"companyname": "wXvM6LMyZc",
-				"teacher": "hE2j5FN19r",
-			    "companynames": "wXvM6LMyZc",
-				"forbidden": "1"
-			},
-            {
-				"id": "85679",
-				"nickname": "wIHKZr6Otb",
-				"username": "jDETsGXjKu",
-				"status": "qb3BStyWqO",
-				"companyname": "wXvM6LMyZc",
-				"teacher": "hE2j5FN19r",
-			    "companynames": "wXvM6LMyZc",
-				"forbidden": "1"
-			},
-            {
-				"id": "85679",
-				"nickname": "wIHKZr6Otb",
-				"username": "jDETsGXjKu",
-				"status": "qb3BStyWqO",
-				"companyname": "wXvM6LMyZc",
-				"teacher": "hE2j5FN19r",
-			    "companynames": "wXvM6LMyZc",
-				"forbidden": "0"
-			},
-            {
-				"id": "85679",
-				"nickname": "wIHKZr6Otb",
-				"username": "jDETsGXjKu",
-				"status": "qb3BStyWqO",
-				"companyname": "wXvM6LMyZc",
-				"teacher": "hE2j5FN19r",
-			    "companynames": "wXvM6LMyZc",
-				"forbidden": "1"
-			}
+		{
+			"id": "98768",
+			"nickName": "SrQCOM2H0d",
+			"userName": "陈泽潇",
+			"status": "实习中",
+			"companyName": "阿里",
+			"teacherName": "谢波",
+			"teacherId": "123",
+			"forbidden": true,
+			"major": "软件工程",
+			"clss": "软件1501"
+		},
+		{
+			"id": "99172",
+			"nickName": "IFZqo9j3oT",
+			"userName": "Cg46rPMuSO",
+			"status": "gJI2KVPP76",
+			"companyName": "QgW9GB4gI4",
+			"teacherName": "W1c6GWGwKT",
+			"teacherId": "323",
+			"forbidden": true,
+			"major": "83XR3rX9MF",
+			"clss": "PXVQcikZsj"
+		},
+		{
+			"id": "99717",
+			"nickName": "fSTc3vigjT",
+			"userName": "v3noU1f9NF",
+			"status": "hEWsqSDfrV",
+			"companyName": "G6b76LbIeF",
+			"teacherName": "jcSkXCn4SP",
+			"teacherId": "223",
+			"forbidden": false,
+			"major": "zBdRvIU2A5",
+			"clss": "nzCLx7uXKg"
+		}
 	]
 }

@@ -1,0 +1,15 @@
+{
+"msg": "返回老师信息成功！",
+"code": 200,
+"teacherDetail":{
+"id": 5,
+"nickName": "hangsenjiang",
+"userName": "123456",
+"sex": "男",
+"phone": "1567147836",
+"email": "836613736@qq.com",
+"photo": "images/u520.png",
+"rank" : "副教授",
+"major": "1"
+},
+}

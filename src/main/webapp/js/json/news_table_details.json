@@ -1,0 +1,30 @@
+{
+"msg": "返回动态信息成功！",
+"code": 200,
+"dynamicApproves":{
+"id": 2,
+"title": "不懂事的傻逼孩子你们也该醒了",
+"imageUrl": "images/timg2.jpg",
+"detail": "时间不会让我热情熄了火",
+"deleteTag": true,
+"passing": true,
+"dopassing": true,
+"companyId": 2,
+"phone": "110",
+"email": "chengou@qq.com",
+"why": "嘿嘿",
+"showStatus": true,
+"startTime": null,
+"endTime": null
+},
+"user":{
+"id": 2,
+"userName": "1511050124",
+"password": "e10adc3949ba59abbe56e057f20f883e",
+"phone": "13587797198",
+"nickName": "詹韩峰",
+"deleteTag": true,
+"roleId": 2,
+"createTime": 1511086188000
+}
+}

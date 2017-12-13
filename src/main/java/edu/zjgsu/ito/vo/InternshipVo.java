@@ -9,6 +9,15 @@ public class InternshipVo {
     String status;
     String teacherName;
     String stages;
+    Integer studentId;
+
+    public Integer getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
+    }
 
     public String getStages() {
         return stages;

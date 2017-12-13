@@ -12,18 +12,17 @@ public class TeacherVo {
     }
 
 
-    String sex;
+    Boolean sex;
     String major;
     String rank;
     String phone;
     String email;
 
-
-    public String getSex() {
+    public Boolean getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(Boolean sex) {
         this.sex = sex;
     }
 

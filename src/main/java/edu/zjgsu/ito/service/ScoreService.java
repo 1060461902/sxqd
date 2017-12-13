@@ -22,6 +22,8 @@ public interface ScoreService {
 
     Score selectByPrimaryKey(Integer id);
 
+    Score selectByStudent(Integer studentId);
+
     int updateByExampleSelective(@Param("record") Score record, @Param("example") ScoreExample example);
 
     int updateByExample(@Param("record") Score record, @Param("example") ScoreExample example);

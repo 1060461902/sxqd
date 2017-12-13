@@ -7,7 +7,7 @@ import edu.zjgsu.ito.service.*;
 import edu.zjgsu.ito.utils.Constant;
 import edu.zjgsu.ito.vo.InternshipVo;
 import edu.zjgsu.ito.vo.RecruitmentVo;
-import edu.zjgsu.ito.vo.ScreenOne;
+import edu.zjgsu.ito.vo.ScreenTwo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +22,8 @@ public class ShowRecruitmentController {
 
     @Autowired
     CompanyViewService companyViewService;
+    @Autowired
+    WeightService weightService;
     @Autowired
     RecruitmentService recruitmentService;
     @Autowired
@@ -116,6 +118,7 @@ public class ShowRecruitmentController {
             recruitmentVo.setTotalNumber(recruitment.getTotalNumber());
             recruitmentVo.setId(recruitment.getId());
             recruitmentVo.setCompanyId(recruitment.getCompanyId());
+            recruitmentVo.setForbidden(recruitment.getForbidden());
             recruitmentVoList.add(recruitmentVo);
         }
 
@@ -244,67 +247,85 @@ public class ShowRecruitmentController {
         return result;
     }
     @RequestMapping(value = "showRecruitmentScreening",method=RequestMethod.POST)
+    /*h获取实习的筛选条件
+    * */
     public @ResponseBody
-    Map<String,Object> showRecruitmentScreening(@RequestBody ScreenOne screenOne){
+    Map<String,Object> showRecruitmentScreening(@RequestBody ScreenTwo screenTwo){
         Map<String, Object> result = new HashMap<String, Object>();
-        String grade =screenOne.getGrade();
-        String major =screenOne.getMajor();
-        String clss =screenOne.getClss();
-        String status=screenOne.getStatus();
-        String iteacher=screenOne.getIteacher();
+        System.out.println(screenTwo);
+
+        String grade =screenTwo.getGrade();
+        String clss =screenTwo.getClss();
+        String status=screenTwo.getStatus();
+        String iteacher=screenTwo.getIteacher();
+        Integer companyId=screenTwo.getCompanyId();
+        String company=screenTwo.getCompany();
+
+        System.out.println(grade);
+        System.out.println(clss);
+        System.out.println(companyId);
+        System.out.println(company);
+        System.out.println(iteacher);
+        System.out.println(status);
 
         StudentExample studentExample1=new StudentExample();
+
+        studentExample1.or().andCompanyIdIsNotNull();
+
         List<Student> students1=studentService.selectByExample(studentExample1);
         Set set1=new TreeSet();
         for(Student student:students1){
             set1.add(student.getGrade());
         }
         result.put("grade",set1);
+        System.out.println("11111111111111");
 
         StudentExample studentExample2=new StudentExample();
-        if(grade==null){
-            studentExample2.or();
+        StudentExample.Criteria criteria=studentExample2.or();
+        if(grade.equals("年级")){
+
         }else{
-            studentExample2.or().andGradeEqualTo(grade);
+            criteria.andGradeEqualTo(grade);
         }
         List<Student> students2=studentService.selectByExample(studentExample2);
         Set set2=new TreeSet();
         for(Student student:students2){
-            set2.add(student.getMajor());
+            set2.add(student.getClss());
         }
-        result.put("major",set2);
+        result.put("clss",set2);
 
+        if(clss.equals("班级")){
 
-        StudentExample studentExample3=new StudentExample();
-        if(major==null){
-            studentExample2.or();
         }else{
-            studentExample2.or().andGradeEqualTo(major);
+            criteria.andClssEqualTo(clss);
         }
         List<Student> students3=studentService.selectByExample(studentExample2);
         Set set3=new TreeSet();
+
         for(Student student:students3){
-            set3.add(student.getClss());
+            set3.add(student.getCompanyId());
         }
-        result.put("clss",set3);
 
-        StudentExample studentExample4=new StudentExample();
-        studentExample4.or();
-        List<Student> students4=studentService.selectByExample(studentExample4);
-        Set set4=new TreeSet();
-        for(Student student:students4){
-            set4.add(student.getStatus());
+        Iterator<Integer> temp = set3.iterator();
+        JSONArray jsonArray=new JSONArray();
+        while (temp.hasNext()) {
+            Company company1=companyService.selectByPrimaryKey(temp.next());
+            JSONObject obj=new JSONObject();
+            obj.put("companyName",company1.getCompanyName());
+            obj.put("companyId",company1.getId());
+            jsonArray.add(obj);
         }
-        result.put("status",set4);
 
-        CompanyExample companyExample=new CompanyExample();
-        companyExample.or().andPassEqualTo(true);
-        List<Company> companies=companyService.selectByExample(companyExample);
-        JSONArray companys=new JSONArray();
-        for(Company company:companies){
-            companys.add(company.getCompanyName());
-        }
-        result.put("company",companys);
+        result.put("company",jsonArray);
+
+//        StudentExample studentExample4=new StudentExample();
+//        studentExample4.or();
+//        List<Student> students4=studentService.selectByExample(studentExample4);
+//        Set set5=new TreeSet();
+//        for(Student student:students4){
+//            set5.add(student.getStatus());
+//        }
+
         return result;
     }
     @RequestMapping(value = "showInternships", method = RequestMethod.POST)
@@ -313,46 +334,43 @@ public class ShowRecruitmentController {
     * 查看实习列表
     * */
     public @ResponseBody
-    Map<String, Object> showInternships(@RequestBody ScreenOne screenOne) {
+    Map<String, Object> showInternships(@RequestBody ScreenTwo screenOne) {
         Map<String, Object> result = new HashMap<String, Object>();
+
         String grade =screenOne.getGrade();
-        String major =screenOne.getMajor();
+        Integer companyId =screenOne.getCompanyId();
         String clss =screenOne.getClss();
         String status=screenOne.getStatus();
         String iteacher=screenOne.getIteacher();
+        String company=screenOne.getCompany();
+
 
         StudentRecruitmentViewExample studentRecruitmentViewExample=new StudentRecruitmentViewExample();
-        System.out.println(grade);
-        System.out.println(major);
-        System.out.println(clss);
-        System.out.println(clss);
-        System.out.println(iteacher);
+
         StudentRecruitmentViewExample.Criteria criteria=studentRecruitmentViewExample.or();
 
-        if(grade==null){
+        if(grade.equals("年级")){
             criteria.andPassingEqualTo(1);
         }else{
-
             criteria.andGradeEqualTo(grade).andPassingEqualTo(1);
         }
-        if(major==null){
-
-        }else{
-            criteria.andMajorEqualTo(major);
-        }
-        if(clss==null){
+        if(clss.equals("班级")){
 
         }else{
             criteria.andClssEqualTo(clss);
         }
-        if(status==null){
+        if(companyId==null){
+
+        }else{
+            criteria.andCompanyIdEqualTo(companyId);
+        }
+
+        if(status.equals("实习状态")){
 
         }else{
             criteria.andStatusEqualTo(status);
         }
-
-
-        if(iteacher==null){
+        if(iteacher.equals("有无指导老师")){
 
         }else if(iteacher.equals("无指导老师")){
             criteria.andTeacherIdIsNull();
@@ -373,9 +391,9 @@ public class ShowRecruitmentController {
             User user=userService.selectByPrimaryKey(studentRecruitmentView.getUserId());
             internshipVo.setNickname(user.getNickName());
             internshipVo.setClss(studentRecruitmentView.getClss());
-            Company company=companyService.selectByPrimaryKey(studentRecruitmentView.getCompanyId());
+            Company company1=companyService.selectByPrimaryKey(studentRecruitmentView.getCompanyId());
             internshipVo.setCompanyId(studentRecruitmentView.getCompanyId());
-            internshipVo.setCompany(company.getCompanyName());
+            internshipVo.setCompany(company1.getCompanyName());
             Recruitment recruitment=recruitmentService.selectByPrimaryKey(studentRecruitmentView.getRecruitmentId());
             internshipVo.setPost(recruitment.getPost());
             internshipVo.setStatus(studentRecruitmentView.getStatus());
@@ -385,6 +403,7 @@ public class ShowRecruitmentController {
             internshipVo.setTeacherId(teacher.getId());
             internshipVo.setTeacherName(user1.getNickName());
             internshipVo.setId(studentRecruitmentView.getId());
+            internshipVo.setStudentId(studentRecruitmentView.getStudentId());
             internshipVos.add(internshipVo);
         }
         result.put("internship",internshipVos);
@@ -456,6 +475,7 @@ public class ShowRecruitmentController {
         dailyCheckExample.or().andStudentIdEqualTo(id);
         List<DailyCheck> dailyChecks=dailyCheckService.selectByExample(dailyCheckExample);
         JSONArray ovjects=new JSONArray();
+
         for(DailyCheck dailyCheck:dailyChecks){
             JSONObject ovj=new JSONObject();
             String four=new SimpleDateFormat("yyyy/MM").format(dailyCheck.getStartTime());
@@ -570,8 +590,8 @@ public class ShowRecruitmentController {
         SummaryExample summaryExample=new SummaryExample();
 
         summaryExample.or().andStudentIdEqualTo(id).andStatusIdEqualTo(true);
-
         List<Summary> summaries=summaryService.selectByExample(summaryExample);
+
 
         JSONArray objects=new JSONArray();
         for(Summary summary:summaries){
@@ -641,6 +661,7 @@ public class ShowRecruitmentController {
         result.put("summary",objects);
         return result;
     }
+
     @RequestMapping(value = "showScore",method = RequestMethod.GET)
     public @ResponseBody
     Map<String, Object> showScore(@RequestParam("id") Integer id) {
@@ -650,15 +671,46 @@ public class ShowRecruitmentController {
          * @author hanfeng
          * */
         Map<String, Object> result = new HashMap<String, Object>();
-        ScoreExample scoreExample=new ScoreExample();
-        scoreExample.or().andStudentIdEqualTo(id);
-        List<Score> scores=scoreService.selectByExample(scoreExample);
-        result.put("score",scores);
+        Score score=scoreService.selectByStudent(id);
+        Weight weight=weightService.selectByPrimaryKey(1);
+
+       System.out.println(weight.toString());
+
+        JSONObject obj=new JSONObject();
+
+        float tweek=score.gettWeekReport();  //老师给的周报加权
+        float tsummary=score.gettSummary();  //老师的小结成绩
+
+        Float treport=score.gettFinalReport();
+        if (treport == null) {
+            treport = 0F;
+        }
+        System.out.println(treport);
+
+        float  tweighting=tweek*weight.getcWeekReport()+tsummary*weight.gettSummary()+treport*weight.gettFinalReport();
+
+        obj.put("totalScore",tweighting);
+        obj.put("tWeekly",tweek);
+        obj.put("summary",tsummary);
+        obj.put("report",treport);
+        obj.put("Weighting", tweighting);
+
+        obj.put("ttotalScore",score.gettWeekReport()*weight.getcWeekReport()+score.gettSummary()*weight.gettSummary()+score.gettFinalReport()*weight.gettFinalReport()+score.getAdditionalScore());
+
+        obj.put("cWeekly",score.getcWeekReport()*weight.getcWeekReport());
+        obj.put("checkonWork",score.getcAttendance()*weight.getcAttendance());
+        obj.put("ctotalScore",score.getcWeekReport()*weight.getcWeekReport()+score.getcAttendance()*weight.getcAttendance());
+        obj.put("additionalPoints",score.getAdditionalScore());
+
+
+        result.put("score",obj);
+
         return result;
     }
-    @RequestMapping(value = "showCompanyRecruitment", method = RequestMethod.GET)
+
+    @RequestMapping(value = "showCompanyRecruitments", method = RequestMethod.GET)
     public @ResponseBody
-    Map<String, Object> showCompanyRecruitment(@RequestParam("companyId") Integer companyId,
+    Map<String, Object> showCompanyRecruitments(@RequestParam("companyId") Integer companyId,
                                                @RequestParam("month") String month) {
 
         RecruitmentVo recruitmentVo=null;
@@ -729,8 +781,6 @@ public class ShowRecruitmentController {
             ovj.put("screen",four);
             ovjects.add(ovj);
         }
-
-        //Set set=new TreeSet();
         System.out.println(ovjects);
         Set set=new HashSet(ovjects);
         System.out.println(set);
@@ -744,8 +794,6 @@ public class ShowRecruitmentController {
     Map<String, Object> showRecruitmentDetails(@RequestParam("id") Integer id
 
     ) {
-
-        RecruitmentVo recruitmentVo=null;
 /*
 * @param
 * @return
@@ -753,9 +801,7 @@ public class ShowRecruitmentController {
 * @author hanfeng
 * */
         Map<String, Object> result = new HashMap<String, Object>();
-        CompanyExample companyExample=new CompanyExample();
         List<Recruitment> Recruitments=null;
-        RecruitmentExample recruitmentExample = new RecruitmentExample();
 
         Recruitment recruitment = recruitmentService.selectByPrimaryKey(id);
 
@@ -764,8 +810,6 @@ public class ShowRecruitmentController {
             result.put("msg", "无法从Recruitment表里查到记录！");
             return result;
         }
-            recruitmentVo=new RecruitmentVo();
-            CompanyView companyView = companyViewService.selectByKey(recruitment.getCompanyId());
             JSONObject object=new JSONObject();
             object.put("post",recruitment.getPost());
             object.put("totalnumber",recruitment.getTotalNumber());

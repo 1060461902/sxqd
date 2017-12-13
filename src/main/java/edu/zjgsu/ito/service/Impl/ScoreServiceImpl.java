@@ -44,6 +44,12 @@ public class ScoreServiceImpl implements ScoreService{
     }
 
     @Override
+    public Score selectByStudent(Integer studentId) {
+        Score score=scoreMapper.selectByStudent(studentId);
+        return score;
+    }
+
+    @Override
     public Score selectByPrimaryKey(Integer id) {
         Score score=scoreMapper.selectByPrimaryKey(id);
         return null;

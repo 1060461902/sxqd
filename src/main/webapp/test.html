@@ -1,94 +1,66 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta charset="UTF-8" />
-<title>MODEL PAGE</title>
-<script src="js/jquery-2.1.0.min.js"></script>
-<style type="text/css">
-table {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-CN">
+    <head>
+    
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">   <!-- 在IE运行最新的渲染模式 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">    <!-- 初始化移动浏览显示  -->
+        <meta name="Author" content="Dreamer-1.">        
+        
+        <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+        <script type="text/javascript" src="js/echarts.common.min.js"></script>
+            <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <title>- 观测数据 -</title>
+    </head>
 
-td,th {
-    border: 1px solid black;
-}
-</style>
-<script type="text/javascript">
-function dolistpage(pagerow,pagenum,rowcount,pagecount){
- $("#pagemsg").html("每页显示"+pagerow+"条，当前" + pagenum + "/" +pagecount + "页 共" +rowcount + "条");
- if (pagenum == 1) {
-  $("#fpbtn").attr("disabled", true);
-  $("#rpbtn").attr("disabled", true);
- }else {
-  $("#fpbtn").removeAttr("disabled");
-  $("#rpbtn").removeAttr("disabled");
- }
- if (pagenum == pagecount) {
-  $("#npbtn").attr("disabled", true);
-  $("#lpbtn").attr("disabled", true);
- }else {
-  $("#npbtn").removeAttr("disabled");
-  $("#lpbtn").removeAttr("disabled");
- }
- $("#fpbtn").click(function(){
-  loadtpage(1);
- });
- $("#rpbtn").click(function(){
-  loadtpage(pagenum - 1);
- });
- $("#npbtn").click(function(){
-  if ((pagenum + 1) >= pagecount) 
-   loadtpage(pagecount);
-  else
-   loadtpage(pagenum + 1);
- });
- $("#lpbtn").click(function(){
-  loadtpage(pagecount);
- });
- $("#gpbtn").click(function(){
-  var tzys = $("#gpinput").val();
-  var re = /^[1-9]+[0-9]*$/;
-  if (tzys == null || tzys == undefined || tzys == '') {
-   alert("请输入跳转页数!");
-   $("#gpinput").focus();
-   return;
-  }
-  if (!re.test(tzys)) {
-   alert("请输入正确跳转页数!");
-   $("#gpinput").focus();
-   return;
-  }
-  if (tzys > pagecount) 
-   tzys = pagecount;
-  if (tzys <= 0) 
-   tzys = 1;
-  loadtpage(tzys);
- });
- $("#gpinput").val(pagenum);
-}
-</script>
-</head>
-<body>
-<table>
- <tfoot>
-  <tr>
-   <td colspan="11">
-    <span class="water-table-listbtn"></span>
-    <span class="water-table-page">
-     <span id="pagemsg" class="water-table-pagemsg">当前0/0页</span>
-     <input type="button" id="fpbtn" value="首页"/>
-     <input type="button" id="rpbtn" value="上页"/>
-     <input type="button" id="npbtn" value="下页"/>
-     <input type="button" id="lpbtn" value="尾页"/>
-     <span id="pagemsg" class="water-table-pagemsg">跳转
-     <input type="text" id="gpinput" size="3" value="0"/>页
-     </span>
-     <input type="button" id="gpbtn" value="跳转"/>
-    </span>
-   </td>
-  </tr>
- </tfoot>
-</table>
-</body>
+    <body>
+
+<div class="container">
+
+   <h1>Hello, world!</h1>
+
+   <div class="row">
+      <div class="col-md-9" style="background-color: #dedef8;box-shadow: 
+         inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+         <div class="row">
+            <div class="col-md-4" style="background-color: #B18904;
+               box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+               <p>Consectetur art party Tonx culpa semiotics. Pinterest 
+                  assumenda minim organic quis.
+               </p>
+            </div>
+            <div class="col-md-4" style="background-color: #B18904;
+               box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+               <p> Consectetur art party Tonx culpa semiotics. Pinterest 
+                  assumenda minim organic quis.
+               </p>
+            </div>
+            <div class="col-md-4" style="background-color: #B18904;
+               box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+               <p> Consectetur art party Tonx culpa semiotics. Pinterest 
+                  assumenda minim organic quis.
+               </p>
+            </div>
+         </div>
+
+         <div class="row">
+            <div class="col-md-12" style="background-color: #B18904;
+               box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+               <p>quis nostrud exercitation ullamco laboris nisi ut 
+                  aliquip ex ea commodo consequat.
+               </p>
+            </div>   
+         </div>
+
+      </div>
+      <div class="col-md-3" style="background-color: #dedef8;box-shadow: 
+         inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.3333333333333333333333333333333333333333333333333333333333333333333333333333333</p>
+      </div>
+   </div>
+
+</div>
+
+    </body>
 </html>

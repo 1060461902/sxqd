@@ -515,4 +515,10 @@
       release_time = #{releaseTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByCompanyId" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM recruitment
+    WHERE company_id=#{companyId}
+  </select>
 </mapper>

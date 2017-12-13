@@ -124,12 +124,49 @@ public class TeacherController {
     public @ResponseBody
     /*查看老师名下学生
     * @author hanfeng*/
-    Map<String, Object> showTeacherStudent(@RequestParam("id") Integer id
+    Map<String, Object> showTeacherStudent(@RequestParam("id") Integer id,
+                                           @RequestParam("major") String major,
+                                           @RequestParam("clss") String clss,
+                                           @RequestParam("status") String status
     ) {
+        try {
+            major= new String(major.getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            clss= new String(clss.getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            status= new String(status.getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
         Map<String, Object> result = new HashMap<String, Object>();
 
         StudentExample studentExample=new StudentExample();
-        studentExample.or().andTeacherIdEqualTo(id);
+
+        StudentExample.Criteria criteria=studentExample.or().andTeacherIdEqualTo(id);
+
+        if(major.equals("专业")){
+
+        }else{
+            criteria.andMajorEqualTo(major);
+        }
+        if(clss.equals("班级")){
+
+        }else{
+            criteria.andClssEqualTo(clss);
+        }
+        if(status.equals("实习状态")){
+
+        } else{
+            criteria.equals(status);
+        }
+
         List<Student> students=studentService.selectByExample(studentExample);
         JSONArray objects=new JSONArray();
         System.out.println(students);
@@ -156,6 +193,60 @@ public class TeacherController {
             objects.add(obj);
         }
         result.put("recruitmentList",objects);
+        return result;
+    }
+    @RequestMapping(value = "showTeacherStudentScreen", method = RequestMethod.GET)
+    public @ResponseBody
+    /*查看老师名下学生的筛选条件
+    * @author hanfeng
+    * */
+    Map<String, Object> showTeacherStudentScreen(@RequestParam("id") Integer id,
+                                                 @RequestParam("major") String major,
+                                                 @RequestParam("clss") String clss,
+                                                 @RequestParam("status") String status
+    ) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        try {
+            major= new String(major.getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            clss= new String(clss.getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            status= new String(status.getBytes("iso8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+
+        StudentExample studentExample1=new StudentExample();
+        studentExample1.or().andTeacherIdEqualTo(id);
+        List<Student> students1=studentService.selectByExample(studentExample1);
+        Set set1=new TreeSet();
+        for(Student student:students1){
+            set1.add(student.getMajor());
+        }
+        result.put("major",set1);
+
+
+        StudentExample studentExample2=new StudentExample();
+        StudentExample.Criteria criteria=studentExample2.or().andTeacherIdEqualTo(id);
+        if(major.equals("专业")){
+
+        }else{
+            criteria.equals(major);
+        }
+        List<Student> students2=studentService.selectByExample(studentExample2);
+        Set set2=new TreeSet();
+        for(Student student:students2){
+            set2.add(student.getClss());
+        }
+        result.put("clss",set2);
+
         return result;
     }
 
@@ -285,7 +376,7 @@ public class TeacherController {
         Map<String, Object> result = new HashMap<String, Object>();
 
         Integer id=teacherVo.getId();
-        String sex=teacherVo.getSex();
+        Boolean sex=teacherVo.getSex();
         String major=teacherVo.getMajor();
         String rank=teacherVo.getRank();
         String phone=teacherVo.getPhone();

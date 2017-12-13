@@ -55,29 +55,32 @@ public class StudentController {
         System.out.println(status);
 
         StudentExample studentExample=new StudentExample();
+        StudentExample.Criteria criteria=studentExample.or();
 
-        if(grade==null){
-            studentExample.or().andDeleteTagEqualTo(true);
+
+        if(grade.equals("年级")){
+            criteria.andDeleteTagEqualTo(true);
         }else{
-            studentExample.or().andGradeEqualTo(grade);
+            criteria.andGradeEqualTo(grade);
         }
-        if(major==null){
-            studentExample.or();
+        if(major.equals("专业")){
+
         }else{
-            studentExample.or().andMajorEqualTo(major);
+            criteria.andMajorEqualTo(major);
         }
-        if(clss==null){
-            studentExample.or();
+        if(clss.equals("班级")){
+
         }else{
-            studentExample.or().andClssEqualTo(clss);
+            criteria.andClssEqualTo(clss);
         }
-        if(status==null){
-            studentExample.or();
+        if(status.equals("实习状态")){
+
         }else{
-            studentExample.or().andStatusEqualTo(status);
+            criteria.andStatusEqualTo(status);
         }
+
+
         List<Student> students=studentService.selectByExample(studentExample);
-
 
         List<StudentVo> studentVos=new ArrayList<>();
         for(Student student:students){
@@ -266,10 +269,13 @@ public class StudentController {
         result.put("grade",set1);
 
         StudentExample studentExample2=new StudentExample();
+
+        StudentExample.Criteria criteria=studentExample2.or();
+
         if(grade==null){
-            studentExample2.or();
+
         }else{
-            studentExample2.or().andGradeEqualTo(grade);
+            criteria.andGradeEqualTo(grade);
         }
         List<Student> students2=studentService.selectByExample(studentExample2);
         Set set2=new TreeSet();
@@ -340,7 +346,7 @@ public class StudentController {
     @RequestMapping(value = "updateStudent", method = RequestMethod.POST)
     /*
     * author hanfeng
-    * 管理员修改老师
+    * 管理员修改学生
     * */
     public @ResponseBody
     Map<String, Object> updateStudent(@RequestBody StudentBaseVo studentBaseVo

@@ -311,4 +311,10 @@
       final_score = #{finalScore,jdbcType=REAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByStudent" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM score
+    WHERE student_id=#{studentId}
+  </select>
 </mapper>
