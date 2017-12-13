@@ -5,10 +5,10 @@ import java.io.Serializable;
 /**
  * @author 
  */
-public class Teacher implements Serializable {
-    private Integer id;
+public class TeacherRegisterView implements Serializable {
+    private String userName;
 
-    private Integer userId;
+    private String nickName;
 
     /**
      * 专业
@@ -17,20 +17,20 @@ public class Teacher implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
-        return id;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getMajor() {
@@ -52,9 +52,9 @@ public class Teacher implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Teacher other = (Teacher) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+        TeacherRegisterView other = (TeacherRegisterView) that;
+        return (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
+            && (this.getNickName() == null ? other.getNickName() == null : this.getNickName().equals(other.getNickName()))
             && (this.getMajor() == null ? other.getMajor() == null : this.getMajor().equals(other.getMajor()));
     }
 
@@ -62,8 +62,8 @@ public class Teacher implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getUserName() == null) ? 0 : getUserName().hashCode());
+        result = prime * result + ((getNickName() == null) ? 0 : getNickName().hashCode());
         result = prime * result + ((getMajor() == null) ? 0 : getMajor().hashCode());
         return result;
     }
@@ -74,8 +74,8 @@ public class Teacher implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", userId=").append(userId);
+        sb.append(", userName=").append(userName);
+        sb.append(", nickName=").append(nickName);
         sb.append(", major=").append(major);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

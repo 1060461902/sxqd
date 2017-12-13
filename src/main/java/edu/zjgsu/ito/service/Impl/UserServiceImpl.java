@@ -1,6 +1,7 @@
 package edu.zjgsu.ito.service.Impl;
 
 import edu.zjgsu.ito.dao.UserMapper;
+import edu.zjgsu.ito.model.StudentExample;
 import edu.zjgsu.ito.model.User;
 import edu.zjgsu.ito.model.UserExample;
 import edu.zjgsu.ito.service.UserService;
@@ -51,6 +52,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User selectByPrimaryKey(Integer id) {
+        StudentExample studentExample = new StudentExample();
+//        StudentExample.GeneratedCriteria criteria = studentExample.or();
         User user = userMapper.selectByPrimaryKey(id);
         return user;
     }

@@ -3,7 +3,7 @@ package edu.zjgsu.ito.utils;
 /**
  * 常量类
  * 
- * @author Jenson_Zhou
+ * @author sawei
  * 
  */
 public class Constant {
@@ -33,8 +33,13 @@ public class Constant {
 	public final static Integer TEACHER =  3;
 	public final static Integer COMPANY =  4;
 
-    public final static String excel2003L =".xls";    //2003- 版本的excel
-    public final static String excel2007U =".xlsx";   //2007+ 版本的excel
+    public final static String EXCEL2003L =".xls";    //2003- 版本的excel
+    public final static String EXCEL2007L =".xlsx";   //2007+ 版本的excel
+
+    public final static String fontName ="宋体";   //2007+ 版本的excel
+
+
+	public static final String DEFAULTPWD = Md5Util.getMD5("123456");
 
 	/**
 	 * 登录成功
@@ -69,8 +74,8 @@ public class Constant {
 	/**
 	 * 文件上传路径
 	 */
-	public final static String UPLOAD_DIR = System.getProperty("user.dir").replace("\\", "/").replace("bin", "");
-	
+	public final static String UPLOAD_DIR = System.getProperty("user.home").replace("\\", "/") + "/excelFiles/";
+
 	/**
 	 * 党员照片存放文件夹
 	 */

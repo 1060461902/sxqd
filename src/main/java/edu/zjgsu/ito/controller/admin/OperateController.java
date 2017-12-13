@@ -1,15 +1,21 @@
 package edu.zjgsu.ito.controller.admin;
 
+import edu.zjgsu.ito.dao.WeightMapper;
 import edu.zjgsu.ito.model.*;
 import edu.zjgsu.ito.service.*;
 import edu.zjgsu.ito.utils.Constant;
+import edu.zjgsu.ito.utils.FileUtil;
 import edu.zjgsu.ito.utils.Md5Util;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +23,6 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "admin")
 public class OperateController {
-    public static final String defaultPwd = "123456";
 
     @Autowired
     StudentService studentService;
@@ -25,15 +30,105 @@ public class OperateController {
     UserService userService;
     @Autowired
     CommonService commonService;
-
     @Autowired
     AdminOperateService adminOperateService;
 
-    @RequestMapping(value = "uploadStudentExcel", method = {RequestMethod.GET, RequestMethod.POST})
-    public @ResponseBody Map<String, Object> uploadStudentExcel(HttpServletRequest request, HttpServletResponse response) {
-        return adminOperateService.studentBatchRegister(request);
+
+    /**
+     *导出学生成绩Excel
+     * @param
+     * @return
+     * @sawei
+     */
+    @RequestMapping(value = "export2Excel", method = RequestMethod.GET )
+    public @ResponseBody Map<String, Object> export2Excel(@RequestParam List<Integer> studentIdList, HttpServletResponse response) {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        adminOperateService.writeToExcel("Sheet1", studentIdList,response);
+
+        result.put("code", Constant.OK);
+        result.put("msg", "导出成功！");
+
+        return result;
     }
 
+    @RequestMapping(value = "weight", method = RequestMethod.POST)
+    public @ResponseBody Map<String, Object> setWeight(@RequestBody Weight weight) {
+        int status;
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        status = commonService.setWeight(weight);
+
+        if (status > 0) {
+            result.put("code", Constant.OK);
+            result.put("msg", "void");
+        } else {
+            result.put("code", Constant.FAIL);
+            result.put("msg", "void");
+        }
+
+        return result;
+
+    }
+    /**
+     * 上传Excel，批量注册学生和老师
+     * @param request
+     * @param roleId
+     * @return
+     * @author sawei
+     */
+    @RequestMapping(value = "uploadExcel", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody Map<String, Object> uploadExcel(HttpServletRequest request, @RequestParam("roleId") Integer roleId) {
+        return adminOperateService.batchRegister(request, roleId);
+    }
+
+    /**
+     *学生注册
+     * @param temp
+     * @return
+     * @author sawei
+     */
+    @RequestMapping(value = "studentRegister", method = RequestMethod.POST )
+    public @ResponseBody Map<String, Object> studentRegister(@RequestBody StudentRegisterView temp) {
+        int status;
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        status = adminOperateService.studentRegister(temp.getUserName(), temp.getNickName(), temp.getMajor(), temp.getClss());
+
+        if (status > 0) {
+            result.put("code", Constant.OK);
+            result.put("msg", "学生注册成功");
+        } else {
+            result.put("code", Constant.FAIL);
+            result.put("msg", "学生注册失败");
+        }
+
+        return result;
+    }
+
+    /**
+     * 老师注册
+     * @param temp
+     * @return
+     * @author sawei
+     */
+    @RequestMapping(value = "teacherRegister", method = RequestMethod.POST )
+    public @ResponseBody Map<String, Object> teacherRegister(@RequestBody TeacherRegisterView temp) {
+        int status;
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        status = adminOperateService.teacherRegister(temp.getUserName(), temp.getNickName(), temp.getMajor());
+
+        if (status > 0) {
+            result.put("code", Constant.OK);
+            result.put("msg", "教师注册成功！");
+        } else {
+            result.put("code", Constant.FAIL);
+            result.put("msg", "教师注册失败！");
+        }
+
+        return result;
+    }
 
     @RequestMapping(value = "allocateStu2Teacher", method = RequestMethod.GET)
     public @ResponseBody Map<String, Object> allocateStu2Teacher(@RequestParam(value = "studentIdList") List<Integer> StudentIdList,
@@ -69,7 +164,7 @@ public class OperateController {
         userId = commonService.role2user(roleId, id);
 
         User user = userService.selectByPrimaryKey(userId);
-        user.setForbidden(true);
+//        user.setForbidden(true);
         status = userService.updateByPrimaryKey(user);
 
         if (status > 0) {
@@ -84,7 +179,13 @@ public class OperateController {
     }
 
 
-
+    /**
+     * 管理员重新设置密码
+     * @param roleId
+     * @param id
+     * @return
+     * @author sawei
+     */
     @RequestMapping(value = "resetPwd", method = RequestMethod.GET)
     public @ResponseBody Map<String, Object> resetPwd(@RequestParam("roleId") Integer roleId,
                                                       @RequestParam("id") Integer id) {
@@ -93,7 +194,7 @@ public class OperateController {
         String md5Password;
         Map<String, Object> result = new HashMap<String, Object>();
 
-        md5Password = Md5Util.getMD5(defaultPwd);
+        md5Password = Md5Util.getMD5(Constant.DEFAULTPWD);
 
         userId = commonService.role2user(roleId, id);
 

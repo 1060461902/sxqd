@@ -13,7 +13,7 @@
     <result column="sex" jdbcType="BIT" property="sex" />
     <result column="nation" jdbcType="VARCHAR" property="nation" />
     <result column="english" jdbcType="BIT" property="english" />
-    <result column="graduate_year" jdbcType="TIMESTAMP" property="graduateYear" />
+    <result column="grade" jdbcType="TIMESTAMP" property="grade" />
     <result column="major" jdbcType="VARCHAR" property="major" />
     <result column="clss" jdbcType="VARCHAR" property="clss" />
   </resultMap>
@@ -77,7 +77,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, user_id, company_id, teacher_id, status, zip_file, post, delete_tag, sex, nation, 
-    english, graduate_year, major, clss
+    english, grade, major, clss
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.StudentExample" resultMap="BaseResultMap">
     select
@@ -124,12 +124,12 @@
     insert into student (user_id, company_id, teacher_id, 
       status, zip_file, post, 
       delete_tag, sex, nation, english, 
-      graduate_year, major, clss
+      grade, major, clss
       )
     values (#{userId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}, 
       #{status,jdbcType=VARCHAR}, #{zipFile,jdbcType=BIT}, #{post,jdbcType=VARCHAR}, 
       #{deleteTag,jdbcType=BIT}, #{sex,jdbcType=BIT}, #{nation,jdbcType=VARCHAR}, #{english,jdbcType=BIT}, 
-      #{graduateYear,jdbcType=TIMESTAMP}, #{major,jdbcType=VARCHAR}, #{clss,jdbcType=VARCHAR}
+      #{grade,jdbcType=TIMESTAMP}, #{major,jdbcType=VARCHAR}, #{clss,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.Student">
@@ -168,8 +168,8 @@
       <if test="english != null">
         english,
       </if>
-      <if test="graduateYear != null">
-        graduate_year,
+      <if test="grade != null">
+        grade,
       </if>
       <if test="major != null">
         major,
@@ -209,8 +209,8 @@
       <if test="english != null">
         #{english,jdbcType=BIT},
       </if>
-      <if test="graduateYear != null">
-        #{graduateYear,jdbcType=TIMESTAMP},
+      <if test="grade != null">
+        #{grade,jdbcType=TIMESTAMP},
       </if>
       <if test="major != null">
         #{major,jdbcType=VARCHAR},
@@ -262,8 +262,8 @@
       <if test="record.english != null">
         english = #{record.english,jdbcType=BIT},
       </if>
-      <if test="record.graduateYear != null">
-        graduate_year = #{record.graduateYear,jdbcType=TIMESTAMP},
+      <if test="record.grade != null">
+        grade = #{record.grade,jdbcType=TIMESTAMP},
       </if>
       <if test="record.major != null">
         major = #{record.major,jdbcType=VARCHAR},
@@ -289,7 +289,7 @@
       sex = #{record.sex,jdbcType=BIT},
       nation = #{record.nation,jdbcType=VARCHAR},
       english = #{record.english,jdbcType=BIT},
-      graduate_year = #{record.graduateYear,jdbcType=TIMESTAMP},
+      grade = #{record.grade,jdbcType=TIMESTAMP},
       major = #{record.major,jdbcType=VARCHAR},
       clss = #{record.clss,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -329,8 +329,8 @@
       <if test="english != null">
         english = #{english,jdbcType=BIT},
       </if>
-      <if test="graduateYear != null">
-        graduate_year = #{graduateYear,jdbcType=TIMESTAMP},
+      <if test="grade != null">
+        grade = #{grade,jdbcType=TIMESTAMP},
       </if>
       <if test="major != null">
         major = #{major,jdbcType=VARCHAR},
@@ -353,7 +353,7 @@
       sex = #{sex,jdbcType=BIT},
       nation = #{nation,jdbcType=VARCHAR},
       english = #{english,jdbcType=BIT},
-      graduate_year = #{graduateYear,jdbcType=TIMESTAMP},
+      grade = #{grade,jdbcType=TIMESTAMP},
       major = #{major,jdbcType=VARCHAR},
       clss = #{clss,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

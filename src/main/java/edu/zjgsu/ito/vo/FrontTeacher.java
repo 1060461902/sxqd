@@ -6,7 +6,6 @@ public class FrontTeacher {
     private Integer id;
     private String nickName;
     private String userName;
-    private Boolean status;
     private String phone;
     private Boolean forbidden;
 
@@ -36,13 +35,6 @@ public class FrontTeacher {
 
 
 
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
 
     public String getPhone() {
         return phone;
@@ -65,7 +57,6 @@ public class FrontTeacher {
                 "id=" + id +
                 ", nickName='" + nickName + '\'' +
                 ", userName='" + userName + '\'' +
-                ", status=" + status +
                 ", phone='" + phone + '\'' +
                 ", forbidden=" + forbidden +
                 '}';
