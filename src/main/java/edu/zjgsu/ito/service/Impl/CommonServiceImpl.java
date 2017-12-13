@@ -1,8 +1,7 @@
 package edu.zjgsu.ito.service.Impl;
 
-import edu.zjgsu.ito.model.Company;
-import edu.zjgsu.ito.model.Student;
-import edu.zjgsu.ito.model.Teacher;
+import edu.zjgsu.ito.dao.WeightMapper;
+import edu.zjgsu.ito.model.*;
 import edu.zjgsu.ito.service.CommonService;
 import edu.zjgsu.ito.service.CompanyService;
 import edu.zjgsu.ito.service.StudentService;
@@ -25,7 +24,28 @@ public class CommonServiceImpl implements CommonService{
     @Autowired
     TeacherService teacherService;
 
-    //通过不同角色的主键id查到其user的userID
+    @Autowired
+    WeightMapper weightMapper;
+
+    @Override
+    public Integer setWeight(Weight weight) {
+        int status;
+        WeightExample weightExample = new WeightExample();
+        weightExample.or().andIdEqualTo(1);
+
+        status = weightMapper.updateByExample(weight, weightExample);
+
+        return status;
+    }
+
+
+    /**
+     * 通过不同角色的主键id查到其user的userID
+     * @param roleid
+     * @param id
+     * @return
+     */
+    @Override
     public Integer role2user(Integer roleid, Integer id) {
         List<Integer> userId = new ArrayList<Integer>();
 

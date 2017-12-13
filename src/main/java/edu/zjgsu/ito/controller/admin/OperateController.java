@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,19 +36,40 @@ public class OperateController {
 
     /**
      *导出学生成绩Excel
-     * @param grade 年级
+     * @param
      * @return
      * @sawei
      */
     @RequestMapping(value = "export2Excel", method = RequestMethod.GET )
-    public @ResponseBody Map<String, Object> export2Excel(@RequestParam("grade") String grade) {
+    public @ResponseBody Map<String, Object> export2Excel(@RequestParam List<Integer> studentIdList, HttpServletResponse response) {
+        Map<String, Object> result = new HashMap<String, Object>();
 
-        adminOperateService.writeToExcel(grade, "Sheet1");
+        adminOperateService.writeToExcel("Sheet1", studentIdList,response);
 
-        return null;
+        result.put("code", Constant.OK);
+        result.put("msg", "导出成功！");
+
+        return result;
     }
 
+    @RequestMapping(value = "weight", method = RequestMethod.POST)
+    public @ResponseBody Map<String, Object> setWeight(@RequestBody Weight weight) {
+        int status;
+        Map<String, Object> result = new HashMap<String, Object>();
 
+        status = commonService.setWeight(weight);
+
+        if (status > 0) {
+            result.put("code", Constant.OK);
+            result.put("msg", "void");
+        } else {
+            result.put("code", Constant.FAIL);
+            result.put("msg", "void");
+        }
+
+        return result;
+
+    }
     /**
      * 上传Excel，批量注册学生和老师
      * @param request

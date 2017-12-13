@@ -74,7 +74,7 @@ public class Constant {
 	/**
 	 * 文件上传路径
 	 */
-	public final static String UPLOAD_DIR = System.getProperty("user.dir").replace("\\", "/") + "\\excelFiles";
+	public final static String UPLOAD_DIR = System.getProperty("user.home").replace("\\", "/") + "/excelFiles/";
 
 	/**
 	 * 党员照片存放文件夹

@@ -7,6 +7,7 @@ import edu.zjgsu.ito.model.User;
 import org.apache.poi.ss.usermodel.Cell;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +27,10 @@ public interface AdminOperateService {
 
     Integer studentRegister(String userName, String nickName, String major, String clss);
 
-    void  writeToExcel(String grade, String sheetName);
+    void  writeToExcel(String sheetName, List<Integer> studentIdList, HttpServletResponse response);
 
     List<String> getExcelTitles(String fileName);
 
-    List<FinalExcelView> getRecords(String grade);
+    List<FinalExcelView> getRecords(List<Integer> studentIdList);
 
 }

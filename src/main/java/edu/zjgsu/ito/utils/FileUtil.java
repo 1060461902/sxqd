@@ -38,12 +38,12 @@ public class FileUtil {
 
     /**
      *返回文件名
-     * @param grade
+     * @param
      * @return
      * @author sawei
      */
-    public static String getFileName(String grade) {
-        return "计算机与信息工程学院" + grade + "学生毕业实习成绩.xls";
+    public static String getFileName (){
+        return "计算机与信息工程学院学生毕业实习成绩.xlsx";
     }
 
 	/**

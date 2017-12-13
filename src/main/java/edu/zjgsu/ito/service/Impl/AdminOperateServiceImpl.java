@@ -3,11 +3,12 @@ package edu.zjgsu.ito.service.Impl;
 import edu.zjgsu.ito.dao.FinalExcelViewMapper;
 import edu.zjgsu.ito.dao.WeightMapper;
 import edu.zjgsu.ito.model.*;
-import edu.zjgsu.ito.service.*;
+import edu.zjgsu.ito.service.AdminOperateService;
+import edu.zjgsu.ito.service.StudentService;
+import edu.zjgsu.ito.service.TeacherService;
+import edu.zjgsu.ito.service.UserService;
 import edu.zjgsu.ito.utils.Constant;
 import edu.zjgsu.ito.utils.FileUtil;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -36,14 +38,16 @@ public class AdminOperateServiceImpl implements AdminOperateService {
     WeightMapper weightMapper;
     @Autowired
     FinalExcelViewMapper finalExcelViewMapper;
+
     /**
      * 对表中数值格式化
+     *
      * @param cell
      * @return
      * @author sawei
      */
     @Override
-    public  Object getCellValue(Cell cell){
+    public Object getCellValue(Cell cell) {
         Object value = null;
         DecimalFormat df = new DecimalFormat("0");  //格式化number String字符
         SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");  //日期格式化
@@ -54,11 +58,11 @@ public class AdminOperateServiceImpl implements AdminOperateService {
                 value = cell.getRichStringCellValue().getString();
                 break;
             case Cell.CELL_TYPE_NUMERIC:
-                if("General".equals(cell.getCellStyle().getDataFormatString())){
+                if ("General".equals(cell.getCellStyle().getDataFormatString())) {
                     value = df.format(cell.getNumericCellValue());
-                }else if("m/d/yy".equals(cell.getCellStyle().getDataFormatString())){
+                } else if ("m/d/yy".equals(cell.getCellStyle().getDataFormatString())) {
                     value = sdf.format(cell.getDateCellValue());
-                }else{
+                } else {
                     value = df2.format(cell.getNumericCellValue());
                 }
                 break;
@@ -75,8 +79,9 @@ public class AdminOperateServiceImpl implements AdminOperateService {
     }
 
     /**
-     *读取Excel
-     * @param is 文件流
+     * 读取Excel
+     *
+     * @param is       文件流
      * @param fileName 文件名
      * @return
      * @author sawei
@@ -105,16 +110,16 @@ public class AdminOperateServiceImpl implements AdminOperateService {
                 String sheetName = sheet.getSheetName();
 
 //            遍历当前页的每一行
-                for (int i = sheet.getFirstRowNum(); i <= sheet.getLastRowNum() ; i++) {
+                for (int i = sheet.getFirstRowNum(); i <= sheet.getLastRowNum(); i++) {
                     row = sheet.getRow(i);
 //                当sheet没有数据时，row = null，报nullPointerException
-//                row.getFirstRowNum() == i:去掉第一行的记录
-                    if(row == null || i == sheet.getFirstRowNum()) {
+//                row.getthirdRowNum() == i:去掉第一行的记录
+                    if (row == null || i == sheet.getFirstRowNum()) {
                         continue;
                     }
 
                     record = new ArrayList<Object>();
-                    for (int j = row.getFirstCellNum(); j <= row.getLastCellNum() - 1 ; j++) {
+                    for (int j = row.getFirstCellNum(); j <= row.getLastCellNum() - 1; j++) {
 //                    得到单元格cell
                         cell = row.getCell(j);
 
@@ -124,7 +129,7 @@ public class AdminOperateServiceImpl implements AdminOperateService {
 //                System.out.println("");
                     data.add(record);
 
-                }//            for (int i = sheet.getFirstRowNum(); i <= sheet.getLastRowNum() ; i++) {
+                }//            for (int i = sheet.getthirdRowNum(); i <= sheet.getLastRowNum() ; i++) {
             }//        for (int index = 0; index < wb.getNumberOfSheets(); index++) {
 
             wb.close();
@@ -137,6 +142,7 @@ public class AdminOperateServiceImpl implements AdminOperateService {
 
     /**
      * 添加一条user表记录，并返回最新记录的id
+     *
      * @param user
      * @return
      * @author sawei
@@ -157,6 +163,7 @@ public class AdminOperateServiceImpl implements AdminOperateService {
 
     /**
      * 学生注册
+     *
      * @param userName
      * @param nickName
      * @param major
@@ -185,6 +192,7 @@ public class AdminOperateServiceImpl implements AdminOperateService {
 
     /**
      * 老师注册
+     *
      * @param userName
      * @param nickName
      * @param major
@@ -209,15 +217,12 @@ public class AdminOperateServiceImpl implements AdminOperateService {
         return status;
     }
 
-//    public Integer companyRegister(Company company) {
-//
-//    }
-
 
     /**
      * 学生或者老师批量注册
+     *
      * @param request
-     * @param roleId 角色id
+     * @param roleId  角色id
      * @return
      * @author sawei
      */
@@ -281,28 +286,40 @@ public class AdminOperateServiceImpl implements AdminOperateService {
 
     @Override
     public List<String> getExcelTitles(String fileName) {
+        String temp = new String();
         List<String> excelTitles = new ArrayList<>();
-        Calendar now = Calendar.getInstance();
+
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");//可以方便地修改日期格式
+        String now = dateFormat.format(date);
+
 
         WeightExample weightExample = new WeightExample();
         weightExample.or().andIdIsNotNull();
         Weight weight = weightMapper.selectByExample(weightExample).get(0);
 
-        excelTitles.add(fileName);
-        excelTitles.add("导入时间：" + now.get(Calendar.YEAR) + "/" + now.get(Calendar.MONTH) + "/" + now.get(Calendar.DAY_OF_MONTH));
+        excelTitles.add(fileName.substring(0, fileName.lastIndexOf(".")));
+        excelTitles.add("导出时间：" + now);
         excelTitles.add("学号");
         excelTitles.add("姓名");
         excelTitles.add("班级");
         excelTitles.add("指导老师");
-        excelTitles.add("老师评分（" + String.valueOf(weight.getTeacherWeight()) + ")");
-        excelTitles.add("周报(" + String.valueOf(weight.gettWeekReport()) + ")");
-        excelTitles.add("实习小结(" + String.valueOf(weight.gettSummary()) + ")");
-        excelTitles.add("实习报告(" + String.valueOf(weight.gettFinalReport()) + ")");
+        temp = String.valueOf(100 * weight.getTeacherWeight());
+        excelTitles.add("老师评分（" + temp.substring(0, temp.lastIndexOf(".")) + "%)");
+        temp = String.valueOf(100 * weight.gettWeekReport());
+        excelTitles.add("周报(" + temp.substring(0, temp.lastIndexOf(".")) + "%)");
+        temp = String.valueOf(100 * weight.gettSummary());
+        excelTitles.add("实习小结(" + temp.substring(0, temp.lastIndexOf(".")) + "%)");
+        temp = String.valueOf(100 * weight.gettFinalReport());
+        excelTitles.add("实习报告(" + temp.substring(0, temp.lastIndexOf(".")) + "%)");
         excelTitles.add("附加分");
         excelTitles.add("实习成绩A");
-        excelTitles.add("企业评分（" + String.valueOf(weight.getCompanyWeight()) + ")");
-        excelTitles.add("周报（" + String.valueOf(weight.getcWeekReport()) + ")");
-        excelTitles.add("考勤（" + String.valueOf(weight.getcAttendance()) + ")");
+        temp = String.valueOf(100 * weight.getCompanyWeight());
+        excelTitles.add("企业评分（" + temp.substring(0, temp.lastIndexOf(".")) + "%)");
+        temp = String.valueOf(100 * weight.getcWeekReport());
+        excelTitles.add("周报（" + temp.substring(0, temp.lastIndexOf(".")) + "%)");
+        temp = String.valueOf(100 * weight.getcAttendance());
+        excelTitles.add("考勤（" + temp.substring(0, temp.lastIndexOf(".")) + "%)");
         excelTitles.add("实习成绩B");
         excelTitles.add("最终实习成绩");
 
@@ -310,18 +327,20 @@ public class AdminOperateServiceImpl implements AdminOperateService {
     }
 
 
-    @Override
-    public List<FinalExcelView> getRecords(String grade) {
+    public List<FinalExcelView> getRecords(List<Integer> studentIdList) {
 //        从视图里查出Excel的所有记录
         FinalExcelViewExample example = new FinalExcelViewExample();
-        example.or().andGradeEqualTo(grade);
+        for (Integer temp:
+             studentIdList) {
+            example.or().andIdEqualTo(temp);
+        }
         List<FinalExcelView> records = finalExcelViewMapper.selectByExample(example);
 //        查询权重
         Weight weight = weightMapper.selectByPrimaryKey(1);
 
 //        计算成绩
-        for (FinalExcelView record:
-             records) {
+        for (FinalExcelView record :
+                records) {
             float scoreA = record.gettWeekReport() * weight.gettWeekReport() + record.gettSummary() * weight.gettSummary()
                     + record.gettFinalReport() * weight.gettWeekReport();
 //            加上附加分
@@ -336,11 +355,29 @@ public class AdminOperateServiceImpl implements AdminOperateService {
         return records;
     }
 
-    public Sheet setTitles(Workbook workbook, String sheetName, List<String> excelTitles) {
+    public void setTitles(Workbook workbook, Sheet sheet, List<String> excelTitles) {
+        sheet.setColumnWidth(1, 13 * 256);
+        sheet.setColumnWidth(2, 10 * 256);
+        sheet.setColumnWidth(3, 9 * 256);
+        sheet.setColumnWidth(4, 9 * 256);
+        sheet.setColumnWidth(5, 11 * 256);
+        sheet.setColumnWidth(6, 11 * 256);
+        sheet.setColumnWidth(7, 11 * 256);
+        sheet.setColumnWidth(8, 11 * 256);
+        sheet.setColumnWidth(9, 11 * 256);
+        sheet.setColumnWidth(10, 11 * 256);
+        sheet.setColumnWidth(11, 11 * 256);
+        sheet.setColumnWidth(12, 11 * 256);
+        sheet.setColumnWidth(13, 10 * 256);
+        sheet.setColumnWidth(14, 10 * 256);
+
+        CellStyle styleRight = workbook.createCellStyle();
+        CellStyle styleLeft = workbook.createCellStyle();
+
         //        宋体，11，加粗，居中,实线边框 ,字段的格式
         Font font = workbook.createFont();
         font.setFontName(Constant.fontName);
-        font.setFontHeightInPoints((short)11);
+        font.setFontHeightInPoints((short) 11);
         font.setBoldweight(Font.BOLDWEIGHT_BOLD);
 
         CellStyle style = workbook.createCellStyle();
@@ -351,11 +388,13 @@ public class AdminOperateServiceImpl implements AdminOperateService {
         style.setBorderLeft(CellStyle.BORDER_THIN);
         style.setBorderRight(CellStyle.BORDER_THIN);
         style.setBorderTop(CellStyle.BORDER_THIN);
+        //设置自动换行
+        style.setWrapText(true);
 
         //        宋体，11，居中 日期的格式
         Font font1 = workbook.createFont();
         font1.setFontName(Constant.fontName);
-        font1.setFontHeightInPoints((short)11);
+        font1.setFontHeightInPoints((short) 11);
 
         CellStyle style1 = workbook.createCellStyle();
         style1.setAlignment(CellStyle.ALIGN_CENTER);
@@ -365,16 +404,12 @@ public class AdminOperateServiceImpl implements AdminOperateService {
         //        宋体，16，居中，标题的格式
         Font font2 = workbook.createFont();
         font2.setFontName(Constant.fontName);
-        font2.setFontHeightInPoints((short)16);
+        font2.setFontHeightInPoints((short) 16);
 
         CellStyle style2 = workbook.createCellStyle();
         style2.setAlignment(CellStyle.ALIGN_CENTER);
         style2.setFont(font2);
 
-        //create sheet
-        Sheet sheet = workbook.createSheet(sheetName);
-//        列宽自适应
-        sheet.autoSizeColumn(1, true);
 
 //        生成行
         Row firstRow = sheet.createRow(1);
@@ -383,257 +418,336 @@ public class AdminOperateServiceImpl implements AdminOperateService {
         Row forthRow = sheet.createRow(4);
 
 
+        //            设置右边框
+        styleRight.setBorderBottom(CellStyle.BORDER_NONE);
+        styleRight.setBorderLeft(CellStyle.BORDER_THICK);
+        styleRight.setBorderRight(CellStyle.BORDER_NONE);
+        styleRight.setBorderTop(CellStyle.BORDER_NONE);
+        firstRow.createCell(15).setCellStyle(styleRight);
+        secondRow.createCell(15).setCellStyle(styleRight);
+        thirdRow.createCell(15).setCellStyle(styleRight);
+        forthRow.createCell(15).setCellStyle(styleRight);
+
+        //            设置左边框
+        styleLeft.setBorderBottom(CellStyle.BORDER_NONE);
+        styleLeft.setBorderLeft(CellStyle.BORDER_NONE);
+        styleLeft.setBorderRight(CellStyle.BORDER_THICK);
+        styleLeft.setBorderTop(CellStyle.BORDER_NONE);
+        firstRow.createCell(0).setCellStyle(styleLeft);
+        secondRow.createCell(0).setCellStyle(styleLeft);
+        thirdRow.createCell(0).setCellStyle(styleLeft);
+        forthRow.createCell(0).setCellStyle(styleLeft);
+
 //        写标题
         sheet.addMergedRegion(new CellRangeAddress(1, 1, 1, 14));
         Cell cell1 = firstRow.createCell(1);
         cell1.setCellValue(excelTitles.get(0));
         cell1.setCellStyle(style2);
 
-//            写导入日期
-        sheet.addMergedRegion(new CellRangeAddress(2,2,1,2));
-        Cell time = secondRow.createCell(1);
-        time.setCellValue(excelTitles.get(1));
-        time.setCellStyle(style1);
+
+//            写导出日期
+        sheet.addMergedRegion(new CellRangeAddress(2, 2, 1, 2));
+        Cell cell2 = secondRow.createCell(1);
+        cell2.setCellValue(excelTitles.get(1));
+        cell2.setCellStyle(style1);
 
 //            写学号
         sheet.addMergedRegion(new CellRangeAddress(3, 4, 1, 1));
-        Cell studentID = mainRow.createCell(1);
-//            studentID.setCellValue(excelTitle.get(2));
-        studentID.setCellValue("学号");
-        studentID.setCellStyle(style);
-        scoreRow.createCell(1).setCellStyle(style);
-        rowIndex++;
+        Cell cell3 = thirdRow.createCell(1);
+        cell3.setCellValue(excelTitles.get(2));
+        cell3.setCellStyle(style);
+        forthRow.createCell(1).setCellStyle(style);
 
 //            姓名
         sheet.addMergedRegion(new CellRangeAddress(3, 4, 2, 2));
-        Cell name = mainRow.createCell(2);
-        name.setCellValue(excelTitle.get(3));
-        name.setCellStyle(style);
-        scoreRow.createCell(2).setCellStyle(style);
+        Cell cell4 = thirdRow.createCell(2);
+        cell4.setCellValue(excelTitles.get(3));
+        cell4.setCellStyle(style);
+        forthRow.createCell(2).setCellStyle(style);
 
 //            班级
-        sheet.addMergedRegion(new CellRangeAddress(3,4,3,3));
-        Cell clss = mainRow.createCell(3);
-        clss.setCellValue(excelTitle.get(4));
-        clss.setCellStyle(style);
-        scoreRow.createCell(3).setCellStyle(style);
+        sheet.addMergedRegion(new CellRangeAddress(3, 4, 3, 3));
+        Cell cell5 = thirdRow.createCell(3);
+        cell5.setCellValue(excelTitles.get(4));
+        cell5.setCellStyle(style);
+        forthRow.createCell(3).setCellStyle(style);
 
 //            指导老师
-        sheet.addMergedRegion(new CellRangeAddress(3,4,4,4));
-        Cell teacher = mainRow.createCell(4);
-        teacher.setCellValue(excelTitle.get(5));
-        teacher.setCellStyle(style);
-        scoreRow.createCell(4).setCellStyle(style);
+        sheet.addMergedRegion(new CellRangeAddress(3, 4, 4, 4));
+        Cell cell6 = thirdRow.createCell(4);
+        cell6.setCellValue(excelTitles.get(5));
+        cell6.setCellStyle(style);
+        forthRow.createCell(4).setCellStyle(style);
 
 //            老师评分
         sheet.addMergedRegion(new CellRangeAddress(3, 3, 5, 8));
-        Cell teacherScore = mainRow.createCell(5);
-        teacherScore.setCellValue(excelTitle.get(6));
-        teacherScore.setCellStyle(style);
-        mainRow.createCell(6).setCellStyle(style);
-        mainRow.createCell(7).setCellStyle(style);
-        mainRow.createCell(8).setCellStyle(style);
+        Cell cell7 = thirdRow.createCell(5);
+        cell7.setCellValue(excelTitles.get(6));
+        cell7.setCellStyle(style);
+        thirdRow.createCell(6).setCellStyle(style);
+        thirdRow.createCell(7).setCellStyle(style);
+        thirdRow.createCell(8).setCellStyle(style);
 
 //            写老师的周报评分
-        Cell teacherWeekReportScore = scoreRow.createCell(5);
-        teacherWeekReportScore.setCellValue(excelTitle.get(7));
-        teacherWeekReportScore.setCellStyle(style);
+        Cell cell8 = forthRow.createCell(5);
+        cell8.setCellValue(excelTitles.get(7));
+        cell8.setCellStyle(style);
 
 //            写老师的实习小结评分
-        Cell teacherInternSummuryScore = scoreRow.createCell(6);
-        teacherInternSummuryScore.setCellValue(excelTitle.get(8));
-        teacherInternSummuryScore.setCellStyle(style);
+        Cell cell9 = forthRow.createCell(6);
+        cell9.setCellValue(excelTitles.get(8));
+        cell9.setCellStyle(style);
 //            老师的实习报告评分
-        Cell teacherInternReportScore = scoreRow.createCell(7);
-        teacherInternReportScore.setCellValue(excelTitle.get(9));
-        teacherInternReportScore.setCellStyle(style);
+        Cell cell10 = forthRow.createCell(7);
+        cell10.setCellValue(excelTitles.get(9));
+        cell10.setCellStyle(style);
 //            附加分
-        Cell additionalScores = scoreRow.createCell(8);
-        additionalScores.setCellValue(excelTitle.get(10));
-        additionalScores.setCellStyle(style);
+        Cell cell11 = forthRow.createCell(8);
+        cell11.setCellValue(excelTitles.get(10));
+        cell11.setCellStyle(style);
 //            实习成绩A
         sheet.addMergedRegion(new CellRangeAddress(3, 4, 9, 9));
-        Cell scoreA = mainRow.createCell(9);
-        scoreA.setCellValue(excelTitle.get(11));
-        scoreA.setCellStyle(style);
-        scoreRow.createCell(9).setCellStyle(style);
+        Cell cell12 = thirdRow.createCell(9);
+        cell12.setCellValue(excelTitles.get(11));
+        cell12.setCellStyle(style);
+        forthRow.createCell(9).setCellStyle(style);
 
 //            企业评分
         sheet.addMergedRegion(new CellRangeAddress(3, 3, 10, 11));
-        Cell companyScore = mainRow.createCell(10);
-        companyScore.setCellValue(excelTitle.get(12));
-        companyScore.setCellStyle(style);
-        mainRow.createCell(11).setCellStyle(style);
+        Cell cell13 = thirdRow.createCell(10);
+        cell13.setCellValue(excelTitles.get(12));
+        cell13.setCellStyle(style);
+        thirdRow.createCell(11).setCellStyle(style);
 
 //            企业周报评分
-        Cell companyWeekRoportScore = scoreRow.createCell(10);
-        companyWeekRoportScore.setCellValue(excelTitle.get(13));
-        companyWeekRoportScore.setCellStyle(style);
+        Cell cell14 = forthRow.createCell(10);
+        cell14.setCellValue(excelTitles.get(13));
+        cell14.setCellStyle(style);
 //            企业考勤评分
-        Cell companyAttendanceScore = scoreRow.createCell(11);
-        companyAttendanceScore.setCellValue(excelTitle.get(14));
-        companyAttendanceScore.setCellStyle(style);
+        Cell cell15 = forthRow.createCell(11);
+        cell15.setCellValue(excelTitles.get(14));
+        cell15.setCellStyle(style);
 //            实习成绩B
         sheet.addMergedRegion(new CellRangeAddress(3, 4, 12, 12));
-        Cell scoreB = mainRow.createCell(12);
-        scoreB.setCellValue(excelTitle.get(15));
-        scoreB.setCellStyle(style);
-        scoreRow.createCell(12).setCellStyle(style);
+        Cell cell16 = thirdRow.createCell(12);
+        cell16.setCellValue(excelTitles.get(15));
+        cell16.setCellStyle(style);
+        forthRow.createCell(12).setCellStyle(style);
 
 //            最终实习成绩
         sheet.addMergedRegion(new CellRangeAddress(3, 4, 13, 14));
-        Cell finalScore = mainRow.createCell(13);
-        finalScore.setCellValue(excelTitle.get(16));
-        finalScore.setCellStyle(style);
-        mainRow.createCell(14).setCellStyle(style);
-        scoreRow.createCell(13).setCellStyle(style);
-        scoreRow.createCell(14).setCellStyle(style);
+        Cell cell17 = thirdRow.createCell(13);
+        cell17.setCellValue(excelTitles.get(16));
+        cell17.setCellStyle(style);
+        thirdRow.createCell(14).setCellStyle(style);
+        forthRow.createCell(13).setCellStyle(style);
+        forthRow.createCell(14).setCellStyle(style);
+
+    }
+
+
+    public void writeData(Workbook workbook, Sheet sheet, List<FinalExcelView> records) {
+        int rowIndex = 5;
+        CellStyle styleTop = workbook.createCellStyle();
+        CellStyle styleBottom = workbook.createCellStyle();
+        CellStyle styleLeft = workbook.createCellStyle();
+        CellStyle styleRight = workbook.createCellStyle();
+
+        //        宋体，11，居中,实线边框 ,数据的格式
+        Font font1 = workbook.createFont();
+        font1.setFontName(Constant.fontName);
+        font1.setFontHeightInPoints((short) 11);
+
+        CellStyle style1 = workbook.createCellStyle();
+        style1.setAlignment(CellStyle.ALIGN_CENTER);
+        style1.setFont(font1);
+        style1.setBorderBottom(CellStyle.BORDER_THIN);
+        style1.setBorderLeft(CellStyle.BORDER_THIN);
+        style1.setBorderRight(CellStyle.BORDER_THIN);
+        style1.setBorderTop(CellStyle.BORDER_THIN);
+
+
+//        宋体，11，靠右,实线边框 ,分数的格式
+        Font font2 = workbook.createFont();
+        font2.setFontName(Constant.fontName);
+        font2.setFontHeightInPoints((short) 11);
+
+        CellStyle style2 = workbook.createCellStyle();
+        style2.setAlignment(CellStyle.ALIGN_RIGHT);
+        style2.setFont(font2);
+        style2.setBorderBottom(CellStyle.BORDER_THIN);
+        style2.setBorderLeft(CellStyle.BORDER_THIN);
+        style2.setBorderRight(CellStyle.BORDER_THIN);
+        style2.setBorderTop(CellStyle.BORDER_THIN);
+
+        DataFormat df = workbook.createDataFormat();
+
+        for (FinalExcelView record :
+                records) {
+            Row row = sheet.createRow(rowIndex);
+
+            //create sheet coluum(单元格)
+            Cell cell1 = row.createCell(1);
+            cell1.setCellValue(record.getUserName());
+            cell1.setCellStyle(style1);
+//            设置左边框
+            styleLeft.setBorderBottom(CellStyle.BORDER_NONE);
+            styleLeft.setBorderLeft(CellStyle.BORDER_NONE);
+            styleLeft.setBorderRight(CellStyle.BORDER_THICK);
+            styleLeft.setBorderTop(CellStyle.BORDER_NONE);
+            row.createCell(0).setCellStyle(styleLeft);
+
+            Cell cell2 = row.createCell(2);
+            cell2.setCellValue(record.getNickName());
+            cell2.setCellStyle(style1);
+
+            Cell cell3 = row.createCell(3);
+            cell3.setCellValue(record.getClss());
+            cell3.setCellStyle(style1);
+
+            Cell cell4 = row.createCell(4);
+            cell4.setCellValue(record.getTeacherName());
+            cell4.setCellStyle(style1);
+//                分数部分
+            Cell cell5 = row.createCell(5);
+//            style2.setDataFormat(df.getFormat("#,#0"));//数据格式只显示整数
+            cell5.setCellStyle(style2);
+            cell5.setCellValue(record.gettWeekReport());
+
+            Cell cell6 = row.createCell(6);
+            cell6.setCellStyle(style2);
+            cell6.setCellValue(record.gettSummary());
+
+            Cell cell7 = row.createCell(7);
+            cell7.setCellStyle(style2);
+            cell7.setCellValue(record.gettFinalReport());
+
+            Cell cell8 = row.createCell(8);
+            cell8.setCellStyle(style2);
+            cell8.setCellValue(record.getAdditionalScore());
+
+            Cell cell9 = row.createCell(9);
+            cell9.setCellStyle(style2);
+            cell9.setCellValue(Double.parseDouble(record.getScoreA().toString()));
+
+            Cell cell10 = row.createCell(10);
+            cell10.setCellStyle(style2);
+            cell10.setCellValue(record.getcWeekReport());
+
+            Cell cell11 = row.createCell(11);
+            cell11.setCellStyle(style2);
+            cell11.setCellValue(record.getcAttendance());
+
+            Cell cell12 = row.createCell(12);
+            cell12.setCellStyle(style2);
+            cell12.setCellValue(Double.parseDouble(record.getScoreB().toString()));
+
+            sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 13, 14));
+            Cell cell13 = row.createCell(13);
+            Cell cell14 = row.createCell(14);
+            style2.setAlignment(CellStyle.ALIGN_RIGHT);
+            style2.setDataFormat(df.getFormat("#,##0.0"));//数据格式只显示小数后一位
+            cell13.setCellStyle(style2);
+            cell14.setCellStyle(style2);
+            cell13.setCellValue(Double.parseDouble(record.getFinalScore().toString()));
+//            设置右边框
+            styleRight.setBorderBottom(CellStyle.BORDER_NONE);
+            styleRight.setBorderLeft(CellStyle.BORDER_THICK);
+            styleRight.setBorderRight(CellStyle.BORDER_NONE);
+            styleRight.setBorderTop(CellStyle.BORDER_NONE);
+            row.createCell(15).setCellStyle(styleRight);
+
+            rowIndex++;
+        }
+
+//        设置最外层边框
+
+//        上边框
+        Row rowZero = sheet.createRow(0);
+        for (int i = 1; i <= 14 ; i++) {
+            styleTop.setBorderBottom(CellStyle.BORDER_THICK);
+            styleTop.setBorderLeft(CellStyle.BORDER_NONE);
+            styleTop.setBorderRight(CellStyle.BORDER_NONE);
+            styleTop.setBorderTop(CellStyle.BORDER_NONE);
+
+            Cell cellTemp = rowZero.createCell(i);
+            cellTemp.setCellStyle(styleTop);
+        }
+
+
+//        下边框
+        Row rowFinal = sheet.createRow(rowIndex);
+        for (int i = 1; i <= 14 ; i++) {
+            styleBottom.setBorderBottom(CellStyle.BORDER_NONE);
+            styleBottom.setBorderLeft(CellStyle.BORDER_NONE);
+            styleBottom.setBorderRight(CellStyle.BORDER_NONE);
+            styleBottom.setBorderTop(CellStyle.BORDER_THICK);
+
+            Cell cellTemp = rowFinal.createCell(i);
+            cellTemp.setCellStyle(styleBottom);
+        }
 
 
     }
 
     @Override
-    public void writeToExcel(String grade, String sheetName){
+    public void writeToExcel(String sheetName, List<Integer> studentIdList, HttpServletResponse response) {
 
-        String fileName = FileUtil.getFileName(grade);
+
+        String fileName = FileUtil.getFileName();
         List<String> excelTitles = getExcelTitles(fileName);
-        List<FinalExcelView> records = getRecords(grade);
+        List<FinalExcelView> records = getRecords(studentIdList);
 
         // 判断目录是否存在,不存在则创建
         File file = new File(Constant.UPLOAD_DIR);
-        if(!file.exists()) {
+        if (!file.exists()) {
             file.mkdir();
         }
 
-        System.out.println("开始写入文件>>>>>>>>>>>>");
         Workbook workbook = null;
 
         if (fileName.toLowerCase().endsWith("xls")) {//2003
             workbook = new HSSFWorkbook();
-        }else if(fileName.toLowerCase().endsWith("xlsx")){//2007
+        } else if (fileName.toLowerCase().endsWith("xlsx")) {//2007
             workbook = new XSSFWorkbook();
-        }else{
+        } else {
 //          logger.debug("invalid file name,should be xls or xlsx");
         }
 
+//        create sheet
+        Sheet sheet = workbook.createSheet(sheetName);
+//        列宽自适应
+        sheet.autoSizeColumn(1, true);
+//        sheet.setColumnWidth(m, “列名”.getBytes().length*2*256);
+//        设置表头
+        setTitles(workbook, sheet, excelTitles);
+//        写数据
+        writeData(workbook, sheet, records);
 
-
-//        宋体，11，居中,实线边框 ,数据的格式
-        Font font3 = workbook.createFont();
-        font3.setFontName(Constant.fontName);
-        font3.setFontHeightInPoints((short)11);
-
-        CellStyle style3 = workbook.createCellStyle();
-        style3.setAlignment(CellStyle.ALIGN_CENTER);
-        style3.setFont(font3);
-        style3.setBorderBottom(CellStyle.BORDER_THIN);
-        style3.setBorderLeft(CellStyle.BORDER_THIN);
-        style3.setBorderRight(CellStyle.BORDER_THIN);
-        style3.setBorderTop(CellStyle.BORDER_THIN);
-
-//        宋体，11，靠右,实线边框 ,分数的格式
-        Font font4 = workbook.createFont();
-        font4.setFontName(Constant.fontName);
-        font4.setFontHeightInPoints((short)11);
-
-        CellStyle style4 = workbook.createCellStyle();
-        style4.setAlignment(CellStyle.ALIGN_RIGHT);
-        style4.setFont(font4);
-        style4.setBorderBottom(CellStyle.BORDER_THIN);
-        style4.setBorderLeft(CellStyle.BORDER_THIN);
-        style4.setBorderRight(CellStyle.BORDER_THIN);
-        style4.setBorderTop(CellStyle.BORDER_THIN);
-
-//        int rowIndex = 1;//标识位，用于标识sheet的行号
-
-        //遍历数据集，将其写入excel中
-        try{
-
-
-/*            for (int i = 0; i < excelTitle.length; i++) {
-
-                //创建表头单元格,填值
-                titleRow.createCell(i).setCellValue(excelTitle[i]);
-            }
-            System.out.println("表头写入完成>>>>>>>>");
-            rowIndex++;
-
-            //循环写入主表数据
-            for (Iterator<User> userIterator = userList.iterator(); userIterator.hasNext();) {
-
-                User user = userIterator.next();
-                //create sheet row
-                Row row = sheet.createRow(rowIndex);
-                //create sheet coluum(单元格)
-                Cell cell0 = row.createCell(0);
-                cell0.setCellValue(employee.getName());
-                Cell cell1 = row.createCell(1);
-                cell1.setCellValue(employee.getGender());
-                Cell cell2 = row.createCell(2);
-                cell2.setCellValue(employee.getAge());
-                Cell cell3 = row.createCell(3);
-                cell3.setCellValue(employee.getDepartment());
-                Cell cell4 = row.createCell(4);
-                cell4.setCellValue(employee.getSalary());
-                Cell cell5 = row.createCell(5);
-                cell5.setCellValue(employee.getDate());
-                rowIndex++;
-            }*/
-            System.out.println("主表数据写入完成>>>>>>>>");
-            FileOutputStream fos = new FileOutputStream(filePath);
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(Constant.UPLOAD_DIR + fileName);
             workbook.write(fos);
             fos.close();
-            System.out.println(filePath + "写入文件成功>>>>>>>>>>>");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
 
-/*    @Override
-    public void writeInternshipScoreToExcel(String filePath,List<String> excelTitle, List<User> userList, String sheetName){
-        //新建excel报表
-        HSSFWorkbook excel = new HSSFWorkbook();
-        //添加一个sheet，名字叫"我的POI之旅"
-        HSSFSheet hssfSheet = excel.createSheet("我的POI之旅");
+        try {
+            //定义excle名称 ISO-8859-1 防止名称乱码
+            String msg = new String(
+                    (fileName).getBytes(),"iso-8859-1");
+            response.setContentType("application/vnd.ms-excel");
+            response.addHeader("Content-Disposition", "attachment;filename="
+                    + msg);
+            workbook.write(response.getOutputStream());
 
-        //单元格范围 参数（int firstRow, int lastRow, int firstCol, int lastCol)
-        CellRangeAddress cellRangeAddress =new CellRangeAddress(3, 3, 0, 20);
-
-        //在sheet里增加合并单元格
-        hssfSheet.addMergedRegion(cellRangeAddress);
-        //生成第一行
-        Row row = hssfSheet.createRow(3);
-        Cell cell = null;
-        HSSFCellStyle  cellStyle = null;
-        //为每个单元格设置边框，问题就解决了
-        for(int i=0;i<=20;i++){
-            cell = row.createCell(i);
-            if(i == 0){
-                cell.setCellValue("合并单元格");
-            }
-            cellStyle = excel.createCellStyle();
-            cellStyle.setAlignment(CellStyle.ALIGN_CENTER);
-            //下边框
-            cellStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
-            //左边框
-            cellStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);
-            //上边框
-            cellStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
-            //右边框
-            cellStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
-            cell.setCellStyle(cellStyle);
-        }
-        FileOutputStream fout = null;
-        try{
-            fout = new FileOutputStream("D:/students.xls");
-            excel.write(fout);
-            fout.close();
-        }catch (Exception e){
+        }catch (IOException e){
             e.printStackTrace();
         }
-    }*/
 
+    }
 
 }
