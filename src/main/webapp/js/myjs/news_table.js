@@ -1,6 +1,6 @@
 $(document).ready(function(){
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showDynamicNewsList',
        async: true,
        contentType: "application/json",

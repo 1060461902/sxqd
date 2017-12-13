@@ -1,7 +1,7 @@
 $(document).ready(function(){
   //---------------获得专业名称---------------------------
     $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/teacherMajor',
        async: true,
        contentType: "application/json",
@@ -15,7 +15,7 @@ $(document).ready(function(){
     var info = new Object();
     info.major = $(this).text();
       $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showTeachers',
        data: JSON.stringify(info),
        async: true,
@@ -228,7 +228,7 @@ $('button#drls').click(function(){
     info.excelFile = new FormData($('#uploadForm')[0]);
     info.roleId = 3;
     $.ajax({
-      type: 'post',
+      type: 'get',
       url: '/fieldManagement/admin/uploadStudentExcel',
       cache: false,
       data: info,
@@ -270,7 +270,7 @@ $('button#addteacher').click(function(){
   else//ajax
   {
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/teacherRegister',
        async: true,
        contentType: "application/json",
@@ -293,7 +293,7 @@ $('.reset').click(function(){
    info.id = $(this).attr("id");//alert(info.id);
    info.roleid = "3";
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/resetPwd',
        async: true,
        contentType: "application/json",
@@ -361,7 +361,7 @@ $('.forbidden').click(function(){
       { 
         info.forbidden =0;
       $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/forbiddenTeacher',
        async: true,
        contentType: "application/json",

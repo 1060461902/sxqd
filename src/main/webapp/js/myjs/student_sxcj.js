@@ -14,7 +14,7 @@ $(document).ready(function(){
   //   $('#additionalPoints').text(data.additionalPoints);
   // });
      $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showScore',
        async: true,
        contentType: "application/json",
