@@ -17,15 +17,13 @@
   </head>
   <body  class="light-gray-bg hidden-scrolling">  
       <!-- Main content --> 
-          <div  class="templatemo-content-widget text-center white-bg fullfill" >
-            <h5 class="iframe-title"><a href="approval-2.html"> 审批</a> > 职位详情</h5><br><hr>
+          <div  class="templatemo-content-widget white-bg fullfill" >
+            <h5 class="iframe-title"><a href="approval-2.html"> 审批</a> > 职位详情</h5><hr>
             <div class="templatemo-flex-row"> 
-              <div class="templatemo-content-widget white-bg text-center  wideone">
-                <div class="float-left" >
+              <div class="templatemo-content-widget white-bg  wideone">
                   <h3><i class="fa fa-envelope-square fa-fw  fa-2x"></i>招聘信息</h3>
-                </div><br>
                 <hr>
-                <table width="75%" class="approval-table hightr">
+                <table width="75%" class="approval-table hightr text-center">
                   <tr>
                     <th><h3>招聘岗位</h3></th>   
                     <td><span id="post"></span></td>
@@ -44,13 +42,11 @@
                   </tr>        
                 </table>
               </div>
-              <div class="templatemo-content-widget white-bg text-center narrowone">
-                <div class="float-left">
+              <div class="templatemo-content-widget white-bg narrowone">
                   <h3><i class="fa fa-file-text-o fa-fw  fa-2x"></i>公司概况</h3>
-                </div><br>
                 <hr>
                 <img src="#" id="company_logo"></img> 
-                <table width="99%" class="approval-table">
+                <table width="99%" class="approval-table text-center">
                   <tr>
                     <th><h3>公司名称</h3></th>   
                     <td><span  id="companyName"></span></td>
@@ -72,16 +68,16 @@
             </div>
             <div class="templatemo-flex-row"> 
               <div class="templatemo-content-widget white-bg col-1" >
-                <div class="float-left">
-                  <h3><i class="fa fa-suitcase fa-fw  fa-2x"></i>工作描述</h3>
-                </div><br><hr>
-                 <div class="">
+                  <h3><i class="fa fa-suitcase fa-fw  fa-2x"></i>工作描述</h3><hr>
+                 <div class="postInfo">
                    <p id="postInfo"></p>
                  </div>                 
               </div>
             </div>
-            <button type="button" class="btn btn-info approval-button" id="pass-button" value="1">&nbsp;通过&nbsp;</button>
-            <button type="button" class="btn btn-danger approval-button" data-toggle="modal" data-target="#passcontent">不通过</button>           
+            <div class='text-center'>
+              <button type="button" class="btn btn-info approval-button" id="pass-button" value=1>&nbsp;通过&nbsp;</button>
+              <button type="button" class="btn btn-danger approval-button" data-toggle="modal" data-target="#passcontent">不通过</button>               
+            </div>    
           </div>
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="passcontent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -1,42 +1,14 @@
-$(document).ready(function(){
-  //筛选的一系列操作
-  var info = new Object();
-  info.grade = '年级';
-  info.iteacher = '有无指导老师';
-  info.status = '实习状态';
-  info.clss = '班级';
-  info.company = null;
-      $.ajax({
-       type: 'get',
-       url: '/fieldManagement/admin/showRecruitmentScreening',
-       async: true,
-       data: JSON.stringify(info),
-       contentType: "application/json",
-       dateType: "json",
-       success: function(data){
-       var namelength = data.companyName.length;
-       for ( var i = 0; i < namelength; i++){
-        $('select#company').append('<option id='+data.company[i].id+'>'+data.company[i].company+'</option>');
-       }
-       var namelength = data.clss.length;
-       for ( var i = 0; i < namelength; i++){
-        $('select#class').append('<option>'+data.clss[i]+'</option>');
-       }
-       var namelength = data.grade.length;
-       for ( var i = 0; i < namelength; i++){
-        $('select#grade').append('<option>'+data.grade[i]+'</option>');
-       }       
-       //筛选（需要表格重新导入）
-  $("option").click(function(){
+function optionclicknj(){
+         //筛选（需要表格重新导入）
     var info = new Object();
     info.grade = $('select#grade').val();
     info.clss = $('select#class').val();    
-    info.company = $('select#company').attr('id');
+    info.companyId = $('select#company').val();
     info.status = $('select.status').val();
-    info.teacher = $('select#teacher').val();
+    info.iteacher = $('select#teacher').val();
       $.ajax({
-       type: 'get',
-       url: '/fieldManagement/admin/showInternships',
+       type: 'post',
+       url: '/fieldManagement/admin/showInternship',
        data: JSON.stringify(info),
        async: true,
        contentType: "application/json",
@@ -47,7 +19,162 @@ $(document).ready(function(){
       writein(data);
       trclick();//-------------点击---------
       checked();//--------------部分选择操作checkbox----------------------
-      dccj();
+      //gd();
+            var docrTable = $('#table').dataTable({
+                "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
+                "bFilter" : true, //是否启动过滤、搜索功能
+                "info": false,
+                 "pageLength": 7,
+                "lengthChange" : false,
+                  "oLanguage": { //国际化配置
+                    "sProcessing" : "正在获取数据，请稍后...",
+                    "sLengthMenu" : "显示 _MENU_ 条",
+                    "sZeroRecords" : "没有您要搜索的内容",
+                    "sInfo" : "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+                    "sInfoEmpty" : "记录数为0",
+                    "sInfoFiltered" : "(全部记录数 _MAX_ 条)",
+                    "sInfoPostFix" : "",
+                    "sSearch" : "搜索",
+                    "sUrl" : "",
+                    "oPaginate": {
+                        "sFirst" : "第一页",
+                        "sPrevious" : "上一页",
+                        "sNext" : "下一页",
+                        "sLast" : "最后一页"
+                    }
+                },
+              });
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });//ajax
+     $('select#class').empty();
+     $('select#company').empty();
+  //重新获得筛选条件
+    $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/showRecruitmentScreening',
+       async: true,
+       data: JSON.stringify(info),
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+        $('select#company').append('<option value="0">公司</option>');
+         $('select#class').append('<option>班级</option>');
+       var namelength = data.company.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#company').append('<option id='+data.company[i].companyId+'>'+data.company[i].companyName+'</option>');
+       }
+       var namelength = data.clss.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#class').append('<option>'+data.clss[i]+'</option>');
+       }
+       },
+        error: function(){
+        alert('服务端异常');
+        }
+        });//ajax  
+}
+function optionclickbj(){
+         //筛选（需要表格重新导入）
+    var info = new Object();
+    info.grade = $('select#grade').val();
+    info.clss = $('select#class').val();    
+    info.companyId = $('select#company').val();
+    info.status = $('select.status').val();
+    info.iteacher = $('select#teacher').val();
+      $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/showInternship',
+       data: JSON.stringify(info),
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+     $('#table').dataTable().fnClearTable(); //清除表格内
+     $('#table').dataTable().fnDestroy();
+      writein(data);
+      trclick();//-------------点击---------
+      checked();//--------------部分选择操作checkbox----------------------
+      //gd();
+            var docrTable = $('#table').dataTable({
+                "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
+                "bFilter" : true, //是否启动过滤、搜索功能
+                "info": false,
+                 "pageLength": 7,
+                "lengthChange" : false,
+                  "oLanguage": { //国际化配置
+                    "sProcessing" : "正在获取数据，请稍后...",
+                    "sLengthMenu" : "显示 _MENU_ 条",
+                    "sZeroRecords" : "没有您要搜索的内容",
+                    "sInfo" : "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+                    "sInfoEmpty" : "记录数为0",
+                    "sInfoFiltered" : "(全部记录数 _MAX_ 条)",
+                    "sInfoPostFix" : "",
+                    "sSearch" : "搜索",
+                    "sUrl" : "",
+                    "oPaginate": {
+                        "sFirst" : "第一页",
+                        "sPrevious" : "上一页",
+                        "sNext" : "下一页",
+                        "sLast" : "最后一页"
+                    }
+                },
+              });
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });//ajax
+     $('select#grade').empty();
+     $('select#company').empty();
+  //重新获得筛选条件
+    $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/showRecruitmentScreening',
+       async: true,
+       data: JSON.stringify(info),
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+        $('select#company').append('<option value="0">公司</option>');
+         $('select#grade').append('<option>年级</option>');
+       var namelength = data.company.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#company').append('<option id='+data.company[i].companyId+'>'+data.company[i].companyName+'</option>');
+       }
+       var namelength = data.grade.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#grade').append('<option>'+data.grade[i]+'</option>');
+       }
+       },
+        error: function(){
+        alert('服务端异常');
+        }
+        });//ajax  
+}
+function optionclickgs(){
+         //筛选（需要表格重新导入）
+    var info = new Object();
+    info.grade = $('select#grade').val();
+    info.clss = $('select#class').val();    
+    info.companyId = $('select#company').val();
+    info.status = $('select.status').val();
+    info.iteacher = $('select#teacher').val();
+      $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/showInternship',
+       data: JSON.stringify(info),
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+     $('#table').dataTable().fnClearTable(); //清除表格内
+     $('#table').dataTable().fnDestroy();
+      writein(data);
+      trclick();//-------------点击---------
+      checked();//--------------部分选择操作checkbox----------------------
       //gd();
             var docrTable = $('#table').dataTable({
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
@@ -80,146 +207,59 @@ $(document).ready(function(){
     });//ajax
      $('select#class').empty();
      $('select#grade').empty();
-     $('select#company').empty();
   //重新获得筛选条件
     $.ajax({
-       type: 'get',
+       type: 'post',
        url: '/fieldManagement/admin/showRecruitmentScreening',
        async: true,
        data: JSON.stringify(info),
        contentType: "application/json",
        dateType: "json",
        success: function(data){
-       var namelength = data.companyName.length;
+        $('select#grade').append('<option>年级</option>');
+         $('select#class').append('<option>班级</option>');
+       var namelength = data.grade.length;
        for ( var i = 0; i < namelength; i++){
-        $('select#company').append('<option id='+data.company[i].id+'>'+data.company[i].company+'</option>');
+        $('select#grade').append('<option>'+data.grade[i]+'</option>');
        }
        var namelength = data.clss.length;
        for ( var i = 0; i < namelength; i++){
         $('select#class').append('<option>'+data.clss[i]+'</option>');
-       }
-       var namelength = data.grade.length;
-       for ( var i = 0; i < namelength; i++){
-        $('select#grade').append('<option>'+data.grade[i]+'</option>');
        }
        },
         error: function(){
         alert('服务端异常');
         }
         });//ajax  
-  });
-     },
-       error: function(){
-        alert('服务端异常');
-        }
-    });//ajax
-  //--------获取老师的列表
-  var info = new Object();
-  info.major = '专业';
-     $.ajax({
-       type: 'get',
-       url: '/fieldManagement/admin/showTeachers',
-       async: true,
-       contentType: "application/json",
-       data: JSON.stringify(info),
-       dateType: "json",
-       success: function(data){
-    var obj = data.teacherList;
-    var length = obj.length;
-    for (var i = 0; i < length; i++) {
-      $('ul').append('<li>'+obj[i].nickName+'</li>');
-      $('li:eq('+i+')').val(obj[i].id);
-    };
-    $('li').click(function(){
-      $('span#checkone').html($(this).text()+'<span style="float:right" class="aaa"><i class="fa fa-times-circle fa-fw"></i></span>');
-      $('ul').css('display','none');
-      $('span#description').text('已分配');
-      window.teacherId = $(this).val();
-    $('span>span>i').click(function(){
-      $('span#description').text('未分配');
-      $('span#checkone').empty();
-      $('ul').css('display','block');
-    });
-    });
-     },
-       error: function(){
-        alert('服务端异常');
-        }
-    });//ajax
-  // $.getJSON("js/json/teacher_table.json", function(data) {
-  //   var obj = data.teacherList;
-  //   var length = obj.length;
-  //   for (var i = 0; i < length; i++) {
-  //     $('ul').append('<li>'+obj[i].userName+'</li>');
-  //     $('li:eq('+i+')').val(obj[i].id);
-  //   };
-  //   $('li').click(function(){
-  //     $('span#checkone').html($(this).text()+'<span style="float:right" class="aaa"><i class="fa fa-times-circle fa-fw"></i></span>');
-  //     $('ul').css('display','none');
-  //     $('span#description').text('已分配');
-  //     window.teacherId = $(this).val();
-  //   $('span>span>i').click(function(){
-  //     $('span#description').text('未分配');
-  //     $('span#checkone').empty();
-  //     $('ul').css('display','block');
-  //   });
-  //   });
-  // });
-  //提交学生分配
-  $('button#distribute').click(function(){
-     var id = new Array();
-     var a = 0;
-    $('td>input:checkbox').each(function() {
-        if ($(this).attr('checked') =='checked') {      
-          id[a]=$(this).parent('td').parent('tr').val();
-          a++;
-        }
-    });
+}
+function optionclick(){
+         //筛选（需要表格重新导入）
     var info = new Object();
-    info.ids = id;
-    info.teacherId = teacherId;
-    $.ajax({
-       type: 'get',
-       url: '/fieldManagement/admin/assignedStudent',
-       async: true,
-       contentType: "application/json",
-       data: JSON.stringify(info),
-       dateType: "json",
-       success: function(data){
-       alert('提交成功');
-       location.reload();
-     },
-       error: function(){
-        alert('服务端异常');
-        }
-    });
-    //ajax
-  }); 
-  //----------第一次写入表格-------------------
-  var info = new Object();
-  info.grade = '年级';
-  info.iteacher = '有无指导老师';
-  info.status = '实习状态';
-  info.clss = '班级';
-  info.company = null;
-     $.ajax({
-       type: 'get',
+    info.grade = $('select#grade').val();
+    info.clss = $('select#class').val();    
+    info.companyId = $('select#company').val();
+    info.status = $('select.status').val();
+    info.iteacher = $('select#teacher').val();
+      $.ajax({
+       type: 'post',
        url: '/fieldManagement/admin/showInternship',
+       data: JSON.stringify(info),
        async: true,
        contentType: "application/json",
-       data: JSON.stringify(info),
        dateType: "json",
        success: function(data){
+     $('#table').dataTable().fnClearTable(); //清除表格内
+     $('#table').dataTable().fnDestroy();
       writein(data);
       trclick();//-------------点击---------
       checked();//--------------部分选择操作checkbox----------------------
-      dccj();
-      var docrTable = $('#table').dataTable({
+      //gd();
+            var docrTable = $('#table').dataTable({
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
                 "bFilter" : true, //是否启动过滤、搜索功能
                 "info": false,
-                 "pageLength": 8,
-                "lengthChange" : false, 
+                 "pageLength": 7,
+                "lengthChange" : false,
                   "oLanguage": { //国际化配置
                     "sProcessing" : "正在获取数据，请稍后...",
                     "sLengthMenu" : "显示 _MENU_ 条",
@@ -242,10 +282,8 @@ $(document).ready(function(){
        error: function(){
         alert('服务端异常');
         }
-    });
-//     $.getJSON("js/json/internship_table.json", function(data) {
-
-// });//getjson
+    });//ajax
+}
 //------------------->
 function writein(data){
        var tbody = document.getElementsByTagName ('tbody')[0];
@@ -260,11 +298,11 @@ function writein(data){
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = '<input type="checkbox">';
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<a href="student_table_details.html?id="'+obj.studentId+'">'+obj.nickName+'</a>';
+            td.innerHTML = '<a href="student_table_details.html?id='+obj.studentId+'">'+obj.nickName+'</a>';
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = obj.clss;
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<a href="company_table_details.html?id="'+obj.companyId+'>'+obj.company+'</a>';
+            td.innerHTML = '<a href="company_table_details.html?id='+obj.companyId+'">'+obj.company+'</a>';
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = obj.post;
             var td = tr.insertCell (tr.cells.length);
@@ -272,7 +310,9 @@ function writein(data){
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = obj.stages;
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<a href="teacher_table_details.html?id="'+obj.teacherId+'>'+obj.teacherName+'</a>';
+            td.innerHTML = '<a href="teacher_table_details.html?id='+obj.teacherId+'">'+obj.teacherName+'</a>';
+          var td = tr.insertCell (tr.cells.length);
+          td.innerHTML = obj.score;
       } //for
 }
 function trclick () {
@@ -284,39 +324,7 @@ $('tbody>tr>td').click(function(){
  }
 });
 }
-//--------------------------全选checkbox--------------------------
-var m=0;
-$('th>input:checkbox').click(function() {
-      m+=1;
-      if(m%2==1){
-        $('input:checkbox').each(function() {
-        $(this).attr('checked', true);
-       });
-        if($('select.status').val()=='待实习'){
-            $('button#gg').css("display","none");
-           // $('button#gd').css("display","none");
-            $('button#fp').css("display","block");
-          }
-          else if($('select.status').val()=='实习中'){
-            $('button#fp').css("display","none");
-            //$('button#gd').css("display","none");
-            $('button#gg').css("display","block");
-          }
-          else if($('select.status').val()=='已结业'){
-            $('button#fp').css("display","none");
-            $('button#gg').css("display","none");
-            //$('button#gd').css("display","block");
-          }
-      }
-      else if(m%2==0){
-        $('input:checkbox').each(function () {
-        $(this).attr('checked',false);
-        $('button#gg').css("display","none");
-       // $('button#gd').css("display","none");
-        $('button#fp').css("display","none");
-});
-      }
-});
+
 function checked(){
    $("td>input:checkbox").click(function(){
     var mm=0;
@@ -352,7 +360,115 @@ function checked(){
    });
 }
 function dccj(){
-  $('button#dccj').click(function(){
+  $('button.dccj').click(function(){
+    var id = new Array();
+    var a = 0;
+    $('td>input:checkbox').each(function() {
+        if ($(this).attr('checked') =='checked') {
+            id[a]=$(this).parent('td').parent('tr').val();
+            a++;
+        }
+    });
+    if(id.length==null||id.length==0){
+        alert('请选择学生');
+        return false;
+    }
+    else{
+        // var studentList=[];
+        // for(var n=0;n<id.length;n++){
+        //     studentList.push(id[n]);
+        // }
+        var info =new Object();
+        info.id= id;
+      $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/export2Excel',
+       data: JSON.stringify(info),
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+        var fileName = data.data.fileName;
+        location.href='/fieldManagement/excel/'+fileName+'';
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });//ajax
+
+    }
+  });
+}
+
+$(document).ready(function(){
+  //筛选的一系列操作
+  var info = new Object();
+  info.grade = '年级';
+  info.iteacher = '有无指导老师';
+  info.status = '实习状态';
+  info.clss = '班级';
+    info.companyId="0";
+//获得筛选信息
+      $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/showRecruitmentScreening',
+       async: true,
+       data: JSON.stringify(info),
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+       var namelength = data.company.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#company').append('<option value='+data.company[i].companyId+'>'+data.company[i].companyName+'</option>');
+       }
+       var namelength = data.clss.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#class').append('<option>'+data.clss[i]+'</option>');
+       }
+       var namelength = data.grade.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#grade').append('<option>'+data.grade[i]+'</option>');
+       }       
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });//ajax
+  //--------获取老师的列表
+  var info = new Object();
+  info.major = '专业';
+     $.ajax({
+       type: 'get',
+       url: '/fieldManagement/admin/showTeachers',
+       async: true,
+       contentType: "application/json",
+       data: info,
+       dateType: "json",
+       success: function(data){
+    var obj = data.teacherList;
+    var length = obj.length;
+    for (var i = 0; i < length; i++) {
+      $('ul').append('<li>'+obj[i].nickName+'</li>');
+      $('li:eq('+i+')').val(obj[i].id);
+    };
+    $('li').click(function(){
+      $('span#checkone').html($(this).text()+'<span style="float:right" class="aaa"><i class="fa fa-times-circle fa-fw"></i></span>');
+      $('ul').css('display','none');
+      $('span#description').text('已分配');
+      window.teacherId = $(this).val();
+    $('span>span>i').click(function(){
+      $('span#description').text('未分配');
+      $('span#checkone').empty();
+      $('ul').css('display','block');
+    });
+    });
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });//ajax
+  //提交学生分配
+  $('button#distribute').click(function(){
      var id = new Array();
      var a = 0;
     $('td>input:checkbox').each(function() {
@@ -360,23 +476,112 @@ function dccj(){
           id[a]=$(this).parent('td').parent('tr').val();
           a++;
         }
-    });    
+    });
     var info = new Object();
-    info.studentIdList =id;
-     $.ajax({
-       type: 'get',
-       url: '/fieldManagement/admin/export2Exce',
+    info.ids = id;
+    info.teacherId = teacherId;
+    $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/assignedStudent',
        async: true,
        contentType: "application/json",
        data: JSON.stringify(info),
        dateType: "json",
        success: function(data){
-       alert("操作成功");
+       alert('提交成功');
+       location.reload();
      },
        error: function(){
         alert('服务端异常');
         }
-    });//ajax
+    });
+    //ajax
   });
-}
+  //----------第一次写入表格-------------------
+  var info = new Object();
+  info.grade = '年级';
+  info.iteacher = '有无指导老师';
+  info.status = '待实习';
+  info.clss = '班级';
+  info.companyId = "0";
+
+    $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/showInternship',
+       async: true,
+       contentType: "application/json",
+       data: JSON.stringify(info),
+       dateType: "json",
+       success: function(data){
+      writein(data);
+      trclick();//-------------点击---------
+      checked();//--------------部分选择操作checkbox----------------------
+      dccj();
+      //gd();
+      var docrTable = $('#table').dataTable({
+                "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
+                "bFilter" : true, //是否启动过滤、搜索功能
+                "info": false,
+                 "pageLength": 8,
+                "lengthChange" : false, 
+                  "oLanguage": { //国际化配置
+                    "sProcessing" : "正在获取数据，请稍后...",
+                    "sLengthMenu" : "显示 _MENU_ 条",
+                    "sZeroRecords" : "没有您要搜索的内容",
+                    "sInfo" : "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+                    "sInfoEmpty" : "记录数为0",
+                    "sInfoFiltered" : "(全部记录数 _MAX_ 条)",
+                    "sInfoPostFix" : "",
+                    "sSearch" : "搜索",
+                    "sUrl" : "",
+                    "oPaginate": {
+                        "sFirst" : "第一页",
+                        "sPrevious" : "上一页",
+                        "sNext" : "下一页",
+                        "sLast" : "最后一页"
+                    }
+                },
+              });
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
+//--------------------------全选checkbox--------------------------
+var m=0;
+$('th>input:checkbox').click(function() {
+      m+=1;
+      if(m%2==1){
+        $('input:checkbox').each(function() {
+        $(this).attr('checked', true);
+       });
+        if($('select.status').val()=='待实习'){
+            $('button#gg').css("display","none");
+           // $('button#gd').css("display","none");
+            $('button#fp').css("display","block");
+          }
+          else if($('select.status').val()=='实习中'){
+            $('button#fp').css("display","none");
+            //$('button#gd').css("display","none");
+            $('button#gg').css("display","block");
+          }
+          else if($('select.status').val()=='已结业'){
+            $('button#fp').css("display","none");
+            $('button#gg').css("display","none");
+            //$('button#gd').css("display","block");
+          }
+      }
+      else if(m%2==0){
+        $('input:checkbox').each(function () {
+        $(this).attr('checked',false);
+        $('button#gg').css("display","none");
+       // $('button#gd').css("display","none");
+        $('button#fp').css("display","none");
+});
+      }
+});
+//     $.getJSON("js/json/internship_table.json", function(data) {
+
+// });//getjson
+
 });//document

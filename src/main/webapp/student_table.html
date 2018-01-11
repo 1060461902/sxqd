@@ -20,30 +20,31 @@
   </head>
   <body class="light-gray-bg hidden-scrolling">
     <div  class="templatemo-content-widget white-bg fullfill" >
-      <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  学生列表</h5><br><hr><br>
+      <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  学生列表</h5><hr><br>
         <div>
           <form role="form" class="form-inline" >
             <div class="form-group">
-              <select class="form-control" id="grade">
+              <select class="form-control" id="grade" onchange="optionclick1()">
                 <option selected = "selected">年级</option>
               </select>
-              <select class="form-control" id="major">
+              <select class="form-control" id="major" onchange="optionclick2()">
                 <option selected = "selected">专业</option>
               </select>
-              <select class="form-control" id="class">
+              <select class="form-control" id="class" onchange="optionclick3()">
                 <option selected = "selected">班级</option>
               </select>
-              <select class="form-control">
-                <option selected = "selected" id="status">实习状态</option>
-                <option value="">未实习</option>
-                <option value="">待实习</option>
-                <option value="">实习中</option>
-                <option value="">已结业</option>
-                <option value="">申请中</option>
+              <select class="form-control" id="status"  onchange="optionclick1()">
+                <option selected = "selected" value="实习状态">实习状态</option>
+                <option value="未实习">未实习</option>
+                <option value="待实习">待实习</option>
+                <option value="实习中">实习中</option>
+                <option value="已结业">已结业</option>
+                <option value="申请中">申请中</option>
               </select>
               <a href="#" data-toggle="modal" data-target="#drxs"><button class="btn btn-primary">导入</button></a>    
               <a href="#" data-toggle="modal" data-target="#add"><button class="btn btn-primary">新增</button></a>
               <button type="button" class="btn btn-primary" id="gd">归档</button>
+              <button type="button" class="btn btn-primary" onclick="window.location.href='ftp://10.21.30.217:2121/'">查看归档学生</button>
             </div>
           </form>
         </div>
@@ -87,8 +88,8 @@
                 <h4 class="modal-title text-center" id="myModalLabel">导入学生</h4>
             </div>
             <div class="modal-body">
-              <form id="uploadForm" enctype="multipart/form-data"><!-- enctype必须加 -->
-                <input type="file" name="file">
+              <form  enctype="multipart/form-data"><!-- enctype必须加 -->
+                <input type="file" name="file" id="uploadForm">
               </form>
             </div>
             <div class="modal-footer">
@@ -105,34 +106,28 @@
                 <h4 class="modal-title" id="myModalLabel">基本信息</h4>
             </div>
             <div class="modal-body" >
-              <table width="80%" id="student_details">
-                <tr>
-                  <th>姓名</th>
-                  <td width="60%"><input  placeholder="请输入姓名" id="nickName"></td>
-                </tr>
-                <tr>
-                  <th>学号</th>
-                  <td><input  placeholder="请输入学号" id="userName"></td>
-                </tr>
-                <tr>
-                  <th>专业</th>
-                  <td>
-                    <select id="major">
-                      <option value="软件工程">软件工程</option>
-                      <option value="计算机与科学">计算机与科学</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <th>班级</th>
-                  <td>
-                    <select id="class">
-                      <option value="软件1501">软件1501</option>
-                      <option value="软件1502">软件1502</option>
-                    </select>
-                  </td>
-                </tr>
-              </table>
+                <table width="80%" id="student_details">
+                    <tr>
+                        <th>姓名</th>
+                        <td width="60%"><input  placeholder="请输入姓名" id="nickName"></td>
+                    </tr>
+                    <tr>
+                        <th>学号</th>
+                        <td><input  placeholder="请输入学号" id="userName"></td>
+                    </tr>
+                    <tr>
+                        <th>专业</th>
+                        <td><input  placeholder="请输入专业" id="major"></td>
+                    </tr>
+                    <tr>
+                        <th>年级</th>
+                        <td><input  placeholder="请输入年级" id="grade"></td>
+                    </tr>
+                    <tr>
+                        <th>班级</th>
+                        <td><input  placeholder="请输入班级" id="class"></td>
+                    </tr>
+                </table>
             </div>
             <div class="modal-footer text-center">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>

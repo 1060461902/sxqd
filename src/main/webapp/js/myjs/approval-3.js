@@ -18,11 +18,12 @@ $(document).ready(function(){
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = '<input type="checkbox">';
             var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<a href="approval-news.html?id="+'+obj.id+'>'+obj.title+'</a>';
+           td.innerHTML = '<a href="./approval-news.html?id='+$("tr:eq("+j+")").val()+'">'+obj.title+'</a>';
+
             var td = tr.insertCell (tr.cells.length);
             td.innerHTML = '<div class="pic-frame"><img src="'+obj.imageUrl+'" class="img-responsive"></img></div>';
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.startTime;
+            // var td = tr.insertCell (tr.cells.length);
+            // td.innerHTML = obj.startTime;
             var m=i+1;
               $('tr:eq('+m+') td:eq(2)').addClass('flex-center');
               // var td = tr.insertCell (tr.cells.length);
@@ -68,13 +69,13 @@ $('th>input:checkbox').click(function() {
     var a=0;
     $('td>input:checkbox').each(function() {
         if ($(this).attr('checked') =='checked') {
-          id[a]=$(this).parent('td').parent('tr').val();
+          id[a]=parseInt($(this).parent('td').parent('tr').val());
           a++;
         }
     });
     var info = new Object();
     info.id=id;
-    info.passFlag='1';
+    info.passFlag=1;
     info.meg = null;
     $.ajax({
        type: 'post',

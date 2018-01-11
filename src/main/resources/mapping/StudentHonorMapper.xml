@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="edu.zjgsu.ito.model.StudentHonor">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="student_id" jdbcType="INTEGER" property="studentId" />
-    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
     <result column="instruction" jdbcType="VARCHAR" property="instruction" />
     <result column="honor_name" jdbcType="VARCHAR" property="honorName" />
     <result column="delete_tag" jdbcType="BIT" property="deleteTag" />
@@ -109,20 +109,19 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.StudentHonor">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into student_honor (student_id, time, instruction, 
-      honor_name, delete_tag)
-    values (#{studentId,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{instruction,jdbcType=VARCHAR}, 
-      #{honorName,jdbcType=VARCHAR}, #{deleteTag,jdbcType=BIT})
+    insert into student_honor (id, student_id, time, 
+      instruction, honor_name, delete_tag
+      )
+    values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{time,jdbcType=VARCHAR}, 
+      #{instruction,jdbcType=VARCHAR}, #{honorName,jdbcType=VARCHAR}, #{deleteTag,jdbcType=BIT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.StudentHonor">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into student_honor
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="studentId != null">
         student_id,
       </if>
@@ -140,11 +139,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="studentId != null">
         #{studentId,jdbcType=INTEGER},
       </if>
       <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
+        #{time,jdbcType=VARCHAR},
       </if>
       <if test="instruction != null">
         #{instruction,jdbcType=VARCHAR},
@@ -173,7 +175,7 @@
         student_id = #{record.studentId,jdbcType=INTEGER},
       </if>
       <if test="record.time != null">
-        time = #{record.time,jdbcType=TIMESTAMP},
+        time = #{record.time,jdbcType=VARCHAR},
       </if>
       <if test="record.instruction != null">
         instruction = #{record.instruction,jdbcType=VARCHAR},
@@ -193,7 +195,7 @@
     update student_honor
     set id = #{record.id,jdbcType=INTEGER},
       student_id = #{record.studentId,jdbcType=INTEGER},
-      time = #{record.time,jdbcType=TIMESTAMP},
+      time = #{record.time,jdbcType=VARCHAR},
       instruction = #{record.instruction,jdbcType=VARCHAR},
       honor_name = #{record.honorName,jdbcType=VARCHAR},
       delete_tag = #{record.deleteTag,jdbcType=BIT}
@@ -208,7 +210,7 @@
         student_id = #{studentId,jdbcType=INTEGER},
       </if>
       <if test="time != null">
-        time = #{time,jdbcType=TIMESTAMP},
+        time = #{time,jdbcType=VARCHAR},
       </if>
       <if test="instruction != null">
         instruction = #{instruction,jdbcType=VARCHAR},
@@ -225,7 +227,7 @@
   <update id="updateByPrimaryKey" parameterType="edu.zjgsu.ito.model.StudentHonor">
     update student_honor
     set student_id = #{studentId,jdbcType=INTEGER},
-      time = #{time,jdbcType=TIMESTAMP},
+      time = #{time,jdbcType=VARCHAR},
       instruction = #{instruction,jdbcType=VARCHAR},
       honor_name = #{honorName,jdbcType=VARCHAR},
       delete_tag = #{deleteTag,jdbcType=BIT}

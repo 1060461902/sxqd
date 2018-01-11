@@ -1,6 +1,7 @@
 package edu.zjgsu.ito.controller.admin;
 
 import edu.zjgsu.ito.model.DynamicApprove;
+import edu.zjgsu.ito.model.DynamicApproveExample;
 import edu.zjgsu.ito.model.Recruitment;
 import edu.zjgsu.ito.service.DynamicApproveService;
 import edu.zjgsu.ito.service.RecruitmentService;
@@ -43,7 +44,7 @@ public class OperateCompanyController {
     Map<String,Object> comfirmRegister(@RequestBody ApprovalVo approvalVo) {
 
 
-        Integer[] ids=approvalVo.getIds();
+        Integer[] ids=approvalVo.getId();
         Boolean passFlag=approvalVo.getPassFlag();
         int status;
         Map<String, Object> result = new HashMap<String, Object>();
@@ -88,13 +89,14 @@ public class OperateCompanyController {
     * */
     Map<String,Object> comfirmDynamicNews(@RequestBody ApprovalVo approvalVo) {
 
-        Integer[] ids=approvalVo.getIds();
+        Integer[] ids=approvalVo.getId();
         Boolean passFlag=approvalVo.getPassFlag();
         String meg=approvalVo.getMeg();
 
         int status;
         Map<String, Object> result = new HashMap<String, Object>();
         for(Integer id:ids) {
+
             DynamicApprove dynamicApproveOne=dynamicApproveService.selectByPrimaryKey(id);
 
             if (dynamicApproveOne == null) {
@@ -136,12 +138,14 @@ public class OperateCompanyController {
     * @实习招聘审批
     * */
     Map<String,Object> comfirmInternship(@RequestBody ApprovalVo approvalVo) {
-        Integer[] ids=approvalVo.getIds();
+        Integer[] ids=approvalVo.getId();
+
         Boolean passFlag=approvalVo.getPassFlag();
         String meg=approvalVo.getMeg();
         int status;
         Map<String, Object> result = new HashMap<String, Object>();
         for(Integer id:ids) {
+
             Recruitment recruitmentOne=recruitmentService.selectByPrimaryKey(id);
             if (recruitmentOne == null) {
                 result.put("code", Constant.FAIL);
@@ -181,35 +185,44 @@ public class OperateCompanyController {
     * @首页动态展示
     * */
 
-    Map<String,Object> comfirmshow(@RequestParam ("id") Integer id,
-                                   @RequestParam("showStatus") String showStatus) {
+    Map<String,Object> comfirmshow(@RequestParam ("id") String iid,
+                                   @RequestParam("showStatus") Integer showStatus) {
         int status;
         Map<String, Object> result = new HashMap<String, Object>();
+        Integer id = Integer.valueOf(iid);
 
-            DynamicApprove dynamicApproveOne=dynamicApproveService.selectByPrimaryKey(id);
+        DynamicApprove dynamicApproveOne = dynamicApproveService.selectByPrimaryKey(id);
 
-            if (dynamicApproveOne == null) {
-                result.put("code", Constant.FAIL);
-                result.put("msg", "未查到id=" + id + "的记录！");
-                return result;
-            }
-            if (showStatus.equals(0)) {
-                dynamicApproveOne.setShowStatus(false);
-                Date date=new Date();
-                DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String time=format.format(date);
-                dynamicApproveOne.setEndTime(time);
-            } else {
-                dynamicApproveOne.setShowStatus(true);
+        if (dynamicApproveOne == null) {
+            result.put("code", Constant.FAIL);
+            result.put("msg", "未查到id=" + id + "的记录！");
+            return result;
+        }
+        if (showStatus.equals(1)) {
+            dynamicApproveOne.setShowStatus(false);
+            Date date = new Date();
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String time = format.format(date);
+            dynamicApproveOne.setEndTime(time);
+        } else {
+            dynamicApproveOne.setShowStatus(true);
 
-                Date date=new Date();
-                DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String time=format.format(date);
-                dynamicApproveOne.setStartTime(time);
-            }
+            Date date = new Date();
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String time = format.format(date);
+            dynamicApproveOne.setStartTime(time);
+        }
 
 //        更新数据库记录
-            status=dynamicApproveService.updateByPrimaryKey(dynamicApproveOne);
+        DynamicApproveExample dynamicApproveExample1 = new DynamicApproveExample();
+        dynamicApproveExample1.or().andDeleteTagEqualTo(true).andShowStatusEqualTo(true).andPassingEqualTo(true).andDopassingEqualTo(true);
+        long count = dynamicApproveService.countByExample(dynamicApproveExample1);
+        if (count == 6) {
+            result.put("code", 250);
+            result.put("msg", "操作失败，展示轮播图数量已达6张");
+            return result;
+        } else {
+            status = dynamicApproveService.updateByPrimaryKey(dynamicApproveOne);
 
             if (status > 0) {
                 result.put("code", Constant.OK);
@@ -219,10 +232,13 @@ public class OperateCompanyController {
                 result.put("msg", "审批失败！更新数据库失败");
                 return result;
             }
-        return result;
-    }
 
-    @RequestMapping(value = "deleteShow", method = RequestMethod.GET)
+            return result;
+            }
+        }
+
+
+    @RequestMapping(value = "deleteshow", method = RequestMethod.POST)
     public @ResponseBody
     /*
     * @author hanfeng
@@ -231,14 +247,17 @@ public class OperateCompanyController {
 
     Map<String,Object> deleteshow(@RequestBody IdVo idVo) {
         System.out.println(idVo);
-        Integer[] ids= idVo.getId();
+        String[] ids= idVo.getId();
         System.out.println(ids);
         int status;
         Map<String, Object> result = new HashMap<String, Object>();
 
-        for (Integer id : ids) {
+        for (String iid : ids) {
+            Integer id = Integer.valueOf(iid);
+
             DynamicApprove dynamicApproveOne = dynamicApproveService.selectByPrimaryKey(id);
             if (dynamicApproveOne == null) {
+
                 result.put("code", Constant.FAIL);
                 result.put("msg", "未查到id=" + id + "的记录！");
                 return result;
@@ -268,10 +287,12 @@ public class OperateCompanyController {
 
     Map<String,Object> deleteCompany(@RequestBody IdVo idVo) {
         System.out.println(idVo);
-        Integer[] ids= idVo.getId();
+        String[] ids= idVo.getId();
         int status;
         Map<String, Object> result = new HashMap<String, Object>();
-        for (Integer id : ids) {
+        for (String iid : ids) {
+            Integer id = Integer.valueOf(iid);
+
             Company companyOne = companyService.selectByPrimaryKey(id);
             if (companyOne == null) {
                 result.put("code", Constant.FAIL);
@@ -301,10 +322,12 @@ public class OperateCompanyController {
 
     Map<String,Object> deleteRecruitment(@RequestBody IdVo idVo) {
         System.out.println(idVo);
-        Integer[] ids= idVo.getId();
+        String[] ids= idVo.getId();
         int status;
         Map<String, Object> result = new HashMap<String, Object>();
-        for (Integer id : ids) {
+        for (String iid : ids) {
+            Integer id = Integer.valueOf(iid);
+
             Recruitment recruitmentOne = recruitmentService.selectByPrimaryKey(id);
             if (recruitmentOne == null) {
                 result.put("code", Constant.FAIL);
@@ -333,11 +356,13 @@ public class OperateCompanyController {
     * 禁用公司
     * */
     public @ResponseBody
-    Map<String, Object> forbiddenCompany(@RequestParam("id") Integer id,
+    Map<String, Object> forbiddenCompany(@RequestParam("id") String iid,
                                          @RequestParam("forbidden") boolean forbidden
     ) {
         Map<String, Object> result = new HashMap<String, Object>();
         int one;
+        Integer id = Integer.valueOf(iid);
+
         Company company=companyService.selectByPrimaryKey(id);
 
         if(company ==null){

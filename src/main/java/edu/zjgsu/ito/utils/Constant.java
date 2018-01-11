@@ -70,17 +70,35 @@ public class Constant {
 	 * 密码错误
 	 */
 	public final static int WRONG_PASSWORD = 2;
-	
+
+	public final static String EXCEL_FILE_NAME = "计算机与信息工程学院学生毕业实习成绩.xlsx";
+
+
 	/**
 	 * 文件上传路径
 	 */
-	public final static String UPLOAD_DIR = System.getProperty("user.home").replace("\\", "/") + "/excelFiles/";
+	public final static String UPLOAD_DIR =  getXmlPath().split("WEB-INF")[0];
+
+	/**
+	 * Excel存放路径
+	 */
+	public final static String EXCEL_DIR = UPLOAD_DIR + "excel/";
+
+	/**
+	 * zip存放目录
+	 */
+	public final static String ZIP_DIR = UPLOAD_DIR + "zip/";
+
+	/**
+	 * pdf存放目录
+	 */
+	public final static String PDF_TMP_DIR = UPLOAD_DIR + "pdf/";
+
 
 	/**
 	 * 党员照片存放文件夹
 	 */
-//	public final static String PHOTO_DIR = UPLOAD_DIR + "/photo/";
-	
+
 	/**
 	 * 党员照片存放文件夹
 	 */
@@ -105,4 +123,23 @@ public class Constant {
 	 * 重置密码成功消息
 	 */
 	public final static String RESET_PWD_SUCCESS_MESSAGE = "重置成功";
+
+
+	/**
+	 * 获取WEB-INF目录下面server.xml文件的路径
+	 * @return
+	 */
+	public static String getXmlPath()
+	{
+		//file:/D:/JavaWeb/.metadata/.me_tcat/webapps/TestBeanUtils/WEB-INF/classes/
+		String path=Thread.currentThread().getContextClassLoader().getResource("").toString();
+//		path=path.replace('/', '\\'); // 将/换成\
+		path=path.replace("file:", ""); //去掉file:
+		path=path.replace("classes\\", ""); //去掉class\
+		path=path.substring(1); //去掉第一个\,如 \D:\JavaWeb...
+		path+="web.xml";
+		//System.out.println(path);
+		return path;
+	}
+
 }

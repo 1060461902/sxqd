@@ -14,42 +14,38 @@
     <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>      <!-- jQuery -->
     <script src="js/myjs/recruit_table_details.js"></script> 
   </head>
-  <body  class="light-gray-bg">  
+  <body  class="light-gray-bg hidden-scrolling">  
       <!-- Main content --> 
-          <div  class="templatemo-content-widget text-center white-bg" >
-            <h5 class="iframe-title"><a href="btn_table.html"> 信息列表</a> > <a href="recruit_table.html">招聘信息列表</a> >  岗位详情</h5><br><hr>
+          <div  class="templatemo-content-widget white-bg" >
+            <h5 class="iframe-title"><a href="btn_table.html"> 信息列表</a> > <a href="recruit_table.html">招聘信息列表</a> >  岗位详情(<span id="post"></span>)</h5><hr>
             <div class="templatemo-flex-row"> 
-              <div class="templatemo-content-widget white-bg text-center wideone">
-                <div class="float-left" >
+              <div class="templatemo-content-widget white-bg wideone">
                   <h3><i class="fa fa-envelope-square fa-fw  fa-2x"></i>招聘信息</h3>
-                </div><br>
                 <hr>
-                <table width="80%" class="approval-table hightr">
+                <table width="80%" class="approval-table hightr text-center ">
                   <tr>
-                    <th><h3></h3>招聘岗位</th>   
+                    <th><h3>招聘岗位</h3></th>   
                     <td><span id="post"></span></td>
                   </tr>
                   <tr>
-                    <th><h3></h3>工作地址</th>   
+                    <th><h3>工作地址</h3></th>   
                     <td><i class="fa fa-map-marker fa-fw" style="color:#01AAED"></i><span id="address"></span></td>
                   </tr>
                   <tr>
-                    <th><h3></h3>招聘人数</th>   
+                    <th><h3>招聘人数</h3></th>   
                     <td><i class="fa fa-user fa-fw"></i><span id="totalnumber">*</span>人</td>
                   </tr>
                   <tr>
-                    <th><h3></h3>招聘时间</th>   
+                    <th><h3>招聘时间</h3></th>   
                     <td><span id="postTime"></span></td>
                   </tr>        
                 </table>
               </div>
-              <div class="templatemo-content-widget white-bg text-center narrowone">
-                <div class="float-left">
+              <div class="templatemo-content-widget white-bg narrowone">
                   <h3><i class="fa fa-file-text-o fa-fw  fa-2x"></i>公司概况</h3>
-                </div><br>
                 <hr>
                 <img src="#" id="company_logo"></img> 
-                <table width="99%" class="approval-table">
+                <table width="99%" class="approval-table text-center ">
                   <tr>
                     <th><h3>公司名称</h3></th>   
                     <td><span  id="companyName"></span></td>
@@ -71,10 +67,8 @@
             </div>
             <div class="templatemo-flex-row"> 
               <div class="templatemo-content-widget white-bg col-1" >
-                <div class="float-left">
-                  <h3><i class="fa fa-suitcase fa-fw  fa-2x"></i>工作描述</h3>
-                </div><br><hr>
-                 <div class="">
+                  <h3><i class="fa fa-suitcase fa-fw  fa-2x"></i>工作描述</h3><hr>
+                 <div class="postInfo">
                    <p id="postInfo"></p>
                  </div>                 
               </div>

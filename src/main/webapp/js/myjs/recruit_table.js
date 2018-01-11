@@ -1,28 +1,10 @@
-$(document).ready(function(){
-  //筛选的一系列操作
-      $.ajax({
-       type: 'get',
-       url: '/fieldManagement/admin/showCompanyNames',
-       async: true,
-       contentType: "application/json",
-       dateType: "json",
-       success: function(data){
-       var namelength = data.Names.length;
-       for ( var i = 0; i < namelength; i++){
-        $('select#company').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
-       }
-       // var namelength = data.Names.length;
-       // for ( var i = 0; i < namelength; i++){
-       //  $('select#address').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
-       // }     
-       //筛选（需要表格重新导入）
-  $("option").click(function(){
+function optionclick(){
     var info = new Object();
-    info.status = $('select#status').val();
+    info.statu = $('select#status').val();
     info.companyName = $('select#company').val();
     //info.address = $('select#address').val();
       $.ajax({
-       type: 'get',
+       type: 'post',
        url: '/fieldManagement/admin/showRecruitment',
        data: JSON.stringify(info),
        async: true,
@@ -65,7 +47,203 @@ $(document).ready(function(){
         alert('服务端异常');
         }
     });//ajax
-  });
+}
+function writein(data){
+       var tbody = document.getElementsByTagName ('tbody')[0];
+       var len = data.RecruitmentList.length;
+       for ( var i = 0; i < len; i++)
+      {
+          var obj = data.RecruitmentList[i];
+            var tr = tbody.insertRow(tbody.rows.length);
+            var j=i+1;
+            $("tr:eq("+j+")").val(obj.id);//对当前行赋值
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = '<input type="checkbox">';
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = '<a href="recruit_table_details.html?id='+obj.id+'">'+obj.post;+'</a>';
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = '<a href="company_table_details.html?id='+obj.companyId+'">'+obj.companyName+'</a>';
+            var td = tr.insertCell (tr.cells.length);
+            if(obj.currentNumber>0){
+            td.innerHTML = +obj.currentNumber+'/'+obj.totalNumber+'<i class="showlist fa fa-fw fa-sort-desc" data-toggle="collapse" data-target="#demo'+j+'"></i><div id="demo'+j+'" class="collapse"><ul></ul></div>';
+          }
+            else if(obj.currentNumber == 0){
+            td.innerHTML = '0/'+obj.totalNumber+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+          }
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = obj.postTime;
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = obj.address;
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML='<a href="#" title="禁用/解禁" class="forbidden" id="'+obj.id+'" value='+obj.forbidden+'><i class="fa fa-ban fa-lg"></i>';
+            if(obj.forbidden==true){
+              $('tr:eq('+j+') td:eq(6) a').css("color","red");
+            }
+      } //for
+}
+function showlist(){
+      $('.showlist').click(function(){
+            if($(this).parent("td").children("i").hasClass("fa-sort-desc")){
+                  $(this).parent("td").children("i").removeClass("fa-sort-desc");
+                  $(this).parent("td").children("i").addClass("fa-sort-up");
+                  }
+            else if($(this).parent("td").children("i").hasClass("fa-sort-up")){
+                  $(this).parent("td").children("i").removeClass("fa-sort-up");
+                  $(this).parent("td").children("i").addClass("fa-sort-desc");
+                  }
+            if($(this).parents('td').find('ul').is(":empty")){//若判断为空 则调用方法
+                  var x = $(this).parents('tr').index();
+                  var y =x+1;
+                  var info = new Object();
+                  info.id = $(this).parents('tr').val();
+     $.ajax({
+       type: 'get',
+       url: '/fieldManagement/admin/showRecruitmentStudent',
+       async: true,
+       contentType: "application/json",
+       data: info,
+       dateType: "json",
+       success: function(data){
+              var obj2 = data.Names;
+              var len2 = data.Names.length;
+              for(var n =0;n<len2;n++){
+                $("tr:eq("+y+")").find('ul').append('<a href="student_table_details.html?id='+obj2[n].id+'">'+obj2[n].studentName+'</a>&nbsp;');
+               // alert($("tr:eq("+y+")").val());
+              }
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
+             // $.getJSON("js/json/teacherStudentName.json", function(data) {
+             // });
+            }
+          });
+}
+function forbidden(){
+$('.forbidden').click(function(){
+// alert($(this).attr("id")+'+'+$(this).attr("value"));
+ var info = new Object();
+ info.id = $(this).attr("id");
+ if($(this).attr("value")=='true'){
+   var r=confirm("是否解禁该用户");
+      if (r==true)
+      { 
+        info.forbidden =0;
+     $.ajax({
+       type: 'get',
+       url: '/fieldManagement/admin/forbiddenRecruitment',
+       async: true,
+       contentType: "application/json",
+       data: info,
+       dateType: "json",
+       success: function(data){
+        alert("解禁成功");
+           $('#'+info.id+'.forbidden').css("color","#337ab7");
+           $('#'+info.id+'.forbidden').attr("value",'false');
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
+      } 
+    }
+    else if($(this).attr("value")=='false'){
+       var r=confirm("是否禁用该用户");
+      if (r==true)
+      { 
+        info.forbidden =1;
+     $.ajax({
+       type: 'get',
+       url: '/fieldManagement/admin/forbiddenRecruitment',
+       async: true,
+       contentType: "application/json",
+       data: info,
+       dateType: "json",
+       success: function(data){
+        alert("禁用成功");
+           $('#'+info.id+'.forbidden').css("color","red");
+           $('#'+info.id+'.forbidden').attr("value",'true');
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
+      }
+    }
+});  
+}
+function checked(){
+   $("td>input:checkbox").click(function(){
+    var mm=0;
+    $('input:checkbox').each(function() {
+        if ($(this).attr('checked') =='checked') {
+          mm++;
+        }
+        if(mm>0)
+        {
+          $(".operations").css("display","block");
+        }
+        else
+        {
+          $(".operations").css("display","none");
+        }
+    });
+   });
+}
+function deleterecruit(){
+  $(".operations").click(function(){
+    var id = new Array();
+    var a=0;
+    $('td>input:checkbox').each(function() {
+        if ($(this).attr('checked') =='checked') {
+          id[a]=$(this).parent('td').parent('tr').val();
+          a++;
+        }
+    });
+    var info = new Object();
+    info.id=id;
+     $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/deleteRecruitment',
+       async: true,
+       contentType: "application/json",
+       data: JSON.stringify(info),
+       dateType: "json",
+       success: function(data){
+    alert("删除成功");
+    $('th>input:checkbox').attr('checked',false);
+    location.reload();
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
+   // alert(info.id);
+   });
+}
+$(document).ready(function(){
+  //筛选的一系列操作
+    var info = new Object();
+    info.status = '招聘状态';
+    info.companyName = '招聘公司';
+      $.ajax({
+       type: 'get',
+       url: '/fieldManagement/admin/showCompanynames',
+          data: info,
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+       var namelength = data.Names.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select#company').append('<option value='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
+       }
+       // var namelength = data.Names.length;
+       // for ( var i = 0; i < namelength; i++){
+       //  $('select#address').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
+       // }     
+       //筛选（需要表格重新导入）
      },
        error: function(){
         alert('服务端异常');
@@ -73,14 +251,16 @@ $(document).ready(function(){
     });//ajax
   //导入表格
     var info = new Object();
-    info.status = '招聘状态';
+    info.statu = '招聘状态';
     info.companyName = '招聘公司';
+    // info.place = '工作地点';
      $.ajax({
-       type: 'get',
+       type: 'post',
        url: '/fieldManagement/admin/showRecruitment',
-       async: true,
-       contentType: "application/json",
-       dateType: "json",
+         async: true,
+         contentType: "application/json",
+         data: JSON.stringify(info),
+         dateType: "json",
        success: function(data){
       writein(data);
       showlist();//-------------下拉---------
@@ -148,180 +328,6 @@ $(document).ready(function(){
 //               });
 // });//getjson
 //------------------->
-function writein(data){
-       var tbody = document.getElementsByTagName ('tbody')[0];
-       var len = data.RecruitmentList.length;
-       for ( var i = 0; i < len; i++)
-      {
-          var obj = data.RecruitmentList[i];
-            var tr = tbody.insertRow(tbody.rows.length);
-            var j=i+1;
-            $("tr:eq("+j+")").val(obj.id);//对当前行赋值
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<input type="checkbox">';
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<a href="recruit_table_details.html?id='+obj.id+'">'+obj.post;+'</a>';
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<a href="company_table_details.html?id='+obj.companyId+'">'+obj.companyName+'</a>';
-            var td = tr.insertCell (tr.cells.length);
-            if(obj.currentNumber>0){
-            td.innerHTML = +obj.currentNumber+'/'+obj.totalNumber+'<i class="showlist fa fa-fw fa-sort-desc" data-toggle="collapse" data-target="#demo'+j+'"></i><div id="demo'+j+'" class="collapse"><ul></ul></div>';
-          }
-            else if(obj.currentNumber == 0){
-            td.innerHTML = '0/'+obj.totalNumber+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-          }
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.postTime;
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.address;
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML='<a href="#" title="禁用/解禁" class="forbidden" id="'+obj.id+'" value='+obj.forbidden+'><i class="fa fa-ban fa-2x"></i>';
-            if(obj.forbidden==true){
-              $('tr:eq('+j+') td:eq(6) a').css("color","red");
-            }
-      } //for
-}
-function showlist(){
-      $('.showlist').click(function(){
-            if($(this).parent("td").children("i").hasClass("fa-sort-desc")){
-                  $(this).parent("td").children("i").removeClass("fa-sort-desc");
-                  $(this).parent("td").children("i").addClass("fa-sort-up");
-                  }
-            else if($(this).parent("td").children("i").hasClass("fa-sort-up")){
-                  $(this).parent("td").children("i").removeClass("fa-sort-up");
-                  $(this).parent("td").children("i").addClass("fa-sort-desc");
-                  }
-            if($(this).parents('td').find('ul').is(":empty")){//若判断为空 则调用方法
-                  var x = $(this).parents('tr').index();
-                  var y =x+1;
-                  var info = new Object();
-                  info.id = $(this).parents('tr').val();
-     $.ajax({
-       type: 'get',
-       url: '/fieldManagement/admin/showRecruitmentStudent',
-       async: true,
-       contentType: "application/json",
-       data: JSON.stringify(info),
-       dateType: "json",
-       success: function(data){
-              var obj2 = data.Names;
-              var len2 = data.Names.length;
-              for(var n =0;n<len2;n++){
-                $("tr:eq("+y+")").find('ul').append('<a href="student_table_details.html?id='+obj2[n].id+'">'+obj2[n].studentName+'</a>&nbsp;');
-               // alert($("tr:eq("+y+")").val());
-              }
-     },
-       error: function(){
-        alert('服务端异常');
-        }
-    });
-             // $.getJSON("js/json/teacherStudentName.json", function(data) {
-             // });
-            }
-          });
-}
-function forbidden(){
-$('.forbidden').click(function(){
-// alert($(this).attr("id")+'+'+$(this).attr("value"));
- var info = new Object();
- info.id = $(this).attr("id");
- if($(this).attr("value")=='true'){
-   var r=confirm("是否解禁该用户");
-      if (r==true)
-      { 
-        info.forbidden =0;
-     $.ajax({
-       type: 'get',
-       url: '/fieldManagement/admin/forbiddenRecruitment',
-       async: true,
-       contentType: "application/json",
-       data: JSON.stringify(info),
-       dateType: "json",
-       success: function(data){
-        alert("解禁成功");
-        $(this).css("color","#337ab7");
-        $(this).attr("value",'false');
-     },
-       error: function(){
-        alert('服务端异常');
-        }
-    });
-      } 
-    }
-    else if($(this).attr("value")=='false'){
-       var r=confirm("是否禁用该用户");
-      if (r==true)
-      { 
-        info.forbidden =1;
-     $.ajax({
-       type: 'get',
-       url: '/fieldManagement/admin/forbiddenRecruitment',
-       async: true,
-       contentType: "application/json",
-       data: JSON.stringify(info),
-       dateType: "json",
-       success: function(data){
-        alert("禁用成功");
-        $(this).css("color","red");
-        $(this).attr("value",'true');
-     },
-       error: function(){
-        alert('服务端异常');
-        }
-    });
-      }
-    }
-});  
-}
-function checked(){
-   $("td>input:checkbox").click(function(){
-    var mm=0;
-    $('input:checkbox').each(function() {
-        if ($(this).attr('checked') =='checked') {
-          mm++;
-        }
-        if(mm>0)
-        {
-          $(".operations").css("display","block");
-        }
-        else
-        {
-          $(".operations").css("display","none");
-        }
-    });
-   });
-}
-function deleterecruit(){
-  $(".operations").click(function(){
-    var id = new Array();
-    var a=0;
-    $('td>input:checkbox').each(function() {
-        if ($(this).attr('checked') =='checked') {
-          id[a]=$(this).parent('td').parent('tr').val();
-          a++;
-        }
-    });
-    var info = new Object();
-    info.id=id;
-     $.ajax({
-       type: 'post',
-       url: '/fieldManagement/admin/deleteRecruitment',
-       async: true,
-       contentType: "application/json",
-       data: JSON.stringify(info),
-       dateType: "json",
-       success: function(data){
-    alert("删除成功");
-    $('th>input:checkbox').attr('checked',false);
-    location.reload();
-     },
-       error: function(){
-        alert('服务端异常');
-        }
-    });
-   // alert(info.id);
-   });
-}
 //--------------------------全选checkbox--------------------------
 var m=0;
 $('th>input:checkbox').click(function() {

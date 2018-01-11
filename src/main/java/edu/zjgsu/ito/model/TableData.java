@@ -16,17 +16,21 @@ public class TableData implements Serializable {
 
     private Long currentStudentNum;
 
+    private static final long serialVersionUID = 1L;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public TableData() {
+
+    }
+
     public TableData(String times, Long companyNum, Long currentRecruitNum, Long currentStudentNum) {
         this.times = times;
         this.companyNum = companyNum;
         this.currentRecruitNum = currentRecruitNum;
         this.currentStudentNum = currentStudentNum;
-    }
-
-    private static final long serialVersionUID = 1L;
-
-    public Integer getId() {
-        return id;
     }
 
     public void setId(Integer id) {

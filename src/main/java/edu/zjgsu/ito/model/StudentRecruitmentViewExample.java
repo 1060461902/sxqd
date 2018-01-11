@@ -883,6 +883,76 @@ public class StudentRecruitmentViewExample {
             addCriterion("clss not between", value1, value2, "clss");
             return (Criteria) this;
         }
+
+        public Criteria andPostTimeIsNull() {
+            addCriterion("post_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostTimeIsNotNull() {
+            addCriterion("post_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostTimeEqualTo(String value) {
+            addCriterion("post_time =", value, "postTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostTimeNotEqualTo(String value) {
+            addCriterion("post_time <>", value, "postTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostTimeGreaterThan(String value) {
+            addCriterion("post_time >", value, "postTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostTimeGreaterThanOrEqualTo(String value) {
+            addCriterion("post_time >=", value, "postTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostTimeLessThan(String value) {
+            addCriterion("post_time <", value, "postTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostTimeLessThanOrEqualTo(String value) {
+            addCriterion("post_time <=", value, "postTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostTimeLike(String value) {
+            addCriterion("post_time like", value, "postTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostTimeNotLike(String value) {
+            addCriterion("post_time not like", value, "postTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostTimeIn(List<String> values) {
+            addCriterion("post_time in", values, "postTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostTimeNotIn(List<String> values) {
+            addCriterion("post_time not in", values, "postTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostTimeBetween(String value1, String value2) {
+            addCriterion("post_time between", value1, value2, "postTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostTimeNotBetween(String value1, String value2) {
+            addCriterion("post_time not between", value1, value2, "postTime");
+            return (Criteria) this;
+        }
     }
 
     /**

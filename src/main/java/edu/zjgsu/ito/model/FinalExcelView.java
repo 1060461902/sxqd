@@ -32,10 +32,7 @@ public class FinalExcelView implements Serializable {
 
     private String clss;
 
-    /**
-     * 毕业年份
-     */
-    private String grade;
+    private Integer userId;
 
     private String teacherName;
 
@@ -145,12 +142,12 @@ public class FinalExcelView implements Serializable {
         this.clss = clss;
     }
 
-    public String getGrade() {
-        return grade;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setGrade(String grade) {
-        this.grade = grade;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getTeacherName() {
@@ -186,7 +183,7 @@ public class FinalExcelView implements Serializable {
             && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
             && (this.getNickName() == null ? other.getNickName() == null : this.getNickName().equals(other.getNickName()))
             && (this.getClss() == null ? other.getClss() == null : this.getClss().equals(other.getClss()))
-            && (this.getGrade() == null ? other.getGrade() == null : this.getGrade().equals(other.getGrade()))
+            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
             && (this.getTeacherName() == null ? other.getTeacherName() == null : this.getTeacherName().equals(other.getTeacherName()));
     }
 
@@ -207,7 +204,7 @@ public class FinalExcelView implements Serializable {
         result = prime * result + ((getUserName() == null) ? 0 : getUserName().hashCode());
         result = prime * result + ((getNickName() == null) ? 0 : getNickName().hashCode());
         result = prime * result + ((getClss() == null) ? 0 : getClss().hashCode());
-        result = prime * result + ((getGrade() == null) ? 0 : getGrade().hashCode());
+        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
         result = prime * result + ((getTeacherName() == null) ? 0 : getTeacherName().hashCode());
         return result;
     }
@@ -231,7 +228,7 @@ public class FinalExcelView implements Serializable {
         sb.append(", userName=").append(userName);
         sb.append(", nickName=").append(nickName);
         sb.append(", clss=").append(clss);
-        sb.append(", grade=").append(grade);
+        sb.append(", userId=").append(userId);
         sb.append(", teacherName=").append(teacherName);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

@@ -20,33 +20,33 @@
   </head>
   <body class="light-gray-bg hidden-scrolling">
     <div  class="templatemo-content-widget white-bg fullfill" >
-      <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  实习列表</h5><br><hr>
+      <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  实习列表</h5><hr>
         <div>
-          <form role="form" class="form-inline" >
+          <form role="form" class="form-inline inline">
             <div class="form-group">
-              <select class="form-control" id="grade">
+              <select class="form-control" id="grade" onchange="optionclicknj()">
                 <option>年级</option>
               </select>
-              <select class="form-control" id="class">
+              <select class="form-control" id="class" onchange="optionclickbj()">
                 <option>班级</option>
               </select>
-              <select class="form-control" id="company">
-                <option id="null">公司</option>
+              <select class="form-control" id="company" onchange="optionclickgs()">
+                <option value="0">公司</option>
               </select>
-              <select class="form-control status">
-                <option>全部</option>
+              <select class="form-control status" onchange="optionclick()">
+                <option  val="全部">全部</option>
                 <option selected = "selected" val="待实习">待实习</option>
                 <option val="实习中">实习中</option>
                 <option val="已结业">已结业</option>
               </select>
-               <select class="form-control" id="teacher">
+               <select class="form-control" id="teacher" onchange="optionclick()">
                 <option>有无指导老师</option>
                 <option>有指导老师</option>
                 <option>无指导老师</option>
               </select>
             </div>
-            <button type="button" class="btn btn-primary" id="dccj">导出成绩</button>            
           </form>
+            <button class="btn btn-primary dccj" >导出成绩 </button>
         </div>
       <table class="table table-hover text-center" id="table">
         <thead>
@@ -85,8 +85,8 @@
       </div>
       <div class="modal-body">
           <form role="form" class="inline">            
-            <input type="text" class="form-control modal-search inline" id="name" placeholder="请输入名称">
-            <!-- <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button> -->
+            <!--<input type="text" class="form-control modal-search inline" id="name" placeholder="请输入名称">
+             <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button> -->
             &nbsp;&nbsp;<span id="description">未分配</span><br>    
           </form>
           <div class="setDiv-2">

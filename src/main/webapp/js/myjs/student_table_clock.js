@@ -1,28 +1,12 @@
-$(document).ready(function(){
-//筛选
+function optionclick(){
     var info = new Object();
-    info.id = window.location.href;
-      $.ajax({
-       type: 'get',
-       url: '/fieldManagement/admin/showCheckScreening',
-       async: true,
-       contentType: "application/json",
-       data: JSON.stringify(info),
-       dateType: "json",
-       success: function(data){
-        var obj1 = data.month;
-        var length1 = data.month.length;
-        for(var n=0;n<length1;n++){
-            $('select').append('<option>'+obj1[n].screens+'</option>');
-        }
-  $("option").click(function(){
-    var info = new Object();
-    info.month =  $(this).text();
-    info.id = window.location.href;
+    info.month =  $('select').val();
+      var zhf= window.location.href.split('=');
+      info.id = zhf[1];
       $.ajax({
        type: 'get',
        url: '/fieldManagement/admin/showCheck',
-       data: JSON.stringify(info),
+       data: info,
        async: true,
        contentType: "application/json",
        dateType: "json",
@@ -34,7 +18,7 @@ $(document).ready(function(){
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
                 "bFilter" : true, //是否启动过滤、搜索功能
                 "info": false,
-                 "pageLength": 7,
+                 "pageLength": 10,
                 "lengthChange" : false,
                   "oLanguage": { //国际化配置
                     "sProcessing" : "正在获取数据，请稍后...",
@@ -59,26 +43,59 @@ $(document).ready(function(){
         alert('服务端异常');
         }
     });
-    //$.getJSON("js/json/approval-2.json", function(data) {
-         // });
-  });
+}
+function writein(data){
+        var obj2 = data.date;
+        var length2 = data.date.length;
+        for( var i=0;i<length2;i++){
+            var tbody = document.getElementsByTagName ('tbody')[0];
+            var tr = tbody.insertRow(tbody.rows.length);
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = obj2[i].date;
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = obj2[i].startTime;
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = obj2[i].endTime;
+        }
+}
+$(document).ready(function(){
+//筛选
+    var info = new Object();
+    var zhf= window.location.href.split('=');
+    info.id = zhf[1];
+
+      $.ajax({
+       type: 'get',
+       url: '/fieldManagement/admin/showCheckScreening',
+       async: true,
+       contentType: "application/json",
+       data: info,
+       dateType: "json",
+       success: function(data){
+        var obj1 = data.month;
+        var length1 = data.month.length;
+        for(var n=0;n<length1;n++){
+            $('select').append('<option>'+obj1[n].screens+'</option>');
+        }
      },
        error: function(){
         alert('服务端异常');
         }
     });   
     var info = new Object();
-    info.id = window.location.href;
+    var zhf= window.location.href.split('=');
+    info.id = zhf[1];
     info.month = "全部时段";
     $.ajax({
        type: 'get',
        url: '/fieldManagement/admin/showCheck',
        async: true,
        contentType: "application/json",
-       data: JSON.stringify(info),
+       data: info,
        dateType: "json",
        success: function(data){
-        $('a#progress').attr('href','student_table_progress.html?id='+data.id);
+        $('span#name').text(data.name);
+        $('a#progress').attr('href','student_table_progress.html?id='+data.id);//+'&name='+data.name);
         writein(data);
     var docrTable = $('#table-1').dataTable({
                 "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
@@ -110,18 +127,4 @@ $(document).ready(function(){
     });
    //  $.getJSON("js/json/student_table_clock.json", function(data){
    // });
-function writein(data){
-        var obj2 = data.date;
-        var length2 = data.date.length;
-        for( var i=0;i<length2;i++){
-            var tbody = document.getElementsByTagName ('tbody')[0];
-            var tr = tbody.insertRow(tbody.rows.length);
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj2[i].date;
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj2[i].startTime;
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj2[i].endTime;
-        }
-}
 });

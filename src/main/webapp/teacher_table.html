@@ -24,7 +24,7 @@
         <div>
          <form role="form" class="form-inline" >
             <div class="form-group">
-              <select class="form-control">
+              <select class="form-control" onchange="optionclick()">
                 <option selected = "selected">专业</option>
               </select>
               <a href="#" data-toggle="modal" data-target="#drls"><button class="btn btn-primary">导入</button></a>    
@@ -59,8 +59,8 @@
                 <h4 class="modal-title text-center" id="myModalLabel">导入老师</h4>
             </div>
             <div class="modal-body">
-              <form id="uploadForm" enctype="multipart/form-data"><!-- enctype必须加 -->
-                <input type="file" name="file">
+              <form enctype="multipart/form-data"><!-- enctype必须加 -->
+                <input type="file" name="file" id="uploadForm" >
               </form>
             </div>
             <div class="modal-footer">

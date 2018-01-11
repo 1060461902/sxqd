@@ -6,15 +6,15 @@
     <result column="student_id" jdbcType="INTEGER" property="studentId" />
     <result column="student_recruitment_id" jdbcType="INTEGER" property="studentRecruitmentId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="published_date" jdbcType="TIMESTAMP" property="publishedDate" />
-    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
-    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="published_date" jdbcType="VARCHAR" property="publishedDate" />
+    <result column="start_time" jdbcType="VARCHAR" property="startTime" />
+    <result column="end_time" jdbcType="VARCHAR" property="endTime" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="readover_time" jdbcType="TIMESTAMP" property="readoverTime" />
+    <result column="readover_time" jdbcType="VARCHAR" property="readoverTime" />
     <result column="score" jdbcType="INTEGER" property="score" />
     <result column="comment" jdbcType="VARCHAR" property="comment" />
-    <result column="c_readover_time" jdbcType="TIMESTAMP" property="cReadoverTime" />
+    <result column="c_readover_time" jdbcType="VARCHAR" property="cReadoverTime" />
     <result column="c_score" jdbcType="INTEGER" property="cScore" />
     <result column="c_comment" jdbcType="VARCHAR" property="cComment" />
     <result column="week" jdbcType="VARCHAR" property="week" />
@@ -121,28 +121,25 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.Report">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into report (student_id, student_recruitment_id, 
+    insert into report (id, student_id, student_recruitment_id, 
       title, published_date, start_time, 
       end_time, content, url, 
       readover_time, score, comment, 
       c_readover_time, c_score, c_comment, 
       week)
-    values (#{studentId,jdbcType=INTEGER}, #{studentRecruitmentId,jdbcType=INTEGER}, 
-      #{title,jdbcType=VARCHAR}, #{publishedDate,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP}, 
-      #{endTime,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
-      #{readoverTime,jdbcType=TIMESTAMP}, #{score,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, 
-      #{cReadoverTime,jdbcType=TIMESTAMP}, #{cScore,jdbcType=INTEGER}, #{cComment,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{studentRecruitmentId,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{publishedDate,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{readoverTime,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, 
+      #{cReadoverTime,jdbcType=VARCHAR}, #{cScore,jdbcType=INTEGER}, #{cComment,jdbcType=VARCHAR}, 
       #{week,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.Report">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into report
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="studentId != null">
         student_id,
       </if>
@@ -190,6 +187,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="studentId != null">
         #{studentId,jdbcType=INTEGER},
       </if>
@@ -200,13 +200,13 @@
         #{title,jdbcType=VARCHAR},
       </if>
       <if test="publishedDate != null">
-        #{publishedDate,jdbcType=TIMESTAMP},
+        #{publishedDate,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
-        #{startTime,jdbcType=TIMESTAMP},
+        #{startTime,jdbcType=VARCHAR},
       </if>
       <if test="endTime != null">
-        #{endTime,jdbcType=TIMESTAMP},
+        #{endTime,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
@@ -215,7 +215,7 @@
         #{url,jdbcType=VARCHAR},
       </if>
       <if test="readoverTime != null">
-        #{readoverTime,jdbcType=TIMESTAMP},
+        #{readoverTime,jdbcType=VARCHAR},
       </if>
       <if test="score != null">
         #{score,jdbcType=INTEGER},
@@ -224,7 +224,7 @@
         #{comment,jdbcType=VARCHAR},
       </if>
       <if test="cReadoverTime != null">
-        #{cReadoverTime,jdbcType=TIMESTAMP},
+        #{cReadoverTime,jdbcType=VARCHAR},
       </if>
       <if test="cScore != null">
         #{cScore,jdbcType=INTEGER},
@@ -259,13 +259,13 @@
         title = #{record.title,jdbcType=VARCHAR},
       </if>
       <if test="record.publishedDate != null">
-        published_date = #{record.publishedDate,jdbcType=TIMESTAMP},
+        published_date = #{record.publishedDate,jdbcType=VARCHAR},
       </if>
       <if test="record.startTime != null">
-        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+        start_time = #{record.startTime,jdbcType=VARCHAR},
       </if>
       <if test="record.endTime != null">
-        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+        end_time = #{record.endTime,jdbcType=VARCHAR},
       </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=VARCHAR},
@@ -274,7 +274,7 @@
         url = #{record.url,jdbcType=VARCHAR},
       </if>
       <if test="record.readoverTime != null">
-        readover_time = #{record.readoverTime,jdbcType=TIMESTAMP},
+        readover_time = #{record.readoverTime,jdbcType=VARCHAR},
       </if>
       <if test="record.score != null">
         score = #{record.score,jdbcType=INTEGER},
@@ -283,7 +283,7 @@
         comment = #{record.comment,jdbcType=VARCHAR},
       </if>
       <if test="record.cReadoverTime != null">
-        c_readover_time = #{record.cReadoverTime,jdbcType=TIMESTAMP},
+        c_readover_time = #{record.cReadoverTime,jdbcType=VARCHAR},
       </if>
       <if test="record.cScore != null">
         c_score = #{record.cScore,jdbcType=INTEGER},
@@ -305,15 +305,15 @@
       student_id = #{record.studentId,jdbcType=INTEGER},
       student_recruitment_id = #{record.studentRecruitmentId,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
-      published_date = #{record.publishedDate,jdbcType=TIMESTAMP},
-      start_time = #{record.startTime,jdbcType=TIMESTAMP},
-      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      published_date = #{record.publishedDate,jdbcType=VARCHAR},
+      start_time = #{record.startTime,jdbcType=VARCHAR},
+      end_time = #{record.endTime,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=VARCHAR},
       url = #{record.url,jdbcType=VARCHAR},
-      readover_time = #{record.readoverTime,jdbcType=TIMESTAMP},
+      readover_time = #{record.readoverTime,jdbcType=VARCHAR},
       score = #{record.score,jdbcType=INTEGER},
       comment = #{record.comment,jdbcType=VARCHAR},
-      c_readover_time = #{record.cReadoverTime,jdbcType=TIMESTAMP},
+      c_readover_time = #{record.cReadoverTime,jdbcType=VARCHAR},
       c_score = #{record.cScore,jdbcType=INTEGER},
       c_comment = #{record.cComment,jdbcType=VARCHAR},
       week = #{record.week,jdbcType=VARCHAR}
@@ -334,13 +334,13 @@
         title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="publishedDate != null">
-        published_date = #{publishedDate,jdbcType=TIMESTAMP},
+        published_date = #{publishedDate,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
-        start_time = #{startTime,jdbcType=TIMESTAMP},
+        start_time = #{startTime,jdbcType=VARCHAR},
       </if>
       <if test="endTime != null">
-        end_time = #{endTime,jdbcType=TIMESTAMP},
+        end_time = #{endTime,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
@@ -349,7 +349,7 @@
         url = #{url,jdbcType=VARCHAR},
       </if>
       <if test="readoverTime != null">
-        readover_time = #{readoverTime,jdbcType=TIMESTAMP},
+        readover_time = #{readoverTime,jdbcType=VARCHAR},
       </if>
       <if test="score != null">
         score = #{score,jdbcType=INTEGER},
@@ -358,7 +358,7 @@
         comment = #{comment,jdbcType=VARCHAR},
       </if>
       <if test="cReadoverTime != null">
-        c_readover_time = #{cReadoverTime,jdbcType=TIMESTAMP},
+        c_readover_time = #{cReadoverTime,jdbcType=VARCHAR},
       </if>
       <if test="cScore != null">
         c_score = #{cScore,jdbcType=INTEGER},
@@ -377,18 +377,19 @@
     set student_id = #{studentId,jdbcType=INTEGER},
       student_recruitment_id = #{studentRecruitmentId,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
-      published_date = #{publishedDate,jdbcType=TIMESTAMP},
-      start_time = #{startTime,jdbcType=TIMESTAMP},
-      end_time = #{endTime,jdbcType=TIMESTAMP},
+      published_date = #{publishedDate,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
-      readover_time = #{readoverTime,jdbcType=TIMESTAMP},
+      readover_time = #{readoverTime,jdbcType=VARCHAR},
       score = #{score,jdbcType=INTEGER},
       comment = #{comment,jdbcType=VARCHAR},
-      c_readover_time = #{cReadoverTime,jdbcType=TIMESTAMP},
+      c_readover_time = #{cReadoverTime,jdbcType=VARCHAR},
       c_score = #{cScore,jdbcType=INTEGER},
       c_comment = #{cComment,jdbcType=VARCHAR},
       week = #{week,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
 </mapper>

@@ -17,8 +17,8 @@
   </head>
   <body  class="light-gray-bg">  
       <!-- Main content --> 
-          <div  class="templatemo-content-widget text-center white-bg" >
-            <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  <a href="student_table.html">学生列表</a> > 学生简历</h5><br><hr>
+          <div  class="templatemo-content-widget white-bg" >
+            <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  <a href="student_table.html">学生列表</a> > 学生简历(<span id="nickName"></span>)</h5><hr>
             <ul class="nav nav-tabs" id="studentTab">
               <li class="active">
                 <a href="#qyzc" >学生简历</a>
@@ -32,12 +32,12 @@
                 <ul class="list-group" id="xsjl">
                   <li class="list-group-item">
                     <h2>基本信息</h2>
-                    <img src="#" class="img-circle" id="identification-photo">
+                    <img src="#" class="img-circle" alt="学生照片" id="identification-photo">
                     <div class="basic-info">
                       <div class="edit"><a href="#" data-toggle="modal" data-target="#student_Modal"><i class="fa fa-pencil fa-fw"></i>编辑</a></div>
                       <h4 id="nickName"></h4>
                       <h3>
-                      <span id="userName"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="sex"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="nation"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="birthDate"></span> <br>
+                      <span id="userName"></span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span id="sex"></span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span id="nation"></span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span id="birthDate"></span> <br>
                       手机号码 ：<span id="phone"></span><br>
                       邮箱 ： <span id="email">*</span><br></h3>
                     </div>
@@ -55,10 +55,10 @@
                     <h2>技能特长</h2><br>
                     <div class="skill-content"></div>
                   </li>
-                  <li class="list-group-item">
+<!--                   <li class="list-group-item">
                     <h2>英语水平</h2><br>
                     <h4 id="english"></h4>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
                             <!-- 模态框（Modal） -->

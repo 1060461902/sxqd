@@ -16,18 +16,18 @@ $(document).ready(function(){
     // });
       $.ajax({
        type: 'get',
-       url: '/fieldworkmanage/admin/weight',
+       url: '/fieldManagement/admin/weight',
        async: true,
        contentType: "application/json",
        dateType: "json",
        success: function(data){
-      $('.setDiv input#x:eq(0)').val(data.teacherWeight);
-      $('.setDiv input#x:eq(1)').val(data.companyWeight);
-      $('.setDiv input#y:eq(0)').val(data.tWeekReport);
-      $('.setDiv input#y:eq(1)').val(data.tSummary);
-      $('.setDiv input#y:eq(2)').val(data.tFinalReport );
-      $('.setDiv input#z:eq(0)').val(data.cWeekReport);
-      $('.setDiv input#z:eq(1)').val(data.cAttendance);
+      $('.setDiv input#x:eq(0)').val(data.teacherWeight*100);
+      $('.setDiv input#x:eq(1)').val(data.companyWeight*100);
+      $('.setDiv input#y:eq(0)').val(data.tWeekReport*100);
+      $('.setDiv input#y:eq(1)').val(data.tSummary*100);
+      $('.setDiv input#y:eq(2)').val(data.tFinalReport*100);
+      $('.setDiv input#z:eq(0)').val(data.cWeekReport*100);
+      $('.setDiv input#z:eq(1)').val(data.cAttendance*100);
      },
        error: function(){
         alert('服务端异常');
@@ -47,34 +47,35 @@ $(document).ready(function(){
       $($('.setDiv input#c:eq(0)')).focus();
     }
     else {
-      var info = new Object();
-      info.teacherWeight = '0.'+ $('.setDiv input#x:eq(0)').val();
-      info.companyWeight = '0.'+ $('.setDiv input#x:eq(1)').val();
-      info.tWeekReport = '0.'+ $('.setDiv input#y:eq(0)').val();
-      info.tSummary = '0.'+ $('.setDiv input#y:eq(1)').val();
-      info.tFinalReport = '0.'+ $('.setDiv input#y:eq(2)').val();
-      info.cWeekReport = '0.'+ $('.setDiv input#z:eq(0)').val();
-      info.cAttendance = '0.'+ $('.setDiv input#z:eq(1)').val();
-      //alert(info.cAttendance);
-      $.ajax({
-       type: 'get',
-       url: '/fieldworkmanage/admin/weight',
-       data: JSON.stringify(info),
-       async: true,
-       contentType: "application/json",
-       dateType: "json",
-       success: function(data){
-                    if (data.code == "200") {
-                         alert('操作成功');
-                    }
-                    else if(data.code == "500"){
-                         alert('操作异常');
-                    }
-     },
-       error: function(){
-        alert('服务端异常');
-        }
-    });
+        var info = new Object();
+        info.teacherWeight = '0.'+ $('.setDiv input#x:eq(0)').val();
+        info.companyWeight = '0.'+ $('.setDiv input#x:eq(1)').val();
+        info.tWeekReport = '0.'+ $('.setDiv input#y:eq(0)').val();
+        info.tSummary = '0.'+ $('.setDiv input#y:eq(1)').val();
+        info.tFinalReport = '0.'+ $('.setDiv input#y:eq(2)').val();
+        info.cWeekReport = '0.'+ $('.setDiv input#z:eq(0)').val();
+        info.cAttendance = '0.'+ $('.setDiv input#z:eq(1)').val();
+        info.id = '1';
+        //alert(info.cAttendance);
+        $.ajax({
+            type: 'post',
+            url: '/fieldManagement/admin/weight',
+            data: JSON.stringify(info),
+            async: true,
+            contentType: "application/json",
+            dateType: "json",
+            success: function(data){
+                if (data.code == "200") {
+                    alert('操作成功');
+                }
+                else if(data.code == "500"){
+                    alert('操作异常');
+                }
+            },
+            error: function(){
+                alert('服务端异常');
+            }
+        });
     }
   });
 });
@@ -138,9 +139,9 @@ function validate_form()
          //            }
          //        })
     var info = new Object();  // alert(info);
-    info.username = "admin"; //alert(info.username);
-    info.oldpassword= oldpsw; //alert(info.oldpassword);
-    info.newpassword = newpsw;  //alert(info.newpassword); 
+    info.userName = "admin"; //alert(info.username);
+    info.oldPassword= oldpsw; //alert(info.oldpassword);
+    info.newPassword = newpsw;  //alert(info.newpassword);
      $.ajax({
        type: 'post',
        url: '/fieldManagement/admin/modifyPwd',

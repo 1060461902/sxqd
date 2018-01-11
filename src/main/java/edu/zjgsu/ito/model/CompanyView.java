@@ -96,6 +96,8 @@ public class CompanyView implements Serializable {
 
     private Boolean deleteTag;
 
+    private String city;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -298,6 +300,14 @@ public class CompanyView implements Serializable {
         this.deleteTag = deleteTag;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -334,7 +344,8 @@ public class CompanyView implements Serializable {
             && (this.getTaxRegistration() == null ? other.getTaxRegistration() == null : this.getTaxRegistration().equals(other.getTaxRegistration()))
             && (this.getOrganizationCode() == null ? other.getOrganizationCode() == null : this.getOrganizationCode().equals(other.getOrganizationCode()))
             && (this.getForbidden() == null ? other.getForbidden() == null : this.getForbidden().equals(other.getForbidden()))
-            && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()));
+            && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()))
+            && (this.getCity() == null ? other.getCity() == null : this.getCity().equals(other.getCity()));
     }
 
     @Override
@@ -366,6 +377,7 @@ public class CompanyView implements Serializable {
         result = prime * result + ((getOrganizationCode() == null) ? 0 : getOrganizationCode().hashCode());
         result = prime * result + ((getForbidden() == null) ? 0 : getForbidden().hashCode());
         result = prime * result + ((getDeleteTag() == null) ? 0 : getDeleteTag().hashCode());
+        result = prime * result + ((getCity() == null) ? 0 : getCity().hashCode());
         return result;
     }
 
@@ -400,6 +412,7 @@ public class CompanyView implements Serializable {
         sb.append(", organizationCode=").append(organizationCode);
         sb.append(", forbidden=").append(forbidden);
         sb.append(", deleteTag=").append(deleteTag);
+        sb.append(", city=").append(city);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

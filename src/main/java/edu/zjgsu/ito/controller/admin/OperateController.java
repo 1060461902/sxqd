@@ -1,85 +1,81 @@
 package edu.zjgsu.ito.controller.admin;
 
-import edu.zjgsu.ito.dao.WeightMapper;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import edu.zjgsu.ito.dao.UserMapper;
 import edu.zjgsu.ito.model.*;
+import edu.zjgsu.ito.pojo.Message;
 import edu.zjgsu.ito.service.*;
-import edu.zjgsu.ito.utils.Constant;
-import edu.zjgsu.ito.utils.FileUtil;
-import edu.zjgsu.ito.utils.Md5Util;
-import org.apache.poi.ss.formula.functions.T;
+import edu.zjgsu.ito.vo.IdVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "admin")
 public class OperateController {
-
     @Autowired
-    StudentService studentService;
+    SimpleService simpleService;
     @Autowired
-    UserService userService;
-    @Autowired
-    CommonService commonService;
-    @Autowired
-    AdminOperateService adminOperateService;
-
+    AdminComplexService adminComplexService;
 
     /**
-     *导出学生成绩Excel
-     * @param
+     *归档
+     * @param studentIds
+     * @param request
+     * @param response
      * @return
-     * @sawei
+     * @throws Exception
+     * @author sawei
      */
-    @RequestMapping(value = "export2Excel", method = RequestMethod.GET )
-    public @ResponseBody Map<String, Object> export2Excel(@RequestParam List<Integer> studentIdList, HttpServletResponse response) {
-        Map<String, Object> result = new HashMap<String, Object>();
-
-        adminOperateService.writeToExcel("Sheet1", studentIdList,response);
-
-        result.put("code", Constant.OK);
-        result.put("msg", "导出成功！");
-
-        return result;
+    @ResponseBody
+    @RequestMapping(value = "archive", method = RequestMethod.POST )
+    public Message archive(@RequestBody IdVo studentIds, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        return adminComplexService.archive(studentIds.String2Integer(studentIds.getId()), request, response);
     }
 
+    /**
+     *导出学生成绩
+     * @param studentIds
+     * @param response
+     * @return
+     * @throws Exception
+     * @author sawei
+     */
+    @ResponseBody
+    @RequestMapping(value = "export2Excel", method = RequestMethod.POST )
+    public Message export2Excel(@RequestBody IdVo studentIds, HttpServletResponse response) throws Exception {
+        return adminComplexService.writeToExcel("Sheet1", studentIds.String2Integer(studentIds.getId()),response);
+    }
+    /**
+     * 设置权重
+     * @param weight
+     * @return
+     * @author sawei
+     */
+    @ResponseBody
     @RequestMapping(value = "weight", method = RequestMethod.POST)
-    public @ResponseBody Map<String, Object> setWeight(@RequestBody Weight weight) {
-        int status;
-        Map<String, Object> result = new HashMap<String, Object>();
-
-        status = commonService.setWeight(weight);
-
-        if (status > 0) {
-            result.put("code", Constant.OK);
-            result.put("msg", "void");
-        } else {
-            result.put("code", Constant.FAIL);
-            result.put("msg", "void");
-        }
-
-        return result;
-
+    public Message setWeight(@RequestBody Weight weight) {
+        return simpleService.setWeight(weight);
     }
+
     /**
      * 上传Excel，批量注册学生和老师
      * @param request
      * @param roleId
      * @return
+     * @throws Exception
      * @author sawei
      */
+    @ResponseBody
     @RequestMapping(value = "uploadExcel", method = {RequestMethod.GET, RequestMethod.POST})
-    public @ResponseBody Map<String, Object> uploadExcel(HttpServletRequest request, @RequestParam("roleId") Integer roleId) {
-        return adminOperateService.batchRegister(request, roleId);
+    public Message uploadExcel(HttpServletRequest request, @RequestParam("roleId") Integer roleId) throws Exception {
+        return adminComplexService.batchRegister(request, roleId);
     }
 
     /**
@@ -88,22 +84,10 @@ public class OperateController {
      * @return
      * @author sawei
      */
+    @ResponseBody
     @RequestMapping(value = "studentRegister", method = RequestMethod.POST )
-    public @ResponseBody Map<String, Object> studentRegister(@RequestBody StudentRegisterView temp) {
-        int status;
-        Map<String, Object> result = new HashMap<String, Object>();
-
-        status = adminOperateService.studentRegister(temp.getUserName(), temp.getNickName(), temp.getMajor(), temp.getClss());
-
-        if (status > 0) {
-            result.put("code", Constant.OK);
-            result.put("msg", "学生注册成功");
-        } else {
-            result.put("code", Constant.FAIL);
-            result.put("msg", "学生注册失败");
-        }
-
-        return result;
+    public Message studentRegister(@RequestBody StudentRegisterView temp) {
+        return simpleService.studentRegister(temp.getUserName(), temp.getNickName(), temp.getMajor(), temp.getClss(), temp.getGrade());
     }
 
     /**
@@ -112,105 +96,11 @@ public class OperateController {
      * @return
      * @author sawei
      */
+    @ResponseBody
     @RequestMapping(value = "teacherRegister", method = RequestMethod.POST )
-    public @ResponseBody Map<String, Object> teacherRegister(@RequestBody TeacherRegisterView temp) {
-        int status;
-        Map<String, Object> result = new HashMap<String, Object>();
-
-        status = adminOperateService.teacherRegister(temp.getUserName(), temp.getNickName(), temp.getMajor());
-
-        if (status > 0) {
-            result.put("code", Constant.OK);
-            result.put("msg", "教师注册成功！");
-        } else {
-            result.put("code", Constant.FAIL);
-            result.put("msg", "教师注册失败！");
-        }
-
-        return result;
-    }
-
-    @RequestMapping(value = "allocateStu2Teacher", method = RequestMethod.GET)
-    public @ResponseBody Map<String, Object> allocateStu2Teacher(@RequestParam(value = "studentIdList") List<Integer> StudentIdList,
-                                                                 @RequestParam(value = "teacherId") Integer teacherId) {
-        int status;
-        Map<String, Object> result = new HashMap<String, Object>();
-
-        for (Integer stuId:
-                StudentIdList) {
-            Student student = studentService.selectByPrimaryKey(stuId);
-            student.setTeacherId(teacherId);
-            status = studentService.updateByPrimaryKey(student);
-            if (!(status > 0)) {
-                result.put("code", Constant.FAIL);
-                result.put("msg", "分配学生失败！");
-                return result;
-            }
-        }
-        result.put("code", Constant.OK);
-        result.put("msg", "分配学生成功！");
-        return result;
+    public Message teacherRegister(@RequestBody TeacherRegisterView temp) {
+        return simpleService.teacherRegister(temp.getUserName(), temp.getNickName(), temp.getMajor());
     }
 
 
-    @RequestMapping(value = "forbidAccount", method = RequestMethod.GET)
-    public @ResponseBody Map<String, Object> forbidAccount(@RequestParam("roleId") Integer roleId,
-                                                           @RequestParam("id") Integer id) {
-        int status;
-        Integer userId;
-        Map<String, Object> result = new HashMap<String, Object>();
-
-//        根据角色的主键id查询userID
-        userId = commonService.role2user(roleId, id);
-
-        User user = userService.selectByPrimaryKey(userId);
-//        user.setForbidden(true);
-        status = userService.updateByPrimaryKey(user);
-
-        if (status > 0) {
-            result.put("code", Constant.OK);
-            result.put("msg", "禁用成功！");
-        } else {
-            result.put("code", Constant.FAIL);
-            result.put("msg", "禁用失败！");
-        }
-
-        return result;
-    }
-
-
-    /**
-     * 管理员重新设置密码
-     * @param roleId
-     * @param id
-     * @return
-     * @author sawei
-     */
-    @RequestMapping(value = "resetPwd", method = RequestMethod.GET)
-    public @ResponseBody Map<String, Object> resetPwd(@RequestParam("roleId") Integer roleId,
-                                                      @RequestParam("id") Integer id) {
-        int status;
-        Integer userId;
-        String md5Password;
-        Map<String, Object> result = new HashMap<String, Object>();
-
-        md5Password = Md5Util.getMD5(Constant.DEFAULTPWD);
-
-        userId = commonService.role2user(roleId, id);
-
-//                修改密码
-        User user = userService.selectByPrimaryKey(userId);
-        user.setPassword(md5Password);
-        status = userService.updateByPrimaryKey(user);
-
-        if (status > 0) {
-            result.put("code", Constant.OK);
-            result.put("msg", "修改密码成功！");
-        } else {
-            result.put("code", Constant.FAIL);
-            result.put("msg", "修改密码失败！");
-        }
-
-        return result;
-    }
 }

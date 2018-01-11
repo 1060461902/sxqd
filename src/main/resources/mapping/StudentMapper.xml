@@ -12,12 +12,11 @@
     <result column="delete_tag" jdbcType="BIT" property="deleteTag" />
     <result column="sex" jdbcType="BIT" property="sex" />
     <result column="nation" jdbcType="VARCHAR" property="nation" />
-    <result column="english" jdbcType="BIT" property="english" />
+    <result column="english" jdbcType="VARCHAR" property="english" />
     <result column="grade" jdbcType="VARCHAR" property="grade" />
     <result column="major" jdbcType="VARCHAR" property="major" />
     <result column="clss" jdbcType="VARCHAR" property="clss" />
     <result column="forbidden" jdbcType="BIT" property="forbidden" />
-    <result column="deleteTag" jdbcType="BIT" property="deletetag" />
     <result column="birthday" jdbcType="VARCHAR" property="birthday" />
     <result column="national" jdbcType="VARCHAR" property="national" />
     <result column="email" jdbcType="VARCHAR" property="email" />
@@ -82,7 +81,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, user_id, company_id, teacher_id, status, zip_file, post, delete_tag, sex, nation, 
-    english, grade, major, clss, forbidden, deleteTag, birthday, national, email
+    english, grade, major, clss, forbidden, birthday, national, email
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.StudentExample" resultMap="BaseResultMap">
     select
@@ -123,28 +122,25 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.Student">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into student (user_id, company_id, teacher_id, 
-      status, zip_file, post, 
-      delete_tag, sex, nation, english, 
-      grade, major, clss, 
-      forbidden, deleteTag, birthday, 
+    insert into student (id, user_id, company_id, 
+      teacher_id, status, zip_file, 
+      post, delete_tag, sex, nation, 
+      english, grade, major, 
+      clss, forbidden, birthday, 
       national, email)
-    values (#{userId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}, 
-      #{status,jdbcType=VARCHAR}, #{zipFile,jdbcType=BIT}, #{post,jdbcType=VARCHAR}, 
-      #{deleteTag,jdbcType=BIT}, #{sex,jdbcType=BIT}, #{nation,jdbcType=VARCHAR}, #{english,jdbcType=BIT}, 
-      #{grade,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{clss,jdbcType=VARCHAR}, 
-      #{forbidden,jdbcType=BIT}, #{deletetag,jdbcType=BIT}, #{birthday,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, 
+      #{teacherId,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, #{zipFile,jdbcType=BIT}, 
+      #{post,jdbcType=VARCHAR}, #{deleteTag,jdbcType=BIT}, #{sex,jdbcType=BIT}, #{nation,jdbcType=VARCHAR}, 
+      #{english,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, 
+      #{clss,jdbcType=VARCHAR}, #{forbidden,jdbcType=BIT}, #{birthday,jdbcType=VARCHAR}, 
       #{national,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.Student">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into student
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="userId != null">
         user_id,
       </if>
@@ -187,9 +183,6 @@
       <if test="forbidden != null">
         forbidden,
       </if>
-      <if test="deletetag != null">
-        deleteTag,
-      </if>
       <if test="birthday != null">
         birthday,
       </if>
@@ -201,6 +194,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
@@ -229,7 +225,7 @@
         #{nation,jdbcType=VARCHAR},
       </if>
       <if test="english != null">
-        #{english,jdbcType=BIT},
+        #{english,jdbcType=VARCHAR},
       </if>
       <if test="grade != null">
         #{grade,jdbcType=VARCHAR},
@@ -242,9 +238,6 @@
       </if>
       <if test="forbidden != null">
         #{forbidden,jdbcType=BIT},
-      </if>
-      <if test="deletetag != null">
-        #{deletetag,jdbcType=BIT},
       </if>
       <if test="birthday != null">
         #{birthday,jdbcType=VARCHAR},
@@ -297,7 +290,7 @@
         nation = #{record.nation,jdbcType=VARCHAR},
       </if>
       <if test="record.english != null">
-        english = #{record.english,jdbcType=BIT},
+        english = #{record.english,jdbcType=VARCHAR},
       </if>
       <if test="record.grade != null">
         grade = #{record.grade,jdbcType=VARCHAR},
@@ -310,9 +303,6 @@
       </if>
       <if test="record.forbidden != null">
         forbidden = #{record.forbidden,jdbcType=BIT},
-      </if>
-      <if test="record.deletetag != null">
-        deleteTag = #{record.deletetag,jdbcType=BIT},
       </if>
       <if test="record.birthday != null">
         birthday = #{record.birthday,jdbcType=VARCHAR},
@@ -340,12 +330,11 @@
       delete_tag = #{record.deleteTag,jdbcType=BIT},
       sex = #{record.sex,jdbcType=BIT},
       nation = #{record.nation,jdbcType=VARCHAR},
-      english = #{record.english,jdbcType=BIT},
+      english = #{record.english,jdbcType=VARCHAR},
       grade = #{record.grade,jdbcType=VARCHAR},
       major = #{record.major,jdbcType=VARCHAR},
       clss = #{record.clss,jdbcType=VARCHAR},
       forbidden = #{record.forbidden,jdbcType=BIT},
-      deleteTag = #{record.deletetag,jdbcType=BIT},
       birthday = #{record.birthday,jdbcType=VARCHAR},
       national = #{record.national,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR}
@@ -384,7 +373,7 @@
         nation = #{nation,jdbcType=VARCHAR},
       </if>
       <if test="english != null">
-        english = #{english,jdbcType=BIT},
+        english = #{english,jdbcType=VARCHAR},
       </if>
       <if test="grade != null">
         grade = #{grade,jdbcType=VARCHAR},
@@ -397,9 +386,6 @@
       </if>
       <if test="forbidden != null">
         forbidden = #{forbidden,jdbcType=BIT},
-      </if>
-      <if test="deletetag != null">
-        deleteTag = #{deletetag,jdbcType=BIT},
       </if>
       <if test="birthday != null">
         birthday = #{birthday,jdbcType=VARCHAR},
@@ -424,12 +410,11 @@
       delete_tag = #{deleteTag,jdbcType=BIT},
       sex = #{sex,jdbcType=BIT},
       nation = #{nation,jdbcType=VARCHAR},
-      english = #{english,jdbcType=BIT},
+      english = #{english,jdbcType=VARCHAR},
       grade = #{grade,jdbcType=VARCHAR},
       major = #{major,jdbcType=VARCHAR},
       clss = #{clss,jdbcType=VARCHAR},
       forbidden = #{forbidden,jdbcType=BIT},
-      deleteTag = #{deletetag,jdbcType=BIT},
       birthday = #{birthday,jdbcType=VARCHAR},
       national = #{national,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR}

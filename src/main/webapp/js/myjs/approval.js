@@ -1,55 +1,11 @@
-$(document).ready(function(){
-  var info = new Object();
-  info.type = "企业类型";//第一次导入时默认全部企业类型
-      $.ajax({
-       type: 'get',
-       url: '/fieldManagement/admin/showCompanyRegisterApplyList',
-       data: JSON.stringify(info),
-       async: true,
-       contentType: "application/json",
-       dateType: "json",
-       success: function(data){
-      writein(data);
-      checkbox();
-      var docrTable = $('#table-1').dataTable({
-                "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
-                "bFilter" : true, //是否启动过滤、搜索功能
-                "info": false,
-                 "pageLength": 7,
-                "lengthChange" : false,
-                  "oLanguage": { //国际化配置
-                    "sProcessing" : "正在获取数据，请稍后...",
-                    "sLengthMenu" : "显示 _MENU_ 条",
-                    "sZeroRecords" : "没有您要搜索的内容",
-                    "sInfo" : "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
-                    "sInfoEmpty" : "记录数为0",
-                    "sInfoFiltered" : "(全部记录数 _MAX_ 条)",
-                    "sInfoPostFix" : "",
-                    "sSearch" : "搜索",
-                    "sUrl" : "",
-                    "oPaginate": {
-                        "sFirst" : "第一页",
-                        "sPrevious" : "上一页",
-                        "sNext" : "下一页",
-                        "sLast" : "最后一页"
-                    }
-                },
-              });
-     },
-       error: function(){
-        alert('服务端异常');
-        }
-    });
-//     $.getJSON("js/json/approval-1.json", function(data) {
-// });//getjson
 //--------------------筛选（需要表格重新导入）
-  $("option").click(function(){
+function optionclick(){
     var info = new Object();
-    info.type = $(this).text();
+    info.type = $('select').val();
      $.ajax({
        type: 'get',
        url: '/fieldManagement/admin/showCompanyRegisterApplyList',
-       data: JSON.stringify(info),
+       data: info,
        async: true,
        contentType: "application/json",
        dateType: "json",
@@ -89,55 +45,7 @@ $(document).ready(function(){
     });
       // $.getJSON("js/json/approval-1.json", function(data) {
       // });
-  });
-//--------------------------全选checkbox--------------------------
-var m=0;
-$('th>input:checkbox').click(function() {
-      m+=1;
-      if(m%2==1){
-        $('input:checkbox').each(function() {
-        $(this).attr('checked', true);
-        $(".operations").css("display","block");
-       });
-      }
-      else if(m%2==0){
-        $('input:checkbox').each(function () {
-        $(this).attr('checked',false);
-        $(".operations").css("display","none");
-});
-      }
-});
-//-----------点击通过（需要表格重新导入）-----------------
-  $(".operations").click(function(){
-    var id = new Array();
-    var a=0;
-    $('td>input:checkbox').each(function() {
-        if ($(this).attr('checked') =='checked') {
-          id[a]=$(this).parent('td').parent('tr').val();alert(id[a]);
-          a++;
-        }
-    });
-    var info = new Object();
-    info.id=id;
-    info.passFlag='1';
-    info.meg = null;
-      $.ajax({
-       type: 'post',
-       url: '/fieldManagement/admin/comfirmRegister',
-       data: JSON.stringify(info),
-       async: true,
-       contentType: "application/json",
-       dateType: "json",
-       success: function(data){
-         $('th>input:checkbox').attr('checked',false);
-          location.reload();
-     },
-       error: function(){
-        alert('服务端异常');
-        }
-    });
-   });
-//------------------->
+}
 function writein(data){
        var tbody = document.getElementsByTagName ('tbody')[0];
        var len = data.compamyViewList.length;
@@ -185,4 +93,97 @@ function checkbox(){
     });
    });
 }
+$(document).ready(function(){
+  var info = new Object();
+  info.type = "企业类型";//第一次导入时默认全部企业类型
+      $.ajax({
+       type: 'get',
+       url: '/fieldManagement/admin/showCompanyRegisterApplyList',
+       data: info,
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+      writein(data);
+      checkbox();
+      var docrTable = $('#table-1').dataTable({
+                "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示   
+                "bFilter" : true, //是否启动过滤、搜索功能
+                "info": false,
+                 "pageLength": 7,
+                "lengthChange" : false,
+                  "oLanguage": { //国际化配置
+                    "sProcessing" : "正在获取数据，请稍后...",
+                    "sLengthMenu" : "显示 _MENU_ 条",
+                    "sZeroRecords" : "没有您要搜索的内容",
+                    "sInfo" : "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+                    "sInfoEmpty" : "记录数为0",
+                    "sInfoFiltered" : "(全部记录数 _MAX_ 条)",
+                    "sInfoPostFix" : "",
+                    "sSearch" : "搜索",
+                    "sUrl" : "",
+                    "oPaginate": {
+                        "sFirst" : "第一页",
+                        "sPrevious" : "上一页",
+                        "sNext" : "下一页",
+                        "sLast" : "最后一页"
+                    }
+                },
+              });
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
+//     $.getJSON("js/json/approval-1.json", function(data) {
+// });//getjson
+//--------------------------全选checkbox--------------------------
+var m=0;
+$('th>input:checkbox').click(function() {
+      m+=1;
+      if(m%2==1){
+        $('input:checkbox').each(function() {
+        $(this).attr('checked', true);
+        $(".operations").css("display","block");
+       });
+      }
+      else if(m%2==0){
+        $('input:checkbox').each(function () {
+        $(this).attr('checked',false);
+        $(".operations").css("display","none");
+});
+      }
+});
+//-----------点击通过（需要表格重新导入）-----------------
+  $(".operations").click(function(){
+    var id = new Array();
+    var a=0;
+    $('td>input:checkbox').each(function() {
+        if ($(this).attr('checked') =='checked') {
+          id[a]=parseInt($(this).parent('td').parent('tr').val());
+          a++;
+        }
+    });
+    var info = new Object();
+    info.id=id;
+    info.passFlag=1;
+    // info.meg = "0";
+      $.ajax({
+       type: 'post',
+       url: '/fieldManagement/admin/comfirmRegister',
+       data: JSON.stringify(info),
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+         $('th>input:checkbox').attr('checked',false);
+          location.reload();
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });
+   });
+//------------------->
+
 });//document

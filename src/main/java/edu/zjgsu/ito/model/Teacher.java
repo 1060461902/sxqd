@@ -15,7 +15,7 @@ public class Teacher implements Serializable {
      */
     private String major;
 
-    private String sex;
+    private Boolean sex;
 
     private String photo;
 
@@ -53,11 +53,11 @@ public class Teacher implements Serializable {
         this.major = major;
     }
 
-    public String getSex() {
+    public Boolean getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(Boolean sex) {
         this.sex = sex;
     }
 

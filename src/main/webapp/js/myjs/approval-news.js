@@ -1,17 +1,18 @@
 $(document).ready(function(){
   var info =new Object();
-	info.id = window.location.href;
+    var zhf= window.location.href.split('=');
+    info.id = zhf[1];
   //alert(id);
-	  $.ajax({
+    $.ajax({
        type: 'get',
        url: '/fieldManagement/admin/showDynamicNewsDetails',
-       data: JSON.stringify(info),
+       data: info,
        async: true,
        contentType: "application/json",
        dateType: "json",
        success: function(data){
-        window.comid =  data.dynamicNewsDetails.id;
-        var obj = data.dynamicNewsDetails;
+        window.comid =  data.dynamicApproves.id;
+        var obj = data.dynamicApproves;
         $("td#title").text(obj.title);
         $("td img").attr("src",obj.imageUrl);
         $("td#detail").text(obj.detail);
@@ -31,11 +32,11 @@ $("button#pass-button").click(function(){
 	var flag = this.value;
 	if(flag=="1"){
       var id = new Array();
-      id[0] = comid;
+      id[0] = parseInt(comid);
       var info = new Object();
       info.id=id;
-      info.passFlag=flag;//要传输的数据
-      info.meg = null;
+      info.passFlag=1;//要传输的数据
+      info.meg = "0";
     $.ajax({
        type: 'post',
        url: '/fieldManagement/admin/comfirmDynamicNews',
@@ -55,10 +56,10 @@ $("button#pass-button").click(function(){
     }
     else if(flag=="0"){
       var id = new Array();
-      id[0] = comid;
+      id[0] = parseInt(comid);
       var info = new Object();
       info.id=id;
-      info.passFlag=flag;
+      info.passFlag=0;
       info.meg = $('textarea').val();
     $.ajax({
        type: 'post',

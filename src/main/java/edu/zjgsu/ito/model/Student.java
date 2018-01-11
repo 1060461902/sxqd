@@ -17,9 +17,6 @@ public class Student implements Serializable {
 
     private Integer teacherId;
 
-    /**
-     * 实习状态0未实习1申请中2待实习3实习中4已结业
-     */
     private String status;
 
     /**
@@ -50,7 +47,7 @@ public class Student implements Serializable {
     /**
      * 0不熟练1熟练
      */
-    private Boolean english;
+    private String english;
 
     /**
      * 毕业年份
@@ -62,8 +59,6 @@ public class Student implements Serializable {
     private String clss;
 
     private Boolean forbidden;
-
-    private Boolean deletetag;
 
     private String birthday;
 
@@ -153,11 +148,11 @@ public class Student implements Serializable {
         this.nation = nation;
     }
 
-    public Boolean getEnglish() {
+    public String getEnglish() {
         return english;
     }
 
-    public void setEnglish(Boolean english) {
+    public void setEnglish(String english) {
         this.english = english;
     }
 
@@ -191,14 +186,6 @@ public class Student implements Serializable {
 
     public void setForbidden(Boolean forbidden) {
         this.forbidden = forbidden;
-    }
-
-    public Boolean getDeletetag() {
-        return deletetag;
-    }
-
-    public void setDeletetag(Boolean deletetag) {
-        this.deletetag = deletetag;
     }
 
     public String getBirthday() {
@@ -252,7 +239,6 @@ public class Student implements Serializable {
             && (this.getMajor() == null ? other.getMajor() == null : this.getMajor().equals(other.getMajor()))
             && (this.getClss() == null ? other.getClss() == null : this.getClss().equals(other.getClss()))
             && (this.getForbidden() == null ? other.getForbidden() == null : this.getForbidden().equals(other.getForbidden()))
-            && (this.getDeletetag() == null ? other.getDeletetag() == null : this.getDeletetag().equals(other.getDeletetag()))
             && (this.getBirthday() == null ? other.getBirthday() == null : this.getBirthday().equals(other.getBirthday()))
             && (this.getNational() == null ? other.getNational() == null : this.getNational().equals(other.getNational()))
             && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()));
@@ -277,7 +263,6 @@ public class Student implements Serializable {
         result = prime * result + ((getMajor() == null) ? 0 : getMajor().hashCode());
         result = prime * result + ((getClss() == null) ? 0 : getClss().hashCode());
         result = prime * result + ((getForbidden() == null) ? 0 : getForbidden().hashCode());
-        result = prime * result + ((getDeletetag() == null) ? 0 : getDeletetag().hashCode());
         result = prime * result + ((getBirthday() == null) ? 0 : getBirthday().hashCode());
         result = prime * result + ((getNational() == null) ? 0 : getNational().hashCode());
         result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
@@ -305,7 +290,6 @@ public class Student implements Serializable {
         sb.append(", major=").append(major);
         sb.append(", clss=").append(clss);
         sb.append(", forbidden=").append(forbidden);
-        sb.append(", deletetag=").append(deletetag);
         sb.append(", birthday=").append(birthday);
         sb.append(", national=").append(national);
         sb.append(", email=").append(email);

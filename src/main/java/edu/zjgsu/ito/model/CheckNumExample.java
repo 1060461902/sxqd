@@ -184,123 +184,253 @@ public class CheckNumExample {
             return (Criteria) this;
         }
 
-        public Criteria andStartCheckNumIsNull() {
-            addCriterion("start_check_num is null");
+        public Criteria andClockinnumIsNull() {
+            addCriterion("clockInNum is null");
             return (Criteria) this;
         }
 
-        public Criteria andStartCheckNumIsNotNull() {
-            addCriterion("start_check_num is not null");
+        public Criteria andClockinnumIsNotNull() {
+            addCriterion("clockInNum is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStartCheckNumEqualTo(Integer value) {
-            addCriterion("start_check_num =", value, "startCheckNum");
+        public Criteria andClockinnumEqualTo(Integer value) {
+            addCriterion("clockInNum =", value, "clockinnum");
             return (Criteria) this;
         }
 
-        public Criteria andStartCheckNumNotEqualTo(Integer value) {
-            addCriterion("start_check_num <>", value, "startCheckNum");
+        public Criteria andClockinnumNotEqualTo(Integer value) {
+            addCriterion("clockInNum <>", value, "clockinnum");
             return (Criteria) this;
         }
 
-        public Criteria andStartCheckNumGreaterThan(Integer value) {
-            addCriterion("start_check_num >", value, "startCheckNum");
+        public Criteria andClockinnumGreaterThan(Integer value) {
+            addCriterion("clockInNum >", value, "clockinnum");
             return (Criteria) this;
         }
 
-        public Criteria andStartCheckNumGreaterThanOrEqualTo(Integer value) {
-            addCriterion("start_check_num >=", value, "startCheckNum");
+        public Criteria andClockinnumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("clockInNum >=", value, "clockinnum");
             return (Criteria) this;
         }
 
-        public Criteria andStartCheckNumLessThan(Integer value) {
-            addCriterion("start_check_num <", value, "startCheckNum");
+        public Criteria andClockinnumLessThan(Integer value) {
+            addCriterion("clockInNum <", value, "clockinnum");
             return (Criteria) this;
         }
 
-        public Criteria andStartCheckNumLessThanOrEqualTo(Integer value) {
-            addCriterion("start_check_num <=", value, "startCheckNum");
+        public Criteria andClockinnumLessThanOrEqualTo(Integer value) {
+            addCriterion("clockInNum <=", value, "clockinnum");
             return (Criteria) this;
         }
 
-        public Criteria andStartCheckNumIn(List<Integer> values) {
-            addCriterion("start_check_num in", values, "startCheckNum");
+        public Criteria andClockinnumIn(List<Integer> values) {
+            addCriterion("clockInNum in", values, "clockinnum");
             return (Criteria) this;
         }
 
-        public Criteria andStartCheckNumNotIn(List<Integer> values) {
-            addCriterion("start_check_num not in", values, "startCheckNum");
+        public Criteria andClockinnumNotIn(List<Integer> values) {
+            addCriterion("clockInNum not in", values, "clockinnum");
             return (Criteria) this;
         }
 
-        public Criteria andStartCheckNumBetween(Integer value1, Integer value2) {
-            addCriterion("start_check_num between", value1, value2, "startCheckNum");
+        public Criteria andClockinnumBetween(Integer value1, Integer value2) {
+            addCriterion("clockInNum between", value1, value2, "clockinnum");
             return (Criteria) this;
         }
 
-        public Criteria andStartCheckNumNotBetween(Integer value1, Integer value2) {
-            addCriterion("start_check_num not between", value1, value2, "startCheckNum");
+        public Criteria andClockinnumNotBetween(Integer value1, Integer value2) {
+            addCriterion("clockInNum not between", value1, value2, "clockinnum");
             return (Criteria) this;
         }
 
-        public Criteria andEndCheckNumIsNull() {
-            addCriterion("end_check_num is null");
+        public Criteria andClockoutnumIsNull() {
+            addCriterion("clockOutNum is null");
             return (Criteria) this;
         }
 
-        public Criteria andEndCheckNumIsNotNull() {
-            addCriterion("end_check_num is not null");
+        public Criteria andClockoutnumIsNotNull() {
+            addCriterion("clockOutNum is not null");
             return (Criteria) this;
         }
 
-        public Criteria andEndCheckNumEqualTo(Integer value) {
-            addCriterion("end_check_num =", value, "endCheckNum");
+        public Criteria andClockoutnumEqualTo(Integer value) {
+            addCriterion("clockOutNum =", value, "clockoutnum");
             return (Criteria) this;
         }
 
-        public Criteria andEndCheckNumNotEqualTo(Integer value) {
-            addCriterion("end_check_num <>", value, "endCheckNum");
+        public Criteria andClockoutnumNotEqualTo(Integer value) {
+            addCriterion("clockOutNum <>", value, "clockoutnum");
             return (Criteria) this;
         }
 
-        public Criteria andEndCheckNumGreaterThan(Integer value) {
-            addCriterion("end_check_num >", value, "endCheckNum");
+        public Criteria andClockoutnumGreaterThan(Integer value) {
+            addCriterion("clockOutNum >", value, "clockoutnum");
             return (Criteria) this;
         }
 
-        public Criteria andEndCheckNumGreaterThanOrEqualTo(Integer value) {
-            addCriterion("end_check_num >=", value, "endCheckNum");
+        public Criteria andClockoutnumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("clockOutNum >=", value, "clockoutnum");
             return (Criteria) this;
         }
 
-        public Criteria andEndCheckNumLessThan(Integer value) {
-            addCriterion("end_check_num <", value, "endCheckNum");
+        public Criteria andClockoutnumLessThan(Integer value) {
+            addCriterion("clockOutNum <", value, "clockoutnum");
             return (Criteria) this;
         }
 
-        public Criteria andEndCheckNumLessThanOrEqualTo(Integer value) {
-            addCriterion("end_check_num <=", value, "endCheckNum");
+        public Criteria andClockoutnumLessThanOrEqualTo(Integer value) {
+            addCriterion("clockOutNum <=", value, "clockoutnum");
             return (Criteria) this;
         }
 
-        public Criteria andEndCheckNumIn(List<Integer> values) {
-            addCriterion("end_check_num in", values, "endCheckNum");
+        public Criteria andClockoutnumIn(List<Integer> values) {
+            addCriterion("clockOutNum in", values, "clockoutnum");
             return (Criteria) this;
         }
 
-        public Criteria andEndCheckNumNotIn(List<Integer> values) {
-            addCriterion("end_check_num not in", values, "endCheckNum");
+        public Criteria andClockoutnumNotIn(List<Integer> values) {
+            addCriterion("clockOutNum not in", values, "clockoutnum");
             return (Criteria) this;
         }
 
-        public Criteria andEndCheckNumBetween(Integer value1, Integer value2) {
-            addCriterion("end_check_num between", value1, value2, "endCheckNum");
+        public Criteria andClockoutnumBetween(Integer value1, Integer value2) {
+            addCriterion("clockOutNum between", value1, value2, "clockoutnum");
             return (Criteria) this;
         }
 
-        public Criteria andEndCheckNumNotBetween(Integer value1, Integer value2) {
-            addCriterion("end_check_num not between", value1, value2, "endCheckNum");
+        public Criteria andClockoutnumNotBetween(Integer value1, Integer value2) {
+            addCriterion("clockOutNum not between", value1, value2, "clockoutnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDayIsNull() {
+            addCriterion("day is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDayIsNotNull() {
+            addCriterion("day is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDayEqualTo(String value) {
+            addCriterion("day =", value, "day");
+            return (Criteria) this;
+        }
+
+        public Criteria andDayNotEqualTo(String value) {
+            addCriterion("day <>", value, "day");
+            return (Criteria) this;
+        }
+
+        public Criteria andDayGreaterThan(String value) {
+            addCriterion("day >", value, "day");
+            return (Criteria) this;
+        }
+
+        public Criteria andDayGreaterThanOrEqualTo(String value) {
+            addCriterion("day >=", value, "day");
+            return (Criteria) this;
+        }
+
+        public Criteria andDayLessThan(String value) {
+            addCriterion("day <", value, "day");
+            return (Criteria) this;
+        }
+
+        public Criteria andDayLessThanOrEqualTo(String value) {
+            addCriterion("day <=", value, "day");
+            return (Criteria) this;
+        }
+
+        public Criteria andDayLike(String value) {
+            addCriterion("day like", value, "day");
+            return (Criteria) this;
+        }
+
+        public Criteria andDayNotLike(String value) {
+            addCriterion("day not like", value, "day");
+            return (Criteria) this;
+        }
+
+        public Criteria andDayIn(List<String> values) {
+            addCriterion("day in", values, "day");
+            return (Criteria) this;
+        }
+
+        public Criteria andDayNotIn(List<String> values) {
+            addCriterion("day not in", values, "day");
+            return (Criteria) this;
+        }
+
+        public Criteria andDayBetween(String value1, String value2) {
+            addCriterion("day between", value1, value2, "day");
+            return (Criteria) this;
+        }
+
+        public Criteria andDayNotBetween(String value1, String value2) {
+            addCriterion("day not between", value1, value2, "day");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastdayattendnumIsNull() {
+            addCriterion("lastDayAttendNum is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastdayattendnumIsNotNull() {
+            addCriterion("lastDayAttendNum is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastdayattendnumEqualTo(Integer value) {
+            addCriterion("lastDayAttendNum =", value, "lastdayattendnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastdayattendnumNotEqualTo(Integer value) {
+            addCriterion("lastDayAttendNum <>", value, "lastdayattendnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastdayattendnumGreaterThan(Integer value) {
+            addCriterion("lastDayAttendNum >", value, "lastdayattendnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastdayattendnumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("lastDayAttendNum >=", value, "lastdayattendnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastdayattendnumLessThan(Integer value) {
+            addCriterion("lastDayAttendNum <", value, "lastdayattendnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastdayattendnumLessThanOrEqualTo(Integer value) {
+            addCriterion("lastDayAttendNum <=", value, "lastdayattendnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastdayattendnumIn(List<Integer> values) {
+            addCriterion("lastDayAttendNum in", values, "lastdayattendnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastdayattendnumNotIn(List<Integer> values) {
+            addCriterion("lastDayAttendNum not in", values, "lastdayattendnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastdayattendnumBetween(Integer value1, Integer value2) {
+            addCriterion("lastDayAttendNum between", value1, value2, "lastdayattendnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastdayattendnumNotBetween(Integer value1, Integer value2) {
+            addCriterion("lastDayAttendNum not between", value1, value2, "lastdayattendnum");
             return (Criteria) this;
         }
     }

@@ -15,23 +15,23 @@
     <script  type="text/javascript" src="js/bootstrap.js"></script>
     <script src="js/myjs/student_sxcj.js"></script> 
   </head>
-  <body  class="light-gray-bg">  
+  <body  class="light-gray-bg hidden-scrolling" >  
       <!-- Main content --> 
         <div  class="templatemo-content-widget white-bg text-center">
           <h2><b>实习成绩<b>&nbsp;&nbsp;<span class="score red" id="totalScore"></span>&nbsp;&nbsp;分</h2>
    <div class="row sxcj-div1">
-    <h2><b>老师评分</b></h2>
+    <h2><b>老师评分(<span id="teacherWeight"></span>%)</b></h2>
     <div class="row">
       <div class="col-md-9">
-        <div class="row">
+        <div class="row" style="margin-left: 15px;">
           <div class="col-sm-3 sxcj-div2">
-            周报<br><br><h2 class="score" id="tWeekly"></h2>
+            周报(<span id="tWeekReport"></span>%)<br><br><h2 class="score" id="tWeekly"></h2>
           </div>
           <div class="col-sm-3 sxcj-div2">
-            实习小结 <br><br><h2 class="score" id="summary"></h2>
+            实习小结(<span id="tSummary"></span>%)<br><br><h2 class="score" id="summary"></h2>
           </div>
           <div class="col-sm-3 sxcj-div2">
-            实习报告<br><br><h2 class="score" id="report"></h2>
+            实习报告(<span id="tFinalReport"></span>%)<br><br><h2 class="score" id="report"></h2>
           </div>
         </div>
         <div class="row">
@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="col-md-2 sxcj-div2">
-        <br><br><span class="add-symbol">+</span><h3>附加分</h3><br><br><h2 class="score" id="additionalPoints"><br><br></h2>
+        <br><br><span class="add-symbol">+</span><h3><b>附加分</b></h3><br><br><h2 class="score" id="additionalPoints"><br><br></h2>
       </div>
     </div>
     <div class="row">
@@ -51,16 +51,16 @@
     </div>
    </div>
           <div class="sxcj-div1">
-            <h2><b>企业评分</b></h2>
+            <h2><b>企业评分(<span id="companyWeight"></span>%)</b></h2>
                 <div class="sxcj-div4">
-                  周报<br><br><h2 class="score" id="cWeekly"></h2>
+                  周报(<span id="cWeekReport"></span>%)<br><br><h2 class="score" id="cWeekly"></h2>
                 </div>
                 <div class="sxcj-div4">
-                  考勤 <br><br><h2 class="score" id="checkonWork"></h2>
+                  考勤(<span id="cAttendance"></span>%)<br><br><h2 class="score" id="checkonWork"></h2>
                 </div>
                 <div class="setDiv-2">
                 <div class="sxcj-div5">
-                  <h3>企业总评&nbsp;&nbsp;<span class="score" id="ctotalScore">&nbsp;</span>分</h3>
+                  <h2>企业总评&nbsp;&nbsp;<span class="score" id="ctotalScore">&nbsp;</span>分</h2>
                 </div>
                 </div>
           </div>

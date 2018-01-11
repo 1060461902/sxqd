@@ -14,7 +14,7 @@
     <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>      <!-- jQuery -->    
     <script type="text/javascript" src="js/myjs/index.js"></script> 
   </head>
-  <body class="hidden-scrolling light-gray-bg">  
+  <body class="light-gray-bg" >  
     <!-- Left column -->
     <div class="templatemo-flex-row fullfill">
       <div class="templatemo-sidebar"> 
@@ -40,8 +40,7 @@
           </ul>  
         </nav>
       </div>
-      <!-- Main content --> 
-      <div class="templatemo-content col-1 light-gray-bg fullfill" >
+      <div class="templatemo-content col-1 fullfill" >
         <div class="templatemo-top-nav-container">
           <div class="row">
             <nav class="templatemo-top-nav col-lg-12 col-md-12 text-center">         
@@ -56,24 +55,13 @@
           </div>
         </div>
         <div class="templatemo-content-container fullfill">
-          <iframe src="data_analysis.html" frameborder="0" width="100%" name="iFrame1" ></iframe>
-            <footer class="text-right">
-            <p>By Zexiao Chen</p>
-          </footer>                         
+          <iframe src="data_analysis.html" frameborder="0" width="100%" name="iFrame1"  onload="this.height=this.contentWindow.document.body.scrollHeight+80" style="min-height"></iframe>                         
         </div>       
     </div>
 
   </div>
  
     <!-- JS -->
-    <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
-    <script>
-      $(document).ready(function(){
-        // Content widget with background image
-        var imageUrl = $('img.content-bg-img').attr('src');
-        $('.templatemo-content-img-bg').css('background-image', 'url(' + imageUrl + ')');
-        $('img.content-bg-img').hide();        
-      });
-    </script>
+    <script type="text/javascript" src="js/templatemo-script.js"></script>   
   </body>
 </html>

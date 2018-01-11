@@ -764,52 +764,62 @@ public class StudentExample {
             return (Criteria) this;
         }
 
-        public Criteria andEnglishEqualTo(Boolean value) {
+        public Criteria andEnglishEqualTo(String value) {
             addCriterion("english =", value, "english");
             return (Criteria) this;
         }
 
-        public Criteria andEnglishNotEqualTo(Boolean value) {
+        public Criteria andEnglishNotEqualTo(String value) {
             addCriterion("english <>", value, "english");
             return (Criteria) this;
         }
 
-        public Criteria andEnglishGreaterThan(Boolean value) {
+        public Criteria andEnglishGreaterThan(String value) {
             addCriterion("english >", value, "english");
             return (Criteria) this;
         }
 
-        public Criteria andEnglishGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andEnglishGreaterThanOrEqualTo(String value) {
             addCriterion("english >=", value, "english");
             return (Criteria) this;
         }
 
-        public Criteria andEnglishLessThan(Boolean value) {
+        public Criteria andEnglishLessThan(String value) {
             addCriterion("english <", value, "english");
             return (Criteria) this;
         }
 
-        public Criteria andEnglishLessThanOrEqualTo(Boolean value) {
+        public Criteria andEnglishLessThanOrEqualTo(String value) {
             addCriterion("english <=", value, "english");
             return (Criteria) this;
         }
 
-        public Criteria andEnglishIn(List<Boolean> values) {
+        public Criteria andEnglishLike(String value) {
+            addCriterion("english like", value, "english");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnglishNotLike(String value) {
+            addCriterion("english not like", value, "english");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnglishIn(List<String> values) {
             addCriterion("english in", values, "english");
             return (Criteria) this;
         }
 
-        public Criteria andEnglishNotIn(List<Boolean> values) {
+        public Criteria andEnglishNotIn(List<String> values) {
             addCriterion("english not in", values, "english");
             return (Criteria) this;
         }
 
-        public Criteria andEnglishBetween(Boolean value1, Boolean value2) {
+        public Criteria andEnglishBetween(String value1, String value2) {
             addCriterion("english between", value1, value2, "english");
             return (Criteria) this;
         }
 
-        public Criteria andEnglishNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andEnglishNotBetween(String value1, String value2) {
             addCriterion("english not between", value1, value2, "english");
             return (Criteria) this;
         }
@@ -1081,66 +1091,6 @@ public class StudentExample {
 
         public Criteria andForbiddenNotBetween(Boolean value1, Boolean value2) {
             addCriterion("forbidden not between", value1, value2, "forbidden");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeletetagIsNull() {
-            addCriterion("deleteTag is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeletetagIsNotNull() {
-            addCriterion("deleteTag is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeletetagEqualTo(Boolean value) {
-            addCriterion("deleteTag =", value, "deletetag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeletetagNotEqualTo(Boolean value) {
-            addCriterion("deleteTag <>", value, "deletetag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeletetagGreaterThan(Boolean value) {
-            addCriterion("deleteTag >", value, "deletetag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeletetagGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("deleteTag >=", value, "deletetag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeletetagLessThan(Boolean value) {
-            addCriterion("deleteTag <", value, "deletetag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeletetagLessThanOrEqualTo(Boolean value) {
-            addCriterion("deleteTag <=", value, "deletetag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeletetagIn(List<Boolean> values) {
-            addCriterion("deleteTag in", values, "deletetag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeletetagNotIn(List<Boolean> values) {
-            addCriterion("deleteTag not in", values, "deletetag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeletetagBetween(Boolean value1, Boolean value2) {
-            addCriterion("deleteTag between", value1, value2, "deletetag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeletetagNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("deleteTag not between", value1, value2, "deletetag");
             return (Criteria) this;
         }
 

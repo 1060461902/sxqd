@@ -1,10 +1,12 @@
 $(document).ready(function(){ 
 	  var info =new Object();
-  info.id = window.location.href;
+    var zhf= window.location.href.split('=');
+    info.id = zhf[1];
+    $('a#zpgw').attr('href','company_table_jobs.html?id='+zhf[1]+'');
 	  $.ajax({
        type: 'get',
        url: '/fieldManagement/admin/showRecruitmentDetails',
-       data: JSON.stringify(id),
+       data: info,
        async: true,
        contentType: "application/json",
        dateType: "json",

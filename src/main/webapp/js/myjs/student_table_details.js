@@ -1,23 +1,26 @@
 $(document).ready(function(){  
 	//alert(window.location.href);
     //window.studentid = window.location.href;
-    window.studentid = window.location.href.split('=');
-	var info = new Object();
-	info.id = studentid[1];
+    var info = new Object();
+    var zhf= window.location.href.split('=');
+    info.id = zhf[1];
+    window.studentid = zhf[1];
+
 	$('a#qzzl').attr("href",'student_table_jobs.html?id='+info.id+'');
      $.ajax({
        type: 'get',
        url: '/fieldManagement/admin/showStudentDetail',
        async: true,
        contentType: "application/json",
-       data: JSON.stringify(info),
+       data: info,
        dateType: "json",
        success: function(data){
 		var obj =data.student;
-		$('h4#nickName').text(obj.nickname);
-		$('table#student_details tr:eq(0) td').text(obj.nickname);
-		$('span#userName').text(obj.username);
-		$('table#student_details tr:eq(1) td').text(obj.username);
+		$('#nickName').text(obj.nickName);
+		$('h4#nickName').text(obj.nickName);
+		$('table#student_details tr:eq(0) td').text(obj.nickName);
+		$('span#userName').text(obj.userName);
+		$('table#student_details tr:eq(1) td').text(obj.userName);
 		if(obj.sex==true||obj.sex==1||obj.sex=='1'){
 		$('span#sex').text('男');
 		$("button#male").css("background-color","#09C");
@@ -28,9 +31,17 @@ $(document).ready(function(){
 	    $("button#male").css("background-color","pink");
 	    window.sex =false;
 	    }	
-		$('span#nation').text(obj.national);
-		$('span#birthDate').text(obj.birthdate);
-		$('table#student_details tr:eq(5) input').val(obj.birthdate);
+	    else
+	    	$('span#sex').text('( 性别信息为空 )');
+	    if ( obj.national==null )
+	    	$('span#nation').text('( 民族信息为空 )');
+	    else
+		    $('span#nation').text(obj.national);
+	    if ( obj.birthday ==null)
+		    $('span#birthDate').text('( 出生日期为空 )');
+	    else
+	    	$('span#birthDate').text(obj.birthday);
+		$('table#student_details tr:eq(5) input').val(obj.birthday);
 		$('span#phone').text(obj.phone);
 		$('table#student_details tr:eq(6) input').val(obj.phone);
 		$('span#email').text(obj.email);
@@ -74,11 +85,12 @@ $(document).ready(function(){
 		$('li.list-group-item:eq(3) div:eq('+n+') span.time').text(obj4[n].Club.startTime+'------'+obj4[n].Club.endTime);
 	    }
 		//标签
-		var skill =data.skill;
-        var skilllength = data.SkillList.length;
+	
+		var skill =data.SkillList;
+        var skilllength = skill.length;
         for(var n=0;n<skilllength;n++)
         {
-          $('div.skill-content').append('<span class="label label-primary" id="skill">'+skill[n]+'</span>');
+          $('div.skill-content').append('<span class="label label-primary" id="skill">'+skill[n].Skill.skill+'</span>');
         };
      },
        error: function(){
@@ -93,7 +105,7 @@ $('button#edit').click(function(){
   studentBasicInfo.id=studentid;
   studentBasicInfo.sex = sex;   
   studentBasicInfo.nation = $('select#nation').val();  
-  studentBasicInfo.birthDate= $('table#student_details tr:eq(5) input').val();
+  studentBasicInfo.birthday= $('table#student_details tr:eq(5) input').val();
   studentBasicInfo.phone= $('table#student_details tr:eq(6) input').val();
   studentBasicInfo.email= $('table#student_details tr:eq(7) input').val();
      $.ajax({

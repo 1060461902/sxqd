@@ -7,7 +7,7 @@ public class StudentDetail {
     Integer teacherId;
     Boolean sex;
     String national;
-    Boolean english;
+    String english;
     String grade;
     String major;
     String clss;
@@ -17,14 +17,13 @@ public class StudentDetail {
     String birthday;
     String email;
 
-    public Boolean getEnglish() {
+    public String getEnglish() {
         return english;
     }
 
-    public void setEnglish(Boolean english) {
+    public void setEnglish(String english) {
         this.english = english;
     }
-
 
     public String getNational() {
         return national;

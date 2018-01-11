@@ -22,10 +22,9 @@
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="recruitment" jdbcType="BIT" property="recruitment" />
     <result column="why" jdbcType="VARCHAR" property="why" />
-    <result column="startTime" jdbcType="TIMESTAMP" property="starttime" />
     <result column="endTime" jdbcType="TIMESTAMP" property="endtime" />
     <result column="city" jdbcType="VARCHAR" property="city" />
-    <result column="release_time" jdbcType="TIMESTAMP" property="releaseTime" />
+    <result column="release_time" jdbcType="VARCHAR" property="releaseTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -88,7 +87,7 @@
   <sql id="Base_Column_List">
     id, company_id, post, current_number, total_number, post_info, checked, pass, delete_tag, 
     address, skill_require, post_time, remove, forbidden, salary, contact, phone, email, 
-    recruitment, why, startTime, endTime, city, release_time
+    recruitment, why, endTime, city, release_time
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.RecruitmentExample" resultMap="BaseResultMap">
     select
@@ -129,32 +128,29 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.Recruitment">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into recruitment (company_id, post, current_number, 
-      total_number, post_info, checked, 
-      pass, delete_tag, address, skill_require, 
-      post_time, remove, forbidden, 
-      salary, contact, phone, 
-      email, recruitment, why, 
-      startTime, endTime, city, 
+    insert into recruitment (id, company_id, post, 
+      current_number, total_number, post_info, 
+      checked, pass, delete_tag, address, 
+      skill_require, post_time, remove, 
+      forbidden, salary, contact, 
+      phone, email, recruitment, 
+      why, endTime, city, 
       release_time)
-    values (#{companyId,jdbcType=INTEGER}, #{post,jdbcType=VARCHAR}, #{currentNumber,jdbcType=INTEGER}, 
-      #{totalNumber,jdbcType=INTEGER}, #{postInfo,jdbcType=VARCHAR}, #{checked,jdbcType=BIT}, 
-      #{pass,jdbcType=BIT}, #{deleteTag,jdbcType=BIT}, #{address,jdbcType=VARCHAR}, #{skillRequire,jdbcType=VARCHAR}, 
-      #{postTime,jdbcType=VARCHAR}, #{remove,jdbcType=BIT}, #{forbidden,jdbcType=BIT}, 
-      #{salary,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{recruitment,jdbcType=BIT}, #{why,jdbcType=VARCHAR}, 
-      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{city,jdbcType=VARCHAR}, 
-      #{releaseTime,jdbcType=TIMESTAMP})
+    values (#{id,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{post,jdbcType=VARCHAR}, 
+      #{currentNumber,jdbcType=INTEGER}, #{totalNumber,jdbcType=INTEGER}, #{postInfo,jdbcType=VARCHAR}, 
+      #{checked,jdbcType=BIT}, #{pass,jdbcType=BIT}, #{deleteTag,jdbcType=BIT}, #{address,jdbcType=VARCHAR}, 
+      #{skillRequire,jdbcType=VARCHAR}, #{postTime,jdbcType=VARCHAR}, #{remove,jdbcType=BIT}, 
+      #{forbidden,jdbcType=BIT}, #{salary,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{recruitment,jdbcType=BIT}, 
+      #{why,jdbcType=VARCHAR}, #{endtime,jdbcType=TIMESTAMP}, #{city,jdbcType=VARCHAR}, 
+      #{releaseTime,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.Recruitment">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into recruitment
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="companyId != null">
         company_id,
       </if>
@@ -212,9 +208,6 @@
       <if test="why != null">
         why,
       </if>
-      <if test="starttime != null">
-        startTime,
-      </if>
       <if test="endtime != null">
         endTime,
       </if>
@@ -226,6 +219,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="companyId != null">
         #{companyId,jdbcType=INTEGER},
       </if>
@@ -283,9 +279,6 @@
       <if test="why != null">
         #{why,jdbcType=VARCHAR},
       </if>
-      <if test="starttime != null">
-        #{starttime,jdbcType=TIMESTAMP},
-      </if>
       <if test="endtime != null">
         #{endtime,jdbcType=TIMESTAMP},
       </if>
@@ -293,7 +286,7 @@
         #{city,jdbcType=VARCHAR},
       </if>
       <if test="releaseTime != null">
-        #{releaseTime,jdbcType=TIMESTAMP},
+        #{releaseTime,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -366,9 +359,6 @@
       <if test="record.why != null">
         why = #{record.why,jdbcType=VARCHAR},
       </if>
-      <if test="record.starttime != null">
-        startTime = #{record.starttime,jdbcType=TIMESTAMP},
-      </if>
       <if test="record.endtime != null">
         endTime = #{record.endtime,jdbcType=TIMESTAMP},
       </if>
@@ -376,7 +366,7 @@
         city = #{record.city,jdbcType=VARCHAR},
       </if>
       <if test="record.releaseTime != null">
-        release_time = #{record.releaseTime,jdbcType=TIMESTAMP},
+        release_time = #{record.releaseTime,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -405,10 +395,9 @@
       email = #{record.email,jdbcType=VARCHAR},
       recruitment = #{record.recruitment,jdbcType=BIT},
       why = #{record.why,jdbcType=VARCHAR},
-      startTime = #{record.starttime,jdbcType=TIMESTAMP},
       endTime = #{record.endtime,jdbcType=TIMESTAMP},
       city = #{record.city,jdbcType=VARCHAR},
-      release_time = #{record.releaseTime,jdbcType=TIMESTAMP}
+      release_time = #{record.releaseTime,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -473,9 +462,6 @@
       <if test="why != null">
         why = #{why,jdbcType=VARCHAR},
       </if>
-      <if test="starttime != null">
-        startTime = #{starttime,jdbcType=TIMESTAMP},
-      </if>
       <if test="endtime != null">
         endTime = #{endtime,jdbcType=TIMESTAMP},
       </if>
@@ -483,7 +469,7 @@
         city = #{city,jdbcType=VARCHAR},
       </if>
       <if test="releaseTime != null">
-        release_time = #{releaseTime,jdbcType=TIMESTAMP},
+        release_time = #{releaseTime,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -509,10 +495,9 @@
       email = #{email,jdbcType=VARCHAR},
       recruitment = #{recruitment,jdbcType=BIT},
       why = #{why,jdbcType=VARCHAR},
-      startTime = #{starttime,jdbcType=TIMESTAMP},
       endTime = #{endtime,jdbcType=TIMESTAMP},
       city = #{city,jdbcType=VARCHAR},
-      release_time = #{releaseTime,jdbcType=TIMESTAMP}
+      release_time = #{releaseTime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByCompanyId" resultMap="BaseResultMap">

@@ -1,5 +1,7 @@
 package edu.zjgsu.ito.vo;
 
+import java.util.Date;
+
 public class RecruitmentVo {
         private String Post;
         private String companyName;
@@ -11,6 +13,15 @@ public class RecruitmentVo {
         private int id;
         private int companyId;
         private  boolean forbidden;
+        private String ReleaseTime;
+
+    public String getReleaseTime() {
+        return ReleaseTime;
+    }
+
+    public void setReleaseTime(String releaseTime) {
+        ReleaseTime = releaseTime;
+    }
 
     public boolean isForbidden() {
         return forbidden;

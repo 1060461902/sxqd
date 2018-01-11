@@ -1,7 +1,6 @@
 package edu.zjgsu.ito.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author 
@@ -16,11 +15,11 @@ public class Summary implements Serializable {
 
     private String title;
 
-    private Date publishedDate;
+    private String publishedDate;
 
-    private Date startTime;
+    private String startTime;
 
-    private Date endTime;
+    private String endTime;
 
     private String url;
 
@@ -33,7 +32,7 @@ public class Summary implements Serializable {
 
     private Integer studentRecruitmentId;
 
-    private Date readoverTime;
+    private String readoverTime;
 
     private Integer score;
 
@@ -65,27 +64,27 @@ public class Summary implements Serializable {
         this.title = title;
     }
 
-    public Date getPublishedDate() {
+    public String getPublishedDate() {
         return publishedDate;
     }
 
-    public void setPublishedDate(Date publishedDate) {
+    public void setPublishedDate(String publishedDate) {
         this.publishedDate = publishedDate;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
@@ -121,11 +120,11 @@ public class Summary implements Serializable {
         this.studentRecruitmentId = studentRecruitmentId;
     }
 
-    public Date getReadoverTime() {
+    public String getReadoverTime() {
         return readoverTime;
     }
 
-    public void setReadoverTime(Date readoverTime) {
+    public void setReadoverTime(String readoverTime) {
         this.readoverTime = readoverTime;
     }
 

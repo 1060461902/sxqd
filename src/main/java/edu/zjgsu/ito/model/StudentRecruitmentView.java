@@ -26,9 +26,6 @@ public class StudentRecruitmentView implements Serializable {
 
     private Integer teacherId;
 
-    /**
-     * 实习状态0未实习1申请中2待实习3实习中4已结业
-     */
     private String status;
 
     /**
@@ -44,6 +41,11 @@ public class StudentRecruitmentView implements Serializable {
     private String major;
 
     private String clss;
+
+    /**
+     * 招聘时间
+     */
+    private String postTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -143,6 +145,14 @@ public class StudentRecruitmentView implements Serializable {
         this.clss = clss;
     }
 
+    public String getPostTime() {
+        return postTime;
+    }
+
+    public void setPostTime(String postTime) {
+        this.postTime = postTime;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -166,7 +176,8 @@ public class StudentRecruitmentView implements Serializable {
             && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()))
             && (this.getGrade() == null ? other.getGrade() == null : this.getGrade().equals(other.getGrade()))
             && (this.getMajor() == null ? other.getMajor() == null : this.getMajor().equals(other.getMajor()))
-            && (this.getClss() == null ? other.getClss() == null : this.getClss().equals(other.getClss()));
+            && (this.getClss() == null ? other.getClss() == null : this.getClss().equals(other.getClss()))
+            && (this.getPostTime() == null ? other.getPostTime() == null : this.getPostTime().equals(other.getPostTime()));
     }
 
     @Override
@@ -185,6 +196,7 @@ public class StudentRecruitmentView implements Serializable {
         result = prime * result + ((getGrade() == null) ? 0 : getGrade().hashCode());
         result = prime * result + ((getMajor() == null) ? 0 : getMajor().hashCode());
         result = prime * result + ((getClss() == null) ? 0 : getClss().hashCode());
+        result = prime * result + ((getPostTime() == null) ? 0 : getPostTime().hashCode());
         return result;
     }
 
@@ -206,6 +218,7 @@ public class StudentRecruitmentView implements Serializable {
         sb.append(", grade=").append(grade);
         sb.append(", major=").append(major);
         sb.append(", clss=").append(clss);
+        sb.append(", postTime=").append(postTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

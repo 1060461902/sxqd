@@ -1,31 +1,11 @@
-$(document).ready(function(){
-  //---------------获得企业名称以及筛选---------------------------
-    // $.getJSON("js/json/approval-2-companyname.json", function(data) {
-       // var namelength = data.Names.length;
-       // for ( var i = 0; i < namelength; i++){
-       //  $('select').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
-       // }
-  // });
-    $.ajax({
-       type: 'get',
-       url: '/fieldManagement/admin/showCompanynames',
-       async: true,
-       contentType: "application/json",
-       dateType: "json",
-       success: function(data){
-       var namelength = data.Names.length;
-       for ( var i = 0; i < namelength; i++){
-        $('select').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
-       }
-       //筛选（需要表格重新导入）
-  $("option").click(function(){
-    var type = $(this).attr("id");
+
+function optionclick(){
     var info = new Object();
-    info.companyId = type;
+    info.companyId = $('select').val();
       $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showRecruitmentApplyList',
-       data: JSON.stringify(info),
+       data: info,
        async: true,
        contentType: "application/json",
        dateType: "json",
@@ -65,7 +45,74 @@ $(document).ready(function(){
     });
     //$.getJSON("js/json/approval-2.json", function(data) {
          // });
-  });
+}
+// 导入表格
+function writein(data){
+       var tbody = document.getElementsByTagName ('tbody')[0];
+       var len = data.recruitmentApplyList.length;
+       var nums=0;
+       for ( var i = 0; i < len; i++)
+       {
+          var obj = data.recruitmentApplyList[i];
+            var tr = tbody.insertRow(tbody.rows.length);
+            var j=i+1;
+            $("tr:eq("+j+")").val(obj.id);//对当前行赋值
+            //alert($("tr:eq("+j+")").val());
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = '<input type="checkbox">';
+            var td = tr.insertCell (tr.cells.length);
+           td.innerHTML = '<a href="./approval-occupation.html?id='+$("tr:eq("+j+")").val()+'">'+obj.post+'</a>';
+
+           // td.innerHTML = '<a href="./approval-occupation.html?id='+$("tr:eq("+j+")").val()+'">'+obj.post+'</a>'
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = obj.companyName;
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = obj.totalNumber;
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = obj.contact;
+              // var td = tr.insertCell (tr.cells.length);
+              // td.innerHTML = '<a href="./approval-occupation.html?id='+$("tr:eq("+j+")").val()+'">'++'</a>';
+         } //for
+}
+function checkbox(){
+//--------------部分选择通过checkbox--------------------------------
+   $("td>input:checkbox").click(function(){
+    var mm=0;
+    $('input:checkbox').each(function() {
+        if ($(this).attr('checked') =='checked') {
+          mm++;
+        }
+        if(mm>0)
+        {
+          $(".operations").css("display","block");
+        }
+        else
+        {
+          $(".operations").css("display","none");
+        }
+    });
+   });
+}
+$(document).ready(function(){
+  //---------------获得企业名称以及筛选---------------------------
+    // $.getJSON("js/json/approval-2-companyname.json", function(data) {
+       // var namelength = data.Names.length;
+       // for ( var i = 0; i < namelength; i++){
+       //  $('select').append('<option id='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
+       // }
+  // });
+    $.ajax({
+       type: 'get',
+       url: '/fieldManagement/admin/showCompanynames',
+       async: true,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+       var namelength = data.Names.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select').append('<option value='+data.Names[i].id+'>'+data.Names[i].companyName+'</option>');
+       }
+       //筛选（需要表格重新导入）
      },
        error: function(){
         alert('服务端异常');
@@ -73,11 +120,11 @@ $(document).ready(function(){
     });
 //-----------------------获取表格信息---------------------
   var info = new Object();
-  info.companyId = '0';
+  info.companyId = "0";
       $.ajax({
-       type: 'post',
+       type: 'get',
        url: '/fieldManagement/admin/showRecruitmentApplyList',
-       data: JSON.stringify(info),
+       data: info,
        async: true,
        contentType: "application/json",
        dateType: "json",
@@ -166,14 +213,14 @@ $('th>input:checkbox').click(function() {
     var a=0;
     $('td>input:checkbox').each(function() {
         if ($(this).attr('checked') =='checked') {
-          id[a]=$(this).parent('td').parent('tr').val();//alert(id[a]);
+          id[a]=parseInt($(this).parent('td').parent('tr').val());//alert(id[a];
           a++;
         }
     });
     var info = new Object();
     info.id=id;
-    info.passFlag='1';
-    info.meg = null;
+    info.passFlag=1;
+    info.meg = "通过";
     $.ajax({
        type: 'post',
        url: '/fieldManagement/admin/comfirmInternship',
@@ -191,49 +238,5 @@ $('th>input:checkbox').click(function() {
     });
    });
 //------------------->
-// 导入表格
-function writein(data){
-       var tbody = document.getElementsByTagName ('tbody')[0];
-       var len = data.recruitmentApplyList.length;
-       var nums=0;
-       for ( var i = 0; i < len; i++)
-       {
-          var obj = data.recruitmentApplyList[i];
-            var tr = tbody.insertRow(tbody.rows.length);
-            var j=i+1;
-            $("tr:eq("+j+")").val(obj.id);//对当前行赋值
-            //alert($("tr:eq("+j+")").val());
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<input type="checkbox">';
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<a href="./approval-occupation.html?id='+$("tr:eq("+j+")").val()+'">'+obj.post+'</a>'
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.companyName;
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.totalNumber;
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.nickName;
-              // var td = tr.insertCell (tr.cells.length);
-              // td.innerHTML = '<a href="./approval-occupation.html?id='+$("tr:eq("+j+")").val()+'">'++'</a>';
-         } //for
-}
-function checkbox(){
-//--------------部分选择通过checkbox--------------------------------
-   $("td>input:checkbox").click(function(){
-    var mm=0;
-    $('input:checkbox').each(function() {
-        if ($(this).attr('checked') =='checked') {
-          mm++;
-        }
-        if(mm>0)
-        {
-          $(".operations").css("display","block");
-        }
-        else
-        {
-          $(".operations").css("display","none");
-        }
-    });
-   });
-}
+
 });//document

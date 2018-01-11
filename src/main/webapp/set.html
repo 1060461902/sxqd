@@ -1,4 +1,4 @@
-x<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,6 @@ x<!DOCTYPE html>
     <title>学生集中实习管理与服务平台</title>
     <meta name="description" content="">
     <meta name="author" content="templatemo">
-
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700' rel='stylesheet' type='text/css'>
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -16,29 +15,30 @@ x<!DOCTYPE html>
     <link href="css/templatemo-style.css" rel="stylesheet">
     <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>        <!-- jQuery -->
     <script src="js/myjs/validate_set.js"></script><!-- 邮箱验证 --> 
+
   </head>
-  <body class="light-gray-bg hidden-scrolling">
+  <body class="light-gray-bg hidden-scrolling" >
       <!-- Main content -->
         <div class="templatemo-content-widget white-bg fullfill">
-          <h5 class="iframe-title">设置</h5><br><hr>
+          <h5 class="iframe-title">设置</h5><hr>
             <h2 class="settitle">个人密码重置</h2>
             <h5 class="settitle">该操作可以重置登录密码</h5>
             <form action="" class="templatemo-login-form setform "enctype="multipart/form-data">
               <div class="row form-group">
                 <div class="col-lg-6 col-md-6 form-group">                  
-                    <label for="inputCurrentPassword">原密码</label>
+                    <label >原密码</label>
                     <input type="password" class="form-control" id="oldpsw" placeholder="请输入您的当前密码" name="oldpsw">
                 </div>                
               </div>
               <div class="row form-group">
                 <div class="col-lg-6 col-md-6 form-group">                  
-                    <label for="inputNewPassword">新密码</label>
+                    <label >新密码</label>
                     <input type="password" class="form-control" id="newpsw" name="newpsw">
                 </div>
               </div>
               <div class="row form-group"> 
                 <div class="col-lg-6 col-md-6 form-group">                  
-                    <label for="inputConfirmNewPassword">再次输入新密码</label>
+                    <label>再次输入新密码</label>
                     <input type="password" class="form-control" id="newpsw2" name="newpsw2">
                 </div> 
               </div>
@@ -49,39 +49,39 @@ x<!DOCTYPE html>
             <h5 class="margin-bottom-10 settitle">该操作可以设置学生成绩权重，学生最终成绩为一下权重百分比之和(单位：%)</h5>
           <div class="setDiv">
           <div>
-            <div style="width:100%;text-align:center;padding-bottom: 20px;">
+            <div style="width:100%;text-align:center;padding-bottom: 12px;">
               <input placeholder="老师评分" id="x">%
-              <h5>老师评分权重</h5>
+              <h6>老师评分权重&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
             </div>
             <div class="inline">
               <input placeholder="周报" id="y">%
-              <h5>周报权重</h5>
-            </div>+
+              <h6>周报权重</h6>
+            </div><b>+</b>
             <div class="inline">
               <input placeholder="实习小结" id="y">%
-              <h5>实习小结权重</h5>
-            </div>+
+              <h6>实习小结权重</h6>
+            </div><b>+</b>
             <div class="inline">
               <input placeholder="实习报告" id="y">%
-              <h5>实习报告权重</h5>
-            </div>= 100%
+              <h6>实习报告权重</h6>
+            </div>
           </div>
-          <div><h2>+</h2></div>
+          <div><h2><b>+</b></h2></div>
           <div>
-            <div style="width:100%;text-align:center;padding-bottom: 20px;">
+            <div style="width:100%;text-align:center;padding-bottom: 12px;">
               <input placeholder="企业评分" id="x">%
-              <h5>企业评分权重</h5>
+              <h6>企业评分权重&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
             </div>
             <div class="inline">
               <input placeholder="周报权重" id="z">%
-              <h5>周报权重</h5>
-            </div>+
+              <h6>周报权重</h6>
+            </div><b>+</b>
             <div class="inline">
               <input placeholder="考勤权重" id="z">%
-              <h5>考勤权重</h5>
-            </div>= 100%
+              <h6>考勤权重</h6>
+            </div>
            </div>
-           <div><h3>= 100%</h3></div> 
+           <div><h3><b>= 100%</b></h3></div> 
           </div>
           <button type="button" class="btn btn-primary btn-lg" id="qzbtn">保存</button> 
         </div>

@@ -14,6 +14,11 @@ public class StudentRegisterView implements Serializable {
 
     private String clss;
 
+    /**
+     * 毕业年份
+     */
+    private String grade;
+
     private static final long serialVersionUID = 1L;
 
     public String getUserName() {
@@ -48,6 +53,14 @@ public class StudentRegisterView implements Serializable {
         this.clss = clss;
     }
 
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -63,7 +76,8 @@ public class StudentRegisterView implements Serializable {
         return (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
             && (this.getNickName() == null ? other.getNickName() == null : this.getNickName().equals(other.getNickName()))
             && (this.getMajor() == null ? other.getMajor() == null : this.getMajor().equals(other.getMajor()))
-            && (this.getClss() == null ? other.getClss() == null : this.getClss().equals(other.getClss()));
+            && (this.getClss() == null ? other.getClss() == null : this.getClss().equals(other.getClss()))
+            && (this.getGrade() == null ? other.getGrade() == null : this.getGrade().equals(other.getGrade()));
     }
 
     @Override
@@ -74,6 +88,7 @@ public class StudentRegisterView implements Serializable {
         result = prime * result + ((getNickName() == null) ? 0 : getNickName().hashCode());
         result = prime * result + ((getMajor() == null) ? 0 : getMajor().hashCode());
         result = prime * result + ((getClss() == null) ? 0 : getClss().hashCode());
+        result = prime * result + ((getGrade() == null) ? 0 : getGrade().hashCode());
         return result;
     }
 
@@ -87,6 +102,7 @@ public class StudentRegisterView implements Serializable {
         sb.append(", nickName=").append(nickName);
         sb.append(", major=").append(major);
         sb.append(", clss=").append(clss);
+        sb.append(", grade=").append(grade);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

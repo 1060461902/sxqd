@@ -6,6 +6,7 @@
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     <result column="major" jdbcType="VARCHAR" property="major" />
     <result column="clss" jdbcType="VARCHAR" property="clss" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_name, nick_name, major, clss
+    user_name, nick_name, major, clss, grade
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.StudentRegisterViewExample" resultMap="BaseResultMap">
     select
@@ -98,9 +99,9 @@
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.StudentRegisterView">
     insert into student_register_view (user_name, nick_name, major, 
-      clss)
+      clss, grade)
     values (#{userName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, 
-      #{clss,jdbcType=VARCHAR})
+      #{clss,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.StudentRegisterView">
     insert into student_register_view
@@ -117,6 +118,9 @@
       <if test="clss != null">
         clss,
       </if>
+      <if test="grade != null">
+        grade,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userName != null">
@@ -130,6 +134,9 @@
       </if>
       <if test="clss != null">
         #{clss,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -154,6 +161,9 @@
       <if test="record.clss != null">
         clss = #{record.clss,jdbcType=VARCHAR},
       </if>
+      <if test="record.grade != null">
+        grade = #{record.grade,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -164,7 +174,8 @@
     set user_name = #{record.userName,jdbcType=VARCHAR},
       nick_name = #{record.nickName,jdbcType=VARCHAR},
       major = #{record.major,jdbcType=VARCHAR},
-      clss = #{record.clss,jdbcType=VARCHAR}
+      clss = #{record.clss,jdbcType=VARCHAR},
+      grade = #{record.grade,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

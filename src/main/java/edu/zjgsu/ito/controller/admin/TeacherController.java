@@ -10,9 +10,7 @@ import edu.zjgsu.ito.service.StudentService;
 import edu.zjgsu.ito.service.TeacherService;
 import edu.zjgsu.ito.service.UserService;
 import edu.zjgsu.ito.utils.Constant;
-import edu.zjgsu.ito.vo.FrontTeacher;
-import edu.zjgsu.ito.vo.TeacherDetail;
-import edu.zjgsu.ito.vo.TeacherVo;
+import edu.zjgsu.ito.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -40,22 +38,20 @@ public class TeacherController {
     public @ResponseBody
     Map<String, Object> showTeachers(@RequestParam("major") String major) {
 
-        try {
-            major= new String(major .getBytes("iso8859-1"),"utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+
+        System.out.println(major);
+
 
         FrontTeacher FrontTeacherTemp = null;
         List<FrontTeacher> teacherList = new ArrayList<FrontTeacher>();
         Map<String, Object> result = new HashMap<String, Object>();
 
+
         TeacherExample TeacherExample = new TeacherExample();
         if(major.equals("专业")){
-            TeacherExample.or().andIdIsNotNull();
-
+            TeacherExample.or().andIdIsNotNull().andDeleteTagEqualTo(true);
         }else {
-            TeacherExample.or().andIdIsNotNull().andMajorEqualTo(major);
+            TeacherExample.or().andIdIsNotNull().andMajorEqualTo(major).andDeleteTagEqualTo(true);
         }
 
         List<Teacher> teachers=teacherService.selectByExample(TeacherExample);
@@ -78,7 +74,7 @@ public class TeacherController {
             studentExample.or().andTeacherIdEqualTo(teacher.getId());
             long count=studentService.countByExample(studentExample);
             FrontTeacherTemp.setCount(count);
-            FrontTeacherTemp.setId(teacher.getUserId());
+            FrontTeacherTemp.setId(teacher.getId());
             FrontTeacherTemp.setNickName(user.getNickName());
             FrontTeacherTemp.setUserName(user.getUserName());
             FrontTeacherTemp.setMajor(teacher.getMajor());
@@ -99,6 +95,7 @@ public class TeacherController {
     Map<String, Object> teacherStudentName(@RequestParam("id") Integer id
                                            ) {
         Map<String, Object> result = new HashMap<String, Object>();
+//        Integer id = Integer.valueOf(iid);
 
         StudentExample studentExample=new StudentExample();
         studentExample.or().andTeacherIdEqualTo(id);
@@ -120,36 +117,38 @@ public class TeacherController {
         result.put("Names",objects);
         return result;
     }
-    @RequestMapping(value = "showTeacherStudent", method = RequestMethod.GET)
+    @RequestMapping(value = "showTeacherStudent", method = RequestMethod.POST)
     public @ResponseBody
     /*查看老师名下学生
     * @author hanfeng*/
-    Map<String, Object> showTeacherStudent(@RequestParam("id") Integer id,
-                                           @RequestParam("major") String major,
-                                           @RequestParam("clss") String clss,
-                                           @RequestParam("status") String status
+    Map<String, Object> showTeacherStudent(@RequestBody MVo mVo
     ) {
-        try {
-            major= new String(major.getBytes("iso8859-1"),"utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        try {
-            clss= new String(clss.getBytes("iso8859-1"),"utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        try {
-            status= new String(status.getBytes("iso8859-1"),"utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            major= new String(major.getBytes("iso8859-1"),"utf-8");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            clss= new String(clss.getBytes("iso8859-1"),"utf-8");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            status= new String(status.getBytes("iso8859-1"),"utf-8");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+        String major=mVo.getMajor();
+        String clss=mVo.getClss();
+        String iid=mVo.getId();
+        String status=mVo.getStatus();
+        Integer id = Integer.valueOf(iid);
 
         Map<String, Object> result = new HashMap<String, Object>();
 
         StudentExample studentExample=new StudentExample();
 
-        StudentExample.Criteria criteria=studentExample.or().andTeacherIdEqualTo(id);
+        StudentExample.Criteria criteria=studentExample.or().andTeacherIdEqualTo(id).andDeleteTagEqualTo(true);
 
         if(major.equals("专业")){
 
@@ -164,7 +163,7 @@ public class TeacherController {
         if(status.equals("实习状态")){
 
         } else{
-            criteria.equals(status);
+            criteria.andStatusEqualTo(status);
         }
 
         List<Student> students=studentService.selectByExample(studentExample);
@@ -192,39 +191,45 @@ public class TeacherController {
             obj.put("name",user.getNickName());
             objects.add(obj);
         }
-        result.put("recruitmentList",objects);
+        Teacher teacher=teacherService.selectByPrimaryKey(id);
+        User user=userService.selectByPrimaryKey(teacher.getUserId());
+        result.put("name",user.getNickName());
+        result.put("students",objects);
         return result;
     }
-    @RequestMapping(value = "showTeacherStudentScreen", method = RequestMethod.GET)
+    @RequestMapping(value = "showTeacherStudentScreen", method = RequestMethod.POST)
     public @ResponseBody
     /*查看老师名下学生的筛选条件
     * @author hanfeng
     * */
-    Map<String, Object> showTeacherStudentScreen(@RequestParam("id") Integer id,
-                                                 @RequestParam("major") String major,
-                                                 @RequestParam("clss") String clss,
-                                                 @RequestParam("status") String status
+    Map<String, Object> showTeacherStudentScreen(@RequestBody MVo mVo
     ) {
         Map<String, Object> result = new HashMap<String, Object>();
-        try {
-            major= new String(major.getBytes("iso8859-1"),"utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        try {
-            clss= new String(clss.getBytes("iso8859-1"),"utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        try {
-            status= new String(status.getBytes("iso8859-1"),"utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            major= new String(major.getBytes("iso8859-1"),"utf-8");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            clss= new String(clss.getBytes("iso8859-1"),"utf-8");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            status= new String(status.getBytes("iso8859-1"),"utf-8");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+        String major=mVo.getMajor();
+        String clss=mVo.getClss();
+        String iid=mVo.getId();
+        String status=mVo.getStatus();
+
+        Integer id = Integer.valueOf(iid);
 
 
         StudentExample studentExample1=new StudentExample();
-        studentExample1.or().andTeacherIdEqualTo(id);
+        studentExample1.or().andTeacherIdEqualTo(id).andDeleteTagEqualTo(true);
         List<Student> students1=studentService.selectByExample(studentExample1);
         Set set1=new TreeSet();
         for(Student student:students1){
@@ -234,11 +239,11 @@ public class TeacherController {
 
 
         StudentExample studentExample2=new StudentExample();
-        StudentExample.Criteria criteria=studentExample2.or().andTeacherIdEqualTo(id);
+        StudentExample.Criteria criteria=studentExample2.or().andTeacherIdEqualTo(id).andDeleteTagEqualTo(true);
         if(major.equals("专业")){
 
         }else{
-            criteria.equals(major);
+            criteria.andMajorEqualTo(major);
         }
         List<Student> students2=studentService.selectByExample(studentExample2);
         Set set2=new TreeSet();
@@ -255,9 +260,11 @@ public class TeacherController {
     /*查看老师详情
     * @author hanfeng*/
     Map<String, Object> teacherDetail(@RequestParam("id") Integer id) {
-        TeacherDetail teacherDetail = null;
+        TeacherDetail teacherDetail ;
         Map<String, Object> result = new HashMap<String, Object>();
         TeacherExample TeacherExample = new TeacherExample();
+//        Integer id = Integer.valueOf(iid);
+
         TeacherExample.or().andIdEqualTo(id);
         Teacher teacher=teacherService.selectByPrimaryKey(id);
         teacherDetail = new TeacherDetail();
@@ -269,7 +276,7 @@ public class TeacherController {
                 return result;
             }
 
-            teacherDetail.setId(teacher.getUserId());
+            teacherDetail.setId(teacher.getId());
             teacherDetail.setNickName(user.getNickName());
             teacherDetail.setUserName(user.getUserName());
             teacherDetail.setMajor(teacher.getMajor());
@@ -277,6 +284,7 @@ public class TeacherController {
             teacherDetail.setSex(teacher.getSex());
             teacherDetail.setEmail(teacher.getEmail());
             teacherDetail.setPhoto(teacher.getPhoto());
+            teacherDetail.setRank(teacher.getRank());
 
 
         result.put("code", Constant.OK);
@@ -295,9 +303,11 @@ public class TeacherController {
                                          ) {
         Map<String, Object> result = new HashMap<String, Object>();
         int one;
+//        Integer id = Integer.valueOf(iid);
+
         Teacher teacher=teacherService.selectByPrimaryKey(id);
 
-        if(teacher ==null){
+        if(teacher == null){
             result.put("code",Constant.FAIL);
             result.put("msg", "未查到id=" + id + "的记录！");
             return result;
@@ -314,33 +324,38 @@ public class TeacherController {
         }
         return result;
     }
-    @RequestMapping(value = "deleteTeacher", method = RequestMethod.GET)
+    @RequestMapping(value = "deleteTeacher", method = RequestMethod.POST)
     /*
     * author hanfeng
     * 删除
     * */
     public @ResponseBody
-    Map<String, Object> deleteTeacher(@RequestParam("id") Integer id
+    Map<String, Object> deleteTeacher(@RequestBody IdVo idVo
     ) {
         Map<String, Object> result = new HashMap<String, Object>();
         int one;
-        Teacher teacher=teacherService.selectByPrimaryKey(id);
+        String[] ids= idVo.getId();
+        for(String idd:ids){
+            Integer id=Integer.valueOf(idd);
+            Teacher teacher=teacherService.selectByPrimaryKey(id);
+            if(teacher ==null){
+                result.put("code",Constant.FAIL);
+                result.put("msg", "未查到id=" + id + "的记录！");
+                return result;
+            }
+            teacher.setDeleteTag(false);
+            one=teacherService.updateByPrimaryKey(teacher);
+            if(one>0){
+                result.put("code", Constant.OK);
+                result.put("msg", "删除成功！");
+            }else{
+                result.put("code", Constant.FAIL);
+                result.put("msg", "删除失败！更新数据库失败");
+                return result;
+            }
+        }
 
-        if(teacher ==null){
-            result.put("code",Constant.FAIL);
-            result.put("msg", "未查到id=" + id + "的记录！");
-            return result;
-        }
-        teacher.setDeleteTag(false);
-        one=teacherService.updateByPrimaryKey(teacher);
-        if(one>0){
-            result.put("code", Constant.OK);
-            result.put("msg", "删除成功！");
-        }else{
-            result.put("code", Constant.FAIL);
-            result.put("msg", "删除失败！更新数据库失败");
-            return result;
-        }
+
         return result;
     }
     @RequestMapping(value = "teacherMajor", method = RequestMethod.GET)
@@ -375,8 +390,10 @@ public class TeacherController {
 
         Map<String, Object> result = new HashMap<String, Object>();
 
-        Integer id=teacherVo.getId();
-        String sex=teacherVo.getSex();
+        String iid=teacherVo.getId();
+        Integer id = Integer.valueOf(iid);
+
+        Boolean sex=teacherVo.getSex();
         String major=teacherVo.getMajor();
         String rank=teacherVo.getRank();
         String phone=teacherVo.getPhone();

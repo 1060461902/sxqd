@@ -22,6 +22,7 @@
     <result column="organization_code" jdbcType="VARCHAR" property="organizationCode" />
     <result column="forbidden" jdbcType="BIT" property="forbidden" />
     <result column="delete_tag" jdbcType="BIT" property="deleteTag" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -84,7 +85,7 @@
   <sql id="Base_Column_List">
     id, company_name, address, user_id, create_time, email, type, logo, network, size, 
     stage, slogans, intruction, checked, pass, licence, tax_registration, organization_code, 
-    forbidden, delete_tag
+    forbidden, delete_tag, city
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.CompanyExample" resultMap="BaseResultMap">
     select
@@ -125,30 +126,27 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.Company">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into company (company_name, address, user_id, 
-      create_time, email, type, 
-      logo, network, size, 
-      stage, slogans, intruction, 
-      checked, pass, licence, tax_registration, 
-      organization_code, forbidden, delete_tag
-      )
-    values (#{companyName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
-      #{logo,jdbcType=VARCHAR}, #{network,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, 
-      #{stage,jdbcType=VARCHAR}, #{slogans,jdbcType=VARCHAR}, #{intruction,jdbcType=VARCHAR}, 
-      #{checked,jdbcType=BIT}, #{pass,jdbcType=BIT}, #{licence,jdbcType=VARCHAR}, #{taxRegistration,jdbcType=VARCHAR}, 
-      #{organizationCode,jdbcType=VARCHAR}, #{forbidden,jdbcType=BIT}, #{deleteTag,jdbcType=BIT}
-      )
+    insert into company (id, company_name, address, 
+      user_id, create_time, email, 
+      type, logo, network, 
+      size, stage, slogans, 
+      intruction, checked, pass, 
+      licence, tax_registration, organization_code, 
+      forbidden, delete_tag, city)
+    values (#{id,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{network,jdbcType=VARCHAR}, 
+      #{size,jdbcType=VARCHAR}, #{stage,jdbcType=VARCHAR}, #{slogans,jdbcType=VARCHAR}, 
+      #{intruction,jdbcType=VARCHAR}, #{checked,jdbcType=BIT}, #{pass,jdbcType=BIT}, 
+      #{licence,jdbcType=VARCHAR}, #{taxRegistration,jdbcType=VARCHAR}, #{organizationCode,jdbcType=VARCHAR}, 
+      #{forbidden,jdbcType=BIT}, #{deleteTag,jdbcType=BIT}, #{city,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.Company">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into company
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="companyName != null">
         company_name,
       </if>
@@ -206,8 +204,14 @@
       <if test="deleteTag != null">
         delete_tag,
       </if>
+      <if test="city != null">
+        city,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="companyName != null">
         #{companyName,jdbcType=VARCHAR},
       </if>
@@ -264,6 +268,9 @@
       </if>
       <if test="deleteTag != null">
         #{deleteTag,jdbcType=BIT},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -336,6 +343,9 @@
       <if test="record.deleteTag != null">
         delete_tag = #{record.deleteTag,jdbcType=BIT},
       </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -362,7 +372,8 @@
       tax_registration = #{record.taxRegistration,jdbcType=VARCHAR},
       organization_code = #{record.organizationCode,jdbcType=VARCHAR},
       forbidden = #{record.forbidden,jdbcType=BIT},
-      delete_tag = #{record.deleteTag,jdbcType=BIT}
+      delete_tag = #{record.deleteTag,jdbcType=BIT},
+      city = #{record.city,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -427,6 +438,9 @@
       <if test="deleteTag != null">
         delete_tag = #{deleteTag,jdbcType=BIT},
       </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -450,7 +464,8 @@
       tax_registration = #{taxRegistration,jdbcType=VARCHAR},
       organization_code = #{organizationCode,jdbcType=VARCHAR},
       forbidden = #{forbidden,jdbcType=BIT},
-      delete_tag = #{deleteTag,jdbcType=BIT}
+      delete_tag = #{deleteTag,jdbcType=BIT},
+      city = #{city,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

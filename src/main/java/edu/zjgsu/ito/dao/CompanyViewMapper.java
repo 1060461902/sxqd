@@ -14,12 +14,14 @@ public interface CompanyViewMapper {
 
     int insertSelective(CompanyView record);
 
+
+    CompanyView selectByKey(Integer id);
+
+    CompanyView selectByName(String companyName);
+
     List<CompanyView> selectByExample(CompanyViewExample example);
 
     int updateByExampleSelective(@Param("record") CompanyView record, @Param("example") CompanyViewExample example);
 
     int updateByExample(@Param("record") CompanyView record, @Param("example") CompanyViewExample example);
-
-    CompanyView selectByKey(Integer id);
-
-    CompanyView selectByName(String companyName);}
+}

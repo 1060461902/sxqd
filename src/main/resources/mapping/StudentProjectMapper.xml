@@ -5,8 +5,8 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="identity" jdbcType="VARCHAR" property="identity" />
-    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
-    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="start_time" jdbcType="VARCHAR" property="startTime" />
+    <result column="end_time" jdbcType="VARCHAR" property="endTime" />
     <result column="instruction" jdbcType="VARCHAR" property="instruction" />
     <result column="student_id" jdbcType="INTEGER" property="studentId" />
     <result column="delete_tag" jdbcType="BIT" property="deleteTag" />
@@ -111,22 +111,19 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.StudentProject">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into student_project (project_name, identity, start_time, 
-      end_time, instruction, student_id, 
-      delete_tag)
-    values (#{projectName,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
-      #{endTime,jdbcType=TIMESTAMP}, #{instruction,jdbcType=VARCHAR}, #{studentId,jdbcType=INTEGER}, 
-      #{deleteTag,jdbcType=BIT})
+    insert into student_project (id, project_name, identity, 
+      start_time, end_time, instruction, 
+      student_id, delete_tag)
+    values (#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, #{instruction,jdbcType=VARCHAR}, 
+      #{studentId,jdbcType=INTEGER}, #{deleteTag,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.StudentProject">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into student_project
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="projectName != null">
         project_name,
       </if>
@@ -150,6 +147,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="projectName != null">
         #{projectName,jdbcType=VARCHAR},
       </if>
@@ -157,10 +157,10 @@
         #{identity,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
-        #{startTime,jdbcType=TIMESTAMP},
+        #{startTime,jdbcType=VARCHAR},
       </if>
       <if test="endTime != null">
-        #{endTime,jdbcType=TIMESTAMP},
+        #{endTime,jdbcType=VARCHAR},
       </if>
       <if test="instruction != null">
         #{instruction,jdbcType=VARCHAR},
@@ -192,10 +192,10 @@
         identity = #{record.identity,jdbcType=VARCHAR},
       </if>
       <if test="record.startTime != null">
-        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+        start_time = #{record.startTime,jdbcType=VARCHAR},
       </if>
       <if test="record.endTime != null">
-        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+        end_time = #{record.endTime,jdbcType=VARCHAR},
       </if>
       <if test="record.instruction != null">
         instruction = #{record.instruction,jdbcType=VARCHAR},
@@ -216,8 +216,8 @@
     set id = #{record.id,jdbcType=INTEGER},
       project_name = #{record.projectName,jdbcType=VARCHAR},
       identity = #{record.identity,jdbcType=VARCHAR},
-      start_time = #{record.startTime,jdbcType=TIMESTAMP},
-      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      start_time = #{record.startTime,jdbcType=VARCHAR},
+      end_time = #{record.endTime,jdbcType=VARCHAR},
       instruction = #{record.instruction,jdbcType=VARCHAR},
       student_id = #{record.studentId,jdbcType=INTEGER},
       delete_tag = #{record.deleteTag,jdbcType=BIT}
@@ -235,10 +235,10 @@
         identity = #{identity,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
-        start_time = #{startTime,jdbcType=TIMESTAMP},
+        start_time = #{startTime,jdbcType=VARCHAR},
       </if>
       <if test="endTime != null">
-        end_time = #{endTime,jdbcType=TIMESTAMP},
+        end_time = #{endTime,jdbcType=VARCHAR},
       </if>
       <if test="instruction != null">
         instruction = #{instruction,jdbcType=VARCHAR},
@@ -256,8 +256,8 @@
     update student_project
     set project_name = #{projectName,jdbcType=VARCHAR},
       identity = #{identity,jdbcType=VARCHAR},
-      start_time = #{startTime,jdbcType=TIMESTAMP},
-      end_time = #{endTime,jdbcType=TIMESTAMP},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
       instruction = #{instruction,jdbcType=VARCHAR},
       student_id = #{studentId,jdbcType=INTEGER},
       delete_tag = #{deleteTag,jdbcType=BIT}

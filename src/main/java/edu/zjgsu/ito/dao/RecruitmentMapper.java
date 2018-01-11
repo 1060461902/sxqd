@@ -18,10 +18,10 @@ public interface RecruitmentMapper {
 
     List<Recruitment> selectByExample(RecruitmentExample example);
 
-    Recruitment selectByPrimaryKey(Integer id);
-
     List<Recruitment> selectByCompanyId(Integer companyId);
 
+
+    Recruitment selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Recruitment record, @Param("example") RecruitmentExample example);
 

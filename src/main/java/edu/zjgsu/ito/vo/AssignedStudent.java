@@ -1,14 +1,14 @@
 package edu.zjgsu.ito.vo;
 
 public class AssignedStudent {
-    Integer[] ids;
+    String[] ids;
     Integer teacherId;
 
-    public Integer[] getIds() {
+    public String[] getIds() {
         return ids;
     }
 
-    public void setIds(Integer[] ids) {
+    public void setIds(String[] ids) {
         this.ids = ids;
     }
 

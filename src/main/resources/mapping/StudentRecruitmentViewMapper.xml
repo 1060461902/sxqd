@@ -14,6 +14,7 @@
     <result column="grade" jdbcType="VARCHAR" property="grade" />
     <result column="major" jdbcType="VARCHAR" property="major" />
     <result column="clss" jdbcType="VARCHAR" property="clss" />
+    <result column="post_time" jdbcType="VARCHAR" property="postTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -75,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, student_id, recruitment_id, passing, user_id, company_id, teacher_id, status, 
-    delete_tag, grade, major, clss
+    delete_tag, grade, major, clss, post_time
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.StudentRecruitmentViewExample" resultMap="BaseResultMap">
     select
@@ -106,24 +107,23 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.StudentRecruitmentView">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into student_recruitment_view (student_id, recruitment_id, passing, 
-      user_id, company_id, teacher_id, 
-      status, delete_tag, grade, 
-      major, clss)
-    values (#{studentId,jdbcType=INTEGER}, #{recruitmentId,jdbcType=INTEGER}, #{passing,jdbcType=INTEGER}, 
-      #{userId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}, 
-      #{status,jdbcType=VARCHAR}, #{deleteTag,jdbcType=BIT}, #{grade,jdbcType=VARCHAR}, 
-      #{major,jdbcType=VARCHAR}, #{clss,jdbcType=VARCHAR})
+    insert into student_recruitment_view (id, student_id, recruitment_id, 
+      passing, user_id, company_id, 
+      teacher_id, status, delete_tag, 
+      grade, major, clss, 
+      post_time)
+    values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{recruitmentId,jdbcType=INTEGER}, 
+      #{passing,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, 
+      #{teacherId,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, #{deleteTag,jdbcType=BIT}, 
+      #{grade,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{clss,jdbcType=VARCHAR}, 
+      #{postTime,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.StudentRecruitmentView">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into student_recruitment_view
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="studentId != null">
         student_id,
       </if>
@@ -157,8 +157,14 @@
       <if test="clss != null">
         clss,
       </if>
+      <if test="postTime != null">
+        post_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="studentId != null">
         #{studentId,jdbcType=INTEGER},
       </if>
@@ -191,6 +197,9 @@
       </if>
       <if test="clss != null">
         #{clss,jdbcType=VARCHAR},
+      </if>
+      <if test="postTime != null">
+        #{postTime,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -239,6 +248,9 @@
       <if test="record.clss != null">
         clss = #{record.clss,jdbcType=VARCHAR},
       </if>
+      <if test="record.postTime != null">
+        post_time = #{record.postTime,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -257,7 +269,8 @@
       delete_tag = #{record.deleteTag,jdbcType=BIT},
       grade = #{record.grade,jdbcType=VARCHAR},
       major = #{record.major,jdbcType=VARCHAR},
-      clss = #{record.clss,jdbcType=VARCHAR}
+      clss = #{record.clss,jdbcType=VARCHAR},
+      post_time = #{record.postTime,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

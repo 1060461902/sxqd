@@ -20,17 +20,17 @@
   <body  class="light-gray-bg hidden-scrolling ">  
       <!-- Main content --> 
           <div  class="templatemo-content-widget white-bg fullfill" >
-            <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  <a href="company_table.html">企业列表</a> > 招聘岗位</h5><br><hr>
+            <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  <a href="company_table.html">企业列表</a> > 招聘岗位(<span id="name"></span>)</h5><br><hr>
             <ul class="nav nav-tabs" id="studentTab">
-              <li><a href="company_table_details.html">企业介绍</a></li>
+              <li><a href="#" id="qyjs">企业介绍</a></li>
               <li class="active">
                 <a href="#">招聘岗位</a></li>
             </ul><br>
             <div id="myTabContent" class="tab-content">
           <form role="form" class="form-inline" >
             <div class="form-group">
-              <select class="form-control">
-                <option selected = "selected">全部</option>
+              <select class="form-control" onchange="optionclick()">
+                <option selected = "selected">招聘时间</option>
               </select>
             </div>
           </form>             

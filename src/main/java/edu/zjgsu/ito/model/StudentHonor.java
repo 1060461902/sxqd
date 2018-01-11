@@ -1,7 +1,6 @@
 package edu.zjgsu.ito.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author 
@@ -11,7 +10,7 @@ public class StudentHonor implements Serializable {
 
     private Integer studentId;
 
-    private Date time;
+    private String time;
 
     private String instruction;
 
@@ -37,11 +36,11 @@ public class StudentHonor implements Serializable {
         this.studentId = studentId;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

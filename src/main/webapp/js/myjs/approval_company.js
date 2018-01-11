@@ -1,16 +1,19 @@
 $(document).ready(function(){
 	  var info =new Object();
-  info.id = window.location.href;
+    var zhf= window.location.href.split('=');
+    info.id = zhf[1];
+
 	 $.ajax({
        type: 'get',
        url: '/fieldManagement/admin/showCompanyDetails',
-       data: JSON.stringify(info),
+       data: info,
        async: true,
        contentType: "application/json",
        dateType: "json",
        success: function(data){
         window.comid =  data.compamyViewList[0].id;
         var obj = data.compamyViewList[0];
+           $('img#identification-photo').attr('src',obj.logo);
         $("span#name").text(obj.companyName);
         $("span#network").text(obj.network);
         $("span#type").text(obj.type);
@@ -19,11 +22,11 @@ $(document).ready(function(){
         $("p#intruction").text(obj.intruction);
         $("p#address").text(obj.address);
         $('div.profile-photo-container>img:eq(0)').attr("src",obj.licence);
-        $('div.profile-photo-container>img:eq(1)').attr("src",obj.tax_registration);
-        $('div.profile-photo-container>img:eq(2)').attr("src",obj.organization_code);
+        $('div.profile-photo-container>img:eq(1)').attr("src",obj.taxRegistration);
+        $('div.profile-photo-container>img:eq(2)').attr("src",obj.organizationCode);
         //标签
-        var mark =data.mark;
-        var marklength = data.mark.length;
+        var mark =data.Mark;
+        var marklength = data.Mark.length;
         for(var n=0;n<marklength;n++)
         {
           $('div.mark-content').append('<span class="label label-primary" id="mark">'+mark[n].mark+'</span>');
@@ -54,8 +57,8 @@ $("button").click(function(){
       id[0] = comid;
       var info = new Object();
       info.id = id;
-      info.passFlag = flag;//要传输的数据
-      info.meg =null;
+      info.passFlag = parseInt(flag);//要传输的数据
+      info.meg ="0";
       $.ajax({
        type: 'post',
        url: '/fieldManagement/admin/comfirmRegister',

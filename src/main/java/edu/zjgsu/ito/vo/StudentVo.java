@@ -5,7 +5,7 @@ public class StudentVo {
     String userName;
     String major;
     String clss;
-    String status;
+    String statu;
     String teacherName;
     Integer Id;
     String grade;
@@ -68,12 +68,12 @@ public class StudentVo {
         this.clss = clss;
     }
 
-    public String getStatus() {
-        return status;
+    public String getStatu() {
+        return statu;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatu(String statu) {
+        this.statu = statu;
     }
 
     public String getTeacherName() {

@@ -1,34 +1,12 @@
-/*
-* @Author: chenzexiao
-* @Date:   2017-12-04 19:03:04
-* @Last Modified by:   chenzexiao
-* @Last Modified time: 2017-12-04 19:51:28
-*/
-$(document).ready(function(){
-  window.companyid = window.location.href;
-  var info =new Object();
-  info.id = companyid;
-  info.month = '招聘时间';
-//筛选的一系列操作-------------------------------------------------------------------------
-    $.ajax({
-       type: 'get',
-       url: '/fieldManagement/admin/showRecruitmentScreening',
-       async: true,
-       data : JSON.stringify(info),
-       contentType: "application/json",
-       dateType: "json",
-       success: function(data){
-       var namelength = data.month.length;
-       for ( var i = 0; i < namelength; i++){
-        $('select').append('<option>'+data.month[i].screens+'</option>');
-       }
+function optionclick(){
        //筛选（需要表格重新导入）
-  $("option").click(function(){
+    var zhf= window.location.href.split('=');
+    var id = zhf[1];
     var info = new Object();
-    info.month = $(this).text();
+    info.month = $('select').val();
     info.id =id;
       $.ajax({
-       type: 'get',
+       type: 'post',
        url: '/fieldManagement/admin/showCompanyRecruitments',
        data: JSON.stringify(info),
        async: true,
@@ -70,7 +48,113 @@ $(document).ready(function(){
     });
     //$.getJSON("js/json/approval-2.json", function(data) {
          // });
-  });
+}
+//写入表格
+function writein(data){
+       var tbody = document.getElementsByTagName ('tbody')[0];
+       var len = data.RecruitmentList.length;
+       for ( var i = 0; i < len; i++)
+      {
+          var obj = data.RecruitmentList[i];
+            $('span#name').text(obj.companyName);
+            var tr = tbody.insertRow(tbody.rows.length);
+            var j=i+1;
+            $("tr:eq("+j+")").val(obj.id);//对当前行赋值
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = '<a href="company_table_jobs_details.html?id='+obj.id+'">'+obj.post+'</a>';
+            var td = tr.insertCell (tr.cells.length);
+            if(obj.currentNumber>0){
+            td.innerHTML = obj.currentNumber+'/'+obj.totalNumber;//+'<i class="showlist fa fa-fw fa-sort-desc" data-toggle="collapse" data-target="#demo'+j+'"></i><div id="demo'+j+'" class="collapse"><ul></ul></div>';
+          }
+            else if(obj.currentNumber == 0){
+            td.innerHTML = '0/'+obj.totalNumber;//+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+          }
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = obj.postTime;//startTime+'~'+obj.endTime;
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML = obj.releaseTime;
+            var td = tr.insertCell (tr.cells.length);
+            td.innerHTML='<a href="#" title="禁用/解禁" class="forbidden" id="'+obj.id+'" value='+obj.forbidden+'><i class="fa fa-ban fa-lg"></i>';
+            if(obj.forbidden==true){
+              $('tr:eq('+j+') td:eq(4) a').css("color","red");
+            }
+      } //for
+}
+//禁用
+function forbidden(){
+$('.forbidden').click(function(){
+// alert($(this).attr("id")+'+'+$(this).attr("value"));
+ var info = new Object();
+ info.id = $(this).attr("id");
+
+ if($(this).attr("value")=='true'){
+   var r=confirm("是否解禁该用户");
+      if (r==true)
+      { 
+       info.forbidden = 0;
+    $.ajax({
+       type: 'get',
+       url: '/fieldManagement/admin/forbiddenRecruitment',
+       async: true,
+       contentType: "application/json",
+       data: info,
+       dateType: "json",
+       success: function(data){
+        alert("解禁成功");
+        $('#'+info.id+'.forbidden').css("color","#337ab7");
+        $('#'+info.id+'.forbidden').attr("value",'false');
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });//ajax
+      } 
+    }
+    else if($(this).attr("value")=='false'){
+       var r=confirm("是否禁用该用户");
+      if (r==true)
+      { 
+        info.forbidden = 1;
+    $.ajax({
+       type: 'get',
+       url: '/fieldManagement/admin/forbiddenRecruitment',
+       async: true,
+       contentType: "application/json",
+       data: info,
+       dateType: "json",
+       success: function(data){
+        alert("禁用成功");
+        $('#'+info.id+'.forbidden').css("color","red");
+        $('#'+info.id+'.forbidden').attr("value",'true');
+     },
+       error: function(){
+        alert('服务端异常');
+        }
+    });//ajax
+      }
+    }
+});//click
+}
+$(document).ready(function(){
+  var info =new Object();
+    var zhf= window.location.href.split('=');
+    info.id = zhf[1];
+    info.month = '招聘时间';
+    $('a#qyjs').attr('href','company_table_details.html?id='+zhf[1]);
+
+//筛选的一系列操作-------------------------------------------------------------------------
+    $.ajax({
+       type: 'get',
+       url: '/fieldManagement/admin/showRecruitmentScreen',
+       async: true,
+       data : info,
+       contentType: "application/json",
+       dateType: "json",
+       success: function(data){
+       var namelength = data.month.length;
+       for ( var i = 0; i < namelength; i++){
+        $('select').append('<option>'+data.month[i].screen+'</option>');
+       }
      },
        error: function(){
         alert('服务端异常');
@@ -79,7 +163,7 @@ $(document).ready(function(){
 //第一次导入-------------------------------
 
     $.ajax({
-       type: 'get',
+       type: 'post',
        url: '/fieldManagement/admin/showCompanyRecruitments',
        async: true,
        contentType: "application/json",
@@ -171,89 +255,4 @@ $(document).ready(function(){
 //               });
 // });//getjson
 //------------------->
-//写入表格
-function writein(data){
-       var tbody = document.getElementsByTagName ('tbody')[0];
-       var len = data.recruitmentList.length;
-       for ( var i = 0; i < len; i++)
-      {
-          var obj = data.recruitmentList[i];
-            var tr = tbody.insertRow(tbody.rows.length);
-            var j=i+1;
-            $("tr:eq("+j+")").val(obj.id);//对当前行赋值
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = '<a href="company_table_jobs_details.html?id='+obj.id+'">'+obj.post;+'</a>';
-            var td = tr.insertCell (tr.cells.length);
-            if(obj.currentNumber>0){
-            td.innerHTML = obj.currentNumber+'/'+obj.totalNumber;//+'<i class="showlist fa fa-fw fa-sort-desc" data-toggle="collapse" data-target="#demo'+j+'"></i><div id="demo'+j+'" class="collapse"><ul></ul></div>';
-          }
-            else if(obj.currentNumber == 0){
-            td.innerHTML = '0/'+obj.totalNumber;//+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-          }
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.postTime;//startTime+'~'+obj.endTime;
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML = obj.release_time;
-            var td = tr.insertCell (tr.cells.length);
-            td.innerHTML='<a href="#" title="禁用/解禁" class="forbidden" id="'+obj.id+'" value='+obj.forbidden+'><i class="fa fa-ban fa-2x"></i>';
-            if(obj.forbidden==true){
-              $('tr:eq('+j+') td:eq(4) a').css("color","red");
-            }
-      } //for
-}
-//禁用
-function forbidden(){
-$('.forbidden').click(function(){
-// alert($(this).attr("id")+'+'+$(this).attr("value"));
- var info = new Object();
- info.id = $(this).attr("id");
-
- if($(this).attr("value")=='true'){
-   var r=confirm("是否解禁该用户");
-      if (r==true)
-      { 
-       info.forbidden = 1;
-    $.ajax({
-       type: 'get',
-       url: '/fieldManagement/admin/forbiddenRecruitment',
-       async: true,
-       contentType: "application/json",
-       data: JSON.stringify(info),
-       dateType: "json",
-       success: function(data){
-        alert("解禁成功");
-        $(this).css("color","#337ab7");
-        $(this).attr("value",'false');
-     },
-       error: function(){
-        alert('服务端异常');
-        }
-    });//ajax
-      } 
-    }
-    else if($(this).attr("value")=='false'){
-       var r=confirm("是否禁用该用户");
-      if (r==true)
-      { 
-        info.forbidden = 0;
-    $.ajax({
-       type: 'get',
-       url: '/fieldManagement/admin/forbiddenRecruitment',
-       async: true,
-       contentType: "application/json",
-       data: JSON.stringify(info),
-       dateType: "json",
-       success: function(data){
-        alert("禁用成功");
-        $(this).css("color","red");
-        $(this).attr("value",'true');
-     },
-       error: function(){
-        alert('服务端异常');
-        }
-    });//ajax
-      }
-    }
-});//click
-}
 });//document

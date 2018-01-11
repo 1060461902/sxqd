@@ -72,6 +72,8 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public int updateByPrimaryKey(Teacher record) {
-        return 0;
+        int status;
+        status=teacherMapper.updateByPrimaryKey(record);
+        return status;
     }
 }

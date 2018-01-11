@@ -13,11 +13,20 @@ public class TeacherDetail {
 
     String nickName;
     String userName;
-    String sex;
+    Boolean sex;
     String phone;
     String email;
     String photo;
     String major;
+    String rank;
+
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
+    }
 
     public String getMajor() {
         return major;
@@ -43,12 +52,12 @@ public class TeacherDetail {
         this.userName = userName;
     }
 
-    public String getSex() {
-        return sex;
+    public void setSex(Boolean sex) {
+        this.sex = sex;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public Boolean getSex() {
+        return sex;
     }
 
     public String getPhone() {

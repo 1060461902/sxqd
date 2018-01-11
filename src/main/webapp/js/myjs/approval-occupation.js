@@ -1,10 +1,12 @@
 $(document).ready(function(){ 
 	  var info =new Object();
-  info.id = window.location.href;
+    var zhf= window.location.href.split('=');
+    info.id = zhf[1];
+
 	  $.ajax({
        type: 'get',
        url: '/fieldManagement/admin/showRecruitmentDetails',
-       data: JSON.stringify(id),
+       data: info,
        async: true,
        contentType: "application/json",
        dateType: "json",
@@ -32,13 +34,13 @@ $(document).ready(function(){
 	 //---------------通过/不通过------------------------
 $("button#pass-button").click(function(){
 	var flag = this.value;
-	if(flag=="1"){
+	if(flag==1){
       var id = new Array();
       id[0] = comid;
       var info = new Object();
       info.id=id;
-      info.passFlag=flag;//要传输的数据
-      info.meg = null;
+      info.passFlag=1;//要传输的数据
+      info.meg = "通过";
       $.ajax({
        type: 'post',
        url: '/fieldManagement/admin/comfirmInternship',
@@ -54,12 +56,12 @@ $("button#pass-button").click(function(){
         }
     });
     }
-    else if(flag=="0"){
+    else {
       var id = new Array();
       id[0] = comid;
       var info = new Object();
       info.id=id;
-      info.passFlag=flag;
+      info.passFlag=0;
       info.meg = $('textarea').val();
       $.ajax({
        type: 'post',

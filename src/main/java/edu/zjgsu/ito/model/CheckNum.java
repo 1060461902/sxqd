@@ -8,9 +8,13 @@ import java.io.Serializable;
 public class CheckNum implements Serializable {
     private Integer id;
 
-    private Integer startCheckNum;
+    private Integer clockinnum;
 
-    private Integer endCheckNum;
+    private Integer clockoutnum;
+
+    private String day;
+
+    private Integer lastdayattendnum;
 
     private static final long serialVersionUID = 1L;
 
@@ -22,20 +26,36 @@ public class CheckNum implements Serializable {
         this.id = id;
     }
 
-    public Integer getStartCheckNum() {
-        return startCheckNum;
+    public Integer getClockinnum() {
+        return clockinnum;
     }
 
-    public void setStartCheckNum(Integer startCheckNum) {
-        this.startCheckNum = startCheckNum;
+    public void setClockinnum(Integer clockinnum) {
+        this.clockinnum = clockinnum;
     }
 
-    public Integer getEndCheckNum() {
-        return endCheckNum;
+    public Integer getClockoutnum() {
+        return clockoutnum;
     }
 
-    public void setEndCheckNum(Integer endCheckNum) {
-        this.endCheckNum = endCheckNum;
+    public void setClockoutnum(Integer clockoutnum) {
+        this.clockoutnum = clockoutnum;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public Integer getLastdayattendnum() {
+        return lastdayattendnum;
+    }
+
+    public void setLastdayattendnum(Integer lastdayattendnum) {
+        this.lastdayattendnum = lastdayattendnum;
     }
 
     @Override
@@ -51,8 +71,10 @@ public class CheckNum implements Serializable {
         }
         CheckNum other = (CheckNum) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getStartCheckNum() == null ? other.getStartCheckNum() == null : this.getStartCheckNum().equals(other.getStartCheckNum()))
-            && (this.getEndCheckNum() == null ? other.getEndCheckNum() == null : this.getEndCheckNum().equals(other.getEndCheckNum()));
+            && (this.getClockinnum() == null ? other.getClockinnum() == null : this.getClockinnum().equals(other.getClockinnum()))
+            && (this.getClockoutnum() == null ? other.getClockoutnum() == null : this.getClockoutnum().equals(other.getClockoutnum()))
+            && (this.getDay() == null ? other.getDay() == null : this.getDay().equals(other.getDay()))
+            && (this.getLastdayattendnum() == null ? other.getLastdayattendnum() == null : this.getLastdayattendnum().equals(other.getLastdayattendnum()));
     }
 
     @Override
@@ -60,8 +82,10 @@ public class CheckNum implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getStartCheckNum() == null) ? 0 : getStartCheckNum().hashCode());
-        result = prime * result + ((getEndCheckNum() == null) ? 0 : getEndCheckNum().hashCode());
+        result = prime * result + ((getClockinnum() == null) ? 0 : getClockinnum().hashCode());
+        result = prime * result + ((getClockoutnum() == null) ? 0 : getClockoutnum().hashCode());
+        result = prime * result + ((getDay() == null) ? 0 : getDay().hashCode());
+        result = prime * result + ((getLastdayattendnum() == null) ? 0 : getLastdayattendnum().hashCode());
         return result;
     }
 
@@ -72,8 +96,10 @@ public class CheckNum implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", startCheckNum=").append(startCheckNum);
-        sb.append(", endCheckNum=").append(endCheckNum);
+        sb.append(", clockinnum=").append(clockinnum);
+        sb.append(", clockoutnum=").append(clockoutnum);
+        sb.append(", day=").append(day);
+        sb.append(", lastdayattendnum=").append(lastdayattendnum);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

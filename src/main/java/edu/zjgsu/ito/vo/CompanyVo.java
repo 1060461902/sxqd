@@ -7,6 +7,15 @@ public class CompanyVo {
     long allIntership;
     long studentNumber;
     String contact;
+    Boolean forbidden;
+
+    public Boolean getForbidden() {
+        return forbidden;
+    }
+
+    public void setForbidden(Boolean forbidden) {
+        this.forbidden = forbidden;
+    }
 
     public Integer getId() {
         return id;

@@ -1425,66 +1425,6 @@ public class RecruitmentExample {
             return (Criteria) this;
         }
 
-        public Criteria andStarttimeIsNull() {
-            addCriterion("startTime is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeIsNotNull() {
-            addCriterion("startTime is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeEqualTo(Date value) {
-            addCriterion("startTime =", value, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeNotEqualTo(Date value) {
-            addCriterion("startTime <>", value, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeGreaterThan(Date value) {
-            addCriterion("startTime >", value, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("startTime >=", value, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeLessThan(Date value) {
-            addCriterion("startTime <", value, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeLessThanOrEqualTo(Date value) {
-            addCriterion("startTime <=", value, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeIn(List<Date> values) {
-            addCriterion("startTime in", values, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeNotIn(List<Date> values) {
-            addCriterion("startTime not in", values, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeBetween(Date value1, Date value2) {
-            addCriterion("startTime between", value1, value2, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeNotBetween(Date value1, Date value2) {
-            addCriterion("startTime not between", value1, value2, "starttime");
-            return (Criteria) this;
-        }
-
         public Criteria andEndtimeIsNull() {
             addCriterion("endTime is null");
             return (Criteria) this;
@@ -1625,52 +1565,62 @@ public class RecruitmentExample {
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeEqualTo(Date value) {
+        public Criteria andReleaseTimeEqualTo(String value) {
             addCriterion("release_time =", value, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeNotEqualTo(Date value) {
+        public Criteria andReleaseTimeNotEqualTo(String value) {
             addCriterion("release_time <>", value, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeGreaterThan(Date value) {
+        public Criteria andReleaseTimeGreaterThan(String value) {
             addCriterion("release_time >", value, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andReleaseTimeGreaterThanOrEqualTo(String value) {
             addCriterion("release_time >=", value, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeLessThan(Date value) {
+        public Criteria andReleaseTimeLessThan(String value) {
             addCriterion("release_time <", value, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeLessThanOrEqualTo(Date value) {
+        public Criteria andReleaseTimeLessThanOrEqualTo(String value) {
             addCriterion("release_time <=", value, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeIn(List<Date> values) {
+        public Criteria andReleaseTimeLike(String value) {
+            addCriterion("release_time like", value, "releaseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andReleaseTimeNotLike(String value) {
+            addCriterion("release_time not like", value, "releaseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andReleaseTimeIn(List<String> values) {
             addCriterion("release_time in", values, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeNotIn(List<Date> values) {
+        public Criteria andReleaseTimeNotIn(List<String> values) {
             addCriterion("release_time not in", values, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeBetween(Date value1, Date value2) {
+        public Criteria andReleaseTimeBetween(String value1, String value2) {
             addCriterion("release_time between", value1, value2, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeNotBetween(Date value1, Date value2) {
+        public Criteria andReleaseTimeNotBetween(String value1, String value2) {
             addCriterion("release_time not between", value1, value2, "releaseTime");
             return (Criteria) this;
         }

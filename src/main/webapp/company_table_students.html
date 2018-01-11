@@ -24,18 +24,18 @@
       <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  <a href="company_table.html">企业列表</a> > 实习学生列表</h5><br><hr>
           <form role="form" class="form-inline" >
             <div class="form-group">
-              <select class="form-control" id="major">
+              <select class="form-control" id="major"  onchange="optionclick1()">
                 <option>专业</option>
               </select>
-              <select class="form-control" id="class">
+              <select class="form-control" id="class"  onchange="optionclick2()">
                 <option>班级</option>
 <!--                 <option>计科1501</option>
                 <option>计科1502</option>
                 <option>软件1501</option>
                 <option>软件1502</option> -->
               </select>
-              <select class="form-control" id="status">
-                <option value="">实习状态</option>
+              <select class="form-control" id="status" onchange="optionclick()">
+                <option selected= "selected">实习状态</option>
                 <option>未实习</option>
                 <option>待实习</option>
                 <option>实习中</option>
@@ -53,7 +53,7 @@
             <th>班级</th>
             <th>实习状态</th>
             <th>指导老师</th>
-            <th width="20%">操作</th>
+<!--             <th width="20%">操作</th> -->
           </tr>
         </thead>
         <tbody>

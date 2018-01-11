@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="major" jdbcType="VARCHAR" property="major" />
-    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="sex" jdbcType="BIT" property="sex" />
     <result column="photo" jdbcType="VARCHAR" property="photo" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="forbidden" jdbcType="BIT" property="forbidden" />
@@ -118,7 +118,7 @@
     insert into teacher (user_id, major, sex, 
       photo, email, forbidden, 
       rank, delete_tag)
-    values (#{userId,jdbcType=INTEGER}, #{major,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=INTEGER}, #{major,jdbcType=VARCHAR}, #{sex,jdbcType=BIT}, 
       #{photo,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{forbidden,jdbcType=BIT}, 
       #{rank,jdbcType=VARCHAR}, #{deleteTag,jdbcType=BIT})
   </insert>
@@ -161,7 +161,7 @@
         #{major,jdbcType=VARCHAR},
       </if>
       <if test="sex != null">
-        #{sex,jdbcType=VARCHAR},
+        #{sex,jdbcType=BIT},
       </if>
       <if test="photo != null">
         #{photo,jdbcType=VARCHAR},
@@ -199,7 +199,7 @@
         major = #{record.major,jdbcType=VARCHAR},
       </if>
       <if test="record.sex != null">
-        sex = #{record.sex,jdbcType=VARCHAR},
+        sex = #{record.sex,jdbcType=BIT},
       </if>
       <if test="record.photo != null">
         photo = #{record.photo,jdbcType=VARCHAR},
@@ -226,7 +226,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       major = #{record.major,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=BIT},
       photo = #{record.photo,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       forbidden = #{record.forbidden,jdbcType=BIT},
@@ -246,7 +246,7 @@
         major = #{major,jdbcType=VARCHAR},
       </if>
       <if test="sex != null">
-        sex = #{sex,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=BIT},
       </if>
       <if test="photo != null">
         photo = #{photo,jdbcType=VARCHAR},
@@ -270,7 +270,7 @@
     update teacher
     set user_id = #{userId,jdbcType=INTEGER},
       major = #{major,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=BIT},
       photo = #{photo,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       forbidden = #{forbidden,jdbcType=BIT},

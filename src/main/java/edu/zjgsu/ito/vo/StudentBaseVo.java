@@ -1,27 +1,27 @@
 package edu.zjgsu.ito.vo;
 
 public class StudentBaseVo {
-    Integer id;
+    String id;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-   Integer sex;
+    boolean sex;
     String nation;
     String birthday;
     String phone;
     String email;
 
-    public Integer getSex() {
+    public boolean isSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(boolean sex) {
         this.sex = sex;
     }
 

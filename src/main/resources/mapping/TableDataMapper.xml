@@ -108,20 +108,17 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.TableData">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into table_data (times, company_num, current_recruit_num, 
-      current_student_num)
-    values (#{times,jdbcType=VARCHAR}, #{companyNum,jdbcType=BIGINT}, #{currentRecruitNum,jdbcType=BIGINT}, 
-      #{currentStudentNum,jdbcType=BIGINT})
+    insert into table_data (id, times, company_num, 
+      current_recruit_num, current_student_num)
+    values (#{id,jdbcType=INTEGER}, #{times,jdbcType=VARCHAR}, #{companyNum,jdbcType=BIGINT}, 
+      #{currentRecruitNum,jdbcType=BIGINT}, #{currentStudentNum,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.TableData">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into table_data
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="times != null">
         times,
       </if>
@@ -136,6 +133,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="times != null">
         #{times,jdbcType=VARCHAR},
       </if>

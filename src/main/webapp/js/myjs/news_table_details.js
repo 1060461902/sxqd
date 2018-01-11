@@ -1,20 +1,23 @@
 $(document).ready(function(){
-  var id = window.location.href;
   var info = new Object();
-  info.id = id;
+    var zhf= window.location.href.split('=');
+    info.id = zhf[1];
+    window.id=zhf[1];
+
      $.ajax({
        type: 'get',
        url: '/fieldManagement/admin/showDynamicNewsDetails',
-       data: JSON.stringify(info),
+       data: info,
        async: true,
        contentType: "application/json",
        dateType: "json",
        success: function(data){
          var obj = data.dynamicApproves;
+         $("#title").text(obj.title);
          $("td#title").text(obj.title);
          $("td img#imageUrl").attr("src",obj.imageUrl);
          $("td#detail").text(obj.detail);
-         $("td#date").text(obj.startTime+"~"+obj.endTime);
+         $("td#date").text(obj.startTime);
          $("td#nickName").text(obj.nickName);
          $("td#phone").text(obj.phone);
          $("td#email").text(obj.email);
@@ -42,8 +45,8 @@ $(document).ready(function(){
       info.showStatus=$("td#switch").attr("value");
      $.ajax({
        type: 'get',
-       url: '/fieldManagement/admin/comfirmshow',
-       data: JSON.stringify(info),
+       url: '/fieldManagement/admin/comfirmShow',
+       data: info,
        async: true,
        contentType: "application/json",
        dateType: "json",
@@ -67,8 +70,8 @@ $(document).ready(function(){
       info.showStatus=$("td#switch").attr("value");
      $.ajax({
        type: 'get',
-       url: '/fieldManagement/admin/comfirmshow',
-       data: JSON.stringify(info),
+       url: '/fieldManagement/admin/comfirmShow',
+       data: info,
        async: true,
        contentType: "application/json",
        dateType: "json",

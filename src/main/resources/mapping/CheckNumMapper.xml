@@ -3,8 +3,10 @@
 <mapper namespace="edu.zjgsu.ito.dao.CheckNumMapper">
   <resultMap id="BaseResultMap" type="edu.zjgsu.ito.model.CheckNum">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="start_check_num" jdbcType="INTEGER" property="startCheckNum" />
-    <result column="end_check_num" jdbcType="INTEGER" property="endCheckNum" />
+    <result column="clockInNum" jdbcType="INTEGER" property="clockinnum" />
+    <result column="clockOutNum" jdbcType="INTEGER" property="clockoutnum" />
+    <result column="day" jdbcType="VARCHAR" property="day" />
+    <result column="lastDayAttendNum" jdbcType="INTEGER" property="lastdayattendnum" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, start_check_num, end_check_num
+    id, clockInNum, clockOutNum, day, lastDayAttendNum
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.CheckNumExample" resultMap="BaseResultMap">
     select
@@ -106,31 +108,45 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.zjgsu.ito.model.CheckNum">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into check_num (start_check_num, end_check_num)
-    values (#{startCheckNum,jdbcType=INTEGER}, #{endCheckNum,jdbcType=INTEGER})
+    insert into check_num (id, clockInNum, clockOutNum, 
+      day, lastDayAttendNum)
+    values (#{id,jdbcType=INTEGER}, #{clockinnum,jdbcType=INTEGER}, #{clockoutnum,jdbcType=INTEGER}, 
+      #{day,jdbcType=VARCHAR}, #{lastdayattendnum,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.CheckNum">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into check_num
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="startCheckNum != null">
-        start_check_num,
+      <if test="id != null">
+        id,
       </if>
-      <if test="endCheckNum != null">
-        end_check_num,
+      <if test="clockinnum != null">
+        clockInNum,
+      </if>
+      <if test="clockoutnum != null">
+        clockOutNum,
+      </if>
+      <if test="day != null">
+        day,
+      </if>
+      <if test="lastdayattendnum != null">
+        lastDayAttendNum,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="startCheckNum != null">
-        #{startCheckNum,jdbcType=INTEGER},
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
       </if>
-      <if test="endCheckNum != null">
-        #{endCheckNum,jdbcType=INTEGER},
+      <if test="clockinnum != null">
+        #{clockinnum,jdbcType=INTEGER},
+      </if>
+      <if test="clockoutnum != null">
+        #{clockoutnum,jdbcType=INTEGER},
+      </if>
+      <if test="day != null">
+        #{day,jdbcType=VARCHAR},
+      </if>
+      <if test="lastdayattendnum != null">
+        #{lastdayattendnum,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -146,11 +162,17 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.startCheckNum != null">
-        start_check_num = #{record.startCheckNum,jdbcType=INTEGER},
+      <if test="record.clockinnum != null">
+        clockInNum = #{record.clockinnum,jdbcType=INTEGER},
       </if>
-      <if test="record.endCheckNum != null">
-        end_check_num = #{record.endCheckNum,jdbcType=INTEGER},
+      <if test="record.clockoutnum != null">
+        clockOutNum = #{record.clockoutnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.day != null">
+        day = #{record.day,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastdayattendnum != null">
+        lastDayAttendNum = #{record.lastdayattendnum,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -160,8 +182,10 @@
   <update id="updateByExample" parameterType="map">
     update check_num
     set id = #{record.id,jdbcType=INTEGER},
-      start_check_num = #{record.startCheckNum,jdbcType=INTEGER},
-      end_check_num = #{record.endCheckNum,jdbcType=INTEGER}
+      clockInNum = #{record.clockinnum,jdbcType=INTEGER},
+      clockOutNum = #{record.clockoutnum,jdbcType=INTEGER},
+      day = #{record.day,jdbcType=VARCHAR},
+      lastDayAttendNum = #{record.lastdayattendnum,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -169,19 +193,27 @@
   <update id="updateByPrimaryKeySelective" parameterType="edu.zjgsu.ito.model.CheckNum">
     update check_num
     <set>
-      <if test="startCheckNum != null">
-        start_check_num = #{startCheckNum,jdbcType=INTEGER},
+      <if test="clockinnum != null">
+        clockInNum = #{clockinnum,jdbcType=INTEGER},
       </if>
-      <if test="endCheckNum != null">
-        end_check_num = #{endCheckNum,jdbcType=INTEGER},
+      <if test="clockoutnum != null">
+        clockOutNum = #{clockoutnum,jdbcType=INTEGER},
+      </if>
+      <if test="day != null">
+        day = #{day,jdbcType=VARCHAR},
+      </if>
+      <if test="lastdayattendnum != null">
+        lastDayAttendNum = #{lastdayattendnum,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="edu.zjgsu.ito.model.CheckNum">
     update check_num
-    set start_check_num = #{startCheckNum,jdbcType=INTEGER},
-      end_check_num = #{endCheckNum,jdbcType=INTEGER}
+    set clockInNum = #{clockinnum,jdbcType=INTEGER},
+      clockOutNum = #{clockoutnum,jdbcType=INTEGER},
+      day = #{day,jdbcType=VARCHAR},
+      lastDayAttendNum = #{lastdayattendnum,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

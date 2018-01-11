@@ -1,7 +1,6 @@
 package edu.zjgsu.ito.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author 
@@ -18,11 +17,11 @@ public class Report implements Serializable {
     /**
      * 发布时间
      */
-    private Date publishedDate;
+    private String publishedDate;
 
-    private Date startTime;
+    private String startTime;
 
-    private Date endTime;
+    private String endTime;
 
     private String content;
 
@@ -31,13 +30,13 @@ public class Report implements Serializable {
      */
     private String url;
 
-    private Date readoverTime;
+    private String readoverTime;
 
     private Integer score;
 
     private String comment;
 
-    private Date cReadoverTime;
+    private String cReadoverTime;
 
     private Integer cScore;
 
@@ -79,27 +78,27 @@ public class Report implements Serializable {
         this.title = title;
     }
 
-    public Date getPublishedDate() {
+    public String getPublishedDate() {
         return publishedDate;
     }
 
-    public void setPublishedDate(Date publishedDate) {
+    public void setPublishedDate(String publishedDate) {
         this.publishedDate = publishedDate;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
@@ -119,11 +118,11 @@ public class Report implements Serializable {
         this.url = url;
     }
 
-    public Date getReadoverTime() {
+    public String getReadoverTime() {
         return readoverTime;
     }
 
-    public void setReadoverTime(Date readoverTime) {
+    public void setReadoverTime(String readoverTime) {
         this.readoverTime = readoverTime;
     }
 
@@ -143,11 +142,11 @@ public class Report implements Serializable {
         this.comment = comment;
     }
 
-    public Date getcReadoverTime() {
+    public String getcReadoverTime() {
         return cReadoverTime;
     }
 
-    public void setcReadoverTime(Date cReadoverTime) {
+    public void setcReadoverTime(String cReadoverTime) {
         this.cReadoverTime = cReadoverTime;
     }
 

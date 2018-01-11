@@ -17,8 +17,8 @@
   </head>
   <body  class="light-gray-bg hidden-scrolling">  
       <!-- Main content --> 
-          <div  class="templatemo-content-widget text-center white-bg fullfill" >
-            <h5 class="iframe-title"><a href="approval-3.html"> 审批</a> > 新闻动态详情</h5><br><hr>
+          <div  class="templatemo-content-widget white-bg fullfill" >
+            <h5 class="iframe-title"><a href="approval-3.html"> 审批</a> > 新闻动态详情</h5><hr>
               <div class="templatemo-content-widget white-bg col-1 text-center approval-news">
                 <table width="100%" class="approval-table">
                   <tr>
@@ -29,6 +29,7 @@
                     <th><h3>文章配图</h3></th>   
                     <td><br><img src="#" id="imageUrl"></img></td>
                   </tr>
+                  <tr></tr>
                   <tr>
                     <th><h3>文章内容</h3></th>   
                     <td id="detail"></td>
@@ -50,8 +51,11 @@
                   </tr>           
                 </table>
               </div>
-            <button type="button" class="btn btn-info approval-button" id="pass-button" value="1">&nbsp;通过&nbsp;</button>
-            <button type="button" class="btn btn-danger approval-button"  data-toggle="modal" data-target="#passcontent">不通过</button>           
+              <div class="text-center">
+                <button type="button" class="btn btn-info approval-button" id="pass-button" value="1">&nbsp;通过&nbsp;</button>
+                <button type="button" class="btn btn-danger approval-button"  data-toggle="modal" data-target="#passcontent">不通过</button>                     
+              </div>
+      
           </div> 
     <!-- JS -->
 <!-- 模态框（Modal） -->

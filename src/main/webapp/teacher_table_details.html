@@ -16,10 +16,10 @@
     <script  type="text/javascript" src="js/bootstrap.js"></script>
     <script src="js/myjs/teacher_table_details.js"></script> 
   </head>
-  <body  class="light-gray-bg">  
+  <body  class="light-gray-bg hidden-scrolling">  
       <!-- Main content --> 
-          <div  class="templatemo-content-widget text-center white-bg height-660" >
-            <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  <a href="teacher_table.html">老师列表</a> > 老师简历</h5><br><hr>
+          <div  class="templatemo-content-widget white-bg height-660" >
+            <h5 class="iframe-title"><a href="btn_table.html">信息列表</a>  >  <a href="teacher_table.html">老师列表</a> > 老师简历(<span id="nickName"></span>)</h5><hr>
             <ul class="nav nav-tabs" id="studentTab">
               <li class="active">
                 <a href="#qyzc" >老师信息</a>
@@ -35,7 +35,7 @@
                     <div class="basic-info">
                       <div class="edit"><a href="#" data-toggle="modal" data-target="#teacher_Modal"><i class="fa fa-pencil fa-fw"></i>编辑</a></div>
                       <h4 id="nickName"></h4>
-                      <h3><span id="userName"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="sex"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="rank"></span><br>
+                      <h3><span id="userName"></span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span id="sex"></span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span id="rank"></span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span id="major"></span><br>
                       手机号码 ：<span id="phone"></span><br>
                       邮箱 ： <span id="email"></span><br></h3>
                     </div>

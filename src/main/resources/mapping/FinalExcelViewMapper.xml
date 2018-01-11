@@ -15,7 +15,7 @@
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     <result column="clss" jdbcType="VARCHAR" property="clss" />
-    <result column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -78,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, t_week_report, t_summary, t_final_report, additional_score, c_week_report, c_attendance, 
-    score_a, score_b, final_score, user_name, nick_name, clss, grade, teacher_name
+    score_a, score_b, final_score, user_name, nick_name, clss, user_id, teacher_name
   </sql>
   <select id="selectByExample" parameterType="edu.zjgsu.ito.model.FinalExcelViewExample" resultMap="BaseResultMap">
     select
@@ -116,12 +116,12 @@
       additional_score, c_week_report, c_attendance, 
       score_a, score_b, final_score, 
       user_name, nick_name, clss, 
-      grade, teacher_name)
+      user_id, teacher_name)
     values (#{tWeekReport,jdbcType=REAL}, #{tSummary,jdbcType=REAL}, #{tFinalReport,jdbcType=REAL}, 
       #{additionalScore,jdbcType=REAL}, #{cWeekReport,jdbcType=REAL}, #{cAttendance,jdbcType=REAL}, 
       #{scoreA,jdbcType=REAL}, #{scoreB,jdbcType=REAL}, #{finalScore,jdbcType=REAL}, 
       #{userName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{clss,jdbcType=VARCHAR}, 
-      #{grade,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR})
+      #{userId,jdbcType=INTEGER}, #{teacherName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="edu.zjgsu.ito.model.FinalExcelView">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -165,8 +165,8 @@
       <if test="clss != null">
         clss,
       </if>
-      <if test="grade != null">
-        grade,
+      <if test="userId != null">
+        user_id,
       </if>
       <if test="teacherName != null">
         teacher_name,
@@ -209,8 +209,8 @@
       <if test="clss != null">
         #{clss,jdbcType=VARCHAR},
       </if>
-      <if test="grade != null">
-        #{grade,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="teacherName != null">
         #{teacherName,jdbcType=VARCHAR},
@@ -265,8 +265,8 @@
       <if test="record.clss != null">
         clss = #{record.clss,jdbcType=VARCHAR},
       </if>
-      <if test="record.grade != null">
-        grade = #{record.grade,jdbcType=VARCHAR},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.teacherName != null">
         teacher_name = #{record.teacherName,jdbcType=VARCHAR},
@@ -291,7 +291,7 @@
       user_name = #{record.userName,jdbcType=VARCHAR},
       nick_name = #{record.nickName,jdbcType=VARCHAR},
       clss = #{record.clss,jdbcType=VARCHAR},
-      grade = #{record.grade,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
       teacher_name = #{record.teacherName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

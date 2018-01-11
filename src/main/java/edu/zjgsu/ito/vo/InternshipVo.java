@@ -1,7 +1,7 @@
 package edu.zjgsu.ito.vo;
 
 public class InternshipVo {
-    String nickname;
+    String nickName;
     String clss;
     String company;
     Integer companyId;
@@ -10,6 +10,23 @@ public class InternshipVo {
     String teacherName;
     String stages;
     Integer studentId;
+    Float score;
+
+    public Float getScore() {
+        return score;
+    }
+
+    public void setScore(Float score) {
+        this.score = score;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
     public Integer getStudentId() {
         return studentId;
@@ -54,13 +71,7 @@ public class InternshipVo {
         this.id = id;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
 
     public String getClss() {
         return clss;
