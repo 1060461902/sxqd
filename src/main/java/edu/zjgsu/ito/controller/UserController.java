@@ -17,7 +17,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Controller
+@RestController
 @RequestMapping(value = "admin")
 public class UserController {
     @Autowired
@@ -29,8 +29,7 @@ public class UserController {
      * @return
      * @author sawei
      */
-    @ResponseBody
-    @RequestMapping(value = "register",method = RequestMethod.GET)
+    @GetMapping(value = "register")
     public Message register(@RequestBody User user) {
         return simpleService.register(user);
     }
@@ -42,8 +41,7 @@ public class UserController {
      * @return
      * @author sawei
      */
-    @ResponseBody
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @PostMapping(value = "login")
     public Message login(HttpServletRequest request, @RequestBody User user) {
         return simpleService.login(request, user);
     }
@@ -55,8 +53,7 @@ public class UserController {
      * @return
      * @author sawei
      */
-    @ResponseBody
-    @RequestMapping(value = "logout", method = RequestMethod.POST)
+    @PostMapping(value = "logout")
     public Message logout(HttpServletRequest request) {
         request.getSession().invalidate();
         return Message.createSuc(null);
@@ -68,8 +65,7 @@ public class UserController {
      * @return
      * @author sawei
      */
-    @ResponseBody
-    @RequestMapping(value = "modifyPwd", method = RequestMethod.POST)
+    @PostMapping(value = "modifyPwd")
     public Message modifyPwd(@RequestBody ResetPwdUser frontUser) {
         return simpleService.modifyPwd(frontUser);
     }
@@ -81,8 +77,7 @@ public class UserController {
      * @return
      * @author sawei
      */
-    @ResponseBody
-    @RequestMapping(value = "resetPwd", method = RequestMethod.GET)
+    @GetMapping(value = "resetPwd")
     public Message resetPwd(@RequestParam("roleId") Integer roleId, @RequestParam("id") Integer id) {
         return simpleService.resetPwd(roleId, id);
     }

@@ -6,6 +6,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import edu.zjgsu.ito.model.*;
+import edu.zjgsu.ito.pojo.Message;
 import edu.zjgsu.ito.service.*;
 import edu.zjgsu.ito.utils.Constant;
 import edu.zjgsu.ito.vo.*;
@@ -19,105 +20,36 @@ import java.util.*;
 @RequestMapping(value ="admin")
 public class StudentController {
     @Autowired
+    SimpleService simpleService;
+    @Autowired
+    AdminComplexService adminComplexService;
+    @Autowired
     StudentService studentService;
     @Autowired
     UserService userService;
     @Autowired
-    CompanyService companyService;
-    @Autowired
-    TeacherService teacherService;
-
-    @Autowired
     StudentProjectService studentProjectService;
     @Autowired
-    StudentClubService studentClubService;
+    StudentSkillService studentSkillService;
     @Autowired
     StudentHonorService studentHonorService;
     @Autowired
-    StudentSkillService studentSkillService;
+    StudentClubService studentClubService;
     @Autowired
     RoadService roadService;
     @Autowired
     RecruitmentService recruitmentService;
-
-    @RequestMapping(value = "showStudents",method=RequestMethod.POST)
-    public @ResponseBody
+    @Autowired
+    CompanyService companyService;
     /*
-* @param
-* 查看学生列表
-* @return
-* @author hanfeng
-**/
-    Map<String,Object> showCompanynames(@RequestBody ScreeningVo screeningVo ,@RequestParam(value="pageNum",defaultValue="1") Integer pageNum){
-        System.out.println(pageNum);
-        Map<String, Object> result = new HashMap<String, Object>();
-        System.out.println(screeningVo);
-        String grade=screeningVo.getGrade();
-        String major=screeningVo.getMajor();
-        String clss=screeningVo.getClss();
-        String status=screeningVo.getStatu();
-        System.out.println(grade);
-        System.out.println(major);
-        System.out.println(clss);
-        System.out.println(status);
-        StudentExample studentExample=new StudentExample();
-        StudentExample.Criteria criteria=studentExample.or();
-
-
-        if(grade.equals("年级")){
-            criteria.andDeleteTagEqualTo(true);
-        }else{
-            criteria.andGradeEqualTo(grade);
-        }
-        if(major.equals("专业")){
-
-        }else{
-            criteria.andMajorEqualTo(major);
-        }
-        if(clss.equals("班级")){
-
-        }else{
-            criteria.andClssEqualTo(clss);
-        }
-        if(status.equals("实习状态")){
-
-        }else{
-            criteria.andStatusEqualTo(status);
-        }
-
- /*       studentExample.setOrderByClause("id DESC");
-
-        PageHelper.startPage(pageNum,8);
-        Page<Student> students=(Page<Student>)studentService.selectByExample(studentExample);*/
-
-        List<Student> students=studentService.selectByExample(studentExample);
-        List<StudentVo> studentVos=new ArrayList<>();
-        for(Student student:students){
-            StudentVo studentVO=new StudentVo();
-            User user=userService.selectByPrimaryKey(student.getUserId());
-            if(student.getTeacherId()==null){
-
-            }else{
-                Teacher teacher=teacherService.selectByPrimaryKey(student.getTeacherId());
-                User userone=userService.selectByPrimaryKey(teacher.getUserId());
-                studentVO.setTeacherName(userone.getNickName());
-                studentVO.setTeacherId(student.getTeacherId());
-            }
-            studentVO.setNickName(user.getNickName());
-            studentVO.setUserName(user.getUserName());
-            studentVO.setMajor(student.getMajor());
-            studentVO.setClss(student.getClss());
-            studentVO.setGrade(student.getGrade());
-            studentVO.setStatu(student.getStatus());
-            studentVO.setId(student.getId());
-            studentVO.setForbidden(student.getForbidden());
-            studentVos.add(studentVO);
-        }
-      /*  PageInfo pageResult = new PageInfo(studentVos);
-        pageResult.setList(studentVos);*/
-
-        result.put("studentList",studentVos);
-        return result;
+     * @param
+     * 查看学生列表
+     * @return
+     * @author hanfeng
+     **/
+    @PostMapping(value = "showStudents")
+    public Message showStudents(@RequestBody ScreeningVo screeningVo , @RequestParam(value="pageNum",defaultValue="1") Integer pageNum){
+        return simpleService.showStudents(screeningVo, pageNum);
 
     }
     @RequestMapping(value = "forbiddenStudent", method = RequestMethod.GET)
@@ -135,11 +67,6 @@ public class StudentController {
         Student student=studentService.selectByPrimaryKey(id);
 
 
-        if(student ==null){
-            result.put("code", Constant.FAIL);
-            result.put("msg", "未查到id=" + id + "的记录！");
-            return result;
-        }
         student.setForbidden(forbidden);
         one=studentService.updateByPrimaryKey(student);
         if(one>0){

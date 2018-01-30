@@ -21,4 +21,8 @@ public interface AdminComplexService {
     Message writeToExcel(String sheetName, Integer[] studentIds, HttpServletResponse response) throws Exception;
 
     Message archive(Integer[] studentIds, HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+    Message confirmShow(String iid, Integer showStatus);
+
+    Message showCompanies(String number);
 }

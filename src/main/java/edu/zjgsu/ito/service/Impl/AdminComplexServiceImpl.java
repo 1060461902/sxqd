@@ -13,6 +13,7 @@ import edu.zjgsu.ito.service.AdminComplexService;
 import edu.zjgsu.ito.service.SimpleService;
 import edu.zjgsu.ito.utils.Constant;
 import edu.zjgsu.ito.utils.FileUtil;
+import edu.zjgsu.ito.vo.CompanyVo;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -25,6 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -48,6 +50,12 @@ public class AdminComplexServiceImpl implements AdminComplexService {
     ReportMapper reportMapper;
     @Autowired
     SimpleService simpleService;
+    @Autowired
+    DynamicApproveMapper dynamicApproveMapper;
+    @Autowired
+    CompanyViewMapper companyViewMapper;
+    @Autowired
+    RecruitmentMapper recruitmentMapper;
 
     /**
      * 得到这个学生的周报，实习小结，实习报告
@@ -164,6 +172,414 @@ public class AdminComplexServiceImpl implements AdminComplexService {
         return Message.createSuc(null);
     }
 
+    /*
+     * @author hanfeng
+     * @首页动态展示
+     * */
+    @Override
+    public Message confirmShow(String iid, Integer showStatus) {
+        Integer id = Integer.valueOf(iid);
+
+        DynamicApprove dynamicApproveOne = dynamicApproveMapper.selectByPrimaryKey(id);
+
+        if (dynamicApproveOne == null) {
+            return Message.createErr("未查到id=" + id + "的记录！");
+        }
+        if (showStatus.equals(1)) {
+            dynamicApproveOne.setShowStatus(false);
+            Date date = new Date();
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String time = format.format(date);
+            dynamicApproveOne.setEndTime(time);
+        } else {
+            dynamicApproveOne.setShowStatus(true);
+
+            Date date = new Date();
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String time = format.format(date);
+            dynamicApproveOne.setStartTime(time);
+        }
+
+//        更新数据库记录
+        DynamicApproveExample dynamicApproveExample1 = new DynamicApproveExample();
+        dynamicApproveExample1.or().andDeleteTagEqualTo(true).andShowStatusEqualTo(true).andPassingEqualTo(true).andDopassingEqualTo(true);
+        long count = dynamicApproveMapper.countByExample(dynamicApproveExample1);
+        if (count == 6) {
+            return Message.createErr("操作失败，展示轮播图数量已达6张");
+        } else {
+            dynamicApproveMapper.updateByPrimaryKey(dynamicApproveOne);
+            return Message.createSuc(null);
+        }
+    }
+
+
+    public CompanyVo getCompanyVo(CompanyView companyView) {
+        CompanyVo companyVo = new CompanyVo();
+
+        User user = userMapper.selectByPrimaryKey(companyView.getUserId());
+        companyVo.setContact(user.getNickName());
+        companyVo.setCompanyName(companyView.getCompanyName());
+        companyVo.setId(companyView.getId());
+        companyVo.setForbidden(companyView.getForbidden());
+
+        RecruitmentExample recruitmentExample=new RecruitmentExample();
+        recruitmentExample.or().andCompanyIdEqualTo(companyView.getId()).andForbiddenEqualTo(false);
+        companyVo.setNowIntership(recruitmentMapper.countByExample(recruitmentExample));
+
+        RecruitmentExample irecruitmentExample = new RecruitmentExample();
+        irecruitmentExample.or().andCompanyIdEqualTo(companyView.getId());
+        companyVo.setAllIntership(recruitmentMapper.countByExample(irecruitmentExample));
+
+        StudentExample studentExample=new StudentExample();
+        studentExample.or().andCompanyIdEqualTo(companyView.getId());
+        companyVo.setStudentNumber(studentMapper.countByExample(studentExample));
+
+        return companyVo;
+    }
+
+    public Integer getRecruitmentNum(CompanyView companyView) {
+        Integer sum = 0;
+
+        RecruitmentExample recruitmentExample1 = new RecruitmentExample();
+        recruitmentExample1.or().andCompanyIdEqualTo(companyView.getId());
+        List<Recruitment> recruitmentList = recruitmentMapper.selectByExample(recruitmentExample1);
+
+        for (Recruitment recruitment : recruitmentList) {
+            sum = sum + recruitment.getCurrentNumber();
+        }
+
+        return sum;
+    }
+
+
+    /*
+     * @param
+     * @return
+     * 查看已在系统内注册好的企业信息
+     * @author hanfeng
+     * */
+    @Override
+    public Message showCompanies(String number) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        List<CompanyVo> companyVoList = null;
+
+        CompanyViewExample CompanyViewExample = new CompanyViewExample();
+        CompanyViewExample.or().andDeleteTagEqualTo(true).andPassEqualTo(true);
+        List<CompanyView> companyViews = companyViewMapper.selectByExample(CompanyViewExample);
+        if(companyViews == null){
+            return Message.createErr("无法从Company表里查到记录！");
+        }
+
+
+        if(number.equals("0")){
+            for(CompanyView companyView:companyViews){
+                companyVoList.add(getCompanyVo(companyView));
+            }
+
+        }else if(number.equals("少于5人")){
+            for(CompanyView companyView:companyViews) {
+                int sum = getRecruitmentNum(companyView);
+                if (sum < 5) {
+                    companyVoList.add(getCompanyVo(companyView));
+                }
+            }
+        }else if(number.equals("5~10人")){
+            for(CompanyView companyView:companyViews) {
+                int sum = getRecruitmentNum(companyView);
+                if (5<sum&&sum<10) {
+                    companyVoList.add(getCompanyVo(companyView));
+                }
+            }
+        }else if(number.equals("10~20人")){
+            for(CompanyView companyView:companyViews) {
+                int sum = getRecruitmentNum(companyView);
+                if (10<sum&&sum<20) {
+                    companyVoList.add(getCompanyVo(companyView));
+                }
+            }
+        }else if(number.equals("20~50人")){
+            for(CompanyView companyView:companyViews) {
+                int sum = getRecruitmentNum(companyView);
+                if (20<sum&&sum<50) {
+                    companyVoList.add(getCompanyVo(companyView));
+                }
+            }
+        }else if(number.equals("大于50人")){
+            for(CompanyView companyView:companyViews) {
+                int sum = getRecruitmentNum(companyView);
+                if (sum>50) {
+                    companyVoList.add(getCompanyVo(companyView));
+                }
+            }
+        }
+
+        result.put("compamyViewList", companyVoList);
+        return Message.createSuc(result);
+    }
+
+
+//    /*
+//     * @param
+//     * @return
+//     * 查看已在系统内注册好的企业信息
+//     * @author hanfeng
+//     * */
+//    @Override
+//    public Message showCompanies(String number) {
+//        Map<String, Object> result = new HashMap<String, Object>();
+//
+//        CompanyViewExample CompanyViewExample=new CompanyViewExample();
+//        CompanyViewExample.or().andDeleteTagEqualTo(true).andPassEqualTo(true);
+//
+//        if(number.equals("0")){
+//            List<CompanyView> companyViews=companyViewMapper.selectByExample(CompanyViewExample);
+//            CompanyVo companyVo;
+//            List<CompanyVo> companyVoList=new ArrayList<>();
+//            if(companyViews == null){
+//                return Message.createErr("无法从Company表里查到记录！");
+//            }
+//            for(CompanyView companyView:companyViews){
+//
+//                User user = userMapper.selectByPrimaryKey(companyView.getUserId());
+//                companyVo = new CompanyVo();
+//                companyVo =new CompanyVo();
+//                companyVo.setContact(user.getNickName());
+//                companyVo.setCompanyName(companyView.getCompanyName());
+//                companyVo.setId(companyView.getId());
+//
+//                RecruitmentExample recruitmentExample=new RecruitmentExample();
+//                recruitmentExample.or().andCompanyIdEqualTo(companyView.getId()).andForbiddenEqualTo(false);
+//                companyVo.setNowIntership(recruitmentMapper.countByExample(recruitmentExample));
+//
+//                RecruitmentExample irecruitmentExample=new RecruitmentExample();
+//                irecruitmentExample.or().andCompanyIdEqualTo(companyView.getId());
+//                companyVo.setAllIntership(recruitmentMapper.countByExample(irecruitmentExample));
+//                companyVo.setForbidden(companyView.getForbidden());
+//                StudentExample studentExample=new StudentExample();
+//                studentExample.or().andCompanyIdEqualTo(companyView.getId());
+//                companyVo.setStudentNumber(studentMapper.countByExample(studentExample));
+//                companyVoList.add(companyVo);
+//                if (user == null) {
+//                    return Message.createErr("无法找到Company表userID=" + companyView.getUserId() + "对应的user！");
+//                }
+//            }
+//            result.put("compamyViewList",companyVoList);
+//
+//        }else if(number.equals("少于5人")){
+//            List<CompanyView> companyViews=companyViewMapper.selectByExample(CompanyViewExample);
+//            CompanyVo companyVo;
+//            List<CompanyVo> companyVoList=new ArrayList<>();
+//            if(companyViews == null){
+//                return Message.createErr("无法从Company表里查到记录！");
+//            }
+//            for(CompanyView companyView:companyViews) {
+//                RecruitmentExample recruitmentExample1 = new RecruitmentExample();
+//                recruitmentExample1.or().andCompanyIdEqualTo(companyView.getId());
+//                List<Recruitment> recruitmentList = recruitmentMapper.selectByExample(recruitmentExample1);
+//                Integer sum =0;
+//                for (Recruitment recruitment : recruitmentList) {
+//                    sum = sum + recruitment.getCurrentNumber();
+//                }
+//                if (sum < 5) {
+//                    User user = userMapper.selectByPrimaryKey(companyView.getUserId());
+//                    companyVo = new CompanyVo();
+//                    companyVo.setContact(user.getNickName());
+//                    companyVo.setCompanyName(companyView.getCompanyName());
+//                    companyVo.setId(companyView.getId());
+//
+//                    RecruitmentExample recruitmentExample = new RecruitmentExample();
+//                    recruitmentExample.or().andCompanyIdEqualTo(companyView.getId()).andForbiddenEqualTo(false);
+//                    companyVo.setNowIntership(recruitmentMapper.countByExample(recruitmentExample));
+//
+//                    RecruitmentExample irecruitmentExample = new RecruitmentExample();
+//                    irecruitmentExample.or().andCompanyIdEqualTo(companyView.getId());
+//                    companyVo.setAllIntership(recruitmentMapper.countByExample(irecruitmentExample));
+//                    companyVo.setForbidden(companyView.getForbidden());
+//                    StudentExample studentExample = new StudentExample();
+//                    studentExample.or().andCompanyIdEqualTo(companyView.getId());
+//                    companyVo.setStudentNumber(studentMapper.countByExample(studentExample));
+//                    companyVoList.add(companyVo);
+//                    if (user == null) {
+//                        return Message.createErr("无法找到Company表userID=" + companyView.getUserId() + "对应的user！");
+//                    }
+//
+//
+//                }
+//
+//                result.put("compamyViewList", companyVoList);
+//            }
+//        }else if(number.equals("5~10人")){
+//            List<CompanyView> companyViews=companyViewMapper.selectByExample(CompanyViewExample);
+//            CompanyVo companyVo;
+//            List<CompanyVo> companyVoList=new ArrayList<>();
+//            if(companyViews == null){
+//                return Message.createErr("无法从Company表里查到记录！");
+//            }
+//            for(CompanyView companyView:companyViews) {
+//                RecruitmentExample recruitmentExample1 = new RecruitmentExample();
+//                recruitmentExample1.or().andCompanyIdEqualTo(companyView.getId());
+//                List<Recruitment> recruitmentList = recruitmentMapper.selectByExample(recruitmentExample1);
+//                Integer sum =0;
+//                for (Recruitment recruitment : recruitmentList) {
+//                    sum = sum + recruitment.getCurrentNumber();
+//                }
+//                if (5<sum&&sum<10) {
+//                    User user = userMapper.selectByPrimaryKey(companyView.getUserId());
+//                    companyVo = new CompanyVo();
+//                    companyVo.setContact(user.getNickName());
+//                    companyVo.setCompanyName(companyView.getCompanyName());
+//                    companyVo.setId(companyView.getId());
+//
+//                    RecruitmentExample recruitmentExample = new RecruitmentExample();
+//                    recruitmentExample.or().andCompanyIdEqualTo(companyView.getId()).andForbiddenEqualTo(false);
+//                    companyVo.setNowIntership(recruitmentMapper.countByExample(recruitmentExample));
+//
+//                    RecruitmentExample irecruitmentExample = new RecruitmentExample();
+//                    irecruitmentExample.or().andCompanyIdEqualTo(companyView.getId());
+//                    companyVo.setAllIntership(recruitmentMapper.countByExample(irecruitmentExample));
+//                    companyVo.setForbidden(companyView.getForbidden());
+//                    StudentExample studentExample = new StudentExample();
+//                    studentExample.or().andCompanyIdEqualTo(companyView.getId());
+//                    companyVo.setStudentNumber(studentMapper.countByExample(studentExample));
+//                    companyVoList.add(companyVo);
+//                    if (user == null) {
+//                        return Message.createErr("无法找到Company表userID=" + companyView.getUserId() + "对应的user！");
+//                    }
+//
+//
+//                }
+//                result.put("compamyViewList", companyVoList);
+//            }
+//        }else if(number.equals("10~20人")){
+//            List<CompanyView> companyViews=companyViewMapper.selectByExample(CompanyViewExample);
+//            CompanyVo companyVo;
+//            List<CompanyVo> companyVoList=new ArrayList<>();
+//            if(companyViews == null){
+//                return Message.createErr("无法从Company表里查到记录！");
+//            }
+//            for(CompanyView companyView:companyViews) {
+//                RecruitmentExample recruitmentExample1 = new RecruitmentExample();
+//                recruitmentExample1.or().andCompanyIdEqualTo(companyView.getId());
+//                List<Recruitment> recruitmentList = recruitmentMapper.selectByExample(recruitmentExample1);
+//                Integer sum =0;
+//                for (Recruitment recruitment : recruitmentList) {
+//                    sum = sum + recruitment.getCurrentNumber();
+//                }
+//                if (10<sum&&sum<20) {
+//                    User user = userMapper.selectByPrimaryKey(companyView.getUserId());
+//                    companyVo = new CompanyVo();
+//                    companyVo.setContact(user.getNickName());
+//                    companyVo.setCompanyName(companyView.getCompanyName());
+//                    companyVo.setId(companyView.getId());
+//
+//                    RecruitmentExample recruitmentExample = new RecruitmentExample();
+//                    recruitmentExample.or().andCompanyIdEqualTo(companyView.getId()).andForbiddenEqualTo(false);
+//                    companyVo.setNowIntership(recruitmentMapper.countByExample(recruitmentExample));
+//
+//                    RecruitmentExample irecruitmentExample = new RecruitmentExample();
+//                    irecruitmentExample.or().andCompanyIdEqualTo(companyView.getId());
+//                    companyVo.setAllIntership(recruitmentMapper.countByExample(irecruitmentExample));
+//                    companyVo.setForbidden(companyView.getForbidden());
+//                    StudentExample studentExample = new StudentExample();
+//                    studentExample.or().andCompanyIdEqualTo(companyView.getId());
+//                    companyVo.setStudentNumber(studentMapper.countByExample(studentExample));
+//                    companyVoList.add(companyVo);
+//                    if (user == null) {
+//                        return Message.createErr("无法找到Company表userID=" + companyView.getUserId() + "对应的user！");
+//                    }
+//
+//
+//                }
+//
+//                result.put("compamyViewList", companyVoList);
+//            }
+//        }else if(number.equals("20~50人")){
+//            List<CompanyView> companyViews=companyViewMapper.selectByExample(CompanyViewExample);
+//            CompanyVo companyVo;
+//            List<CompanyVo> companyVoList=new ArrayList<>();
+//            if(companyViews == null){
+//                return Message.createErr("无法从Company表里查到记录！");
+//            }
+//            for(CompanyView companyView:companyViews) {
+//                RecruitmentExample recruitmentExample1 = new RecruitmentExample();
+//                recruitmentExample1.or().andCompanyIdEqualTo(companyView.getId());
+//                List<Recruitment> recruitmentList = recruitmentMapper.selectByExample(recruitmentExample1);
+//                Integer sum =0;
+//                for (Recruitment recruitment : recruitmentList) {
+//                    sum = sum + recruitment.getCurrentNumber();
+//                }
+//                if (20<sum&&sum<50) {
+//                    User user = userMapper.selectByPrimaryKey(companyView.getUserId());
+//                    companyVo = new CompanyVo();
+//                    companyVo.setContact(user.getNickName());
+//                    companyVo.setCompanyName(companyView.getCompanyName());
+//                    companyVo.setId(companyView.getId());
+//
+//                    RecruitmentExample recruitmentExample = new RecruitmentExample();
+//                    recruitmentExample.or().andCompanyIdEqualTo(companyView.getId()).andForbiddenEqualTo(false);
+//                    companyVo.setNowIntership(recruitmentMapper.countByExample(recruitmentExample));
+//
+//                    RecruitmentExample irecruitmentExample = new RecruitmentExample();
+//                    irecruitmentExample.or().andCompanyIdEqualTo(companyView.getId());
+//                    companyVo.setAllIntership(recruitmentMapper.countByExample(irecruitmentExample));
+//                    companyVo.setForbidden(companyView.getForbidden());
+//                    StudentExample studentExample = new StudentExample();
+//                    studentExample.or().andCompanyIdEqualTo(companyView.getId());
+//                    companyVo.setStudentNumber(studentMapper.countByExample(studentExample));
+//                    companyVoList.add(companyVo);
+//                    if (user == null) {
+//                        return Message.createErr("无法找到Company表userID=" + companyView.getUserId() + "对应的user！");
+//                    }
+//
+//
+//                }
+//
+//                result.put("compamyViewList", companyVoList);
+//            }
+//        }else if(number.equals("大于50人")){
+//            List<CompanyView> companyViews = companyViewMapper.selectByExample(CompanyViewExample);
+//            CompanyVo companyVo;
+//            List<CompanyVo> companyVoList=new ArrayList<>();
+//            if(companyViews == null){
+//                return Message.createErr("无法从Company表里查到记录！");
+//            }
+//            for(CompanyView companyView:companyViews) {
+//                RecruitmentExample recruitmentExample1 = new RecruitmentExample();
+//                recruitmentExample1.or().andCompanyIdEqualTo(companyView.getId());
+//                List<Recruitment> recruitmentList = recruitmentMapper.selectByExample(recruitmentExample1);
+//                Integer sum =0;
+//                for (Recruitment recruitment : recruitmentList) {
+//                    sum = sum + recruitment.getCurrentNumber();
+//                }
+//                if (sum>50) {
+//                    User user = userMapper.selectByPrimaryKey(companyView.getUserId());
+//                    companyVo = new CompanyVo();
+//                    companyVo.setContact(user.getNickName());
+//                    companyVo.setCompanyName(companyView.getCompanyName());
+//                    companyVo.setId(companyView.getId());
+//
+//                    RecruitmentExample recruitmentExample = new RecruitmentExample();
+//                    recruitmentExample.or().andCompanyIdEqualTo(companyView.getId()).andForbiddenEqualTo(false);
+//                    companyVo.setNowIntership(recruitmentMapper.countByExample(recruitmentExample));
+//
+//                    RecruitmentExample irecruitmentExample = new RecruitmentExample();
+//                    irecruitmentExample.or().andCompanyIdEqualTo(companyView.getId());
+//                    companyVo.setAllIntership(recruitmentMapper.countByExample(irecruitmentExample));
+//                    companyVo.setForbidden(companyView.getForbidden());
+//                    StudentExample studentExample = new StudentExample();
+//                    studentExample.or().andCompanyIdEqualTo(companyView.getId());
+//                    companyVo.setStudentNumber(studentMapper.countByExample(studentExample));
+//                    companyVoList.add(companyVo);
+//                    if (user == null) {
+//                        return Message.createErr("无法找到Company表userID=" + companyView.getUserId() + "对应的user！");
+//                    }
+//                }
+//                result.put("compamyViewList", companyVoList);
+//            }
+//        }
+//        return Message.createSuc(result);
+//    }
+
     /**
      * 对表中数值格式化
      * @param cell
@@ -267,7 +683,7 @@ public class AdminComplexServiceImpl implements AdminComplexService {
         List<List<Object>> data = null;
 
 //        接收文件
-        MultipartHttpServletRequest multipartRequest = multipartRequest = (MultipartHttpServletRequest) request;
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile file = multipartRequest.getFile("excelFile");
 
         is = file.getInputStream();

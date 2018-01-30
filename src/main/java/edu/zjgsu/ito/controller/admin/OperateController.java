@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping(value = "admin")
 public class OperateController {
     @Autowired
@@ -33,8 +33,7 @@ public class OperateController {
      * @throws Exception
      * @author sawei
      */
-    @ResponseBody
-    @RequestMapping(value = "archive", method = RequestMethod.POST )
+    @PostMapping(value = "archive")
     public Message archive(@RequestBody IdVo studentIds, HttpServletRequest request, HttpServletResponse response) throws Exception {
         return adminComplexService.archive(studentIds.String2Integer(studentIds.getId()), request, response);
     }
@@ -47,8 +46,7 @@ public class OperateController {
      * @throws Exception
      * @author sawei
      */
-    @ResponseBody
-    @RequestMapping(value = "export2Excel", method = RequestMethod.POST )
+    @PostMapping(value = "export2Excel")
     public Message export2Excel(@RequestBody IdVo studentIds, HttpServletResponse response) throws Exception {
         return adminComplexService.writeToExcel("Sheet1", studentIds.String2Integer(studentIds.getId()),response);
     }
@@ -58,8 +56,7 @@ public class OperateController {
      * @return
      * @author sawei
      */
-    @ResponseBody
-    @RequestMapping(value = "weight", method = RequestMethod.POST)
+    @PostMapping(value = "weight")
     public Message setWeight(@RequestBody Weight weight) {
         return simpleService.setWeight(weight);
     }
@@ -72,8 +69,7 @@ public class OperateController {
      * @throws Exception
      * @author sawei
      */
-    @ResponseBody
-    @RequestMapping(value = "uploadExcel", method = {RequestMethod.GET, RequestMethod.POST})
+    @GetMapping(value = "uploadExcel")
     public Message uploadExcel(HttpServletRequest request, @RequestParam("roleId") Integer roleId) throws Exception {
         return adminComplexService.batchRegister(request, roleId);
     }
@@ -84,8 +80,7 @@ public class OperateController {
      * @return
      * @author sawei
      */
-    @ResponseBody
-    @RequestMapping(value = "studentRegister", method = RequestMethod.POST )
+    @PostMapping(value = "studentRegister")
     public Message studentRegister(@RequestBody StudentRegisterView temp) {
         return simpleService.studentRegister(temp.getUserName(), temp.getNickName(), temp.getMajor(), temp.getClss(), temp.getGrade());
     }
@@ -96,8 +91,7 @@ public class OperateController {
      * @return
      * @author sawei
      */
-    @ResponseBody
-    @RequestMapping(value = "teacherRegister", method = RequestMethod.POST )
+    @PostMapping(value = "teacherRegister")
     public Message teacherRegister(@RequestBody TeacherRegisterView temp) {
         return simpleService.teacherRegister(temp.getUserName(), temp.getNickName(), temp.getMajor());
     }
