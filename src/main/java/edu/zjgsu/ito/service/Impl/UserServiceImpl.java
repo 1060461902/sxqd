@@ -1,6 +1,7 @@
 package edu.zjgsu.ito.service.Impl;
 
 import edu.zjgsu.ito.dao.UserMapper;
+import edu.zjgsu.ito.model.StudentExample;
 import edu.zjgsu.ito.model.User;
 import edu.zjgsu.ito.model.UserExample;
 import edu.zjgsu.ito.service.UserService;
@@ -12,7 +13,6 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
@@ -29,15 +29,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int deleteByPrimaryKey(String id) {
+    public int deleteByPrimaryKey(Integer id) {
         return 0;
     }
 
     @Override
     public int insert(User record) {
-//        int count = userMapper.insert(record);
-//        return count;
-        return 0;
+        int count = userMapper.insert(record);
+        return count;
     }
 
     @Override
@@ -52,7 +51,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User selectByPrimaryKey(String id) {
+    public User selectByPrimaryKey(Integer id) {
+        StudentExample studentExample = new StudentExample();
+//        StudentExample.GeneratedCriteria criteria = studentExample.or();
         User user = userMapper.selectByPrimaryKey(id);
         return user;
     }
@@ -81,4 +82,5 @@ public class UserServiceImpl implements UserService {
         status = userMapper.updateByPrimaryKey(record);
         return status;
     }
+
 }

@@ -52,7 +52,7 @@ public class LoginFilter implements Filter {
                 }
             } else {
                 //重定向
-                response.sendRedirect("/fieldManagement/admin-login.html");
+                response.sendRedirect("/internshipmgn/admin-login.html");
                 return;
             }
         return;

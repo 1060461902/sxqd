@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="epi:war">
-    <output-path>$PROJECT_DIR$/../../../环保院/hhprojmgn/target</output-path>
-    <root id="archive" name="epi.war">
-      <element id="artifact" artifact-name="epi:war exploded" />
-    </root>
-  </artifact>
-</component>

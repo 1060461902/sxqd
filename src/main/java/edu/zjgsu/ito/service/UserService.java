@@ -1,17 +1,17 @@
 package edu.zjgsu.ito.service;
 
 import edu.zjgsu.ito.model.User;
+
 import edu.zjgsu.ito.model.UserExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
 public interface UserService {
     long countByExample(UserExample example);
 
     int deleteByExample(UserExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(User record);
 
@@ -19,7 +19,7 @@ public interface UserService {
 
     List<User> selectByExample(UserExample example);
 
-    User selectByPrimaryKey(String id);
+    User selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 

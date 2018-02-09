@@ -1,21 +1,19 @@
 package edu.zjgsu.ito.controller.admin;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
+import edu.zjgsu.ito.dao.CompanyMapper;
+import edu.zjgsu.ito.dao.RecruitmentMapper;
+import edu.zjgsu.ito.dao.StudentMapper;
+import edu.zjgsu.ito.dao.StudentRecruitmentMapper;
 import edu.zjgsu.ito.model.*;
-import edu.zjgsu.ito.vo.FrontTeacherInfo;
-import edu.zjgsu.ito.service.StuInfoService;
-import edu.zjgsu.ito.service.TeacherInfoService;
-import edu.zjgsu.ito.service.UserService;
-import edu.zjgsu.ito.utils.Constant;
+import edu.zjgsu.ito.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,81 +22,117 @@ import java.util.Map;
 @RequestMapping(value = "admin")
 public class ViewController {
 //    页大小
-    public static final int pageSize = 2;
 
     @Autowired
-    TeacherInfoService teacherInfoService;
+    TeacherService teacherService;
     @Autowired
     UserService userService;
     @Autowired
-    StuInfoService stuInfoService;
+    StudentService studentService;
+    @Autowired
+    WeightService weightService;
+    @Autowired
+    CheckNumService checkNumService;
+    @Autowired
+    TableDataService tableDataService;
+    @Autowired
+    StudentMapper studentMapper;
+    @Autowired
+    StudentRecruitmentMapper studentRecruitmentMapper;
+    @Autowired
+    CompanyMapper companyMapper;
+    @Autowired
+    RecruitmentMapper recruitmentMapper;
+    @Autowired
+    RecruitmentService recruitmentService;
 
-    /**
-     *
-     * @param pageNum 页码
-     * @return
-     * @author sawei
-     */
-    @RequestMapping(value = "showTeachers", method = RequestMethod.GET)
-    public @ResponseBody
-    Map<String, Object> showTeachers(@RequestParam("pageNum") int pageNum) {
 
-
-        FrontTeacherInfo FrontTeacherInfoTemp = null;
-        List<FrontTeacherInfo> teacherList = new ArrayList<FrontTeacherInfo>();
-//        List<String> studentList = new ArrayList<String>();
+    @RequestMapping(value = "weight", method = RequestMethod.GET)
+    public @ResponseBody Map<String, Object> setWeight() {
+        int status;
         Map<String, Object> result = new HashMap<String, Object>();
 
-//        分页查询teacherinfo表所有的记录
-        TeacherInfoExample teacherInfoExample = new TeacherInfoExample();
-        teacherInfoExample.or().andIdIsNotNull();
-//        分页
-        Page<TeacherInfo> teacherInfos = PageHelper.startPage(pageNum,pageSize);
-        teacherInfoService.selectByExample(teacherInfoExample);
-        if (teacherInfos == null) {
-            result.put("code", Constant.FAIL);
-            result.put("msg", "无法从teacherInfo表里查到记录！");
-            return result;
-        }
+        Weight weight=weightService.selectByPrimaryKey(1);
 
-//        查找teacherInfos的每一个元素的全部信息
-        for (TeacherInfo teacherInfo:
-             teacherInfos) {
-            FrontTeacherInfoTemp = new FrontTeacherInfo();
+        result.put("tWeekReport",weight.gettWeekReport());
+        result.put("tSummary",weight.gettSummary());
+        result.put("tFinalReport",weight.gettFinalReport());
+        result.put("cWeekReport",weight.getcWeekReport());
+        result.put("cAttendance",weight.getcAttendance());
+        result.put("teacherWeight",weight.getTeacherWeight());
+        result.put("companyWeight",weight.getCompanyWeight());
+        return result;
+    }
 
-//            得到老师对应的user
-            User user = userService.selectByPrimaryKey(teacherInfo.getUserid());
-            if (user == null) {
-                result.put("code", Constant.FAIL);
-                result.put("msg", "无法找到teacherinfo表userID=" + teacherInfo.getUserid() + "对应的user！");
-                return result;
-            }
+    @RequestMapping(value = "index",method=RequestMethod.GET)
+    public @ResponseBody
+    /**
+    * author hanfeng
+    **/
 
-////            查询老师指导的学生
-//            StuInfoExample stuInfoExample = new StuInfoExample();
-//            stuInfoExample.or().andTeacheridEqualTo(teacherInfo.getId());
-//            List<StuInfo> stuInfos = stuInfoService.selectByExample(stuInfoExample);
-//            for (StuInfo stuInfo:
-//                 stuInfos) {
-//                studentList.add(stuInfo.getId())
-//            }
+    Map<String,Object> index(){
+        Map<String, Object> result = new HashMap<String, Object>();
+        int sum = 0;
+//        DateFormat czx=new SimpleDateFormat("yyyy-MM-dd");
+        CheckNumExample checkNumExample=new CheckNumExample();
+        checkNumExample.setOrderByClause("id DESC");
+        checkNumExample.setLimit(1);
+        List<CheckNum> checkNums=checkNumService.selectByExample(checkNumExample);
+        System.out.println(checkNums);
+        CheckNum checkNum=checkNumService.selectByExample(checkNumExample).get(0);
+//        JSONObject object=new JSONObject();
+//        object.put("table",tableDatas);
 
-//            设置返回给前端的对象的属性
-            FrontTeacherInfoTemp.setId(teacherInfo.getId());
-            FrontTeacherInfoTemp.setNickname(user.getNickname());
-            FrontTeacherInfoTemp.setUsername(user.getUsername());
-            FrontTeacherInfoTemp.setStatus(teacherInfo.getStatus());
-            FrontTeacherInfoTemp.setPhone(user.getPhone());
-            FrontTeacherInfoTemp.setForbidden(user.getForbidden());
+        StudentExample studentExample = new StudentExample();
+        studentExample.or().andDeleteTagEqualTo(true);
+        String studentNum = String.valueOf(studentMapper.countByExample(studentExample));
 
-//            加到list里面
-            teacherList.add(FrontTeacherInfoTemp);
-        }
+        StudentRecruitmentExample example = new StudentRecruitmentExample();
+        example.or().andPassingEqualTo(1);
+        String employeeNum = String.valueOf(studentRecruitmentMapper.countByExample(example));
 
-        result.put("code", Constant.OK);
-        result.put("msg", "返回老师信息成功！");
-        result.put("teacherList", teacherList);
+        CompanyExample companyExample = new CompanyExample();
+        companyExample.or().andPassEqualTo(true).andDeleteTagEqualTo(true);
+        String companyNum = String.valueOf(companyMapper.countByExample(companyExample));
+
+        RecruitmentExample recruitmentExample = new RecruitmentExample();
+        recruitmentExample.or().andPassEqualTo(true).andDeleteTagEqualTo(true).andForbiddenEqualTo(false).andRemoveEqualTo(false);
+
+        String postNum = String.valueOf(recruitmentMapper.countByExample(recruitmentExample));
+
+        List<Recruitment> recruitmentList = recruitmentService.selectByExample(recruitmentExample);
+        for (Recruitment recruitment :
+                recruitmentList) {
+            sum += recruitment.getTotalNumber();
+       }
+        String headcounts = String.valueOf(sum);
+
+        TableDataExample tableDataExample=new TableDataExample();
+        tableDataExample.setOrderByClause("id");
+        tableDataExample.setLimit(6);
+        List<TableData> tableDatas=tableDataService.selectByExample(tableDataExample);
+        System.out.println(tableDatas);
+        Date a=new Date();
+        SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd");
+
+        result.put("today",dateFormater.format(a));
+        result.put("table",tableDatas);
+        result.put("studentNum", studentNum);
+        result.put("employeeNum", employeeNum);
+        result.put("companyNum", companyNum);
+        result.put("postNum", postNum);
+        result.put("headcounts", headcounts);
+
+        result.put("clockInNum", checkNum.getClockinnum());
+        result.put("clockOutNum", checkNum.getClockoutnum());
+        result.put("lastDayAttendNum", checkNum.getLastdayattendnum());
+//        result.put("table", object);
+        result.put("clockInNum", checkNum.getClockinnum());
+
+
 
         return result;
     }
+
+
 }
