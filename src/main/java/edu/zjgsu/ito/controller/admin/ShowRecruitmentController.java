@@ -18,7 +18,7 @@ import java.util.*;
 
 import static jdk.nashorn.internal.objects.NativeString.substr;
 
-@Controller
+@RestController
 @RequestMapping(value = "admin")
 public class ShowRecruitmentController {
 

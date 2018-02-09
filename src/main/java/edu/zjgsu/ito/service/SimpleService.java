@@ -4,6 +4,8 @@ import edu.zjgsu.ito.model.User;
 import edu.zjgsu.ito.model.Weight;
 import edu.zjgsu.ito.pojo.Message;
 import edu.zjgsu.ito.vo.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -91,10 +93,45 @@ public interface SimpleService {
 
     Message showStudents(ScreeningVo screeningVo , Integer pageNum);
 
+    Message forbiddenStudent(String iid, boolean forbidden);
 
+    Message deleteStudent(IdVo idvo);
 
+    Message showStudentDetail(Integer id);
 
+    Message showScreening(ScreeningVo screeningVo);
 
+    Message assignedStudent(AssignedStudent assignedStudent);
 
+    Message updateStudent(StudentBaseVo studentBaseVo);
 
+    Message showRoad(Integer id);
+
+    Message showTeachers(String major);
+
+    Message teacherStudentName(Integer id);
+
+    Message showTeacherStudent(MVo mVo);
+
+    Message showTeacherStudentScreen(MVo mVo);
+
+    Message teacherDetail(Integer id);
+
+    Message forbiddenTeacher(Integer id, boolean forbidden);
+
+    Message deleteTeacher(IdVo idVo);
+
+    Message teacherMajor();
+
+    Message updateTeacher(TeacherVo teacherVo);
+
+    Message getWeight();
+
+    Message index();
+
+    Message showNewsList();
+
+    Message showRecruitmentsOne(Integer id);
+
+    Message showRecruitmentsTwo(Integer id);
 }

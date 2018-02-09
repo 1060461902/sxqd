@@ -22,6 +22,20 @@ import static jdk.nashorn.internal.objects.NativeString.substr;
 @Service
 public class SimpleServiceImpl implements SimpleService {
     @Autowired
+    CheckNumMapper checkNumMapper;
+    @Autowired
+    TableDataMapper tableDataMapper;
+    @Autowired
+    RoadMapper roadMapper;
+    @Autowired
+    StudentSkillMapper studentSkillMapper;
+    @Autowired
+    StudentClubMapper studentClubMapper;
+    @Autowired
+    StudentHonorMapper studentHonorMapper;
+    @Autowired
+    StudentProjectMapper studentProjectMapper;
+    @Autowired
     UserMapper userMapper;
     @Autowired
     StudentMapper studentMapper;
@@ -575,26 +589,19 @@ public class SimpleServiceImpl implements SimpleService {
         Map<String, Object> result = new HashMap<String, Object>();
 
         DynamicApproveExample dynamicApproveExample=new DynamicApproveExample();
-        dynamicApproveExample.or().andPassingEqualTo(true).andDeleteTagEqualTo(true);
+        dynamicApproveExample.or().andPassingEqualTo(true).andDeleteTagEqualTo(true).andShowStatusEqualTo(true);
 
 
         List<DynamicApprove> dynamicApproves=dynamicApproveMapper.selectByExample(dynamicApproveExample);
 
-        if(dynamicApproves == null){
-            return Message.createErr("无法从DynamicApprove表里查到记录！");
-        }else {
-            for (DynamicApprove dynamicApprove : dynamicApproves) {
-                User user = userMapper.selectByPrimaryKey(dynamicApprove.getCompanyId());
-                if (user == null) {
-                    return Message.createErr("无法找到dynamicApprove表userID=" + dynamicApprove.getCompanyId() + "对应的user！");
-                }
-
-            }
+        for (DynamicApprove dynamicApprove : dynamicApproves) {
+            userMapper.selectByPrimaryKey(dynamicApprove.getCompanyId());
         }
 
         result.put("dynamicApproves", dynamicApproves);
         return Message.createSuc(result);
     }
+
     /*
      * 获取所有注册企业名字
      * author hanfeng
@@ -1676,5 +1683,679 @@ public class SimpleServiceImpl implements SimpleService {
         return Message.createSuc(result);
     }
 
+    @Override
+    public Message forbiddenStudent(String iid, boolean forbidden) {
+        Integer id = Integer.valueOf(iid);
+
+        Student student = studentMapper.selectByPrimaryKey(id);
+
+        student.setForbidden(forbidden);
+        studentMapper.updateByPrimaryKey(student);
+
+        return Message.createSuc(null);
+    }
+
+    @Override
+    public Message deleteStudent(IdVo idvo) {
+        String[] ids=idvo.getId();
+        for(String iid:ids){
+            Integer id=Integer.valueOf(iid);
+            Student student=studentMapper.selectByPrimaryKey(id);
+
+            student.setDeleteTag(false);
+            studentMapper.updateByPrimaryKey(student);
+        }
+
+        return Message.createSuc(null);
+    }
+
+    @Override
+    public Message showStudentDetail(Integer id) {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        Student student=studentMapper.selectByPrimaryKey(id);
+        StudentDetail studentDetail=new StudentDetail();
+
+
+        User user=userMapper.selectByPrimaryKey(student.getUserId());
+
+        studentDetail.setId(student.getId());
+        studentDetail.setUserId(student.getUserId());
+        studentDetail.setCompanyId(student.getCompanyId());
+        studentDetail.setTeacherId(student.getTeacherId());
+        studentDetail.setSex(student.getSex());
+        studentDetail.setNational(student.getNation());
+        studentDetail.setEnglish(student.getEnglish());
+        studentDetail.setGrade(student.getGrade());
+        studentDetail.setMajor(student.getMajor());
+        studentDetail.setClss(student.getClss());
+        studentDetail.setPhone(user.getPhone());
+        studentDetail.setNickName(user.getNickName());
+        studentDetail.setUserName(user.getUserName());
+        studentDetail.setBirthday(student.getBirthday());
+
+        studentDetail.setEmail(student.getEmail());
+        result.put("student",studentDetail);
+
+        StudentProjectExample studentProjectExample=new StudentProjectExample();
+        studentProjectExample.or().andStudentIdEqualTo(student.getId()).andDeleteTagEqualTo(true);
+        List<StudentProject> studentProjects=studentProjectMapper.selectByExample(studentProjectExample);
+
+        JSONArray objects=new JSONArray();
+        for(StudentProject studentProject:studentProjects){
+            JSONObject obj=new JSONObject();
+
+            obj.put("Project",studentProject);
+
+            objects.add(obj);
+        }
+        result.put("ProjectList",objects);
+
+        StudentSkillExample studentSkillExample=new StudentSkillExample();
+        studentSkillExample.or().andStudentIdEqualTo(student.getId());
+        List<StudentSkill> studentSkills=studentSkillMapper.selectByExample(studentSkillExample);
+        JSONArray okjects=new JSONArray();
+        for(StudentSkill studentSkill:studentSkills){
+            JSONObject okj=new JSONObject();
+            okj.put("Skill",studentSkill);
+            okjects.add(okj);
+        }
+        result.put("SkillList",okjects);
+
+        StudentHonorExample studentHonorExample=new StudentHonorExample();
+        studentHonorExample.or().andStudentIdEqualTo(student.getId()).andDeleteTagEqualTo(true);
+        List<StudentHonor> studentHonors=studentHonorMapper.selectByExample(studentHonorExample);
+        JSONArray ovjects=new JSONArray();
+        for(StudentHonor studentHonor:studentHonors){
+            JSONObject ovj=new JSONObject();
+            ovj.put("Honor",studentHonor);
+            ovjects.add(ovj);
+        }
+        result.put("HonorList",ovjects);
+
+        StudentClubExample studentClubExample=new StudentClubExample();
+        studentClubExample.or().andStudentIdEqualTo(student.getId()).andDelectTagEqualTo(true);
+        List<StudentClub> studentClubs=studentClubMapper.selectByExample(studentClubExample);
+        JSONArray opjects=new JSONArray();
+        for(StudentClub studentClub:studentClubs){
+            JSONObject opj=new JSONObject();
+            opj.put("Club",studentClub);
+            opjects.add(opj);
+        }
+        result.put("ClubList",opjects);
+
+        return Message.createSuc(result);
+    }
+
+    @Override
+    public Message showScreening(ScreeningVo screeningVo) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        String grade =screeningVo.getGrade();
+        String major =screeningVo.getMajor();
+        String clss =screeningVo.getClss();
+        String status=screeningVo.getStatu();
+
+        StudentExample studentExample1=new StudentExample();
+        studentExample1.or().andDeleteTagEqualTo(true);
+        List<Student> students1=studentMapper.selectByExample(studentExample1);
+        Set set1=new TreeSet();
+        for(Student student:students1){
+            set1.add(student.getGrade());
+        }
+        result.put("grade",set1);
+
+        StudentExample studentExample2=new StudentExample();
+
+        StudentExample.Criteria criteria=studentExample2.or();
+
+        if(grade.equals("年级")){
+            criteria.andDeleteTagEqualTo(true);
+        }else{
+            criteria.andGradeEqualTo(grade).andDeleteTagEqualTo(true);
+        }
+        List<Student> students2=studentMapper.selectByExample(studentExample2);
+        Set set2=new TreeSet();
+        for(Student student:students2){
+            set2.add(student.getMajor());
+        }
+        result.put("major",set2);
+
+
+        StudentExample studentExample3=new StudentExample();
+        studentExample3.or().andDeleteTagEqualTo(true);
+        if(major.equals("专业")){
+
+        }else{
+            criteria.andMajorEqualTo(major);
+        }
+
+        List<Student> students3=studentMapper.selectByExample(studentExample2);
+        Set set3=new TreeSet();
+        for(Student student:students3){
+            set3.add(student.getClss());
+        }
+        result.put("clss",set3);
+
+        StudentExample studentExample4=new StudentExample();
+        studentExample4.or().andDeleteTagEqualTo(true);
+        List<Student> students4=studentMapper.selectByExample(studentExample4);
+        Set set4=new TreeSet();
+        for(Student student:students4){
+            set4.add(student.getStatus());
+        }
+        result.put("status",set4);
+
+        return Message.createSuc(result);
+    }
+
+    @Override
+    public Message assignedStudent(AssignedStudent assignedStudent) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        System.out.println(assignedStudent);
+
+        String[] ids=assignedStudent.getIds();
+        Integer teacherId=assignedStudent.getTeacherId();
+        System.out.println(ids);
+        System.out.println(teacherId);
+        for(String iid:ids){
+            Integer id = Integer.valueOf(iid);
+            Student student=studentMapper.selectByPrimaryKey(id);
+
+            student.setTeacherId(teacherId);
+            studentMapper.updateByPrimaryKey(student);
+        }
+
+        return Message.createSuc(null);
+    }
+
+    @Override
+    public Message updateStudent(StudentBaseVo studentBaseVo) {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        String iid=studentBaseVo.getId();
+        Boolean sex=studentBaseVo.isSex();
+        String nation=studentBaseVo.getNation();
+        String birthday=studentBaseVo.getBirthday();
+        String phone=studentBaseVo.getPhone();
+        String email=studentBaseVo.getEmail();
+        Integer id = Integer.valueOf(iid);
+
+        Student student=studentMapper.selectByPrimaryKey(id);
+
+        if(sex==false){
+            student.setSex(false);
+        }else{
+            student.setSex(true);
+        }
+        student.setEmail(email);
+        student.setNation(nation);
+        student.setBirthday(birthday);
+        User user=userMapper.selectByPrimaryKey(student.getUserId());
+        user.setPhone(phone);
+        studentMapper.updateByPrimaryKey(student);
+        userMapper.updateByPrimaryKey(user);
+
+        return Message.createSuc(null);
+    }
+
+    @Override
+    public Message showRoad(Integer id) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        RoadExample roadExample=new RoadExample();
+
+        roadExample.setOrderByClause("id");
+        roadExample.or().andStudentIdEqualTo(id);
+
+        List<Road> roads=roadMapper.selectByExample(roadExample);
+        JSONArray arr=new JSONArray();
+        for(Road road:roads){
+            arr.add(road.getRecruitmentId());
+        }
+        HashSet set=new HashSet(arr);
+        Iterator iterator = set.iterator();
+        JSONArray one=new JSONArray();
+        System.out.println(set);
+        while (iterator.hasNext()) {
+            JSONObject object=new JSONObject();
+            int a=(Integer)iterator.next();
+            System.out.println(a);
+            RoadExample roadExample2=new RoadExample();
+            roadExample2.or().andStudentIdEqualTo(id).andRecruitmentIdEqualTo(a);
+            Recruitment recruitment=recruitmentMapper.selectByPrimaryKey(a);
+            Company company=companyMapper.selectByPrimaryKey(recruitment.getCompanyId());
+
+            object.put("company_id",company.getId());
+            object.put("recruitment_id",recruitment.getId());
+            object.put("companyName",company.getCompanyName());
+            object.put("recruitmentName",recruitment.getPost());
+            object.put("logo",company.getLogo());
+            List<Road> roadList=roadMapper.selectByExample(roadExample2);
+            object.put("action",roadList);
+            one.add(object);
+        }
+        Student student=studentMapper.selectByPrimaryKey(id);
+        User user=userMapper.selectByPrimaryKey(student.getUserId());
+        result.put("name",user.getNickName());
+        result.put("roadList",one);
+
+        return Message.createSuc(result);
+    }
+
+    @Override
+    public Message showTeachers(String major) {
+        System.out.println(major);
+
+
+        FrontTeacher FrontTeacherTemp = null;
+        List<FrontTeacher> teacherList = new ArrayList<FrontTeacher>();
+        Map<String, Object> result = new HashMap<String, Object>();
+
+
+        TeacherExample TeacherExample = new TeacherExample();
+        if(major.equals("专业")){
+            TeacherExample.or().andIdIsNotNull().andDeleteTagEqualTo(true);
+        }else {
+            TeacherExample.or().andIdIsNotNull().andMajorEqualTo(major).andDeleteTagEqualTo(true);
+        }
+
+        List<Teacher> teachers=teacherMapper.selectByExample(TeacherExample);
+        for (Teacher teacher:
+                teachers) {
+            FrontTeacherTemp = new FrontTeacher();
+
+            User user = userMapper.selectByPrimaryKey(teacher.getUserId());
+
+            StudentExample studentExample=new StudentExample();
+            studentExample.or().andTeacherIdEqualTo(teacher.getId());
+            long count=studentMapper.countByExample(studentExample);
+            FrontTeacherTemp.setCount(count);
+            FrontTeacherTemp.setId(teacher.getId());
+            FrontTeacherTemp.setNickName(user.getNickName());
+            FrontTeacherTemp.setUserName(user.getUserName());
+            FrontTeacherTemp.setMajor(teacher.getMajor());
+            FrontTeacherTemp.setPhone(user.getPhone());
+            FrontTeacherTemp.setForbidden(teacher.getForbidden());
+
+            teacherList.add(FrontTeacherTemp);
+        }
+
+        result.put("teacherList", teacherList);
+
+        return Message.createSuc(result);
+    }
+
+    @Override
+    public Message teacherStudentName(Integer id) {
+        Map<String, Object> result = new HashMap<String, Object>();
+//        Integer id = Integer.valueOf(iid);
+
+        StudentExample studentExample=new StudentExample();
+        studentExample.or().andTeacherIdEqualTo(id);
+        List<Student> students=studentMapper.selectByExample(studentExample);
+        JSONArray objects=new JSONArray();
+        System.out.println(students);
+        for(Student student:students){
+            JSONObject obj=new JSONObject();
+            obj.put("id",student.getId());
+            User user=userMapper.selectByPrimaryKey(student.getUserId());
+            obj.put("name",user.getNickName());
+            objects.add(obj);
+        }
+        result.put("Names",objects);
+
+        return Message.createSuc(result);
+    }
+
+    @Override
+    public Message showTeacherStudent(MVo mVo) {
+        String major=mVo.getMajor();
+        String clss=mVo.getClss();
+        String iid=mVo.getId();
+        String status=mVo.getStatus();
+        Integer id = Integer.valueOf(iid);
+
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        StudentExample studentExample=new StudentExample();
+
+        StudentExample.Criteria criteria=studentExample.or().andTeacherIdEqualTo(id).andDeleteTagEqualTo(true);
+
+        if(major.equals("专业")){
+
+        }else{
+            criteria.andMajorEqualTo(major);
+        }
+        if(clss.equals("班级")){
+
+        }else{
+            criteria.andClssEqualTo(clss);
+        }
+        if(status.equals("实习状态")){
+
+        } else{
+            criteria.andStatusEqualTo(status);
+        }
+
+        List<Student> students=studentMapper.selectByExample(studentExample);
+        JSONArray objects=new JSONArray();
+        System.out.println(students);
+        for(Student student:students){
+            JSONObject obj=new JSONObject();
+            obj.put("id",student.getId());
+            User user=userMapper.selectByPrimaryKey(student.getUserId());
+            obj.put("nickName",user.getNickName());
+            obj.put("userName",user.getUserName());
+            obj.put("status",student.getStatus());
+            Company company=companyMapper.selectByPrimaryKey(student.getCompanyId());
+            obj.put("companyName",company.getCompanyName());
+            Teacher teacher=teacherMapper.selectByPrimaryKey(student.getTeacherId());
+            obj.put("major",student.getMajor());
+            obj.put("clss",student.getClss());
+            obj.put("companyId",student.getCompanyId());
+
+            obj.put("name",user.getNickName());
+            objects.add(obj);
+        }
+        Teacher teacher=teacherMapper.selectByPrimaryKey(id);
+        User user=userMapper.selectByPrimaryKey(teacher.getUserId());
+        result.put("name",user.getNickName());
+        result.put("students",objects);
+
+        return  Message.createSuc(result);
+    }
+
+    @Override
+    public Message showTeacherStudentScreen(MVo mVo) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        String major=mVo.getMajor();
+        String clss=mVo.getClss();
+        String iid=mVo.getId();
+        String status=mVo.getStatus();
+
+        Integer id = Integer.valueOf(iid);
+
+
+        StudentExample studentExample1=new StudentExample();
+        studentExample1.or().andTeacherIdEqualTo(id).andDeleteTagEqualTo(true);
+        List<Student> students1=studentMapper.selectByExample(studentExample1);
+        Set set1=new TreeSet();
+        for(Student student:students1){
+            set1.add(student.getMajor());
+        }
+        result.put("major",set1);
+
+
+        StudentExample studentExample2=new StudentExample();
+        StudentExample.Criteria criteria=studentExample2.or().andTeacherIdEqualTo(id).andDeleteTagEqualTo(true);
+        if(major.equals("专业")){
+
+        }else{
+            criteria.andMajorEqualTo(major);
+        }
+        List<Student> students2=studentMapper.selectByExample(studentExample2);
+        Set set2=new TreeSet();
+        for(Student student:students2){
+            set2.add(student.getClss());
+        }
+        result.put("clss",set2);
+
+        return Message.createSuc(result);
+    }
+
+    @Override
+    public Message teacherDetail(Integer id) {
+        TeacherDetail teacherDetail ;
+        Map<String, Object> result = new HashMap<String, Object>();
+        TeacherExample TeacherExample = new TeacherExample();
+//        Integer id = Integer.valueOf(iid);
+
+        TeacherExample.or().andIdEqualTo(id);
+        Teacher teacher=teacherMapper.selectByPrimaryKey(id);
+        teacherDetail = new TeacherDetail();
+
+        User user = userMapper.selectByPrimaryKey(teacher.getUserId());
+
+        teacherDetail.setId(teacher.getId());
+        teacherDetail.setNickName(user.getNickName());
+        teacherDetail.setUserName(user.getUserName());
+        teacherDetail.setMajor(teacher.getMajor());
+        teacherDetail.setPhone(user.getPhone());
+        teacherDetail.setSex(teacher.getSex());
+        teacherDetail.setEmail(teacher.getEmail());
+        teacherDetail.setPhoto(teacher.getPhoto());
+        teacherDetail.setRank(teacher.getRank());
+
+
+        result.put("teacherDetail", teacherDetail);
+
+        return Message.createSuc(result);
+    }
+
+    @Override
+    public Message forbiddenTeacher(Integer id, boolean forbidden) {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        Teacher teacher=teacherMapper.selectByPrimaryKey(id);
+
+        teacher.setForbidden(forbidden);
+
+        teacherMapper.updateByPrimaryKey(teacher);
+
+        return Message.createSuc(null);
+    }
+
+    @Override
+    public Message deleteTeacher(IdVo idVo) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        String[] ids= idVo.getId();
+        for(String idd:ids){
+            Integer id=Integer.valueOf(idd);
+            Teacher teacher=teacherMapper.selectByPrimaryKey(id);
+            teacher.setDeleteTag(false);
+            teacherMapper.updateByPrimaryKey(teacher);
+        }
+
+        return Message.createSuc(null);
+    }
+
+    @Override
+    public Message teacherMajor() {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        TeacherExample teacherExample=new TeacherExample();
+        List<Teacher> teachers=teacherMapper.selectByExample(teacherExample);
+        JSONArray objects=new JSONArray();
+        for(Teacher teacher:teachers){
+            JSONObject obj=new JSONObject();
+            obj.put("major",teacher.getMajor());
+            objects.add(obj);
+        }
+        Set set=new HashSet(objects);
+        result.put("major",set);
+
+        return Message.createSuc(result);
+    }
+
+    @Override
+    public Message updateTeacher(TeacherVo teacherVo) {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        String iid=teacherVo.getId();
+        Integer id = Integer.valueOf(iid);
+
+        Boolean sex=teacherVo.getSex();
+        String major=teacherVo.getMajor();
+        String rank=teacherVo.getRank();
+        String phone=teacherVo.getPhone();
+        String email=teacherVo.getEmail();
+
+        Teacher teacher=teacherMapper.selectByPrimaryKey(id);
+
+        teacher.setMajor(major);
+        teacher.setRank(rank);
+        teacher.setSex(sex);
+        teacher.setEmail(email);
+        User user=userMapper.selectByPrimaryKey(teacher.getUserId());
+        user.setPhone(phone);
+
+        teacherMapper.updateByPrimaryKey(teacher);
+        userMapper.updateByPrimaryKey(user);
+
+        return Message.createSuc(null);
+    }
+
+    @Override
+    public Message getWeight() {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        Weight weight=weightMapper.selectByPrimaryKey(1);
+
+        result.put("tWeekReport",weight.gettWeekReport());
+        result.put("tSummary",weight.gettSummary());
+        result.put("tFinalReport",weight.gettFinalReport());
+        result.put("cWeekReport",weight.getcWeekReport());
+        result.put("cAttendance",weight.getcAttendance());
+        result.put("teacherWeight",weight.getTeacherWeight());
+        result.put("companyWeight",weight.getCompanyWeight());
+
+        return Message.createSuc(result);
+    }
+
+    @Override
+    public Message index() {
+        Map<String, Object> result = new HashMap<String, Object>();
+        int sum = 0;
+//        DateFormat czx=new SimpleDateFormat("yyyy-MM-dd");
+        CheckNumExample checkNumExample=new CheckNumExample();
+        checkNumExample.setOrderByClause("id DESC");
+        checkNumExample.setLimit(1);
+        List<CheckNum> checkNums=checkNumMapper.selectByExample(checkNumExample);
+        System.out.println(checkNums);
+        CheckNum checkNum=checkNumMapper.selectByExample(checkNumExample).get(0);
+//        JSONObject object=new JSONObject();
+//        object.put("table",tableDatas);
+
+        StudentExample studentExample = new StudentExample();
+        studentExample.or().andDeleteTagEqualTo(true);
+        String studentNum = String.valueOf(studentMapper.countByExample(studentExample));
+
+        StudentRecruitmentExample example = new StudentRecruitmentExample();
+        example.or().andPassingEqualTo(1);
+        String employeeNum = String.valueOf(studentRecruitmentMapper.countByExample(example));
+
+        CompanyExample companyExample = new CompanyExample();
+        companyExample.or().andPassEqualTo(true).andDeleteTagEqualTo(true);
+        String companyNum = String.valueOf(companyMapper.countByExample(companyExample));
+
+        RecruitmentExample recruitmentExample = new RecruitmentExample();
+        recruitmentExample.or().andPassEqualTo(true).andDeleteTagEqualTo(true).andForbiddenEqualTo(false).andRemoveEqualTo(false);
+
+        String postNum = String.valueOf(recruitmentMapper.countByExample(recruitmentExample));
+
+        List<Recruitment> recruitmentList = recruitmentMapper.selectByExample(recruitmentExample);
+        for (Recruitment recruitment :
+                recruitmentList) {
+            sum += recruitment.getTotalNumber();
+        }
+        String headcounts = String.valueOf(sum);
+
+        TableDataExample tableDataExample=new TableDataExample();
+        tableDataExample.setOrderByClause("id");
+        tableDataExample.setLimit(6);
+        List<TableData> tableDatas=tableDataMapper.selectByExample(tableDataExample);
+        System.out.println(tableDatas);
+        Date a=new Date();
+        SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd");
+
+        result.put("today",dateFormater.format(a));
+        result.put("table",tableDatas);
+        result.put("studentNum", studentNum);
+        result.put("employeeNum", employeeNum);
+        result.put("companyNum", companyNum);
+        result.put("postNum", postNum);
+        result.put("headcounts", headcounts);
+
+        result.put("clockInNum", checkNum.getClockinnum());
+        result.put("clockOutNum", checkNum.getClockoutnum());
+        result.put("lastDayAttendNum", checkNum.getLastdayattendnum());
+//        result.put("table", object);
+        result.put("clockInNum", checkNum.getClockinnum());
+
+        return Message.createSuc(result);
+    }
+
+    @Override
+    public Message showNewsList() {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        DynamicApproveExample dynamicApproveExample=new DynamicApproveExample();
+
+        dynamicApproveExample.setOrderByClause("id");
+        dynamicApproveExample.setLimit(10);
+
+        dynamicApproveExample.or().andPassingEqualTo(true).andDeleteTagEqualTo(true);
+
+        List<DynamicApprove> dynamicApproves=dynamicApproveMapper.selectByExample(dynamicApproveExample);
+
+        for (DynamicApprove dynamicApprove : dynamicApproves) {
+            User user = userMapper.selectByPrimaryKey(dynamicApprove.getCompanyId());
+//            if (user == null) {
+//                result.put("code", Constant.FAIL);
+//                result.put("msg", "无法找到dynamicApprove表userID=" + dynamicApprove.getCompanyId() + "对应的user！");
+//                return result;
+//            }
+        }
+        result.put("dynamicApproves", dynamicApproves);
+
+        return Message.createSuc(result);
+    }
+
+    @Override
+    public Message showRecruitmentsOne(Integer id) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        RecruitmentExample recruitmentExample=new RecruitmentExample();
+        recruitmentExample.or().andDeleteTagEqualTo(true).andRemoveEqualTo(false).andPassEqualTo(true).andCompanyIdEqualTo(id);
+        List<Recruitment> recruitmentList=recruitmentMapper.selectByExample(recruitmentExample);
+
+        JSONArray recruitmentVoList=new JSONArray();
+        for (Recruitment recruitment : recruitmentList) {
+            RecruitmentVo recruitmentVo=new RecruitmentVo();
+            recruitmentVo.setPost(recruitment.getPost());
+            recruitmentVo.setAddress(recruitment.getAddress());
+            recruitmentVo.setCurrentNumber(recruitment.getCurrentNumber());
+            recruitmentVo.setTotalNumber(recruitment.getTotalNumber());
+            recruitmentVo.setId(recruitment.getId());
+            recruitmentVo.setReleaseTime(recruitment.getReleaseTime());
+            recruitmentVoList.add(recruitmentVo);
+
+        }
+        result.put("recruitmentVoList", recruitmentVoList);
+        return Message.createSuc(result);
+    }
+
+    @Override
+    public Message showRecruitmentsTwo(Integer id) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        RecruitmentExample recruitmentExample=new RecruitmentExample();
+        recruitmentExample.or().andDeleteTagEqualTo(true).andRemoveEqualTo(false).andPassEqualTo(true).andCompanyIdEqualTo(id);
+        List<Recruitment> recruitmentList=recruitmentMapper.selectByExample(recruitmentExample);
+
+        JSONArray recruitmentVoList=new JSONArray();
+        for (Recruitment recruitment : recruitmentList) {
+            RecruitmentVo recruitmentVo=new RecruitmentVo();
+            recruitmentVo.setPost(recruitment.getPost());
+            recruitmentVo.setAddress(recruitment.getAddress());
+            recruitmentVo.setCurrentNumber(recruitment.getCurrentNumber());
+            recruitmentVo.setTotalNumber(recruitment.getTotalNumber());
+            recruitmentVo.setId(recruitment.getId());
+            recruitmentVo.setReleaseTime(recruitment.getReleaseTime());
+            recruitmentVoList.add(recruitmentVo);
+
+        }
+        result.put("recruitmentVoList", recruitmentVoList);
+
+        return Message.createSuc(result);
+
+    }
 
 }
