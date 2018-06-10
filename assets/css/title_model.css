@@ -1,0 +1,27 @@
+/*top-bar通用文件*/
+.entity-body{
+    width: 96%;
+    background: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+.entity-body hr{
+    margin: 0;
+    height: 2px;
+    border-top: 1px solid #7F7F7F;
+}
+.top-bar{
+    padding: 0.5vw;
+}
+.top-bar a{
+    cursor: pointer;
+    font-size: 0.9vw;
+    text-decoration: none;
+    color: #7F7F7F;
+}
+.top-title{
+    font-size: 20px;
+    margin-left: 0.7vw;
+    margin-top: 1.5vw;
+    color: #797979;
+}

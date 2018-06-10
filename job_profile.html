@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>学生集中实习管理与服务平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./assets/css/font-awesome.min.css" rel="stylesheet">
+    <!-- bootstrap-css -->
+    <link href="./assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- css -->
+    <link rel="stylesheet" href="./assets/css/commonCSS.css">
+    <link rel="stylesheet" href="./assets/css/model.css">
+    <link rel="stylesheet" href="./assets/css/title_model.css">
+    <link rel="stylesheet" href="./assets/css/job_profile.css">
+    <!-- js -->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="./assets/js/html5shiv.min.js"></script>
+    <script type="text/javascript" src="./assets/js/respond.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="./assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="./assets/js/bootstrap-paginator.min.js"></script>
+    <script type="text/javascript" src="./assets/js/job_profile.js"></script>
+</head>
+
+<body>
+    <div class="alert-model"></div>
+    <div class="page_head">
+        <div class="logo_bar">
+            <div class="logo">
+                <a href="#home">
+                    <img src="./assets/images/logo.png" />
+                </a>
+            </div>
+            <div class="page_title">
+                <p>学生集中实习管理与服务平台</p>
+            </div>
+            <a id="exit_button">
+                <img id="search_exit" src="./assets/images/首页_exit.png" />
+                退出
+            </a>
+        </div>
+        <nav class="navbar navbar-inner nav-up" role="navigation">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="./home_page.html">
+                        <img src="./assets/images/首页_home.png" />
+                        <p>首页</p>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a>
+                        <img src="./assets/images/首页_computer.png" />
+                        <p>实习管理</p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#">实习招聘</a>
+                        </li>
+                        <li>
+                            <a href="./my_resume.html">求职之路</a>
+                        </li>
+                        <li>
+                            <a href="./job_collection.html">岗位收藏</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a>
+                        <img src="./assets/images/首页_funnel.png" />
+                        <p>过程考核</p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="./guidance_message.html">指导消息</a>
+                        </li>
+                        <li>
+                            <a href="./weekly_report.html">实习周报</a>
+                        </li>
+                        <li>
+                            <a href="./practice_summary.html">实习小结</a>
+                        </li>
+                        <li>
+                            <a href="./practice_report.html">实习报告</a>
+                        </li>
+                        <li>
+                            <a href="./attendance_record.html">考勤情况</a>
+                        </li>
+                        <li>
+                            <a href="./internship_score.html">实习成绩</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a>
+                        <img src="./assets/images/首页_gear.png" />
+                        <p>设置</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="page_body">
+        <div class="entity-body">
+            <div class="top-bar">
+                <a>实习管理</a>
+                &gt;
+                <a href="./Internship_recruitment.html">实习招聘列表</a>
+                &gt;
+                <a>实习招聘信息</a>
+            </div>
+            <hr/>
+            <div class="info-top">
+                <div class="info-top-left job-shadow">
+                    <div class="bord-top">
+                        <img src="./assets/images/job_p_letter.png" alt="">
+                        <span>招聘信息</span>
+                        <hr/>
+                    </div>
+                    <div class="post-info">
+                        <p>
+                            <span>招聘岗位</span>
+                            <span>&nbsp;&nbsp;&nbsp;</span>
+                            <span id="post-name">后端工程师（Node.js方向）</span>
+                        </p>
+                        <p class="post-position">
+                            <span>地理位置</span>
+                            <img src="./assets/images/location_point.png" alt=":" />
+                            <span>上海杨浦区政学路51号</span>
+                        </p>
+                        <p class="post-position">
+                            <span>招聘人数</span>
+                            <img src="./assets/images/person.png" alt=":" />
+                            <span>1人</span>
+                        </p>
+                        <p class="post-ef-time">
+                            <span>招聘时段</span>
+                            <span>&nbsp;&nbsp;&nbsp;</span>
+                            <span>2017.12.11~2018.01.11</span>
+                        </p>
+                        <p class="post-ef-time">
+                            <span>技能要求</span>
+                            <span>&nbsp;&nbsp;&nbsp;</span>
+                            <span class="label label-info">JavaScript</span>
+                            <span class="label label-info">TypeScript</span>
+                        </p>
+
+                    </div>
+                </div>
+                <div class="info-top-right job-shadow">
+                    <div class="bord-top">
+                        <img src="./assets/images/job_p_papper.png" alt="">
+                        <span>公司概况</span>
+                        <hr/>
+                    </div>
+                    <div class="company-info">
+                        <a href="./company_profile.html">
+                            <div class="company-info-top">
+                                <img src="./assets/images/jk.png" />
+                                <span>即刻</span>
+                            </div>
+                            <div class="company-info-body">
+                                <p>
+                                    <span>领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域</span>
+                                    <span>&nbsp;&nbsp;&nbsp;</span>
+                                    <span>IT/互联网</span>
+                                </p>
+                                <p>
+                                    <span>规&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;模</span>
+                                    <span>&nbsp;&nbsp;&nbsp;</span>
+                                    <span>50~150人</span>
+                                </p>
+                                <p>
+                                    <span>阶&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;段</span>
+                                    <span>&nbsp;&nbsp;&nbsp;</span>
+                                    <span>成长型</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="job-profile-body job-shadow">
+                <div class="bord-top">
+                    <img src="./assets/images/job_p_bag.png" alt="">
+                    <span>工作描述</span>
+                    <hr/>
+                </div>
+                <div class="job-discription">
+                    <h6>一、岗位职责：</h6>
+                    <p>1. 图片审核：负责美团外卖的合作商家使用图片进行审核及编辑，确保图片美观且传达信息有效，符合美团网上线标准；</p>
+                    <p>2. 合同审核：负责美团外卖的商家合作合同及资质调研及审核，确保合同及资质信息完全真实有效，符合美团网上单标准；</p>
+                    <p>3. 外卖销售支持：负责处理美团外卖商家信息的整理及录入；</p>
+                    <p>4. 流程优化：配合团队梳理现有审核、上单、结款的流程以达到控制风险的目的，不断优化各端口的使用，提高消费者体验和给商家提供</p>
+                    <h6>二、岗位要求：</h6>
+                    <p>1. 大专及以上；</p>
+                    <p>2. 工作严谨细心，吃苦耐劳，能够坚守原则，承担重任，直面压力和挑战；</p>
+                    <p>3. 熟练掌握办公软件，如office、PPT、VISIO、Photoshop等；</p>
+                    <p>4. 对互联网行业有兴趣；</p>
+                    <p>5. 能够将简单的工作做到极致。</p>
+                </div>
+            </div>
+            <div class="ask-bord job-shadow">
+                <div class="bord-top">
+                    <img src="./assets/images/job_p_bord.png" alt="">
+                    <span>咨询板</span>
+                    <hr/>
+                </div>
+                <div class="list-group-v">
+                    <ul class="list-group ask-list">
+                        <li class="list-group-item ask-item">
+                            <a href="">
+                                <div class="head-img">
+                                    <img src="./assets/images/head_img.png" />
+                                </div>
+                                <div class="ask-body">
+                                    <p>徐俊聪</p>
+                                    <p>这是问题</p>
+                                </div>
+                                <div class="ask-time">
+                                    <span>2018/05/18</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="list-group-item ask-item">
+                            <a href="">
+                                <div class="head-img">
+                                    <img src="./assets/images/head_img.png" />
+                                </div>
+                                <div class="ask-body">
+                                    <p>徐俊聪</p>
+                                    <p>这是问题</p>
+                                </div>
+                                <div class="ask-time">
+                                    <span>2018/05/18</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="list-group-item ask-item">
+                            <a href="">
+                                <div class="head-img">
+                                    <img src="./assets/images/head_img.png" />
+                                </div>
+                                <div class="ask-body">
+                                    <p>徐俊聪</p>
+                                    <p>这是问题这是问题这是问题这是问题这是问题这是问题这是问题这是问题这是问题这是问题这是问题这是问题这是问题这是问题这是问题这是问题这是问题这是问题这是问题这是问题这是问题这是问题这是问题</p>
+                                </div>
+                                <div class="ask-time">
+                                    <span>2018/05/18</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="list-group-item ask-item">
+                            <a href="">
+                                <div class="head-img">
+                                    <img src="./assets/images/head_img.png" />
+                                </div>
+                                <div class="ask-body">
+                                    <p>徐俊聪</p>
+                                    <p>这是问题</p>
+                                </div>
+                                <div class="ask-time">
+                                    <span>2018/05/18</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="list-group-item ask-item">
+                            <a href="">
+                                <div class="head-img">
+                                    <img src="./assets/images/head_img.png" />
+                                </div>
+                                <div class="ask-body">
+                                    <p>徐俊聪</p>
+                                    <p>这是问题</p>
+                                </div>
+                                <div class="ask-time">
+                                    <span>2018/05/18</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="question-send-bar">
+                    <div>
+                        <input type="text" placeholder="输入内容">
+                        <button>发送</button>
+                    </div>
+                </div>
+            </div>
+            <div class="sub-botton-bar">
+                <button>投简历</button>
+            </div>
+        </div>
+        <div class="floor">
+            <div class="floor-top">
+                <img id="floor-logo" src="./assets/images/logo-sm.gif" />
+                <p id="bah">浙ICP备用111111号　浙公网安备33011802号</p>
+            </div>
+            <div class="floor-down">
+                <p id="#floor-down-left">地址：浙江省杭州市下沙高教园区学正街18号　邮编：310018
+                    <span>电话：（86）571-28877777　传真：（86）571-28877222</span>
+                </p>
+            </div>
+            <img id="floor_door" src="./assets/images/u3050.gif" />
+        </div>
+    </div>
+</body>
+
+</html>

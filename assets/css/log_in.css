@@ -1,0 +1,122 @@
+.log-main{
+    position: absolute;
+    display: inline;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-70%);
+    height: 24vw;
+    width: 60vw;
+}
+
+.log-top{
+    width: 100%;
+    font-size: 2vw;
+    font-weight: bold;
+    background: #f5f5f5;
+}
+
+.log-top img{
+    height: 4vw;
+    margin-left: 3vw;
+    margin-right: 9vw;
+}
+
+.carousel-map{
+    display: inline-block;
+    float: left;
+    width: 50%;
+    height: 20vw;
+}
+.carousel-map img{
+    height: 20vw;
+}
+
+.log-input{
+    display: inline-block;
+    float: right;
+    width: 50%;
+}
+
+.log-input ul{
+    padding: 0;
+    width: 100%;
+    display: inline;
+    list-style: none;
+}
+
+.log-input ul li{
+    width: 32%;
+    height: 100%;
+    display: inline-block;
+    font-size: 1.3vw;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.user-info-bar{
+    width: 90%;
+    margin: auto;
+    border: 1px solid #2b2b2b;
+    border-radius: 0.5vw;
+    margin: 1.5vw 1vw 1vw 1vw;
+    padding: 0.5vw;
+}
+
+.user-info-bar img{
+    width: 1.2vw;
+    height: 1.2vw;
+    margin-left: 0.5vw;
+}
+
+.user-info-bar input{
+    outline: none;
+    border: none;
+    width: 80%;
+    font-size: 1vw;
+}
+
+.remember-bar{
+    height: 5vw;
+    padding: 0 1vw 0 0.5vw;
+    width:90%;
+    margin:auto;
+}
+
+#remember-bar-left{
+    float: left;
+}
+
+#remember-bar-right{
+    float: right;
+}
+
+.logIn-btn{
+    width: 100%;;
+}
+
+.logIn-btn button{
+    outline: none;
+    border: none;
+    width: 90%;
+    color: white;
+    font-size: 1.5vw;
+    transform: translateX(5%);
+    background: rgb(0, 150, 255);
+    border-radius: 0.5vw;
+}
+
+.company-logUp-bar{
+    display: none;
+    height: 5vw;
+    width: 90%;
+    margin:auto;
+}
+
+#company-logUp-bar-left{
+    float: left;
+}
+
+#company-logUp-bar-right{
+    float: right;
+}

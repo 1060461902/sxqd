@@ -1,0 +1,115 @@
+.info-top,
+.list-group{
+    width: 96%;
+    margin: auto;
+}
+
+.list-group-v{
+    margin-top: 1vw;
+    height: 1000px;
+}
+
+.info-top span{
+    color: #7F7F7F;
+    font-size: 1.5vw;
+}
+
+.sort-select,
+.resume-status-select,
+.employment-status-select{
+    height: 100%;
+    float: right;
+}
+
+.list-group{
+    height: 200px;
+}
+
+.list-group-item{
+    height: 170px;
+}
+
+.history-item{
+    position: relative;
+}
+
+.history-item hr{
+    position: absolute;
+    top: 20px;
+    left: 170px;
+    width: 80%;
+}
+
+.logo-part{
+    width: 10%;
+}
+
+.logo-part img{
+    height:100px;
+    width: 100px;
+}
+
+.logo-part img{
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+.logo-part p{
+    text-align: center;
+}
+
+.company-name{
+    margin: auto;
+    font-weight: bold;
+    font-size: 1vw;
+}
+
+.post-name{
+    margin: auto;
+    font-size: 12px;
+}
+
+.history-entity{
+    position: absolute;
+    width: 75%;
+    left: 180px;
+    top: -10px;
+}
+
+.history-entity-item{
+    margin-right: 10px;
+    display: inline-block;
+    width: 50px;
+}
+
+.history-entity-top{
+    text-align: center;
+    margin: auto;
+}
+
+.history-entity img{
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
+    background: white;
+    height: 20px;
+    width: 20px;
+    border:1px solid #7F7F7F;
+    border-radius: 100px;
+    margin-bottom: 20px;
+}
+
+.history-entity-bottom p{
+    font-size: 12px;
+    display: inline-block;
+    writing-mode: tb-rl;
+    writing-mode: vertical-rl;
+    word-wrap: break-word;
+    margin: auto;
+}
+
+.list-group-item:hover{
+    transform: translate3D(-0.2vw,-0.2vw,0.2vw);
+    box-shadow: 0.2vw 0.2vw 0.2vw #7f7f7f;
+}

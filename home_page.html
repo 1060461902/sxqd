@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>学生集中实习管理与服务平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <!-- bootstrap-css -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- css -->
+    <link rel="stylesheet" href="assets/css/commonCSS.css">
+    <link rel="stylesheet" href="./assets/css/model.css">
+    <link rel="stylesheet" href="./assets/css/home_page.css">
+    <!-- js -->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="./assets/js/html5shiv.min.js"></script>
+    <script type="text/javascript" src="./assets/js/respond.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="./assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="./assets/js/home_page.js"></script>
+</head>
+
+<body>
+    <div class="page_head">
+        <div class="logo_bar">
+            <div class="logo">
+                <a href="#home">
+                    <img src="./assets/images/logo.png" />
+                </a>
+            </div>
+            <div class="page_title">
+                <p>学生集中实习管理与服务平台</p>
+            </div>
+            <a id="exit_button">
+                <img id="search_exit" src="./assets/images/首页_exit.png" />
+                退出
+            </a>
+        </div>
+
+        <nav class="navbar navbar-inner nav-up" role="navigation">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#">
+                        <img src="./assets/images/首页_home.png" />
+                        <p>首页</p>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a>
+                        <img src="./assets/images/首页_computer.png" />
+                        <p>实习管理</p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="./Internship_recruitment.html">实习招聘</a>
+                        </li>
+                        <li>
+                            <a href="./my_resume.html">求职之路</a>
+                        </li>
+                        <li>
+                            <a href="./job_collection.html">岗位收藏</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a>
+                        <img src="./assets/images/首页_funnel.png" />
+                        <p>过程考核</p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="./guidance_message.html">指导消息</a>
+                        </li>
+                        <li>
+                            <a href="./weekly_report.html">实习周报</a>
+                        </li>
+                        <li>
+                            <a href="./practice_summary.html">实习小结</a>
+                        </li>
+                        <li>
+                            <a href="./practice_report.html">实习报告</a>
+                        </li>
+                        <li>
+                            <a href="./attendance_record.html">考勤情况</a>
+                        </li>
+                        <li>
+                            <a href="./internship_score.html">实习成绩</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a>
+                        <img src="./assets/images/首页_gear.png" />
+                        <p>设置</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="page_body">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="./assets/images/u3040.jpg" alt="First slide" />
+                    <div class="carousel-caption">
+                        <span>标题</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="./assets/images/u3041.jpg" alt="Second slide" />
+                    <div class="carousel-caption">
+                        <span>标题</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="./assets/images/u3040.jpg" alt="Third slide" />
+                    <div class="carousel-caption">
+                        <span>标题</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-part">
+            <nav class="navbar navbar-default" role="navigation">
+                <ul class="nav navbar-nav nav-down">
+                    <li class="nav-active news-item">
+                        <a>新闻动态
+                            <br>NEWS & EVENTS</a>
+                    </li>
+                    <li class="nav-active post-item">
+                        <a>最新岗位
+                            <br>LATEST JOBS</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="news-container">
+                <p>
+                    <i class="fa fa-th"></i>
+                    <a href="">
+                        <span class="news-title">我校学子在浙江省第六届大学生统计调查方案设计大赛中再创佳绩</span>
+                        <span class="news-time">（2017.12.08）</span>
+                    </a>
+                </p>
+                <p>
+                    <i class="fa fa-th"></i>
+                    <a href="">
+                        <span class="news-title">我校学子在浙江省第六届大学生统计调查方案设计大赛中再创佳绩</span>
+                        <span class="news-time">（2017.12.08）</span>
+                    </a>
+                </p>
+                <p>
+                    <i class="fa fa-th"></i>
+                    <a href="">
+                        <span class="news-title">我校学子在浙江省第六届大学生统计调查方案设计大赛中再创佳绩</span>
+                        <span class="news-time">（2017.12.08）</span>
+                    </a>
+                </p>
+                <div class="news-more">
+                    <a>更多<img src="./assets/images/more.gif"></a>
+                </div>
+            </div>
+            <div class="post-container">
+                <div class="post-item-list">
+                    <a>
+                        <div class="post-name-item">
+                            <div class="post-up">
+                                <p>.Net工程师[17:32发布]
+                                    <br/>1人/11.17~12.17</p>
+                            </div>
+                            <hr/>
+                            <div class="post-down">
+                                <img src="./assets/images/u153.jpg" />
+                                <p>XXXXXXX公司
+                                    <br/>IT 互联网/杭州</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a>
+                        <div class="post-name-item">
+                            <div class="post-up">
+                                <p>.Net工程师[17:32发布]
+                                    <br/>1人/11.17~12.17</p>
+                            </div>
+                            <hr/>
+                            <div class="post-down">
+                                <img src="./assets/images/u153.jpg" />
+                                <p>XXXXXXX公司
+                                    <br/>IT 互联网/杭州</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a>
+                        <div class="post-name-item">
+                            <div class="post-up">
+                                <p>.Net工程师[17:32发布]
+                                    <br/>1人/11.17~12.17</p>
+                            </div>
+                            <hr/>
+                            <div class="post-down">
+                                <img src="./assets/images/u153.jpg" />
+                                <p>XXXXXXX公司
+                                    <br/>IT 互联网/杭州</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a>
+                        <div class="post-name-item">
+                            <div class="post-up">
+                                <p>.Net工程师[17:32发布]
+                                    <br/>1人/11.17~12.17</p>
+                            </div>
+                            <hr/>
+                            <div class="post-down">
+                                <img src="./assets/images/u153.jpg" />
+                                <p>XXXXXXX公司
+                                    <br/>IT 互联网/杭州</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="bottom-select-bar"></div>
+            </div>
+        </div>
+        <div class="floor">
+            <div class="floor-top">
+                <img id="floor-logo" src="./assets/images/logo-sm.gif" />
+                <p id="bah">浙ICP备用111111号　浙公网安备33011802号</p>
+            </div>
+            <div class="floor-down">
+                <p id="#floor-down-left">地址：浙江省杭州市下沙高教园区学正街18号　邮编：310018
+                    <span>电话：（86）571-28877777　传真：（86）571-28877222</span>
+                </p>
+            </div>
+            <img id="floor_door" src="./assets/images/u3050.gif" />
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $("#myCarousel").carousel({
+                interval: 3000,
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+.title-name{
+    font-size: 25px;
+    margin-left: 20px;
+    color: #7f7f7f;
+}
+
+.report-show{
+    position: relative;
+    height: 800px;
+}
+
+.report-show-body{
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-60%);
+    border: 1px dashed #7f7f7f;
+}
+
+.report-show-title{
+    background: #ffb500;
+    height: 70px;
+}
+
+.report-show-title p{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+.report-show-entity{
+    height: 400px;
+}
+
+.report-show-bottom{
+    text-align: center;
+    background: #cdcdcd;
+    height: 30px;
+}
+
+#small-screen{
+    height: 400px;
+    width: 500px;
+}
+
+.report-show-entity{
+    position: relative;
+}
+
+.report-show-edit{
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    bottom: 10px;
+    right: 10px;
+}
+
+.report-show-edit img{
+    height: 30px;
+    width: 30px;
+}
+
+.report-show-edit:hover{
+    content: url("../images/edit_pen_over.png");
+}
+
+.report-show-entity p{
+    position: relative;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: #7f7f7f;
+    font-size: 20px;
+}
+
+.report-show-entity-day{
+    font-size: 80px;
+    font-weight: bolder;
+    color: #ffb500;
+}
+
+.report-show-already{
+    display: none;
+
+}
+
+.report-show-already img{
+    width: 100%;
+    height: 350px;
+}

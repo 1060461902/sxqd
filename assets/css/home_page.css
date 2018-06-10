@@ -1,0 +1,143 @@
+#myCarousel {
+    width: 95%;
+    margin: auto;
+    padding: 1.5vw;
+}
+
+.carousel-caption {
+    left: auto !important;
+    right: auto !important;
+    bottom: 0px;
+    width: 100%;
+    background-color: rgba(225, 225, 225, 0.5);
+    font-weight: bold;
+}
+
+.carousel-caption>span {
+    opacity: 1.0;
+    color: white;
+    font-size: 25px;
+}
+
+.carousel {
+    cursor: pointer;
+}
+
+.carousel-inner .item img {
+    width: 100%;
+}
+
+.news-container {
+    position: relative;
+    width: 100%;
+    padding: 1vw;
+    margin: auto;
+    height: 500px;
+    background-color: #F0F8FA;
+}
+
+.news-container p {
+    color: #7F7F7F;
+    margin-left: 45px;
+}
+
+.news-container a {
+    color: #333333;
+}
+
+.news-container a :hover {
+    color: rgb(153, 153, 153);
+}
+
+.nav-down li:hover {
+    display: block;
+    background-color: #F0F8FA;
+    border-right: 0.2vw solid blue;
+    color: black !important;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white;
+}
+
+.post-container {
+    display: none;
+    height: 500px;
+    margin: auto;
+    width: 98%;
+    padding: 1vw;
+    background-color: #F0F8FA;
+}
+
+.post-item-list {
+    position: relative;
+    margin-bottom: -50px;
+    padding: 1vw;
+    display: grid;
+    height: 400px;
+    width: 100%;
+    grid-template-rows: 45% 45%;
+    grid-template-columns: 50% 50%;
+}
+
+.post-name-item {
+    border: 0.1vw solid rgb(200, 200, 200);
+    width: 98%;
+    height: 95%;
+    padding: 0.5vw;
+}
+
+.post-name-item hr {
+    margin: 0;
+    height: 1px;
+    border-top: 2px dashed rgb(200, 200, 200);
+}
+
+.post-up {
+    height: 50%;
+    width: 100%;
+    color: dimgrey;
+}
+
+.post-down {
+    height: 45%;
+    width: 100%;
+    color: dimgrey;
+}
+
+.post-down img {
+    transform: translateY(10%);
+    height: 50px;
+    width: 50px;
+    float: left;
+}
+
+.post-down p {
+    margin-left: 2.5vw;
+    float: left;
+}
+
+.post-item-list a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.bottom-select-bar {
+    width: 100%;
+    height: 8%;
+}
+
+.news-more{
+    position: absolute;
+    bottom: 20px;
+    right: 100px;
+}
+
+.news-more a{
+    color: #5e5e5e;
+    cursor: pointer;
+}
+
+.news-more a:hover{
+    color: #7f7f7f;
+}

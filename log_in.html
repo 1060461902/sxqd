@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>学生集中实习管理与服务平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- bootstrap-css -->
+    <link href="./assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- css -->
+    <link rel="stylesheet" href="./assets/css/commonCSS.css">
+    <link rel="stylesheet" href="./assets/css/model.css">
+    <link rel="stylesheet" href="./assets/css/log_in.css">
+    <!-- js -->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="./assets/js/html5shiv.min.js"></script>
+    <script type="text/javascript" src="./assets/js/respond.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="./assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="./assets/js/log_in.js"></script>
+</head>
+<body>
+    <div class="alert-model"></div>
+    <div class="log-main">
+        <div class="log-top">
+            <img src="./assets/images/logo.png"><span>计算机与信息工程学院</span>
+        </div>
+        <div id="myCarousel" class="carousel-map carousel slide" data-ride="carousel" data-interval="5000">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="./assets/images/u3040.jpg"/>
+                </div>
+                <div class="item">
+                    <img src="./assets/images/u3041.jpg"/>
+                </div>
+                <div class="item">
+                    <img src="./assets/images/u3040.jpg"/>
+                </div>
+            </div>
+        </div>
+        <div class="log-input">
+            <ul>
+                <li id="teacher-select">
+                    老师
+                </li>
+                <li id="student-select" style="border-bottom:3px solid rgb(0, 140, 255);color: rgb(0, 140, 255);">
+                    学生
+                </li>
+                <li id="company-select">
+                    企业
+                </li>
+            </ul>
+            <div class="log-info-input">
+                <div class="user-id-bar user-info-bar">
+                    <img src="./assets/images/u13.png">
+                    <input name="user-id" id="user-id" placeholder="请输入账号"/>
+                </div>
+                <div class="user-password-bar user-info-bar">
+                    <img src="./assets/images/u14.png">
+                    <input name="user-password" id="user-password" placeholder="请输入密码"/>
+                </div>
+            </div>
+            <div class="remember-bar">
+                <span id="remember-bar-left">
+                    <input type="checkbox" id="check-remember"/>记住我
+                </span>
+                <span id="remember-bar-right"><a href="">忘记密码</a></span>
+            </div>
+            <div class="company-logUp-bar">
+                <span id="company-logUp-bar-left">
+                    <a href="">企业注册</a>
+                </span>
+                <span id="company-logUp-bar-right">
+                    <a href="">忘记密码</a>
+                </span>
+            </div>
+            <div class="logIn-btn">
+                <button>登录</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

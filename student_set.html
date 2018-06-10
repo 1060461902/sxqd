@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>学生集中实习管理与服务平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./assets/css/font-awesome.min.css" rel="stylesheet">
+    <!-- bootstrap-css -->
+    <link href="./assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- css -->
+    <link rel="stylesheet" href="./assets/css/commonCSS.css">
+    <link rel="stylesheet" href="./assets/css/model.css">
+    <link rel="stylesheet" href="./assets/css/title_model.css">
+    <link rel="stylesheet" href="./assets/css/student_set.css">
+
+</head>
+<body>
+    <div class="mask"></div>
+    <div class="confirm-modal span5">
+        <p class="confirm-text"></p>
+        <div class="clearfix">
+            <input type="button" name="" value="确定" class="confirm-btn">
+            <input type="button" name="" value="取消" class="confirm-cancel">
+        </div>
+    </div>
+    <div class="alert-model"></div>
+    <div class="edit-position editor">
+        <div class="edit-side">
+            <div>
+                <span>基本信息</span>
+            </div>
+        </div>
+        <div class="basic-info-edit edit-body">
+            <div>
+                <p>
+                    <span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名&nbsp;&nbsp;</span>
+                    <span id="student-name">小陈</span>
+                </p>
+            </div>
+            <div>
+                <p>
+                    <span>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号&nbsp;&nbsp;</span>
+                    <span id="student-no">1612180000</span>
+                </p>
+            </div>
+            <div id="student-sex">
+                <span>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别&nbsp;&nbsp;</span>
+                <div>
+                    <button id="student-sex-male">
+                        <img src="./assets/images/male.png">
+                    </button>
+                    <p>男</p>
+                </div>
+                <div id="female-btn">
+                    <button id="student-sex-female">
+                        <img src="./assets/images/female.png">
+                    </button>
+                    <p>女</p>
+                </div>
+            </div>
+            <br/><br/><br/>
+            <div id="student-nation">
+                <p>
+                    <span>民&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族&nbsp;&nbsp;</span>
+                    <select>
+                        <option>汉族</option>
+                        <option>壮族</option>
+                        <option>满族</option>
+                        <option>回族</option>
+                        <option>苗族</option>
+                        <option>维吾尔族</option>
+                        <option>土家族</option>
+                        <option>彝族</option>
+                        <option>蒙古族</option>
+                        <option>藏族</option>
+                        <option>布依族</option>
+                        <option>侗族</option>
+                        <option>瑶族</option>
+                        <option>朝鲜族</option>
+                        <option>白族</option>
+                        <option>哈尼族</option>
+                        <option>哈萨克族</option>
+                        <option>黎族</option>
+                        <option>傣族</option>
+                        <option>畲族</option>
+                        <option>傈傈族</option>
+                        <option>仡佬族</option>
+                        <option>东乡族</option>
+                        <option>高山族</option>
+                        <option>拉枯族</option>
+                        <option>水族</option>
+                        <option>佤族</option>
+                        <option>纳西族</option>
+                        <option>羌族</option>
+                        <option>土族</option>
+                        <option>仫佬族</option>
+                        <option>锡伯族</option>
+                        <option>柯尔克牧族</option>
+                        <option>达斡尔族</option>
+                        <option>景颇族</option>
+                        <option>毛南族</option>
+                        <option>撒拉族</option>
+                        <option>塔吉克族</option>
+                        <option>阿昌族</option>
+                        <option>普米族</option>
+                        <option>鄂温克族</option>
+                        <option>怒族</option>
+                        <option>京族</option>
+                        <option>基诺族</option>
+                        <option>德昂族</option>
+                        <option>保安族</option>
+                        <option>俄罗斯族</option>
+                        <option>裕固族</option>
+                        <option>乌孜别克族</option>
+                        <option>门巴族</option>
+                        <option>鄂伦春族</option>
+                        <option>独龙族</option>
+                        <option>塔塔尔族</option>
+                        <option>赫哲族</option>
+                        <option>珞巴族</option>
+                        <option>布朗族</option>
+                        <option>来自国外</option>
+                    </select>
+                </p>
+            </div>
+            <div id="native-place" data-toggle="distpicker">
+                <p id="change-native-place">
+                    <span>籍&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;贯&nbsp;&nbsp;</span>
+                    <span id="native-place-select">
+                        <select></select>
+                        <select></select>
+                        <select></select>
+                    </span>
+                    <span id="origin-native-place"></span>
+                    <a id="change-place-btn">
+                        修改
+                    </a>
+                </p>
+            </div>
+            <div>
+                <p>
+                    <span>出生年月&nbsp;&nbsp;</span>
+                    <input id="birthday-data" type="date" value="1998-05-16"/>
+                </p>
+            </div>
+            <div>
+                <p>
+                    <span>手机号码&nbsp;&nbsp;</span>
+                    <input id="phone-number" type="text" value="11111111111" placeholder="请输入手机号"/>
+                </p>
+            </div>
+            <div>
+                <p>
+                    <span>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱&nbsp;&nbsp;</span>
+                    <input id="student-email" type="text" value="ccc@126.com" placeholder="请输入常用邮箱"/>
+                </p>
+            </div>
+            <div class="edit-btn-bar">
+                <button class="cancel-button">取消</button>
+                <button class="confirm-button basic-info-confirm">确定</button>
+            </div>
+        </div>
+    </div>
+    <div class="edit-project editor">
+        <div class="edit-side">
+            <div>
+                <span>项目经历</span>
+            </div>
+        </div>
+        <div class="project-info-edit edit-body">
+            <div id="edit-project-name">
+                <span>项目名称&nbsp;&nbsp;</span>
+                <input type="text" placeholder="请输入项目名称"/>
+            </div>
+            <div id="edit-project-role">
+                <span>参与身份&nbsp;&nbsp;</span>
+                <input type="text" placeholder="请输入参与身份"/>
+            </div>
+            <div id="edit-project-start">
+                <span>开始时间&nbsp;&nbsp;</span>
+                <input type="date" placeholder="请选择开始时间"/>
+            </div>
+            <div id="edit-project-end">
+                <span>结束时间&nbsp;&nbsp;</span>
+                <input type="date" placeholder="请选择结束时间"/>
+            </div>
+            <div id="edit-project-description">
+                <span>项目说明&nbsp;&nbsp;</span>
+                <textarea></textarea>
+                <p class="font-limit">
+                    <span>(</span>
+                    <span class="font-num-limit project-limit">200</span>
+                    <span>&#47; 200)</span>
+                </p>
+            </div>
+            <div class="edit-btn-bar">
+                <button class="cancel-button">取消</button>
+                <button class="confirm-button project-info-confirm">确定</button>
+            </div>
+        </div>
+    </div>
+    <div class="edit-corporation editor">
+        <div class="edit-side">
+            <div>
+                <span>社团经历</span>
+            </div>
+        </div>
+        <div class="corporation-info-edit edit-body">
+            <div id="edit-corporation-name">
+                <span>组织名称&nbsp;&nbsp;</span>
+                <input type="text" placeholder="请输入组织名称"/>
+            </div>
+            <div id="edit-corporation-role">
+                <span>职位身份&nbsp;&nbsp;</span>
+                <input type="text" placeholder="请输入职位名称"/>
+            </div>
+            <div id="edit-corporation-start">
+                <span>开始时间&nbsp;&nbsp;</span>
+                <input type="date" placeholder="请选择开始时间"/>
+            </div>
+            <div id="edit-corporation-end">
+                <span>结束时间&nbsp;&nbsp;</span>
+                <input type="date" placeholder="请选择结束时间"/>
+            </div>
+            <div id="edit-corporation-description">
+                <span>内容描述&nbsp;&nbsp;</span>
+                <textarea></textarea>
+                <p class="font-limit">
+                    <span>(</span>
+                    <span class="font-num-limit corporation-limit">200</span>
+                    <span>&#47; 200)</span>
+                </p>
+            </div>
+            <div class="edit-btn-bar">
+                <button class="cancel-button">取消</button>
+                <button class="confirm-button corporation-info-confirm">确定</button>
+            </div>
+        </div>
+    </div>
+    <div class="page_head">
+    <div class="logo_bar">
+        <div class="logo">
+            <a href="#home">
+                <img src="./assets/images/logo.png" />
+            </a>
+        </div>
+        <div class="page_title">
+            <p>学生集中实习管理与服务平台</p>
+        </div>
+        <a id="exit_button">
+            <img id="search_exit" src="./assets/images/首页_exit.png" />
+            退出
+        </a>
+    </div>
+    <nav class="navbar navbar-inner nav-up" role="navigation">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="./home_page.html">
+                    <img src="./assets/images/首页_home.png" />
+                    <p>首页</p>
+                </a>
+            </li>
+            <li class="dropdown">
+                <a>
+                    <img src="./assets/images/首页_computer.png" />
+                    <p>实习管理</p>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="./Internship_recruitment.html">实习招聘</a>
+                    </li>
+                    <li>
+                        <a href="./my_resume.html">求职之路</a>
+                    </li>
+                    <li>
+                        <a href="./job_collection.html">岗位收藏</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a>
+                    <img src="./assets/images/首页_funnel.png" />
+                    <p>过程考核</p>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="./guidance_message.html">指导消息</a>
+                    </li>
+                    <li>
+                        <a href="./weekly_report.html">实习周报</a>
+                    </li>
+                    <li>
+                        <a href="./practice_summary.html">实习小结</a>
+                    </li>
+                    <li>
+                        <a href="./practice_report.html">实习报告</a>
+                    </li>
+                    <li>
+                        <a href="./attendance_record.html">考勤情况</a>
+                    </li>
+                    <li>
+                        <a href="./internship_score.html">实习成绩</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a>
+                    <img src="./assets/images/首页_gear.png" />
+                    <p>设置</p>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+    <div class="page_body">
+    <div class="entity-body">
+        <div class="top-bar">
+            <a>设置</a>
+            &gt;
+            <a>个人信息完善</a>
+        </div>
+        <hr/>
+        <div class="info-body">
+            <p class="title-name">个人信息完善</p>
+            <div class="student-set-body">
+                <div class="student-set-info">
+                    <div class="basic-info">
+                        <p class="sub-title-name" id="basic-info">基本信息</p>
+                        <div class="basic-info-entity">
+                            <div class="head-img-block">
+                                <img src="./assets/images/default_head.png">
+                                <p>
+                                    上传头像
+                                </p>
+                            </div>
+                            <div class="basic-info-other">
+                                <p class="basic-info-name">小陈</p>
+                                <p class="basic-info-id">1612180000|男|汉族|1998年9月</p>
+                                <p>
+                                    <span>手机号码:</span>
+                                    <span class="info-phone-number">11111111111</span>
+                                </p>
+                                <p>
+                                    <span>邮箱:</span>
+                                    <span class="info-email">840276079@qq.com</span>
+                                </p>
+                            </div>
+                            <a id="edit-basic-info">
+                                <img src="./assets/images/edit_pen_over.png">
+                                <span>编辑</span>
+                            </a>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="project-info">
+                        <div class="info-title">
+                            <span class="sub-title-name" id="project-info">项目经历</span>
+                            <a class="add-btn add-project">
+                                <img src="./assets/images/add.png">
+                                <span>添加</span>
+                            </a>
+                        </div>
+                        <div class="updown-btn-v">
+                            <input type="button" value="▼" class="updown-btn" id="project-info-updown" data-role="up"/>
+                        </div>
+                        <div id="project-info-group">
+                            <ul class="updown-list project-info-list">
+                                <li>
+                                    <p class="project-info-name">智能客服saas系统</p>
+                                    <p>
+                                        <span class="project-info-role">产品经理</span>
+                                        &nbsp;|&nbsp;
+                                        <span class="project-info-start">2016.09</span>
+                                        -
+                                        <span class="project-info-end">2017.06</span>
+                                    </p>
+                                    <p class="project-info-introduction">
+                                        这是工作说明
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="project-info-name">智能客服saas系统</p>
+                                    <p>
+                                        <span class="project-info-role">产品经理</span>
+                                        &nbsp;|&nbsp;
+                                        <span class="project-info-start">2016.09</span>
+                                        -
+                                        <span class="project-info-end">2017.06</span>
+                                    </p>
+                                    <p class="project-info-introduction">
+                                        这是工作说明
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <br/>
+                    <hr/>
+                    <div class="corporation-info">
+                        <div class="info-title">
+                            <span class="sub-title-name" id="corporation-info">社团经历</span>
+                            <a class="add-btn add-corporation">
+                                <img src="./assets/images/add.png">
+                                <span>添加</span>
+                            </a>
+                        </div>
+                        <div class="updown-btn-v">
+                            <input type="button" value="▼" class="updown-btn" id="corporation-info-updown" data-role="up"/>
+                        </div>
+                        <div id="corporation-info-group">
+                            <ul class="updown-list corporation-info-list">
+                                <li>
+                                    <p class="corporation-info-name">浙商大信息学院学生组织联席会</p>
+                                    <p>
+                                        <span class="corporation-info-role">权益部部长</span>
+                                        &nbsp;|&nbsp;
+                                        <span class="corporation-info-start">2016.09</span>
+                                        -
+                                        <span class="corporation-info-end">2017.06</span>
+                                    </p>
+                                    <p class="corporation-info-introduction">
+                                        这是工作说明
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="corporation-info-name">浙商大信息学院学生组织联席会</p>
+                                    <p>
+                                        <span class="corporation-info-role">权益部部长</span>
+                                        &nbsp;|&nbsp;
+                                        <span class="corporation-info-start">2016.09</span>
+                                        -
+                                        <span class="corporation-info-end">2017.06</span>
+                                    </p>
+                                    <p class="corporation-info-introduction">
+                                        这是工作说明
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="corporation-info-name">浙商大信息学院学生组织联席会</p>
+                                    <p>
+                                        <span class="corporation-info-role">权益部部长</span>
+                                        &nbsp;|&nbsp;
+                                        <span class="corporation-info-start">2016.09</span>
+                                        -
+                                        <span class="corporation-info-end">2017.06</span>
+                                    </p>
+                                    <p class="corporation-info-introduction">
+                                        这是工作说明
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <br/>
+                    <hr/>
+                </div>
+                <div class="student-set-guide">
+                    <div class="guide-top">
+                        <p>简历完整度:<span class="resume-complete-percent">50%</span></p>
+                        <div class="progress"><div class="progress-bar progress-bar-info" role="progressbar"
+                                                   aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div></div>
+                    </div>
+                    <div class="guide-upload">
+                        <input id="attachment-upload" type="file" style="display: none"/>
+                        <div class="upload-btn">
+                            <img src="./assets/images/huixingzhen.png">
+                            <span>上传简历附件(0/1)</span>
+                        </div>
+                    </div>
+                    <div class="guide-btn">
+                        <button id="preview-btn"><img src="./assets/images/eye.png"><span>预览</span></button>
+                        <span class="btn-space"></span>
+                        <button id="output-btn"><img src="./assets/images/output.png"><span>导出</span></button>
+                    </div>
+                    <div class="guide-bar">
+                        <ul>
+                            <li>
+                                <a href="#basic-info"><p>基本信息</p></a>
+                            </li>
+                            <li>
+                                <a href="#project-info"><p>项目经历</p></a>
+                            </li>
+                            <li>
+                                <a href="#corporation-info"><p>社团经历</p></a>
+                            </li>
+                            <li>
+                                <a><p>所获荣誉</p></a>
+                            </li>
+                            <li>
+                                <a><p>技能水平</p></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="floor">
+        <div class="floor-top">
+            <img id="floor-logo" src="./assets/images/logo-sm.gif" />
+            <p id="bah">浙ICP备用111111号　浙公网安备33011802号</p>
+        </div>
+        <div class="floor-down">
+            <p id="#floor-down-left">地址：浙江省杭州市下沙高教园区学正街18号　邮编：310018
+                <span>电话：（86）571-28877777　传真：（86）571-28877222</span>
+            </p>
+        </div>
+        <img id="floor_door" src="./assets/images/u3050.gif" />
+    </div>
+</div>
+    <!-- js -->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="./assets/js/html5shiv.min.js"></script>
+    <script type="text/javascript" src="./assets/js/respond.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="./assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="./assets/js/bootstrap-paginator.min.js"></script>
+    <script type="text/javascript" src="./assets/js/model.js"></script>
+    <script type="text/javascript" src="./assets/js/distpicker.data.js"></script>
+    <script type="text/javascript" src="./assets/js/distpicker.min.js"></script>
+    <script type="text/javascript" src="./assets/js/student_set.js"></script>
+</body>
+</html>

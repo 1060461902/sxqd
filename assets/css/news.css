@@ -1,0 +1,36 @@
+.news-body {
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    background: white;
+}
+
+.news-body hr {
+    margin: 0;
+    height: 2px;
+    border-top: 2px dashed #7F7F7F;
+}
+
+.top-bar {
+    padding: 0.5vw;
+    height: 30px;
+    position: relative;
+    width: 100%;
+}
+
+.top-bar img {
+    position: absolute;
+}
+
+.top-bar p {
+    position: absolute;
+    font-size: 20px;
+    font-weight: bold;
+    left: 35px;
+    color: #7F7F7F;
+}
+
+.news-title {
+    text-align: center;
+}
