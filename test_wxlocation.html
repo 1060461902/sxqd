@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试微信定位</title>
+</head>
+<script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="./assets/js/jweixin-1.2.0.js"></script>
+<script>
+    var latitude;
+    var longitude;
+    var accuracy;
+    $(document).ready(function () {
+        $.ajax({
+            url:"",
+            type:"POST",
+            data:{},
+            dataType:"json",
+            success:function (data) {
+                //微信验证
+                wx.config({
+                    debug:true,
+                    appId:'',
+                    timestamp:'',
+                    nonceStr:'',
+                    signature:'',
+                    jsApiList:[
+                        'checkJsApi',
+                        'openLocation',
+                        'getLocation'
+                    ]
+                });
+                //微信验证完成调用
+                wx.ready(function () {
+                    wx.getLocation({
+                        success:function (rs) {
+                            latitude = rs.latitude; //维度
+                            longitude = rs.longitude; //经度
+                            accuracy = rs.accuracy; //精度
+                            alert("维度:"+latitude+";"+"经度:"+longitude+"精度:"+accuracy);
+                        },
+                        cancel:function (rs) {
+                            alert("您拒绝提供位置信息");
+                        }
+                    })
+                });
+            }
+        });
+    });
+</script>
+<body>
+
+</body>
+</html>

@@ -415,7 +415,13 @@
 }
 
 .updown-list li{
-    border-bottom: 1px dashed #9d9d9d;
+    margin-bottom: 10px;
+    width: 96%;
+    border: 1px dashed #9d9d9d;
+}
+
+.updown-list li:last-child{
+    margin-bottom: 0;
 }
 
 .project-info-name,
