@@ -4,6 +4,8 @@ var nativePlaveUseStatus = USE_ORIGIN_NATIVE_PLACE; //默认使用原来的地�
 
 $(document).ready(function () {
 
+    $(document).context
+
     /**
      * 点击上传建立附件
      * */
@@ -79,8 +81,25 @@ $(document).ready(function () {
         setAlert("编辑成功");
     });
 
-    $('#project-info-group,#corporation-info-group').hide();
+    $('#project-info-group,#corporation-info-group,#honor-info-group').hide();
 
+/*    $('.updown-list li').bind('contextmenu',function () {
+        return false
+    });*/
+
+    /**
+     * 右键弹出菜单
+     * */
+    $('.updown-list li').bind('contextmenu',function(e){
+        e.preventDefault();
+        var x = e.clientX;
+        var y = e.clientY;
+        $(".popup-menu").css({
+            'left':x+'px',
+            'top':y+'px'
+        }).show()
+    });
+    
     /**
      * 项目经历下拉按钮
      * */
@@ -139,6 +158,15 @@ $(document).ready(function () {
     });
 
     /**
+     * 项目经历编辑确认按钮
+     * */
+    $('.project-info-confirm').click(function () {
+        $('.mask').fadeOut();
+        $('.edit-project').fadeOut();
+        setAlert("编辑成功");
+    });
+
+    /**
      * 点击社团经历添加按钮
      * */
     $('.add-corporation').click(function () {
@@ -162,6 +190,65 @@ $(document).ready(function () {
         }
         $('.corporation-limit').html(200-len);
     });
+
+    /**
+     * 社团经历编辑确认按钮
+     * */
+    $('.corporation-info-confirm').click(function () {
+        $('.mask').fadeOut();
+        $('.edit-corporation').fadeOut();
+        setAlert("编辑成功");
+    });
+
+    /**
+     * 所获荣誉添加按钮
+     * */
+    $('.add-honor').click(function () {
+        $('.mask').fadeIn();
+        $('.edit-honor').fadeIn();
+    });
+
+    /**
+     * 所获荣誉下拉按钮
+     * */
+    $('#honor-info-updown').click(function () {
+        var role = $(this).data('role');
+        if (role === "down"){
+            $(this).val('▼');
+            $(this).data('role','up');
+            $('#honor-info-group').slideUp();
+        }else if(role === "up"){
+            $(this).val('▲');
+            $(this).data('role','down');
+            $('#honor-info-group').slideDown();
+        }
+    });
+
+    /**
+     * 荣誉说明描述字数限制
+     * */
+    $('#edit-honor-description textarea').keyup(function () {
+        var max = 200;
+        var str = $(this).val();
+        var len = str.length;
+        if (len>max){
+            $('.honor-info-confirm').attr("disabled",true);
+            $('.honor-info-confirm').css({'background':'#7f7f7f'})
+        }else {
+            $('.honor-info-confirm').attr("disabled",false);
+            $('.honor-info-confirm').css({'background':'#2f84f6'})
+        }
+        $('.honor-limit').html(200-len);
+    });
+
+    /**
+     * 所获荣誉编辑确认按钮
+     * */
+    $('.honor-info-confirm').click(function () {
+        $('.mask').fadeOut();
+        $('.edit-honor').fadeOut();
+        setAlert("编辑成功");
+    });
 });
 
 $(document).scroll(function (e) {
@@ -171,4 +258,8 @@ $(document).scroll(function (e) {
     }else {
         $(".guide-bar").css({"position":"static"});
     }
+});
+
+$(document).click(function () {
+   $(".popup-menu").hide();
 });
