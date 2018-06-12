@@ -5,6 +5,8 @@ $(document).ready(function () {
     weeklyReportView(3,3);
     weeklyReportView(4,2);
     weeklyReportView(5,1);
+
+    pageLimit(1,20,5);
 });
 
 function weeklyReportView(status,data_id,day) {

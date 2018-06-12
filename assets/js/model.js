@@ -11,7 +11,7 @@ $(document).ready(function () {
  * 分页条
  * @author xujuncong
  * */
-function pageLimit(currentPage,totalPages,numberOfPages) {
+function pageLimit(currentPage,totalPages,numberOfPages,callback) {
     $('#pageLimit').bootstrapPaginator({
         currentPage: currentPage, //当前的请求页面
         totalPages: totalPages, //一共多少页
@@ -31,6 +31,12 @@ function pageLimit(currentPage,totalPages,numberOfPages) {
                     return "末页";
                 case "page":
                     return page;
+            }
+        },
+        //点击事件
+        onPageClicked:function (event, originalEvent, type, page) {
+            if (callback){
+                callback(page);
             }
         }
     });

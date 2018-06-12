@@ -21,6 +21,8 @@
     <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
     <script type="text/javascript" src="./assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="./assets/js/bootstrap-paginator.min.js"></script>
+    <script type="text/javascript" src="./assets/js/model.js"></script>
     <script type="text/javascript" src="./assets/js/home_page.js"></script>
 </head>
 
@@ -93,7 +95,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a>
+                    <a href="./student_set.html">
                         <img src="./assets/images/首页_gear.png" />
                         <p>设置</p>
                     </a>
@@ -227,7 +229,9 @@
                         </div>
                     </a>
                 </div>
-                <div class="bottom-select-bar"></div>
+                <div class="page-limit">
+                    <ul id="pageLimit"></ul>
+                </div>
             </div>
         </div>
         <div class="floor">

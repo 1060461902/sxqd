@@ -274,7 +274,8 @@
             </div>
             <div id="edit-honor-img">
                 <span>获奖证书&nbsp;&nbsp;</span>
-                <a>
+                <input type="file" id="honor-upload" style="display: none"/>
+                <a id="honor-upload-btn">
                     <p>
                         <span id="honor-img-add">
                             +
@@ -356,7 +357,7 @@
                 </ul>
             </li>
             <li>
-                <a>
+                <a href="./student_set.html">
                     <img src="./assets/images/首页_gear.png" />
                     <p>设置</p>
                 </a>
@@ -529,6 +530,21 @@
                     </div>
                     <br/>
                     <hr/>
+                    <div class="skill-info">
+                        <div class="info-title">
+                            <span class="sub-title-name" id="skill-info">技能水平（计算机等级，英语等级等）</span>
+                            <a class="add-btn add-skill">
+                                <img src="./assets/images/add.png">
+                                <span>添加</span>
+                            </a>
+                        </div>
+                        <div class="updown-btn-v">
+                            <input type="button" value="▼" class="updown-btn" id="skill-info-updown" data-role="up"/>
+                        </div>
+                        <div id="skill-info-group">
+
+                        </div>
+                    </div>
                 </div>
                 <div class="student-set-guide">
                     <div class="guide-top">

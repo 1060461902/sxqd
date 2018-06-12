@@ -82,15 +82,11 @@ $(document).ready(function () {
     });
 
     $('#project-info-group,#corporation-info-group,#honor-info-group').hide();
-
-/*    $('.updown-list li').bind('contextmenu',function () {
-        return false
-    });*/
-
+    
     /**
      * 右键弹出菜单
      * */
-    $('.updown-list li').bind('contextmenu',function(e){
+    $('.updown-list').on('contextmenu','li',function(e){
         e.preventDefault();
         var x = e.clientX;
         var y = e.clientY;
@@ -222,6 +218,13 @@ $(document).ready(function () {
             $(this).data('role','down');
             $('#honor-info-group').slideDown();
         }
+    });
+
+    /**
+     * 点击上传荣誉证书
+     * */
+    $('#honor-upload-btn').click(function () {
+        $('#honor-upload').trigger("click");
     });
 
     /**

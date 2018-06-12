@@ -11,4 +11,6 @@ $(document).ready(function () {
 		$('.post-container').css("display", "none");
 		$('.news-container').css("display", "block");
 	});
+
+	pageLimit(1,20,5);
 });

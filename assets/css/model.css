@@ -258,3 +258,15 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 5;
 }
+
+.page-limit{
+    height: 50px;
+    position: relative;
+}
+
+.page-limit ul{
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+}

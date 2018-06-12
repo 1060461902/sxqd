@@ -208,7 +208,7 @@
 .student-set-body hr{
     width: 96%;
     margin: auto;
-    border-top: 1px dashed #bdbdbd;
+    border-top: 2px dashed #8d8d8d;
 }
 
 .basic-info{
@@ -307,10 +307,6 @@
     height: 110px;
 }
 
-.basic-info-edit{
-    height: 600px;
-}
-
 #student-sex div{
     display: inline-block;
     text-align: center;
@@ -399,7 +395,9 @@
 }
 
 .project-info,
-.corporation-info{
+.corporation-info,
+.honor-info,
+.skill-info{
     margin-top: 30px;
 }
 
@@ -445,6 +443,8 @@
     margin-bottom: 10px;
     width: 96%;
     border: 1px dashed #9d9d9d;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px #7f7f7f;
     padding: 10px;
 }
 

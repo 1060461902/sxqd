@@ -198,3 +198,10 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
+
+#collect_job{
+    position: relative;
+    right: 30px;
+    float: right;
+    cursor: pointer;
+}
