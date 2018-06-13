@@ -13,4 +13,30 @@ $(document).ready(function () {
 	});
 
 	pageLimit(1,20,5);
+
+	//后端返回的数据
+	var icontent = {
+		img_info:[
+			{title:"1",img_laod:"./assets/images/u3040.jpg"},
+			{title:"2",img_laod:"./assets/images/u3041.jpg"},
+			{title:"3",img_laod:"./assets/images/u3040.jpg"},
+		]
+	}
+
+	//轮播图
+	HandelBarsHelper({
+		origin:$('#carousel-model'),
+		goal:$('#myCarousel'),
+		data:icontent.img_info,
+		helper:{
+			name:'active',
+			callback:function (index) {
+				if(index == 0){
+					return 'active';
+				}else{
+					return '';
+				}
+			}
+		}
+	});
 });

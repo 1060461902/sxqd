@@ -13,17 +13,6 @@
     <link rel="stylesheet" href="assets/css/commonCSS.css">
     <link rel="stylesheet" href="./assets/css/model.css">
     <link rel="stylesheet" href="./assets/css/home_page.css">
-    <!-- js -->
-    <!--[if lt IE 9]>
-    <script type="text/javascript" src="./assets/js/html5shiv.min.js"></script>
-    <script type="text/javascript" src="./assets/js/respond.js"></script>
-    <![endif]-->
-    <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
-    <script type="text/javascript" src="./assets/js/bootstrap.js"></script>
-    <script type="text/javascript" src="./assets/js/bootstrap-paginator.min.js"></script>
-    <script type="text/javascript" src="./assets/js/model.js"></script>
-    <script type="text/javascript" src="./assets/js/home_page.js"></script>
 </head>
 
 <body>
@@ -64,7 +53,7 @@
                             <a href="./my_resume.html">求职之路</a>
                         </li>
                         <li>
-                            <a href="./job_collection.html">岗位收藏</a>
+                            <a href="./job_collection.html">岗位关注</a>
                         </li>
                     </ul>
                 </li>
@@ -105,31 +94,7 @@
     </div>
     <div class="page_body">
         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="item active">
-                    <img src="./assets/images/u3040.jpg" alt="First slide" />
-                    <div class="carousel-caption">
-                        <span>标题</span>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="./assets/images/u3041.jpg" alt="Second slide" />
-                    <div class="carousel-caption">
-                        <span>标题</span>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="./assets/images/u3040.jpg" alt="Third slide" />
-                    <div class="carousel-caption">
-                        <span>标题</span>
-                    </div>
-                </div>
-            </div>
+
         </div>
         <div class="bottom-part">
             <nav class="navbar navbar-default" role="navigation">
@@ -247,6 +212,38 @@
             <img id="floor_door" src="./assets/images/u3050.gif" />
         </div>
     </div>
+    
+
+    <!-- 轮播图 -->
+    <script id="carousel-model" type="text/x-handlebars-template">
+        <ol class="carousel-indicators">
+            {{#each this}}
+                <li data-target="#myCarousel" data-slide-to="{{@index}}" class="{{active @index}}"></li>
+            {{/each}}
+        </ol>
+        <div class="carousel-inner">
+            {{#each this}}
+                <div class="item {{active @index}}">
+                    <img src="{{img_laod}}"/>
+                    <div class="carousel-caption">
+                        <span>{{title}}</span>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </script>
+
+    <!-- js -->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="./assets/js/html5shiv.min.js"></script>
+    <script type="text/javascript" src="./assets/js/respond.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="./assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="./assets/js/bootstrap-paginator.min.js"></script>
+    <script type="text/javascript" src="./assets/js/model.js"></script>
+    <script type="text/javascript" src="./assets/js/home_page.js"></script>
     <script type="text/javascript">
         $(window).load(function () {
             $("#myCarousel").carousel({

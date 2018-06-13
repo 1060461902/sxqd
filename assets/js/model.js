@@ -1,7 +1,41 @@
-/*
-* 通用文件
-* */
+/**
+ * @author xujuncong
+ * 通用文件
+ * */
+var BASEGETAJAX = {
+    dataType:"json",
+    type:"GET",
+    data:{}
+};
+
+var BASEPOSTAJAX = {
+    dataType:"json",
+    type:"POST",
+    traditional:true,
+    data:{}
+};
+/**
+ * 获得基础GET method ajax对象
+ * @return object [基础GET method ajax对象]
+ */
+function getBASEGETAJAX(){
+    var newObject = $.extend(true,{},BASEGETAJAX);
+    return newObject;
+}
+
+/**
+ * 获得基础POST method ajax对象
+ * @return object [基础POST method ajax对象]
+ */
+function getBASEPOSTAJAX(){
+    var newObject = $.extend(true,{},BASEPOSTAJAX);
+    return newObject;
+}
+
 $(document).ready(function () {
+    /**
+     * 点击确认框的取消按钮
+     * */
     $('.confirm-cancel').click(function() {
         $('.confirm-modal,.mask').fadeOut();
     });
@@ -9,16 +43,20 @@ $(document).ready(function () {
 
 /**
  * 分页条
- * @author xujuncong
+ * @param {int} currentPage [当前所需要请求的页面]
+ * @param {int} totalPages [一共有多少页]
+ * @param {int} numberOfPages [页码按钮个数]
+ * 
+ * @return
  * */
 function pageLimit(currentPage,totalPages,numberOfPages,callback) {
     $('#pageLimit').bootstrapPaginator({
-        currentPage: currentPage, //当前的请求页面
-        totalPages: totalPages, //一共多少页
+        currentPage: currentPage,
+        totalPages: totalPages,
         size: "small", //大小
         bootstrapMajorVersion: 3, //bootstrap的版本要求
         alignment: "right",
-        numberOfPages: numberOfPages, //一页列出多少数据
+        numberOfPages: numberOfPages,
         itemTexts: function (type, page, current) {
             switch (type) {
                 case "first":
@@ -44,17 +82,24 @@ function pageLimit(currentPage,totalPages,numberOfPages,callback) {
 
 /**
  *简化handlebars的操作
- * @author xujuncong
  * @param {object} obj [需要包含以下属性]
- * @param {} origin [模板对象]
- * @param {[object]} data [需要插入的数据]
- * @param {} goal [可缺省，缺省为origin，模板作用的对象]
+ *
+ * @param {element} obj.origin [模板对象]
+ * @param {object} obj.data [需要插入的数据]
+ * @param {element} obj.goal [可缺省，缺省为origin，模板作用的对象]
+ * @param {object} obj.helper [可缺省，registerHelper相关对象]
+ * 
+ * @param {string} obj.helper.name [需要registerHelper的模块名]
+ * @param {function} obj.helper.callback [registerHelper回调函数]
  * @return
  * */
 function HandelBarsHelper(obj) {
     if (typeof obj.origin != 'undefined'&&typeof obj.data != 'undefined'){
         if(typeof obj.goal == 'undefined'){
             obj.goal = obj.origin;
+        }
+        if(typeof obj.helper != 'undefined'){
+            Handlebars.registerHelper(obj.helper.name,obj.helper.callback);
         }
         var origin = obj.origin;
         var goal = obj.goal;
@@ -83,6 +128,8 @@ function setAlert(str,timeAlert) {
 
 /**
  * 自订确认框
+ * @param {string} string [确认框中的文本内容]
+ * @param {function} callback [点击确认后执行的回调函数]
  * */
 function setConfirm(string,callback) {
     $('.confirm-text').html(string);
@@ -96,6 +143,8 @@ function setConfirm(string,callback) {
 
 /**
  * 根据状态在报告界面显示不同的画面
+ * @param {int} status [状态码]
+ * @param {int} day [天数]
  * */
 function reportView(status,day) {
     switch (status){

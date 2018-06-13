@@ -32,7 +32,7 @@ $(document).ready(function () {
     $('.post-focus').click(function () {
         console.log($(this).html());
         if ($(this).html()=='关注'){
-            $(this).html('已收藏');
+            $(this).html('已关注');
             $(this).css({
                 'border':'none',
                 'background':'rgb(0, 140, 255)',
