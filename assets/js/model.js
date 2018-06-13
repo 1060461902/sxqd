@@ -6,14 +6,14 @@ var BASEGETAJAX = {
     dataType:"json",
     type:"GET",
     data:{}
-};
+}
 
 var BASEPOSTAJAX = {
     dataType:"json",
     type:"POST",
     traditional:true,
     data:{}
-};
+}
 /**
  * 获得基础GET method ajax对象
  * @return object [基础GET method ajax对象]

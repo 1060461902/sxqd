@@ -1,8 +1,7 @@
 $(document).ready(function () {
-	$('div.carousel img , div.carousel span').click(function () {
-		//alert($(this).attr('id'));
-		window.location.href = "./news.html";
-	});
+	/**
+	 * 下方导航栏鼠标浮动效果
+	 * */
 	$('.post-item').hover(function () {
 		$('.news-container').css("display", "none");
 		$('.post-container').css("display", "block");
@@ -12,31 +11,46 @@ $(document).ready(function () {
 		$('.news-container').css("display", "block");
 	});
 
-	pageLimit(1,20,5);
-
-	//后端返回的数据
-	var icontent = {
-		img_info:[
-			{title:"1",img_laod:"./assets/images/u3040.jpg"},
-			{title:"2",img_laod:"./assets/images/u3041.jpg"},
-			{title:"3",img_laod:"./assets/images/u3040.jpg"},
-		]
-	}
-
-	//轮播图
-	HandelBarsHelper({
-		origin:$('#carousel-model'),
-		goal:$('#myCarousel'),
-		data:icontent.img_info,
-		helper:{
-			name:'active',
-			callback:function (index) {
-				if(index == 0){
-					return 'active';
-				}else{
-					return '';
+	/**
+	 * 请求后端获取页面数据
+	 */
+	var option = getBASEGETAJAX();
+	option.url = './json/home_page.json';
+	option.success = (data) => {
+		/**
+		 * 轮播图
+		 * */
+		HandelBarsHelper({
+			origin: $('#carousel-model'),
+			goal: $('#myCarousel'),
+			data: data.show,
+			helper: {
+				name: 'active',
+				callback: (index) => {
+					if (index == 0) {
+						return 'active';
+					} else {
+						return '';
+					}
 				}
 			}
-		}
+		});
+	}
+	option.error = (res) => {
+		console.log(res)
+	}
+	$.ajax(option);
+
+	/**
+	 * 分页
+	 */
+	pageLimit(1, 20, 5);
+
+	/**
+	 * 
+	 */
+	$('div.carousel img , div.carousel span').click(function () {
+		//alert($(this).attr('id'));
+		window.location.href = "./news.html";
 	});
 });
