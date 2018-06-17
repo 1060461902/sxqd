@@ -16,27 +16,22 @@ $(document).ready(function () {
 	 */
 	var option = getBASEGETAJAX();
 	option.url = './json/home_page.json';
-	option.success = (data) => {
+	option.success = function (data) {
 		/**
 		 * 轮播图
 		 * */
-		HandelBarsHelper({
-			origin: $('#carousel-model'),
-			goal: $('#myCarousel'),
-			data: data.show,
-			helper: {
-				name: 'active',
-				callback: (index) => {
-					if (index == 0) {
-						return 'active';
-					} else {
-						return '';
-					}
+		$('#myCarousel').handlebars($('#carousel-model'), data.show, {
+			name: 'active',
+			callback: function (index) {
+				if (index == 0) {
+					return 'active';
+				} else {
+					return '';
 				}
 			}
-		});
+		})
 	}
-	option.error = (res) => {
+	option.error = function (res) {
 		console.log(res)
 	}
 	$.ajax(option);

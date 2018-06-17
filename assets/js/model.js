@@ -81,7 +81,7 @@ function pageLimit(currentPage,totalPages,numberOfPages,callback) {
 }
 
 /**
- *简化handlebars的操作
+ * 简化handlebars的操作，此方法可脱离jquery使用(已编写jquery插件替代，操作更加简便)
  * @param {object} obj [需要包含以下属性]
  *
  * @param {element} obj.origin [模板对象]
@@ -104,9 +104,9 @@ function HandelBarsHelper(obj) {
         var origin = obj.origin;
         var goal = obj.goal;
         var data = obj.data;
-        var template = Handlebars.compile(origin.html());
+        var template = Handlebars.compile(origin.innerHTML);
         var html = template(data);
-        goal.html(html);
+        goal.innerHTML = html;
     }
 }
 
