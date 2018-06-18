@@ -1,0 +1,198 @@
+body,
+html {
+    height: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.weui-bar__item--on .weui-tabbar__label{
+    color: #627aff !important;
+}
+
+.weui-bar__item--on .weui-tabbar__icon #img_dk{
+    content: url(../images/dk_blue.png);
+}
+
+.weui-bar__item--on .weui-tabbar__icon #img_sq{
+    content: url(../images/sq_blue.png);
+}
+
+.weui-bar__item--on .weui-tabbar__icon #img_tj{
+    content: url(../images/tj_blue.png);
+}
+
+.first-top{
+    padding: 1rem 2rem;
+    display: -webkit-box; /* OLD: Safari, iOS 6 and earlier; Android browser, older WebKit */
+    display: -moz-box; /* OLD: Firefox (can be buggy) */
+    display: -ms-flexbox; /* OLD: IE 10 */
+    display: -webkit-flex; /* FINAL, PREFIXED, Chrome 21+ */
+    display: flex; /* FINAL: Opera 12.1+, Firefox 22+ */
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    border-top: 1px solid #e0e0e085;
+    border-bottom: 1px solid #e0e0e085;
+}
+
+#first-username{
+    margin-left: 10px;
+    font-size: 0.8rem;
+    color: #00000086;
+}
+
+#first-userimg{
+    display: inline-block;
+    height: 1.5rem;
+    width: 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 15px;
+}
+
+.title-bar-name{
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    margin: 5px auto;
+    color: #00000086;
+    font-size: 0.8rem;
+}
+
+#first-subtitle{
+    padding: 1rem;
+    font-size: 0.7rem;
+    color: #00000086;
+}
+
+.dk-item{
+    display: block;
+    width: 100%;
+    height: 3.5rem;
+    margin-left: 1rem;
+}
+
+.dk-item>div{
+    float: left;
+    display: inline-block;
+}
+
+#dk-start-timebar,
+#dk-end-timebar{
+    margin-left: 1rem;
+    font-size: 0.7rem;
+    line-height: 1.7rem;
+    color: black;
+}
+
+#dk-start-place,
+#dk-end-place{
+    margin-left: 1rem;
+    font-size: 0.6rem;
+    color: #7f7f7f;
+}
+
+.work-status-btn-block{
+    display: -webkit-box; /* OLD: Safari, iOS 6 and earlier; Android browser, older WebKit */
+    display: -moz-box; /* OLD: Firefox (can be buggy) */
+    display: -ms-flexbox; /* OLD: IE 10 */
+    display: -webkit-flex; /* FINAL, PREFIXED, Chrome 21+ */
+    display: flex; /* FINAL: Opera 12.1+, Firefox 22+ */
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+#work-status-change-btn{
+    display: -webkit-box; /* OLD: Safari, iOS 6 and earlier; Android browser, older WebKit */
+    display: -moz-box; /* OLD: Firefox (can be buggy) */
+    display: -ms-flexbox; /* OLD: IE 10 */
+    display: -webkit-flex; /* FINAL, PREFIXED, Chrome 21+ */
+    display: flex; /* FINAL: Opera 12.1+, Firefox 22+ */
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    height: 8rem;
+    width: 8rem;
+    background: #627aff;
+    background: -webkit-linear-gradient(#627aff, blue); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#627aff, blue); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#627aff, blue); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#627aff, blue);
+    border-radius: 4rem;
+    color: white;
+}
+
+#show-status{
+    text-align: center;
+    font-size: 1rem;
+}
+
+#show-time{
+    text-align: center;
+    font-size: 0.7rem;
+}
+
+.sq-btn-set{
+    border-top: 1px solid #e0e0e085;
+    border-bottom: 10px solid #e0e0e085;
+    height: 100px;
+    display: -webkit-box; /* OLD: Safari, iOS 6 and earlier; Android browser, older WebKit */
+    display: -moz-box; /* OLD: Firefox (can be buggy) */
+    display: -ms-flexbox; /* OLD: IE 10 */
+    display: -webkit-flex; /* FINAL, PREFIXED, Chrome 21+ */
+    display: flex; /* FINAL: Opera 12.1+, Firefox 22+ */
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.sq-btn-set>a{
+    margin: 20px;
+    display: inline-block;
+    text-align: center;
+}
+
+#sq-record-bar{
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e085;
+}
+
+#sq-record{
+    display: -webkit-box; /* OLD: Safari, iOS 6 and earlier; Android browser, older WebKit */
+    display: -moz-box; /* OLD: Firefox (can be buggy) */
+    display: -ms-flexbox; /* OLD: IE 10 */
+    display: -webkit-flex; /* FINAL, PREFIXED, Chrome 21+ */
+    display: flex; /* FINAL: Opera 12.1+, Firefox 22+ */
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+#sq-record-name{
+    margin-left: 10px;
+}
+
+#sq-img-next{
+    position: absolute;
+    display: inline-block;
+    right: 10px;
+}

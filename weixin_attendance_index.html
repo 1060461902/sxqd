@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>title</title>
+    <!--css-->
+    <link rel="stylesheet" href="./assets/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="./assets/css/weui.min.css">
+    <link rel="stylesheet" href="./assets/css/weixin_attendance_index.css">
+
+</head>
+
+<body>
+    <div class="weui-tab">
+        <div class="weui-tab__bd">
+            <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+                <div class="title-bar">
+                    <p class="title-bar-name">考勤打卡</p>
+                </div>
+                <div class="first-top">
+                    <img id="first-userimg" src="./assets/images/head_img.png" />
+                    <span id="first-username">小陈</span>
+                </div>
+                <div>
+                    <p id="first-subtitle">打卡记录时间和位置</p>
+                </div>
+                <div class="first-dk-body">
+                    <div class="dk-item">
+                        <div>
+                            <img src="./assets/images/dk_point_gray.png" />
+                        </div>
+                        <div>
+                            <p id="dk-start-timebar">上班打卡时间
+                                <span id="dk-start-time">8:05</span>
+                            </p>
+                            <p id="dk-start-place">浙商大现教中心</p>
+                        </div>
+                    </div>
+                    <div class="dk-item">
+                        <div>
+                            <img src="./assets/images/dk_point_gray.png" />
+                        </div>
+                        <div>
+                            <p id="dk-end-timebar">下班打卡时间
+                                <span id="dk-end-time">17:05</span>
+                            </p>
+                            <p id="dk-end-place">浙商大现教中心</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="work-status-btn-block">
+                    <a id="work-status-change-btn">
+                        <div>
+                            <p id="show-status">下班打卡</p>
+                            <p id="show-time"></p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div id="tab2" class="weui-tab__bd-item">
+                <div class="title-bar">
+                    <p class="title-bar-name">申请</p>
+                </div>
+                <div class="sq-btn-set">
+                    <a>
+                        <img src="./assets/images/sq_bk.png" alt="">
+                        <p>补卡申请</p>
+                    </a>
+                    <a>
+                        <img src="./assets/images/sq_qj.png" alt="">
+                        <p>请假申请</p>
+                    </a>
+                </div>
+                <div id="sq-record-bar">
+                    <a href="" id="sq-record">
+                        <img src="./assets/images/sq_paper.png" alt="">
+                        <span id="sq-record-name">申请记录</span>
+                        <img id="sq-img-next" src="./assets/images/next.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div id="tab3" class="weui-tab__bd-item">
+                <h1>页面三</h1>
+            </div>
+        </div>
+        <div class="weui-tabbar">
+            <a href="#tab1" id="" class="weui-tabbar__item weui-bar__item--on">
+                <div class="weui-tabbar__icon">
+                    <img id="img_dk" src="./assets/images/dk_gray.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">打卡</p>
+            </a>
+            <a href="#tab2" id="" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img id="img_sq" src="./assets/images/sq_gray.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">申请</p>
+            </a>
+            <a href="#tab3" id="" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img id="img_tj" src="./assets/images/tj_gray.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">统计</p>
+            </a>
+        </div>
+    </div>
+    <!--js-->
+    <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript" src="./assets/js/fastclick.js"></script>
+    <script type="text/javascript" src="./assets/js/weixin_attendance_index.js"></script>
+</body>
+
+</html>
