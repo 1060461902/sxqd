@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>title</title>
+    <title>浙商大学生实习管理</title>
     <!--css-->
     <link rel="stylesheet" href="./assets/css/jquery-weui.min.css">
     <link rel="stylesheet" href="./assets/css/weui.min.css">
@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body ontouchstart>
     <div class="weui-tab">
         <div class="weui-tab__bd">
             <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
@@ -83,7 +83,62 @@
                 </div>
             </div>
             <div id="tab3" class="weui-tab__bd-item">
-                <h1>页面三</h1>
+                <div class="title-bar">
+                    <p class="title-bar-name">考勤统计</p>
+                </div>
+                <div class="tj-top-bar">
+                    <div>
+                        <p id="tj-top-time">2018.6</p>
+                    </div>
+                    <div id="second-top-bar">
+                        <img id="second-userimg" src="./assets/images/head_img.png" />
+                        <span id="second-username">小陈</span>
+                        <div id="tj-top-left">
+                            <a href="#">
+                                <img src="./assets/images/tj_yl.png" alt="">
+                                <span>打卡月历</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="tj-list">
+                    <div class="tj-list-item">
+                        <p>
+                            出勤天数
+                        </p>
+                        <p class="tj-times-num">
+                            <span id="cq_num"></span>
+                            <span>天</span>
+                        </p>
+                    </div>
+                    <div class="tj-list-item">
+                        <p>
+                            缺卡次数
+                        </p>
+                        <p class="tj-times-num">
+                            <span id="qk_num"></span>
+                            <span>次</span>
+                        </p>
+                    </div>
+                    <div class="tj-list-item">
+                        <p>
+                            请假天数
+                        </p>
+                        <p class="tj-times-num">
+                            <span id="qj_num"></span>
+                            <span>天</span>
+                        </p>
+                    </div>
+                    <div class="tj-list-item">
+                        <p>
+                            外勤次数
+                        </p>
+                        <p class="tj-times-num">
+                            <span id="wq_num"></span>
+                            <span>次</span>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="weui-tabbar">

@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    /**
+     * 考勤按钮的时间显示
+     */
     setInterval(function () {
         var dateObj = new Date();
         var month = dateObj.getMonth() + 1;
@@ -18,4 +21,5 @@ $(document).ready(function () {
         var newDate = month+"月"+date+"日"+"&nbsp"+hours+":"+minutes+":"+seconds;
         $('#show-time').html(newDate);
     }, 1000);
+    //picker-calendar-day
 });
