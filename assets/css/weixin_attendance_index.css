@@ -128,10 +128,10 @@ html {
     height: 8rem;
     width: 8rem;
     background: #627aff;
-    background: -webkit-linear-gradient(#627aff, blue); /* Safari 5.1 - 6.0 */
-    background: -o-linear-gradient(#627aff, blue); /* Opera 11.1 - 12.0 */
-    background: -moz-linear-gradient(#627aff, blue); /* Firefox 3.6 - 15 */
-    background: linear-gradient(#627aff, blue);
+    background: -webkit-linear-gradient(#51aefac4, #0077ff); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#51aefac4, #0077ff); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#51aefac4, #0077ff); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#51aefac4, #0077ff);
     border-radius: 4rem;
     color: white;
 }
@@ -268,6 +268,7 @@ html {
 
 .tj-list-item>p{
     display: inline-block;
+    margin-left: 5px;
 }
 
 .tj-times-num{
