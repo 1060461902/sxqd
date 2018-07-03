@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>title</title>
+    <!--css-->
+    <link rel="stylesheet" href="./assets/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="./assets/css/weui.min.css">
+    <link rel="stylesheet" href="./assets/css/weixin_attendance_apply.css">
+</head>
+<body>
+    <div class="title-bar">
+        <p>
+            <a id="title-back" onclick="javascript:history.back();">
+                <img src="./assets/images/back_lt.png" alt="">
+            </a>
+            <span id="title-name">补卡申请</span>
+        </p>
+    </div>
+    <div class="time-bar">
+        <span>补卡时间</span>
+        <span id="time-date">2018-06-01 08:30</span>
+    </div>
+    <div class="reason-bar">
+        <p id="reason-title">缺卡原因</p>
+        <textarea id="reason-enter" placeholder="请输入缺卡原因"></textarea>
+    </div>
+    <div class="approver-bar">
+        <p id="approver-title">
+            <span id="approver-title1">审批人</span>
+            <span id="approver-title2">默认为企业账号管理者</span>
+        </p>
+        <div id="approver-container">
+            <div class="approver-person">
+                <img src="./assets/images/head_img.png" alt="">
+                <p>张某某</p>
+            </div>
+            <div class="approver-person">
+                <img src="./assets/images/head_img.png" alt="">
+                <p>张某某</p>
+            </div>
+            <div class="approver-person">
+                <img src="./assets/images/head_img.png" alt="">
+                <p>张某某</p>
+            </div>
+            <div class="approver-person">
+                <img src="./assets/images/head_img.png" alt="">
+                <p>张某某</p>
+            </div>
+            <div class="approver-person">
+                <img src="./assets/images/head_img.png" alt="">
+                <p>张某某</p>
+            </div>
+            <div class="approver-person">
+                <img src="./assets/images/head_img.png" alt="">
+                <p>张某某</p>
+            </div>
+        </div>
+    </div>
+    <div class="submit-bar">
+        <button>提交</button>
+    </div>
+    <!--js-->
+    <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript" src="./assets/js/fastclick.js"></script>
+    <script type="text/javascript" src="./assets/js/weixin_attendance_apply.js"></script>
+</body>
+</html>
