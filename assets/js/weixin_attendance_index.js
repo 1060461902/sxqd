@@ -1,8 +1,8 @@
 $(document).ready(function () {
     /**
-     * 
+     * 获取url中的参数并判断切换到哪一页面
      */
-    var res = parseURL(location.href);
+    var res = $.parseURL(location.href);
     if (res) {
         switch (res['tab']) {
             case '2':
@@ -40,16 +40,3 @@ $(document).ready(function () {
     }, 1000);
     //picker-calendar-day
 });
-
-function parseURL(url) {
-    var url = url.split('?')[1];
-    if (url) {
-        var param = url.split('&');
-        var res = {};
-        param.forEach(function (p) {
-            arr = p.split('=');
-            res[arr[0]] = arr[1];
-        });
-        return res;
-    }
-}
