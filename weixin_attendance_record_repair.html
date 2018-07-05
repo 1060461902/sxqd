@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,21 +9,77 @@
     <!--css-->
     <link rel="stylesheet" href="./assets/css/jquery-weui.min.css">
     <link rel="stylesheet" href="./assets/css/weui.min.css">
-    <link rel="stylesheet" href="./assets/css/weixin_bundle.css">
+    <link rel="stylesheet" href="./assets/css/weixin_head.css">
+    <link rel="stylesheet" href="./assets/css/weixin_attendance_record_repair.css">
 
 </head>
-<body>
 
-    <div class="bundle-body">
-        <input type="text" id="student-id-input" placeholder="输入学号"/>
-        <input type="password" id="student-pwd-input" placeholder="输入密码"/>
-        <a class="weui-btn bundle-btn" onclick="bundle()">点此绑定</a>
+<body>
+    <div class="title-bar">
+        <p>
+            <a id="title-back" onclick="javascript:history.back()">
+                <img src="./assets/images/back_lt.png" alt="">
+            </a>
+            <span id="title-name">补卡申请</span>
+        </p>
     </div>
+    <div class="status-bar">
+        <div class="status-head-img">
+            <img src="./assets/images/head_img.png" alt="">
+        </div>
+        <div class="status-info">
+            <p id="status-name">小陈</p>
+            <p id="status-show" class="status-r">未通过</p>
+        </div>
+    </div>
+    <div class="info-bar">
+        <p>补卡时间:
+            <span id="info-time"></span>
+        </p>
+        <div class="info-reason">
+            <p id="info-reason-title">缺卡原因:</p>
+            <p id="info-reason-body">这是理由这是理由这是理由</p>
+        </div>
+    </div>
+    <div class="approver-bar">
+        <div class="approver-item">
+            <div class="approver-info">
+                <img class="approver-head" src="./assets/images/head_img.png" alt="">
+                <span class="approver-name">我</span>
+                <span class="approver-status approver-status-s">发起申请</span>
+            </div>
+            <div class="approver-time">
+                <p>01.10 08:10</p>
+            </div>
+        </div>
+        <div class="approver-item">
+            <div class="approver-info">
+                <img class="approver-head" src="./assets/images/head_img.png" alt="">
+                <span class="approver-name">A某</span>
+                <span class="approver-status approver-status-p">已通过</span>
+            </div>
+            <div class="approver-time">
+                <p>01.10 08:10</p>
+            </div>
+        </div>
+        <div class="approver-item">
+            <div class="approver-info">
+                <img class="approver-head" src="./assets/images/head_img.png" alt="">
+                <span class="approver-name">B某</span>
+                <span class="approver-status approver-status-r">已拒绝</span>
+            </div>
+            <div class="approver-time">
+                <p>01.10 08:10</p>
+            </div>
+        </div>
+    </div>
+
     <!--js-->
     <script type="text/javascript" src="./assets/js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="./assets/js/jquery-weui.min.js"></script>
     <script type="text/javascript" src="./assets/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript" src="./assets/js/fastclick.js"></script>
-    <script type="text/javascript" src="./assets/js/weixin_bundle.js"></script>
+    <script type="text/javascript" src="./assets/js/weixin_attendance_record_repair.js"></script>
 </body>
+
 </html>
