@@ -3,6 +3,24 @@ var size = 5;
 var loading = false;
 
 $(document).ready(function () {
+	/**
+     * 获取url中的参数并判断切换到哪一页面
+     */
+    var res = $.parseURL(location.href);
+    if (res) {
+        switch (res['tab']) {
+            case '2':
+                $('#qzzl').click();
+                break;
+            case '3':
+                $('#wd').click();
+                break;
+            default:
+                $('#sxzp').click();
+                break;
+        }
+	}
+	
 	$(".weui-loadmore").hide();
 	/**
 	 * 请求后端获取页面数据

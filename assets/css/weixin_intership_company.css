@@ -1,0 +1,54 @@
+.company-top{
+    position: fixed;
+    width: 100%;
+}
+
+.company-title{
+    height: 1rem;
+    font-size: 0.6rem;
+    border-bottom: 1px solid #e0e0e085;
+}
+
+.company-title>img{
+    height: 1rem;
+}
+
+.company-title *{
+    position: relative;
+    display: inline-block;
+    float: left;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.company-info{
+    padding: 1%;
+}
+
+.company-img,
+.company-info-body{
+    display: inline-block;
+    float: left;
+}
+
+.company-img{
+    width: 19%;
+}
+
+.company-info-body{
+    font-size: 0.6rem;
+    width: 79%;
+}
+
+.company-img-container{
+    width: 90%;
+    padding-bottom: 90%;
+    height: 0;
+    position: relative;
+}
+
+.company-img-container>img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
