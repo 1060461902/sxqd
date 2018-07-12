@@ -13,10 +13,14 @@
 </head>
 <body>
 
-    <div class="bundle-body">
+    <div class="bind-body">
         <input type="text" id="student-id-input" placeholder="输入学号"/>
         <input type="password" id="student-pwd-input" placeholder="输入密码"/>
-        <a class="weui-btn bundle-btn" onclick="bundle()">点此绑定</a>
+        <a class="weui-btn bind-btn" onclick="dobind()">点此绑定</a>
+        <br/>
+        <div class="unbind-btn-bar">
+            <a class="unbind-btn" onclick="dounbind()">解除绑定<div class="red-btn"></div></a>
+        </div>
     </div>
     <!--js-->
     <script type="text/javascript" src="./assets/js/jquery-2.1.0.min.js"></script>

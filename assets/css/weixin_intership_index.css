@@ -105,6 +105,132 @@ a:hover{
     font-weight: bold;
 }
 
-.weui-cells{
+.post-cells{
     margin-bottom: 60px;
+}
+
+.road-cells{
+    margin-bottom: 60px;
+}
+
+.road-cells-item{
+    height: 10rem;
+}
+
+.history-item{
+    width: 100%;
+}
+
+.logo-part,
+.history-entity{
+    position: relative;
+    display: inline-block;
+    float: left;
+}
+
+.logo-part{
+    width: 20%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.logo-part>p{
+    text-align: center;
+}
+
+.history-entity{
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width: 75%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.logo-img{
+    margin: auto;
+    width: 60%;
+    padding-bottom: 60%;
+    height: 0;
+    position: relative;
+}
+
+.logo-img>img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.company-name{
+    font-size: 0.9rem;
+}
+
+.post-name{
+    font-size: 0.6rem;
+    font-weight: bold;
+}
+
+.history-entity-item{
+    display: inline-block;
+    margin: auto 5px;
+}
+
+.history-entity-item p{
+    margin: auto;
+}
+
+.history-entity-top{
+    text-align: center;
+}
+
+.history-entity-bottom p{
+    font-size: 0.6rem;
+    display: inline-block;
+    writing-mode: tb-rl;
+    writing-mode: vertical-rl;
+    word-wrap: break-word;
+    margin: auto;
+}
+
+.history-entity-item-img{
+    height: 15px;
+    margin: 2px auto;
+}
+
+.history-entity-item-img>img{
+    display: block; 
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.person-bar{
+    height: 100px;
+    border-bottom: 6px solid #e4e3e3;
+}
+
+.person-head-img{
+    display: inline-block;
+    width: 60px;
+    /* padding-bottom: 10%; */
+    height: 60px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.person-head-img>img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 100%;
+    margin-left: 10px;
+}
+
+.person-name{
+    display: inline-block;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 10px;
+    font-size: 20px;
 }

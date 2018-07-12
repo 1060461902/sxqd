@@ -9,7 +9,7 @@
     <!--css-->
     <link rel="stylesheet" href="./assets/css/jquery-weui.min.css">
     <link rel="stylesheet" href="./assets/css/weui.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.css"/>
+    <link rel="stylesheet" href="assets/css/bootstrap.css" />
     <link rel="stylesheet" href="assets/css/commonCSS.css">
     <link rel="stylesheet" href="./assets/css/weixin_intership_index.css">
 </head>
@@ -25,11 +25,11 @@
                     </a>
                     <div id="search-bar">
                         <img id="search-bar-img" src="./assets/images/magnifier.png" alt="">
-                        <input id="search-info" type="text" placeholder="搜索实习\公司"/>
+                        <input id="search-info" type="text" placeholder="搜索实习\公司" />
                     </div>
                 </div>
                 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000"></div>
-                <div class="weui-cells">
+                <div class="weui-cells post-cells">
                     <div class="cells-container">
                         <a class="weui-cell" data-id="" href="./weixin_intership_post.html">
                             <div class="cell-left">
@@ -93,10 +93,47 @@
                 </div>
             </div>
             <div id="tab2" class="weui-tab__bd-item">
-
+                <div class="list-group road-cells">
+                    <div class="list-group-item road-cells-item">
+                        <div class="logo-part">
+                            <div class="logo-img">
+                                <img src="./assets/images/jk.png">
+                            </div>
+                            <p class="company-name">即刻</p>
+                            <p class="post-name">产品经理</p>
+                        </div>
+                        <div class="history-entity">
+                            <div class="history-entity-item">
+                                <p class="history-entity-top">25</p>
+                                <div class="history-entity-item-img">
+                                    <img src="./assets/images/history_send.png">
+                                </div>
+                                <div class="history-entity-bottom">
+                                    <p>2017年9月</p>
+                                    <p>投递简历</p>
+                                </div>
+                            </div>
+                            <div class="history-entity-item">
+                                <p class="history-entity-top">27</p>
+                                <div class="history-entity-item-img">
+                                    <img src="./assets/images/history_pass.png">
+                                </div>
+                                <div class="history-entity-bottom">
+                                    <p>2017年9月</p>
+                                    <p>简历通过</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="tab3" class="weui-tab__bd-item">
-
+                <div class="person-bar">
+                    <div class="person-head-img">
+                        <img src="./assets/images/head_img.png" alt="">
+                    </div>
+                    <span class="person-name">老李</span>
+                </div>
             </div>
         </div>
         <div class="weui-tabbar">
@@ -125,16 +162,16 @@
     <script id="carousel-model" type="text/x-handlebars-template">
         <ol class="carousel-indicators">
             {{#each this}}
-                <li data-target="#myCarousel" data-slide-to="{{@index}}" class="{{active @index}}"></li>
+            <li data-target="#myCarousel" data-slide-to="{{@index}}" class="{{active @index}}"></li>
             {{/each}}
         </ol>
         <div class="carousel-inner">
             {{#each this}}
-                <div class="item {{active @index}}">
-                    <img src="{{img_laod}}"/>
-                    <div class="carousel-caption">
-                    </div>
+            <div class="item {{active @index}}">
+                <img src="{{img_laod}}" />
+                <div class="carousel-caption">
                 </div>
+            </div>
             {{/each}}
         </div>
     </script>
