@@ -161,7 +161,8 @@
 
 .person-info-bar,
 .project-info-bar,
-.corporation-info-bar {
+.corporation-info-bar,
+.honor-info-bar {
     padding: 1%;
     position: relative;
     display: -webkit-box;
@@ -193,20 +194,24 @@
 .project-info-title,
 .project-info-entity,
 .corporation-info-title,
-.corporation-info-entity {
+.corporation-info-entity,
+.honor-info-title,
+.honor-info-entity {
     display: inline-block;
 }
 
 .person-info-title,
 .project-info-title,
-.corporation-info-title{
+.corporation-info-title,
+.honor-info-title{
     position: relative;
     width: 30%;
 }
 
 .person-info-entity,
 .project-info-entity,
-.corporation-info-entity {
+.corporation-info-entity,
+.honor-info-entity {
     width: 65%;
 }
 
@@ -217,23 +222,27 @@
 }
 
 .project-item,
-.corporation-item{
+.corporation-item,
+.honor-item{
     width: 96%;
     margin: 5px auto 0;
 }
 
 .project-item-old,
-.corporation-item-old{
+.corporation-item-old,
+.honor-item-old{
     border: 1px dashed #6494fa;
 }
 
 .project-item-new,
-.corporation-item-new{
+.corporation-item-new,
+.honor-item-new{
     border: 1px dashed #faf764;
 }
 
 .project-delete,
-.corporation-delete{
+.corporation-delete,
+.honor-delete{
     background: rgb(255, 100, 100);
     border-radius: 5px;
     width: 20%;
@@ -242,7 +251,8 @@
 }
 
 .project-edit,
-.corporation-edit{
+.corporation-edit,
+.honor-edit{
     background: rgb(122, 153, 253);
     border-radius: 5px;
     width: 20%;
@@ -252,12 +262,14 @@
 }
 
 .project-item-new .project-edit,
-.corporation-item-new .corporation-edit{
+.corporation-item-new .corporation-edit,
+.honor-item-new .honor-edit{
     display: none;
 }
 
 #add-project-btn,
-#add-corporation-btn{
+#add-corporation-btn,
+#add-honor-btn{
     display: block;
     background: #7bc2fc;
     color: #ffffff;
@@ -265,36 +277,87 @@
     border-radius: 5px;
     text-align: center;
     margin: 10px auto;
-}
-
-#add-project-btn{
-    width: 30%;
-}
-
-#add-corporation-btn{
     width: 50%;
 }
 
-#add-plus{
+.add-plus{
     color: rgb(0, 60, 255);
 }
 
 #add-project-btn:active,
-#add-corporation-btn:active{
+#add-corporation-btn:active,
+#add-honor-btn:active{
     background: #5eb5fc;
 }
 
 .project-describe,
-.corporation-describe{
+.corporation-describe,
+.honor-describe{
     font-size: 0.8;
     padding: 3%;
 }
 
 .project-describe>textarea,
-.corporation-describe>textarea{
+.corporation-describe>textarea,
+.honor-describe>textarea{
     resize: none;
     width: 100%;
     height: 100px !important;
     border: none;
     overflow-y: auto !important;
+}
+
+.honor-describe{
+    border-bottom: 1px solid #e0e0e085;
+}
+
+.honor-img-add{
+    display: block;
+    height: 50px;
+    width: 50px;
+    border: 5px solid #7f7f7f;
+    color: #7f7f7f;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.honor-img-btn p:first-child{
+    display: -webkit-box; /* OLD: Safari, iOS 6 and earlier; Android browser, older WebKit */
+    display: -moz-box; /* OLD: Firefox (can be buggy) */
+    display: -ms-flexbox; /* OLD: IE 10 */
+    display: -webkit-flex; /* FINAL, PREFIXED, Chrome 21+ */
+    display: flex; /* FINAL: Opera 12.1+, Firefox 22+ */
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.honor-img-btn p{
+    text-align: center;
+}
+
+.honor-img{
+    padding: 3%;
+}
+
+.honor-img-upload{
+    display: inline-block;
+    width: 50%;
+    background: #dddddd;
+}
+
+.honor-img-describe{
+    word-break:break-all;
+    display: inline-block;
+    width: 45%;
+    font-size: 0.5rem;
+    color: #494949;
 }

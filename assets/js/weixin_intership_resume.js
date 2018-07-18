@@ -162,17 +162,17 @@ $(document).ready(function () {
     /**
      * 日期选择
      */
-    $('#birthday-picker,.project-item .project-start,.project-item .project-end,.corporation-item .corporation-start,.corporation-item .corporation-end').datetimePicker({
+    $('#birthday-picker,.project-item .project-start,.project-item .project-end,.corporation-item .corporation-start,.corporation-item .corporation-end,.honor-item .honor-date').datetimePicker({
         times: function () {}
     });
 
     /**
      * 设置老条目不可编辑
      */
-    $('.project-item-old input,.project-item-old textarea,.corporation-item-old input,.corporation-item-old textarea').attr("disabled", true);
+    $('.project-item-old input,.project-item-old textarea,.corporation-item-old input,.corporation-item-old textarea,.honor-item-old input,.honor-item-old textarea').attr("disabled", true);
 
     /**
-     * 点击老项目条目询问是否编辑
+     * 点击老项目条目修改按钮询问是否编辑
      */
     $('.project-item-old').on('click', '.project-edit', function () {
         var id = $(this).parent().parent().data('id');
@@ -187,7 +187,7 @@ $(document).ready(function () {
     });
 
     /**
-     * 点击老社团经历条目询问是否编辑
+     * 点击老社团经历条目修改按钮询问是否编辑
      */
     $('.corporation-item-old').on('click', '.corporation-edit', function () {
         var id = $(this).parent().parent().data('id');
@@ -199,6 +199,28 @@ $(document).ready(function () {
                 $('.corporation-item[data-id="' + id + '"] input,.corporation-item[data-id="' + id + '"] textarea').attr("disabled", false);
             }
         })
+    });
+
+    /**
+     * 点击老荣誉条目修改按钮询问是否编辑
+     */
+    $('.honor-item-old').on('click', '.honor-edit', function () {
+        var id = $(this).parent().parent().data('id');
+        $.confirm({
+            text: '确定要修改该条目？',
+            onOK: function () {
+                $('.honor-item[data-id="' + id + '"]').removeClass('honor-item-old');
+                $('.honor-item[data-id="' + id + '"]').addClass('honor-item-new');
+                $('.honor-item[data-id="' + id + '"] input,.honor-item[data-id="' + id + '"] textarea').attr("disabled", false);
+            }
+        })
+    });
+
+    /**
+     * 点击荣誉图片上传按钮
+     */
+    $('.honor-item').on('click', '.honor-img-btn', function () {
+        $(this).parent().children('input').eq(0).click();
     });
 
     /**
@@ -304,14 +326,67 @@ $(document).ready(function () {
     });
 
     /**
+     * 点击添加所获荣誉
+     */
+    $('#add-honor-btn').click(function () {
+        var date = new Date(); //利用date拼接虚拟id，到时候删除
+        $('.honor-items').append('<div class="honor-item honor-item-new" data-id="' + date.getMinutes() + date.getSeconds() + '">' +
+            '<div class="honor-info-bar">' +
+            '<div class="honor-info-title">' +
+            '<p>荣誉名称</p>' +
+            '</div>' +
+            '<div class="honor-info-entity">' +
+            '<input id="honor-name" class="weui-input" type="text" value="" placeholder="请填写">' +
+            '</div>' +
+            '</div>' +
+            '<div class="honor-info-bar">' +
+            '<div class="honor-info-title">' +
+            '<p>获奖时间</p>' +
+            '</div>' +
+            '<div class="honor-info-entity">' +
+            '<input class="weui-input honor-date" type="text" value="" placeholder="选择">' +
+            '</div>' +
+            '</div>' +
+            '<div class="honor-describe">' +
+            '<p>获奖说明</p>' +
+            '<textarea placeholder="请填写"></textarea>' +
+            '</div>' +
+            '<div class="honor-img">' +
+            '<p>获奖证书</p>' +
+            '<div class="honor-img-upload">' +
+            '<input type="file" data-id="2" hidden>' +
+            '<a class="honor-img-btn" data-id="2">' +
+            '<p>' +
+            '<span class="honor-img-add">' +
+            '+' +
+            '</span>' +
+            '</p>' +
+            '<p>点击上传证书</p>' +
+            '</a>' +
+            '</div>' +
+            '<div class="honor-img-describe">' +
+            '<p>①支持格式：.jpg，.png，.jpeg，.gif，.bmp；②图片格式要求：高/宽100-1400像素；图片大小不能超过5M。</p>' +
+            '</div>' +
+            '<div></div>' +
+            '</div>' +
+            '<div class="honor-info-bar">' +
+            '<a class="honor-delete">删除</a>' +
+            '<a class="honor-edit">修改</a>' +
+            '</div>' +
+            '</div>');
+        $('.honor-item .honor-date').datetimePicker({
+            times: function () {}
+        });
+    });
+
+    /**
      * 删除新增的项目条目
      */
     $('.project-items').on('click', '.project-item-new .project-delete', function () {
-        var id = $(this).parent().parent().data('id');
         $.confirm({
             text: "确定删除该条目?",
-            onOK: function () {
-                $('.project-item[data-id="' + id + '"]').remove();
+            onOK: () => {
+                $(this).parent().parent().remove();
             }
         })
     })
@@ -320,11 +395,22 @@ $(document).ready(function () {
      * 删除新增的社团条目
      */
     $('.corporation-items').on('click', '.corporation-item-new .corporation-delete', function () {
-        var id = $(this).parent().parent().data('id');
         $.confirm({
             text: "确定删除该条目?",
-            onOK: function () {
-                $('.corporation-item[data-id="' + id + '"]').remove();
+            onOK: () => {
+                $(this).parent().parent().remove();
+            }
+        })
+    })
+
+    /**
+     * 删除新增的荣誉条目
+     */
+    $('.honor-items').on('click', '.honor-item-new .honor-delete', function () {
+        $.confirm({
+            text: "确定删除该条目?",
+            onOK: () => {
+                $(this).parent().parent().remove();
             }
         })
     })
