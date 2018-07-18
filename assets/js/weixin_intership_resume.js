@@ -58,7 +58,7 @@ $(document).ready(function () {
                 $('.honor-info-tab').addClass('tab-active');
                 break;
             case 4:
-                $('#title-name').html('简历管理·技能证书');
+                $('#title-name').html('简历管理·技能水平');
                 $('.skill-info-tab').addClass('tab-active');
                 break;
         }
@@ -219,8 +219,8 @@ $(document).ready(function () {
     /**
      * 点击荣誉图片上传按钮
      */
-    $('.honor-item').on('click', '.honor-img-btn', function () {
-        $(this).parent().children('input').eq(0).click();
+    $('.honor-items').on('click', '.honor-img-btn', function () {
+        $(this).parent().children('input').click();
     });
 
     /**
@@ -329,8 +329,7 @@ $(document).ready(function () {
      * 点击添加所获荣誉
      */
     $('#add-honor-btn').click(function () {
-        var date = new Date(); //利用date拼接虚拟id，到时候删除
-        $('.honor-items').append('<div class="honor-item honor-item-new" data-id="' + date.getMinutes() + date.getSeconds() + '">' +
+        $('.honor-items').append('<div class="honor-item honor-item-new" data-id="">' +
             '<div class="honor-info-bar">' +
             '<div class="honor-info-title">' +
             '<p>荣誉名称</p>' +
@@ -354,8 +353,8 @@ $(document).ready(function () {
             '<div class="honor-img">' +
             '<p>获奖证书</p>' +
             '<div class="honor-img-upload">' +
-            '<input type="file" data-id="2" hidden>' +
-            '<a class="honor-img-btn" data-id="2">' +
+            '<input type="file" data-role="none" hidden>' +
+            '<a class="honor-img-btn">' +
             '<p>' +
             '<span class="honor-img-add">' +
             '+' +
