@@ -365,3 +365,36 @@
     font-size: 0.5rem;
     color: #494949;
 }
+
+.editable-lables{
+    padding: 2%;
+}
+
+.editable-lable{
+    display: inline-block;
+    border: 1px solid #a7a7a7;
+    border-radius: 5px;
+    font-size: 0.6rem;
+}
+
+.editable-lable>input{
+    width: 6rem !important;
+}
+
+.edited-lables{
+    display: inline-block;
+}
+
+.edited-lable{
+    color: #ffffff;
+    display: inline-block;
+    border: 1px solid #688bfd;
+    border-radius: 5px;
+    font-size: 0.6rem;
+    background: #688bfd;
+    margin-left: 5px;
+}
+
+.edited-lable>a{
+    color: rgb(0, 26, 255);
+}

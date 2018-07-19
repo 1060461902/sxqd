@@ -27,8 +27,7 @@
                 <p>学生集中实习管理与服务平台</p>
             </div>
             <a id="exit_button">
-                <img id="search_exit" src="./assets/images/首页_exit.png" />
-                退出
+                <img id="search_exit" src="./assets/images/首页_exit.png" /> 退出
             </a>
         </div>
 
@@ -94,7 +93,7 @@
     </div>
     <div class="page_body">
         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
-
+            <!-- carousel-model -->
         </div>
         <div class="bottom-part">
             <nav class="navbar navbar-default" role="navigation">
@@ -110,89 +109,18 @@
                 </ul>
             </nav>
             <div class="news-container">
-                <p>
-                    <i class="fa fa-th"></i>
-                    <a href="">
-                        <span class="news-title">我校学子在浙江省第六届大学生统计调查方案设计大赛中再创佳绩</span>
-                        <span class="news-time">（2017.12.08）</span>
-                    </a>
-                </p>
-                <p>
-                    <i class="fa fa-th"></i>
-                    <a href="">
-                        <span class="news-title">我校学子在浙江省第六届大学生统计调查方案设计大赛中再创佳绩</span>
-                        <span class="news-time">（2017.12.08）</span>
-                    </a>
-                </p>
-                <p>
-                    <i class="fa fa-th"></i>
-                    <a href="">
-                        <span class="news-title">我校学子在浙江省第六届大学生统计调查方案设计大赛中再创佳绩</span>
-                        <span class="news-time">（2017.12.08）</span>
-                    </a>
-                </p>
+                <div class="news-list">
+                    <!-- news-model -->
+                </div>
                 <div class="news-more">
-                    <a>更多<img src="./assets/images/more.gif"></a>
+                    <a>更多
+                        <img src="./assets/images/more.gif">
+                    </a>
                 </div>
             </div>
             <div class="post-container">
                 <div class="post-item-list">
-                    <a>
-                        <div class="post-name-item">
-                            <div class="post-up">
-                                <p>.Net工程师[17:32发布]
-                                    <br/>1人/11.17~12.17</p>
-                            </div>
-                            <hr/>
-                            <div class="post-down">
-                                <img src="./assets/images/u153.jpg" />
-                                <p>XXXXXXX公司
-                                    <br/>IT 互联网/杭州</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a>
-                        <div class="post-name-item">
-                            <div class="post-up">
-                                <p>.Net工程师[17:32发布]
-                                    <br/>1人/11.17~12.17</p>
-                            </div>
-                            <hr/>
-                            <div class="post-down">
-                                <img src="./assets/images/u153.jpg" />
-                                <p>XXXXXXX公司
-                                    <br/>IT 互联网/杭州</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a>
-                        <div class="post-name-item">
-                            <div class="post-up">
-                                <p>.Net工程师[17:32发布]
-                                    <br/>1人/11.17~12.17</p>
-                            </div>
-                            <hr/>
-                            <div class="post-down">
-                                <img src="./assets/images/u153.jpg" />
-                                <p>XXXXXXX公司
-                                    <br/>IT 互联网/杭州</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a>
-                        <div class="post-name-item">
-                            <div class="post-up">
-                                <p>.Net工程师[17:32发布]
-                                    <br/>1人/11.17~12.17</p>
-                            </div>
-                            <hr/>
-                            <div class="post-down">
-                                <img src="./assets/images/u153.jpg" />
-                                <p>XXXXXXX公司
-                                    <br/>IT 互联网/杭州</p>
-                            </div>
-                        </div>
-                    </a>
+                    <!-- post-model -->
                 </div>
                 <div class="page-limit">
                     <ul id="pageLimit"></ul>
@@ -212,26 +140,57 @@
             <img id="floor_door" src="./assets/images/u3050.gif" />
         </div>
     </div>
-    
+
 
     <!-- 轮播图 -->
     <script id="carousel-model" type="text/x-handlebars-template">
         <ol class="carousel-indicators">
             {{#each this}}
-                <li data-target="#myCarousel" data-slide-to="{{@index}}" class="{{active @index}}"></li>
+            <li data-target="#myCarousel" data-slide-to="{{@index}}" class="{{active @index}}"></li>
             {{/each}}
         </ol>
         <div class="carousel-inner">
             {{#each this}}
-                <div class="item {{active @index}}">
-                    <img src="{{img_laod}}"/>
-                    <div class="carousel-caption">
-                        <span>{{title}}</span>
-                        <p>{{time}}</p>
-                    </div>
+            <div class="item {{active @index}}" data-id="{{id}}">
+                <img src="{{image_url}}" />
+                <div class="carousel-caption">
+                    <span>{{title}}</span>
+                    <p>{{starttime}}</p>
                 </div>
+            </div>
             {{/each}}
         </div>
+    </script>
+    <!-- 企业招聘 -->
+    <script id="post-model" type="text/x-handlebars-template">
+        {{#each this}}
+        <a data-id="{{id}}">
+            <div class="post-name-item">
+                <div class="post-up">
+                    <p>{{post}}[{{releaseTime}}发布]
+                        <br/>{{currentNum}}人/{{postTime}}</p>
+                </div>
+                <hr/>
+                <div class="post-down">
+                    <img src="{{logo}}" />
+                    <p>{{companyName}}
+                        <br/>{{companyType}}/{{address}}</p>
+                </div>
+            </div>
+        </a>
+        {{/each}}
+    </script>
+    <!-- 新闻列表 -->
+    <script id="news-model" type="text/x-handlebars-template">
+        {{#each this}}
+        <p data-id="{{id}}">
+            <i class="fa fa-th"></i>
+            <a href="./news.html?id={{id}}">
+                <span class="news-title">{{title}}</span>
+                <span class="news-time">（{{starttime}}）</span>
+            </a>
+        </p>
+        {{/each}}
     </script>
 
     <!-- js -->

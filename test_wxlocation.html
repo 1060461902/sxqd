@@ -14,7 +14,7 @@
         $.ajax({
             url:"",
             type:"POST",
-            data:{},
+            data:{page_url:location.href},
             dataType:"json",
             success:function (data) {
                 //微信验证

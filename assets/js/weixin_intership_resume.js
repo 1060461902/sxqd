@@ -6,7 +6,7 @@ $(document).ready(function () {
      */
     $('#title-back').click(function () {
         $.confirm({
-            text: '如确认保存，点击确定退出页面',
+            text: '如您已确认保存，点击确定退出页面',
             onOK: function () {
                 window.location.href = './weixin_intership_index.html?tab=3';
             }
@@ -413,4 +413,49 @@ $(document).ready(function () {
             }
         })
     })
+
+    /**
+     * 阻止editable-lable点击事件的派发
+     */
+    $('.editable-lable').click(function (e) {
+        e.stopPropagation();
+    });
+
+    /**
+     * 点击skill-info-tab空白处
+     */
+    $('body').click(function () {
+        if ($('.skill-info-tab').is('.tab-active') && $('.editable-lable>input').val() !== '' && $('.editable-lable>input').val() !== null) {
+            var skill = $('.editable-lable>input').val();
+            $('.edited-lables').append('<div class="edited-lable">' +
+                '<span>' + skill + '</span>' +
+                '<a>X</a>' +
+                '</div>');
+            $('.editable-lable>input').val('')
+            if ($('.edited-lables').children('.edited-lable').length >= 10) {
+                $('.editable-lable').css({
+                    'display': 'none'
+                });
+            }
+        }
+    });
+
+    /**
+     * 点击edited-lable的关闭按钮
+     */
+    $('.edited-lables').on('click','.edited-lable>a',function(){
+        $(this).parent().remove();
+        if($('.edited-lables').children('.edited-lable').length < 10){
+            $('.editable-lable').css({
+                'display': 'inline-block'
+            });
+        }
+    });
+
+    /**
+     * 
+     */
+    $('.editable-lable>a').click(function () {
+        $('.editable-lable>input').val('')
+    });
 });

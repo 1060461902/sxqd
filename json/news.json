@@ -1,0 +1,9 @@
+{
+	"code": 200,
+	"msg": null,
+	"data": {
+		"img": "images/lianjia.jpg",
+		"details": "这里是文章内容",
+		"title": "多家外媒报道【即刻】的一个小产品"
+	}
+}
