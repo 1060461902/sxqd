@@ -8,6 +8,48 @@ $(document).ready(function () {
             setAlert("删除成功");
         })
     });*/
+    /**
+     * 访问页面请求第一页
+     */
+    var option = getBASEGETAJAX();
+    option.url = './json/guidance_message.json';
+    option.data = {
+        pageNum: 1
+    };
+    option.success = function (data) {
+        if (data.code !== 200) {
+            alert(data.msg);
+            return;
+        } else {
+            $('.table-v').handlebars($('#guidance-message-model'), data.data.messages);
+            /**
+             * 分页
+             */
+            pageLimit(1, data.data.totalPage, 5, function (page) {
+                var option = getBASEGETAJAX();
+                option.url = './json/guidance_message.json';
+                option.data = {
+                    pageNum: page
+                };
+                option.success = function (data) {
+                    if (data.code !== 200) {
+                        alert(data.msg);
+                        return;
+                    } else {
+                        $('.table-v').handlebars($('#guidance-message-model'), data.data.messages);
+                    }
+                }
+                option.error = function (res) {
+                    console.log(res)
+                }
+                $.ajax(option);
+            });
+        }
+    }
+    option.error = function (res) {
+        console.log(res)
+    }
+    $.ajax(option);
 });
 
 function answer_window(data) {

@@ -14,6 +14,13 @@ var BASEPOSTAJAX = {
     traditional:true,
     data:{}
 }
+
+var BASEDELETEAJAX = {
+    dataType:"json",
+    type:"DELETE",
+    traditional:true,
+    data:{}
+}
 /**
  * 获得基础GET method ajax对象
  * @return object [基础GET method ajax对象]
@@ -29,6 +36,15 @@ function getBASEGETAJAX(){
  */
 function getBASEPOSTAJAX(){
     var newObject = $.extend(true,{},BASEPOSTAJAX);
+    return newObject;
+}
+
+/**
+ * 获得基础DELETE method ajax对象
+ * @return object [基础DELETE method ajax对象]
+ */
+function getBASEDELETEAJAX(){
+    var newObject = $.extend(true,{},BASEDELETEAJAX);
     return newObject;
 }
 

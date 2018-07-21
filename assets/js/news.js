@@ -12,6 +12,8 @@ $(document).ready(function () {
             }else{
                 $('.news-title h2').html(data.data.title);
                 $('.news-content-body').html(data.data.details);
+                $('#company-name').html(data.data.companyName);
+                $('#publish-time').html(data.data.publishTime);
             }
         }
         option.error = function (res) {

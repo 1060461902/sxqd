@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,182 +15,201 @@
     <link rel="stylesheet" href="./assets/css/title_model.css">
     <link rel="stylesheet" href="./assets/css/job_collection.css">
 </head>
+
 <body>
     <div class="alert-model"></div>
     <div class="page_head">
-    <div class="logo_bar">
-        <div class="logo">
-            <a href="#home">
-                <img src="./assets/images/logo.png" />
+        <div class="logo_bar">
+            <div class="logo">
+                <a href="#home">
+                    <img src="./assets/images/logo.png" />
+                </a>
+            </div>
+            <div class="page_title">
+                <p>学生集中实习管理与服务平台</p>
+            </div>
+            <a id="exit_button">
+                <img id="search_exit" src="./assets/images/首页_exit.png" /> 退出
             </a>
         </div>
-        <div class="page_title">
-            <p>学生集中实习管理与服务平台</p>
-        </div>
-        <a id="exit_button">
-            <img id="search_exit" src="./assets/images/首页_exit.png" />
-            退出
-        </a>
+        <nav class="navbar navbar-inner nav-up" role="navigation">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="./home_page.html">
+                        <img src="./assets/images/首页_home.png" />
+                        <p>首页</p>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a>
+                        <img src="./assets/images/首页_computer.png" />
+                        <p>实习管理</p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="./Internship_recruitment.html">实习招聘</a>
+                        </li>
+                        <li>
+                            <a href="./my_resume.html">求职之路</a>
+                        </li>
+                        <li>
+                            <a href="./job_collection.html">岗位收藏</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a>
+                        <img src="./assets/images/首页_funnel.png" />
+                        <p>过程考核</p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="./guidance_message.html">指导消息</a>
+                        </li>
+                        <li>
+                            <a href="./weekly_report.html">实习周报</a>
+                        </li>
+                        <li>
+                            <a href="./practice_summary.html">实习小结</a>
+                        </li>
+                        <li>
+                            <a href="./practice_report.html">实习报告</a>
+                        </li>
+                        <li>
+                            <a href="./attendance_record.html">考勤情况</a>
+                        </li>
+                        <li>
+                            <a href="./internship_score.html">实习成绩</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="./student_set.html">
+                        <img src="./assets/images/首页_gear.png" />
+                        <p>设置</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
-    <nav class="navbar navbar-inner nav-up" role="navigation">
-        <ul class="nav navbar-nav">
-            <li>
-                <a href="./home_page.html">
-                    <img src="./assets/images/首页_home.png" />
-                    <p>首页</p>
-                </a>
-            </li>
-            <li class="dropdown">
-                <a>
-                    <img src="./assets/images/首页_computer.png" />
-                    <p>实习管理</p>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="./Internship_recruitment.html">实习招聘</a>
-                    </li>
-                    <li>
-                        <a href="./my_resume.html">求职之路</a>
-                    </li>
-                    <li>
-                        <a href="./job_collection.html">岗位收藏</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a>
-                    <img src="./assets/images/首页_funnel.png" />
-                    <p>过程考核</p>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="./guidance_message.html">指导消息</a>
-                    </li>
-                    <li>
-                        <a href="./weekly_report.html">实习周报</a>
-                    </li>
-                    <li>
-                        <a href="./practice_summary.html">实习小结</a>
-                    </li>
-                    <li>
-                        <a href="./practice_report.html">实习报告</a>
-                    </li>
-                    <li>
-                        <a href="./attendance_record.html">考勤情况</a>
-                    </li>
-                    <li>
-                        <a href="./internship_score.html">实习成绩</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="./student_set.html">
-                    <img src="./assets/images/首页_gear.png" />
-                    <p>设置</p>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
     <div class="page_body">
-    <div class="entity-body">
-        <div class="top-bar">
-            <a>实习管理</a>
-            &gt;
-            <a>岗位收藏列表</a>
+        <div class="entity-body">
+            <div class="top-bar">
+                <a>实习管理</a>
+                &gt;
+                <a>岗位收藏列表</a>
+            </div>
+            <hr/>
+            <div class="info-body">
+                <div class="info-top">
+                    <span>我的岗位收藏列表</span>
+                    <select class="company-type-select">
+                        <option value="0">企业类型</option>
+                        <option value="">IT/互联网</option>
+                        <option value="">政府组织/NGO</option>
+                        <option value="">机械制造</option>
+                        <option value="">电子电器</option>
+                        <option value="">市场商务</option>
+                        <option value="">财经法务</option>
+                        <option value="">传媒设计</option>
+                        <option value="">餐饮旅游</option>
+                        <option value="">医疗化工</option>
+                        <option value="">教育翻译</option>
+                        <option value="">地产物业</option>
+                        <option value="">传媒设计</option>
+                        <option value="">消费品</option>
+                        <option value="">人事行政</option>
+                        <option value="">其他</option>
+                    </select>
+                    <select class="sort-select">
+                        <option value="0">默认排序</option>
+                        <option value="1">收藏时间A-Z</option>
+                        <option value="2">收藏时间Z-A</option>
+                    </select>
+                </div>
+                <div class="list-group-v">
+                    <ul class="list-group">
+                        <!-- <li class="list-group-item">
+                            <div>
+                                <div class="left-part">
+                                    <p class="post-name">后端工程师（Node.js方向）</p>
+                                    <p class="company-name">即刻</p>
+                                    <p class="company-type">IT/互联网</p>
+                                </div>
+                                <div class="right-part">
+                                    <p>
+                                        <span>收藏时间</span>
+                                        <span>&nbsp;&nbsp;&nbsp;</span>
+                                        <span>2017.12.11 20:25</span>
+                                    </p>
+                                    <p>
+                                        <span>地理位置</span>
+                                        <img src="./assets/images/location_point.png">
+                                        <span>上海杨浦区政学路51号</span>
+                                    </p>
+                                </div>
+                                <div class="img-part">
+                                    <img src="./assets/images/jk.png">
+                                </div>
+                            </div>
+                            <div class="item-bottom">
+                                <button>取消关注</button>
+                                <button>投简历</button>
+                            </div>
+                        </li> -->
+                    </ul>
+                </div>
+                <div class="page-limit">
+                    <ul id="pageLimit"></ul>
+                </div>
+            </div>
         </div>
-        <hr/>
-        <div class="info-body">
-            <div class="info-top">
-                <span>我的岗位收藏列表</span>
-                <select class="company-type-select">
-                    <option value="0">企业类型</option>
-                    <option value="">IT/互联网</option>
-                    <option value="">政府组织/NGO</option>
-                    <option value="">机械制造</option>
-                    <option value="">电子电器</option>
-                    <option value="">市场商务</option>
-                    <option value="">财经法务</option>
-                    <option value="">传媒设计</option>
-                    <option value="">餐饮旅游</option>
-                    <option value="">医疗化工</option>
-                    <option value="">教育翻译</option>
-                    <option value="">地产物业</option>
-                    <option value="">传媒设计</option>
-                    <option value="">消费品</option>
-                    <option value="">人事行政</option>
-                    <option value="">其他</option>
-                </select>
-                <select class="sort-select">
-                    <option value="0">默认排序</option>
-                    <option value="1">收藏时间A-Z</option>
-                    <option value="2">收藏时间Z-A</option>
-                </select>
+        <div class="floor">
+            <div class="floor-top">
+                <img id="floor-logo" src="./assets/images/logo-sm.gif" />
+                <p id="bah">浙ICP备用111111号　浙公网安备33011802号</p>
             </div>
-            <div class="list-group-v">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <div>
-                            <div class="left-part">
-                                <p class="post-name">后端工程师（Node.js方向）</p>
-                                <p class="company-name">即刻</p>
-                                <p class="company-type">IT/互联网</p>
-                            </div>
-                            <div class="right-part">
-                                <p><span>收藏时间</span><span>&nbsp;&nbsp;&nbsp;</span><span>2017.12.11  20:25</span></p>
-                                <p><span>地理位置</span><img src="./assets/images/location_point.png"><span>上海杨浦区政学路51号</span></p>
-                            </div>
-                            <div class="img-part">
-                                <img src="./assets/images/jk.png">
-                            </div>
-                        </div>
-                        <div class="item-bottom">
-                            <button>取消关注</button>
-                            <!--<button>咨询</button>-->
-                            <button>投简历</button>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div>
-                            <div class="left-part">
-                                <p class="post-name">后端工程师（Node.js方向）</p>
-                                <p class="company-name">即刻</p>
-                                <p class="company-type">IT/互联网</p>
-                            </div>
-                            <div class="right-part">
-                                <p><span>收藏时间</span><span>&nbsp;&nbsp;&nbsp;</span><span>2017.12.11  20:25</span></p>
-                                <p><span>地理位置</span><img src="./assets/images/location_point.png"><span>上海杨浦区政学路51号</span></p>
-                            </div>
-                            <div class="img-part">
-                                <img src="./assets/images/jk.png">
-                            </div>
-                        </div>
-                        <div class="item-bottom">
-                            <button>取消关注</button>
-                            <!--<button>咨询</button>-->
-                            <button>投简历</button>
-                        </div>
-                    </li>
-                </ul>
+            <div class="floor-down">
+                <p id="#floor-down-left">地址：浙江省杭州市下沙高教园区学正街18号　邮编：310018
+                    <span>电话：（86）571-28877777　传真：（86）571-28877222</span>
+                </p>
             </div>
-            <div class="page-limit">
-                <ul id="pageLimit"></ul>
-            </div>
+            <img id="floor_door" src="./assets/images/u3050.gif" />
         </div>
     </div>
-    <div class="floor">
-        <div class="floor-top">
-            <img id="floor-logo" src="./assets/images/logo-sm.gif" />
-            <p id="bah">浙ICP备用111111号　浙公网安备33011802号</p>
-        </div>
-        <div class="floor-down">
-            <p id="#floor-down-left">地址：浙江省杭州市下沙高教园区学正街18号　邮编：310018
-                <span>电话：（86）571-28877777　传真：（86）571-28877222</span>
-            </p>
-        </div>
-        <img id="floor_door" src="./assets/images/u3050.gif" />
-    </div>
-</div>
+    <script id="job-collection-model" type="text/x-handlebars-template">
+        {{#each this}}
+        <li class="list-group-item" data-id="{{id}}">
+            <div>
+                <div class="left-part">
+                    <p class="post-name">{{post}}</p>
+                    <p class="company-name">{{companyName}}</p>
+                    <p class="company-type">{{companyType}}</p>
+                </div>
+                <div class="right-part">
+                    <p>
+                        <span>收藏时间</span>
+                        <span>&nbsp;&nbsp;&nbsp;</span>
+                        <span>{{releaseTime}}</span>
+                    </p>
+                    <p>
+                        <span>地理位置</span>
+                        <img src="./assets/images/location_point.png">
+                        <span>{{address}}</span>
+                    </p>
+                </div>
+                <div class="img-part">
+                    <img src="{{logo}}">
+                </div>
+            </div>
+            <div class="item-bottom">
+                <button data-id="{{id}}" class="unfocus-btn">取消关注</button>
+                <!--<button>咨询</button>-->
+                <button  data-id="{{id}}" class="send-btn">投简历</button>
+            </div>
+        </li>
+        {{/each}}
+    </script>
     <!-- js -->
     <!--[if lt IE 9]>
     <script type="text/javascript" src="./assets/js/html5shiv.min.js"></script>
@@ -197,9 +217,11 @@
     <![endif]-->
     <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-jquery.js"></script>
     <script type="text/javascript" src="./assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="./assets/js/bootstrap-paginator.min.js"></script>
     <script type="text/javascript" src="./assets/js/model.js"></script>
     <script type="text/javascript" src="./assets/js/job_collection.js"></script>
 </body>
+
 </html>

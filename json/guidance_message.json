@@ -1,0 +1,28 @@
+{
+	"code": 200,
+	"msg": null,
+	"data": {
+		"messages": [
+			{
+				"teacherName": "蒋杭森",
+				"createTime": "2018-9-10",
+				"id": 1,
+				"content": "asdfasdf"
+			},
+			{
+				"teacherName": "蒋杭森",
+				"createTime": "2018-9-10",
+				"id": 2,
+				"content": "asdfasdf"
+			},
+			{
+				"teacherName": "蒋杭森",
+				"createTime": "2018-9-10",
+				"id": 3,
+				"content": "asdfasdf"
+			}
+		],
+        "currentPage": 1,
+        "totalPage": 3
+	}
+}

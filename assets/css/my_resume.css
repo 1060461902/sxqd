@@ -41,12 +41,12 @@
 }
 
 .logo-part{
-    width: 10%;
+    width: 15%;
 }
 
 .logo-part img{
-    height:100px;
-    width: 100px;
+    height:60px;
+    width: 60px;
 }
 
 .logo-part img{
@@ -62,7 +62,7 @@
 .company-name{
     margin: auto;
     font-weight: bold;
-    font-size: 1vw;
+    font-size: 10px;
 }
 
 .post-name{
