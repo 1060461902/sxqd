@@ -14,7 +14,8 @@
 				"logo": "./assets/images/jk.png",
 				"startTime": "2017-02-15",
 				"currentNum": 2,
-				"endTime": "2017-03-25"
+				"endTime": "2017-03-25",
+				"companyId":23
 			},
 			{
                 "id":15,
@@ -26,7 +27,8 @@
 				"logo": "./assets/images/jk.png",
 				"startTime": "2017-02-15",
 				"currentNum": 2,
-				"endTime": "2017-03-25"
+				"endTime": "2017-03-25",
+				"companyId":23
 			},
 			{
                 "id":18,
@@ -38,7 +40,8 @@
 				"logo": "./assets/images/jk.png",
 				"startTime": "2017-02-15",
 				"currentNum": 2,
-				"endTime": "2017-03-25"
+				"endTime": "2017-03-25",
+				"companyId":23
 			}
 		],
 		"totalPage": 8,

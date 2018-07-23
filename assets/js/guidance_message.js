@@ -63,11 +63,32 @@ function answer_window(data) {
 function close_window() {
     $('.answer-window').css({
         'display':'none',
-    })
+    });
+    $('#answer-content').val('');
 }
 
 function answer_it() {
-    console.log(info_id);
-    setAlert("回复成功");
-    $('tr[data-id="'+info_id+'"] .is-answered').html("已回复")
+    var answer_content = $('#answer-content').val();
+    if(answer_content !=null && answer_content != ''){
+        var option = getBASEGETAJAX();
+        option.url = './json/reply_info.json';
+        option.data = {
+            "id": info_id,
+            "content": answer_content
+        }
+        option.success = function (data) {
+            if(data.code === 200){
+                setAlert('回复成功');
+                // $('tr[data-id="'+info_id+'"] .is-answered').html("已回复");
+            }else{
+                alert("回复发生错误:"+data.msg);
+            }
+        }
+        option.error = function (res) {
+            console.log(res)
+        }
+        $.ajax(option);
+    }else{
+        setAlert("请输入回复内容！");
+    }
 }

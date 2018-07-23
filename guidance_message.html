@@ -117,7 +117,7 @@
                         <button onclick="close_window()">X</button>
                     </div>
                     <div>
-                        <textarea autofocus></textarea>
+                        <textarea autofocus id="answer-content"></textarea>
                     </div>
                     <div class="answer-send">
                         <button onclick="answer_it(this)">回复</button>
@@ -170,7 +170,7 @@
             <td>{{createTime}}</td>
             <td>{{teacherName}}</td>
             <td>
-                <a href="./message_details.html">{{content}}</a>
+                <a href="./message_details.html?id={{id}}">{{content}}</a>
             </td>
             <td>
                 <button class="answer-btn" onclick="answer_window(this)">回复</button>

@@ -193,7 +193,7 @@
     <script id="post-item-model" type="text/x-handlebars-template">
         {{#each this}}
         <li class="list-group-item post-item" data-id="{{id}}">
-            <a href="./job_profile.html" tooltip="点击查看岗位，右侧查看企业">
+            <a href="./job_profile.html?id={{id}}" tooltip="点击查看岗位，右侧查看企业">
                 <div class="post-item-left">
                     <p>
                         <span class="post-name">{{post}}</span>
@@ -212,7 +212,7 @@
                     </p>
                 </div>
             </a>
-            <a href="./company_profile.html">
+            <a href="./company_profile.html?id={{companyId}}">
                 <div class="post-item-mid">
                     <p>{{companyName}}</p>
                     <p>{{companyType}}</p>

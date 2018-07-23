@@ -205,7 +205,11 @@
             <div class="item-bottom">
                 <button data-id="{{id}}" class="unfocus-btn">取消关注</button>
                 <!--<button>咨询</button>-->
+                {{#if_bool sendflag}}
+                <button  data-id="{{id}}" class="sent-btn">已投递</button>
+                {{else}}
                 <button  data-id="{{id}}" class="send-btn">投简历</button>
+                {{/if_bool}}
             </div>
         </li>
         {{/each}}

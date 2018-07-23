@@ -12,7 +12,16 @@ $(document).ready(function () {
             alert(data.msg);
             return;
         } else {
-            $('.list-group').handlebars($('#job-collection-model'), data.data.data);
+            $('.list-group').handlebars($('#job-collection-model'), data.data.data,{
+                name:'if_bool',
+                callback:function (flag,options) {
+                    if(flag === 1){
+                        return options.fn(this);
+                    }else if(flag === 0){
+                        return options.inverse(this);
+                    }
+                }
+            });
             /**
              * 分页
              */
@@ -27,7 +36,16 @@ $(document).ready(function () {
                         alert(data.msg);
                         return;
                     } else {
-                        $('.list-group').handlebars($('#job-collection-model'), data.data.data);
+                        $('.list-group').handlebars($('#job-collection-model'), data.data.data,{
+                            name:'if_bool',
+                            callback:function (flag,options) {
+                                if(flag === 1){
+                                    return options.fn(this);
+                                }else if(flag === 0){
+                                    return options.inverse(this);
+                                }
+                            }
+                        });
                     }
                 }
                 option.error = function (res) {
@@ -81,6 +99,10 @@ $(document).ready(function () {
                 alert(data.msg);
                 return;
             } else {
+                var tag = $('.send-btn[data-id="'+id+'"]');
+                tag.html('已投递');
+                tag.removeClass('send-btn');
+                tag.addClass('sent-btn');
                 setAlert("简历已投递");
             }
         }

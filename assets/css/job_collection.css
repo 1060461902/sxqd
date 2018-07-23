@@ -49,6 +49,15 @@
     margin: 5px;
 }
 
+.sent-btn{
+    outline: none;
+    background: #2696ff !important;
+    color: white !important;
+    border: 1px solid #2696ff !important;
+    border-radius: 5px;
+    margin: 5px;
+}
+
 .left-part,
 .right-part,
 .img-part{

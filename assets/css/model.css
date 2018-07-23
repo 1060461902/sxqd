@@ -211,7 +211,7 @@
 .confirm-modal {
     width: 50%;
     position: fixed;
-    z-index: 999;
+    z-index: 1000;
     display: none;
     background: #fff;
     left: 0;

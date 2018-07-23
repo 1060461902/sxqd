@@ -1,0 +1,30 @@
+{
+    "_comment":"请求考情情况 /api/attendances/record",
+	"code": 200,
+	"msg": null,
+	"data": {
+		"attendances": [
+			{
+				"id": 1,
+				"studentId": 1,
+				"date": "2017-2-3",
+				"startTime": "1:30",
+				"endTime": "2:30"
+			},
+			{
+				"id": 1,
+				"studentId": 1,
+				"date": "2017-2-3",
+				"startTime": "1:30",
+				"endTime": "2:30"
+			},
+			{
+				"id": 1,
+				"studentId": 1,
+				"date": "2017-2-3",
+				"startTime": "1:30",
+				"endTime": "2:30"
+			}
+		]
+	}
+}

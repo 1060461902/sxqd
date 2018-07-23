@@ -1,0 +1,12 @@
+{
+    "_comment":"请求考勤月份筛选条件 /api/attendances/pattern",
+	"code": 200,
+	"msg": null,
+	"data": {
+		"patterns": [
+			"2018年1月",
+			"2018年2月",
+			"2018年3月"
+		]
+	}
+}

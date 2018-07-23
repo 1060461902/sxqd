@@ -1,0 +1,31 @@
+{
+    "_comment":"查看导师信息详情 /api/messages/details",
+	"code": 200,
+	"msg": null,
+	"data": {
+		"teacherName": "蒋杭森",
+		"replies": [
+			{
+				"name": "宋子潇",
+                "content": "收到",
+                "logo":"./assets/images/head_img.png"
+			},
+			{
+				"name": "宋子潇",
+                "content": "收到",
+                "logo":"./assets/images/head_img.png"
+			},
+			{
+				"name": "宋子潇",
+                "content": "收到",
+                "logo":"./assets/images/head_img.png"
+			}
+		],
+		"students": [
+			"小陈",
+			"小李",
+			"小红"
+		],
+		"msgcontent": "asdfasdf"
+	}
+}

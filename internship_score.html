@@ -108,32 +108,32 @@
             <div class="score-body">
                 <div class="score-title">
                     <span>实习成绩</span>
-                    <span class="main-score-level">A</span>
+                    <span class="main-score-level"></span>
                     <span>级</span>
                 </div>
                 <div class="teacher-score">
-                    <p class="part-title">老师评分(40%)</p>
+                    <p class="part-title">老师评分(<span id="tw-teacherWeight"></span>%)</p>
                     <div class="teacher-score-top">
                         <div class="teacher-score-main">
                             <div class="teacher-score-main-top">
                                 <div class="teacher-score-main-part score-bord">
-                                    <p>周报(30%)</p>
-                                    <p class="sub-score">A</p>
+                                    <p>周报(<span id="tw-tWeekReport"></span>%)</p>
+                                    <p class="sub-score" id="t-week-report"></p>
                                     <img src="./assets/images/u5379.png">
                                 </div>
                                 <div class="teacher-score-main-part score-bord center-part">
-                                    <p>实习小结(35%)</p>
-                                    <p class="sub-score">B</p>
+                                    <p>实习小结(<span id="tw-tSummary"></span>%)</p>
+                                    <p class="sub-score" id="t-summary"></p>
                                     <img src="./assets/images/u5379.png">
                                 </div>
                                 <div class="teacher-score-main-part score-bord">
-                                    <p>实习报告(35%)</p>
-                                    <p class="sub-score">B</p>
+                                    <p>实习报告(<span id="tw-tFinalReport"></span>%)</p>
+                                    <p class="sub-score" id="t-final-report"></p>
                                     <img src="./assets/images/u5379.png">
                                 </div>
                             </div>
                             <div class="teacher-score-main-bottom score-bord">
-                                <span>加权分数等级</span><span class="sub-score inline-score">B</span>
+                                <span>加权分数等级</span><span class="sub-score inline-score" id="t-multi-score"></span>
                             </div>
                         </div>
                         <div class="teacher-score-plus">
@@ -141,30 +141,30 @@
                         </div>
                         <div class="teacher-score-additional score-bord">
                             <p>附加分</p>
-                            <p class="sub-score">5.0</p>
+                            <p class="sub-score" id="addtional-score"></p>
                         </div>
                     </div>
                     <div class="teacher-general-comment score-bord">
-                        <span>老师总评</span><span class="sub-score inline-score">A</span>
+                        <span>老师总评</span><span class="sub-score inline-score" id="t-score"></span>
                     </div>
                 </div>
                 <div class="company-score">
-                    <p class="part-title">企业评分(60%)</p>
+                    <p class="part-title">企业评分(<span id="cw-companyWeight"></span>%)</p>
                     <div class="company-score-top">
                         <div class="company-score-main-part score-bord">
-                            <p>周报(60%)</p>
-                            <p class="sub-score">A</p>
+                            <p>周报(<span id="cw-cWeekReport"></span>%)</p>
+                            <p class="sub-score" id="c-week-report"></p>
                             <img src="./assets/images/u5379.png">
                         </div>
                         <div class="center-part"></div>
                         <div class="company-score-main-part score-bord">
-                            <p>考勤(40%)</p>
-                            <p class="sub-score">A</p>
+                            <p>考勤(<span id="cw-cAttendance"></span>%)</p>
+                            <p class="sub-score" id="c-attendance"></p>
                             <img src="./assets/images/u5379.png">
                         </div>
                     </div>
                     <div class="company-general-comment score-bord">
-                        <span>企业总评</span><span class="sub-score inline-score">A</span>
+                        <span>企业总评</span><span class="sub-score inline-score" id="c-score"></span>
                     </div>
                 </div>
             </div>
@@ -189,7 +189,6 @@
     <script type="text/javascript" src="./assets/js/respond.js"></script>
     <![endif]-->
     <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
     <script type="text/javascript" src="./assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="./assets/js/bootstrap-paginator.min.js"></script>
     <script type="text/javascript" src="./assets/js/model.js"></script>
