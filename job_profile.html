@@ -102,8 +102,39 @@
                 <a>实习招聘信息</a>
             </div>
             <hr/>
-            <div id="info-v">
-               <!-- info-model -->
+            <div class="info-top">
+                <div class="info-top-left job-shadow">
+                    <div class="bord-top">
+                        <img src="./assets/images/job_p_letter.png" alt="">
+                        <span>招聘信息</span>
+                        <img id="collect_job" src="assets/images/collect_star.png" />
+                        <hr/>
+                    </div>
+                    <div class="post-info">
+                        <!-- recruitment-model -->
+                    </div>
+                </div>
+                <div class="info-top-right job-shadow">
+                    <div class="bord-top">
+                        <img src="./assets/images/job_p_papper.png" alt="">
+                        <span>公司概况</span>
+                        <hr/>
+                    </div>
+                    <div class="company-info">
+                        <!-- company-model -->
+                    </div>
+                </div>
+
+                <div class="job-profile-body job-shadow">
+                    <div class="bord-top">
+                        <img src="./assets/images/job_p_bag.png" alt="">
+                        <span>工作描述</span>
+                        <hr/>
+                    </div>
+                    <div class="job-discription">
+
+                    </div>
+                </div>
             </div>
             <div class="ask-bord job-shadow">
                 <div class="bord-top">
@@ -114,20 +145,6 @@
                 <div class="list-group-v">
                     <ul class="list-group ask-list">
                         <!-- answer-item-model -->
-                        <!-- <li class="list-group-item ask-item">
-                            <a href="">
-                                <div class="head-img">
-                                    <img src="./assets/images/head_img.png" />
-                                </div>
-                                <div class="ask-body">
-                                    <p>徐俊聪</p>
-                                    <p>这是问题</p>
-                                </div>
-                                <div class="ask-time">
-                                    <span>2018/05/18</span>
-                                </div>
-                            </a>
-                        </li> -->
                     </ul>
                 </div>
                 <div class="question-send-bar">
@@ -138,7 +155,7 @@
                 </div>
             </div>
             <div class="sub-botton-bar">
-                <button>投简历</button>
+                <button class="send-btn">投简历</button>
             </div>
         </div>
         <div class="floor">
@@ -172,95 +189,59 @@
         </li>
         {{/each}}
     </script>
-    <script id="info-model" type="x-handlebars-template">
-        <div class="info-top">
-            <div class="info-top-left job-shadow">
-                <div class="bord-top">
-                    <img src="./assets/images/job_p_letter.png" alt="">
-                    <span>招聘信息</span>
-                    <img id="collect_job" src="assets/images/collect_star.png" />
-                    <hr/>
-                </div>
-                <div class="post-info">
-                    {{#with recruitment}}
-                    <p>
-                        <span>招聘岗位</span>
-                        <span>&nbsp;&nbsp;&nbsp;</span>
-                        <span id="post-name">{{post}}</span>
-                    </p>
-                    <p class="post-position">
-                        <span>地理位置</span>
-                        <img src="./assets/images/location_point.png" alt=":" />
-                        <span>{{address}}</span>
-                    </p>
-                    <p class="post-position">
-                        <span>招聘人数</span>
-                        <img src="./assets/images/person.png" alt=":" />
-                        <span>{{currentNumber}}人</span>
-                    </p>
-                    <p class="post-ef-time">
-                        <span>招聘时段</span>
-                        <span>&nbsp;&nbsp;&nbsp;</span>
-                        <span>{{startTime}}~{{endTime}}</span>
-                    </p>
-                    <p class="post-ef-time">
-                        <span>技能要求</span>
-                        <span>&nbsp;&nbsp;&nbsp;</span>
-                        {{{skills skillRequire}}}
-                    </p>
-                    {{/with}}
+    <script id="recruitment-model" type="x-handlebars-template">
+        <p>
+            <span>招聘岗位</span>
+            <span>&nbsp;&nbsp;&nbsp;</span>
+            <span id="post-name">{{post}}</span>
+        </p>
+        <p class="post-position">
+            <span>地理位置</span>
+            <img src="./assets/images/location_point.png" alt=":" />
+            <span>{{address}}</span>
+        </p>
+        <p class="post-position">
+            <span>招聘人数</span>
+            <img src="./assets/images/person.png" alt=":" />
+            <span>{{currentNumber}}人</span>
+        </p>
+        <p class="post-ef-time">
+            <span>招聘时段</span>
+            <span>&nbsp;&nbsp;&nbsp;</span>
+            <span>{{startTime}}~{{endTime}}</span>
+        </p>
+        <p class="post-ef-time">
+            <span>技能要求</span>
+            <span>&nbsp;&nbsp;&nbsp;</span>
+            {{{skills skillRequire}}}
+        </p>
+    </script>
+    <script id="company-model" type="x-handlebars-template">
+        <a href="./company_profile.html?id={{id}}">
+            <div class="company-info-top">
+                <img src="{{logo}}" />
+                <div id="company-name">
+                    <p>{{companyName}}</p>
                 </div>
             </div>
-            <div class="info-top-right job-shadow">
-                <div class="bord-top">
-                    <img src="./assets/images/job_p_papper.png" alt="">
-                    <span>公司概况</span>
-                    <hr/>
-                </div>
-                <div class="company-info">
-                    {{#with company}}
-                    <a href="./company_profile.html?id={{id}}">
-                        <div class="company-info-top">
-                            <img src="{{logo}}" />
-                            <div id="company-name">
-                                <p>{{companyName}}</p>
-                            </div>
-                        </div>
-                        <div class="company-info-body">
-                            <p>
-                                <span>领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域</span>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                <span>{{type}}</span>
-                            </p>
-                            <p>
-                                <span>规&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;模</span>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                <span>{{size}}</span>
-                            </p>
-                            <p>
-                                <span>阶&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;段</span>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                <span>{{stage}}</span>
-                            </p>
-                        </div>
-                    </a>
-                    {{/with}}
-                </div>
+            <div class="company-info-body">
+                <p>
+                    <span>领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>{{type}}</span>
+                </p>
+                <p>
+                    <span>规&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;模</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>{{size}}</span>
+                </p>
+                <p>
+                    <span>阶&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;段</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>{{stage}}</span>
+                </p>
             </div>
-        </div>
-
-        <div class="job-profile-body job-shadow">
-            <div class="bord-top">
-                <img src="./assets/images/job_p_bag.png" alt="">
-                <span>工作描述</span>
-                <hr/>
-            </div>
-            <div class="job-discription">
-                {{#with recruitment}}
-                {{postInfo}}
-                {{/with}}
-            </div>
-        </div>
+        </a>
     </script>
     <!-- js -->
     <!--[if lt IE 9]>

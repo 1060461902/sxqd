@@ -33,7 +33,8 @@ $(document).ready(function () {
                 };
                 option.success = function (data) {
                     if (data.code !== 200) {
-                        alert(data.msg);
+                        console.log(data.msg);
+                        setAlert("系统繁忙，请稍后再试");
                         return;
                     } else {
                         $('.list-group').handlebars($('#job-collection-model'), data.data.data,{
@@ -49,6 +50,7 @@ $(document).ready(function () {
                     }
                 }
                 option.error = function (res) {
+                    setAlert("系统繁忙，请稍后再试");
                     console.log(res)
                 }
                 $.ajax(option);
@@ -56,6 +58,7 @@ $(document).ready(function () {
         }
     }
     option.error = function (res) {
+        setAlert("系统繁忙，请稍后再试");
         console.log(res)
     }
     $.ajax(option);
@@ -71,15 +74,15 @@ $(document).ready(function () {
         option.data = {'id':id};
         option.success = function (data) {
             if (data.code !== 200) {
-                alert(data.msg);
-                return;
+                console.log(data.msg);
+                setAlert("系统繁忙，请稍后再试");
             } else {
                 $('.list-group-item[data-id="'+id+'"]').remove();
                 setAlert("已取消关注");
             }
         }
         option.error = function (res) {
-            alert('error');
+            setAlert("系统繁忙，请稍后再试");
             console.log(res)
         }
         $.ajax(option);
@@ -96,7 +99,8 @@ $(document).ready(function () {
         option.data = {'recruitmentId':id};
         option.success = function (data) {
             if (data.code !== 200) {
-                alert(data.msg);
+                console.log(data.msg);
+                setAlert("系统繁忙，请稍后再试");
                 return;
             } else {
                 var tag = $('.send-btn[data-id="'+id+'"]');
@@ -107,7 +111,7 @@ $(document).ready(function () {
             }
         }
         option.error = function (res) {
-            alert('error');
+            setAlert("系统繁忙，请稍后再试");
             console.log(res)
         }
         $.ajax(option);

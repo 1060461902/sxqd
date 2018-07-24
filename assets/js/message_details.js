@@ -6,6 +6,10 @@ $(document).ready(function () {
         lang:"zh-CN",
         focus:true
     });*/
+
+    /**
+     * 获取消息ID
+     */
     var message_id = $.parseURL(location.href)['id'];
     /**
      * 请求接口获取页面信息
@@ -19,9 +23,9 @@ $(document).ready(function () {
         if (data.code === 200) {
             $("#teacher-name").html(data.data.teacherName);
             $("#message-content").html(data.data.msgcontent);
-            $("#receiver-v").handlebars($("#receiver-model"),data.data.students);
-            $(".answer-item-v").handlebars($("#answer-item-model"),data.data.replies);
-        }else{
+            $("#receiver-v").handlebars($("#receiver-model"), data.data.students);
+            $(".answer-item-v").handlebars($("#answer-item-model"), data.data.replies);
+        } else {
             alert(data.msg);
         }
     }
@@ -29,7 +33,9 @@ $(document).ready(function () {
         console.log(res)
     }
     $.ajax(option);
-    //点击回复按钮
+    /**
+     * 点击回复按钮
+     */
     $('.answer-button-bar button').click(function () {
         var answer_content = $('#answer-content').val();
         if (answer_content != null && answer_content != '') {

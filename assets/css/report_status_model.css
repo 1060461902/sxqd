@@ -54,7 +54,6 @@
 }
 
 .report-show-edit{
-    display: none;
     cursor: pointer;
     position: absolute;
     height: 30px;
@@ -86,11 +85,6 @@
     font-size: 80px;
     font-weight: bolder;
     color: #ffb500;
-}
-
-.report-show-already{
-    display: none;
-
 }
 
 .report-show-already img{

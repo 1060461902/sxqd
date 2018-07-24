@@ -213,3 +213,8 @@
     float: right;
     cursor: pointer;
 }
+
+.sent-btn{
+    background: rgb(56, 125, 255) !important;
+    color: #ffffff !important;
+}

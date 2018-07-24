@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    //获取公司id
+    var company_id = $.parseURL(location.href)['id'];
 
     //第二导航栏
     $('.guide-bar li').click(function () {
@@ -12,8 +14,12 @@ $(document).ready(function () {
                 'border-bottom': 'none',
                 'color': 'black',
             });
-            $('.recruit-info-body').css({'display':'none'});
-            $('.company-info-body').css({'display':'block'});
+            $('.recruit-info-body').css({
+                'display': 'none'
+            });
+            $('.company-info-body').css({
+                'display': 'block'
+            });
         } else if (id == 'info2') {
             $('#info2').css({
                 'border-bottom': '3px solid rgb(0, 140, 255)',
@@ -23,51 +29,162 @@ $(document).ready(function () {
                 'border-bottom': 'none',
                 'color': 'black',
             });
-            $('.company-info-body').css({'display':'none'});
-            $('.recruit-info-body').css({'display':'block'});
+            $('.company-info-body').css({
+                'display': 'none'
+            });
+            $('.recruit-info-body').css({
+                'display': 'block'
+            });
         }
     });
-
-    //点击关注
-    $('.post-focus').click(function () {
-        console.log($(this).html());
-        if ($(this).html()=='关注'){
-            $(this).html('已关注');
-            $(this).css({
-                'border':'none',
-                'background':'rgb(0, 140, 255)',
-                'color':'white',
-            })
-        }else {
-            $(this).html('关注');
-            $(this).css({
-                'border':'0.1vw dashed #7F7F7F',
-                'background':'none',
-                'color':'#2DBEEA',
-            })
-        }
-    });
-
-    //点击投简历
-    $('.hand-in-resume').click(function () {
-        console.log($(this).html());
-        if ($(this).html()=='投简历'){
-            $(this).html('投递成功');
-            $(this).css({
-                'border':'none',
-                'background':'rgb(0, 140, 255)',
-                'color':'white',
-            })
-        }else {
-            $(this).html('投简历');
-            $(this).css({
-                'border':'0.1vw dashed #7F7F7F',
-                'background':'none',
-                'color':'#2DBEEA',
-            })
-        }
-    })
 
     //分页
-    pageLimit(1,20,5);
+    pageLimit(1, 20, 5);
+
+    /**
+     * 请求企业信息页面数据
+     */
+    var option = getBASEGETAJAX();
+    option.url = './json/company_profile_1.json';
+    option.data = {
+        id: company_id
+    }
+    option.success = function (data) {
+        if (data.code === 200) {
+            $('#company-intro-v').handlebars($('#company-intro-model'), data.data.general);
+            $('.photo-album>p').handlebars($('#photo-album-model'), data.data.images);
+            $('.company-discription').html(data.data.info);
+        } else {
+            console.log(data.code + ":" + data.msg);
+            setAlert("系统繁忙，请稍后再试");
+        }
+    }
+    option.error = function (res) {
+        console.log(res);
+        setAlert("系统繁忙，请稍后再试");
+    }
+    $.ajax(option);
+
+    /**
+     * 请求企业招聘岗位页面数据
+     */
+    var option = getBASEGETAJAX();
+    option.url = './json/company_profile_2.json';
+    option.data = {
+        id: company_id,
+        pageNum: 1
+    }
+    option.success = function (data) {
+        if (data.code === 200) {
+            $('.post-list').handlebars($('#post-item-model'), data.data, {
+                name: "if_status",
+                callback: function (status, options) {
+                    if (status === 1) {
+                        return options.fn(this);
+                    } else if (status === 0) {
+                        return options.inverse(this);
+                    }
+                }
+            });
+        } else {
+            console.log(data.code + ":" + data.msg);
+            setAlert("系统繁忙，请稍后再试");
+        }
+    }
+    option.error = function (res) {
+        console.log(res);
+        setAlert("系统繁忙，请稍后再试");
+    }
+    $.ajax(option);
+
+    /**
+     * 点击已关注按钮取消关注
+     */
+    $('.post-list').on('click', '.post-focused', function () {
+        var id = $(this).data('id');
+        // var option = getBASEDELETEAJAX();
+        var option = getBASEGETAJAX(); //暂时
+        option.url = './json/unfoucs_job.json';
+        option.data = {
+            'id': id
+        };
+        option.success = function (data) {
+            if (data.code !== 200) {
+                alert(data.msg);
+                return;
+            } else {
+                var focus_btn = $('.post-focused[data-id="' + id + '"]');
+                focus_btn.html('关注');
+                focus_btn.removeClass('post-focused');
+                focus_btn.addClass('post-focus');
+                setAlert("已取消关注");
+            }
+        }
+        option.error = function (res) {
+            setAlert("系统繁忙，请稍后再试");
+            console.log(res)
+        }
+        $.ajax(option);
+    });
+
+    /**
+     * 点击关注按钮关注
+     */
+    $('.post-list').on('click', '.post-focus', function () {
+        var id = $(this).data('id');
+        // var option = getBASEPUTAJAX();
+        var option = getBASEGETAJAX(); //暂时
+        option.url = './json/focus_job.json';
+        option.data = {
+            'id': id
+        };
+        option.success = function (data) {
+            if (data.code !== 200) {
+                alert(data.msg);
+                return;
+            } else {
+                var focus_btn = $('.post-focus[data-id="' + id + '"]');
+                focus_btn.html('已关注');
+                focus_btn.removeClass('post-focus');
+                focus_btn.addClass('post-focused');
+                setAlert("关注成功");
+            }
+        }
+        option.error = function (res) {
+            setAlert("系统繁忙，请稍后再试");
+            console.log(res)
+        }
+        $.ajax(option);
+    });
+
+    /**
+     * 点击投递简历按钮投简历
+     */
+    $('.post-list').on('click', '.hand-in-resume', function () {
+        var id = $(this).data('id');
+        // var option = getBASEPOSTAJAX();
+        var option = getBASEGETAJAX(); //暂时
+        option.url = './json/send_resume.json';
+        option.data = {
+            'recruitmentId': id
+        };
+        option.success = function (data) {
+            if (data.code !== 200) {
+                console.log(data.msg);
+                setAlert("系统繁忙，请稍后再试");
+                return;
+            } else {
+                var tag = $('.hand-in-resume[data-id="' + id + '"]');
+                tag.html('已投递');
+                tag.removeClass('hand-in-resume');
+                tag.addClass('handed-in-resume');
+                setAlert("简历已投递");
+            }
+        }
+        option.error = function (res) {
+            setAlert("系统繁忙，请稍后再试");
+            console.log(res)
+        }
+        $.ajax(option);
+    });
 });
