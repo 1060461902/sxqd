@@ -104,28 +104,7 @@
             <p class="title-name">我的实习报告</p>
             <div class="report-show">
                 <div class="report-show-body">
-                    <div class="report-show-title">
-                        <p>实习报告</p>
-                    </div>
-                    <div class="report-show-entity">
-                        <p>
-                            <span class="report-show-entity-left"></span>
-                            <span class="report-show-entity-day"></span>
-                            <span class="report-show-entity-right"></span>
-                        </p>
-                        <a class="report-show-already">
-                            <img src="./assets/images/done.png">
-                        </a>
-                        <a class="report-show-edit" href="./practice_report_edit.html">
-                            <img src="assets/images/edit_pen_nover.png">
-                        </a>
-                    </div>
-                    <div class="report-show-bottom">
-                        <span>应填写时段：</span>
-                        <span id="start-time">11月24日</span>
-                        <span>~</span>
-                        <span id="end-time">1月14日</span>
-                    </div>
+                    <!-- practice-report-model -->
                 </div>
             </div>
         </div>
@@ -142,6 +121,18 @@
         </div>
         <img id="floor_door" src="./assets/images/u3050.gif" />
     </div>
+    <script id="practice-report-model" type="text/x-handlebars-template">
+        <div class="report-show-title">
+            <p>实习报告</p>
+        </div>
+        <div class="report-show-entity">
+            {{{show_info status_code id write_flag}}} {{{editable status_code id}}}
+        </div>
+        <div class="report-show-bottom">
+            <span>应填写时段：</span>
+            {{time}}
+        </div>
+    </script>
 </div>
     <!-- js -->
     <!--[if lt IE 9]>
@@ -150,6 +141,7 @@
     <![endif]-->
     <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-jquery.js"></script>
     <script type="text/javascript" src="./assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="./assets/js/bootstrap-paginator.min.js"></script>
     <script type="text/javascript" src="./assets/js/model.js"></script>

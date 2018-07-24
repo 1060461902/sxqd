@@ -1,0 +1,11 @@
+{
+    "_comment":"请求实习小结 /student/summaries/summary",
+	"code": 200,
+	"msg": null,
+	"data": {
+		"status_code": "4_5",
+		"write_flag": 0,
+		"time": "2018-7-15~2018-7-18",
+		"id": 2
+	}
+}
