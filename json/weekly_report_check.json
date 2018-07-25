@@ -1,0 +1,40 @@
+{
+    "_comment":"查看周报详情 /student/weeklyreports/details",
+	"code": 200,
+	"msg": null,
+	"data": {
+		"studentInfo": {
+			"school": "浙江工商大学",
+			"name": "陈泽潇",
+			"class": "软件1501"
+		},
+		"companyInfo": {
+			"phone": "18867714413",
+			"name": "范某",
+			"email": "加水淀粉"
+		},
+		"teacherInfo": {
+			"phone": "123123123",
+			"name": "蒋杭森",
+			"email": "加水淀粉"
+		},
+		"report": {
+			"id": 1,
+			"studentId": 1,
+			"studentRecruitmentId": 1,
+			"title": "第（1）周报告",
+			"publishedDate": "2017-12-06",
+			"startTime": "2018-7-1",
+			"endTime": "2018-7-7",
+			"content": "sdsdsdsds",
+			"url": "D:/nginxDir/upload/weeklyreport/H19Q8r5pG9_chrome.zip",
+			"readoverTime": "2017-12-10",
+			"score": 99,
+			"comment": "sawei",
+			"cReadoverTime": "2017-12-11 15:37:20",
+			"cScore": 80,
+			"cComment": "还行",
+			"week": "第（1）周报告"
+		}
+	}
+}

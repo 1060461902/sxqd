@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,154 +16,191 @@
     <link rel="stylesheet" href="./assets/css/report_model.css">
     <link rel="stylesheet" href="./assets/css/practice_report_check.css">
 </head>
+
 <body>
     <div class="alert-model"></div>
     <div class="page_head">
-    <div class="logo_bar">
-        <div class="logo">
-            <a href="#home">
-                <img src="./assets/images/logo.png" />
+        <div class="logo_bar">
+            <div class="logo">
+                <a href="#home">
+                    <img src="./assets/images/logo.png" />
+                </a>
+            </div>
+            <div class="page_title">
+                <p>学生集中实习管理与服务平台</p>
+            </div>
+            <a id="exit_button">
+                <img id="search_exit" src="./assets/images/首页_exit.png" /> 退出
             </a>
         </div>
-        <div class="page_title">
-            <p>学生集中实习管理与服务平台</p>
-        </div>
-        <a id="exit_button">
-            <img id="search_exit" src="./assets/images/首页_exit.png" />
-            退出
-        </a>
+        <nav class="navbar navbar-inner nav-up" role="navigation">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="./home_page.html">
+                        <img src="./assets/images/首页_home.png" />
+                        <p>首页</p>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a>
+                        <img src="./assets/images/首页_computer.png" />
+                        <p>实习管理</p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="./Internship_recruitment.html">实习招聘</a>
+                        </li>
+                        <li>
+                            <a href="./my_resume.html">求职之路</a>
+                        </li>
+                        <li>
+                            <a href="./job_collection.html">岗位关注</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a>
+                        <img src="./assets/images/首页_funnel.png" />
+                        <p>过程考核</p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="./guidance_message.html">指导消息</a>
+                        </li>
+                        <li>
+                            <a href="./weekly_report.html">实习周报</a>
+                        </li>
+                        <li>
+                            <a href="./practice_summary.html">实习小结</a>
+                        </li>
+                        <li>
+                            <a href="./practice_report.html">实习报告</a>
+                        </li>
+                        <li>
+                            <a href="./attendance_record.html">考勤情况</a>
+                        </li>
+                        <li>
+                            <a href="./internship_score.html">实习成绩</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="./student_set.html">
+                        <img src="./assets/images/首页_gear.png" />
+                        <p>设置</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
-    <nav class="navbar navbar-inner nav-up" role="navigation">
-        <ul class="nav navbar-nav">
-            <li>
-                <a href="./home_page.html">
-                    <img src="./assets/images/首页_home.png" />
-                    <p>首页</p>
-                </a>
-            </li>
-            <li class="dropdown">
-                <a>
-                    <img src="./assets/images/首页_computer.png" />
-                    <p>实习管理</p>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="./Internship_recruitment.html">实习招聘</a>
-                    </li>
-                    <li>
-                        <a href="./my_resume.html">求职之路</a>
-                    </li>
-                    <li>
-                        <a href="./job_collection.html">岗位关注</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a>
-                    <img src="./assets/images/首页_funnel.png" />
-                    <p>过程考核</p>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="./guidance_message.html">指导消息</a>
-                    </li>
-                    <li>
-                        <a href="./weekly_report.html">实习周报</a>
-                    </li>
-                    <li>
-                        <a href="./practice_summary.html">实习小结</a>
-                    </li>
-                    <li>
-                        <a href="./practice_report.html">实习报告</a>
-                    </li>
-                    <li>
-                        <a href="./attendance_record.html">考勤情况</a>
-                    </li>
-                    <li>
-                        <a href="./internship_score.html">实习成绩</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="./student_set.html">
-                    <img src="./assets/images/首页_gear.png" />
-                    <p>设置</p>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
     <div class="page_body">
-    <div class="entity-body">
-        <div class="top-bar">
-            <a>过程考核</a>
-            &gt;
-            <a href="./practice_report.html">实习报告</a>
-            >
-            <a>查看</a>
+        <div class="entity-body">
+            <div class="top-bar">
+                <a>过程考核</a>
+                &gt;
+                <a href="./practice_report.html">实习报告</a>
+                >
+                <a>查看</a>
+            </div>
+            <hr/>
+            <div class="info-body">
+                <div class="info-content">
+                    <!-- info-content-model -->
+                </div>
+                <div class="read-body">
+                    <ul class="read-title">
+                        <li id="teacher-read">老师批阅</li>
+                        <!-- <li id="company-read">企业批阅</li> -->
+                    </ul>
+                    <div id="teacher-read-v">
+                        <!-- teacher-read-model -->
+                    </div>
+                    <!-- <div id="company-read-v">
+                                company-read-model
+                            </div> -->
+                </div>
+            </div>
         </div>
+        <div class="floor">
+            <div class="floor-top">
+                <img id="floor-logo" src="./assets/images/logo-sm.gif" />
+                <p id="bah">浙ICP备用111111号　浙公网安备33011802号</p>
+            </div>
+            <div class="floor-down">
+                <p id="#floor-down-left">地址：浙江省杭州市下沙高教园区学正街18号　邮编：310018
+                    <span>电话：（86）571-28877777　传真：（86）571-28877222</span>
+                </p>
+            </div>
+            <img id="floor_door" src="./assets/images/u3050.gif" />
+        </div>
+    </div>
+    <script id="info-content-model" type="text/x-handleabrs-template">
+        <h2 class="weekly-report-title">实习报告</h2>
+        <p class="orgin-info">（ 来源：{{#with studentInfo}}{{name}}&nbsp;{{school}}&nbsp;{{class}}{{/with}}&nbsp;发布日期：{{#with practiceReport}}{{publishedDate}}&nbsp;实习周{{startTime}}~{{endTime}}{{/with}}）</p>
         <hr/>
-        <div class="info-body">
-            <div class="info-content">
-                <h2 class="weekly-report-title">实习报告</h2>
-                <p class="orgin-info">（ 来源：小李　浙江工商大学　计科1502　发布日期：2017-11-30　实习周2017-11-24~2017-11-30）</p>
-                <hr/>
-                <div class="weekly-report-content">
-                    <p>
-                        21世纪，杭州的经济、政治、文化生活都发生了巨大变迁。那么，在该背景下，杭州市民的价值观又是什么样的呢？杭州市民的价值观是否具有继承性，
-                        呈现着时代的印记，又或者具有相对独立性，呈现出不同于时代的特色呢？为了解杭州市民的价值观，我们着眼于一些社会热点问题，
-                        向各个年龄段的杭州市民提问，并从中提炼出对杭州市民的价值观的分析。经过本小组在暑假期间于杭州万象城、杭州市图书馆、杭州市民中心、
-                        天街等地的实地调研、问卷访谈和实地访谈，得出了杭州市民的价值观呈现出继承性、相对独立性和多样性等等特性的结论。
-                        并且杭州市民的价值观总体趋向于积极正面、乐观奋斗以及独立自主。这也是评价杭州市民总体素质、是否具有上进心、是否有孝心、
-                        看问题是否客观、是否文明等等的依据。
-                    </p>
-                </div>
-            </div>
-            <div class="read-body">
-                <ul class="read-title">
-                    <li id="teacher-read">老师批阅</li>
-                    <li id="company-read">企业批阅</li>
-                </ul>
-                <div class="read-content">
-                    <p><span class="read-subtitle">批阅日期:</span><span id="read-time">2017-3-30</span></p>
-                    <p><span class="read-subtitle">评分:</span><span id="read-score">80.0</span></p>
-                    <p class="read-subtitle">评语:</p>
-                    <p class="read-comment">调查对象的代表性稍显不足，
-                        大学生占调查对象的7成以上，大学生并不能作为杭州市民的代表；数据的表达不直观，最好能用图表的形式表现；数据分析比较粗糙，
-                        问卷中的一部分调查题目未出现在结果分析中；结论的得出有待商榷，因对象不具代表性，直接影响到调查结果的可靠性；
-                        建议和对策部分不具有针对性和可行性。
-                    </p>
-                </div>
-                <div class="read-man-info">
-                    <p>批阅人:XXX&nbsp;&nbsp;&nbsp;电话:11111111111&nbsp;&nbsp;&nbsp;邮箱:123123@126.com</p>
-                </div>
-            </div>
+        <div class="weekly-report-content">
+            {{practiceReport.content}}
         </div>
-    </div>
-    <div class="floor">
-        <div class="floor-top">
-            <img id="floor-logo" src="./assets/images/logo-sm.gif" />
-            <p id="bah">浙ICP备用111111号　浙公网安备33011802号</p>
-        </div>
-        <div class="floor-down">
-            <p id="#floor-down-left">地址：浙江省杭州市下沙高教园区学正街18号　邮编：310018
-                <span>电话：（86）571-28877777　传真：（86）571-28877222</span>
+    </script>
+    <script id="teacher-read-model" type="text/x-handleabrs-template">
+        <div class="read-content">
+            {{#with practiceReport}}
+            <p>
+                <span class="read-subtitle">批阅日期:</span>
+                <span id="read-time">{{readoverTime}}</span>
             </p>
+            <p>
+                <span class="read-subtitle">评分:</span>
+                <span id="read-score">{{score}}</span>
+            </p>
+            <p class="read-subtitle">评语:</p>
+            <p class="read-comment">
+                {{comment}}
+            </p>
+            {{/with}}
         </div>
-        <img id="floor_door" src="./assets/images/u3050.gif" />
-    </div>
-</div>
+        {{#with teacherInfo}}
+        <div class="read-man-info">
+            <p>批阅人:{{name}}&nbsp;&nbsp;&nbsp;电话:{{phone}}&nbsp;&nbsp;&nbsp;邮箱:{{email}}</p>
+        </div>
+        {{/with}}
+    </script>
+    <!-- <script id="company-read-model" type="text/x-handleabrs-template">
+        <div class="read-content">
+            {{#with summary}}
+            <p>
+                <span class="read-subtitle">批阅日期:</span>
+                <span id="read-time">{{cReadoverTime}}</span>
+            </p>
+            <p>
+                <span class="read-subtitle">评分:</span>
+                <span id="read-score">{{cScore}}</span>
+            </p>
+            <p class="read-subtitle">评语:</p>
+            <p class="read-comment">
+                {{cComment}}
+            </p>
+            {{/with}}
+        </div>
+        {{#with companyInfo}}
+        <div class="read-man-info">
+            <p>批阅人:{{name}}&nbsp;&nbsp;&nbsp;电话:{{phone}}&nbsp;&nbsp;&nbsp;邮箱:{{email}}</p>
+        </div>
+        {{/with}}
+    </script> -->
     <!-- js -->
     <!--[if lt IE 9]>
     <script type="text/javascript" src="./assets/js/html5shiv.min.js"></script>
     <script type="text/javascript" src="./assets/js/respond.js"></script>
     <![endif]-->
     <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery-url.js"></script>
     <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-jquery.js"></script>
     <script type="text/javascript" src="./assets/js/bootstrap.js"></script>
-    <script type="text/javascript" src="./assets/js/bootstrap-paginator.min.js"></script>
     <script type="text/javascript" src="./assets/js/model.js"></script>
     <script type="text/javascript" src="./assets/js/report_model.js"></script>
     <script type="text/javascript" src="./assets/js/practice_report_check.js"></script>
 </body>
+
 </html>

@@ -87,3 +87,7 @@
     height: 200px;
     overflow-y: auto;
 }
+
+#company-read-v{
+    display: none;
+}

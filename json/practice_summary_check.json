@@ -1,0 +1,32 @@
+{
+    "_comment":"请求实习小结内容以及批阅内容 /student/summaries/details",
+    "code": 200,
+	"msg": null,
+	"data": {
+		"summary": {
+			"id": 2,
+			"studentId": 1,
+			"title": "学习中的一些小问题",
+			"publishedDate": "2017-12-04",
+			"startTime": "2018-7-15",
+			"endTime": "2018-7-18",
+			"url": "13256",
+			"statusId": true,
+			"content": "1239712398",
+			"studentRecruitmentId": 1,
+			"readoverTime": "2017-12-12",
+			"score": 99,
+			"comment": "asdfadsfasdfasdfad"
+		},
+		"studentInfo": {
+			"school": "浙江工商大学",
+			"name": "陈泽潇",
+			"class": "软件1501"
+		},
+		"teacherInfo": {
+			"phone": "123123123",
+			"name": "蒋杭森",
+			"email": "加水淀粉"
+		}
+	}
+}
