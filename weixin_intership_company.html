@@ -9,14 +9,13 @@
     <!--css-->
     <link rel="stylesheet" href="./assets/css/jquery-weui.min.css">
     <link rel="stylesheet" href="./assets/css/weui.min.css">
-    <link rel="stylesheet" href="assets/css/commonCSS.css">
     <link rel="stylesheet" href="./assets/css/weixin_head.css">
     <link rel="stylesheet" href="./assets/css/weixin_intership_company.css">
 
 </head>
 
 <body>
-    <div class="company-top">
+    <div class="company-top" id="company-top">
         <div class="title-bar">
             <p>
                 <a id="title-back" onclick="javascript:history.back()">
@@ -30,33 +29,107 @@
             <span>企业概况</span>
         </div>
         <div class="company-info">
-            <div class="company-img">
-                <div class="company-img-container">
-                    <img src="./assets/images/jk.png" alt="">
+            <div class="company-info-v">
+                <div class="company-img">
+                    <div class="company-img-container">
+                        <img src="./assets/images/jk.png" alt="">
+                    </div>
+                </div>
+                <div class="company-info-body">
+                    <p id="company-name">即刻</p>
+                    <p>
+                        <span id="company-field">IT/互联网</span>
+                        <span>&nbsp;|&nbsp;</span>
+                        <span id="company-size">50~150人</span>
+                        <span>&nbsp;|&nbsp;</span>
+                        <span id="company-stage">成长型</span>
+                    </p>
                 </div>
             </div>
-            <div class="company-info-body">
-                <p id="company-name">即刻</p>
-                <p>
-                    <span id="company-field">IT/互联网</span>
-                    <span>&nbsp;|&nbsp;</span>
-                    <span id="company-size">50~150人</span>
-                    <span>&nbsp;|&nbsp;</span>
-                    <span id="company-stage">成长型</span>
-                </p>
+            <div class="company-switch">
+                <ul>
+                    <li class="company-switch-selected" id="index-btn">
+                        企业主页
+                    </li>
+                    <li id="post-btn">
+                        在招岗位
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="company-switch">
-            <ul>
-                <li>
-                    企业主页
-                </li>
-                <li>
-                    在招岗位
-                </li>
-            </ul>
+        <div class="bottom-info">
+            <div class="company-index">
+                <div class="company-lable">
+                    <div class="company-title">
+                        <img src="./assets/images/mobile_paper.png" alt="">
+                        <span>企业标签</span>
+                    </div>
+                    <div class="company-lable-list">
+                        <span class="lable-item">待遇高</span>
+                        <span class="lable-item">福利好</span>
+                    </div>
+                </div>
+                <div class="company-introduction">
+                    <div class="company-title">
+                        <img src="./assets/images/mobile_info.png" alt="">
+                        <span>企业信息</span>
+                    </div>
+                    <div class="company-introduction-entity">
+                        一、公司简介 即刻是中国最大的生活服务业电商平台，在到店餐饮、外卖、电影、酒店旅游、KTV、婚庆、美业等领域保持领先地位。覆盖全国超过1,200个城市，拥有用户近6亿，合作商家达300万户，日订单量突破1000万单，移动端月度活跃用户超1.5亿，年度活跃买家近2亿，2015年总交易额超1700亿元。以年度活跃买家、订单交易数维度计算，美团点评是中国仅次于阿里巴巴的第二大电子商务平台。
+                    </div>
+                </div>
+                <div class="company-album">
+                    <div class="company-title">
+                        <img src="./assets/images/mobile_imglogo.png" alt="">
+                        <span>企业相册</span>
+                    </div>
+                    <div class="company-album-list">
+                        <p>
+                            <img src="./assets/images/u3040.jpg" alt="">
+                            <img src="./assets/images/u3040.jpg" alt="">
+                            <img src="./assets/images/u3040.jpg" alt="">
+                        </p>
+                    </div>
+                </div>
+                <div class="company-location">
+                    <div class="company-title">
+                        <img src="./assets/images/mobile_location.png" alt="">
+                        <span>企业地址</span>
+                    </div>
+                    <div class="company-location-info" style="height: 50px;">
+
+                    </div>
+                </div>
+            </div>
+            <div class="company-post">
+                <div class="company-post-list-v">
+                    <div class="company-title">
+                        <img src="./assets/images/mobile_letter.png" alt="">
+                        <span>招聘信息</span>
+                    </div>
+                    <div class="company-post-list weui-cells">
+                        <div class="weui-cell company-post-item">
+                            <div class="company-post-info">
+                                <p>
+                                    运营审核专员实习生
+                                    <span class="out-time">05/31</span>
+                                </p>
+                                <p>
+                                    <img src="./assets/images/location_point.png" alt="">
+                                    <span>上海杨浦区政学路51号</span>
+                                </p>
+                                <p>
+                                    <img src="./assets/images/person.png" alt="">
+                                    <span>1人</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
     <!--js-->
     <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="./assets/js/jquery-weui.min.js"></script>

@@ -38,9 +38,6 @@ $(document).ready(function () {
         }
     });
 
-    //分页
-    pageLimit(1, 20, 5);
-
     /**
      * 请求企业信息页面数据
      */
@@ -68,34 +65,7 @@ $(document).ready(function () {
     /**
      * 请求企业招聘岗位页面数据
      */
-    var option = getBASEGETAJAX();
-    option.url = './json/company_profile_2.json';
-    option.data = {
-        id: company_id,
-        pageNum: 1
-    }
-    option.success = function (data) {
-        if (data.code === 200) {
-            $('.post-list').handlebars($('#post-item-model'), data.data, {
-                name: "if_status",
-                callback: function (status, options) {
-                    if (status === 1) {
-                        return options.fn(this);
-                    } else if (status === 0) {
-                        return options.inverse(this);
-                    }
-                }
-            });
-        } else {
-            console.log(data.code + ":" + data.msg);
-            setAlert("系统繁忙，请稍后再试");
-        }
-    }
-    option.error = function (res) {
-        console.log(res);
-        setAlert("系统繁忙，请稍后再试");
-    }
-    $.ajax(option);
+    getPostData(company_id,1,pageLimit);
 
     /**
      * 点击已关注按钮取消关注
@@ -188,3 +158,41 @@ $(document).ready(function () {
         $.ajax(option);
     });
 });
+
+function getPostData(company_id,pageNum,pageLimit) {
+    console.log(pageNum);
+    var option = getBASEGETAJAX();
+    option.url = './json/company_profile_2.json';
+    option.data = {
+        'id': company_id,
+        'pageNum': pageNum
+    }
+    option.success = function (data) {
+        if (data.code === 200) {
+            $('.post-list').handlebars($('#post-item-model'), data.data.data, {
+                name: "if_status",
+                callback: function (status, options) {
+                    if (status === 1) {
+                        return options.fn(this);
+                    } else if (status === 0) {
+                        return options.inverse(this);
+                    }
+                }
+            });
+
+            if(pageLimit){
+                pageLimit(pageNum,data.data.totalPage,5,function (page) {
+                    getPostData(company_id,page);
+                });
+            }
+        } else {
+            console.log(data.code + ":" + data.msg);
+            setAlert("系统繁忙，请稍后再试");
+        }
+    }
+    option.error = function (res) {
+        console.log(res);
+        setAlert("系统繁忙，请稍后再试");
+    }
+    $.ajax(option);
+}

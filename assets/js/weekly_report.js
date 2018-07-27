@@ -1,6 +1,56 @@
 $(document).ready(function () {
+    getPageData(1,pageLimit);
+});
+
+/*function weeklyReportView(status, data_id, day) {
+    switch (status) {
+        case 1: //未到填写时段
+            $('[data-id="' + data_id + '"] .report-show-entity-left').html("未到可填写时间");
+            break;
+        case 2: //即将开始
+            $('[data-id="' + data_id + '"] .report-show-entity-left').html("还有");
+            $('[data-id="' + data_id + '"] .report-show-entity-day').html(day);
+            $('[data-id="' + data_id + '"] .report-show-entity-right').html("天开始");
+            break;
+        case 3: //已开始，未填写
+            $('[data-id="' + data_id + '"] .report-show-entity-left').html("还有");
+            $('[data-id="' + data_id + '"] .report-show-entity-day').html(day);
+            $('[data-id="' + data_id + '"] .report-show-entity-right').html("天截止");
+            $('[data-id="' + data_id + '"] .report-show-edit').css({
+                'display': 'block'
+            });
+            break;
+        case 4: //已开始，已填写
+            $('[data-id="' + data_id + '"] .report-show-already').css({
+                'display': 'block'
+            });
+            $('[data-id="' + data_id + '"] .report-show-edit').css({
+                'display': 'block'
+            });
+            $('[data-id="' + data_id + '"] .report-show-entity p').css({
+                'display': 'none'
+            });
+            break;
+        case 5: //已填写，已过时
+            $('[data-id="' + data_id + '"] .report-show-already').css({
+                'display': 'block'
+            });
+            $('[data-id="' + data_id + '"] .report-show-entity p').css({
+                'display': 'none'
+            });
+            break;
+        case 6: //错过
+            $('[data-id="' + data_id + '"] .report-show-entity-left').html("未按时填写");
+            break;
+    }
+}*/
+
+function getPageData(pageNum,pageLimit) {
     var option = getBASEGETAJAX();
     option.url = './json/weekly_report.json';
+    option.data = {
+        'pageNum':pageNum
+    };
     option.success = function (data) {
         if (data.code === 200) {
             $('.weekly-report-list').handlebars($('#weekly-report-item-model'), data.data.data, [{
@@ -49,6 +99,12 @@ $(document).ready(function () {
                     }
                 }
             }]);
+
+            if(pageLimit){
+                pageLimit(pageNum,data.data.totalPage,5,function (page) {
+                    getPageData(page);
+                })
+            }
         } else {
             console.log(data.msg);
             setAlert("系统繁忙，请稍后再试");
@@ -59,48 +115,4 @@ $(document).ready(function () {
         console.log(res);
     }
     $.ajax(option);
-    pageLimit(1, 20, 5);
-});
-
-/*function weeklyReportView(status, data_id, day) {
-    switch (status) {
-        case 1: //未到填写时段
-            $('[data-id="' + data_id + '"] .report-show-entity-left').html("未到可填写时间");
-            break;
-        case 2: //即将开始
-            $('[data-id="' + data_id + '"] .report-show-entity-left').html("还有");
-            $('[data-id="' + data_id + '"] .report-show-entity-day').html(day);
-            $('[data-id="' + data_id + '"] .report-show-entity-right').html("天开始");
-            break;
-        case 3: //已开始，未填写
-            $('[data-id="' + data_id + '"] .report-show-entity-left').html("还有");
-            $('[data-id="' + data_id + '"] .report-show-entity-day').html(day);
-            $('[data-id="' + data_id + '"] .report-show-entity-right').html("天截止");
-            $('[data-id="' + data_id + '"] .report-show-edit').css({
-                'display': 'block'
-            });
-            break;
-        case 4: //已开始，已填写
-            $('[data-id="' + data_id + '"] .report-show-already').css({
-                'display': 'block'
-            });
-            $('[data-id="' + data_id + '"] .report-show-edit').css({
-                'display': 'block'
-            });
-            $('[data-id="' + data_id + '"] .report-show-entity p').css({
-                'display': 'none'
-            });
-            break;
-        case 5: //已填写，已过时
-            $('[data-id="' + data_id + '"] .report-show-already').css({
-                'display': 'block'
-            });
-            $('[data-id="' + data_id + '"] .report-show-entity p').css({
-                'display': 'none'
-            });
-            break;
-        case 6: //错过
-            $('[data-id="' + data_id + '"] .report-show-entity-left').html("未按时填写");
-            break;
-    }
-}*/
+}
