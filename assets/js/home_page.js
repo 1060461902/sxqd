@@ -15,7 +15,10 @@ $(document).ready(function () {
 	 * 请求后端获取页面数据
 	 */
 	var option = getBASEGETAJAX();
-	option.url = '/internshipmgn/student/home';
+	option.url = 'http://127.0.0.1:5500/internshipmgn/student/home';
+	option.data = {
+		pageNum:1
+	}
 	option.success = function (data) {
 		if (data.code !== 200) {
 			alert(data.msg);
