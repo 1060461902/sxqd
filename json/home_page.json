@@ -1,5 +1,5 @@
 {
-	"_comment":"首页请求 /student/home",
+	"_comment":"首页请求 /internshipmgn/student/home",
 	"code": 200,
 	"msg": null,
 	"data": {

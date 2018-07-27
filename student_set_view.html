@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,258 +15,259 @@
     <link rel="stylesheet" href="./assets/css/title_model.css">
     <link rel="stylesheet" href="./assets/css/student_set_view.css">
 </head>
+
 <body>
     <div class="alert-model"></div>
     <div class="page_head">
-    <div class="logo_bar">
-        <div class="logo">
-            <a href="#home">
-                <img src="./assets/images/logo.png" />
+        <div class="logo_bar">
+            <div class="logo">
+                <a href="#home">
+                    <img src="./assets/images/logo.png" />
+                </a>
+            </div>
+            <div class="page_title">
+                <p>学生集中实习管理与服务平台</p>
+            </div>
+            <a id="exit_button">
+                <img id="search_exit" src="./assets/images/home_exit.png" /> 退出
             </a>
         </div>
-        <div class="page_title">
-            <p>学生集中实习管理与服务平台</p>
-        </div>
-        <a id="exit_button">
-            <img id="search_exit" src="./assets/images/首页_exit.png" />
-            退出
-        </a>
-    </div>
-    <nav class="navbar navbar-inner nav-up" role="navigation">
-        <ul class="nav navbar-nav">
-            <li>
-                <a href="./home_page.html">
-                    <img src="./assets/images/首页_home.png" />
-                    <p>首页</p>
-                </a>
-            </li>
-            <li class="dropdown">
-                <a>
-                    <img src="./assets/images/首页_computer.png" />
-                    <p>实习管理</p>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="./Internship_recruitment.html">实习招聘</a>
-                    </li>
-                    <li>
-                        <a href="./my_resume.html">求职之路</a>
-                    </li>
-                    <li>
-                        <a href="./job_collection.html">岗位关注</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a>
-                    <img src="./assets/images/首页_funnel.png" />
-                    <p>过程考核</p>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="./guidance_message.html">指导消息</a>
-                    </li>
-                    <li>
-                        <a href="./weekly_report.html">实习周报</a>
-                    </li>
-                    <li>
-                        <a href="./practice_summary.html">实习小结</a>
-                    </li>
-                    <li>
-                        <a href="./practice_report.html">实习报告</a>
-                    </li>
-                    <li>
-                        <a href="./attendance_record.html">考勤情况</a>
-                    </li>
-                    <li>
-                        <a href="./internship_score.html">实习成绩</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="./student_set.html">
-                    <img src="./assets/images/首页_gear.png" />
-                    <p>设置</p>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
-    <div class="page_body">
-    <div class="entity-body">
-        <div class="top-bar">
-            <a>设置</a>
-            &gt;
-            <a href="./student_set.html">个人信息完善</a>
-            &gt;
-            <a>个人信息查看</a>
-        </div>
-        <hr/>
-        <div class="info-body">
-            <div class="student-set-body">
-                <div class="student-set-info">
-                    <div class="basic-info">
-                        <p class="sub-title-name" id="basic-info">基本信息</p>
-                        <div class="basic-info-entity">
-                            <div class="head-img-block">
-                                <img src="./assets/images/default_head.png">
-                            </div>
-                            <div class="basic-info-other">
-                                <p class="basic-info-name">小陈</p>
-                                <p class="basic-info-id">1612180000|男|汉族|1998年9月</p>
-                                <p>
-                                    <span>手机号码:</span>
-                                    <span class="info-phone-number">11111111111</span>
-                                </p>
-                                <p>
-                                    <span>邮箱:</span>
-                                    <span class="info-email">840276079@qq.com</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <hr/>
-                    <div class="project-info">
-                        <div class="info-title">
-                            <span class="sub-title-name" id="project-info">项目经历</span>
-                        </div>
-                        <div class="updown-btn-v">
-                            <input type="button" value="▼" class="updown-btn" id="project-info-updown" data-role="up"/>
-                        </div>
-                        <div id="project-info-group">
-                            <ul class="updown-list project-info-list">
-                                <li>
-                                    <p class="project-info-name">智能客服saas系统</p>
-                                    <p>
-                                        <span class="project-info-role">产品经理</span>
-                                        &nbsp;|&nbsp;
-                                        <span class="project-info-start">2016.09</span>
-                                        -
-                                        <span class="project-info-end">2017.06</span>
-                                    </p>
-                                    <p class="project-info-introduction">
-                                        这是工作说明
-                                    </p>
-                                </li>
-                                <li>
-                                    <p class="project-info-name">智能客服saas系统</p>
-                                    <p>
-                                        <span class="project-info-role">产品经理</span>
-                                        &nbsp;|&nbsp;
-                                        <span class="project-info-start">2016.09</span>
-                                        -
-                                        <span class="project-info-end">2017.06</span>
-                                    </p>
-                                    <p class="project-info-introduction">
-                                        这是工作说明
-                                    </p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <br/>
-                    <hr/>
-                    <div class="corporation-info">
-                        <div class="info-title">
-                            <span class="sub-title-name" id="corporation-info">社团经历</span>
-                        </div>
-                        <div class="updown-btn-v">
-                            <input type="button" value="▼" class="updown-btn" id="corporation-info-updown" data-role="up"/>
-                        </div>
-                        <div id="corporation-info-group">
-                            <ul class="updown-list corporation-info-list">
-                                <li>
-                                    <p class="corporation-info-name">浙商大信息学院学生组织联席会</p>
-                                    <p>
-                                        <span class="corporation-info-role">权益部部长</span>
-                                        &nbsp;|&nbsp;
-                                        <span class="corporation-info-start">2016.09</span>
-                                        -
-                                        <span class="corporation-info-end">2017.06</span>
-                                    </p>
-                                    <p class="corporation-info-introduction">
-                                        这是工作说明
-                                    </p>
-                                </li>
-                                <li>
-                                    <p class="corporation-info-name">浙商大信息学院学生组织联席会</p>
-                                    <p>
-                                        <span class="corporation-info-role">权益部部长</span>
-                                        &nbsp;|&nbsp;
-                                        <span class="corporation-info-start">2016.09</span>
-                                        -
-                                        <span class="corporation-info-end">2017.06</span>
-                                    </p>
-                                    <p class="corporation-info-introduction">
-                                        这是工作说明
-                                    </p>
-                                </li>
-                                <li>
-                                    <p class="corporation-info-name">浙商大信息学院学生组织联席会</p>
-                                    <p>
-                                        <span class="corporation-info-role">权益部部长</span>
-                                        &nbsp;|&nbsp;
-                                        <span class="corporation-info-start">2016.09</span>
-                                        -
-                                        <span class="corporation-info-end">2017.06</span>
-                                    </p>
-                                    <p class="corporation-info-introduction">
-                                        这是工作说明
-                                    </p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <br/>
-                    <hr/>
-                    <div class="honor-info">
-                        <div class="info-title">
-                            <span class="sub-title-name" id="honor-info">所获荣誉</span>
-                        </div>
-                        <div class="updown-btn-v">
-                            <input type="button" value="▼" class="updown-btn" id="honor-info-updown" data-role="up"/>
-                        </div>
-                        <div id="honor-info-group">
-                            <ul class="updown-list honor-info-list">
-                                <li>
-                                    <p class="honor-info-name">荣誉名称</p>
-                                    <p class="honor-info-time">获奖时间</p>
-                                    <p class="honor-info-introduction">这是获奖说明</p>
-                                    <img class="honor-info-img" src="./assets/images/u3041.jpg">
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <br/>
-                    <hr/>
-                    <div class="skill-info">
-                        <div class="info-title">
-                            <span class="sub-title-name" id="skill-info">技能水平（计算机等级，英语等级等）</span>
-                        </div>
-                        <div class="updown-btn-v">
-                            <input type="button" value="▼" class="updown-btn" id="skill-info-updown" data-role="up"/>
-                        </div>
-                        <div id="skill-info-group">
 
+        <nav class="navbar navbar-inner nav-up" role="navigation">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="./home_page.html">
+                        <img src="./assets/images/home_home.png" />
+                        <p>首页</p>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a>
+                        <img src="./assets/images/home_computer.png" />
+                        <p>实习管理</p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="./Internship_recruitment.html">实习招聘</a>
+                        </li>
+                        <li>
+                            <a href="./my_resume.html">求职之路</a>
+                        </li>
+                        <li>
+                            <a href="./job_collection.html">岗位关注</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a>
+                        <img src="./assets/images/home_funnel.png" />
+                        <p>过程考核</p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="./guidance_message.html">指导消息</a>
+                        </li>
+                        <li>
+                            <a href="./weekly_report.html">实习周报</a>
+                        </li>
+                        <li>
+                            <a href="./practice_summary.html">实习小结</a>
+                        </li>
+                        <li>
+                            <a href="./practice_report.html">实习报告</a>
+                        </li>
+                        <li>
+                            <a href="./attendance_record.html">考勤情况</a>
+                        </li>
+                        <li>
+                            <a href="./internship_score.html">实习成绩</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="./student_set.html">
+                        <img src="./assets/images/home_gear.png" />
+                        <p>设置</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="page_body">
+        <div class="entity-body">
+            <div class="top-bar">
+                <a>设置</a>
+                &gt;
+                <a href="./student_set.html">个人信息完善</a>
+                &gt;
+                <a>个人信息查看</a>
+            </div>
+            <hr/>
+            <div class="info-body">
+                <div class="student-set-body">
+                    <div class="student-set-info">
+                        <div class="basic-info">
+                            <p class="sub-title-name" id="basic-info">基本信息</p>
+                            <div class="basic-info-entity">
+                                <div class="head-img-block">
+                                    <img src="./assets/images/default_head.png">
+                                </div>
+                                <div class="basic-info-other">
+                                    <p class="basic-info-name">小陈</p>
+                                    <p class="basic-info-id">1612180000|男|汉族|1998年9月</p>
+                                    <p>
+                                        <span>手机号码:</span>
+                                        <span class="info-phone-number">11111111111</span>
+                                    </p>
+                                    <p>
+                                        <span>邮箱:</span>
+                                        <span class="info-email">840276079@qq.com</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="project-info">
+                            <div class="info-title">
+                                <span class="sub-title-name" id="project-info">项目经历</span>
+                            </div>
+                            <div class="updown-btn-v">
+                                <input type="button" value="▼" class="updown-btn" id="project-info-updown" data-role="up" />
+                            </div>
+                            <div id="project-info-group">
+                                <ul class="updown-list project-info-list">
+                                    <li>
+                                        <p class="project-info-name">智能客服saas系统</p>
+                                        <p>
+                                            <span class="project-info-role">产品经理</span>
+                                            &nbsp;|&nbsp;
+                                            <span class="project-info-start">2016.09</span>
+                                            -
+                                            <span class="project-info-end">2017.06</span>
+                                        </p>
+                                        <p class="project-info-introduction">
+                                            这是工作说明
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="project-info-name">智能客服saas系统</p>
+                                        <p>
+                                            <span class="project-info-role">产品经理</span>
+                                            &nbsp;|&nbsp;
+                                            <span class="project-info-start">2016.09</span>
+                                            -
+                                            <span class="project-info-end">2017.06</span>
+                                        </p>
+                                        <p class="project-info-introduction">
+                                            这是工作说明
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <br/>
+                        <hr/>
+                        <div class="corporation-info">
+                            <div class="info-title">
+                                <span class="sub-title-name" id="corporation-info">社团经历</span>
+                            </div>
+                            <div class="updown-btn-v">
+                                <input type="button" value="▼" class="updown-btn" id="corporation-info-updown" data-role="up" />
+                            </div>
+                            <div id="corporation-info-group">
+                                <ul class="updown-list corporation-info-list">
+                                    <li>
+                                        <p class="corporation-info-name">浙商大信息学院学生组织联席会</p>
+                                        <p>
+                                            <span class="corporation-info-role">权益部部长</span>
+                                            &nbsp;|&nbsp;
+                                            <span class="corporation-info-start">2016.09</span>
+                                            -
+                                            <span class="corporation-info-end">2017.06</span>
+                                        </p>
+                                        <p class="corporation-info-introduction">
+                                            这是工作说明
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="corporation-info-name">浙商大信息学院学生组织联席会</p>
+                                        <p>
+                                            <span class="corporation-info-role">权益部部长</span>
+                                            &nbsp;|&nbsp;
+                                            <span class="corporation-info-start">2016.09</span>
+                                            -
+                                            <span class="corporation-info-end">2017.06</span>
+                                        </p>
+                                        <p class="corporation-info-introduction">
+                                            这是工作说明
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="corporation-info-name">浙商大信息学院学生组织联席会</p>
+                                        <p>
+                                            <span class="corporation-info-role">权益部部长</span>
+                                            &nbsp;|&nbsp;
+                                            <span class="corporation-info-start">2016.09</span>
+                                            -
+                                            <span class="corporation-info-end">2017.06</span>
+                                        </p>
+                                        <p class="corporation-info-introduction">
+                                            这是工作说明
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <br/>
+                        <hr/>
+                        <div class="honor-info">
+                            <div class="info-title">
+                                <span class="sub-title-name" id="honor-info">所获荣誉</span>
+                            </div>
+                            <div class="updown-btn-v">
+                                <input type="button" value="▼" class="updown-btn" id="honor-info-updown" data-role="up" />
+                            </div>
+                            <div id="honor-info-group">
+                                <ul class="updown-list honor-info-list">
+                                    <li>
+                                        <p class="honor-info-name">荣誉名称</p>
+                                        <p class="honor-info-time">获奖时间</p>
+                                        <p class="honor-info-introduction">这是获奖说明</p>
+                                        <img class="honor-info-img" src="./assets/images/u3041.jpg">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <br/>
+                        <hr/>
+                        <div class="skill-info">
+                            <div class="info-title">
+                                <span class="sub-title-name" id="skill-info">技能水平（计算机等级，英语等级等）</span>
+                            </div>
+                            <div class="updown-btn-v">
+                                <input type="button" value="▼" class="updown-btn" id="skill-info-updown" data-role="up" />
+                            </div>
+                            <div id="skill-info-group">
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="floor">
-        <div class="floor-top">
-            <img id="floor-logo" src="./assets/images/logo-sm.gif" />
-            <p id="bah">浙ICP备用111111号　浙公网安备33011802号</p>
+        <div class="floor">
+            <div class="floor-top">
+                <img id="floor-logo" src="./assets/images/logo-sm.gif" />
+                <p id="bah">浙ICP备用111111号　浙公网安备33011802号</p>
+            </div>
+            <div class="floor-down">
+                <p id="#floor-down-left">地址：浙江省杭州市下沙高教园区学正街18号　邮编：310018
+                    <span>电话：（86）571-28877777　传真：（86）571-28877222</span>
+                </p>
+            </div>
+            <img id="floor_door" src="./assets/images/u3050.gif" />
         </div>
-        <div class="floor-down">
-            <p id="#floor-down-left">地址：浙江省杭州市下沙高教园区学正街18号　邮编：310018
-                <span>电话：（86）571-28877777　传真：（86）571-28877222</span>
-            </p>
-        </div>
-        <img id="floor_door" src="./assets/images/u3050.gif" />
     </div>
-</div>
     <!-- js -->
     <!--[if lt IE 9]>
     <script type="text/javascript" src="./assets/js/html5shiv.min.js"></script>
@@ -278,4 +280,5 @@
     <script type="text/javascript" src="./assets/js/model.js"></script>
     <script type="text/javascript" src="./assets/js/student_set_view.js"></script>
 </body>
+
 </html>

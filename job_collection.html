@@ -29,20 +29,21 @@
                 <p>学生集中实习管理与服务平台</p>
             </div>
             <a id="exit_button">
-                <img id="search_exit" src="./assets/images/首页_exit.png" /> 退出
+                <img id="search_exit" src="./assets/images/home_exit.png" /> 退出
             </a>
         </div>
+
         <nav class="navbar navbar-inner nav-up" role="navigation">
             <ul class="nav navbar-nav">
                 <li>
                     <a href="./home_page.html">
-                        <img src="./assets/images/首页_home.png" />
+                        <img src="./assets/images/home_home.png" />
                         <p>首页</p>
                     </a>
                 </li>
                 <li class="dropdown">
                     <a>
-                        <img src="./assets/images/首页_computer.png" />
+                        <img src="./assets/images/home_computer.png" />
                         <p>实习管理</p>
                     </a>
                     <ul class="dropdown-menu">
@@ -53,13 +54,13 @@
                             <a href="./my_resume.html">求职之路</a>
                         </li>
                         <li>
-                            <a href="./job_collection.html">岗位收藏</a>
+                            <a href="./job_collection.html">岗位关注</a>
                         </li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a>
-                        <img src="./assets/images/首页_funnel.png" />
+                        <img src="./assets/images/home_funnel.png" />
                         <p>过程考核</p>
                     </a>
                     <ul class="dropdown-menu">
@@ -85,7 +86,7 @@
                 </li>
                 <li>
                     <a href="./student_set.html">
-                        <img src="./assets/images/首页_gear.png" />
+                        <img src="./assets/images/home_gear.png" />
                         <p>设置</p>
                     </a>
                 </li>
@@ -206,9 +207,9 @@
                 <button data-id="{{id}}" class="unfocus-btn">取消关注</button>
                 <!--<button>咨询</button>-->
                 {{#if_bool sendflag}}
-                <button  data-id="{{id}}" class="sent-btn">已投递</button>
+                <button data-id="{{id}}" class="sent-btn">已投递</button>
                 {{else}}
-                <button  data-id="{{id}}" class="send-btn">投简历</button>
+                <button data-id="{{id}}" class="send-btn">投简历</button>
                 {{/if_bool}}
             </div>
         </li>

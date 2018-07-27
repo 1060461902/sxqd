@@ -15,7 +15,7 @@ $(document).ready(function () {
 	 * 请求后端获取页面数据
 	 */
 	var option = getBASEGETAJAX();
-	option.url = './json/home_page.json';
+	option.url = '/internshipmgn/student/home';
 	option.success = function (data) {
 		if (data.code !== 200) {
 			alert(data.msg);
