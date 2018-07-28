@@ -26,7 +26,7 @@ $(document).ready(function () {
 
 function requestURL() {
     var option = getBASEGETAJAX();
-    option.url = './json/Internship_recruitment.json';
+    option.url = '../student/recruitments/recruitment';
     option.data = {
         order: order,
         type: type,
@@ -43,7 +43,7 @@ function requestURL() {
              */
             pageLimit(1, data.data.totalPage, 5, function (page) {
                 var option = getBASEGETAJAX();
-                option.url = './json/Internship_recruitment.json';
+                option.url = '../student/recruitments/recruitment';
                 option.data = {
                     pageNum: page
                 };

@@ -3,7 +3,7 @@ $(document).ready(function () {
      * 访问页面请求第一页
      */
     var option = getBASEGETAJAX();
-    option.url = './json/my_resume.json';
+    option.url = '../student/roads/road';
     option.data = {pageNum:1};
     option.success = function (data) {
         if (data.code !== 200) {
@@ -29,7 +29,7 @@ $(document).ready(function () {
              */
             pageLimit(1, data.data.totalPage, 5, function (page) {
                 var option = getBASEGETAJAX();
-                option.url = './json/my_resume.json';
+                option.url = '../student/roads/road';
                 option.data = {pageNum:page};
                 option.success = function (data) {
                     if (data.code !== 200) {

@@ -3,7 +3,7 @@ $(document).ready(function () {
      * 访问页面请求第一页
      */
     var option = getBASEGETAJAX();
-    option.url = './json/job_collection.json';
+    option.url = '../student/collections/collection';
     option.data = {
         pageNum: 1
     };
@@ -27,7 +27,7 @@ $(document).ready(function () {
              */
             pageLimit(1, data.data.totalPage, 5, function (page) {
                 var option = getBASEGETAJAX();
-                option.url = './json/job_collection.json';
+                option.url = '../student/collections/collection';
                 option.data = {
                     pageNum: page
                 };
@@ -48,19 +48,19 @@ $(document).ready(function () {
                             }
                         });
                     }
-                }
+                };
                 option.error = function (res) {
                     setAlert("系统繁忙，请稍后再试");
                     console.log(res)
-                }
+                };
                 $.ajax(option);
             });
         }
-    }
+    };
     option.error = function (res) {
         setAlert("系统繁忙，请稍后再试");
         console.log(res)
-    }
+    };
     $.ajax(option);
 
     /**
@@ -68,9 +68,8 @@ $(document).ready(function () {
      */
     $('.list-group').on('click', '.unfocus-btn', function () {
         var id = $(this).data('id');
-        // var option = getBASEDELETEAJAX();
-        var option = getBASEGETAJAX();//暂时
-        option.url = './json/unfoucs_job.json';
+        var option = getBASEDELETEAJAX();
+        option.url = '../student/collections/collection';
         option.data = {'id':id};
         option.success = function (data) {
             if (data.code !== 200) {
@@ -80,11 +79,11 @@ $(document).ready(function () {
                 $('.list-group-item[data-id="'+id+'"]').remove();
                 setAlert("已取消关注");
             }
-        }
+        };
         option.error = function (res) {
             setAlert("系统繁忙，请稍后再试");
             console.log(res)
-        }
+        };
         $.ajax(option);
     });
 
@@ -93,9 +92,8 @@ $(document).ready(function () {
      */
     $('.list-group').on('click', '.send-btn', function () {
         var id = $(this).data('id');
-        // var option = getBASEPOSTAJAX();
-        var option = getBASEGETAJAX();//暂时
-        option.url = './json/send_resume.json';
+        var option = getBASEPOSTAJAX();
+        option.url = '../student/recruitments/resume';
         option.data = {'recruitmentId':id};
         option.success = function (data) {
             if (data.code !== 200) {
@@ -109,11 +107,11 @@ $(document).ready(function () {
                 tag.addClass('sent-btn');
                 setAlert("简历已投递");
             }
-        }
+        };
         option.error = function (res) {
             setAlert("系统繁忙，请稍后再试");
             console.log(res)
-        }
+        };
         $.ajax(option);
     });
 });

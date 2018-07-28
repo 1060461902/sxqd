@@ -23,5 +23,6 @@ $(document).ready(function () {
                'display':"none"
            });
        }
-   }) 
+   }) ;
+
 });

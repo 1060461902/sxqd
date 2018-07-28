@@ -12,10 +12,10 @@ $(document).ready(function () {
      * 请求页面数据
      */
     var option = getBASEGETAJAX();
-    option.url = './json/job_profile.json';
+    option.url = '../student/recruitments/profile';
     option.data = {
         id: post_id
-    }
+    };
     option.success = function (data) {
         if (data.code === 200) {
             $(".post-info").handlebars($('#recruitment-model'), data.data.recruitment, {

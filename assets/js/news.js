@@ -3,7 +3,7 @@ $(document).ready(function () {
     if(res && res['id']){
         var id = res['id'];
         var option = getBASEGETAJAX();
-        option.url = './json/news.json';
+        option.url = '../student/approves/details';
         option.data = {'id':id};
         option.success = function (data) {
             if(data.code !== 200){
