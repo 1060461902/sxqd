@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var report_id = $.parseURL(location.href);
+    var report_id = $.parseURL(location.href)['id'];
 
     $('#save-timeplate').click(function () {
         setAlert('保存成功');
@@ -10,9 +10,8 @@ $(document).ready(function () {
         if (edited_content == '' || edited_content == null) {
             setAlert("请输入内容");
         } else {
-            // var option = getBASEPOSTAJAX();
-            var option = getBASEGETAJAX(); //暂时
-            option.url = "./json/weekly_report_edit.json";
+            var option = getBASEPOSTAJAX();
+            option.url = "../student/weeklyreports/report";
             option.data = {
                 id: report_id,
                 content: edited_content
@@ -35,9 +34,9 @@ $(document).ready(function () {
     });
 
     var option = getBASEGETAJAX();
-    option.url = "./json/weekly_report_check.json";
+    option.url = "../student/weeklyreports/details";
     option.data = {
-        int: report_id
+        id: report_id
     }
     option.success = function (data) {
         if (data.code === 200) {

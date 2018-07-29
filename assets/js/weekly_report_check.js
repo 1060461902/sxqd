@@ -1,12 +1,12 @@
 $(document).ready(function () {
-    var report_id = $.parseURL(location.href);
+    var report_id = $.parseURL(location.href)['id'];
     /**
      * 请求页面数据
      */
     var option = getBASEGETAJAX();
-    option.url = "./json/weekly_report_check.json";
+    option.url = "../student/weeklyreports/details";
     option.data = {
-        int: report_id
+        id: report_id
     }
     option.success = function (data) {
         if (data.code === 200) {

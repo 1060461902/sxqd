@@ -12,7 +12,7 @@ $(document).ready(function () {
      * 访问页面请求第一页
      */
     var option = getBASEGETAJAX();
-    option.url = './json/guidance_message.json';
+    option.url = '../student/messages/message';
     option.data = {
         pageNum: 1
     };
@@ -21,13 +21,13 @@ $(document).ready(function () {
             alert(data.msg);
             return;
         } else {
-            $('.table-v').handlebars($('#guidance-message-model'), data.data.messages);
+            $('.table-v').handlebars($('#guidance-message-model'), data.data.message);
             /**
              * 分页
              */
             pageLimit(1, data.data.totalPage, 5, function (page) {
                 var option = getBASEGETAJAX();
-                option.url = './json/guidance_message.json';
+                option.url = '../student/messages/message';
                 option.data = {
                     pageNum: page
                 };
@@ -36,7 +36,7 @@ $(document).ready(function () {
                         alert(data.msg);
                         return;
                     } else {
-                        $('.table-v').handlebars($('#guidance-message-model'), data.data.messages);
+                        $('.table-v').handlebars($('#guidance-message-model'), data.data.message);
                     }
                 }
                 option.error = function (res) {
@@ -70,8 +70,8 @@ function close_window() {
 function answer_it() {
     var answer_content = $('#answer-content').val();
     if(answer_content !=null && answer_content != ''){
-        var option = getBASEGETAJAX();
-        option.url = './json/reply_info.json';
+        var option = getBASEPOSTAJAX();
+        option.url = '../student/messages/reply';
         option.data = {
             "id": info_id,
             "content": answer_content

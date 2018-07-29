@@ -15,7 +15,7 @@ $(document).ready(function () {
      * 请求接口获取页面信息
      */
     var option = getBASEGETAJAX();
-    option.url = './json/message_details.json';
+    option.url = '../student/messages/details';
     option.data = {
         "id": message_id
     }
@@ -39,8 +39,8 @@ $(document).ready(function () {
     $('.answer-button-bar button').click(function () {
         var answer_content = $('#answer-content').val();
         if (answer_content != null && answer_content != '') {
-            var option = getBASEGETAJAX();
-            option.url = './json/reply_info.json';
+            var option = getBASEPOSTAJAX();
+            option.url = '../student/messages/reply';
             option.data = {
                 "id": message_id,
                 "content": answer_content

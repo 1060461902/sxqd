@@ -1,5 +1,5 @@
 {
-    "_comment":"请求考勤月份筛选条件 /api/attendances/pattern",
+    "_comment":"请求考勤月份筛选条件 /student/attendances/pattern",
 	"code": 200,
 	"msg": null,
 	"data": {

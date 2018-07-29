@@ -5,7 +5,7 @@ $(document).ready(function () {
     });*/
 
     var option = getBASEGETAJAX();
-    option.url = './json/practice_summary.json';
+    option.url = '../student/summaries/summary';
     option.success = function (data) {
         if (data.code === 200) {
             $('.report-show-body').handlebars($('#practice-summary-model'), data.data, [{

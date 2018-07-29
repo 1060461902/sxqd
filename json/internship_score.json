@@ -1,5 +1,5 @@
 {
-    "_comment":"请求实习成绩 /api/scores/score",
+    "_comment":"请求实习成绩 /student/scores/score",
 	"code": 200,
 	"msg": null,
 	"data": {

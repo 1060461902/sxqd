@@ -47,7 +47,7 @@ $(document).ready(function () {
 
 function getPageData(pageNum,pageLimit) {
     var option = getBASEGETAJAX();
-    option.url = './json/weekly_report.json';
+    option.url = '../student/weeklyreports/report';
     option.data = {
         'pageNum':pageNum
     };

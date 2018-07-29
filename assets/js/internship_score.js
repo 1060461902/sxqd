@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var option = getBASEGETAJAX();
-    option.url = './json/internship_score.json';
+    option.url = '../student/scores/score';
     option.success = function (data) {
         if(data.code === 200){
             var score = data.data.score;

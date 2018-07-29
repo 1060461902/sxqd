@@ -1,5 +1,5 @@
 {
-    "_comment":"请求考情情况 /api/attendances/record",
+    "_comment":"请求考情情况 /student/attendances/record",
 	"code": 200,
 	"msg": null,
 	"data": {

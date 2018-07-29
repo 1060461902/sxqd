@@ -6,7 +6,7 @@ $(document).ready(function () {
      * 请求月份
      */
     var option = getBASEGETAJAX();
-    option.url = './json/pattern.json';
+    option.url = '../student/attendances/pattern';
     option.success = function (data) {
         if (data.code === 200) {
             $("#pattern-v").handlebars($('#pattern-model'), data.data.patterns);
@@ -15,7 +15,7 @@ $(document).ready(function () {
              * 请求第一个月份的考勤情况
              */
             var option = getBASEGETAJAX();
-            option.url = './json/attendance_record.json';
+            option.url = '../student/attendances/record';
             option.data = {
                 pattern: first_pattern_val
             }
@@ -42,7 +42,7 @@ $(document).ready(function () {
     $("#pattern-v").on('change', function () {
         var pattern_val = $('#pattern-v').val();
         var option = getBASEGETAJAX();
-        option.url = './json/attendance_record.json';
+        option.url = '../student/attendances/record';
         option.data = {
             pattern: pattern_val
         }

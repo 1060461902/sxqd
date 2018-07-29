@@ -55,6 +55,27 @@ $(document).ready(function () {
     $('.confirm-cancel').click(function() {
         $('.confirm-modal,.mask').fadeOut();
     });
+
+    /**
+     * 点击退出按钮退出登录
+     */
+    $('#exit_button').click(function () {
+        var option = getBASEGETAJAX();
+        option.url = '../logout';
+        option.success = function (data) {
+            if (data.code === 200){
+                window.location.href = './log_in.html'
+            }else {
+                console.log(data.code+":"+data.msg);
+                setAlert('系统繁忙，请稍候再试');
+            }
+        }
+        option.error = function (res) {
+            console.log(res);
+            setAlert('系统繁忙，请稍候再试');
+        }
+        $.ajax(option);
+    });
 });
 
 /**

@@ -4,7 +4,7 @@ $(document).ready(function () {
         $('.report-show-entity').append(canvas);
     });*/
     var option = getBASEGETAJAX();
-    option.url = './json/practice_report.json';
+    option.url = '../student/practicereports/report';
     option.success = function (data) {
         if (data.code === 200) {
             $('.report-show-body').handlebars($('#practice-report-model'), data.data, [{

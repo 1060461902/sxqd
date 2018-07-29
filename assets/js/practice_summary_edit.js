@@ -1,12 +1,12 @@
 $(document).ready(function () {
-    var report_id = $.parseURL(location.href);
+    var report_id = $.parseURL(location.href)['id'];
     /**
      * 
      */
     var option = getBASEGETAJAX();
-    option.url = "./json/practice_summary_check.json";
+    option.url = "../student/summaries/details";
     option.data = {
-        int: report_id
+        id: report_id
     }
     option.success = function (data) {
         if (data.code === 200) {
@@ -35,9 +35,8 @@ $(document).ready(function () {
         if (edited_content == '' || edited_content == null) {
             setAlert("请输入内容");
         } else {
-            // var option = getBASEPOSTAJAX();
-            var option = getBASEGETAJAX(); //暂时
-            option.url = "./json/practice_summary_edit.json";
+            var option = getBASEPOSTAJAX();
+            option.url = "../student/summaries/summary";
             option.data = {
                 id: report_id,
                 content: edited_content
