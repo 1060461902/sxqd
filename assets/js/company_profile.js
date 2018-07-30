@@ -42,7 +42,7 @@ $(document).ready(function () {
      * 请求企业信息页面数据
      */
     var option = getBASEGETAJAX();
-    option.url = './json/company_profile_1.json';
+    option.url = '../student/companies/company';
     option.data = {
         id: company_id
     }
@@ -51,6 +51,7 @@ $(document).ready(function () {
             $('#company-intro-v').handlebars($('#company-intro-model'), data.data.general);
             $('.photo-album>p').handlebars($('#photo-album-model'), data.data.images);
             $('.company-discription').html(data.data.info);
+            $('.label-body').handlebars($('#label-model'),data.data.marks)
         } else {
             console.log(data.code + ":" + data.msg);
             setAlert("系统繁忙，请稍后再试");
@@ -72,12 +73,8 @@ $(document).ready(function () {
      */
     $('.post-list').on('click', '.post-focused', function () {
         var id = $(this).data('id');
-        // var option = getBASEDELETEAJAX();
-        var option = getBASEGETAJAX(); //暂时
-        option.url = './json/unfoucs_job.json';
-        option.data = {
-            'id': id
-        };
+        var option = getBASEDELETEAJAX();
+        option.url = '../student/collections/collection?id='+id;
         option.success = function (data) {
             if (data.code !== 200) {
                 alert(data.msg);
@@ -102,9 +99,8 @@ $(document).ready(function () {
      */
     $('.post-list').on('click', '.post-focus', function () {
         var id = $(this).data('id');
-        // var option = getBASEPUTAJAX();
-        var option = getBASEGETAJAX(); //暂时
-        option.url = './json/focus_job.json';
+        var option = getBASEPUTAJAX();
+        option.url = '../student/collections/collection';
         option.data = {
             'id': id
         };
@@ -134,7 +130,7 @@ $(document).ready(function () {
         var id = $(this).data('id');
         // var option = getBASEPOSTAJAX();
         var option = getBASEGETAJAX(); //暂时
-        option.url = './json/send_resume.json';
+        option.url = '../student/recruitments/resume';
         option.data = {
             'recruitmentId': id
         };
@@ -162,14 +158,14 @@ $(document).ready(function () {
 function getPostData(company_id,pageNum,pageLimit) {
     console.log(pageNum);
     var option = getBASEGETAJAX();
-    option.url = './json/company_profile_2.json';
+    option.url = '../student/companies/recruitment';
     option.data = {
         'id': company_id,
         'pageNum': pageNum
     }
     option.success = function (data) {
         if (data.code === 200) {
-            $('.post-list').handlebars($('#post-item-model'), data.data.data, {
+            $('.post-list').handlebars($('#post-item-model'), data.data.recruitments, {
                 name: "if_status",
                 callback: function (status, options) {
                     if (status === 1) {

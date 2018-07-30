@@ -238,7 +238,7 @@
     </script>
     <script id="label-model" type="text/x-handlebars-template">
         {{#each this}}
-        <span class="label label-info">福利多</span>
+        <span class="label label-info">{{mark}}</span>
         {{/each}}
     </script>
     <script id="photo-album-model" type="text/x-handlebars-template">
@@ -266,7 +266,7 @@
             </a>
             <div class="post-item-right">
                 <div>
-                    {{#if_status focus}}
+                    {{#if_status collectflag}}
                     <button class="post-focused" data-id="{{id}}">已关注</button>
                     {{else}}
                     <button class="post-focus" data-id="{{id}}">关注</button>

@@ -48,6 +48,15 @@
     width: 96%;
 }
 
+
+.job-profile-body{
+    min-height: 200px;
+}
+
+.ask-list{
+    min-height: 100px;
+}
+
 .post-info {
     margin-left: 10px;
 }
@@ -217,4 +226,9 @@
 .sent-btn{
     background: rgb(56, 125, 255) !important;
     color: #ffffff !important;
+}
+
+.reply-block{
+    display: none;
+    color: #1E9FFF;
 }

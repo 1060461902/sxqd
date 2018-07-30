@@ -45,7 +45,21 @@ $(document).ready(function () {
 			 * 职位分页导航
 			 */
 			var post_data = data.data.recruitments;
-			pageLimit(post_data.currentPage, post_data.totalPage, 5);
+			pageLimit(post_data.currentPage, post_data.totalPage, 5, function (page) {
+				var option = getBASEGETAJAX();
+				option.url = '../student/home/recruitment';
+				option.data = {
+					pageNum:page
+				}
+				option.success = function (data) {
+					$('.post-item-list').handlebars($('#post-model'),data.data.data)
+                }
+                option.error = function (res) {
+                    console.log(res);
+                    setAlert('系统繁忙,请稍候再试');
+                }
+                $.ajax(option);
+            });
 			/**
 			 * 职位列表
 			 */
@@ -53,7 +67,8 @@ $(document).ready(function () {
 		}
 	}
 	option.error = function (res) {
-		console.log(res)
+		console.log(res);
+		setAlert('系统繁忙,请稍候再试');
 	}
 	$.ajax(option);
 

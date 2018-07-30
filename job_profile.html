@@ -150,7 +150,10 @@
                 </div>
                 <div class="question-send-bar">
                     <div>
-                        <input type="text" placeholder="输入内容">
+                        <span class="reply-block">@&nbsp;</span>
+                        <span class="reply-block" id="reply-who"></span>
+                        <span class="reply-block">:&nbsp;</span>
+                        <input type="text" id="ask-input" placeholder="输入内容">
                         <button>发送</button>
                     </div>
                 </div>
@@ -181,10 +184,18 @@
                 </div>
                 <div class="ask-body">
                     <p>{{name}}</p>
-                    <p>{{content}}</p>
+                    <p>
+                        {{#if followName}}
+                            回复&nbsp;{{followName}}&nbsp;:
+                        {{/if}}
+                        {{content}}
+                    </p>
                 </div>
                 <div class="ask-time">
-                    <span>{{createTime}}</span>
+                    <p>{{createTime}}</p>
+                    <p>
+                        <a class="answer-person" data-id="{{id}}">回复</a>
+                    </p>
                 </div>
             </a>
         </li>

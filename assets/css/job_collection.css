@@ -84,6 +84,6 @@
     padding-bottom: 0;
 }
 .list-group-item:hover{
-    transform: translate3D(-5px,-5px,5px);
+    transform: translate3D(-5px,-5px,0px);
     box-shadow: 5px 5px 5px #7f7f7f;
 }

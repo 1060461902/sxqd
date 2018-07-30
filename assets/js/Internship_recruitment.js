@@ -1,5 +1,5 @@
-var order = "EmYn559L8C";
-var type = "cUAmL8accq";
+var order = $('#sort-type').val();
+var type = $('#company-type').val();
 
 $(document).ready(function () {
     /**
@@ -16,7 +16,7 @@ $(document).ready(function () {
     });
 
     /**
-     * 点击顺序列表
+     * 点击企业类型列表
      */
     $('#company-type').on('change', function () {
         type = $(this).val();

@@ -69,8 +69,7 @@ $(document).ready(function () {
     $('.list-group').on('click', '.unfocus-btn', function () {
         var id = $(this).data('id');
         var option = getBASEDELETEAJAX();
-        option.url = '../student/collections/collection';
-        option.data = {'id':id};
+        option.url = '../student/collections/collection?id='+id;
         option.success = function (data) {
             if (data.code !== 200) {
                 console.log(data.msg);
