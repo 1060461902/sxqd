@@ -37,10 +37,23 @@ $(document).ready(function () {
         } else {
             var option = getBASEPOSTAJAX();
             option.url = "../student/summaries/summary";
-            option.data = {
+
+            /*option.data = {
                 id: report_id,
                 content: edited_content
+            }*/
+            var form = new FormData();
+            var attachment = $('#select-file')[0].files[0];
+            if (attachment != null && attachment != ''){
+                form.append('attachment',attachment);
             }
+            form.append('id', report_id);
+            form.append('content', edited_content);
+
+            option.data = form;
+            option.processData = false;
+            option.contentType = false;
+
             option.success = function (data) {
                 if (data.code === 200) {
                     setAlert("发表成功");
