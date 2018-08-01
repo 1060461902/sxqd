@@ -29,31 +29,38 @@
         </p>
     </div>
     <div class="weui-cells post-cells">
-        <div class="weui-cell" data-id="" href="./weixin_intership_post.html">
-            <div class="cell-left">
-                <p class="post-name">后端工程师</p>
-                <p>
-                    <span>即刻</span>
-                    <span>&nbsp;&nbsp;&nbsp;</span>
-                    <span>IT/互联网</span>
-                </p>
-                <p>
-                    <img src="./assets/images/location_point.png" alt="">
-                    <span class="location-show">上海杨浦区政学路51号</span>
-                </p>
-            </div>
-            <div class="cell-right">
-                <a class="post-unfocus" data-id="">取消关注</a>
-                <div class="post-img-container">
-                    <img src="./assets/images/jk.png" alt="">
-                </div>
-            </div>
-        </div>
+        <!-- collect-item-model -->
     </div>
     <div class="weui-loadmore" style="padding-bottom:30px;height:20px;display: none;">
         <i class="weui-loading"></i>
         <span class="weui-loadmore__tips">正在加载</span>
     </div>
+    <script id="collect-item-model" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="weui-cell" data-id="{{id}}" href="./weixin_intership_post.html">
+            <a href="./weixin_intership_post.html?id={{id}}" class="cell-left">
+                <p class="post-name">{{post}}</p>
+                <p>{{companyName}}</p>
+                <p>{{companyType}}</p>
+                <p>
+                    <img src="./assets/images/location_point.png" alt="">
+                    <span class="location-show">{{address}}</span>
+                </p>
+            </a>
+            <div class="cell-right">
+                <a class="post-unfocus" data-id="{{id}}">取消关注</a>
+                <div class="post-img-container">
+                    <img src="{{logo}}" alt="">
+                </div>
+                {{#if_bool sendflag}}
+                <a class="post-sent" data-id="{{id}}">已投递</a>
+                {{else}}
+                <a class="post-send" data-id="{{id}}">投简历</a>
+                {{/if_bool}}
+            </div>
+        </div>
+        {{/each}}
+    </script>
     <!--js-->
     <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="./assets/js/jquery-weui.min.js"></script>
