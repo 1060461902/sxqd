@@ -256,8 +256,8 @@ $(document).ready(function () {
 
 $(document).scroll(function (e) {
     //侧边导航栏
-    if ($(document).scrollTop()>550){
-        $(".guide-bar").css({"position":"fixed","top":"0"});
+    if ($(document).scrollTop()>450){
+        $(".guide-bar").css({"position":"fixed","top":"50px"});
     }else {
         $(".guide-bar").css({"position":"static"});
     }

@@ -143,6 +143,7 @@ function touchMoveFunc(e) {
                     $("body").on("touchmove", function (e) {
                         touchMoveFunc(e);
                     });
+                    setScrollTop(getScrollTop() - 50);
                 });
                 $("body").off("touchmove");
                 $('.weui-loadmore').fadeOut();
@@ -150,4 +151,22 @@ function touchMoveFunc(e) {
             }
         }
     }
+}
+
+//设置滚动条高度
+function setScrollTop(top) {
+    if (!isNaN(top)) {
+        document.body.scrollTop = top;
+    }
+}
+
+//滚动条高度
+function getScrollTop() {
+    var scrollTop = 0;
+    if (document.documentElement && document.documentElement.scrollTop) {
+        scrollTop = document.documentElement.scrollTop;
+    } else if (document.body) {
+        scrollTop = document.body.scrollTop;
+    }
+    return scrollTop;
 }

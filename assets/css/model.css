@@ -1,7 +1,6 @@
 /*通用文件*/
 .page_head {
     width: 1000px;
-    height: 250px;
     margin-left: auto;
     margin-right: auto;
     box-shadow: 5px 5px 5px #888888;
@@ -56,9 +55,18 @@
 }
 
 .nav-up {
+    z-index: 500;
     height: 100px;
     background-color: #5D6D7E;
     cursor: pointer;
+}
+
+.nav-fix {
+    top:0;
+    height: 50px;
+    position: fixed;
+    margin: auto;
+    width: 1000px;
 }
 
 .nav-up>ul>li>ul {
@@ -81,6 +89,10 @@
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.nav-fix>ul>li>a img{
+    width: 25px;
 }
 
 .nav-up>ul>li:hover>a {

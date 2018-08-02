@@ -195,6 +195,7 @@ function setConfirm(string,callback) {
 }
 
 /**
+ * @deprecated
  * 根据状态在报告界面显示不同的画面
  * @param {int} status [状态码]
  * @param {int} day [天数]
@@ -229,3 +230,14 @@ function reportView(status,day) {
             break;
     }
 }
+
+/**
+ * 顶部导航栏滑动固定
+ */
+$(document).scroll(function (e) {
+    if ($(document).scrollTop()>50){
+        $(".nav-up").addClass('nav-fix');
+    }else {
+        $(".nav-up").removeClass('nav-fix');
+    }
+});

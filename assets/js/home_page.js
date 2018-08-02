@@ -75,7 +75,7 @@ $(document).ready(function () {
 	/**
 	 * 
 	 */
-	$('div.carousel img , div.carousel span').click(function () {
+	$('body').on('click','div.carousel img , div.carousel span',function () {
 		//alert($(this).attr('id'));
 		window.location.href = "./news.html";
 	});
