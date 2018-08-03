@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./assets/css/weui.min.css">
     <link rel="stylesheet" href="./assets/css/weixin_head.css">
     <link rel="stylesheet" href="./assets/css/weixin_intership_company.css">
-
+    <link rel="stylesheet" href="./assets/css/dropload.css">
 </head>
 
 <body>
@@ -30,21 +30,7 @@
         </div>
         <div class="company-info">
             <div class="company-info-v">
-                <div class="company-img">
-                    <div class="company-img-container">
-                        <img src="./assets/images/jk.png" alt="">
-                    </div>
-                </div>
-                <div class="company-info-body">
-                    <p id="company-name">即刻</p>
-                    <p>
-                        <span id="company-field">IT/互联网</span>
-                        <span>&nbsp;|&nbsp;</span>
-                        <span id="company-size">50~150人</span>
-                        <span>&nbsp;|&nbsp;</span>
-                        <span id="company-stage">成长型</span>
-                    </p>
-                </div>
+                <!-- company-info-model -->
             </div>
             <div class="company-switch">
                 <ul>
@@ -65,8 +51,7 @@
                         <span>企业标签</span>
                     </div>
                     <div class="company-lable-list">
-                        <span class="lable-item">待遇高</span>
-                        <span class="lable-item">福利好</span>
+                        <!-- company-lable-model -->
                     </div>
                 </div>
                 <div class="company-introduction">
@@ -75,7 +60,7 @@
                         <span>企业信息</span>
                     </div>
                     <div class="company-introduction-entity">
-                        一、公司简介 即刻是中国最大的生活服务业电商平台，在到店餐饮、外卖、电影、酒店旅游、KTV、婚庆、美业等领域保持领先地位。覆盖全国超过1,200个城市，拥有用户近6亿，合作商家达300万户，日订单量突破1000万单，移动端月度活跃用户超1.5亿，年度活跃买家近2亿，2015年总交易额超1700亿元。以年度活跃买家、订单交易数维度计算，美团点评是中国仅次于阿里巴巴的第二大电子商务平台。
+                        <!-- 企业介绍内容 -->
                     </div>
                 </div>
                 <div class="company-album">
@@ -85,9 +70,7 @@
                     </div>
                     <div class="company-album-list">
                         <p>
-                            <img src="./assets/images/u3040.jpg" alt="">
-                            <img src="./assets/images/u3040.jpg" alt="">
-                            <img src="./assets/images/u3040.jpg" alt="">
+                            <!-- company-album-model -->
                         </p>
                     </div>
                 </div>
@@ -97,7 +80,7 @@
                         <span>企业地址</span>
                     </div>
                     <div class="company-location-info" style="height: 50px;">
-
+                        <div id="map-container"></div>
                     </div>
                 </div>
             </div>
@@ -108,36 +91,72 @@
                         <span>招聘信息</span>
                     </div>
                     <div class="company-post-list weui-cells">
-                        <div class="weui-cell company-post-item">
-                            <div class="company-post-info">
-                                <p>
-                                    运营审核专员实习生
-                                    <span class="out-time">05/31</span>
-                                </p>
-                                <p>
-                                    <img src="./assets/images/location_point.png" alt="">
-                                    <span>上海杨浦区政学路51号</span>
-                                </p>
-                                <p>
-                                    <img src="./assets/images/person.png" alt="">
-                                    <span>1人</span>
-                                </p>
-                            </div>
-                        </div>
+                        <!-- company-post-model -->
+                    </div>
+                    <div class="company-post-loading">
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <script id="company-info-model" type="text/x-handlebars-template">
+        <div class="company-img">
+            <div class="company-img-container">
+                <img src="{{logo}}" alt="">
+            </div>
+        </div>
+        <div class="company-info-body">
+            <p id="company-name">{{name}}</p>
+            <p>
+                <span id="company-field">{{type}}</span>
+                <span>&nbsp;|&nbsp;</span>
+                <span id="company-size">{{size}}</span>
+                <span>&nbsp;|&nbsp;</span>
+                <span id="company-stage">{{stage}}</span>
+            </p>
+        </div>
+    </script>
+    <script id="company-lable-model" type="text/x-handlebars-template">
+        {{#each this}}
+        <span class="lable-item">{{mark}}</span>
+        {{/each}}
+    </script>
+    <script id="company-album-model" type="text/x-handlebars-template">
+        {{#each this}}
+        <img src="{{url}}" alt=""> {{/each}}
+    </script>
+    <script id="company-post-model" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="weui-cell company-post-item">
+            <div class="company-post-info">
+                <p>
+                    {{post}}
+                    <span class="out-time">{{outtime}}</span>
+                </p>
+                <!-- <p>
+                    <img src="./assets/images/location_point.png" alt="">
+                    <span>上海杨浦区政学路51号</span>
+                </p> -->
+                <p>
+                    <img src="./assets/images/person.png" alt="">
+                    <span>{{currentNum}}人</span>
+                </p>
+            </div>
+        </div>
+        {{/each}}
+    </script>
     <!--js-->
-    <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="./assets/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery-url.js"></script>
     <script type="text/javascript" src="./assets/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript" src="./assets/js/fastclick.js"></script>
     <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
     <script type="text/javascript" src="./assets/js/handlebars-jquery.js"></script>
     <script type="text/javascript" src="./assets/js/model.js"></script>
+    <script type="text/javascript" src="./assets/js/dropload.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A2lj3o8gzFKVWpcrADzOz0OIH2tKZGSG"></script>
     <script type="text/javascript" src="./assets/js/weixin_intership_company.js"></script>
 </body>
 

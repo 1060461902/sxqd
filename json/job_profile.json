@@ -1,5 +1,5 @@
 {
-    "_comment":"查看招聘详情 /api/recruitments/profile 改 收藏状态 投简历状态",
+    "_comment":"查看招聘详情 /student/recruitments/profile 改 收藏状态 投简历状态",
 	"code": 200,
 	"msg": null,
 	"data": {

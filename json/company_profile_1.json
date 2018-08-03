@@ -29,14 +29,14 @@
 			}
 		],
 		"location": {
-			"lnglat": null,
+			"lnglat": "116.404#39",
 			"address": "杭州市江干区学正街204号"
 		},
 		"marks": [
 			{
 				"id": 1,
 				"companyId": 1,
-				"mark": "images/ali.jpg"
+				"mark": "hao"
 			},
 			{
 				"id": 1,

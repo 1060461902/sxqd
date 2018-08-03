@@ -1,34 +1,59 @@
-var loading = false; //状态标记
-var startY, isToTop;
-var pageNum = 1;
+var page = 1;
+
 $(document).ready(function () {
 
-    $("body").on("touchstart", function (e) {
-        startY = e.originalEvent.changedTouches[0].pageY;
-    });
-
-    $("body").on("touchmove", function (e) {
-        touchMoveFunc(e);
-    });
-
-    var screen_height = document.documentElement.clientHeight;
-    $('body').css({
-        'min-height': screen_height
-    });
-    /**
-     * 获取关注列表
-     */
-    askPage(1, function (data) {
-        $('.post-cells').handlebars($('#collect-item-model'), data.data.data, {
-            name: 'if_bool',
-            callback: function (flag, options) {
-                if (flag === 1) {
-                    return options.fn(this);
-                } else if (flag === 0) {
-                    return options.inverse(this);
+    $('.post-loading').dropload({
+        scrollArea: window,
+        loadDownFn: function (me) {
+            $.ajax({
+                type: 'GET',
+                url: './json/job_collection1.json',
+                // url:'../student/collections/collection',
+                data: {
+                    pageNum: page
+                },
+                success: function (data) {
+                    if (data.code === 200) {
+                        if (data.data.data.length === 0) {
+                            // 锁定
+                            me.lock();
+                            // 无数据
+                            me.noData();
+                        } else {
+                            var template = Handlebars.compile($('#collect-item-model').html());
+                            Handlebars.registerHelper('if_bool', function (flag, options) {
+                                if (flag === 1) {
+                                    return options.fn(this);
+                                } else if (flag === 0) {
+                                    return options.inverse(this);
+                                }
+                            });
+                            var html = template(data.data.data);
+                            $('.post-cells').append(html);
+                            page++;
+                            me.resetload();
+                        }
+                    } else {
+                        console.log(data.msg);
+                        $.toptip("系统繁忙，请稍后再试", 'error');
+                        me.resetload();
+                        // 锁定
+                        me.lock();
+                        // 无数据
+                        me.noData();
+                    }
+                },
+                error: function (res) {
+                    $.toptip("系统繁忙，请稍后再试", 'error');
+                    console.log(res);
+                    me.resetload();
+                    // 锁定
+                    me.lock();
+                    // 无数据
+                    me.noData();
                 }
-            }
-        });
+            });
+        }
     });
 
     /**
@@ -88,85 +113,3 @@ $(document).ready(function () {
         $.ajax(option);
     });
 });
-
-/**
- * 
- */
-function askPage(pageNum, callback) {
-    var option = getBASEGETAJAX();
-    option.data = {
-        pageNum: pageNum
-    }
-    // option.url = '../student/collections/collection';
-    option.url = './json/job_collection.json';
-    option.success = function (data) {
-        if (data.code === 200) {
-            callback(data);
-        } else {
-            console.log(data.msg);
-            $.toptip("系统繁忙，请稍后再试", 'error');
-        }
-    }
-    option.error = function (res) {
-        $.toptip("系统繁忙，请稍后再试", 'error');
-        console.log(res);
-    }
-    $.ajax(option);
-}
-
-function touchMoveFunc(e) {
-    var moveEndY = e.originalEvent.changedTouches[0].pageY;
-    var Y = moveEndY - startY;
-    if (Y < 0) {
-        var scrollT = document.documentElement.scrollTop || document.body.scrollTop; //滚动条的垂直偏移
-        var scrollH = document.documentElement.scrollHeight || document.body.scrollHeight; //元素的整体高度
-        var clientH = document.documentElement.clientHeight || document.body.clientHeight; //元素的可见高度
-        if (scrollT == scrollH - clientH) {
-            e.preventDefault();
-            if (loading) {
-                return
-            } else {
-                pageNum++;
-                loading = true;
-                $('.weui-loadmore').fadeIn();
-                askPage(pageNum, function (data) {
-                    var template = Handlebars.compile($('#collect-item-model').html());
-                    Handlebars.registerHelper('if_bool', function (flag, options) {
-                        if (flag === 1) {
-                            return options.fn(this);
-                        } else if (flag === 0) {
-                            return options.inverse(this);
-                        }
-                    });
-                    var html = template(data.data.data);
-                    $('.post-cells').append(html);
-                    $("body").on("touchmove", function (e) {
-                        touchMoveFunc(e);
-                    });
-                    setScrollTop(getScrollTop() - 50);
-                });
-                $("body").off("touchmove");
-                $('.weui-loadmore').fadeOut();
-                loading = false;
-            }
-        }
-    }
-}
-
-//设置滚动条高度
-function setScrollTop(top) {
-    if (!isNaN(top)) {
-        document.body.scrollTop = top;
-    }
-}
-
-//滚动条高度
-function getScrollTop() {
-    var scrollTop = 0;
-    if (document.documentElement && document.documentElement.scrollTop) {
-        scrollTop = document.documentElement.scrollTop;
-    } else if (document.body) {
-        scrollTop = document.body.scrollTop;
-    }
-    return scrollTop;
-}

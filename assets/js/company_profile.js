@@ -39,6 +39,29 @@ $(document).ready(function () {
     });
 
     /**
+     * 百度地图
+     */
+    var map = new BMap.Map("map-container");
+    var point = new BMap.Point(116.404, 39);
+    map.centerAndZoom(point, 15);
+    var marker = new BMap.Marker(point);
+    map.addOverlay(marker);
+    map.addControl(new BMap.NavigationControl());
+    map.addControl(new BMap.ScaleControl());
+    map.addControl(new BMap.OverviewMapControl());
+    map.enableScrollWheelZoom();
+    var opts = {
+        width: 100,
+        height: 50,
+        title: "企业地址"
+    }
+    var infoWindow = new BMap.InfoWindow("这是地址", opts);
+    map.openInfoWindow(infoWindow, map.getCenter());
+    marker.addEventListener('click',function () {
+        map.openInfoWindow(infoWindow, marker.getPosition());
+    });
+
+    /**
      * 请求企业信息页面数据
      */
     var option = getBASEGETAJAX();

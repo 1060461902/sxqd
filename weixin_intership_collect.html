@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="assets/css/commonCSS.css">
     <link rel="stylesheet" href="./assets/css/weixin_head.css">
     <link rel="stylesheet" href="./assets/css/weixin_intership_collect.css">
+    <link rel="stylesheet" href="./assets/css/dropload.css">
     <script>
         function backto() {
             window.location.href = './weixin_intership_index.html?tab=3'
@@ -29,11 +30,11 @@
         </p>
     </div>
     <div class="weui-cells post-cells">
+
         <!-- collect-item-model -->
     </div>
-    <div class="weui-loadmore" style="padding-bottom:30px;height:20px;display: none;">
-        <i class="weui-loading"></i>
-        <span class="weui-loadmore__tips">正在加载</span>
+    <div class="post-loading">
+
     </div>
     <script id="collect-item-model" type="text/x-handlebars-template">
         {{#each this}}
@@ -69,6 +70,7 @@
     <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
     <script type="text/javascript" src="./assets/js/handlebars-jquery.js"></script>
     <script type="text/javascript" src="./assets/js/model.js"></script>
+    <script type="text/javascript" src="./assets/js/dropload.min.js"></script>
     <script type="text/javascript" src="./assets/js/weixin_intership_collect.js"></script>
 </body>
 
