@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
     <title>实习管理</title>
     <!--css-->
     <link rel="stylesheet" href="./assets/css/jquery-weui.min.css">
@@ -12,13 +14,14 @@
     <link rel="stylesheet" href="assets/css/bootstrap.css" />
     <link rel="stylesheet" href="assets/css/commonCSS.css">
     <link rel="stylesheet" href="./assets/css/weixin_intership_index.css">
+    <link rel="stylesheet" href="./assets/css/dropload.css">
 </head>
 
 <body ontouchstart>
     <div class="weui-tab">
         <div class="weui-tab__bd">
             <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
-                <div class="title-bar-1">
+                <!-- <div class="title-bar-1">
                     <a id="location-select">
                         <img id="location-select-img" src="./assets/images/local_white.png" alt="">
                         <span id="location-name">杭州</span>
@@ -27,75 +30,27 @@
                         <img id="search-bar-img" src="./assets/images/magnifier.png" alt="">
                         <input id="search-info" type="text" placeholder="搜索实习\公司" />
                     </div>
+                </div> -->
+                <div class="weui-search-bar" id="searchBar">
+                    <form class="weui-search-bar__form">
+                        <div class="weui-search-bar__box">
+                            <i class="weui-icon-search"></i>
+                            <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
+                            <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                        </div>
+                        <label class="weui-search-bar__label" id="searchText">
+                            <i class="weui-icon-search"></i>
+                            <span>搜索实习\公司</span>
+                        </label>
+                    </form>
+                    <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
                 </div>
                 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000"></div>
                 <div class="weui-cells post-cells">
                     <div class="cells-container">
-                        <a class="weui-cell" data-id="" href="./weixin_intership_post.html">
-                            <div class="cell-left">
-                                <p class="post-name">后端工程师</p>
-                                <p>
-                                    <span>即刻</span>
-                                    <span>&nbsp;&nbsp;&nbsp;</span>
-                                    <span>IT/互联网</span>
-                                </p>
-                                <p>
-                                    <img src="./assets/images/location_point.png" alt="">
-                                    <span class="location-show">上海杨浦区政学路51号</span>
-                                </p>
-                            </div>
-                            <div class="cell-right">
-                                <p class="post-date">05\31</p>
-                                <div class="post-img-container">
-                                    <img src="./assets/images/jk.png" alt="">
-                                </div>
-                            </div>
-                        </a>
-                        <a class="weui-cell" data-id="" href="./weixin_intership_post.html">
-                            <div class="cell-left">
-                                <p class="post-name">后端工程师</p>
-                                <p>
-                                    <span>即刻</span>
-                                    <span>&nbsp;&nbsp;&nbsp;</span>
-                                    <span>IT/互联网</span>
-                                </p>
-                                <p>
-                                    <img src="./assets/images/location_point.png" alt="">
-                                    <span class="location-show">上海杨浦区政学路51号</span>
-                                </p>
-                            </div>
-                            <div class="cell-right">
-                                <p class="post-date">05\31</p>
-                                <div class="post-img-container">
-                                    <img src="./assets/images/jk.png" alt="">
-                                </div>
-                            </div>
-                        </a>
-                        <a class="weui-cell" data-id="" href="./weixin_intership_post.html">
-                            <div class="cell-left">
-                                <p class="post-name">后端工程师</p>
-                                <p>
-                                    <span>即刻</span>
-                                    <span>&nbsp;&nbsp;&nbsp;</span>
-                                    <span>IT/互联网</span>
-                                </p>
-                                <p>
-                                    <img src="./assets/images/location_point.png" alt="">
-                                    <span class="location-show">上海杨浦区政学路51号</span>
-                                </p>
-                            </div>
-                            <div class="cell-right">
-                                <p class="post-date">05\31</p>
-                                <div class="post-img-container">
-                                    <img src="./assets/images/jk.png" alt="">
-                                </div>
-                            </div>
-                        </a>
+                        <!-- post-list-model -->
                     </div>
-                    <div class="weui-loadmore" style="padding-bottom:30px;height:20px">
-                        <i class="weui-loading"></i>
-                        <span class="weui-loadmore__tips">正在加载</span>
-                    </div>
+                    <div class="post-loading"></div>
                 </div>
             </div>
             <div id="tab2" class="weui-tab__bd-item">
@@ -186,12 +141,37 @@
         <div class="carousel-inner">
             {{#each this}}
             <div class="item {{active @index}}">
-                <img src="{{img_laod}}" />
+                <img src="{{image_url}}" />
                 <div class="carousel-caption">
                 </div>
             </div>
             {{/each}}
         </div>
+    </script>
+    <script id="post-list-model" type="text/x-handlebars-template">
+        {{#each this}}
+        <a class="weui-cell" data-id="" href="./weixin_intership_post.html?id={{companyId}}">
+            <div class="cell-left">
+                <p class="post-name">{{post}}</p>
+                <p>
+                    <span>{{companyName}}</span>
+                </p>
+                <p>
+                    <img src="./assets/images/location_point.png" alt="">
+                    <span class="location-show">{{address}}</span>
+                </p>
+            </div>
+            <div class="cell-center">
+                <p>{{companyType}}</p>
+            </div>
+            <div class="cell-right">
+                <p class="post-date">{{releaseTime}}</p>
+                <div class="post-img-container">
+                    <img src="{{logo}}" alt="">
+                </div>
+            </div>
+        </a>
+        {{/each}}
     </script>
 
     <!--js-->
@@ -201,6 +181,7 @@
     <script type="text/javascript" src="./assets/js/fastclick.js"></script>
     <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
     <script type="text/javascript" src="./assets/js/handlebars-jquery.js"></script>
+    <script type="text/javascript" src="./assets/js/dropload.min.js"></script>
     <script type="text/javascript" src="./assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="./assets/js/model.js"></script>
     <script type="text/javascript" src="./assets/js/jquery-url.js"></script>

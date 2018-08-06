@@ -39,29 +39,6 @@ $(document).ready(function () {
     });
 
     /**
-     * 百度地图
-     */
-    var map = new BMap.Map("map-container");
-    var point = new BMap.Point(116.404, 39);
-    map.centerAndZoom(point, 15);
-    var marker = new BMap.Marker(point);
-    map.addOverlay(marker);
-    map.addControl(new BMap.NavigationControl());
-    map.addControl(new BMap.ScaleControl());
-    map.addControl(new BMap.OverviewMapControl());
-    map.enableScrollWheelZoom();
-    var opts = {
-        width: 100,
-        height: 50,
-        title: "企业地址"
-    }
-    var infoWindow = new BMap.InfoWindow("这是地址", opts);
-    map.openInfoWindow(infoWindow, map.getCenter());
-    marker.addEventListener('click',function () {
-        map.openInfoWindow(infoWindow, marker.getPosition());
-    });
-
-    /**
      * 请求企业信息页面数据
      */
     var option = getBASEGETAJAX();
@@ -74,7 +51,44 @@ $(document).ready(function () {
             $('#company-intro-v').handlebars($('#company-intro-model'), data.data.general);
             $('.photo-album>p').handlebars($('#photo-album-model'), data.data.images);
             $('.company-discription').html(data.data.info);
-            $('.label-body').handlebars($('#label-model'),data.data.marks)
+            $('.label-body').handlebars($('#label-model'), data.data.marks);
+            var location_point = data.data.location.lnglat.split('#');
+            /**
+             * 腾讯地图
+             */
+            var center = new qq.maps.LatLng(location_point[0], location_point[1]);
+            var map = new qq.maps.Map(document.getElementById("map-container"), {
+                center: center,
+                zoom: 16
+            });
+            var marker = new qq.maps.Marker({
+                position: center,
+                map: map
+            });
+            marker.setVisible(true);
+            var anchor = new qq.maps.Point(5, 20),
+                size = new qq.maps.Size(12, 19),
+                origin = new qq.maps.Point(0, 0),
+                icon = new qq.maps.MarkerImage(
+                    "../assets/images/location_point.png",
+                    size,
+                    origin,
+                    anchor
+                );
+            marker.setIcon(icon);
+            var info = new qq.maps.InfoWindow({
+                map: map
+            });
+            info.open();
+            info.setContent('<div style="text-align:center;' +
+                'margin:10px;width:100px">' + data.data.location.address + '</div>');
+            info.setPosition(marker.getPosition());
+            qq.maps.event.addListener(marker, 'click', function () {
+                info.open();
+                info.setContent('<div style="text-align:center;' +
+                    'margin:10px;width:100px">' + data.data.location.address + '</div>');
+                info.setPosition(marker.getPosition());
+            });
         } else {
             console.log(data.code + ":" + data.msg);
             setAlert("系统繁忙，请稍后再试");
@@ -89,7 +103,7 @@ $(document).ready(function () {
     /**
      * 请求企业招聘岗位页面数据
      */
-    getPostData(company_id,1,pageLimit);
+    getPostData(company_id, 1, pageLimit);
 
     /**
      * 点击已关注按钮取消关注
@@ -97,7 +111,7 @@ $(document).ready(function () {
     $('.post-list').on('click', '.post-focused', function () {
         var id = $(this).data('id');
         var option = getBASEDELETEAJAX();
-        option.url = '../student/collections/collection?id='+id;
+        option.url = '../student/collections/collection?id=' + id;
         option.success = function (data) {
             if (data.code !== 200) {
                 alert(data.msg);
@@ -178,7 +192,7 @@ $(document).ready(function () {
     });
 });
 
-function getPostData(company_id,pageNum,pageLimit) {
+function getPostData(company_id, pageNum, pageLimit) {
     console.log(pageNum);
     var option = getBASEGETAJAX();
     option.url = '../student/companies/recruitment';
@@ -199,9 +213,9 @@ function getPostData(company_id,pageNum,pageLimit) {
                 }
             });
 
-            if(pageLimit){
-                pageLimit(pageNum,data.data.totalPage,5,function (page) {
-                    getPostData(company_id,page);
+            if (pageLimit) {
+                pageLimit(pageNum, data.data.totalPage, 5, function (page) {
+                    getPostData(company_id, page);
                 });
             }
         } else {

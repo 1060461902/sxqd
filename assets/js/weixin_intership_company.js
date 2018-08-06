@@ -108,26 +108,42 @@ $(document).ready(function () {
             $('.company-lable-list').handlebars($('#company-lable-model'), data.data.marks);
             var location_point = data.data.location.lnglat.split('#');
             /**
-             * 百度地图
+             * 腾讯地图
              */
-            var map = new BMap.Map("map-container");
-            var point = new BMap.Point(location_point[0], location_point[1]);
-            map.centerAndZoom(point, 15);
-            var marker = new BMap.Marker(point);
-            map.addOverlay(marker);
-            map.addControl(new BMap.NavigationControl());
-            map.addControl(new BMap.ScaleControl());
-            map.addControl(new BMap.OverviewMapControl());
-            var opts = {
-                width: 20,
-                height: 10,
-                title: "企业地址"
-            }
-            var infoWindow = new BMap.InfoWindow(data.data.location.address, opts);
-            map.openInfoWindow(infoWindow, map.getCenter());
-            marker.addEventListener('click', function () {
-                map.openInfoWindow(infoWindow, marker.getPosition());
+            var center = new qq.maps.LatLng(location_point[0], location_point[1]);
+            var map = new qq.maps.Map(document.getElementById("map-container"), {
+                center: center,
+                zoom: 16
             });
+            var marker = new qq.maps.Marker({
+                position: center,
+                map: map
+            });
+            marker.setVisible(true);
+            var anchor = new qq.maps.Point(5,20),
+                size = new qq.maps.Size(12, 19),
+                origin = new qq.maps.Point(0, 0),
+                icon = new qq.maps.MarkerImage(
+                    "../assets/images/location_point.png",
+                    size,
+                    origin,
+                    anchor
+                );
+            marker.setIcon(icon);
+            var info = new qq.maps.InfoWindow({
+                map: map
+            });
+            info.open();
+            info.setContent('<div style="text-align:center;' +
+            'margin:10px;width:100px">'+data.data.location.address+'</div>');
+            info.setPosition(marker.getPosition());
+            qq.maps.event.addListener(marker, 'click', function() {
+                info.open();
+                info.setContent('<div style="text-align:center;' +
+                    'margin:10px;width:100px">'+data.data.location.address+'</div>');
+                info.setPosition(marker.getPosition());
+            });
+
         } else {
             console.log(data.code + ":" + data.msg);
             setAlert("系统繁忙，请稍后再试");

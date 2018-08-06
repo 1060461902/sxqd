@@ -7,7 +7,7 @@ $(document).ready(function () {
         loadDownFn: function (me) {
             $.ajax({
                 type: 'GET',
-                url: './json/job_collection1.json',
+                url: './json/job_collection.json',
                 // url:'../student/collections/collection',
                 data: {
                     pageNum: page
