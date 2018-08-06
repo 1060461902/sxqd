@@ -1,5 +1,4 @@
-var page = 1;
-var status = true;
+var mescroll;
 
 $(document).ready(function () {
     //获取公司id
@@ -12,7 +11,11 @@ $(document).ready(function () {
     var top_height = document.getElementById("company-top").offsetHeight;
     $('.bottom-info').css({
         'overflow': 'scroll',
-        'height': (screen_height - top_height),
+        'height': (screen_height - top_height)
+    });
+    $('#mescroll').height(screen_height - top_height - 50);
+    $('#mescroll').css({
+        'overflow': 'scroll'
     });
 
     /**
@@ -30,6 +33,10 @@ $(document).ready(function () {
                 $('.company-index').css({
                     'display': 'block'
                 });
+                $('.bottom-info').css({
+                    'overflow': 'scroll'
+                });
+                mescroll.destroy();
                 break;
             case 'post-btn':
                 $('#post-btn').addClass('company-switch-selected');
@@ -40,22 +47,31 @@ $(document).ready(function () {
                 $('.company-post').css({
                     'display': 'block'
                 });
-                if (status) {
-                    status = false;
-                    /**
-                     * 请求企业招聘岗位页面数据
-                     */
-                    $('.company-post-loading').dropload({
-                        scrollArea: $('.bottom-info'),
-                        loadDownFn: function (me) {
+                $('.bottom-info').css({
+                    'overflow': 'hidden'
+                });
+                mescroll = new MeScroll("mescroll", {
+                    up: {
+                        auto: true,
+                        isBounce: false,
+                        clearEmptyId: "dataList",
+                        page: {
+                            num: 0,
+                            size:1
+                        },
+                        loadFull: {
+                            use: true
+                        },
+                        callback: function (page) {
                             $.ajax({
                                 type: 'GET',
                                 url: './json/company_profile_2.json',
                                 data: {
-                                    pageNum: page
+                                    pageNum: page.num
                                 },
                                 success: function (data) {
                                     if (data.code === 200) {
+                                        mescroll.endSuccess(data.data.data.length, page.num == data.data.totalPage ? false : true);
                                         var template = Handlebars.compile($('#company-post-model').html());
                                         /*Handlebars.registerHelper('if_bool', function (flag, options) {
                                             if (flag === 1) {
@@ -65,29 +81,32 @@ $(document).ready(function () {
                                             }
                                         });*/
                                         var html = template(data.data.data);
-                                        setTimeout(function () {
-                                            $('.company-post-list').append(html);
-                                            page++;
-                                            me.resetload();
-                                        }, 1000)
-                                        // $('.company-post-list').append(html);
-                                        // page++;
-                                        // me.resetload();
+                                        // setTimeout(function () {
+                                        //     $('.company-post-list').append(html);
+                                        //     page++;
+                                        // }, 1000)
+                                        $('.company-post-list').append(html);
                                     } else {
+                                        mescroll.endErr();
                                         console.log(data.msg);
                                         $.toptip("系统繁忙，请稍后再试", 'error');
-                                        me.resetload();
                                     }
                                 },
                                 error: function (res) {
+                                    //联网失败的回调
+                                    mescroll.endErr();
                                     $.toptip("系统繁忙，请稍后再试", 'error');
                                     console.log(res);
-                                    me.resetload();
                                 }
                             });
+
+                        },
+                        toTop: {
+                            src: "./assets/images/mescroll-totop.png",
+                            offset: 1000
                         }
-                    });
-                }
+                    }
+                });
                 break;
         }
     });
@@ -120,7 +139,7 @@ $(document).ready(function () {
                 map: map
             });
             marker.setVisible(true);
-            var anchor = new qq.maps.Point(5,20),
+            var anchor = new qq.maps.Point(5, 20),
                 size = new qq.maps.Size(12, 19),
                 origin = new qq.maps.Point(0, 0),
                 icon = new qq.maps.MarkerImage(
@@ -135,12 +154,12 @@ $(document).ready(function () {
             });
             info.open();
             info.setContent('<div style="text-align:center;' +
-            'margin:10px;width:100px">'+data.data.location.address+'</div>');
+                'margin:10px;width:100px">' + data.data.location.address + '</div>');
             info.setPosition(marker.getPosition());
-            qq.maps.event.addListener(marker, 'click', function() {
+            qq.maps.event.addListener(marker, 'click', function () {
                 info.open();
                 info.setContent('<div style="text-align:center;' +
-                    'margin:10px;width:100px">'+data.data.location.address+'</div>');
+                    'margin:10px;width:100px">' + data.data.location.address + '</div>');
                 info.setPosition(marker.getPosition());
             });
 
