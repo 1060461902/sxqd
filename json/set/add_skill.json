@@ -1,0 +1,17 @@
+{
+    "GET":{
+        "url":"/student/studentset/skill",
+        "data":{
+            "studentSkill": {
+                "id": 98493,
+                "skill": "ZtC2VD5PZ7",
+                "studentId": 99379
+            }
+        }
+    },
+    "return":{
+        "code": 200,
+        "msg": null,
+        "data": null
+    }
+}

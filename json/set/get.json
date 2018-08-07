@@ -1,0 +1,133 @@
+{
+    "GET": {
+        "url": "/student/studentset/set",
+        "data": {}
+    },
+    "return": {
+        "code": 200,
+        "msg": null,
+        "data": {
+            "integrity": 100,
+            "honor": [
+                {
+                    "id": 82189,
+                    "studentId": 82559,
+                    "time": "1533651008028",
+                    "instruction": "Z6GfqRAgwo",
+                    "honorName": "kcbo6A6Dqe",
+                    "image": "FfSQXEfgnQ",
+                    "deleteTag": false
+                },
+                {
+                    "id": 82632,
+                    "studentId": 83086,
+                    "time": "1533650753723",
+                    "instruction": "VUog9WF0O5",
+                    "honorName": "bGC2mzauAP",
+                    "image": "dCdlpKiHHE",
+                    "deleteTag": true
+                },
+                {
+                    "id": 83662,
+                    "studentId": 84205,
+                    "time": "1533651209188",
+                    "instruction": "BoYWCQasEU",
+                    "honorName": "HYS9SIeX8e",
+                    "image": "yfDKfdQFst",
+                    "deleteTag": false
+                }
+            ],
+            "skill": [
+                {
+                    "id": 84985,
+                    "skill": "nOcBHMvl4O",
+                    "studentId": 85643
+                },
+                {
+                    "id": 86430,
+                    "skill": "qAhWhF0cd8",
+                    "studentId": 86747
+                },
+                {
+                    "id": 87089,
+                    "skill": "ceblh5xLVy",
+                    "studentId": 87909
+                }
+            ],
+            "club": [
+                {
+                    "id": 88846,
+                    "clubName": "eCT37ZuMRR",
+                    "indentity": "Dl8JhcFINc",
+                    "startTime": "1533649920765",
+                    "endTime": "1533650736134",
+                    "instruction": "Q6jSjd1e5L",
+                    "studentId": 89073,
+                    "deleteTag": false
+                },
+                {
+                    "id": 89465,
+                    "clubName": "UxD6t8n5XE",
+                    "indentity": "aAPN23x14S",
+                    "startTime": "1533650165940",
+                    "endTime": "1533650951664",
+                    "instruction": "qYLTgNt3br",
+                    "studentId": 89609,
+                    "deleteTag": true
+                },
+                {
+                    "id": 90216,
+                    "clubName": "YCTCJpXNtK",
+                    "indentity": "ZfXGQsV41o",
+                    "startTime": "1533651180895",
+                    "endTime": "1533650258487",
+                    "instruction": "rRNT7NUEra",
+                    "studentId": 91106,
+                    "deleteTag": true
+                }
+            ],
+            "project": [
+                {
+                    "id": 91172,
+                    "projectName": "AhN6Q7SXkc",
+                    "identity": "b9UqpY9qPo",
+                    "startTime": "1533650777732",
+                    "endTime": "1533649447382",
+                    "instruction": "FE51H0HQvO",
+                    "studentId": 91762,
+                    "deleteTag": true
+                },
+                {
+                    "id": 92605,
+                    "projectName": "PwWqOwvybZ",
+                    "identity": "mbVq4tkXV9",
+                    "startTime": "1533649769576",
+                    "endTime": "1533651013889",
+                    "instruction": "sncJphj1Ss",
+                    "studentId": 93121,
+                    "deleteTag": false
+                },
+                {
+                    "id": 93947,
+                    "projectName": "rdNDRizDTL",
+                    "identity": "tGqtnUxopn",
+                    "startTime": "1533650274409",
+                    "endTime": "1533650763536",
+                    "instruction": "KR1LzFJPNZ",
+                    "studentId": 94369,
+                    "deleteTag": false
+                }
+            ],
+            "info": {
+                "birthday": "2017-12-04",
+                "nation": "汉族",
+                "phone": "13587797198",
+                "sex": "女",
+                "name": "陈泽潇",
+                "logo": "./assets/images/default_head.png",
+                "studentNum": "1511050124",
+                "email": "135@qq.com"
+            }
+        }
+    }
+}

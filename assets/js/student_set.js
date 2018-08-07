@@ -1,10 +1,51 @@
-var USE_ORIGIN_NATIVE_PLACE = 0; //使用原来的地址
-var USE_CHANGED_NATIVE_PLACE = 1; //使用用户修改的地址
-var nativePlaveUseStatus = USE_ORIGIN_NATIVE_PLACE; //默认使用原来的地址
+// var USE_ORIGIN_NATIVE_PLACE = 0; //使用原来的地址
+// var USE_CHANGED_NATIVE_PLACE = 1; //使用用户修改的地址
+// var nativePlaveUseStatus = USE_ORIGIN_NATIVE_PLACE; //默认使用原来的地址
+var phone_num;
+var email;
 
 $(document).ready(function () {
-
-    $(document).context
+    $.ajax({
+        type: "GET",
+        url: "./json/set/get.json",
+        data: {},
+        success: function (d) {
+            d = d.return;
+            if (d.code === 200) {
+                /**
+                 * 基础信息
+                 */
+                var info = d.data.info
+                $('.basic-info-entity').handlebars($('#basic-info-model'), info);
+                $("#student-name").html(info.name);
+                $("#student-no").html(info.studentNum);
+                $("#student-edit-nation").html(info.nation);
+                $("#student-place").html(info.place);//空缺
+                $("#student-birthday").html(info.birthday);
+                if(info.sex === '男'){
+                    $('#male-btn').css({
+                        'display':'block'
+                    })
+                }else{
+                    $('#female-btn').css({
+                        'display':'block'
+                    })
+                }
+                phone_num = info.phone;
+                email = info.email;
+                /**
+                 * 
+                 */
+            } else {
+                console.log(d.code + ":" + d.msg);
+                setAlert("系统繁忙,请稍后再试");
+            }
+        },
+        error: function (res) {
+            console.log(res);
+            setAlert("系统繁忙,请稍后再试");
+        }
+    });
 
     /**
      * 点击上传建立附件
@@ -17,7 +58,7 @@ $(document).ready(function () {
      * 预览按钮
      * */
     $('#preview-btn').click(function () {
-        setConfirm("保存后可预览，确认保存？",function () {
+        setConfirm("保存后可预览，确认保存？", function () {
             window.location.href = "./student_set_view.html";
         })
     });
@@ -33,28 +74,40 @@ $(document).ready(function () {
     /**
      * 数据库中存储的籍贯
      * */
+    /*
     $('#origin-native-place').html("浙江省杭州市江干区");
+    */
 
     /**
      * 籍贯选择相关,定义默认选项
      * */
+    /*
     $('#native-place').distpicker('destroy');
     $('#native-place').distpicker('distpick');
+    */
 
     /**
      * 籍贯的修改按钮
      * */
-    $('#change-place-btn').click(function () {
-        $('#origin-native-place').css({'display':'none'});
-        $('#change-place-btn').css({'display':'none'});
-        $('#native-place-select').css({'display':'inline'});
+    /*$('#change-place-btn').click(function () {
+        $('#origin-native-place').css({
+            'display': 'none'
+        });
+        $('#change-place-btn').css({
+            'display': 'none'
+        });
+        $('#native-place-select').css({
+            'display': 'inline'
+        });
         nativePlaveUseStatus = USE_CHANGED_NATIVE_PLACE;
-    });
+    });*/
 
     /**
      * 基本信息编辑按钮
      * */
-    $('#edit-basic-info').click(function () {
+    $('body').on("click", "#edit-basic-info", function () {
+        $("#phone-number").val(phone_num);
+        $("#student-email").val(email);
         $('.mask').fadeIn();
         $('.edit-position').fadeIn();
     });
@@ -63,51 +116,57 @@ $(document).ready(function () {
      * 基本信息编辑确认按钮
      * */
     $('.basic-info-confirm').click(function () {
-        var native_place = "";
-        if (nativePlaveUseStatus==USE_ORIGIN_NATIVE_PLACE){
-            native_place = $('#origin-native-place').html();
-        }else{
-            $('#native-place-select select option:selected').each(function () {
-                native_place += $(this).val();
-            })
-        }
+        // var native_place = "";
+        // if (nativePlaveUseStatus == USE_ORIGIN_NATIVE_PLACE) {
+        //     native_place = $('#origin-native-place').html();
+        // } else {
+        //     $('#native-place-select select option:selected').each(function () {
+        //         native_place += $(this).val();
+        //     })
+        // }
         $('.mask').fadeOut();
         $('.edit-position').fadeOut();
-        nativePlaveUseStatus = USE_ORIGIN_NATIVE_PLACE;
-        $('#origin-native-place').html(native_place);
-        $('#origin-native-place').css({'display':'inline'});
-        $('#change-place-btn').css({'display':'inline'});
-        $('#native-place-select').css({'display':'none'});
+        // nativePlaveUseStatus = USE_ORIGIN_NATIVE_PLACE;
+        // $('#origin-native-place').html(native_place);
+        // $('#origin-native-place').css({
+        //     'display': 'inline'
+        // });
+        // $('#change-place-btn').css({
+        //     'display': 'inline'
+        // });
+        // $('#native-place-select').css({
+        //     'display': 'none'
+        // });
         setAlert("编辑成功");
     });
 
     $('#project-info-group,#corporation-info-group,#honor-info-group').hide();
-    
+
     /**
      * 右键弹出菜单
      * */
-    $('.updown-list').on('contextmenu','li',function(e){
+    $('.updown-list').on('contextmenu', 'li', function (e) {
         e.preventDefault();
         var x = e.clientX;
         var y = e.clientY;
         $(".popup-menu").css({
-            'left':x+'px',
-            'top':y+'px'
+            'left': x + 'px',
+            'top': y + 'px'
         }).show()
     });
-    
+
     /**
      * 项目经历下拉按钮
      * */
     $('#project-info-updown').click(function () {
         var role = $(this).data('role');
-        if (role === "down"){
+        if (role === "down") {
             $(this).val('▼');
-            $(this).data('role','up');
+            $(this).data('role', 'up');
             $('#project-info-group').slideUp();
-        }else if(role === "up"){
+        } else if (role === "up") {
             $(this).val('▲');
-            $(this).data('role','down');
+            $(this).data('role', 'down');
             $('#project-info-group').slideDown();
         }
     });
@@ -117,13 +176,13 @@ $(document).ready(function () {
      * */
     $('#corporation-info-updown').click(function () {
         var role = $(this).data('role');
-        if (role === "down"){
+        if (role === "down") {
             $(this).val('▼');
-            $(this).data('role','up');
+            $(this).data('role', 'up');
             $('#corporation-info-group').slideUp();
-        }else if(role === "up"){
+        } else if (role === "up") {
             $(this).val('▲');
-            $(this).data('role','down');
+            $(this).data('role', 'down');
             $('#corporation-info-group').slideDown();
         }
     });
@@ -143,14 +202,18 @@ $(document).ready(function () {
         var max = 200;
         var str = $(this).val();
         var len = str.length;
-        if (len>max){
-            $('.project-info-confirm').attr("disabled",true);
-            $('.project-info-confirm').css({'background':'#7f7f7f'})
-        }else {
-            $('.project-info-confirm').attr("disabled",false);
-            $('.project-info-confirm').css({'background':'#2f84f6'})
+        if (len > max) {
+            $('.project-info-confirm').attr("disabled", true);
+            $('.project-info-confirm').css({
+                'background': '#7f7f7f'
+            })
+        } else {
+            $('.project-info-confirm').attr("disabled", false);
+            $('.project-info-confirm').css({
+                'background': '#2f84f6'
+            })
         }
-        $('.project-limit').html(200-len);
+        $('.project-limit').html(200 - len);
     });
 
     /**
@@ -177,14 +240,18 @@ $(document).ready(function () {
         var max = 200;
         var str = $(this).val();
         var len = str.length;
-        if (len>max){
-            $('.corporation-info-confirm').attr("disabled",true);
-            $('.corporation-info-confirm').css({'background':'#7f7f7f'})
-        }else {
-            $('.corporation-info-confirm').attr("disabled",false);
-            $('.corporation-info-confirm').css({'background':'#2f84f6'})
+        if (len > max) {
+            $('.corporation-info-confirm').attr("disabled", true);
+            $('.corporation-info-confirm').css({
+                'background': '#7f7f7f'
+            })
+        } else {
+            $('.corporation-info-confirm').attr("disabled", false);
+            $('.corporation-info-confirm').css({
+                'background': '#2f84f6'
+            })
         }
-        $('.corporation-limit').html(200-len);
+        $('.corporation-limit').html(200 - len);
     });
 
     /**
@@ -209,13 +276,13 @@ $(document).ready(function () {
      * */
     $('#honor-info-updown').click(function () {
         var role = $(this).data('role');
-        if (role === "down"){
+        if (role === "down") {
             $(this).val('▼');
-            $(this).data('role','up');
+            $(this).data('role', 'up');
             $('#honor-info-group').slideUp();
-        }else if(role === "up"){
+        } else if (role === "up") {
             $(this).val('▲');
-            $(this).data('role','down');
+            $(this).data('role', 'down');
             $('#honor-info-group').slideDown();
         }
     });
@@ -234,14 +301,18 @@ $(document).ready(function () {
         var max = 200;
         var str = $(this).val();
         var len = str.length;
-        if (len>max){
-            $('.honor-info-confirm').attr("disabled",true);
-            $('.honor-info-confirm').css({'background':'#7f7f7f'})
-        }else {
-            $('.honor-info-confirm').attr("disabled",false);
-            $('.honor-info-confirm').css({'background':'#2f84f6'})
+        if (len > max) {
+            $('.honor-info-confirm').attr("disabled", true);
+            $('.honor-info-confirm').css({
+                'background': '#7f7f7f'
+            })
+        } else {
+            $('.honor-info-confirm').attr("disabled", false);
+            $('.honor-info-confirm').css({
+                'background': '#2f84f6'
+            })
         }
-        $('.honor-limit').html(200-len);
+        $('.honor-limit').html(200 - len);
     });
 
     /**
@@ -256,13 +327,18 @@ $(document).ready(function () {
 
 $(document).scroll(function (e) {
     //侧边导航栏
-    if ($(document).scrollTop()>450){
-        $(".guide-bar").css({"position":"fixed","top":"50px"});
-    }else {
-        $(".guide-bar").css({"position":"static"});
+    if ($(document).scrollTop() > 450) {
+        $(".guide-bar").css({
+            "position": "fixed",
+            "top": "50px"
+        });
+    } else {
+        $(".guide-bar").css({
+            "position": "static"
+        });
     }
 });
 
 $(document).click(function () {
-   $(".popup-menu").hide();
+    $(".popup-menu").hide();
 });

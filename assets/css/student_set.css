@@ -271,7 +271,8 @@
 }
 
 .editor{
-    z-index: 100;
+    display: none;
+    z-index: 999;
     width: 500px;
     position: fixed;
     top: 50%;
@@ -318,7 +319,14 @@
     outline: none;
     width: 60px;
     border: none;
-    background-color: #959595;
+}
+
+#student-sex-male{
+    background-color: #2f84f6;
+}
+
+#student-sex-female{
+    background-color: #ff525c;
 }
 
 #female-btn{
@@ -381,10 +389,6 @@
 #change-place-btn{
     cursor: pointer;
     font-size: 10px;
-}
-
-.editor{
-    display: none;
 }
 
 .info-title{

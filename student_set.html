@@ -47,24 +47,24 @@
             <div>
                 <p>
                     <span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名&nbsp;&nbsp;</span>
-                    <span id="student-name">小陈</span>
+                    <span id="student-name"></span>
                 </p>
             </div>
             <div>
                 <p>
                     <span>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号&nbsp;&nbsp;</span>
-                    <span id="student-no">1612180000</span>
+                    <span id="student-no"></span>
                 </p>
             </div>
             <div id="student-sex">
                 <span>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别&nbsp;&nbsp;</span>
-                <div>
+                <div id="male-btn" style="display: none">
                     <button id="student-sex-male">
                         <img src="./assets/images/male.png">
                     </button>
                     <p>男</p>
                 </div>
-                <div id="female-btn">
+                <div id="female-btn" style="display: none">
                     <button id="student-sex-female">
                         <img src="./assets/images/female.png">
                     </button>
@@ -77,7 +77,7 @@
             <div id="student-nation">
                 <p>
                     <span>民&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族&nbsp;&nbsp;</span>
-                    <select>
+                    <!-- <select>
                         <option>汉族</option>
                         <option>壮族</option>
                         <option>满族</option>
@@ -135,13 +135,14 @@
                         <option>珞巴族</option>
                         <option>布朗族</option>
                         <option>来自国外</option>
-                    </select>
+                    </select> -->
+                    <span id="student-edit-nation"></span>
                 </p>
             </div>
             <div id="native-place" data-toggle="distpicker">
                 <p id="change-native-place">
                     <span>籍&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;贯&nbsp;&nbsp;</span>
-                    <span id="native-place-select">
+                    <!-- <span id="native-place-select">
                         <select></select>
                         <select></select>
                         <select></select>
@@ -149,25 +150,27 @@
                     <span id="origin-native-place"></span>
                     <a id="change-place-btn">
                         修改
-                    </a>
+                    </a> -->
+                    <span id="student-place"></span>
                 </p>
             </div>
             <div>
                 <p>
                     <span>出生年月&nbsp;&nbsp;</span>
-                    <input id="birthday-data" type="date" value="1998-05-16" />
+                    <!-- <input id="birthday-data" type="date" value="1998-05-16" /> -->
+                    <span id="student-birthday">1998/5/17</span>
                 </p>
             </div>
             <div>
                 <p>
                     <span>手机号码&nbsp;&nbsp;</span>
-                    <input id="phone-number" type="text" value="11111111111" placeholder="请输入手机号" />
+                    <input id="phone-number" type="text" value="" placeholder="请输入手机号" />
                 </p>
             </div>
             <div>
                 <p>
                     <span>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱&nbsp;&nbsp;</span>
-                    <input id="student-email" type="text" value="ccc@126.com" placeholder="请输入常用邮箱" />
+                    <input id="student-email" type="text" value="" placeholder="请输入常用邮箱" />
                 </p>
             </div>
             <div class="edit-btn-bar">
@@ -384,28 +387,7 @@
                         <div class="basic-info">
                             <p class="sub-title-name" id="basic-info">基本信息</p>
                             <div class="basic-info-entity">
-                                <div class="head-img-block">
-                                    <img src="./assets/images/default_head.png">
-                                    <p>
-                                        上传头像
-                                    </p>
-                                </div>
-                                <div class="basic-info-other">
-                                    <p class="basic-info-name">小陈</p>
-                                    <p class="basic-info-id">1612180000|男|汉族|1998年9月</p>
-                                    <p>
-                                        <span>手机号码:</span>
-                                        <span class="info-phone-number">11111111111</span>
-                                    </p>
-                                    <p>
-                                        <span>邮箱:</span>
-                                        <span class="info-email">840276079@qq.com</span>
-                                    </p>
-                                </div>
-                                <a id="edit-basic-info">
-                                    <img src="./assets/images/edit_pen_over.png">
-                                    <span>编辑</span>
-                                </a>
+                                <!-- basic-info-model -->
                             </div>
                         </div>
                         <hr/>
@@ -556,8 +538,7 @@
                                 <span class="resume-complete-percent">50%</span>
                             </p>
                             <div class="progress">
-                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                    aria-valuemax="100" style="width: 50%"></div>
+                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>
                             </div>
                         </div>
                         <div class="guide-upload">
@@ -629,8 +610,34 @@
     <script type="text/javascript" src="./assets/js/html5shiv.min.js"></script>
     <script type="text/javascript" src="./assets/js/respond.js"></script>
     <![endif]-->
+    <script id="basic-info-model" type="text/x-handlebars-template">
+        <div class="head-img-block">
+            <input id="head-img-upload" type="file" style="display: none" />
+            <img src="{{logo}}">
+            <p>
+                上传头像
+            </p>
+        </div>
+        <div class="basic-info-other">
+            <p class="basic-info-name">{{name}}</p>
+            <p class="basic-info-id">{{studentNum}}|{{sex}}|{{nation}}|{{birthday}}</p>
+            <p>
+                <span>手机号码:</span>
+                <span class="info-phone-number">{{phone}}</span>
+            </p>
+            <p>
+                <span>邮箱:</span>
+                <span class="info-email">{{email}}</span>
+            </p>
+        </div>
+        <a id="edit-basic-info">
+            <img src="./assets/images/edit_pen_over.png">
+            <span>编辑</span>
+        </a>
+    </script>
     <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-jquery.js"></script>
     <script type="text/javascript" src="./assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="./assets/js/bootstrap-paginator.min.js"></script>
     <script type="text/javascript" src="./assets/js/model.js"></script>

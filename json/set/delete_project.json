@@ -1,0 +1,15 @@
+{
+    "DELETE":{
+        "url":"/student/studentsets/project",
+        "data":{
+            "id": 84897,
+            "code": 200,
+            "msg": null
+        }
+    },
+    "return":{
+        "code": 200,
+        "msg": null,
+        "data": null
+    }
+}

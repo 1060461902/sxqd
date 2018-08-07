@@ -1,0 +1,17 @@
+{
+    "POST":{
+        "url":"/student/studentsets/honor",
+        "data":{
+            "id": 53217,
+            "name": "dXhm4lPE1t",
+            "time": "1533643125553",
+            "instruction": "IH3XvyjJjN",
+            "image": "<File>"
+        }
+    },
+    "return":{
+        "code": 200,
+        "msg": null,
+        "data": null
+    }
+}
