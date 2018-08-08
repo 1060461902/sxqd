@@ -1,6 +1,7 @@
 // var USE_ORIGIN_NATIVE_PLACE = 0; //使用原来的地址
 // var USE_CHANGED_NATIVE_PLACE = 1; //使用用户修改的地址
 // var nativePlaveUseStatus = USE_ORIGIN_NATIVE_PLACE; //默认使用原来的地址
+var isProjectAdd = true;
 
 $(document).ready(function () {
     $.ajax({
@@ -36,6 +37,7 @@ $(document).ready(function () {
                 $('.project-info-list').handlebars($('#project-info-model'), project, {
                     name: "timehelper",
                     callback: function (time) {
+                        time = Number(time);
                         return getdate(time);
                     }
                 });
@@ -47,6 +49,7 @@ $(document).ready(function () {
                 $('.corporation-info-list').handlebars($('#corporation-info-model'), club, {
                     name: "timehelper",
                     callback: function (time) {
+                        time = Number(time);
                         return getdate(time);
                     }
                 });
@@ -58,6 +61,7 @@ $(document).ready(function () {
                 $('.honor-info-list').handlebars($('#honor-info-model'), honor, {
                     name: "timehelper",
                     callback: function (time) {
+                        time = Number(time);
                         return getdate(time);
                     }
                 });
@@ -122,7 +126,7 @@ $(document).ready(function () {
     });
 
     /**
-     * 
+     * 点击X按钮清空技能输入框
      */
     $('.editable-lable>a').click(function () {
         $('.editable-lable>input').val('')
@@ -208,8 +212,11 @@ $(document).ready(function () {
         $('#head-upload').click();
     });
 
+    /**
+     * 头像预览
+     */
     $('#head-upload').change(function () {
-        proviewImg($('#head-upload')[0].files[0],$('#head-img-prov'));
+        proviewImg($('#head-upload')[0].files[0], $('#head-img-prov'));
     });
 
     /**
@@ -224,9 +231,9 @@ $(document).ready(function () {
         //         native_place += $(this).val();
         //     })
         // }
-        var phone_edit = $('#phone-number');
-        var email_edit = $('#student-email');
-        var head_img = $('#head-img-prov')[0].files[0];
+        var phone_edit = $('#phone-number').val();
+        var email_edit = $('#student-email').val();
+        var head_img = $('#head-upload')[0].files[0];
         var form = new FormData();
         if (head_img != null && head_img != '') {
             form.append('logo', head_img);
@@ -244,6 +251,47 @@ $(document).ready(function () {
         option.success = function (d) {
             d = d.return; //暂时
             if (d.code === 200) {
+                $.ajax({
+                    type: "GET",
+                    url: "./json/set/get.json",
+                    data: {},
+                    success: function (d) {
+                        d = d.return;
+                        if (d.code === 200) {
+                            /**
+                             * 基础信息
+                             */
+                            var info = d.data.info;
+                            $('.basic-info-entity').handlebars($('#basic-info-model'), info);
+                            $("#student-name").html(info.name);
+                            $("#student-no").html(info.studentNum);
+                            $("#student-edit-nation").html(info.nation);
+                            $("#student-place").html(info.place); //空缺
+                            $("#student-birthday").html(info.birthday);
+                            if (info.sex === '男') {
+                                $('#male-btn').css({
+                                    'display': 'block'
+                                })
+                            } else {
+                                $('#female-btn').css({
+                                    'display': 'block'
+                                })
+                            }
+
+                            /**
+                             * 信息读取完成后计算百分比
+                             */
+                            persent();
+                        } else {
+                            console.log(d.code + ":" + d.msg);
+                            setAlert("系统繁忙,请稍后再试");
+                        }
+                    },
+                    error: function (res) {
+                        console.log(res);
+                        setAlert("系统繁忙,请稍后再试");
+                    }
+                });
                 setAlert("修改成功");
             } else {
                 console.log(d.code + ":" + d.msg);
@@ -322,9 +370,36 @@ $(document).ready(function () {
      * 点击项目经历添加按钮
      * */
     $('.add-project').click(function () {
+        $('#edit-project-name input').val('');
+        $('#edit-project-role input').val('');
+        $('#edit-project-start input').val('');
+        $('#edit-project-end input').val('');
+        $('#edit-project-description textarea').val('');
+        var id = $('.edit-project').attr('data-id', '');
+        var studentId = $('.edit-project').attr('data-studentid', '');
+        isProjectAdd = true;
         $('.mask').fadeIn();
         $('.edit-project').fadeIn();
     });
+
+    /**
+     * 点击项目修改按钮
+     */
+    $('.project-info-list').on('click', '.project-edit', function () {
+        var parent = $(this).parent().parent();
+        var id = $(this).data('id');
+        var studentId = $(this).data('studentid');
+        $('.edit-project').attr('data-id', id);
+        $('.edit-project').attr('data-studentid', studentId);
+        $('#edit-project-name input').val(parent.find('.project-info-name').html());
+        $('#edit-project-role input').val(parent.find('.project-info-role').html());
+        $('#edit-project-start input').val(parent.find('.project-info-start').html());
+        $('#edit-project-end input').val(parent.find('.project-info-end').html());
+        $('#edit-project-description textarea').val(parent.find('.project-info-introduction').html());
+        isProjectAdd = false;
+        $('.mask').fadeIn();
+        $('.edit-project').fadeIn();
+    })
 
     /**
      * 项目经历描述字数限制
@@ -351,9 +426,99 @@ $(document).ready(function () {
      * 项目经历编辑确认按钮
      * */
     $('.project-info-confirm').click(function () {
-        $('.mask').fadeOut();
-        $('.edit-project').fadeOut();
-        setAlert("编辑成功");
+        var proname = $('#edit-project-name input').val();
+        var proindentity = $('#edit-project-role input').val();
+        var prostart = $('#edit-project-start input').val();
+        var proend = $('#edit-project-end input').val();
+        var prointro = $('#edit-project-description textarea').val();
+        if (proname == '' || proname == null) {
+            setAlert('请填写项目名称');
+        } else if (proindentity == '' || proindentity == null) {
+            setAlert('请填写参与身份');
+        } else if (prostart == '' || prostart == null) {
+            setAlert('请填写开始时间');
+        } else if (proend == '' || proend == null) {
+            setAlert('请填写结束时间');
+        } else if (prointro == '' || prointro == null) {
+            setAlert('请填写项目介绍');
+        } else {
+            // var option = getBASEPOSTAJAX();
+            var option = getBASEGETAJAX(); //暂时
+            option.url = "./json/set/add_project.json";
+            if (isProjectAdd) {
+                option.data = {
+                    "studentProject": {
+                        "projectName": proname,
+                        "identity": proindentity,
+                        "startTime": prostart,
+                        "endTime": proend,
+                        "instruction": prointro,
+                        "deleteTag": false
+                    }
+                }
+            } else {
+                var id = $('.edit-project').data('id');
+                var studentId = $('.edit-project').data('studentid');
+                option.data = {
+                    "studentProject": {
+                        "id": id,
+                        "projectName": proname,
+                        "identity": proindentity,
+                        "startTime": prostart,
+                        "endTime": proend,
+                        "instruction": prointro,
+                        "studentId": studentId,
+                        "deleteTag": false
+                    }
+                }
+                var id = $('.edit-project').attr('data-id', '');
+                var studentId = $('.edit-project').attr('data-studentid', '');
+            }
+            option.success = function (d) {
+                d = d.return; //暂时
+                if (d.code === 200) {
+                    $.ajax({
+                        type: "GET",
+                        url: "./json/set/get.json",
+                        data: {},
+                        success: function (d) {
+                            d = d.return; //暂时
+                            if (d.code === 200) {
+                                /**
+                                 * 项目经历
+                                 */
+                                var project = d.data.project;
+                                $('.project-info-list').handlebars($('#project-info-model'), project, {
+                                    name: "timehelper",
+                                    callback: function (time) {
+                                        return getdate(time);
+                                    }
+                                });
+                            } else {
+                                console.log(d.code + ":" + d.msg);
+                                setAlert("系统繁忙,请稍后再试");
+                            }
+                        },
+                        error: function (res) {
+                            console.log(res);
+                            setAlert("系统繁忙,请稍后再试");
+                        }
+                    });
+                    $('.mask').fadeOut();
+                    $('.edit-project').fadeOut();
+                    setAlert("编辑成功");
+                } else {
+                    console.log(d.code + ":" + d.msg);
+                    setAlert("系统繁忙，请稍后再试");
+                }
+            }
+            option.error = function (res) {
+                setAlert("系统繁忙，请稍后再试");
+                console.log(res);
+            }
+            $.ajax(option);
+        }
+
     });
 
     /**
@@ -519,7 +684,7 @@ function getdate(time) {
     var y = date.getFullYear();
     var m = date.getMonth() + 1;
     var d = date.getDate();
-    return y + "/" + (m < 10 ? "0" + m : m) + "/" + (d < 10 ? "0" + d : d);
+    return y + "-" + (m < 10 ? "0" + m : m) + "-" + (d < 10 ? "0" + d : d);
 }
 
 /**
@@ -540,6 +705,6 @@ function proviewImg(file, container) {
     reader.readAsBinaryString(file);
     reader.onload = function (f) {
         var src = "data:" + file.type + ";base64," + window.btoa(this.result);
-        container.attr('src',src);
+        container.attr('src', src);
     }
 }
