@@ -2,6 +2,8 @@
 // var USE_CHANGED_NATIVE_PLACE = 1; //使用用户修改的地址
 // var nativePlaveUseStatus = USE_ORIGIN_NATIVE_PLACE; //默认使用原来的地址
 var isProjectAdd = true;
+var isClubAdd = true;
+var isHonorAdd = true;
 
 $(document).ready(function () {
     $.ajax({
@@ -133,7 +135,7 @@ $(document).ready(function () {
     });
 
     /**
-     * 点击上传建立附件
+     * 点击上传简历附件
      * */
     $('.upload-btn').click(function () {
         $('#attachment-upload').trigger("click");
@@ -351,22 +353,6 @@ $(document).ready(function () {
     });
 
     /**
-     * 社团经历下拉按钮
-     * */
-    $('#corporation-info-updown').click(function () {
-        var role = $(this).data('role');
-        if (role === "down") {
-            $(this).val('▼');
-            $(this).data('role', 'up');
-            $('#corporation-info-group').slideUp();
-        } else if (role === "up") {
-            $(this).val('▲');
-            $(this).data('role', 'down');
-            $('#corporation-info-group').slideDown();
-        }
-    });
-
-    /**
      * 点击项目经历添加按钮
      * */
     $('.add-project').click(function () {
@@ -399,7 +385,7 @@ $(document).ready(function () {
         isProjectAdd = false;
         $('.mask').fadeIn();
         $('.edit-project').fadeIn();
-    })
+    });
 
     /**
      * 项目经历描述字数限制
@@ -445,65 +431,27 @@ $(document).ready(function () {
             // var option = getBASEPOSTAJAX();
             var option = getBASEGETAJAX(); //暂时
             option.url = "./json/set/add_project.json";
-            if (isProjectAdd) {
-                option.data = {
-                    "studentProject": {
-                        "projectName": proname,
-                        "identity": proindentity,
-                        "startTime": prostart,
-                        "endTime": proend,
-                        "instruction": prointro,
-                        "deleteTag": false
-                    }
+            var push = {
+                "studentProject": {
+                    "projectName": proname,
+                    "identity": proindentity,
+                    "startTime": prostart,
+                    "endTime": proend,
+                    "instruction": prointro,
                 }
-            } else {
-                var id = $('.edit-project').data('id');
-                var studentId = $('.edit-project').data('studentid');
-                option.data = {
-                    "studentProject": {
-                        "id": id,
-                        "projectName": proname,
-                        "identity": proindentity,
-                        "startTime": prostart,
-                        "endTime": proend,
-                        "instruction": prointro,
-                        "studentId": studentId,
-                        "deleteTag": false
-                    }
-                }
-                var id = $('.edit-project').attr('data-id', '');
-                var studentId = $('.edit-project').attr('data-studentid', '');
             }
+            if (!isProjectAdd) {
+                var id = $('.edit-project').data('id');
+                // var studentId = $('.edit-project').data('studentid');
+                push.studentProject.id = id;
+                $('.edit-project').attr('data-id', '');
+                // $('.edit-project').attr('data-studentid', '');
+            }
+            option.data = push;
             option.success = function (d) {
                 d = d.return; //暂时
                 if (d.code === 200) {
-                    $.ajax({
-                        type: "GET",
-                        url: "./json/set/get.json",
-                        data: {},
-                        success: function (d) {
-                            d = d.return; //暂时
-                            if (d.code === 200) {
-                                /**
-                                 * 项目经历
-                                 */
-                                var project = d.data.project;
-                                $('.project-info-list').handlebars($('#project-info-model'), project, {
-                                    name: "timehelper",
-                                    callback: function (time) {
-                                        return getdate(time);
-                                    }
-                                });
-                            } else {
-                                console.log(d.code + ":" + d.msg);
-                                setAlert("系统繁忙,请稍后再试");
-                            }
-                        },
-                        error: function (res) {
-                            console.log(res);
-                            setAlert("系统繁忙,请稍后再试");
-                        }
-                    });
+                    reflashProjct();
                     $('.mask').fadeOut();
                     $('.edit-project').fadeOut();
                     setAlert("编辑成功");
@@ -518,19 +466,38 @@ $(document).ready(function () {
             }
             $.ajax(option);
         }
-
     });
 
     /**
-     * 点击社团经历添加按钮
-     * */
-    $('.add-corporation').click(function () {
-        $('.mask').fadeIn();
-        $('.edit-corporation').fadeIn();
+     * 点击项目删除按钮
+     */
+    $('.project-info-list').on('click', '.project-delete', function () {
+        var id = $(this).data('id');
+        // var option = getBASEDELETEAJAX();
+        var option = getBASEGETAJAX();
+        option.url = './json/set/delete_project.json';
+        option.data = {
+            'id': id
+        }
+        option.success = function (d) {
+            d = d.return; //暂时
+            if (d.code === 200) {
+                reflashProjct();
+                setAlert('删除成功');
+            } else {
+                console.log(d.code + ":" + d.msg);
+                setAlert("系统繁忙，请稍后再试");
+            }
+        }
+        option.error = function (res) {
+            setAlert("系统繁忙，请稍后再试");
+            console.log(res);
+        }
+        $.ajax(option);
     });
 
     /**
-     * 项目经历描述字数限制
+     * 社团经历描述字数限制
      * */
     $('#edit-corporation-description textarea').keyup(function () {
         var max = 200;
@@ -551,12 +518,141 @@ $(document).ready(function () {
     });
 
     /**
+     * 社团经历下拉按钮
+     * */
+    $('#corporation-info-updown').click(function () {
+        var role = $(this).data('role');
+        if (role === "down") {
+            $(this).val('▼');
+            $(this).data('role', 'up');
+            $('#corporation-info-group').slideUp();
+        } else if (role === "up") {
+            $(this).val('▲');
+            $(this).data('role', 'down');
+            $('#corporation-info-group').slideDown();
+        }
+    });
+
+    /**
+     * 点击社团经历添加按钮
+     * */
+    $('.add-corporation').click(function () {
+        $('#edit-corporation-name input').val('');
+        $('#edit-corporation-role input').val('');
+        $('#edit-corporation-start input').val('');
+        $('#edit-corporation-end input').val('');
+        $('#edit-corporation-description textarea').val('');
+        var id = $('.edit-corporation').attr('data-id', '');
+        var studentId = $('.edit-corporation').attr('data-studentid', '');
+        isClubAdd = true;
+        $('.mask').fadeIn();
+        $('.edit-corporation').fadeIn();
+    });
+
+    /**
      * 社团经历编辑确认按钮
      * */
     $('.corporation-info-confirm').click(function () {
-        $('.mask').fadeOut();
-        $('.edit-corporation').fadeOut();
-        setAlert("编辑成功");
+        var clubname = $('#edit-corporation-name input').val();
+        var clubindentity = $('#edit-corporation-role input').val();
+        var clubstart = $('#edit-corporation-start input').val();
+        var clubend = $('#edit-corporation-end input').val();
+        var clubintro = $('#edit-corporation-description textarea').val();
+        if (clubname == '' || clubname == null) {
+            setAlert('请填写社团名称');
+        } else if (clubindentity == '' || clubindentity == null) {
+            setAlert('请填写担任职位');
+        } else if (clubstart == '' || clubstart == null) {
+            setAlert('请填写开始时间');
+        } else if (clubend == '' || clubend == null) {
+            setAlert('请填写结束时间');
+        } else if (clubintro == '' || clubintro == null) {
+            setAlert('请填写经历介绍');
+        } else {
+            // var option = getBASEPOSTAJAX();
+            var option = getBASEGETAJAX(); //暂时
+            option.url = "./json/set/add_club.json";
+            push = {
+                "studentClub": {
+                    "clubName": clubname,
+                    "indentity": clubindentity,
+                    "startTime": clubstart,
+                    "endTime": clubend,
+                    "instruction": clubintro
+                }
+            }
+            if (!isClubAdd) {
+                var id = $('.edit-corporation').data('id');
+                // var studentId = $('.edit-corporation').data('studentid');
+                push.studentClub.id = id;
+                $('.edit-corporation').attr('data-id', '');
+            }
+            option.data = push;
+            option.success = function (d) {
+                d = d.return; //暂时
+                if (d.code === 200) {
+                    reflashClub();
+                    $('.mask').fadeOut();
+                    $('.edit-corporation').fadeOut();
+                    setAlert("编辑成功");
+                } else {
+                    console.log(d.code + ":" + d.msg);
+                    setAlert("系统繁忙，请稍后再试");
+                }
+            }
+            option.error = function (res) {
+                setAlert("系统繁忙，请稍后再试");
+                console.log(res);
+            }
+            $.ajax(option);
+        }
+    });
+
+    /**
+     * 点击社团修改按钮
+     */
+    $('.corporation-info-list').on('click', '.corporation-edit', function () {
+        var parent = $(this).parent().parent();
+        var id = $(this).data('id');
+        // var studentId = $(this).data('studentid');
+        $('.edit-corporation').attr('data-id', id);
+        // $('.edit-project').attr('data-studentid', studentId);
+        $('#edit-corporation-name input').val(parent.find('.corporation-info-name').html());
+        $('#edit-corporation-role input').val(parent.find('.corporation-info-role').html());
+        $('#edit-corporation-start input').val(parent.find('.corporation-info-start').html());
+        $('#edit-corporation-end input').val(parent.find('.corporation-info-end').html());
+        $('#edit-corporation-description textarea').val(parent.find('.corporation-info-introduction').html());
+        isClubAdd = false;
+        $('.mask').fadeIn();
+        $('.edit-corporation').fadeIn();
+    });
+
+    /**
+     * 点击经历删除按钮
+     */
+    $('.corporation-info-list').on('click', '.corporation-delete', function () {
+        var id = $(this).data('id');
+        // var option = getBASEDELETEAJAX();
+        var option = getBASEGETAJAX();
+        option.url = './json/set/delete_club.json';
+        option.data = {
+            'id': id
+        }
+        option.success = function (d) {
+            d = d.return; //暂时
+            if (d.code === 200) {
+                reflashClub();
+                setAlert('删除成功');
+            } else {
+                console.log(d.code + ":" + d.msg);
+                setAlert("系统繁忙，请稍后再试");
+            }
+        }
+        option.error = function (res) {
+            setAlert("系统繁忙，请稍后再试");
+            console.log(res);
+        }
+        $.ajax(option);
     });
 
     /**
@@ -707,4 +803,106 @@ function proviewImg(file, container) {
         var src = "data:" + file.type + ";base64," + window.btoa(this.result);
         container.attr('src', src);
     }
+}
+
+/**
+ * 刷新项目列表
+ */
+function reflashProjct() {
+    $.ajax({
+        type: "GET",
+        url: "./json/set/get.json",
+        data: {},
+        success: function (d) {
+            d = d.return; //暂时
+            if (d.code === 200) {
+                /**
+                 * 项目经历
+                 */
+                var project = d.data.project;
+                $('.project-info-list').handlebars($('#project-info-model'), project, {
+                    name: "timehelper",
+                    callback: function (time) {
+                        time = Number(time);
+                        return getdate(time);
+                    }
+                });
+            } else {
+                console.log(d.code + ":" + d.msg);
+                setAlert("系统繁忙,请稍后再试");
+            }
+        },
+        error: function (res) {
+            console.log(res);
+            setAlert("系统繁忙,请稍后再试");
+        }
+    });
+}
+
+/**
+ * 刷新社团经历列表
+ */
+function reflashClub() {
+    $.ajax({
+        type: "GET",
+        url: "./json/set/get.json",
+        data: {},
+        success: function (d) {
+            d = d.return; //暂时
+            if (d.code === 200) {
+                /**
+                 * 社团经历 
+                 */
+                var club = d.data.club;
+                $('.corporation-info-list').handlebars($('#corporation-info-model'), club, {
+                    name: "timehelper",
+                    callback: function (time) {
+                        time = Number(time);
+                        return getdate(time);
+                    }
+                });
+            } else {
+                console.log(d.code + ":" + d.msg);
+                setAlert("系统繁忙,请稍后再试");
+            }
+        },
+        error: function (res) {
+            console.log(res);
+            setAlert("系统繁忙,请稍后再试");
+        }
+    });
+}
+
+/**
+ * 刷新所获荣誉列表
+ */
+function reflashHonor() {
+    $.ajax({
+        type: "GET",
+        url: "./json/set/get.json",
+        data: {},
+        success: function (d) {
+            d = d.return; //暂时
+            if (d.code === 200) {
+                /**
+                 * 所获荣誉
+                 */
+                var honor = d.data.honor;
+                $('.honor-info-list').handlebars($('#honor-info-model'), honor, {
+                    name: "timehelper",
+                    callback: function (time) {
+                        time = Number(time);
+                        return getdate(time);
+                    }
+                });
+            } else {
+                console.log(d.code + ":" + d.msg);
+                setAlert("系统繁忙,请稍后再试");
+            }
+        },
+        error: function (res) {
+            console.log(res);
+            setAlert("系统繁忙,请稍后再试");
+        }
+    });
 }

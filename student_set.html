@@ -567,7 +567,7 @@
     <script type="text/javascript" src="./assets/js/respond.js"></script>
     <![endif]-->
     <script id="basic-info-model" type="text/x-handlebars-template">
-        <div class="head-img-block">
+        <div class="head-img-block" notFoundSrc="./assets/images/default_head.png">
             <img src="{{logo}}">
         </div>
         <div class="basic-info-other">
@@ -620,9 +620,7 @@
                     -
                     <span class="corporation-info-end">{{timehelper endTime}}</span>
                 </p>
-                <p class="corporation-info-introduction">
-                    {{instruction}}
-                </p>
+                <p class="corporation-info-introduction">{{instruction}}</p>
             </div>
             <div class="corporation-down">
                 <a class="corporation-edit" data-id="{{id}}" data-studentid="{{studentId}}">修改</a>
@@ -638,7 +636,7 @@
                 <p class="honor-info-name">{{honorName}}</p>
                 <p class="honor-info-time">{{timehelper time}}</p>
                 <p class="honor-info-introduction">{{instruction}}</p>
-                <img class="honor-info-img" src="{{image}}">
+                <img class="honor-info-img" src="{{image}}" notFoundSrc='./assets/images/not_found.jpg'>
             </div>
             <div class="honor-down">
                 <a class="honor-edit" data-id="{{id}}" data-studentid="{{studentId}}">修改</a>

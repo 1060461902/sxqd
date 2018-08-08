@@ -241,3 +241,19 @@ $(document).scroll(function (e) {
         $(".nav-up").removeClass('nav-fix');
     }
 });
+
+/**
+ * 处理错误
+ */
+document.addEventListener("error", function (e) {
+    var elem = e.target;
+    if (elem.tagName.toLowerCase() === 'img') {
+        var notFoundImgSrt = $(elem).attr("notFoundSrc");
+        if (notFoundImgSrt) {
+            $.get(notFoundImgSrt, null, function (response, status, xhr) {
+                if (xhr.status === 200)
+                    elem.src = notFoundImgSrt;
+            });
+        }
+    }
+}, true);
