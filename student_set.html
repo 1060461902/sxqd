@@ -173,6 +173,19 @@
                     <input id="student-email" type="text" value="" placeholder="请输入常用邮箱" />
                 </p>
             </div>
+            <div id="edit-head-img">
+                <span>头&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;像&nbsp;&nbsp;&nbsp;</span>
+                <input type="file" id="head-upload" style="display: none" />
+                <img id="head-img-prov" src="./assets/images/head_img.png" style="display: none;"/>
+                <a id="head-upload-btn">
+                    <p>
+                        <span id="head-img-add">
+                            +
+                        </span>
+                    </p>
+                    <p>点击上传头像</p>
+                </a>
+            </div>
             <div class="edit-btn-bar">
                 <button class="cancel-button">取消</button>
                 <button class="confirm-button basic-info-confirm">确定</button>
@@ -555,11 +568,7 @@
     <![endif]-->
     <script id="basic-info-model" type="text/x-handlebars-template">
         <div class="head-img-block">
-            <input id="head-img-upload" type="file" style="display: none" />
             <img src="{{logo}}">
-            <p>
-                上传头像
-            </p>
         </div>
         <div class="basic-info-other">
             <p class="basic-info-name">{{name}}</p>

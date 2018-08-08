@@ -1,8 +1,6 @@
 // var USE_ORIGIN_NATIVE_PLACE = 0; //使用原来的地址
 // var USE_CHANGED_NATIVE_PLACE = 1; //使用用户修改的地址
 // var nativePlaveUseStatus = USE_ORIGIN_NATIVE_PLACE; //默认使用原来的地址
-var phone_num;
-var email;
 
 $(document).ready(function () {
     $.ajax({
@@ -31,8 +29,6 @@ $(document).ready(function () {
                         'display': 'block'
                     })
                 }
-                phone_num = info.phone;
-                email = info.email;
                 /**
                  * 项目经历
                  */
@@ -189,10 +185,31 @@ $(document).ready(function () {
      * 基本信息编辑按钮
      * */
     $('body').on("click", "#edit-basic-info", function () {
-        $("#phone-number").val(phone_num);
-        $("#student-email").val(email);
+        $("#phone-number").val($('.info-phone-number').html());
+        $("#student-email").val($('.info-email').html());
+        var head_img_load = $('.head-img-block img').attr('src');
+        if (head_img_load != null && head_img_load != '') {
+            $('#head-upload-btn').css({
+                'display': 'none'
+            });
+            $('#head-img-prov').attr('src', head_img_load);
+            $('#head-img-prov').css({
+                'display': 'inline-block'
+            });
+        }
         $('.mask').fadeIn();
         $('.edit-position').fadeIn();
+    });
+
+    /**
+     * 头像上传按钮
+     */
+    $('#head-img-prov,#head-upload-btn').click(function () {
+        $('#head-upload').click();
+    });
+
+    $('#head-upload').change(function () {
+        proviewImg($('#head-upload')[0].files[0],$('#head-img-prov'));
     });
 
     /**
@@ -207,6 +224,37 @@ $(document).ready(function () {
         //         native_place += $(this).val();
         //     })
         // }
+        var phone_edit = $('#phone-number');
+        var email_edit = $('#student-email');
+        var head_img = $('#head-img-prov')[0].files[0];
+        var form = new FormData();
+        if (head_img != null && head_img != '') {
+            form.append('logo', head_img);
+        }
+        form.append('phone', phone_edit);
+        form.append('email', email_edit);
+
+        // var option = getBASEPOSTAJAX();
+        // option.url = "../student/studentset/set";
+        var option = getBASEGETAJAX();
+        option.url = './json/set/set.json';
+        option.data = form;
+        option.processData = false;
+        option.contentType = false;
+        option.success = function (d) {
+            d = d.return; //暂时
+            if (d.code === 200) {
+                setAlert("修改成功");
+            } else {
+                console.log(d.code + ":" + d.msg);
+                setAlert("系统繁忙，请稍后再试");
+            }
+        };
+        option.error = function (res) {
+            setAlert("系统繁忙，请稍后再试");
+            console.log(res);
+        }
+        $.ajax(option);
         $('.mask').fadeOut();
         $('.edit-position').fadeOut();
         // nativePlaveUseStatus = USE_ORIGIN_NATIVE_PLACE;
@@ -371,7 +419,7 @@ $(document).ready(function () {
     });
 
     /**
-     * 点击上传荣誉证书
+     * 点击上传荣誉证书按钮
      * */
     $('#honor-upload-btn').click(function () {
         $('#honor-upload').trigger("click");
@@ -472,4 +520,26 @@ function getdate(time) {
     var m = date.getMonth() + 1;
     var d = date.getDate();
     return y + "/" + (m < 10 ? "0" + m : m) + "/" + (d < 10 ? "0" + d : d);
+}
+
+/**
+ * 图片预览
+ */
+function proviewImg(file, container) {
+    var fileType = file.type.split("/")[0];
+    if (fileType != "image") {
+        setAlert("请上传图片")
+        return;
+    }
+    var fileSize = Math.round(file.size / 1024 / 1024);
+    if (fileSize >= 3) {
+        setAlert("请上传小于少于3M的图片");
+        return;
+    }
+    var reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.onload = function (f) {
+        var src = "data:" + file.type + ";base64," + window.btoa(this.result);
+        container.attr('src',src);
+    }
 }
