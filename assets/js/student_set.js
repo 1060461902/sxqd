@@ -15,27 +15,67 @@ $(document).ready(function () {
                 /**
                  * 基础信息
                  */
-                var info = d.data.info
+                var info = d.data.info;
                 $('.basic-info-entity').handlebars($('#basic-info-model'), info);
                 $("#student-name").html(info.name);
                 $("#student-no").html(info.studentNum);
                 $("#student-edit-nation").html(info.nation);
-                $("#student-place").html(info.place);//空缺
+                $("#student-place").html(info.place); //空缺
                 $("#student-birthday").html(info.birthday);
-                if(info.sex === '男'){
+                if (info.sex === '男') {
                     $('#male-btn').css({
-                        'display':'block'
+                        'display': 'block'
                     })
-                }else{
+                } else {
                     $('#female-btn').css({
-                        'display':'block'
+                        'display': 'block'
                     })
                 }
                 phone_num = info.phone;
                 email = info.email;
                 /**
-                 * 
+                 * 项目经历
                  */
+                var project = d.data.project;
+                $('.project-info-list').handlebars($('#project-info-model'), project, {
+                    name: "timehelper",
+                    callback: function (time) {
+                        return getdate(time);
+                    }
+                });
+
+                /**
+                 * 社团经历 
+                 */
+                var club = d.data.club;
+                $('.corporation-info-list').handlebars($('#corporation-info-model'), club, {
+                    name: "timehelper",
+                    callback: function (time) {
+                        return getdate(time);
+                    }
+                });
+
+                /**
+                 * 所获荣誉
+                 */
+                var honor = d.data.honor;
+                $('.honor-info-list').handlebars($('#honor-info-model'), honor, {
+                    name: "timehelper",
+                    callback: function (time) {
+                        return getdate(time);
+                    }
+                });
+
+                /**
+                 * 技能水平
+                 */
+                var skill = d.data.skill;
+                $('.edited-lables').handlebars($('#skill-info-model'), skill);
+
+                /**
+                 * 信息读取完成后计算百分比
+                 */
+                persent();
             } else {
                 console.log(d.code + ":" + d.msg);
                 setAlert("系统繁忙,请稍后再试");
@@ -45,6 +85,51 @@ $(document).ready(function () {
             console.log(res);
             setAlert("系统繁忙,请稍后再试");
         }
+    });
+
+    /**
+     * 阻止editable-lable点击事件的派发
+     */
+    $('.editable-lable').click(function (e) {
+        e.stopPropagation();
+    });
+
+    /**
+     * 点击skill-info-tab空白处
+     */
+    $('body').click(function () {
+        if ($('.editable-lable>input').val() !== '' && $('.editable-lable>input').val() !== null) {
+            var skill = $('.editable-lable>input').val();
+            $('.edited-lables').append('<div class="edited-lable">' +
+                '<span>' + skill + '</span>' +
+                '<a>X</a>' +
+                '</div>');
+            $('.editable-lable>input').val('')
+            if ($('.edited-lables').children('.edited-lable').length >= 10) {
+                $('.editable-lable').css({
+                    'display': 'none'
+                });
+            }
+        }
+    });
+
+    /**
+     * 点击edited-lable的关闭按钮
+     */
+    $('.edited-lables').on('click', '.edited-lable>a', function () {
+        $(this).parent().remove();
+        if ($('.edited-lables').children('.edited-lable').length < 10) {
+            $('.editable-lable').css({
+                'display': 'inline-block'
+            });
+        }
+    });
+
+    /**
+     * 
+     */
+    $('.editable-lable>a').click(function () {
+        $('.editable-lable>input').val('')
     });
 
     /**
@@ -58,9 +143,7 @@ $(document).ready(function () {
      * 预览按钮
      * */
     $('#preview-btn').click(function () {
-        setConfirm("保存后可预览，确认保存？", function () {
-            window.location.href = "./student_set_view.html";
-        })
+        window.location.href = "./student_set_view.html";
     });
 
     /**
@@ -145,7 +228,7 @@ $(document).ready(function () {
     /**
      * 右键弹出菜单
      * */
-    $('.updown-list').on('contextmenu', 'li', function (e) {
+    /*$('.updown-list').on('contextmenu', 'li', function (e) {
         e.preventDefault();
         var x = e.clientX;
         var y = e.clientY;
@@ -153,7 +236,7 @@ $(document).ready(function () {
             'left': x + 'px',
             'top': y + 'px'
         }).show()
-    });
+    });*/
 
     /**
      * 项目经历下拉按钮
@@ -323,6 +406,15 @@ $(document).ready(function () {
         $('.edit-honor').fadeOut();
         setAlert("编辑成功");
     });
+
+    /**
+     * 计算简历完成度
+     */
+    var edited_lables = document.querySelector(".edited-lables");
+    var updown_list = document.querySelector(".updown-list");
+    edited_lables.addEventListener('DOMSubtreeModified', persent, false);
+    updown_list.addEventListener('DOMSubtreeModified', persent, false);
+    $('body').on('change', '.info-phone-number,.info-email', persent);
 });
 
 $(document).scroll(function (e) {
@@ -339,6 +431,45 @@ $(document).scroll(function (e) {
     }
 });
 
-$(document).click(function () {
+/*$(document).click(function () {
     $(".popup-menu").hide();
-});
+});*/
+
+/**
+ * 计算完成度百分比
+ */
+function persent() {
+    var persent = 0;
+    if ($('.edited-lables').children().length > 0) {
+        persent += 20;
+    }
+    if ($('.honor-info-list').children().length > 0) {
+        persent += 20;
+    }
+    if ($('.corporation-info-list').children().length > 0) {
+        persent += 20;
+    }
+    if ($('.project-info-list').children().length > 0) {
+        persent += 20;
+    }
+    if ($('.info-phone-number').html() != "" && $('.info-phone-number').html() != null) {
+        persent += 10;
+    }
+    if ($('.info-email').html() != "" && $('.info-email').html() != null) {
+        persent += 10;
+    }
+    $('.resume-complete-percent').html(persent + '%');
+    $('.progress-bar-info').attr('style', "width: " + persent + "%");
+    $('.progress-bar-info').attr('aria-valuenow', persent + "");
+}
+
+/**
+ * 时间戳转换
+ */
+function getdate(time) {
+    var date = new Date(time);
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    var d = date.getDate();
+    return y + "/" + (m < 10 ? "0" + m : m) + "/" + (d < 10 ? "0" + d : d);
+}

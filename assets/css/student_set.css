@@ -559,3 +559,57 @@
     width: 150px;
     height: 100px;
 }
+
+.project-down a,
+.corporation-down a,
+.honor-down a{
+    cursor: pointer;
+}
+
+.editable-lables{
+    padding: 2%;
+}
+
+.editable-lable{
+    display: inline-block;
+    border: 1px solid #a7a7a7;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.editable-lable>input{
+    border: none;
+    outline: none;
+    height: 90%;
+    width: 150px !important;
+}
+
+.edited-lables{
+    display: inline-block;
+}
+
+.edited-lable{
+    color: #ffffff;
+    display: inline-block;
+    border: 1px solid #688bfd;
+    border-radius: 5px;
+    font-size: 15px;
+    background: #688bfd;
+    margin-left: 5px;
+}
+
+.edited-lable>a{
+    color: rgb(0, 26, 255);
+}
+
+.editable-lable a,
+.edited-lable a{
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.skill-info-tips{
+    width: 96%;
+    margin: auto;
+    font-size: 15px;
+}

@@ -1,6 +1,6 @@
 {
     "GET": {
-        "url": "/student/studentset/set",
+        "url": "/student/studentsets/set",
         "data": {}
     },
     "return": {
@@ -24,7 +24,7 @@
                     "time": "1533650753723",
                     "instruction": "VUog9WF0O5",
                     "honorName": "bGC2mzauAP",
-                    "image": "dCdlpKiHHE",
+                    "image": "./assets/images/u3041.jpg",
                     "deleteTag": true
                 },
                 {
@@ -91,8 +91,8 @@
                     "id": 91172,
                     "projectName": "AhN6Q7SXkc",
                     "identity": "b9UqpY9qPo",
-                    "startTime": "1533650777732",
-                    "endTime": "1533649447382",
+                    "startTime": "1533650777000",
+                    "endTime": "1533649447000",
                     "instruction": "FE51H0HQvO",
                     "studentId": 91762,
                     "deleteTag": true
@@ -101,8 +101,8 @@
                     "id": 92605,
                     "projectName": "PwWqOwvybZ",
                     "identity": "mbVq4tkXV9",
-                    "startTime": "1533649769576",
-                    "endTime": "1533651013889",
+                    "startTime": "1533649769000",
+                    "endTime": "1533651013000",
                     "instruction": "sncJphj1Ss",
                     "studentId": 93121,
                     "deleteTag": false
@@ -111,8 +111,8 @@
                     "id": 93947,
                     "projectName": "rdNDRizDTL",
                     "identity": "tGqtnUxopn",
-                    "startTime": "1533650274409",
-                    "endTime": "1533650763536",
+                    "startTime": "1533650274000",
+                    "endTime": "1533650763000",
                     "instruction": "KR1LzFJPNZ",
                     "studentId": 94369,
                     "deleteTag": false

@@ -176,11 +176,9 @@
 
 #bah {
     color: #7F7F7F;
-    margin-top: 1vw;
-    left: 40vw;
-    width: 50%;
-    font-size: 1vw;
-    position: absolute;
+    margin-top: 10px;
+    width: 70%;
+    font-size: 15px;
 }
 
 .floor-down {
@@ -189,10 +187,10 @@
 
 .floor-down p {
     color: #7F7F7F;
-    margin-top: 0.5vw;
+    margin-top: 10px;
     left: 25%;
     width: 100%;
-    font-size: 0.8vw;
+    font-size: 10px;
 }
 
 .page-bar{
