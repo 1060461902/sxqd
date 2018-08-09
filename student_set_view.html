@@ -109,21 +109,7 @@
                         <div class="basic-info">
                             <p class="sub-title-name" id="basic-info">基本信息</p>
                             <div class="basic-info-entity">
-                                <div class="head-img-block">
-                                    <img src="./assets/images/default_head.png">
-                                </div>
-                                <div class="basic-info-other">
-                                    <p class="basic-info-name">小陈</p>
-                                    <p class="basic-info-id">1612180000|男|汉族|1998年9月</p>
-                                    <p>
-                                        <span>手机号码:</span>
-                                        <span class="info-phone-number">11111111111</span>
-                                    </p>
-                                    <p>
-                                        <span>邮箱:</span>
-                                        <span class="info-email">840276079@qq.com</span>
-                                    </p>
-                                </div>
+                                <!-- basic-info-model -->
                             </div>
                         </div>
                         <hr/>
@@ -136,32 +122,7 @@
                             </div>
                             <div id="project-info-group">
                                 <ul class="updown-list project-info-list">
-                                    <li>
-                                        <p class="project-info-name">智能客服saas系统</p>
-                                        <p>
-                                            <span class="project-info-role">产品经理</span>
-                                            &nbsp;|&nbsp;
-                                            <span class="project-info-start">2016.09</span>
-                                            -
-                                            <span class="project-info-end">2017.06</span>
-                                        </p>
-                                        <p class="project-info-introduction">
-                                            这是工作说明
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p class="project-info-name">智能客服saas系统</p>
-                                        <p>
-                                            <span class="project-info-role">产品经理</span>
-                                            &nbsp;|&nbsp;
-                                            <span class="project-info-start">2016.09</span>
-                                            -
-                                            <span class="project-info-end">2017.06</span>
-                                        </p>
-                                        <p class="project-info-introduction">
-                                            这是工作说明
-                                        </p>
-                                    </li>
+                                    <!-- project-info-model -->
                                 </ul>
                             </div>
                         </div>
@@ -176,45 +137,7 @@
                             </div>
                             <div id="corporation-info-group">
                                 <ul class="updown-list corporation-info-list">
-                                    <li>
-                                        <p class="corporation-info-name">浙商大信息学院学生组织联席会</p>
-                                        <p>
-                                            <span class="corporation-info-role">权益部部长</span>
-                                            &nbsp;|&nbsp;
-                                            <span class="corporation-info-start">2016.09</span>
-                                            -
-                                            <span class="corporation-info-end">2017.06</span>
-                                        </p>
-                                        <p class="corporation-info-introduction">
-                                            这是工作说明
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p class="corporation-info-name">浙商大信息学院学生组织联席会</p>
-                                        <p>
-                                            <span class="corporation-info-role">权益部部长</span>
-                                            &nbsp;|&nbsp;
-                                            <span class="corporation-info-start">2016.09</span>
-                                            -
-                                            <span class="corporation-info-end">2017.06</span>
-                                        </p>
-                                        <p class="corporation-info-introduction">
-                                            这是工作说明
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p class="corporation-info-name">浙商大信息学院学生组织联席会</p>
-                                        <p>
-                                            <span class="corporation-info-role">权益部部长</span>
-                                            &nbsp;|&nbsp;
-                                            <span class="corporation-info-start">2016.09</span>
-                                            -
-                                            <span class="corporation-info-end">2017.06</span>
-                                        </p>
-                                        <p class="corporation-info-introduction">
-                                            这是工作说明
-                                        </p>
-                                    </li>
+                                    <!-- corporation-info-model -->
                                 </ul>
                             </div>
                         </div>
@@ -229,12 +152,7 @@
                             </div>
                             <div id="honor-info-group">
                                 <ul class="updown-list honor-info-list">
-                                    <li>
-                                        <p class="honor-info-name">荣誉名称</p>
-                                        <p class="honor-info-time">获奖时间</p>
-                                        <p class="honor-info-introduction">这是获奖说明</p>
-                                        <img class="honor-info-img" src="./assets/images/u3041.jpg">
-                                    </li>
+                                    <!-- honor-info-model -->
                                 </ul>
                             </div>
                         </div>
@@ -244,11 +162,12 @@
                             <div class="info-title">
                                 <span class="sub-title-name" id="skill-info">技能水平（计算机等级，英语等级等）</span>
                             </div>
-                            <div class="updown-btn-v">
-                                <input type="button" value="▼" class="updown-btn" id="skill-info-updown" data-role="up" />
-                            </div>
-                            <div id="skill-info-group">
-
+                            <div class="skill-info-tab">
+                                <div class="editable-lables">
+                                    <div class="edited-lables">
+                                        <!-- skill-info-model -->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -268,6 +187,76 @@
             <img id="floor_door" src="./assets/images/u3050.gif" />
         </div>
     </div>
+    <script id="basic-info-model" type="text/x-handlebars-template">
+        <div class="head-img-block" notFoundSrc="./assets/images/default_head.png">
+            <img src="{{logo}}">
+        </div>
+        <div class="basic-info-other">
+            <p class="basic-info-name">{{name}}</p>
+            <p class="basic-info-id">{{studentNum}}|{{sex}}|{{nation}}|{{birthday}}</p>
+            <p>
+                <span>手机号码:</span>
+                <span class="info-phone-number">{{phone}}</span>
+            </p>
+            <p>
+                <span>邮箱:</span>
+                <span class="info-email">{{email}}</span>
+            </p>
+        </div>
+    </script>
+    <script id="project-info-model" type="text/x-handlebars-template">
+        {{#each this}}
+        <li data-id="{{id}}">
+            <div class="project-up">
+                <p class="project-info-name">{{projectName}}</p>
+                <p>
+                    <span class="project-info-role">{{identity}}</span>
+                    &nbsp;|&nbsp;
+                    <span class="project-info-start">{{timehelper startTime}}</span>
+                    -
+                    <span class="project-info-end">{{timehelper endTime}}</span>
+                </p>
+                <p class="project-info-introduction">{{instruction}}</p>
+            </div>
+        </li>
+        {{/each}}
+    </script>
+    <script id="corporation-info-model" type="text/x-handlebars-template">
+        {{#each this}}
+        <li data-id="{{id}}">
+            <div class="corporation-up">
+                <p class="corporation-info-name">{{clubName}}</p>
+                <p>
+                    <span class="corporation-info-role">{{indentity}}</span>
+                    &nbsp;|&nbsp;
+                    <span class="corporation-info-start">{{timehelper startTime}}</span>
+                    -
+                    <span class="corporation-info-end">{{timehelper endTime}}</span>
+                </p>
+                <p class="corporation-info-introduction">{{instruction}}</p>
+            </div>
+        </li>
+        {{/each}}
+    </script>
+    <script id="honor-info-model" type="text/x-handlebars-template">
+        {{#each this}}
+        <li data-id="{{id}}">
+            <div class="honor-up">
+                <p class="honor-info-name">{{honorName}}</p>
+                <p class="honor-info-time">{{timehelper time}}</p>
+                <p class="honor-info-introduction">{{instruction}}</p>
+                <img class="honor-info-img" src="{{image}}" notFoundSrc='./assets/images/not_found.jpg'>
+            </div>
+        </li>
+        {{/each}}
+    </script>
+    <script id="skill-info-model" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="edited-lable">
+            <span>{{skill}}</span>
+        </div>
+        {{/each}}
+    </script>
     <!-- js -->
     <!--[if lt IE 9]>
     <script type="text/javascript" src="./assets/js/html5shiv.min.js"></script>
@@ -275,6 +264,7 @@
     <![endif]-->
     <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-jquery.js"></script>
     <script type="text/javascript" src="./assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="./assets/js/bootstrap-paginator.min.js"></script>
     <script type="text/javascript" src="./assets/js/model.js"></script>

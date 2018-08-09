@@ -126,3 +126,28 @@
     width: 150px;
     height: 100px;
 }
+
+.editable-lables{
+    padding: 2%;
+}
+
+.editable-lable{
+    display: inline-block;
+    border: 1px solid #a7a7a7;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.edited-lables{
+    display: inline-block;
+}
+
+.edited-lable{
+    color: #ffffff;
+    display: inline-block;
+    border: 1px solid #688bfd;
+    border-radius: 5px;
+    font-size: 15px;
+    background: #688bfd;
+    margin-left: 5px;
+}
