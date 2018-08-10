@@ -41,12 +41,11 @@
 
 .head-img,
 .answer-entity{
-    display: inline-block;
+    float: left;
 }
 
 .head-img{
     position: relative;
-    top: -20px;
     width: 30px;
 }
 

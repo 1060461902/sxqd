@@ -626,3 +626,10 @@
     border-radius: 150px;
     border: 1px solid #e2e2e2;
 }
+
+#honor-img-show {
+    cursor: pointer;
+    height: 120px;
+    width: 200px;
+    border: 1px solid #e2e2e2;
+}

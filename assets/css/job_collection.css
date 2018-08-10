@@ -87,3 +87,8 @@
     transform: translate3D(-5px,-5px,0px);
     box-shadow: 5px 5px 5px #7f7f7f;
 }
+.list-group-item a{
+    color: #0c0c0c;
+    outline: none;
+    text-decoration: none;
+}

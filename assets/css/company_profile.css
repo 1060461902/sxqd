@@ -121,6 +121,7 @@
 .company-discription{
     width: 95%;
     margin: auto;
+    min-height: 200px;
 }
 
 .photo-album{

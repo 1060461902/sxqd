@@ -55,13 +55,14 @@
 }
 
 .nav-up {
-    z-index: 500;
+    z-index: 510;
     height: 100px;
     background-color: #5D6D7E;
     cursor: pointer;
 }
 
 .nav-fix {
+    z-index: 530;
     top:0;
     height: 50px;
     position: fixed;

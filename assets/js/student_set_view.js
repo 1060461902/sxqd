@@ -4,10 +4,9 @@ $(document).ready(function () {
 
     $.ajax({
         type: "GET",
-        url: "./json/set/get.json",
+        url: "../student/studentsets/set",
         data: {},
         success: function (d) {
-            d = d.return;
             if (d.code === 200) {
                 /**
                  * 基础信息
@@ -32,37 +31,19 @@ $(document).ready(function () {
                  * 项目经历
                  */
                 var project = d.data.project;
-                $('.project-info-list').handlebars($('#project-info-model'), project, {
-                    name: "timehelper",
-                    callback: function (time) {
-                        time = Number(time);
-                        return getdate(time);
-                    }
-                });
+                $('.project-info-list').handlebars($('#project-info-model'), project);
 
                 /**
                  * 社团经历 
                  */
                 var club = d.data.club;
-                $('.corporation-info-list').handlebars($('#corporation-info-model'), club, {
-                    name: "timehelper",
-                    callback: function (time) {
-                        time = Number(time);
-                        return getdate(time);
-                    }
-                });
+                $('.corporation-info-list').handlebars($('#corporation-info-model'), club);
 
                 /**
                  * 所获荣誉
                  */
                 var honor = d.data.honor;
-                $('.honor-info-list').handlebars($('#honor-info-model'), honor, {
-                    name: "timehelper",
-                    callback: function (time) {
-                        time = Number(time);
-                        return getdate(time);
-                    }
-                });
+                $('.honor-info-list').handlebars($('#honor-info-model'), honor);
 
                 /**
                  * 技能水平

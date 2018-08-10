@@ -295,6 +295,7 @@
             <div id="edit-honor-img">
                 <span>获奖证书&nbsp;&nbsp;</span>
                 <input type="file" id="honor-upload" style="display: none" />
+                <img id="honor-img-show" notFoundSrc="./assets/images/not_found.jpg" style="display: none">
                 <a id="honor-upload-btn">
                     <p>
                         <span id="honor-img-add">
@@ -567,8 +568,8 @@
     <script type="text/javascript" src="./assets/js/respond.js"></script>
     <![endif]-->
     <script id="basic-info-model" type="text/x-handlebars-template">
-        <div class="head-img-block" notFoundSrc="./assets/images/default_head.png">
-            <img src="{{logo}}">
+        <div class="head-img-block">
+            <img src="{{logo}}" notFoundSrc="./assets/images/default_head.png">
         </div>
         <div class="basic-info-other">
             <p class="basic-info-name">{{name}}</p>
@@ -595,9 +596,9 @@
                 <p>
                     <span class="project-info-role">{{identity}}</span>
                     &nbsp;|&nbsp;
-                    <span class="project-info-start">{{timehelper startTime}}</span>
+                    <span class="project-info-start">{{startTime}}</span>
                     -
-                    <span class="project-info-end">{{timehelper endTime}}</span>
+                    <span class="project-info-end">{{endTime}}</span>
                 </p>
                 <p class="project-info-introduction">{{instruction}}</p>
             </div>
@@ -616,9 +617,9 @@
                 <p>
                     <span class="corporation-info-role">{{indentity}}</span>
                     &nbsp;|&nbsp;
-                    <span class="corporation-info-start">{{timehelper startTime}}</span>
+                    <span class="corporation-info-start">{{startTime}}</span>
                     -
-                    <span class="corporation-info-end">{{timehelper endTime}}</span>
+                    <span class="corporation-info-end">{{endTime}}</span>
                 </p>
                 <p class="corporation-info-introduction">{{instruction}}</p>
             </div>
@@ -634,7 +635,7 @@
         <li data-id="{{id}}">
             <div class="honor-up">
                 <p class="honor-info-name">{{honorName}}</p>
-                <p class="honor-info-time">{{timehelper time}}</p>
+                <p class="honor-info-time">{{time}}</p>
                 <p class="honor-info-introduction">{{instruction}}</p>
                 <img class="honor-info-img" src="{{image}}" notFoundSrc='./assets/images/not_found.jpg'>
             </div>

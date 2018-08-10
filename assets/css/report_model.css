@@ -22,6 +22,11 @@
     padding: 20px;
 }
 
+.weekly-report-content img{
+    max-width: 50%;
+    max-height: 50px;
+}
+
 .read-body,
 .info-content{
     width: 96%;

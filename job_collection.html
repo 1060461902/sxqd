@@ -181,6 +181,7 @@
     <script id="job-collection-model" type="text/x-handlebars-template">
         {{#each this}}
         <li class="list-group-item" data-id="{{id}}">
+            <a href="./job_profile.html?id={{id}}">
             <div>
                 <div class="left-part">
                     <p class="post-name">{{post}}</p>
@@ -200,7 +201,7 @@
                     </p>
                 </div>
                 <div class="img-part">
-                    <img src="{{logo}}">
+                    <img src="{{logo}}" notFoundSrc='./assets/images/defult_company.png'>
                 </div>
             </div>
             <div class="item-bottom">
@@ -212,6 +213,7 @@
                 <button data-id="{{id}}" class="send-btn">投简历</button>
                 {{/if_bool}}
             </div>
+            </a>
         </li>
         {{/each}}
     </script>

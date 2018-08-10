@@ -230,7 +230,7 @@
             <!--</p>-->
         </div>
         <div class="company-intro-right">
-            <img src="{{logo}}" alt="">
+            <img src="{{logo}}" alt="" notFoundSrc="./assets/images/defult_company.png">
             <p>{{name}}</p>
         </div>
     </script>
@@ -241,7 +241,7 @@
     </script>
     <script id="photo-album-model" type="text/x-handlebars-template">
         {{#each this}}
-        <img src="{{url}}" alt=""> {{/each}}
+        <img src="{{url}}" alt="" notFoundSrc="./assets/images/not_found.jpg"> {{/each}}
     </script>
     <script id="post-item-model" type="text/x-handlebars-template">
         {{#each this}}

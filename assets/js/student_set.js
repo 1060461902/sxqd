@@ -8,10 +8,9 @@ var isHonorAdd = true;
 $(document).ready(function () {
     $.ajax({
         type: "GET",
-        url: "./json/set/get.json",
+        url: "../student/studentsets/set",
         data: {},
         success: function (d) {
-            d = d.return;
             if (d.code === 200) {
                 /**
                  * 基础信息
@@ -36,37 +35,19 @@ $(document).ready(function () {
                  * 项目经历
                  */
                 var project = d.data.project;
-                $('.project-info-list').handlebars($('#project-info-model'), project, {
-                    name: "timehelper",
-                    callback: function (time) {
-                        time = Number(time);
-                        return getdate(time);
-                    }
-                });
+                $('.project-info-list').handlebars($('#project-info-model'), project);
 
                 /**
                  * 社团经历 
                  */
                 var club = d.data.club;
-                $('.corporation-info-list').handlebars($('#corporation-info-model'), club, {
-                    name: "timehelper",
-                    callback: function (time) {
-                        time = Number(time);
-                        return getdate(time);
-                    }
-                });
+                $('.corporation-info-list').handlebars($('#corporation-info-model'), club);
 
                 /**
                  * 所获荣誉
                  */
                 var honor = d.data.honor;
-                $('.honor-info-list').handlebars($('#honor-info-model'), honor, {
-                    name: "timehelper",
-                    callback: function (time) {
-                        time = Number(time);
-                        return getdate(time);
-                    }
-                });
+                $('.honor-info-list').handlebars($('#honor-info-model'), honor);
 
                 /**
                  * 技能水平
@@ -102,16 +83,32 @@ $(document).ready(function () {
     $('body').click(function () {
         if ($('.editable-lable>input').val() !== '' && $('.editable-lable>input').val() !== null) {
             var skill = $('.editable-lable>input').val();
-            $('.edited-lables').append('<div class="edited-lable">' +
-                '<span>' + skill + '</span>' +
-                '<a>X</a>' +
-                '</div>');
-            $('.editable-lable>input').val('')
-            if ($('.edited-lables').children('.edited-lable').length >= 10) {
-                $('.editable-lable').css({
-                    'display': 'none'
-                });
+            var skillForm = new FormData();
+            skillForm.append('skill',skill);
+            var option = getBASEPOSTAJAX();
+            option.url = '../student/studentsets/skill';
+            option.data = skillForm;
+            option.processData = false;
+            option.contentType = false;
+            option.success = function (d) {
+                if (d.code === 200){
+                    reflashSkill();
+                    $('.editable-lable>input').val('');
+                    if ($('.edited-lables').children('.edited-lable').length >= 10) {
+                        $('.editable-lable').css({
+                            'display': 'none'
+                        });
+                    }
+                }else {
+                    console.log(d.code + ":" + d.msg);
+                    setAlert("系统繁忙,请稍后再试");
+                }
             }
+            option.error = function (res) {
+                console.log(res);
+                setAlert("系统繁忙,请稍后再试");
+            }
+            $.ajax(option);
         }
     });
 
@@ -119,12 +116,27 @@ $(document).ready(function () {
      * 点击edited-lable的关闭按钮
      */
     $('.edited-lables').on('click', '.edited-lable>a', function () {
-        $(this).parent().remove();
-        if ($('.edited-lables').children('.edited-lable').length < 10) {
-            $('.editable-lable').css({
-                'display': 'inline-block'
-            });
+        var id = $(this).data('id');
+        var option = getBASEDELETEAJAX();
+        option.url = '../student/studentsets/skill?id='+id;
+        option.success = function (d) {
+            if (d.code === 200){
+                reflashSkill();
+                if ($('.edited-lables').children('.edited-lable').length < 10) {
+                    $('.editable-lable').css({
+                        'display': 'inline-block'
+                    });
+                }
+            }else {
+                console.log(d.code + ":" + d.msg);
+                setAlert("系统繁忙,请稍后再试");
+            }
         }
+        option.error = function (res) {
+            console.log(res);
+            setAlert("系统繁忙,请稍后再试");
+        }
+        $.ajax(option);
     });
 
     /**
@@ -243,22 +255,18 @@ $(document).ready(function () {
         form.append('phone', phone_edit);
         form.append('email', email_edit);
 
-        // var option = getBASEPOSTAJAX();
-        // option.url = "../student/studentset/set";
-        var option = getBASEGETAJAX();
-        option.url = './json/set/set.json';
+        var option = getBASEPOSTAJAX();
+        option.url = "../student/studentsets/set";
         option.data = form;
         option.processData = false;
         option.contentType = false;
         option.success = function (d) {
-            d = d.return; //暂时
             if (d.code === 200) {
                 $.ajax({
                     type: "GET",
-                    url: "./json/set/get.json",
+                    url: "../student/studentsets/set",
                     data: {},
                     success: function (d) {
-                        d = d.return;
                         if (d.code === 200) {
                             /**
                              * 基础信息
@@ -428,28 +436,25 @@ $(document).ready(function () {
         } else if (prointro == '' || prointro == null) {
             setAlert('请填写项目介绍');
         } else {
-            // var option = getBASEPOSTAJAX();
-            var option = getBASEGETAJAX(); //暂时
-            option.url = "./json/set/add_project.json";
-            var push = {
-                "studentProject": {
-                    "projectName": proname,
-                    "identity": proindentity,
-                    "startTime": prostart,
-                    "endTime": proend,
-                    "instruction": prointro,
-                }
-            }
+            var option = getBASEPOSTAJAX();
+            option.url = "../student/studentsets/project";
+            var projectForm = new FormData();
+            projectForm.append("projectName", proname);
+            projectForm.append("identity", proindentity);
+            projectForm.append("startTime", prostart);
+            projectForm.append("endTime", proend);
+            projectForm.append("instruction", prointro);
             if (!isProjectAdd) {
                 var id = $('.edit-project').data('id');
                 // var studentId = $('.edit-project').data('studentid');
-                push.studentProject.id = id;
+                projectForm.append('id',id)
                 $('.edit-project').attr('data-id', '');
                 // $('.edit-project').attr('data-studentid', '');
             }
-            option.data = push;
+            option.data = projectForm;
+            option.processData = false;
+            option.contentType = false;
             option.success = function (d) {
-                d = d.return; //暂时
                 if (d.code === 200) {
                     reflashProjct();
                     $('.mask').fadeOut();
@@ -473,14 +478,9 @@ $(document).ready(function () {
      */
     $('.project-info-list').on('click', '.project-delete', function () {
         var id = $(this).data('id');
-        // var option = getBASEDELETEAJAX();
-        var option = getBASEGETAJAX();
-        option.url = './json/set/delete_project.json';
-        option.data = {
-            'id': id
-        }
+        var option = getBASEDELETEAJAX();
+        option.url = '../student/studentsets/project?id='+id;
         option.success = function (d) {
-            d = d.return; //暂时
             if (d.code === 200) {
                 reflashProjct();
                 setAlert('删除成功');
@@ -569,27 +569,24 @@ $(document).ready(function () {
         } else if (clubintro == '' || clubintro == null) {
             setAlert('请填写经历介绍');
         } else {
-            // var option = getBASEPOSTAJAX();
-            var option = getBASEGETAJAX(); //暂时
-            option.url = "./json/set/add_club.json";
-            push = {
-                "studentClub": {
-                    "clubName": clubname,
-                    "indentity": clubindentity,
-                    "startTime": clubstart,
-                    "endTime": clubend,
-                    "instruction": clubintro
-                }
-            }
+            var option = getBASEPOSTAJAX();
+            option.url = "../student/studentsets/club";
+            var clubForm = new FormData();
+            clubForm.append("clubName", clubname);
+            clubForm.append("indentity", clubindentity);
+            clubForm.append("startTime", clubstart);
+            clubForm.append("endTime", clubend);
+            clubForm.append("instruction", clubintro);
             if (!isClubAdd) {
                 var id = $('.edit-corporation').data('id');
                 // var studentId = $('.edit-corporation').data('studentid');
-                push.studentClub.id = id;
+                clubForm.append("id",id);
                 $('.edit-corporation').attr('data-id', '');
             }
-            option.data = push;
+            option.data = clubForm;
+            option.processData = false;
+            option.contentType = false;
             option.success = function (d) {
-                d = d.return; //暂时
                 if (d.code === 200) {
                     reflashClub();
                     $('.mask').fadeOut();
@@ -632,14 +629,9 @@ $(document).ready(function () {
      */
     $('.corporation-info-list').on('click', '.corporation-delete', function () {
         var id = $(this).data('id');
-        // var option = getBASEDELETEAJAX();
-        var option = getBASEGETAJAX();
-        option.url = './json/set/delete_club.json';
-        option.data = {
-            'id': id
-        }
+        var option = getBASEDELETEAJAX();
+        option.url = '../student/studentsets/club?id='+id;
         option.success = function (d) {
-            d = d.return; //暂时
             if (d.code === 200) {
                 reflashClub();
                 setAlert('删除成功');
@@ -659,6 +651,16 @@ $(document).ready(function () {
      * 所获荣誉添加按钮
      * */
     $('.add-honor').click(function () {
+        $('#edit-honor-name input').val('');
+        $('#edit-honor-time input').val('');
+        $('#edit-honor-description textarea').val('');
+        $('#edit-honor-img input').val('');
+        var id = $('.edit-honor').attr('data-id', '');
+        $('#honor-upload-btn').css({'display':'inline-block'});
+        $('#honor-img-show').css({'display':'none'});
+        $('#honor-img-show').attr('src','');
+        // var studentId = $('.edit-honor').attr('data-studentid', '');
+        isHonorAdd = true;
         $('.mask').fadeIn();
         $('.edit-honor').fadeIn();
     });
@@ -682,8 +684,17 @@ $(document).ready(function () {
     /**
      * 点击上传荣誉证书按钮
      * */
-    $('#honor-upload-btn').click(function () {
+    $('#honor-upload-btn, #honor-img-show').click(function () {
         $('#honor-upload').trigger("click");
+    });
+
+    /**
+     * 预览荣誉证书
+     */
+    $('#honor-upload').change(function () {
+        $('#honor-upload-btn').css({'display':'none'});
+        $('#honor-img-show').css({'display':'inline-block'});
+        proviewImg($('#honor-upload')[0].files[0],$('#honor-img-show'));
     });
 
     /**
@@ -711,9 +722,102 @@ $(document).ready(function () {
      * 所获荣誉编辑确认按钮
      * */
     $('.honor-info-confirm').click(function () {
-        $('.mask').fadeOut();
-        $('.edit-honor').fadeOut();
-        setAlert("编辑成功");
+        var honorname = $('#edit-honor-name input').val();
+        var honortime = $('#edit-honor-time input').val();
+        var honorintro = $('#edit-honor-description textarea').val();
+        var honorimg = $('#honor-upload')[0].files[0];
+        if (honorname == '' || honorname == null) {
+            setAlert('请填写荣誉名称');
+        } else if (honortime == '' || honortime == null) {
+            setAlert('请填写获奖时间');
+        } else if (honorintro == '' || honorintro == null) {
+            setAlert('请填写获奖说明');
+        } else {
+            var option = getBASEPOSTAJAX();
+            option.url = "../student/studentsets/honor";
+            var honorForm = new FormData();
+            honorForm.append("name", honorname);
+            honorForm.append("time", honortime);
+            honorForm.append("instruction", honorintro);
+            if(honorimg != null && honorimg != '') {
+                honorForm.append("image", honorimg);
+            }
+            if (!isHonorAdd) {
+                var id = $('.edit-honor').data('id');
+                // var studentId = $('.edit-project').data('studentid');
+                honorForm.append('id',id)
+                $('.edit-honor').attr('data-id', '');
+                // $('.edit-project').attr('data-studentid', '');
+            }
+            option.data = honorForm;
+            option.processData = false;
+            option.contentType = false;
+            option.success = function (d) {
+                if (d.code === 200) {
+                    reflashHonor();
+                    $('.mask').fadeOut();
+                    $('.edit-honor').fadeOut();
+                    setAlert("编辑成功");
+                } else {
+                    console.log(d.code + ":" + d.msg);
+                    setAlert("系统繁忙，请稍后再试");
+                }
+            }
+            option.error = function (res) {
+                setAlert("系统繁忙，请稍后再试");
+                console.log(res);
+            }
+            $.ajax(option);
+        }
+    });
+
+    /**
+     * 点击荣誉修改按钮
+     */
+    $('.honor-info-list').on('click', '.honor-edit', function () {
+        var parent = $(this).parent().parent();
+        var id = $(this).data('id');
+        // var studentId = $(this).data('studentid');
+        $('.edit-honor').attr('data-id', id);
+        // $('.edit-project').attr('data-studentid', studentId);
+        $('#edit-honor-name input').val(parent.find('.honor-info-name').html());
+        $('#edit-honor-time input').val(parent.find('.honor-info-time').html());
+        $('#edit-honor-description textarea').val(parent.find('.honor-info-introduction').html());
+        var img_url = parent.find('.honor-info-img').attr('src');
+        if (img_url != './assets/images/not_found.jpg'){
+            $('#honor-upload-btn').css({'display':'none'});
+            $('#honor-img-show').css({'display':'inline-block'});
+            $('#honor-img-show').attr('src',img_url);
+        }else {
+            $('#honor-upload-btn').css({'display':'inline-block'});
+            $('#honor-img-show').css({'display':'none'});
+        }
+        isHonorAdd = false;
+        $('.mask').fadeIn();
+        $('.edit-honor').fadeIn();
+    });
+
+    /**
+     * 点击荣誉删除按钮
+     */
+    $('.honor-info-list').on('click', '.honor-delete', function () {
+        var id = $(this).data('id');
+        var option = getBASEDELETEAJAX();
+        option.url = '../student/studentsets/honor?id='+id;
+        option.success = function (d) {
+            if (d.code === 200) {
+                reflashHonor();
+                setAlert('删除成功');
+            } else {
+                console.log(d.code + ":" + d.msg);
+                setAlert("系统繁忙，请稍后再试");
+            }
+        }
+        option.error = function (res) {
+            setAlert("系统繁忙，请稍后再试");
+            console.log(res);
+        }
+        $.ajax(option);
     });
 
     /**
@@ -811,22 +915,15 @@ function proviewImg(file, container) {
 function reflashProjct() {
     $.ajax({
         type: "GET",
-        url: "./json/set/get.json",
+        url: "../student/studentsets/set",
         data: {},
         success: function (d) {
-            d = d.return; //暂时
             if (d.code === 200) {
                 /**
                  * 项目经历
                  */
                 var project = d.data.project;
-                $('.project-info-list').handlebars($('#project-info-model'), project, {
-                    name: "timehelper",
-                    callback: function (time) {
-                        time = Number(time);
-                        return getdate(time);
-                    }
-                });
+                $('.project-info-list').handlebars($('#project-info-model'), project);
             } else {
                 console.log(d.code + ":" + d.msg);
                 setAlert("系统繁忙,请稍后再试");
@@ -845,22 +942,15 @@ function reflashProjct() {
 function reflashClub() {
     $.ajax({
         type: "GET",
-        url: "./json/set/get.json",
+        url: "../student/studentsets/set",
         data: {},
         success: function (d) {
-            d = d.return; //暂时
             if (d.code === 200) {
                 /**
                  * 社团经历 
                  */
                 var club = d.data.club;
-                $('.corporation-info-list').handlebars($('#corporation-info-model'), club, {
-                    name: "timehelper",
-                    callback: function (time) {
-                        time = Number(time);
-                        return getdate(time);
-                    }
-                });
+                $('.corporation-info-list').handlebars($('#corporation-info-model'), club);
             } else {
                 console.log(d.code + ":" + d.msg);
                 setAlert("系统繁忙,请稍后再试");
@@ -879,22 +969,42 @@ function reflashClub() {
 function reflashHonor() {
     $.ajax({
         type: "GET",
-        url: "./json/set/get.json",
+        url: "../student/studentsets/set",
         data: {},
         success: function (d) {
-            d = d.return; //暂时
             if (d.code === 200) {
                 /**
                  * 所获荣誉
                  */
                 var honor = d.data.honor;
-                $('.honor-info-list').handlebars($('#honor-info-model'), honor, {
-                    name: "timehelper",
-                    callback: function (time) {
-                        time = Number(time);
-                        return getdate(time);
-                    }
-                });
+                $('.honor-info-list').handlebars($('#honor-info-model'), honor);
+            } else {
+                console.log(d.code + ":" + d.msg);
+                setAlert("系统繁忙,请稍后再试");
+            }
+        },
+        error: function (res) {
+            console.log(res);
+            setAlert("系统繁忙,请稍后再试");
+        }
+    });
+}
+
+/**
+ * 刷新技能列表
+ */
+function reflashSkill() {
+    $.ajax({
+        type: "GET",
+        url: "../student/studentsets/set",
+        data: {},
+        success: function (d) {
+            if (d.code === 200) {
+                /**
+                 * 技能水平
+                 */
+                var skill = d.data.skill;
+                $('.edited-lables').handlebars($('#skill-info-model'), skill);
             } else {
                 console.log(d.code + ":" + d.msg);
                 setAlert("系统繁忙,请稍后再试");
