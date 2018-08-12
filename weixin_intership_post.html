@@ -33,53 +33,10 @@
         <span>招聘信息</span>
     </div>
     <div class="post-info">
-        <div class="post-info-left">
-            <p id="post-name">后端工程师（Node.js方向）</p>
-            <p>
-                <span>招聘时段</span>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                <span id="post-time">11.17~12.17</span>
-            </p>
-            <div id="post-location-bar">
-                <div id="post-location-title">
-                    <span>工作地址</span>
-                    <span>&nbsp;&nbsp;&nbsp;</span>
-                    <img src="./assets/images/location_point.png" alt="">
-                </div>
-                <span id="post-location">上海杨浦区政学路51号</span>
-            </div>
-            <div>
-                <span>招聘人数</span>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                <img src="./assets/images/person.png" alt="">
-                <span id="post-person">1人</span>
-            </div>
-            <div id="post-skills-bar">
-                <div>
-                    <span>技能要求</span>
-                    <span>&nbsp;&nbsp;&nbsp;</span>
-                </div>
-                <div id="post-skills">
-                    <span class="post-skill-lable">JavaScript</span>
-                    <span class="post-skill-lable">TypeScript</span>
-                    <span class="post-skill-lable">java</span>
-                </div>
-            </div>
-        </div>
-        <a class="post-info-right" href="./weixin_intership_company.html">
-            <div class="post-info-img">
-                <img src="./assets/images/jk.png" alt="">
-            </div>
-            <p id="post-company-name">即刻</p>
-        </a>
+        <!-- post-info-model -->
     </div>
     <div class="post-info-other">
-        领域&nbsp;
-        <span id="post-field">IT/互联网</span>
-        &nbsp;&nbsp;规模&nbsp;
-        <span id="post-size">50~150人</span>
-        &nbsp;&nbsp;阶段&nbsp;
-        <span id="post-stage">成长型</span>
+        <!-- post-info-other-model -->
     </div>
     <div class="post-title">
         <img src="./assets/images/mobile_document.png" alt="">
@@ -87,43 +44,113 @@
     </div>
     <div class="post-describe">
         <p>
-            一、岗位职责： 1. 图片审核：负责美团外卖的合作商家使用图片进行审核及编辑，确保图片美观且传达信息有效，符合美团网上线标准； 2. 合同审核：负责美团外卖的商家合作合同及资质调研及审核，确保合同及资质信息完全真实有效，符合美团网上单标准；
-            3. 外卖销售支持：负责处理美团外卖商家信息的整理及录入； 4. 流程优化：配合团队梳理现有审核、上单、结款的流程以达到控制风险的目的，不断优化各端口的使用，提高消费者体验和给商家提供便利； 二、岗位要求： 1. 大专及以上；
-            2. 工作严谨细心，吃苦耐劳，能够坚守原则，承担重任，直面压力和挑战； 3. 熟练掌握办公软件，如office、PPT、VISIO、Photoshop等； 4. 对互联网行业有兴趣； 5. 能够将简单的工作做到极致。
-            三、福利待遇： 1. 工作时间：9:00-18:00或者9；30-18:30自由选择，晚睡熬夜族和起床困难户首选 2. 硬件设施：公司设有健身房、自助贩卖机、浴室、休息室，给你家一般的感觉~~ 3. 培训发展：专业贴心的入职培训和进阶培训，让你快速入门；多样化的分享课程任你选择，了解除了工作之外的广阔世界；
+
         </p>
     </div>
     <div class="post-title">
         <img src="./assets/images/mobile_paper.png" alt="">
         <span>咨询板</span>
     </div>
-    <div class="weui-cells">
+    <div class="weui-cells ask-items">
+        <!-- ask-item-model -->
+    </div>
+    <div class="post-do-bar">
+        <!-- do-model -->
+    </div>
+
+    <script id="post-info-model" type="text/x-handlebars-template">
+        <div class="post-info-left">
+            {{#with recruitment}}
+            <p id="post-name">{{post}}</p>
+            <p>
+                <span>招聘时段</span>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <span id="post-time">{{startTime}}~{{endTime}}</span>
+            </p>
+            <div id="post-location-bar">
+                <div id="post-location-title">
+                    <span>工作地址</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <img src="./assets/images/location_point.png" alt="">
+                </div>
+                <span id="post-location">{{address}}</span>
+            </div>
+            <div>
+                <span>招聘人数</span>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <img src="./assets/images/person.png" alt="">
+                <span id="post-person">{{currentNumber}}人</span>
+            </div>
+            <div id="post-skills-bar">
+                <div>
+                    <span>技能要求</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                </div>
+                <div id="post-skills">
+                    {{{skills skillRequire}}}
+                </div>
+            </div>
+            {{/with}}
+        </div>
+        {{#with company}}
+        <a class="post-info-right" href="./weixin_intership_company.html?id={{id}}">
+            <div class="post-info-img">
+                <img src="{{logo}}" alt="">
+            </div>
+            <p id="post-company-name">{{companyName}}</p>
+        </a>
+        {{/with}}
+    </script>
+    <script type="text/x-handlebars-template" id="post-info-other-model">
+        领域&nbsp;
+        <span id="post-field">{{type}}</span>
+        &nbsp;&nbsp;规模&nbsp;
+        <span id="post-size">{{size}}</span>
+        &nbsp;&nbsp;阶段&nbsp;
+        <span id="post-stage">{{stage}}</span>
+    </script>
+    <script type="text/x-handlebars-template" id="ask-item-model">
+        {{#each this}}
         <div class="weui-cell">
             <div class="cell-head-img">
                 <div class="head-img-square">
-                    <img src="./assets/images/head_img.png" alt="">
+                    <img src="{{logo}}" alt="">
                 </div>
             </div>
             <div class="cell-info">
-                <p class="cell-name">老李</p>
-                <p class="cell-question">这里是咨询的问题</p>
+                <p class="cell-name">{{name}}</p>
+                <p class="cell-question">{{#if followName}}回复&nbsp;{{followName}}&nbsp;:{{/if}}{{content}}</p>
             </div>
             <div>
-                <p class="cell-time">1小时前</p>
+                <p class="cell-time">{{createTime}}</p>
+                <p class="reply-btn"><a data-id="{{id}}">回复</a></p>
             </div>
         </div>
-    </div>
-    <div class="post-do-bar">
-        <a id="collect-btn" data-status="">
-            <img src="./assets/images/collect_star.png" alt=""> 关注岗位
+        {{/each}}
+    </script>
+    <script type="text/x-handlebars-template" id="do-model">
+        {{#if_bool collectflag}}
+        <a class="collected-btn" data-status="">
+            <img class="collect-star" src="./assets/images/collected_star.png" alt="">
+            <span class="collect-text">已关注</span>
         </a>
-        <a id="send-btn" data-status="">
-            投简历
+        {{else}}
+        <a class="collect-btn" data-status="">
+            <img class="collect-star" src="./assets/images/collect_star.png" alt="">
+            <span class="collect-text">关注岗位</span>
         </a>
-    </div>
+        {{/if_bool}}
+        {{#if_bool sendflag}}
+        <a class="sent-btn">已投递</a>
+        {{else}}
+        <a class="send-btn">投简历</a>
+        {{/if_bool}}
+        <a id="ask-btn">咨询</a>
+    </script>
     <!--js-->
     <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="./assets/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery-url.js"></script>
     <script type="text/javascript" src="./assets/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript" src="./assets/js/fastclick.js"></script>
     <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>

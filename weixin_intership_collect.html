@@ -7,15 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>title</title>
     <!--css-->
-    <link rel="stylesheet" href="./assets/css/jquery-weui.min.css">
-    <link rel="stylesheet" href="./assets/css/weui.min.css">
-    <link rel="stylesheet" href="./assets/css/commonCSS.css">
-    <link rel="stylesheet" href="./assets/css/weixin_head.css">
-    <link rel="stylesheet" href="./assets/css/weixin_intership_collect.css">
-    <link rel="stylesheet" href="./assets/css/dropload.css">
+    <link rel="stylesheet" href="../student/assets/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="../student/assets/css/weui.min.css">
+    <link rel="stylesheet" href="../student/assets/css/commonCSS.css">
+    <link rel="stylesheet" href="../student/assets/css/weixin_head.css">
+    <link rel="stylesheet" href="../student/assets/css/weixin_intership_collect.css">
+    <link rel="stylesheet" href="../student/assets/css/dropload.css">
     <script>
         function backto() {
-            window.location.href = './weixin_intership_index.html?tab=3'
+            window.location.href = '../student/weixin_intership_index.html?tab=3'
         }
     </script>
 </head>
@@ -24,7 +24,7 @@
     <div class="title-bar">
         <p>
             <a id="title-back" onclick="backto()">
-                <img src="./assets/images/back_lt.png" alt="">
+                <img src="../student/assets/images/back_lt.png" alt="">
             </a>
             <span id="title-name">岗位关注</span>
         </p>
@@ -38,13 +38,13 @@
     </div>
     <script id="collect-item-model" type="text/x-handlebars-template">
         {{#each this}}
-        <div class="weui-cell" data-id="{{id}}" href="./weixin_intership_post.html">
-            <a href="./weixin_intership_post.html?id={{id}}" class="cell-left">
+        <div class="weui-cell" data-id="{{id}}" href="../student/weixin_intership_post.html">
+            <a href="../student/weixin_intership_post.html?id={{id}}" class="cell-left">
                 <p class="post-name">{{post}}</p>
                 <p>{{companyName}}</p>
                 <p>{{companyType}}</p>
                 <p>
-                    <img src="./assets/images/location_point.png" alt="">
+                    <img src="../student/assets/images/location_point.png" alt="">
                     <span class="location-show">{{address}}</span>
                 </p>
             </a>
@@ -63,15 +63,15 @@
         {{/each}}
     </script>
     <!--js-->
-    <script type="text/javascript" src="./assets/js/jquery-2.1.0.min.js"></script>
-    <script type="text/javascript" src="./assets/js/jquery-weui.min.js"></script>
-    <script type="text/javascript" src="./assets/js/jweixin-1.2.0.js"></script>
-    <script type="text/javascript" src="./assets/js/fastclick.js"></script>
-    <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
-    <script type="text/javascript" src="./assets/js/handlebars-jquery.js"></script>
-    <script type="text/javascript" src="./assets/js/model.js"></script>
-    <script type="text/javascript" src="./assets/js/dropload.min.js"></script>
-    <script type="text/javascript" src="./assets/js/weixin_intership_collect.js"></script>
+    <script type="text/javascript" src="../student/assets/js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="../student/assets/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="../student/assets/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript" src="../student/assets/js/fastclick.js"></script>
+    <script type="text/javascript" src="../student/assets/js/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="../student/assets/js/handlebars-jquery.js"></script>
+    <script type="text/javascript" src="../student/assets/js/model.js"></script>
+    <script type="text/javascript" src="../student/assets/js/dropload.min.js"></script>
+    <script type="text/javascript" src="../student/assets/js/weixin_intership_collect.js"></script>
 </body>
 
 </html>

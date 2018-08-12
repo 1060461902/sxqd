@@ -11,24 +11,35 @@
     var longitude;
     var accuracy;
     $(document).ready(function () {
+        console.log(location.href);
         $.ajax({
-            url:"",
-            type:"POST",
-            data:{page_url:location.href},
+            url:"../wx/config",
+            type:"GET",
+            data:{url:location.href},
             dataType:"json",
             success:function (data) {
+                console.log(data.data);
                 //微信验证
                 wx.config({
-                    debug:true,
-                    appId:'',
-                    timestamp:'',
-                    nonceStr:'',
-                    signature:'',
+                    appId:'wxb4a99366ee403d22',
+                    timestamp:data.data.timestamp,
+                    nonceStr:data.data.noncestr,
+                    signature:data.data.signature,
                     jsApiList:[
-                        'checkJsApi',
-                        'openLocation',
-                        'getLocation'
+                        "checkJsApi",
+                        "getLocation"
                     ]
+                });
+                wx.checkJsApi({
+                    jsApiList: [
+                        'getLocation'
+                    ],
+                    success: function (res) {
+                        if (res.checkResult.getLocation == false) {
+                            alert('你的微信版本太低，不支持微信JS接口，请升级到最新的微信版本！');
+                            return;
+                        }
+                    }
                 });
                 //微信验证完成调用
                 wx.ready(function () {
@@ -36,8 +47,7 @@
                         success:function (rs) {
                             latitude = rs.latitude; //维度
                             longitude = rs.longitude; //经度
-                            accuracy = rs.accuracy; //精度
-                            alert("维度:"+latitude+";"+"经度:"+longitude+"精度:"+accuracy);
+                            console.log("维度:"+latitude+";"+"经度:"+longitude);
                         },
                         cancel:function (rs) {
                             alert("您拒绝提供位置信息");

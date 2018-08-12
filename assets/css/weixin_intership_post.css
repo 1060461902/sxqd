@@ -112,8 +112,11 @@
     border-bottom: 6px solid #e0e0e085;
 }
 
-.weui-cells{
+.ask-items{
+    margin-top: 0;
     margin-bottom: 43px;
+    max-height: 250px;
+    overflow-y: auto;
 }
 
 .post-do-bar{
@@ -126,11 +129,33 @@
     bottom: 0;
 }
 
-#collect-btn{
-    position: absolute;
+.collect-btn,
+.collected-btn{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid #e0e0e085;
+    height: 75%;
+    width: 30%;
+    margin-left: 2%;
+    margin-top: 5%;
+    margin: auto;
+    border-radius: 5px;
+    font-size: 0.8rem;
+}
+
+.collect-btn>img,
+.collected-btn>img{
+    width: 20%;
+    display: inline-block;
+    position: relative;
     top: 50%;
     transform: translateY(-50%);
-    left: 2%;
+}
+
+.send-btn,
+#ask-btn{
+    position: relative;
     display: inline-block;
     text-align: center;
     border: 1px solid #e0e0e085;
@@ -139,31 +164,21 @@
     margin: auto;
     border-radius: 5px;
     font-size: 0.8rem;
+    color: #3575ff;
 }
 
-#collect-btn>img{
-    width: 20%;
-    display: inline-block;
+.sent-btn{
     position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-#send-btn{
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 2%;
     display: inline-block;
     text-align: center;
     border: 1px solid #e0e0e085;
     height: 75%;
-    width: 63%;
-    margin-left: 8%;
+    width: 30%;
     margin: auto;
+    background: #1E9FFF;
     border-radius: 5px;
     font-size: 0.8rem;
-    color: #3575ff;
+    color: #FFFFFF;
 }
 
 .weui-cell{
@@ -196,4 +211,8 @@
     position: relative;
     top: 1%;
     right: 1%;
+}
+
+.reply-btn{
+    color: #1E9FFF;
 }

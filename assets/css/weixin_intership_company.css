@@ -101,7 +101,7 @@
 }
 
 .company-introduction-entity{
-    min-height: 200px;
+    min-height: 100px;
     padding: 5px;
     font-size: 10px;
 }
@@ -131,7 +131,6 @@
 .company-post-item{
     height: 50px;
     padding: 2%;
-    width: 130%;
     overflow-x: hidden;
 }
 
@@ -145,6 +144,7 @@
 }
 
 .company-post-list{
+    width: 100%;
     overflow-y: scroll;
     margin: auto;
 }
@@ -152,4 +152,8 @@
 #map-container{
     width: 100%;
     height: 200px;
+}
+
+.weui-cells{
+    margin: auto;
 }

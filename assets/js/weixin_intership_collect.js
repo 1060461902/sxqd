@@ -1,4 +1,5 @@
 var page = 1;
+var total= 0;
 
 $(document).ready(function () {
 
@@ -7,14 +8,16 @@ $(document).ready(function () {
         loadDownFn: function (me) {
             $.ajax({
                 type: 'GET',
-                url: './json/job_collection.json',
-                // url:'../student/collections/collection',
+                // url: './json/job_collection.json',
+                url:'../student/collections/collection',
                 data: {
                     pageNum: page
                 },
                 success: function (data) {
+                    total = data.data.totalPage;
                     if (data.code === 200) {
-                        if (data.data.data.length === 0) {
+                        if (page > total) {
+                            me.resetload();
                             // 锁定
                             me.lock();
                             // 无数据
@@ -61,10 +64,8 @@ $(document).ready(function () {
      */
     $('.post-cells').on('click', '.post-unfocus', function () {
         var id = $(this).data('id');
-        // var option = getBASEDELETEAJAX();
-        // option.url = '../student/collections/collection?id='+id;
-        var option = getBASEGETAJAX();
-        option.url = './json/unfoucs_job.json';
+        var option = getBASEDELETEAJAX();
+        option.url = '../student/collections/collection?id='+id;
         option.success = function (data) {
             if (data.code !== 200) {
                 console.log(data.msg);
@@ -86,10 +87,8 @@ $(document).ready(function () {
      */
     $('.post-cells').on('click', '.post-send', function () {
         var id = $(this).data('id');
-        // var option = getBASEPOSTAJAX();
-        // option.url = '../student/recruitments/resume';
         var option = getBASEGETAJAX();
-        option.url = './json/send_resume.json';
+        option.url = '../student/recruitments/resume';
         option.data = {
             'recruitmentId': id
         };

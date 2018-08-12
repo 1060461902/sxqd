@@ -65,13 +65,14 @@ $(document).ready(function () {
                         callback: function (page) {
                             $.ajax({
                                 type: 'GET',
-                                url: './json/company_profile_2.json',
+                                url: '../student/companies/recruitment',
                                 data: {
-                                    pageNum: page.num
+                                    pageNum: page.num,
+                                    id:company_id
                                 },
                                 success: function (data) {
                                     if (data.code === 200) {
-                                        mescroll.endSuccess(data.data.data.length, page.num == data.data.totalPage ? false : true);
+                                        mescroll.endSuccess(data.data.recruitments.length, page.num == data.data.totalPage ? false : true);
                                         var template = Handlebars.compile($('#company-post-model').html());
                                         /*Handlebars.registerHelper('if_bool', function (flag, options) {
                                             if (flag === 1) {
@@ -80,11 +81,7 @@ $(document).ready(function () {
                                                 return options.inverse(this);
                                             }
                                         });*/
-                                        var html = template(data.data.data);
-                                        // setTimeout(function () {
-                                        //     $('.company-post-list').append(html);
-                                        //     page++;
-                                        // }, 1000)
+                                        var html = template(data.data.recruitments);
                                         $('.company-post-list').append(html);
                                     } else {
                                         mescroll.endErr();
@@ -115,7 +112,7 @@ $(document).ready(function () {
      * 请求企业信息页面数据
      */
     var option = getBASEGETAJAX();
-    option.url = './json/company_profile_1.json';
+    option.url = '../student/companies/company';
     option.data = {
         id: company_id
     }
@@ -162,7 +159,6 @@ $(document).ready(function () {
                     'margin:10px;width:100px">' + data.data.location.address + '</div>');
                 info.setPosition(marker.getPosition());
             });
-
         } else {
             console.log(data.code + ":" + data.msg);
             setAlert("系统繁忙，请稍后再试");
