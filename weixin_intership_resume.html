@@ -44,9 +44,6 @@
                 <img src="./assets/images/back_lt.png" alt="">
             </a>
             <span id="title-name">简历管理·基本信息</span>
-            <a id="save-btn">
-                保存
-            </a>
         </p>
     </div>
     <div class="main-body">
@@ -58,7 +55,7 @@
                 <div class="person-info-entity">
                     <input id="upload-head-img" type="file" hidden/>
                     <a id="person-head-img">
-                        <img src="./assets/images/head_img.png" alt="head img">
+                        <img src="" alt="head img">
                     </a>
                 </div>
             </div>
@@ -67,7 +64,7 @@
                     <p>姓名</p>
                 </div>
                 <div class="person-info-entity">
-                    <p>老李</p>
+                    <p id="student-name"></p>
                 </div>
             </div>
             <div class="person-info-bar">
@@ -75,7 +72,7 @@
                     <p>学号</p>
                 </div>
                 <div class="person-info-entity">
-                    <p>1612180000</p>
+                    <p id="student-no"></p>
                 </div>
             </div>
             <div class="person-info-bar">
@@ -83,7 +80,7 @@
                     <p>性别</p>
                 </div>
                 <div class="person-info-entity">
-                    <p>男</p>
+                    <p id="student-sex"></p>
                 </div>
             </div>
             <div class="person-info-bar">
@@ -91,7 +88,8 @@
                     <p>籍贯</p>
                 </div>
                 <div class="person-info-entity">
-                    <input id="location-picker" class="weui-input" type="text" placeholder="请选择">
+                    <!-- <input id="location-picker" class="weui-input" type="text" placeholder="请选择"> -->
+                    <p id="student-place"></p>
                 </div>
             </div>
             <div class="person-info-bar">
@@ -99,7 +97,8 @@
                     <p>民族</p>
                 </div>
                 <div class="person-info-entity">
-                    <input id="nation-picker" class="weui-input" type="text" placeholder="请选择">
+                    <!-- <input id="nation-picker" class="weui-input" type="text" placeholder="请选择"> -->
+                    <p id="student-nation"></p>
                 </div>
             </div>
             <div class="person-info-bar">
@@ -107,7 +106,8 @@
                     <p>出生年月</p>
                 </div>
                 <div class="person-info-entity">
-                    <input id="birthday-picker" class="weui-input" type="text" placeholder="请选择">
+                    <!-- <input id="birthday-picker" class="weui-input" type="text" placeholder="请选择"> -->
+                    <p id="student-birthday"></p>
                 </div>
             </div>
             <div class="person-info-bar">
@@ -126,51 +126,11 @@
                     <input type="text" id="info-email" class="weui-input" value="" placeholder="请填写">
                 </div>
             </div>
+            <a class="basic-save">保存</a>
         </div>
         <div class="project-info-tab" data-role="none">
             <div class="project-items">
-                <div class="project-item project-item-old" data-id="3">
-                    <div class="project-info-bar">
-                        <div class="project-info-title">
-                            <p>项目名称</p>
-                        </div>
-                        <div class="project-info-entity">
-                            <input id="project-name" class="weui-input" type="text" value="学生实习" placeholder="请填写">
-                        </div>
-                    </div>
-                    <div class="project-info-bar">
-                        <div class="project-info-title">
-                            <p>参与身份</p>
-                        </div>
-                        <div class="project-info-entity">
-                            <input id="project-role" class="weui-input" type="text" value="开发人员" placeholder="请填写">
-                        </div>
-                    </div>
-                    <div class="project-info-bar">
-                        <div class="project-info-title">
-                            <p>开始时间</p>
-                        </div>
-                        <div class="project-info-entity">
-                            <input class="weui-input project-start" type="text" value="2018-07-01 " placeholder="请选择">
-                        </div>
-                    </div>
-                    <div class="project-info-bar">
-                        <div class="project-info-title">
-                            <p>结束时间</p>
-                        </div>
-                        <div class="project-info-entity">
-                            <input class="weui-input project-end" type="text" value="2018-08-10 " placeholder="请选择">
-                        </div>
-                    </div>
-                    <div class="project-describe">
-                        <p>项目说明</p>
-                        <textarea placeholder="请填写">好好好好好</textarea>
-                    </div>
-                    <div class="project-info-bar">
-                        <a class="project-delete">删除</a>
-                        <a class="project-edit">修改</a>
-                    </div>
-                </div>
+                <!-- project-item-model -->
             </div>
             <div class="add-project">
                 <a id="add-project-btn">
@@ -221,6 +181,7 @@
                     <div class="corporation-info-bar">
                         <a class="corporation-delete">删除</a>
                         <a class="corporation-edit">修改</a>
+                        <a class="corporation-save">保存</a>
                     </div>
                 </div>
             </div>
@@ -275,6 +236,7 @@
                     <div class="honor-info-bar">
                         <a class="honor-delete">删除</a>
                         <a class="honor-edit">修改</a>
+                        <a class="honor-save">保存</a>
                     </div>
                 </div>
             </div>
@@ -303,9 +265,57 @@
             </div>
         </div>
     </div>
+    <script id="project-item-model" type="x-handlebars-template">
+        {{#each this}}
+        <div class="project-item project-item-old" data-id="{{id}}">
+            <div class="project-info-bar">
+                <div class="project-info-title">
+                    <p>项目名称</p>
+                </div>
+                <div class="project-info-entity">
+                    <input id="project-name" class="weui-input" type="text" value="{{projectName}}" placeholder="请填写">
+                </div>
+            </div>
+            <div class="project-info-bar">
+                <div class="project-info-title">
+                    <p>参与身份</p>
+                </div>
+                <div class="project-info-entity">
+                    <input id="project-role" class="weui-input" type="text" value="{{identity}}" placeholder="请填写">
+                </div>
+            </div>
+            <div class="project-info-bar">
+                <div class="project-info-title">
+                    <p>开始时间</p>
+                </div>
+                <div class="project-info-entity">
+                    <input class="weui-input project-start" type="text" value="{{timetool startTime}}" placeholder="请选择">
+                </div>
+            </div>
+            <div class="project-info-bar">
+                <div class="project-info-title">
+                    <p>结束时间</p>
+                </div>
+                <div class="project-info-entity">
+                    <input class="weui-input project-end" type="text" value="{{timetool endTime}}" placeholder="请选择">
+                </div>
+            </div>
+            <div class="project-describe">
+                <p>项目说明</p>
+                <textarea placeholder="请填写">{{instruction}}</textarea>
+            </div>
+            <div class="project-info-bar">
+                <a class="project-delete">删除</a>
+                <a class="project-edit">修改</a>
+                <a class="project-save">保存</a>
+            </div>
+        </div>
+        {{/each}}
+    </script>
     <!--js-->
     <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="./assets/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="./assets/js/floatbutton.js"></script>
     <script type="text/javascript" src="./assets/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript" src="./assets/js/fastclick.js"></script>
     <script type="text/javascript" src="./assets/js/city-picker.min.js"></script>

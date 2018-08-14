@@ -1,17 +1,91 @@
 $(document).ready(function () {
     $('.remind-swipe').fadeIn(1500);
     $('.remind-swipe').fadeOut(1500);
+
+    $.ajax({
+        type: "GET",
+        // url: "../student/studentsets/set",
+        url: './json/set/get.json', //暂时
+        data: {},
+        success: function (d) {
+
+            d = d.return; //暂时
+
+            if (d.code === 200) {
+                /**
+                 * 基础信息
+                 */
+                var info = d.data.info;
+                $('#person-head-img img').attr('src', info.logo);
+                $("#student-name").html(info.name);
+                $("#student-no").html(info.studentNum);
+                $("#student-nation").html(info.nation);
+                $("#student-sex").html(info.sex);
+                $("#student-place").html(info.place); //空缺
+                $("#student-birthday").html(info.birthday);
+                $("#info-phone").val(info.phone);
+                $("#info-email").val(info.email);
+                /**
+                 * 项目经历
+                 */
+                var project = d.data.project;
+                $('.project-items').handlebars($('#project-item-model'), project, {
+                    name: 'timetool',
+                    callback: function (time) {
+                        time = Number(time);
+                        return getdate(time) + ' ';
+                    }
+                });
+
+                // /**
+                //  * 社团经历 
+                //  */
+                // var club = d.data.club;
+                // $('.corporation-info-list').handlebars($('#corporation-info-model'), club);
+
+                // /**
+                //  * 所获荣誉
+                //  */
+                // var honor = d.data.honor;
+                // $('.honor-info-list').handlebars($('#honor-info-model'), honor);
+
+                // /**
+                //  * 技能水平
+                //  */
+                // var skill = d.data.skill;
+                // $('.edited-lables').handlebars($('#skill-info-model'), skill);
+
+                /**
+                 * 设置老条目不可编辑
+                 */
+                $('.project-item-old input,.project-item-old textarea,.corporation-item-old input,.corporation-item-old textarea,.honor-item-old input,.honor-item-old textarea').attr("disabled", true);
+            } else {
+                console.log(d.code + ":" + d.msg);
+                setAlert("系统繁忙,请稍后再试");
+            }
+        },
+        error: function (res) {
+            console.log(res);
+            setAlert("系统繁忙,请稍后再试");
+        }
+    });
+
     /**
      * 点击返回键
      */
     $('#title-back').click(function () {
         $.confirm({
-            text: '如您已确认保存，点击确定退出页面',
+            text: '如您已确认修改完成，点击确定退出页面',
             onOK: function () {
                 window.location.href = './weixin_intership_index.html?tab=3';
             }
         });
     });
+
+    document.addEventListener("touchmove",function(){
+        event.preventDefault();
+        return false;
+    },false);
 
     /**
      * 右滑
@@ -67,14 +141,14 @@ $(document).ready(function () {
     /**
      * 点击保存按钮
      */
-    $('#save-btn').on('click', function () {
-        $.confirm({
-            text: '确定编辑好了所有资料?',
-            onOK: function () {
+    // $('#save-btn').on('click', function () {
+    //     $.confirm({
+    //         text: '确定编辑好了所有资料?',
+    //         onOK: function () {
 
-            }
-        });
-    });
+    //         }
+    //     });
+    // });
 
     /**
      * 点击头像
@@ -86,14 +160,14 @@ $(document).ready(function () {
     /**
      * 点击地址选择
      */
-    $('#location-picker').cityPicker({
+    /*$('#location-picker').cityPicker({
         title: "请选择籍贯地址"
-    });
+    });*/
 
     /**
      * 点击名族选择
      */
-    $('#nation-picker').picker({
+    /*$('#nation-picker').picker({
         title: "请选择民族",
         cols: [{
             textAlign: 'center',
@@ -157,24 +231,19 @@ $(document).ready(function () {
                 '来自国外'
             ]
         }]
-    });
+    });*/
 
     /**
      * 日期选择
      */
-    $('#birthday-picker,.project-item .project-start,.project-item .project-end,.corporation-item .corporation-start,.corporation-item .corporation-end,.honor-item .honor-date').datetimePicker({
+    $('.project-item .project-start,.project-item .project-end,.corporation-item .corporation-start,.corporation-item .corporation-end,.honor-item .honor-date').datetimePicker({
         times: function () {}
     });
 
     /**
-     * 设置老条目不可编辑
-     */
-    $('.project-item-old input,.project-item-old textarea,.corporation-item-old input,.corporation-item-old textarea,.honor-item-old input,.honor-item-old textarea').attr("disabled", true);
-
-    /**
      * 点击老项目条目修改按钮询问是否编辑
      */
-    $('.project-item-old').on('click', '.project-edit', function () {
+    $('.project-items').on('click', '.project-edit', function () {
         var id = $(this).parent().parent().data('id');
         $.confirm({
             text: '确定要修改该条目？',
@@ -189,7 +258,7 @@ $(document).ready(function () {
     /**
      * 点击老社团经历条目修改按钮询问是否编辑
      */
-    $('.corporation-item-old').on('click', '.corporation-edit', function () {
+    $('.corporation-items').on('click', '.corporation-edit', function () {
         var id = $(this).parent().parent().data('id');
         $.confirm({
             text: '确定要修改该条目？',
@@ -204,7 +273,7 @@ $(document).ready(function () {
     /**
      * 点击老荣誉条目修改按钮询问是否编辑
      */
-    $('.honor-item-old').on('click', '.honor-edit', function () {
+    $('.honor-items').on('click', '.honor-edit', function () {
         var id = $(this).parent().parent().data('id');
         $.confirm({
             text: '确定要修改该条目？',
@@ -212,6 +281,54 @@ $(document).ready(function () {
                 $('.honor-item[data-id="' + id + '"]').removeClass('honor-item-old');
                 $('.honor-item[data-id="' + id + '"]').addClass('honor-item-new');
                 $('.honor-item[data-id="' + id + '"] input,.honor-item[data-id="' + id + '"] textarea').attr("disabled", false);
+            }
+        })
+    });
+
+    /**
+     * 点击新项目条目保存按钮询问是否保存
+     */
+    $('.project-items').on('click', '.project-save', function () {
+        var element = $(this).parent().parent();
+        $.confirm({
+            text: '确定要保存该条目？',
+            onOK: function () {
+                element.removeClass('project-item-new');
+                element.addClass('project-item-old');
+                element.find("input").attr("disabled", true);
+                element.find("textarea").attr("disabled", true);
+            }
+        })
+    });
+
+    /**
+     * 点击新社团经历条目保存按钮询问是否保存
+     */
+    $('.corporation-items').on('click', '.corporation-save', function () {
+        var element = $(this).parent().parent();
+        $.confirm({
+            text: '确定要保存该条目？',
+            onOK: function () {
+                element.removeClass('corporation-item-new');
+                element.addClass('corporation-item-old');
+                element.find("input").attr("disabled", true);
+                element.find("textarea").attr("disabled", true);
+            }
+        })
+    });
+
+    /**
+     * 点击新荣誉条目保存按钮询问是否保存
+     */
+    $('.honor-items').on('click', '.honor-save', function () {
+        var element = $(this).parent().parent();
+        $.confirm({
+            text: '确定要保存该条目？',
+            onOK: function () {
+                element.removeClass('honor-item-new');
+                element.addClass('honor-item-old');
+                element.find("input").attr("disabled", true);
+                element.find("textarea").attr("disabled", true);
             }
         })
     });
@@ -228,7 +345,7 @@ $(document).ready(function () {
      */
     $('#add-project-btn').click(function () {
         var date = new Date(); //利用date拼接虚拟id，到时候删除
-        $('.project-items').append('<div class="project-item project-item-new" data-id="' + date.getMinutes() + date.getSeconds() + '">' +
+        $('.project-items').append('<div class="project-item project-item-new">' +
             '<div class="project-info-bar">' +
             '<div class="project-info-title">' +
             '<p>项目名称</p>' +
@@ -267,6 +384,8 @@ $(document).ready(function () {
             '</div>' +
             '<div class="project-info-bar">' +
             '<a class="project-delete">删除</a>' +
+            '<a class="project-edit">修改</a>' +
+            '<a class="project-save">保存</a>' +
             '</div>' +
             '</div>');
         $('.project-item .project-start,.project-item .project-end').datetimePicker({
@@ -279,7 +398,7 @@ $(document).ready(function () {
      */
     $('#add-corporation-btn').click(function () {
         var date = new Date(); //利用date拼接虚拟id，到时候删除
-        $('.corporation-items').append('<div class="corporation-item corporation-item-new" data-id="' + date.getMinutes() + date.getSeconds() + '">' +
+        $('.corporation-items').append('<div class="corporation-item corporation-item-new">' +
             '<div class="corporation-info-bar">' +
             '<div class="corporation-info-title">' +
             '<p>组织名称</p>' +
@@ -318,6 +437,8 @@ $(document).ready(function () {
             '</div>' +
             '<div class="corporation-info-bar">' +
             '<a class="corporation-delete">删除</a>' +
+            '<a class="corporation-edit">修改</a>' +
+            '<a class="corporation-save">保存</a>' +
             '</div>' +
             '</div>');
         $('.corporation-item .corporation-start,.corporation-item .corporation-end').datetimePicker({
@@ -329,7 +450,7 @@ $(document).ready(function () {
      * 点击添加所获荣誉
      */
     $('#add-honor-btn').click(function () {
-        $('.honor-items').append('<div class="honor-item honor-item-new" data-id="">' +
+        $('.honor-items').append('<div class="honor-item honor-item-new">' +
             '<div class="honor-info-bar">' +
             '<div class="honor-info-title">' +
             '<p>荣誉名称</p>' +
@@ -371,6 +492,7 @@ $(document).ready(function () {
             '<div class="honor-info-bar">' +
             '<a class="honor-delete">删除</a>' +
             '<a class="honor-edit">修改</a>' +
+            '<a class="honor-save">保存</a>' +
             '</div>' +
             '</div>');
         $('.honor-item .honor-date').datetimePicker({
@@ -379,9 +501,10 @@ $(document).ready(function () {
     });
 
     /**
-     * 删除新增的项目条目
+     * 删除项目条目
      */
-    $('.project-items').on('click', '.project-item-new .project-delete', function () {
+    $('.project-items').on('click', '.project-delete', function () {
+        var id = $(this).parent().parent().data('id');
         $.confirm({
             text: "确定删除该条目?",
             onOK: () => {
@@ -391,9 +514,10 @@ $(document).ready(function () {
     })
 
     /**
-     * 删除新增的社团条目
+     * 删除社团条目
      */
-    $('.corporation-items').on('click', '.corporation-item-new .corporation-delete', function () {
+    $('.corporation-items').on('click', '.corporation-delete', function () {
+        var id = $(this).parent().parent().data('id');
         $.confirm({
             text: "确定删除该条目?",
             onOK: () => {
@@ -403,9 +527,10 @@ $(document).ready(function () {
     })
 
     /**
-     * 删除新增的荣誉条目
+     * 删除荣誉条目
      */
-    $('.honor-items').on('click', '.honor-item-new .honor-delete', function () {
+    $('.honor-items').on('click', '.honor-delete', function () {
+        var id = $(this).parent().parent().data('id');
         $.confirm({
             text: "确定删除该条目?",
             onOK: () => {
@@ -443,9 +568,9 @@ $(document).ready(function () {
     /**
      * 点击edited-lable的关闭按钮
      */
-    $('.edited-lables').on('click','.edited-lable>a',function(){
+    $('.edited-lables').on('click', '.edited-lable>a', function () {
         $(this).parent().remove();
-        if($('.edited-lables').children('.edited-lable').length < 10){
+        if ($('.edited-lables').children('.edited-lable').length < 10) {
             $('.editable-lable').css({
                 'display': 'inline-block'
             });
@@ -459,3 +584,36 @@ $(document).ready(function () {
         $('.editable-lable>input').val('')
     });
 });
+
+/**
+ * 时间戳转换
+ */
+function getdate(time) {
+    var date = new Date(time);
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    var d = date.getDate();
+    return y + "-" + (m < 10 ? "0" + m : m) + "-" + (d < 10 ? "0" + d : d);
+}
+
+/**
+ * 图片预览
+ */
+function proviewImg(file, container) {
+    var fileType = file.type.split("/")[0];
+    if (fileType != "image") {
+        setAlert("请上传图片")
+        return;
+    }
+    var fileSize = Math.round(file.size / 1024 / 1024);
+    if (fileSize >= 3) {
+        setAlert("请上传小于少于3M的图片");
+        return;
+    }
+    var reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.onload = function (f) {
+        var src = "data:" + file.type + ";base64," + window.btoa(this.result);
+        container.attr('src', src);
+    }
+}

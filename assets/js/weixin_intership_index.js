@@ -1,4 +1,6 @@
 var page = 1;
+var mescroll_sxzp;
+var mescroll_qzzl;
 
 $(document).ready(function () {
 	/**
@@ -9,12 +11,14 @@ $(document).ready(function () {
 		switch (res['tab']) {
 			case '2':
 				$('#qzzl').click();
+				getResume()
 				break;
 			case '3':
 				$('#wd').click();
 				break;
 			default:
 				$('#sxzp').click();
+				getPost();
 				break;
 		}
 	}
@@ -27,7 +31,7 @@ $(document).ready(function () {
 	option.data = {
 		pageNum: 1
 	}
-	option.url = './json/home_page.json';
+	option.url = '../student/home';
 	option.success = function (data) {
 		if (data.code === 200) {
 			/**
@@ -55,57 +59,156 @@ $(document).ready(function () {
 	$.ajax(option);
 
 	$('.post-cells').css({
-		'height':$(window).height()-$('#searchBar').outerHeight(true)-$('#myCarousel').outerHeight(true)-$('.weui-tabbar').outerHeight(true),
+		'height': $(window).height() - $('#searchBar').outerHeight(true) - $('#myCarousel').outerHeight(true) - $('.weui-tabbar').outerHeight(true),
 		'overflow': 'scroll'
 	});
 
+	$('.road-cells').css({
+		'height': $(window).height(),
+		'overflow': 'scroll'
+	});
+
+
+    var option = getBASEGETAJAX();
+    option.url = '../student/studentsets/set';
+    option.success = function (d) {
+        if (d.code === 200) {
+            /**
+             * 基础信息
+             */
+            var info = d.data.info;
+            $('.person-bar').handlebars($('#person-info-model'),info);
+        }else {
+            console.log(d.msg);
+            $.toptip("系统繁忙，请稍后再试", 'error');
+		}
+    }
+    option.error = function (res) {
+        $.toptip("系统繁忙，请稍后再试", 'error');
+        console.log(res);
+    }
+    $.ajax(option);
 	/**
-	 * 请求职位列表
+	 * 滚动加载触发与销毁
 	 */
-	$('.post-loading').dropload({
-		scrollArea: $('.post-cells'),
-		loadDownFn: function (me) {
-			$.ajax({
-				type: 'GET',
-				url: './json/home_rec.json',
-				// url:'../student/collections/collection',
-				data: {
-					pageNum: page
-				},
-				success: function (data) {
-					if (data.code === 200) {
-						if (data.data.data.length === 0) {
-							// 锁定
-							me.lock();
-							// 无数据
-							me.noData();
-						} else {
+	$('#sxzp').click(function () {
+		getPost();
+	});
+	$('#qzzl,#wd').click(function () {
+		mescroll_sxzp.destroy();
+	});
+	$('#qzzl').click(function () {
+		getResume();
+	});
+	$('#sxzp,#wd').click(function () {
+		mescroll_qzzl.destroy();
+	});
+});
+
+function getPost() {
+	mescroll_sxzp = new MeScroll("mescroll_sxzp", {
+		up: {
+			auto: true,
+			isBounce: false,
+			clearEmptyId: "dataList_sxzp",
+			page: {
+				num: 0,
+				size: 1
+			},
+			loadFull: {
+				use: true
+			},
+			callback: function (page) {
+				$.ajax({
+					type: 'GET',
+					url: '../student/home/recruitment',
+					data: {
+						pageNum: page.num
+					},
+					success: function (data) {
+						if (data.code === 200) {
+							mescroll_sxzp.endSuccess(data.data.data.length, page.num == data.data.totalPage ? false : true);
 							var template = Handlebars.compile($('#post-list-model').html());
 							var html = template(data.data.data);
 							$('.cells-container').append(html);
-							page++;
-							me.resetload();
+						} else {
+							mescroll_sxzp.endErr();
+							console.log(data.msg);
+							$.toptip("系统繁忙，请稍后再试", 'error');
 						}
-					} else {
-						console.log(data.msg);
+					},
+					error: function (res) {
+						//联网失败的回调
+						mescroll_sxzp.endErr();
 						$.toptip("系统繁忙，请稍后再试", 'error');
-						me.resetload();
-						// 锁定
-						me.lock();
-						// 无数据
-						me.noData();
+						console.log(res);
 					}
-				},
-				error: function (res) {
-					$.toptip("系统繁忙，请稍后再试", 'error');
-					console.log(res);
-					me.resetload();
-					// 锁定
-					me.lock();
-					// 无数据
-					me.noData();
-				}
-			});
+				});
+
+			},
+			toTop: {
+				src: "./assets/images/mescroll-totop.png",
+				offset: 1000
+			}
 		}
 	});
-});
+}
+
+function getResume(){
+	mescroll_qzzl = new MeScroll("mescroll_qzzl", {
+		up: {
+			auto: true,
+			isBounce: false,
+			clearEmptyId: "dataList_qzzl",
+			page: {
+				num: 0,
+				size: 1
+			},
+			loadFull: {
+				use: true
+			},
+			callback: function (page) {
+				$.ajax({
+					type: 'GET',
+					url: '../student/roads/road',
+					data: {
+						pageNum: page.num
+					},
+					success: function (data) {
+						if (data.code === 200) {
+							mescroll_qzzl.endSuccess(data.data.data.length, page.num == data.data.totalPage ? false : true);
+							var template = Handlebars.compile($('#resume-list-model').html());
+							Handlebars.registerHelper('which_img',function (actionName) {
+								switch (actionName) {
+                                    case '投递简历':
+                                        return './assets/images/history_send.png';
+                                    case '简历通过':
+                                        return './assets/images/history_pass.png';
+                                    case '成功录用':
+                                        return './assets/images/history_success.png';
+                                }
+							});
+							var html = template(data.data.data);
+							$('.resume-list').append(html);
+						} else {
+							mescroll_qzzl.endErr();
+							console.log(data.msg);
+							$.toptip("系统繁忙，请稍后再试", 'error');
+						}
+					},
+					error: function (res) {
+						//联网失败的回调
+						mescroll_qzzl.endErr();
+						$.toptip("系统繁忙，请稍后再试", 'error');
+						console.log(res);
+					}
+				});
+
+			},
+			toTop: {
+				src: "./assets/images/mescroll-totop.png",
+				offset: 1000
+			}
+		}
+	});
+}

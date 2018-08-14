@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/internshipmgn/student/assets/css/bootstrap.css" />
     <link rel="stylesheet" href="/internshipmgn/student/assets/css/commonCSS.css">
     <link rel="stylesheet" href="/internshipmgn/student/assets/css/weixin_intership_index.css">
-    <link rel="stylesheet" href="/internshipmgn/student/assets/css/dropload.css">
+    <link rel="stylesheet" href="/internshipmgn/student/assets/css/mescroll.min.css">
 </head>
 
 <body ontouchstart>
@@ -23,11 +23,11 @@
             <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
                 <!-- <div class="title-bar-1">
                     <a id="location-select">
-                        <img id="location-select-img" src="/internshipmgn/student/assets/images/local_white.png" alt="">
+                        <img id="location-select-img" src="./assets/images/local_white.png" alt="">
                         <span id="location-name">杭州</span>
                     </a>
                     <div id="search-bar">
-                        <img id="search-bar-img" src="/internshipmgn/student/assets/images/magnifier.png" alt="">
+                        <img id="search-bar-img" src="./assets/images/magnifier.png" alt="">
                         <input id="search-info" type="text" placeholder="搜索实习\公司" />
                     </div>
                 </div> -->
@@ -46,54 +46,22 @@
                     <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
                 </div>
                 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000"></div>
-                <div class="weui-cells post-cells">
-                    <div class="cells-container">
+                <div class="weui-cells post-cells mescroll" id="mescroll_sxzp">
+                    <div class="cells-container data-list" id="dataList_sxzp">
                         <!-- post-list-model -->
                     </div>
-                    <div class="post-loading"></div>
                 </div>
             </div>
             <div id="tab2" class="weui-tab__bd-item">
-                <div class="list-group road-cells">
-                    <div class="list-group-item road-cells-item">
-                        <div class="logo-part">
-                            <div class="logo-img">
-                                <img src="/internshipmgn/student/assets/images/jk.png">
-                            </div>
-                            <p class="company-name">即刻</p>
-                            <p class="post-name">产品经理</p>
-                        </div>
-                        <div class="history-entity">
-                            <div class="history-entity-item">
-                                <p class="history-entity-top">25</p>
-                                <div class="history-entity-item-img">
-                                    <img src="/internshipmgn/student/assets/images/history_send.png">
-                                </div>
-                                <div class="history-entity-bottom">
-                                    <p>2017年9月</p>
-                                    <p>投递简历</p>
-                                </div>
-                            </div>
-                            <div class="history-entity-item">
-                                <p class="history-entity-top">27</p>
-                                <div class="history-entity-item-img">
-                                    <img src="/internshipmgn/student/assets/images/history_pass.png">
-                                </div>
-                                <div class="history-entity-bottom">
-                                    <p>2017年9月</p>
-                                    <p>简历通过</p>
-                                </div>
-                            </div>
-                        </div>
+                <div class="list-group road-cells mescroll" id="mescroll_qzzl">
+                    <div class="resume-list data-list" id="dataList_qzzl">
+                        <!-- resume-list-model -->
                     </div>
                 </div>
             </div>
             <div id="tab3" class="weui-tab__bd-item">
                 <div class="person-bar">
-                    <div class="person-head-img">
-                        <img src="/internshipmgn/student/assets/images/head_img.png" alt="">
-                    </div>
-                    <span class="person-name">老李</span>
+                    <!-- person-info-model -->
                 </div>
                 <a class="person-resume next-container" href="/internshipmgn/student/weixin_intership_resume.html">
                     <img src="/internshipmgn/student/assets/images/mobile_resume.png" alt="">
@@ -150,7 +118,7 @@
     </script>
     <script id="post-list-model" type="text/x-handlebars-template">
         {{#each this}}
-        <a class="weui-cell" data-id="" href="/internshipmgn/student/weixin_intership_post.html?id={{companyId}}">
+        <a class="weui-cell post-item" data-id="" href="/internshipmgn/student/weixin_intership_post.html?id={{companyId}}">
             <div class="cell-left">
                 <p class="post-name">{{post}}</p>
                 <p>
@@ -173,6 +141,39 @@
         </a>
         {{/each}}
     </script>
+    <script id="resume-list-model" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="list-group-item road-cells-item">
+            <div class="logo-part">
+                <div class="logo-img">
+                    <img src="{{logo}}">
+                </div>
+                <p class="company-name">{{companyName}}</p>
+                <p class="post-name">{{recruitmentName}}</p>
+            </div>
+            <div class="history-entity">
+                {{#each recruitmentRoads}}
+                <div class="history-entity-item">
+                    <p class="history-entity-top">{{day}}</p>
+                    <div class="history-entity-item-img">
+                        <img src="{{which_img actionName}}">
+                    </div>
+                    <div class="history-entity-bottom">
+                        <p>{{year}}年{{month}}月</p>
+                        <p>{{actionName}}</p>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/each}}
+    </script>
+    <script id="person-info-model" type="text/x-handlebars-template">
+        <div class="person-head-img">
+            <img src="{{logo}}" alt="">
+        </div>
+        <span class="person-name">{{name}}</span>
+    </script>
 
     <!--js-->
     <script type="text/javascript" src="/internshipmgn/student/assets/js/jquery-2.1.0.min.js"></script>
@@ -181,7 +182,7 @@
     <script type="text/javascript" src="/internshipmgn/student/assets/js/fastclick.js"></script>
     <script type="text/javascript" src="/internshipmgn/student/assets/js/handlebars-v4.0.11.js"></script>
     <script type="text/javascript" src="/internshipmgn/student/assets/js/handlebars-jquery.js"></script>
-    <script type="text/javascript" src="/internshipmgn/student/assets/js/dropload.min.js"></script>
+    <script type="text/javascript" src="/internshipmgn/student/assets/js/mescroll.min.js"></script>
     <script type="text/javascript" src="/internshipmgn/student/assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="/internshipmgn/student/assets/js/model.js"></script>
     <script type="text/javascript" src="/internshipmgn/student/assets/js/jquery-url.js"></script>

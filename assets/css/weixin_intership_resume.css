@@ -6,7 +6,7 @@
     background: #ffffff;
 }
 
-#save-btn {
+/* #save-btn {
     position: absolute;
     display: block;
     right: 2%;
@@ -21,7 +21,7 @@
     background: #ffffff;
     border-radius: 5px;
     color: #000000;
-}
+} */
 
 .side-nav-bg {
     top: 0;
@@ -203,7 +203,7 @@
 .person-info-title,
 .project-info-title,
 .corporation-info-title,
-.honor-info-title{
+.honor-info-title {
     position: relative;
     width: 30%;
 }
@@ -223,26 +223,26 @@
 
 .project-item,
 .corporation-item,
-.honor-item{
+.honor-item {
     width: 96%;
     margin: 5px auto 0;
 }
 
 .project-item-old,
 .corporation-item-old,
-.honor-item-old{
+.honor-item-old {
     border: 1px dashed #6494fa;
 }
 
 .project-item-new,
 .corporation-item-new,
-.honor-item-new{
+.honor-item-new {
     border: 1px dashed #faf764;
 }
 
 .project-delete,
 .corporation-delete,
-.honor-delete{
+.honor-delete {
     background: rgb(255, 100, 100);
     border-radius: 5px;
     width: 20%;
@@ -252,7 +252,7 @@
 
 .project-edit,
 .corporation-edit,
-.honor-edit{
+.honor-edit {
     background: rgb(122, 153, 253);
     border-radius: 5px;
     width: 20%;
@@ -263,13 +263,19 @@
 
 .project-item-new .project-edit,
 .corporation-item-new .corporation-edit,
-.honor-item-new .honor-edit{
+.honor-item-new .honor-edit {
+    display: none;
+}
+
+.project-item-old .project-save,
+.corporation-item-old .corporation-save,
+.honor-item-old .honor-save {
     display: none;
 }
 
 #add-project-btn,
 #add-corporation-btn,
-#add-honor-btn{
+#add-honor-btn {
     display: block;
     background: #7bc2fc;
     color: #ffffff;
@@ -280,26 +286,26 @@
     width: 50%;
 }
 
-.add-plus{
+.add-plus {
     color: rgb(0, 60, 255);
 }
 
 #add-project-btn:active,
 #add-corporation-btn:active,
-#add-honor-btn:active{
+#add-honor-btn:active {
     background: #5eb5fc;
 }
 
 .project-describe,
 .corporation-describe,
-.honor-describe{
+.honor-describe {
     font-size: 0.8;
     padding: 3%;
 }
 
 .project-describe>textarea,
 .corporation-describe>textarea,
-.honor-describe>textarea{
+.honor-describe>textarea {
     resize: none;
     width: 100%;
     height: 100px !important;
@@ -307,11 +313,11 @@
     overflow-y: auto !important;
 }
 
-.honor-describe{
+.honor-describe {
     border-bottom: 1px solid #e0e0e085;
 }
 
-.honor-img-add{
+.honor-img-add {
     display: block;
     height: 50px;
     width: 50px;
@@ -322,16 +328,21 @@
     font-size: 30px;
 }
 
-.honor-img-btn{
+.honor-img-btn {
     display: block;
 }
 
-.honor-img-btn p:first-child{
-    display: -webkit-box; /* OLD: Safari, iOS 6 and earlier; Android browser, older WebKit */
-    display: -moz-box; /* OLD: Firefox (can be buggy) */
-    display: -ms-flexbox; /* OLD: IE 10 */
-    display: -webkit-flex; /* FINAL, PREFIXED, Chrome 21+ */
-    display: flex; /* FINAL: Opera 12.1+, Firefox 22+ */
+.honor-img-btn p:first-child {
+    display: -webkit-box;
+    /* OLD: Safari, iOS 6 and earlier; Android browser, older WebKit */
+    display: -moz-box;
+    /* OLD: Firefox (can be buggy) */
+    display: -ms-flexbox;
+    /* OLD: IE 10 */
+    display: -webkit-flex;
+    /* FINAL, PREFIXED, Chrome 21+ */
+    display: flex;
+    /* FINAL: Opera 12.1+, Firefox 22+ */
     -webkit-box-align: center;
     -moz-box-align: center;
     -ms-flex-align: center;
@@ -344,48 +355,48 @@
     justify-content: center;
 }
 
-.honor-img-btn p{
+.honor-img-btn p {
     text-align: center;
 }
 
-.honor-img{
+.honor-img {
     padding: 3%;
 }
 
-.honor-img-upload{
+.honor-img-upload {
     display: inline-block;
     width: 50%;
     background: #dddddd;
 }
 
-.honor-img-describe{
-    word-break:break-all;
+.honor-img-describe {
+    word-break: break-all;
     display: inline-block;
     width: 45%;
     font-size: 0.5rem;
     color: #494949;
 }
 
-.editable-lables{
+.editable-lables {
     padding: 2%;
 }
 
-.editable-lable{
+.editable-lable {
     display: inline-block;
     border: 1px solid #a7a7a7;
     border-radius: 5px;
     font-size: 0.6rem;
 }
 
-.editable-lable>input{
+.editable-lable>input {
     width: 6rem !important;
 }
 
-.edited-lables{
+.edited-lables {
     display: inline-block;
 }
 
-.edited-lable{
+.edited-lable {
     color: #ffffff;
     display: inline-block;
     border: 1px solid #688bfd;
@@ -395,6 +406,28 @@
     margin-left: 5px;
 }
 
-.edited-lable>a{
+.edited-lable>a {
     color: rgb(0, 26, 255);
+}
+
+.honor-save,
+.corporation-save,
+.project-save {
+    background: rgb(255, 174, 0);
+    border-radius: 5px;
+    width: 20%;
+    text-align: center;
+    color: #ffffff;
+    margin-left: 5px
+}
+
+.basic-save {
+    display: block;
+    background: rgb(255, 174, 0);
+    border-radius: 5px;
+    width: 50%;
+    font-size: 15px;
+    text-align: center;
+    color: #ffffff;
+    margin: 10px auto 0;
 }
