@@ -1,26 +1,20 @@
+var timeTool = {
+    name: 'timetool',
+    callback: function (time) {
+        return time + ' ';
+    }
+}
+
 $(document).ready(function () {
     $('.remind-swipe').fadeIn(1500);
     $('.remind-swipe').fadeOut(1500);
 
     $.ajax({
         type: "GET",
-        // url: "../student/studentsets/set",
-        url: './json/set/get.json', //暂时
+        url: "../student/studentsets/set",
         data: {},
         success: function (d) {
-
-            d = d.return; //暂时
-
             if (d.code === 200) {
-
-                var timeTool = {
-                    name: 'timetool',
-                    callback: function (time) {
-                        time = Number(time);
-                        return getdate(time) + ' ';
-                    }
-                }
-
                 /**
                  * 基础信息
                  */
@@ -103,6 +97,9 @@ $(document).ready(function () {
         });
     });
 
+    /**
+     * 右滑菜单
+     */
     var startX, startY;
     $("body").on("touchstart", function (e) {
         e.preventDefault();
@@ -162,22 +159,17 @@ $(document).ready(function () {
     })
 
     /**
-     * 点击保存按钮
-     */
-    // $('#save-btn').on('click', function () {
-    //     $.confirm({
-    //         text: '确定编辑好了所有资料?',
-    //         onOK: function () {
-
-    //         }
-    //     });
-    // });
-
-    /**
      * 点击头像
      */
     $('#person-head-img').on('click', function () {
         $('#upload-head-img').click();
+    });
+
+    /**
+     * 头像预览
+     */
+    $('#upload-head-img').change(function () {
+        proviewImg($(this)[0].files[0],$('#person-head-img img'));
     });
 
     /**
@@ -317,17 +309,122 @@ $(document).ready(function () {
     });
 
     /**
+     * 点击基础信息的保存按钮保存
+     */
+    $('.basic-save').click(function () {
+        var phone_edit = $('#info-phone').val();
+        var email_edit = $('#info-email').val();
+        var head_img = $('#upload-head-img')[0].files[0];
+        var form = new FormData();
+        if (head_img != null && head_img != '') {
+            form.append('logo', head_img);
+        }
+        form.append('phone', phone_edit);
+        form.append('email', email_edit);
+
+        var option = getBASEPOSTAJAX();
+        option.url = "../student/studentsets/set";
+        option.data = form;
+        option.processData = false;
+        option.contentType = false;
+        option.success = function (d) {
+            if (d.code === 200) {
+                $.ajax({
+                    type: "GET",
+                    url: "../student/studentsets/set",
+                    data: {},
+                    success: function (d) {
+                        if (d.code === 200) {
+                            /**
+                             * 基础信息
+                             */
+                            var info = d.data.info;
+                            $('#person-head-img img').attr('src', info.logo);
+                            $("#student-name").html(info.name);
+                            $("#student-no").html(info.studentNum);
+                            $("#student-nation").html(info.nation);
+                            $("#student-sex").html(info.sex);
+                            $("#student-place").html(info.place); //空缺
+                            $("#student-birthday").html(info.birthday);
+                            $("#info-phone").val(info.phone);
+                            $("#info-email").val(info.email);
+                        } else {
+                            console.log(d.code + ":" + d.msg);
+                            $.toptip("系统繁忙，请稍后再试","error");
+                        }
+                    },
+                    error: function (res) {
+                        console.log(res);
+                        $.toptip("系统繁忙，请稍后再试","error");
+                    }
+                });
+                $.toptip("修改成功","success");
+            } else {
+                console.log(d.code + ":" + d.msg);
+                $.toptip("系统繁忙，请稍后再试","error");
+            }
+        };
+        option.error = function (res) {
+            $.toptip("系统繁忙，请稍后再试","error");
+            console.log(res);
+        }
+        $.ajax(option);
+    });
+
+    /**
      * 点击新项目条目保存按钮询问是否保存
      */
     $('.project-items').on('click', '.project-save', function () {
         var element = $(this).parent().parent();
+        var id = element.data('id');
         $.confirm({
             text: '确定要保存该条目？',
             onOK: function () {
-                element.removeClass('project-item-new');
-                element.addClass('project-item-old');
-                element.find("input").attr("disabled", true);
-                element.find("textarea").attr("disabled", true);
+                var proname = element.find('.project-name').val();
+                var proindentity = element.find('.project-role').val();
+                var prostart = element.find('.project-start').val();
+                var proend = element.find('.project-end').val();
+                var prointro = element.find('.project-describe textarea').val();
+                if (proname == '' || proname == null) {
+                    $.alert('请填写项目名称');
+                } else if (proindentity == '' || proindentity == null) {
+                    $.alert('请填写参与身份');
+                } else if (prostart == '' || prostart == null) {
+                    $.alert('请填写开始时间');
+                } else if (proend == '' || proend == null) {
+                    $.alert('请填写结束时间');
+                } else if (prointro == '' || prointro == null) {
+                    $.alert('请填写项目介绍');
+                } else {
+                    var option = getBASEPOSTAJAX();
+                    option.url = "../student/studentsets/project";
+                    var projectForm = new FormData();
+                    projectForm.append("projectName", proname);
+                    projectForm.append("identity", proindentity);
+                    projectForm.append("startTime", prostart);
+                    projectForm.append("endTime", proend);
+                    projectForm.append("instruction", prointro);
+                    if (id != '' && id != null) {
+                        projectForm.append('id',id)
+                    }
+                    option.data = projectForm;
+                    option.processData = false;
+                    option.contentType = false;
+                    option.success = function (d) {
+                        if (d.code === 200) {
+                            reflashProjct();
+                            $.toptip("编辑成功","success");
+                        } else {
+                            console.log(d.code + ":" + d.msg);
+                            $.toptip("系统繁忙，请稍后再试","error");
+                        }
+                    }
+                    option.error = function (res) {
+                        $.toptip("系统繁忙，请稍后再试","error");
+                        console.log(res);
+                    }
+                    $.ajax(option);
+                }
             }
         })
     });

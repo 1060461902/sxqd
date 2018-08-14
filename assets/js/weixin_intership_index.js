@@ -31,7 +31,7 @@ $(document).ready(function () {
 	option.data = {
 		pageNum: 1
 	}
-	option.url = '../student/home';
+	option.url = '/internshipmgn/student/home';
 	option.success = function (data) {
 		if (data.code === 200) {
 			/**
@@ -70,7 +70,7 @@ $(document).ready(function () {
 
 
     var option = getBASEGETAJAX();
-    option.url = '../student/studentsets/set';
+    option.url = '/internshipmgn/student/studentsets/set';
     option.success = function (d) {
         if (d.code === 200) {
             /**
@@ -121,7 +121,7 @@ function getPost() {
 			callback: function (page) {
 				$.ajax({
 					type: 'GET',
-					url: '../student/home/recruitment',
+					url: '/internshipmgn/student/home/recruitment',
 					data: {
 						pageNum: page.num
 					},
@@ -170,7 +170,7 @@ function getResume(){
 			callback: function (page) {
 				$.ajax({
 					type: 'GET',
-					url: '../student/roads/road',
+					url: '/internshipmgn/student/roads/road',
 					data: {
 						pageNum: page.num
 					},
