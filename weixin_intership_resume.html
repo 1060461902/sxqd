@@ -141,49 +141,7 @@
         </div>
         <div class="corporation-info-tab" data-role="none">
             <div class="corporation-items">
-                <div class="corporation-item corporation-item-old" data-id="3">
-                    <div class="corporation-info-bar">
-                        <div class="corporation-info-title">
-                            <p>组织名称</p>
-                        </div>
-                        <div class="corporation-info-entity">
-                            <input id="corporation-name" class="weui-input" type="text" value="学生实习" placeholder="请填写">
-                        </div>
-                    </div>
-                    <div class="corporation-info-bar">
-                        <div class="corporation-info-title">
-                            <p>职位身份</p>
-                        </div>
-                        <div class="corporation-info-entity">
-                            <input id="corporation-role" class="weui-input" type="text" value="开发人员" placeholder="请填写">
-                        </div>
-                    </div>
-                    <div class="corporation-info-bar">
-                        <div class="corporation-info-title">
-                            <p>开始时间</p>
-                        </div>
-                        <div class="corporation-info-entity">
-                            <input class="weui-input corporation-start" type="text" value="2018-07-01 " placeholder="选择">
-                        </div>
-                    </div>
-                    <div class="corporation-info-bar">
-                        <div class="corporation-info-title">
-                            <p>结束时间</p>
-                        </div>
-                        <div class="corporation-info-entity">
-                            <input class="weui-input corporation-end" type="text" value="2018-08-10 " placeholder="请选择">
-                        </div>
-                    </div>
-                    <div class="corporation-describe">
-                        <p>内容描述</p>
-                        <textarea placeholder="请填写">好好好好好</textarea>
-                    </div>
-                    <div class="corporation-info-bar">
-                        <a class="corporation-delete">删除</a>
-                        <a class="corporation-edit">修改</a>
-                        <a class="corporation-save">保存</a>
-                    </div>
-                </div>
+                <!-- corporation-item-model -->
             </div>
             <div class="add-corporation">
                 <a id="add-corporation-btn">
@@ -194,51 +152,7 @@
         </div>
         <div class="honor-info-tab" data-role="none">
             <div class="honor-items">
-                <div class="honor-item honor-item-old" data-id="3">
-                    <div class="honor-info-bar">
-                        <div class="honor-info-title">
-                            <p>荣誉名称</p>
-                        </div>
-                        <div class="honor-info-entity">
-                            <input id="honor-name" class="weui-input" type="text" value="一等奖" placeholder="请填写">
-                        </div>
-                    </div>
-                    <div class="honor-info-bar">
-                        <div class="honor-info-title">
-                            <p>获奖时间</p>
-                        </div>
-                        <div class="honor-info-entity">
-                            <input class="weui-input honor-date" type="text" value="2018-07-01 " placeholder="选择">
-                        </div>
-                    </div>
-                    <div class="honor-describe">
-                        <p>获奖说明</p>
-                        <textarea placeholder="请填写">好好好好好</textarea>
-                    </div>
-                    <div class="honor-img">
-                        <p>获奖证书</p>
-                        <div class="honor-img-upload">
-                            <input type="file" data-role="none" hidden>
-                            <a class="honor-img-btn">
-                                <p>
-                                    <span class="honor-img-add">
-                                        +
-                                    </span>
-                                </p>
-                                <p>点击上传证书</p>
-                            </a>
-                        </div>
-                        <div class="honor-img-describe">
-                            <p>①支持格式：.jpg，.png，.jpeg，.gif，.bmp；②图片格式要求：高/宽100-1400像素；图片大小不能超过5M。</p>
-                        </div>
-                        <div></div>
-                    </div>
-                    <div class="honor-info-bar">
-                        <a class="honor-delete">删除</a>
-                        <a class="honor-edit">修改</a>
-                        <a class="honor-save">保存</a>
-                    </div>
-                </div>
+                <!-- honor-item-model -->
             </div>
             <div class="add-honor">
                 <a id="add-honor-btn">
@@ -253,10 +167,7 @@
             </div>
             <div class="editable-lables">
                 <div class="edited-lables">
-                    <div class="edited-lable">
-                        <span>123</span>
-                        <a>X</a>
-                    </div>
+                    <!-- skill-item-model -->
                 </div>
                 <div class="editable-lable">
                     <input type="text" class="weui-input" data-role="none" placeholder="请输入技能水平">
@@ -312,10 +223,121 @@
         </div>
         {{/each}}
     </script>
+    <script id="corporation-item-model" type="x-handlebars-template">
+        {{#each this}}
+        <div class="corporation-item corporation-item-old" data-id="{{id}}">
+            <div class="corporation-info-bar">
+                <div class="corporation-info-title">
+                    <p>组织名称</p>
+                </div>
+                <div class="corporation-info-entity">
+                    <input id="corporation-name" class="weui-input" type="text" value="{{clubName}}" placeholder="请填写">
+                </div>
+            </div>
+            <div class="corporation-info-bar">
+                <div class="corporation-info-title">
+                    <p>职位身份</p>
+                </div>
+                <div class="corporation-info-entity">
+                    <input id="corporation-role" class="weui-input" type="text" value="{{indentity}}" placeholder="请填写">
+                </div>
+            </div>
+            <div class="corporation-info-bar">
+                <div class="corporation-info-title">
+                    <p>开始时间</p>
+                </div>
+                <div class="corporation-info-entity">
+                    <input class="weui-input corporation-start" type="text" value="{{timetool startTime}}" placeholder="选择">
+                </div>
+            </div>
+            <div class="corporation-info-bar">
+                <div class="corporation-info-title">
+                    <p>结束时间</p>
+                </div>
+                <div class="corporation-info-entity">
+                    <input class="weui-input corporation-end" type="text" value="{{timetool endTime}}" placeholder="请选择">
+                </div>
+            </div>
+            <div class="corporation-describe">
+                <p>内容描述</p>
+                <textarea placeholder="请填写">{{instruction}}</textarea>
+            </div>
+            <div class="corporation-info-bar">
+                <a class="corporation-delete">删除</a>
+                <a class="corporation-edit">修改</a>
+                <a class="corporation-save">保存</a>
+            </div>
+        </div>
+        {{/each}}
+    </script>
+    <script id="honor-item-model" type="x-handlebars-template">
+        {{#each this}}
+        <div class="honor-item honor-item-old" data-id="{{id}}">
+            <div class="honor-info-bar">
+                <div class="honor-info-title">
+                    <p>荣誉名称</p>
+                </div>
+                <div class="honor-info-entity">
+                    <input id="honor-name" class="weui-input" type="text" value="{{honorName}}" placeholder="请填写">
+                </div>
+            </div>
+            <div class="honor-info-bar">
+                <div class="honor-info-title">
+                    <p>获奖时间</p>
+                </div>
+                <div class="honor-info-entity">
+                    <input class="weui-input honor-date" type="text" value="{{timetool time}}" placeholder="选择">
+                </div>
+            </div>
+            <div class="honor-describe">
+                <p>获奖说明</p>
+                <textarea placeholder="请填写">{{instruction}}</textarea>
+            </div>
+            <div class="honor-img">
+                <p>获奖证书</p>
+                <input type="file" class="honor-img-upload-input" data-role="none" hidden> {{#if_show image}}
+                <div class="honor-img-show">
+                    <img src="{{image}}" notFoundSrc="./assets/images/not_found.jpg" />
+                </div>
+                {{else}}
+                <div class="honor-img-show" style="display:none">
+                    <img src="" notFoundSrc="./assets/images/not_found.jpg" />
+                </div>
+                <div class="honor-img-upload">
+                    <a class="honor-img-btn">
+                        <p>
+                            <span class="honor-img-add">
+                                +
+                            </span>
+                        </p>
+                        <p>点击上传证书</p>
+                    </a>
+                </div>
+                {{/if_show}}
+                <div class="honor-img-describe">
+                    <p>①支持格式：.jpg，.png，.jpeg，.gif，.bmp；②图片格式要求：高/宽100-1400像素；图片大小不能超过3M。</p>
+                </div>
+                <div></div>
+            </div>
+            <div class="honor-info-bar">
+                <a class="honor-delete">删除</a>
+                <a class="honor-edit">修改</a>
+                <a class="honor-save">保存</a>
+            </div>
+        </div>
+        {{/each}}
+    </script>
+    <script id="skill-item-model" type="x-handlebars-template">
+        {{#each this}}
+        <div class="edited-lable">
+            <span>{{skill}}</span>
+            <a>X</a>
+        </div>
+        {{/each}}
+    </script>
     <!--js-->
     <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="./assets/js/jquery-weui.min.js"></script>
-    <script type="text/javascript" src="./assets/js/floatbutton.js"></script>
     <script type="text/javascript" src="./assets/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript" src="./assets/js/fastclick.js"></script>
     <script type="text/javascript" src="./assets/js/city-picker.min.js"></script>

@@ -12,6 +12,15 @@ $(document).ready(function () {
             d = d.return; //暂时
 
             if (d.code === 200) {
+
+                var timeTool = {
+                    name: 'timetool',
+                    callback: function (time) {
+                        time = Number(time);
+                        return getdate(time) + ' ';
+                    }
+                }
+
                 /**
                  * 基础信息
                  */
@@ -29,32 +38,44 @@ $(document).ready(function () {
                  * 项目经历
                  */
                 var project = d.data.project;
-                $('.project-items').handlebars($('#project-item-model'), project, {
-                    name: 'timetool',
-                    callback: function (time) {
-                        time = Number(time);
-                        return getdate(time) + ' ';
+                $('.project-items').handlebars($('#project-item-model'), project, timeTool);
+
+                /**
+                 * 社团经历 
+                 */
+                var club = d.data.club;
+                $('.corporation-items').handlebars($('#corporation-item-model'), club, timeTool);
+
+                /**
+                 * 所获荣誉
+                 */
+                var honor = d.data.honor;
+                $('.honor-items').handlebars($('#honor-item-model'), honor, [timeTool, {
+                    name: 'if_show',
+                    callback: function (image_url, options) {
+                        if (image_url != null && image_url != '') {
+                            return options.fn(this)
+                        } else {
+                            return options.inverse(this);
+                        }
                     }
+                }]);
+
+                /**
+                 * 技能水平
+                 */
+                var skill = d.data.skill;
+                $('.edited-lables').handlebars($('#skill-item-model'), skill);
+                if($('.edited-lables').children('.edited-lable').length == 10) {
+                    $('.editable-lable').css({'display':'none'});
+                }
+
+                /**
+                 * 日期选择
+                 */
+                $('.project-item .project-start,.project-item .project-end,.corporation-item .corporation-start,.corporation-item .corporation-end,.honor-item .honor-date').datetimePicker({
+                    times: function () {}
                 });
-
-                // /**
-                //  * 社团经历 
-                //  */
-                // var club = d.data.club;
-                // $('.corporation-info-list').handlebars($('#corporation-info-model'), club);
-
-                // /**
-                //  * 所获荣誉
-                //  */
-                // var honor = d.data.honor;
-                // $('.honor-info-list').handlebars($('#honor-info-model'), honor);
-
-                // /**
-                //  * 技能水平
-                //  */
-                // var skill = d.data.skill;
-                // $('.edited-lables').handlebars($('#skill-info-model'), skill);
-
                 /**
                  * 设置老条目不可编辑
                  */
@@ -82,27 +103,29 @@ $(document).ready(function () {
         });
     });
 
-    document.addEventListener("touchmove",function(){
-        event.preventDefault();
-        return false;
-    },false);
-
-    /**
-     * 右滑
-     */
-    $("body").on("swiperight", function () {
-        $('.side-nav-bg').fadeIn();
-        $('.side-nav').removeClass('nav-out');
-        $('.side-nav').addClass('nav-show');
+    var startX, startY;
+    $("body").on("touchstart", function (e) {
+        e.preventDefault();
+        startX = e.originalEvent.changedTouches[0].pageX;
+        startY = e.originalEvent.changedTouches[0].pageY;
     });
-
-    /**
-     * 左滑
-     */
-    $("body").on("swipeleft", function () {
-        $('.side-nav-bg').fadeOut();
-        $('.side-nav').removeClass('nav-show');
-        $('.side-nav').addClass('nav-out');
+    $("body").on("touchmove", function (e) {
+        e.preventDefault();
+        moveEndX = e.originalEvent.changedTouches[0].pageX;
+        moveEndY = e.originalEvent.changedTouches[0].pageY;
+        var X = moveEndX - startX;
+        var Y = moveEndY - startY;
+        if (Y < 30 && Y > -30) {
+            if (X > 65) {
+                $('.side-nav-bg').fadeIn();
+                $('.side-nav').removeClass('nav-out');
+                $('.side-nav').addClass('nav-show');
+            } else if (X < -65) {
+                $('.side-nav-bg').fadeOut();
+                $('.side-nav').removeClass('nav-show');
+                $('.side-nav').addClass('nav-out');
+            }
+        }
     });
 
     /**
@@ -234,55 +257,63 @@ $(document).ready(function () {
     });*/
 
     /**
-     * 日期选择
-     */
-    $('.project-item .project-start,.project-item .project-end,.corporation-item .corporation-start,.corporation-item .corporation-end,.honor-item .honor-date').datetimePicker({
-        times: function () {}
-    });
-
-    /**
      * 点击老项目条目修改按钮询问是否编辑
      */
     $('.project-items').on('click', '.project-edit', function () {
-        var id = $(this).parent().parent().data('id');
-        $.confirm({
-            text: '确定要修改该条目？',
-            onOK: function () {
-                $('.project-item[data-id="' + id + '"]').removeClass('project-item-old');
-                $('.project-item[data-id="' + id + '"]').addClass('project-item-new');
-                $('.project-item[data-id="' + id + '"] input,.project-item[data-id="' + id + '"] textarea').attr("disabled", false);
-            }
-        })
+        var parent = document.querySelector('.project-items');
+        if (parent.querySelector('.project-item-new')) {
+            $.toptip('请先保存之前修改的条目', 'warning');
+        } else {
+            var id = $(this).parent().parent().data('id');
+            $.confirm({
+                text: '确定要修改该条目？',
+                onOK: function () {
+                    $('.project-item[data-id="' + id + '"]').removeClass('project-item-old');
+                    $('.project-item[data-id="' + id + '"]').addClass('project-item-new');
+                    $('.project-item[data-id="' + id + '"] input,.project-item[data-id="' + id + '"] textarea').attr("disabled", false);
+                }
+            })
+        }
     });
 
     /**
      * 点击老社团经历条目修改按钮询问是否编辑
      */
     $('.corporation-items').on('click', '.corporation-edit', function () {
-        var id = $(this).parent().parent().data('id');
-        $.confirm({
-            text: '确定要修改该条目？',
-            onOK: function () {
-                $('.corporation-item[data-id="' + id + '"]').removeClass('corporation-item-old');
-                $('.corporation-item[data-id="' + id + '"]').addClass('corporation-item-new');
-                $('.corporation-item[data-id="' + id + '"] input,.corporation-item[data-id="' + id + '"] textarea').attr("disabled", false);
-            }
-        })
+        var parent = document.querySelector('.corporation-items');
+        if (parent.querySelector('.corporation-item-new')) {
+            $.toptip('请先保存之前修改的条目', 'warning');
+        } else {
+            var id = $(this).parent().parent().data('id');
+            $.confirm({
+                text: '确定要修改该条目？',
+                onOK: function () {
+                    $('.corporation-item[data-id="' + id + '"]').removeClass('corporation-item-old');
+                    $('.corporation-item[data-id="' + id + '"]').addClass('corporation-item-new');
+                    $('.corporation-item[data-id="' + id + '"] input,.corporation-item[data-id="' + id + '"] textarea').attr("disabled", false);
+                }
+            })
+        }
     });
 
     /**
      * 点击老荣誉条目修改按钮询问是否编辑
      */
     $('.honor-items').on('click', '.honor-edit', function () {
-        var id = $(this).parent().parent().data('id');
-        $.confirm({
-            text: '确定要修改该条目？',
-            onOK: function () {
-                $('.honor-item[data-id="' + id + '"]').removeClass('honor-item-old');
-                $('.honor-item[data-id="' + id + '"]').addClass('honor-item-new');
-                $('.honor-item[data-id="' + id + '"] input,.honor-item[data-id="' + id + '"] textarea').attr("disabled", false);
-            }
-        })
+        var parent = document.querySelector('.honor-items');
+        if (parent.querySelector('.honor-item-new')) {
+            $.toptip('请先保存之前修改的条目', 'warning');
+        } else {
+            var id = $(this).parent().parent().data('id');
+            $.confirm({
+                text: '确定要修改该条目？',
+                onOK: function () {
+                    $('.honor-item[data-id="' + id + '"]').removeClass('honor-item-old');
+                    $('.honor-item[data-id="' + id + '"]').addClass('honor-item-new');
+                    $('.honor-item[data-id="' + id + '"] input,.honor-item[data-id="' + id + '"] textarea').attr("disabled", false);
+                }
+            })
+        }
     });
 
     /**
@@ -336,168 +367,191 @@ $(document).ready(function () {
     /**
      * 点击荣誉图片上传按钮
      */
-    $('.honor-items').on('click', '.honor-img-btn', function () {
-        $(this).parent().children('input').click();
+    $('.honor-items').on('click', '.honor-img-btn, .honor-img-show img', function () {
+        $(this).parent().parent().children('.honor-img-upload-input').click();
+    });
+
+    /**
+     * 荣誉图片预览
+     */
+    $('.honor-items').on('change', '.honor-img-upload-input', function () {
+        $(this).parent().children('.honor-img-upload').css({'display':'none'});
+        $(this).parent().children('.honor-img-show').css({'display':'inline-block'});
+        var container = $(this).parent().children('.honor-img-show').children('img');
+        proviewImg($(this)[0].files[0],container);
     });
 
     /**
      * 点击添加项目
      */
     $('#add-project-btn').click(function () {
-        var date = new Date(); //利用date拼接虚拟id，到时候删除
-        $('.project-items').append('<div class="project-item project-item-new">' +
-            '<div class="project-info-bar">' +
-            '<div class="project-info-title">' +
-            '<p>项目名称</p>' +
-            '</div>' +
-            '<div class="project-info-entity">' +
-            '<input id="project-name" class="weui-input" type="text" placeholder="请填写">' +
-            '</div>' +
-            '</div>' +
-            '<div class="project-info-bar">' +
-            '<div class="project-info-title">' +
-            '<p>参与身份</p>' +
-            '</div>' +
-            '<div class="project-info-entity">' +
-            '<input id="project-role" class="weui-input" type="text" placeholder="请填写">' +
-            '</div>' +
-            '</div>' +
-            '<div class="project-info-bar">' +
-            '<div class="project-info-title">' +
-            '<p>开始时间</p>' +
-            '</div>' +
-            '<div class="project-info-entity">' +
-            '<input class="weui-input project-start" type="text" placeholder="请选择">' +
-            '</div>' +
-            '</div>' +
-            '<div class="project-info-bar">' +
-            '<div class="project-info-title">' +
-            '<p>结束时间</p>' +
-            '</div>' +
-            '<div class="project-info-entity">' +
-            '<input class="weui-input project-end" type="text" placeholder="请选择">' +
-            '</div>' +
-            '</div>' +
-            '<div class="project-describe">' +
-            '<p>项目说明</p>' +
-            '<textarea placeholder="请填写"></textarea>' +
-            '</div>' +
-            '<div class="project-info-bar">' +
-            '<a class="project-delete">删除</a>' +
-            '<a class="project-edit">修改</a>' +
-            '<a class="project-save">保存</a>' +
-            '</div>' +
-            '</div>');
-        $('.project-item .project-start,.project-item .project-end').datetimePicker({
-            times: function () {}
-        });
+        var parent = document.querySelector('.project-items');
+        if (parent.querySelector('.project-item-new')) {
+            $.toptip('请先保存修改的条目', 'warning');
+        } else {
+            $('.project-items').append('<div class="project-item project-item-new">' +
+                '<div class="project-info-bar">' +
+                '<div class="project-info-title">' +
+                '<p>项目名称</p>' +
+                '</div>' +
+                '<div class="project-info-entity">' +
+                '<input id="project-name" class="weui-input" type="text" placeholder="请填写">' +
+                '</div>' +
+                '</div>' +
+                '<div class="project-info-bar">' +
+                '<div class="project-info-title">' +
+                '<p>参与身份</p>' +
+                '</div>' +
+                '<div class="project-info-entity">' +
+                '<input id="project-role" class="weui-input" type="text" placeholder="请填写">' +
+                '</div>' +
+                '</div>' +
+                '<div class="project-info-bar">' +
+                '<div class="project-info-title">' +
+                '<p>开始时间</p>' +
+                '</div>' +
+                '<div class="project-info-entity">' +
+                '<input class="weui-input project-start" type="text" placeholder="请选择">' +
+                '</div>' +
+                '</div>' +
+                '<div class="project-info-bar">' +
+                '<div class="project-info-title">' +
+                '<p>结束时间</p>' +
+                '</div>' +
+                '<div class="project-info-entity">' +
+                '<input class="weui-input project-end" type="text" placeholder="请选择">' +
+                '</div>' +
+                '</div>' +
+                '<div class="project-describe">' +
+                '<p>项目说明</p>' +
+                '<textarea placeholder="请填写"></textarea>' +
+                '</div>' +
+                '<div class="project-info-bar">' +
+                '<a class="project-delete">删除</a>' +
+                '<a class="project-edit">修改</a>' +
+                '<a class="project-save">保存</a>' +
+                '</div>' +
+                '</div>');
+            $('.project-item .project-start,.project-item .project-end').datetimePicker({
+                times: function () {}
+            });
+        }
     });
 
     /**
      * 点击添加社团经历
      */
     $('#add-corporation-btn').click(function () {
-        var date = new Date(); //利用date拼接虚拟id，到时候删除
-        $('.corporation-items').append('<div class="corporation-item corporation-item-new">' +
-            '<div class="corporation-info-bar">' +
-            '<div class="corporation-info-title">' +
-            '<p>组织名称</p>' +
-            '</div>' +
-            '<div class="corporation-info-entity">' +
-            '<input id="corporation-name" class="weui-input" type="text" placeholder="请填写">' +
-            '</div>' +
-            '</div>' +
-            '<div class="corporation-info-bar">' +
-            '<div class="corporation-info-title">' +
-            '<p>职位身份</p>' +
-            '</div>' +
-            '<div class="corporation-info-entity">' +
-            '<input id="corporation-role" class="weui-input" type="text" placeholder="请填写">' +
-            '</div>' +
-            '</div>' +
-            '<div class="corporation-info-bar">' +
-            '<div class="corporation-info-title">' +
-            '<p>开始时间</p>' +
-            '</div>' +
-            '<div class="corporation-info-entity">' +
-            '<input class="weui-input corporation-start" type="text" placeholder="请选择">' +
-            '</div>' +
-            '</div>' +
-            '<div class="corporation-info-bar">' +
-            '<div class="corporation-info-title">' +
-            '<p>结束时间</p>' +
-            '</div>' +
-            '<div class="corporation-info-entity">' +
-            '<input class="weui-input corporation-end" type="text" placeholder="请选择">' +
-            '</div>' +
-            '</div>' +
-            '<div class="corporation-describe">' +
-            '<p>内容描述</p>' +
-            '<textarea placeholder="请填写"></textarea>' +
-            '</div>' +
-            '<div class="corporation-info-bar">' +
-            '<a class="corporation-delete">删除</a>' +
-            '<a class="corporation-edit">修改</a>' +
-            '<a class="corporation-save">保存</a>' +
-            '</div>' +
-            '</div>');
-        $('.corporation-item .corporation-start,.corporation-item .corporation-end').datetimePicker({
-            times: function () {}
-        });
+        var parent = document.querySelector('.corporation-items');
+        if (parent.querySelector('.corporation-item-new')) {
+            $.toptip('请先保存之前修改的条目', 'warning');
+        } else {
+            $('.corporation-items').append('<div class="corporation-item corporation-item-new">' +
+                '<div class="corporation-info-bar">' +
+                '<div class="corporation-info-title">' +
+                '<p>组织名称</p>' +
+                '</div>' +
+                '<div class="corporation-info-entity">' +
+                '<input id="corporation-name" class="weui-input" type="text" placeholder="请填写">' +
+                '</div>' +
+                '</div>' +
+                '<div class="corporation-info-bar">' +
+                '<div class="corporation-info-title">' +
+                '<p>职位身份</p>' +
+                '</div>' +
+                '<div class="corporation-info-entity">' +
+                '<input id="corporation-role" class="weui-input" type="text" placeholder="请填写">' +
+                '</div>' +
+                '</div>' +
+                '<div class="corporation-info-bar">' +
+                '<div class="corporation-info-title">' +
+                '<p>开始时间</p>' +
+                '</div>' +
+                '<div class="corporation-info-entity">' +
+                '<input class="weui-input corporation-start" type="text" placeholder="请选择">' +
+                '</div>' +
+                '</div>' +
+                '<div class="corporation-info-bar">' +
+                '<div class="corporation-info-title">' +
+                '<p>结束时间</p>' +
+                '</div>' +
+                '<div class="corporation-info-entity">' +
+                '<input class="weui-input corporation-end" type="text" placeholder="请选择">' +
+                '</div>' +
+                '</div>' +
+                '<div class="corporation-describe">' +
+                '<p>内容描述</p>' +
+                '<textarea placeholder="请填写"></textarea>' +
+                '</div>' +
+                '<div class="corporation-info-bar">' +
+                '<a class="corporation-delete">删除</a>' +
+                '<a class="corporation-edit">修改</a>' +
+                '<a class="corporation-save">保存</a>' +
+                '</div>' +
+                '</div>');
+            $('.corporation-item .corporation-start,.corporation-item .corporation-end').datetimePicker({
+                times: function () {}
+            });
+        }
     });
 
     /**
      * 点击添加所获荣誉
      */
     $('#add-honor-btn').click(function () {
-        $('.honor-items').append('<div class="honor-item honor-item-new">' +
-            '<div class="honor-info-bar">' +
-            '<div class="honor-info-title">' +
-            '<p>荣誉名称</p>' +
-            '</div>' +
-            '<div class="honor-info-entity">' +
-            '<input id="honor-name" class="weui-input" type="text" value="" placeholder="请填写">' +
-            '</div>' +
-            '</div>' +
-            '<div class="honor-info-bar">' +
-            '<div class="honor-info-title">' +
-            '<p>获奖时间</p>' +
-            '</div>' +
-            '<div class="honor-info-entity">' +
-            '<input class="weui-input honor-date" type="text" value="" placeholder="选择">' +
-            '</div>' +
-            '</div>' +
-            '<div class="honor-describe">' +
-            '<p>获奖说明</p>' +
-            '<textarea placeholder="请填写"></textarea>' +
-            '</div>' +
-            '<div class="honor-img">' +
-            '<p>获奖证书</p>' +
-            '<div class="honor-img-upload">' +
-            '<input type="file" data-role="none" hidden>' +
-            '<a class="honor-img-btn">' +
-            '<p>' +
-            '<span class="honor-img-add">' +
-            '+' +
-            '</span>' +
-            '</p>' +
-            '<p>点击上传证书</p>' +
-            '</a>' +
-            '</div>' +
-            '<div class="honor-img-describe">' +
-            '<p>①支持格式：.jpg，.png，.jpeg，.gif，.bmp；②图片格式要求：高/宽100-1400像素；图片大小不能超过5M。</p>' +
-            '</div>' +
-            '<div></div>' +
-            '</div>' +
-            '<div class="honor-info-bar">' +
-            '<a class="honor-delete">删除</a>' +
-            '<a class="honor-edit">修改</a>' +
-            '<a class="honor-save">保存</a>' +
-            '</div>' +
-            '</div>');
-        $('.honor-item .honor-date').datetimePicker({
-            times: function () {}
-        });
+        var parent = document.querySelector('.honor-items');
+        if (parent.querySelector('.honor-item-new')) {
+            $.toptip('请先保存之前修改的条目', 'warning');
+        } else {
+            $('.honor-items').append('<div class="honor-item honor-item-new">' +
+                '<div class="honor-info-bar">' +
+                '<div class="honor-info-title">' +
+                '<p>荣誉名称</p>' +
+                '</div>' +
+                '<div class="honor-info-entity">' +
+                '<input id="honor-name" class="weui-input" type="text" value="" placeholder="请填写">' +
+                '</div>' +
+                '</div>' +
+                '<div class="honor-info-bar">' +
+                '<div class="honor-info-title">' +
+                '<p>获奖时间</p>' +
+                '</div>' +
+                '<div class="honor-info-entity">' +
+                '<input class="weui-input honor-date" type="text" value="" placeholder="选择">' +
+                '</div>' +
+                '</div>' +
+                '<div class="honor-describe">' +
+                '<p>获奖说明</p>' +
+                '<textarea placeholder="请填写"></textarea>' +
+                '</div>' +
+                '<div class="honor-img">' +
+                '<p>获奖证书</p>' +
+                '<div class="honor-img-upload">' +
+                '<input type="file" data-role="none" hidden>' +
+                '<a class="honor-img-btn">' +
+                '<p>' +
+                '<span class="honor-img-add">' +
+                '+' +
+                '</span>' +
+                '</p>' +
+                '<p>点击上传证书</p>' +
+                '</a>' +
+                '</div>' +
+                '<div class="honor-img-describe">' +
+                '<p>①支持格式：.jpg，.png，.jpeg，.gif，.bmp；②图片格式要求：高/宽100-1400像素；图片大小不能超过5M。</p>' +
+                '</div>' +
+                '<div></div>' +
+                '</div>' +
+                '<div class="honor-info-bar">' +
+                '<a class="honor-delete">删除</a>' +
+                '<a class="honor-edit">修改</a>' +
+                '<a class="honor-save">保存</a>' +
+                '</div>' +
+                '</div>');
+            $('.honor-item .honor-date').datetimePicker({
+                times: function () {}
+            });
+        }
     });
 
     /**
@@ -508,7 +562,11 @@ $(document).ready(function () {
         $.confirm({
             text: "确定删除该条目?",
             onOK: () => {
-                $(this).parent().parent().remove();
+                if (id == null || id == '') {
+                    $(this).parent().parent().remove();
+                } else {
+
+                }
             }
         })
     })
@@ -521,7 +579,11 @@ $(document).ready(function () {
         $.confirm({
             text: "确定删除该条目?",
             onOK: () => {
-                $(this).parent().parent().remove();
+                if (id == null || id == '') {
+                    $(this).parent().parent().remove();
+                } else {
+
+                }
             }
         })
     })
@@ -534,7 +596,11 @@ $(document).ready(function () {
         $.confirm({
             text: "确定删除该条目?",
             onOK: () => {
-                $(this).parent().parent().remove();
+                if (id == null || id == '') {
+                    $(this).parent().parent().remove();
+                } else {
+
+                }
             }
         })
     })
@@ -578,7 +644,7 @@ $(document).ready(function () {
     });
 
     /**
-     * 
+     * 点击可编辑条的X清空输入
      */
     $('.editable-lable>a').click(function () {
         $('.editable-lable>input').val('')
@@ -616,4 +682,124 @@ function proviewImg(file, container) {
         var src = "data:" + file.type + ";base64," + window.btoa(this.result);
         container.attr('src', src);
     }
+}
+
+/**
+ * 刷新项目列表
+ */
+function reflashProjct() {
+    $.ajax({
+        type: "GET",
+        url: "../student/studentsets/set",
+        data: {},
+        success: function (d) {
+            if (d.code === 200) {
+                /**
+                 * 项目经历
+                 */
+                var project = d.data.project;
+                $('.project-items').handlebars($('#project-item-model'), project, timeTool);
+            } else {
+                console.log(d.code + ":" + d.msg);
+                setAlert("系统繁忙,请稍后再试");
+            }
+        },
+        error: function (res) {
+            console.log(res);
+            setAlert("系统繁忙,请稍后再试");
+        }
+    });
+}
+
+/**
+ * 刷新社团经历列表
+ */
+function reflashClub() {
+    $.ajax({
+        type: "GET",
+        url: "../student/studentsets/set",
+        data: {},
+        success: function (d) {
+            if (d.code === 200) {
+                /**
+                 * 社团经历 
+                 */
+                var club = d.data.club;
+                $('.corporation-items').handlebars($('#corporation-item-model'), club, timeTool);
+            } else {
+                console.log(d.code + ":" + d.msg);
+                setAlert("系统繁忙,请稍后再试");
+            }
+        },
+        error: function (res) {
+            console.log(res);
+            setAlert("系统繁忙,请稍后再试");
+        }
+    });
+}
+
+/**
+ * 刷新所获荣誉列表
+ */
+function reflashHonor() {
+    $.ajax({
+        type: "GET",
+        url: "../student/studentsets/set",
+        data: {},
+        success: function (d) {
+            if (d.code === 200) {
+                /**
+                 * 所获荣誉
+                 */
+                var honor = d.data.honor;
+                $('.honor-items').handlebars($('#honor-item-model'), honor, [timeTool, {
+                    name: 'if_show',
+                    callback: function (image_url, options) {
+                        if (image_url != null && image_url != '') {
+                            return options.fn(this)
+                        } else {
+                            return options.inverse(this);
+                        }
+                    }
+                }]);
+            } else {
+                console.log(d.code + ":" + d.msg);
+                setAlert("系统繁忙,请稍后再试");
+            }
+        },
+        error: function (res) {
+            console.log(res);
+            setAlert("系统繁忙,请稍后再试");
+        }
+    });
+}
+
+/**
+ * 刷新技能列表
+ */
+function reflashSkill() {
+    $.ajax({
+        type: "GET",
+        url: "../student/studentsets/set",
+        data: {},
+        success: function (d) {
+            if (d.code === 200) {
+                /**
+                 * 技能水平
+                 */
+                var skill = d.data.skill;
+                $('.edited-lables').handlebars($('#skill-item-model'), skill);
+                if($('.edited-lables').children('.edited-lable').length == 10) {
+                    $('.editable-lable').css({'display':'none'});
+                }
+            } else {
+                console.log(d.code + ":" + d.msg);
+                setAlert("系统繁忙,请稍后再试");
+            }
+        },
+        error: function (res) {
+            console.log(res);
+            setAlert("系统繁忙,请稍后再试");
+        }
+    });
 }

@@ -373,7 +373,7 @@
     word-break: break-all;
     display: inline-block;
     width: 45%;
-    font-size: 0.5rem;
+    font-size: 0.2rem;
     color: #494949;
 }
 
@@ -430,4 +430,14 @@
     text-align: center;
     color: #ffffff;
     margin: 10px auto 0;
+}
+
+.honor-img-show{
+    width: 50%;
+    display: inline-block;
+}
+
+.honor-img-show img{
+    width: 98%;
+    height: 100px;
 }
