@@ -60,8 +60,10 @@ $(document).ready(function () {
                  */
                 var skill = d.data.skill;
                 $('.edited-lables').handlebars($('#skill-item-model'), skill);
-                if($('.edited-lables').children('.edited-lable').length == 10) {
-                    $('.editable-lable').css({'display':'none'});
+                if ($('.edited-lables').children('.edited-lable').length == 10) {
+                    $('.editable-lable').css({
+                        'display': 'none'
+                    });
                 }
 
                 /**
@@ -76,12 +78,12 @@ $(document).ready(function () {
                 $('.project-item-old input,.project-item-old textarea,.corporation-item-old input,.corporation-item-old textarea,.honor-item-old input,.honor-item-old textarea').attr("disabled", true);
             } else {
                 console.log(d.code + ":" + d.msg);
-                setAlert("系统繁忙,请稍后再试");
+                $.toptip("系统繁忙,请稍后再试", "error");
             }
         },
         error: function (res) {
             console.log(res);
-            setAlert("系统繁忙,请稍后再试");
+            $.toptip("系统繁忙,请稍后再试", "error");
         }
     });
 
@@ -169,7 +171,7 @@ $(document).ready(function () {
      * 头像预览
      */
     $('#upload-head-img').change(function () {
-        proviewImg($(this)[0].files[0],$('#person-head-img img'));
+        proviewImg($(this)[0].files[0], $('#person-head-img img'));
     });
 
     /**
@@ -350,22 +352,22 @@ $(document).ready(function () {
                             $("#info-email").val(info.email);
                         } else {
                             console.log(d.code + ":" + d.msg);
-                            $.toptip("系统繁忙，请稍后再试","error");
+                            $.toptip("系统繁忙，请稍后再试", "error");
                         }
                     },
                     error: function (res) {
                         console.log(res);
-                        $.toptip("系统繁忙，请稍后再试","error");
+                        $.toptip("系统繁忙，请稍后再试", "error");
                     }
                 });
-                $.toptip("修改成功","success");
+                $.toptip("修改成功", "success");
             } else {
                 console.log(d.code + ":" + d.msg);
-                $.toptip("系统繁忙，请稍后再试","error");
+                $.toptip("系统繁忙，请稍后再试", "error");
             }
         };
         option.error = function (res) {
-            $.toptip("系统繁忙，请稍后再试","error");
+            $.toptip("系统繁忙，请稍后再试", "error");
             console.log(res);
         }
         $.ajax(option);
@@ -405,7 +407,7 @@ $(document).ready(function () {
                     projectForm.append("endTime", proend);
                     projectForm.append("instruction", prointro);
                     if (id != '' && id != null) {
-                        projectForm.append('id',id)
+                        projectForm.append('id', id)
                     }
                     option.data = projectForm;
                     option.processData = false;
@@ -413,14 +415,14 @@ $(document).ready(function () {
                     option.success = function (d) {
                         if (d.code === 200) {
                             reflashProjct();
-                            $.toptip("编辑成功","success");
+                            $.toptip("编辑成功", "success");
                         } else {
                             console.log(d.code + ":" + d.msg);
-                            $.toptip("系统繁忙，请稍后再试","error");
+                            $.toptip("系统繁忙，请稍后再试", "error");
                         }
                     }
                     option.error = function (res) {
-                        $.toptip("系统繁忙，请稍后再试","error");
+                        $.toptip("系统繁忙，请稍后再试", "error");
                         console.log(res);
                     }
                     $.ajax(option);
@@ -434,6 +436,7 @@ $(document).ready(function () {
      */
     $('.corporation-items').on('click', '.corporation-save', function () {
         var element = $(this).parent().parent();
+        var id = element.data('id');
         $.confirm({
             text: '确定要保存该条目？',
             onOK: function () {
@@ -450,13 +453,51 @@ $(document).ready(function () {
      */
     $('.honor-items').on('click', '.honor-save', function () {
         var element = $(this).parent().parent();
+        var id = element.data('id');
         $.confirm({
             text: '确定要保存该条目？',
             onOK: function () {
-                element.removeClass('honor-item-new');
-                element.addClass('honor-item-old');
-                element.find("input").attr("disabled", true);
-                element.find("textarea").attr("disabled", true);
+                var honorname = element.find('.honor-name').val();
+                var honortime = element.find('.honor-date').val();
+                var honorintro = element.find('.honor-describe textarea').val();
+                var honorimg = element.find('.honor-img-upload-input')[0].files[0];
+                if (honorname == '' || honorname == null) {
+                    $.alert('请填写荣誉名称');
+                } else if (honortime == '' || honortime == null) {
+                    $.alert('请填写获奖时间');
+                } else if (honorintro == '' || honorintro == null) {
+                    $.alert('请填写获奖说明');
+                } else {
+                    var option = getBASEPOSTAJAX();
+                    option.url = "../student/studentsets/honor";
+                    var honorForm = new FormData();
+                    honorForm.append("name", honorname);
+                    honorForm.append("time", honortime);
+                    honorForm.append("instruction", honorintro);
+                    if (honorimg != null && honorimg != '') {
+                        honorForm.append("image", honorimg);
+                    }
+                    if (id != '' && id != null) {
+                        honorForm.append('id', id)
+                    }
+                    option.data = honorForm;
+                    option.processData = false;
+                    option.contentType = false;
+                    option.success = function (d) {
+                        if (d.code === 200) {
+                            reflashHonor();
+                            $.toptip("编辑成功", "success");
+                        } else {
+                            console.log(d.code + ":" + d.msg);
+                            $.toptip("系统繁忙，请稍后再试", "error");
+                        }
+                    }
+                    option.error = function (res) {
+                        $.toptip("系统繁忙，请稍后再试", "error");
+                        console.log(res);
+                    }
+                    $.ajax(option);
+                }
             }
         })
     });
@@ -472,10 +513,14 @@ $(document).ready(function () {
      * 荣誉图片预览
      */
     $('.honor-items').on('change', '.honor-img-upload-input', function () {
-        $(this).parent().children('.honor-img-upload').css({'display':'none'});
-        $(this).parent().children('.honor-img-show').css({'display':'inline-block'});
+        $(this).parent().children('.honor-img-upload').css({
+            'display': 'none'
+        });
+        $(this).parent().children('.honor-img-show').css({
+            'display': 'inline-block'
+        });
         var container = $(this).parent().children('.honor-img-show').children('img');
-        proviewImg($(this)[0].files[0],container);
+        proviewImg($(this)[0].files[0], container);
     });
 
     /**
@@ -662,7 +707,22 @@ $(document).ready(function () {
                 if (id == null || id == '') {
                     $(this).parent().parent().remove();
                 } else {
-
+                    var option = getBASEDELETEAJAX();
+                    option.url = '../student/studentsets/project?id=' + id;
+                    option.success = function (d) {
+                        if (d.code === 200) {
+                            reflashProjct();
+                            $.toptip("删除成功", "success");
+                        } else {
+                            console.log(d.code + ":" + d.msg);
+                            $.toptip("系统繁忙,请稍后再试", "error");
+                        }
+                    }
+                    option.error = function (res) {
+                        $.toptip("系统繁忙,请稍后再试", "error");
+                        console.log(res);
+                    }
+                    $.ajax(option);
                 }
             }
         })
@@ -679,7 +739,22 @@ $(document).ready(function () {
                 if (id == null || id == '') {
                     $(this).parent().parent().remove();
                 } else {
-
+                    var option = getBASEDELETEAJAX();
+                    option.url = '../student/studentsets/club?id=' + id;
+                    option.success = function (d) {
+                        if (d.code === 200) {
+                            reflashClub();
+                            $.toptip("删除成功", "success");
+                        } else {
+                            console.log(d.code + ":" + d.msg);
+                            $.toptip("系统繁忙,请稍后再试", "error");
+                        }
+                    }
+                    option.error = function (res) {
+                        $.toptip("系统繁忙,请稍后再试", "error");
+                        console.log(res);
+                    }
+                    $.ajax(option);
                 }
             }
         })
@@ -696,7 +771,22 @@ $(document).ready(function () {
                 if (id == null || id == '') {
                     $(this).parent().parent().remove();
                 } else {
-
+                    var option = getBASEDELETEAJAX();
+                    option.url = '../student/studentsets/honor?id=' + id;
+                    option.success = function (d) {
+                        if (d.code === 200) {
+                            reflashHonor();
+                            $.toptip("删除成功", "success");
+                        } else {
+                            console.log(d.code + ":" + d.msg);
+                            $.toptip("系统繁忙,请稍后再试", "error");
+                        }
+                    }
+                    option.error = function (res) {
+                        $.toptip("系统繁忙,请稍后再试", "error");
+                        console.log(res);
+                    }
+                    $.ajax(option);
                 }
             }
         })
@@ -715,16 +805,32 @@ $(document).ready(function () {
     $('body').click(function () {
         if ($('.skill-info-tab').is('.tab-active') && $('.editable-lable>input').val() !== '' && $('.editable-lable>input').val() !== null) {
             var skill = $('.editable-lable>input').val();
-            $('.edited-lables').append('<div class="edited-lable">' +
-                '<span>' + skill + '</span>' +
-                '<a>X</a>' +
-                '</div>');
-            $('.editable-lable>input').val('')
-            if ($('.edited-lables').children('.edited-lable').length >= 10) {
-                $('.editable-lable').css({
-                    'display': 'none'
-                });
+            var skillForm = new FormData();
+            skillForm.append('skill',skill);
+            var option = getBASEPOSTAJAX();
+            option.url = '../student/studentsets/skill';
+            option.data = skillForm;
+            option.processData = false;
+            option.contentType = false;
+            option.success = function (d) {
+                if (d.code === 200){
+                    reflashSkill();
+                    $('.editable-lable>input').val('');
+                    if ($('.edited-lables').children('.edited-lable').length >= 10) {
+                        $('.editable-lable').css({
+                            'display': 'none'
+                        });
+                    }
+                }else {
+                    console.log(d.code + ":" + d.msg);
+                    setAlert("系统繁忙,请稍后再试");
+                }
             }
+            option.error = function (res) {
+                console.log(res);
+                setAlert("系统繁忙,请稍后再试");
+            }
+            $.ajax(option);
         }
     });
 
@@ -732,12 +838,27 @@ $(document).ready(function () {
      * 点击edited-lable的关闭按钮
      */
     $('.edited-lables').on('click', '.edited-lable>a', function () {
-        $(this).parent().remove();
-        if ($('.edited-lables').children('.edited-lable').length < 10) {
-            $('.editable-lable').css({
-                'display': 'inline-block'
-            });
+        var id = $(this).data('id');
+        var option = getBASEDELETEAJAX();
+        option.url = '../student/studentsets/skill?id='+id;
+        option.success = function (d) {
+            if (d.code === 200){
+                reflashSkill();
+                if ($('.edited-lables').children('.edited-lable').length < 10) {
+                    $('.editable-lable').css({
+                        'display': 'inline-block'
+                    });
+                }
+            }else {
+                console.log(d.code + ":" + d.msg);
+                setAlert("系统繁忙,请稍后再试");
+            }
         }
+        option.error = function (res) {
+            console.log(res);
+            setAlert("系统繁忙,请稍后再试");
+        }
+        $.ajax(option);
     });
 
     /**
@@ -765,12 +886,12 @@ function getdate(time) {
 function proviewImg(file, container) {
     var fileType = file.type.split("/")[0];
     if (fileType != "image") {
-        setAlert("请上传图片")
+        $.toptip("请上传图片", "warning");
         return;
     }
     var fileSize = Math.round(file.size / 1024 / 1024);
     if (fileSize >= 3) {
-        setAlert("请上传小于少于3M的图片");
+        $.toptip("请上传小于少于3M的图片", "warning");
         return;
     }
     var reader = new FileReader();
@@ -798,12 +919,12 @@ function reflashProjct() {
                 $('.project-items').handlebars($('#project-item-model'), project, timeTool);
             } else {
                 console.log(d.code + ":" + d.msg);
-                setAlert("系统繁忙,请稍后再试");
+                $.toptip("系统繁忙,请稍后再试", "error");
             }
         },
         error: function (res) {
             console.log(res);
-            setAlert("系统繁忙,请稍后再试");
+            $.toptip("系统繁忙,请稍后再试", "error");
         }
     });
 }
@@ -825,12 +946,12 @@ function reflashClub() {
                 $('.corporation-items').handlebars($('#corporation-item-model'), club, timeTool);
             } else {
                 console.log(d.code + ":" + d.msg);
-                setAlert("系统繁忙,请稍后再试");
+                $.toptip("系统繁忙,请稍后再试", "error");
             }
         },
         error: function (res) {
             console.log(res);
-            setAlert("系统繁忙,请稍后再试");
+            $.toptip("系统繁忙,请稍后再试", "error");
         }
     });
 }
@@ -861,12 +982,12 @@ function reflashHonor() {
                 }]);
             } else {
                 console.log(d.code + ":" + d.msg);
-                setAlert("系统繁忙,请稍后再试");
+                $.toptip("系统繁忙,请稍后再试", "error");
             }
         },
         error: function (res) {
             console.log(res);
-            setAlert("系统繁忙,请稍后再试");
+            $.toptip("系统繁忙,请稍后再试", "error");
         }
     });
 }
@@ -886,17 +1007,19 @@ function reflashSkill() {
                  */
                 var skill = d.data.skill;
                 $('.edited-lables').handlebars($('#skill-item-model'), skill);
-                if($('.edited-lables').children('.edited-lable').length == 10) {
-                    $('.editable-lable').css({'display':'none'});
+                if ($('.edited-lables').children('.edited-lable').length == 10) {
+                    $('.editable-lable').css({
+                        'display': 'none'
+                    });
                 }
             } else {
                 console.log(d.code + ":" + d.msg);
-                setAlert("系统繁忙,请稍后再试");
+                $.toptip("系统繁忙,请稍后再试", "error");
             }
         },
         error: function (res) {
             console.log(res);
-            setAlert("系统繁忙,请稍后再试");
+            $.toptip("系统繁忙,请稍后再试", "error");
         }
     });
 }

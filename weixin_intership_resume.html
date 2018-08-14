@@ -176,7 +176,7 @@
             </div>
         </div>
     </div>
-    <script id="project-item-model" type="x-handlebars-template">
+    <script id="project-item-model" type="text/x-handlebars-template">
         {{#each this}}
         <div class="project-item project-item-old" data-id="{{id}}">
             <div class="project-info-bar">
@@ -223,7 +223,7 @@
         </div>
         {{/each}}
     </script>
-    <script id="corporation-item-model" type="x-handlebars-template">
+    <script id="corporation-item-model" type="text/x-handlebars-template">
         {{#each this}}
         <div class="corporation-item corporation-item-old" data-id="{{id}}">
             <div class="corporation-info-bar">
@@ -270,7 +270,7 @@
         </div>
         {{/each}}
     </script>
-    <script id="honor-item-model" type="x-handlebars-template">
+    <script id="honor-item-model" type="text/x-handlebars-template">
         {{#each this}}
         <div class="honor-item honor-item-old" data-id="{{id}}">
             <div class="honor-info-bar">
@@ -327,11 +327,11 @@
         </div>
         {{/each}}
     </script>
-    <script id="skill-item-model" type="x-handlebars-template">
+    <script id="skill-item-model" type="text/x-handlebars-template">
         {{#each this}}
         <div class="edited-lable">
             <span>{{skill}}</span>
-            <a>X</a>
+            <a data-id="{{id}}">X</a>
         </div>
         {{/each}}
     </script>
