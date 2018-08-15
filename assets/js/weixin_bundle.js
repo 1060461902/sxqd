@@ -1,13 +1,15 @@
-$(document).ready(function () {
+/*$(document).ready(function () {
     $.ajax({
         type: 'GET',
         url: '../auth/bind',
         data: {},
         success: function (d) {
-            if (d.code === 502) {
-                $.toptip('该微信已绑定账号', 'warning');
-            } else {
-                $.toptip('系统繁忙', 'error');
+            if (d.code === 500) {
+                if(d.msg == '502') {
+                    $.toptip('该微信已绑定账号', 'warning');
+                }else {
+                    $.toptip('系统繁忙', 'error');
+                }
             }
         },
         error: function (res) {
@@ -15,7 +17,7 @@ $(document).ready(function () {
             $.toptip('系统繁忙', 'error');
         }
     });
-});
+});*/
 
 function dobind() {
     var userid = $('#student-id-input').val();
@@ -35,10 +37,12 @@ function dobind() {
             success: function (d) {
                 if (d.code === 200) {
                     $.toptip('绑定成功', 'success');
-                } else if (d.code === 501) {
-                    $.toptip('请检查账号密码', 'warning');
                 } else {
-                    $.toptip('系统繁忙', 'error');
+                    if (d.msg == '501'){
+                        $.toptip('请检查账号密码', 'warning');
+                    }else {
+                        $.toptip('系统繁忙', 'error');
+                    }
                 }
             },
             error: function (res) {

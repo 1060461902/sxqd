@@ -440,10 +440,51 @@ $(document).ready(function () {
         $.confirm({
             text: '确定要保存该条目？',
             onOK: function () {
-                element.removeClass('corporation-item-new');
-                element.addClass('corporation-item-old');
-                element.find("input").attr("disabled", true);
-                element.find("textarea").attr("disabled", true);
+                var clubname = element.find('.corporation-name').val();
+                var clubindentity = element.find('.corporation-role').val();
+                var clubstart = element.find('.corporation-start').val();
+                var clubend = element.find('.corporation-end').val();
+                var clubintro = element.find('.corporation-describe textarea').val();
+                if (clubname == '' || clubname == null) {
+                    $.alert('请填写社团名称');
+                } else if (clubindentity == '' || clubindentity == null) {
+                    $.alert('请填写担任职位');
+                } else if (clubstart == '' || clubstart == null) {
+                    $.alert('请填写开始时间');
+                } else if (clubend == '' || clubend == null) {
+                    $.alert('请填写结束时间');
+                } else if (clubintro == '' || clubintro == null) {
+                    $.alert('请填写经历介绍');
+                } else {
+                    var option = getBASEPOSTAJAX();
+                    option.url = "../student/studentsets/club";
+                    var clubForm = new FormData();
+                    clubForm.append("clubName", clubname);
+                    clubForm.append("indentity", clubindentity);
+                    clubForm.append("startTime", clubstart);
+                    clubForm.append("endTime", clubend);
+                    clubForm.append("instruction", clubintro);
+                    if (id != '' && id != null) {
+                        clubForm.append("id",id);
+                    }
+                    option.data = clubForm;
+                    option.processData = false;
+                    option.contentType = false;
+                    option.success = function (d) {
+                        if (d.code === 200) {
+                            reflashClub();
+                            $.toptip("编辑成功", "success");
+                        } else {
+                            console.log(d.code + ":" + d.msg);
+                            $.toptip("系统繁忙，请稍后再试", "error");
+                        }
+                    }
+                    option.error = function (res) {
+                        $.toptip("系统繁忙，请稍后再试", "error");
+                        console.log(res);
+                    }
+                    $.ajax(option);
+                }
             }
         })
     });
@@ -537,7 +578,7 @@ $(document).ready(function () {
                 '<p>项目名称</p>' +
                 '</div>' +
                 '<div class="project-info-entity">' +
-                '<input id="project-name" class="weui-input" type="text" placeholder="请填写">' +
+                '<input class="weui-input project-name"type="text" placeholder="请填写">' +
                 '</div>' +
                 '</div>' +
                 '<div class="project-info-bar">' +
@@ -545,7 +586,7 @@ $(document).ready(function () {
                 '<p>参与身份</p>' +
                 '</div>' +
                 '<div class="project-info-entity">' +
-                '<input id="project-role" class="weui-input" type="text" placeholder="请填写">' +
+                '<input class="weui-input project-role"type="text" placeholder="请填写">' +
                 '</div>' +
                 '</div>' +
                 '<div class="project-info-bar">' +
@@ -594,7 +635,7 @@ $(document).ready(function () {
                 '<p>组织名称</p>' +
                 '</div>' +
                 '<div class="corporation-info-entity">' +
-                '<input id="corporation-name" class="weui-input" type="text" placeholder="请填写">' +
+                '<input class="weui-input corporation-name" type="text" placeholder="请填写">' +
                 '</div>' +
                 '</div>' +
                 '<div class="corporation-info-bar">' +
@@ -602,7 +643,7 @@ $(document).ready(function () {
                 '<p>职位身份</p>' +
                 '</div>' +
                 '<div class="corporation-info-entity">' +
-                '<input id="corporation-role" class="weui-input" type="text" placeholder="请填写">' +
+                '<input class="weui-input corporation-role" type="text" placeholder="请填写">' +
                 '</div>' +
                 '</div>' +
                 '<div class="corporation-info-bar">' +
@@ -651,7 +692,7 @@ $(document).ready(function () {
                 '<p>荣誉名称</p>' +
                 '</div>' +
                 '<div class="honor-info-entity">' +
-                '<input id="honor-name" class="weui-input" type="text" value="" placeholder="请填写">' +
+                '<input class="weui-input honor-name"type="text" value="" placeholder="请填写">' +
                 '</div>' +
                 '</div>' +
                 '<div class="honor-info-bar">' +
@@ -668,6 +709,10 @@ $(document).ready(function () {
                 '</div>' +
                 '<div class="honor-img">' +
                 '<p>获奖证书</p>' +
+                '<input type="file" class="honor-img-upload-input" data-role="none" hidden>'+
+                '<div class="honor-img-show">'+
+                '<img src="" notFoundSrc="./assets/images/not_found.jpg" />'+
+                '</div>'+
                 '<div class="honor-img-upload">' +
                 '<input type="file" data-role="none" hidden>' +
                 '<a class="honor-img-btn">' +

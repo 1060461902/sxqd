@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>浙商大学生实习管理</title>
     <!--css-->
-    <link rel="stylesheet" href="./assets/css/jquery-weui.min.css">
-    <link rel="stylesheet" href="./assets/css/weui.min.css">
-    <link rel="stylesheet" href="./assets/css/weixin_attendance_index.css">
+    <link rel="stylesheet" href="/internshipmgn/student/assets/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="/internshipmgn/student/assets/css/weui.min.css">
+    <link rel="stylesheet" href="/internshipmgn/student/assets/css/weixin_attendance_index.css">
 
 </head>
 
@@ -21,7 +21,7 @@
                     <p class="title-bar-name">考勤打卡</p>
                 </div>
                 <div class="first-top">
-                    <img id="first-userimg" src="./assets/images/head_img.png" />
+                    <img id="first-userimg" src="/internshipmgn/student/assets/images/head_img.png" />
                     <span id="first-username">小陈</span>
                 </div>
                 <div>
@@ -30,7 +30,7 @@
                 <div class="first-dk-body">
                     <div class="dk-item">
                         <div>
-                            <img src="./assets/images/dk_point_gray.png" />
+                            <img src="/internshipmgn/student/assets/images/dk_point_gray.png" />
                         </div>
                         <div>
                             <p id="dk-start-timebar">上班打卡时间
@@ -41,7 +41,7 @@
                     </div>
                     <div class="dk-item">
                         <div>
-                            <img src="./assets/images/dk_point_gray.png" />
+                            <img src="/internshipmgn/student/assets/images/dk_point_gray.png" />
                         </div>
                         <div>
                             <p id="dk-end-timebar">下班打卡时间
@@ -54,7 +54,7 @@
                 <div class="work-status-btn-block">
                     <a id="work-status-change-btn">
                         <div>
-                            <p id="show-status">下班打卡</p>
+                            <p id="show-status">打卡</p>
                             <p id="show-time"></p>
                         </div>
                     </a>
@@ -65,20 +65,20 @@
                     <p class="title-bar-name">申请</p>
                 </div>
                 <div class="sq-btn-set">
-                    <a href="./weixin_attendance_repair.html">
-                        <img src="./assets/images/sq_bk.png" alt="">
+                    <a href="/internshipmgn/student/weixin_attendance_repair.html">
+                        <img src="/internshipmgn/student/assets/images/sq_bk.png" alt="">
                         <p>补卡申请</p>
                     </a>
-                    <a href="./weixin_attendance_leave.html">
-                        <img src="./assets/images/sq_qj.png" alt="">
+                    <a href="/internshipmgn/student/weixin_attendance_leave.html">
+                        <img src="/internshipmgn/student/assets/images/sq_qj.png" alt="">
                         <p>请假申请</p>
                     </a>
                 </div>
                 <div id="sq-record-bar">
-                    <a href="./weixin_attendance_record.html" id="sq-record">
-                        <img src="./assets/images/sq_paper.png" alt="">
+                    <a href="/internshipmgn/student/weixin_attendance_record.html" id="sq-record">
+                        <img src="/internshipmgn/student/assets/images/sq_paper.png" alt="">
                         <span id="sq-record-name">申请记录</span>
-                        <img id="sq-img-next" src="./assets/images/next.png" alt="">
+                        <img id="sq-img-next" src="/internshipmgn/student/assets/images/next.png" alt="">
                     </a>
                 </div>
             </div>
@@ -91,11 +91,11 @@
                         <p id="tj-top-time">2018.6</p>
                     </div>
                     <div id="second-top-bar">
-                        <img id="second-userimg" src="./assets/images/head_img.png" />
+                        <img id="second-userimg" src="/internshipmgn/student/assets/images/head_img.png" />
                         <span id="second-username">小陈</span>
                         <div id="tj-top-left">
-                            <a href="./weixin_attendance_calender.html">
-                                <img src="./assets/images/tj_yl.png" alt="">
+                            <a href="/internshipmgn/student/weixin_attendance_calender.html">
+                                <img src="/internshipmgn/student/assets/images/tj_yl.png" alt="">
                                 <span>打卡月历</span>
                             </a>
                         </div>
@@ -144,31 +144,31 @@
         <div class="weui-tabbar">
             <a href="#tab1" id="dk" class="weui-tabbar__item weui-bar__item--on">
                 <div class="weui-tabbar__icon">
-                    <img id="img_dk" src="./assets/images/dk_gray.png" alt=""/>
+                    <img id="img_dk" src="/internshipmgn/student/assets/images/dk_gray.png" alt=""/>
                 </div>
                 <p class="weui-tabbar__label">打卡</p>
             </a>
             <a href="#tab2" id="sq" class="weui-tabbar__item">
                 <div class="weui-tabbar__icon">
-                    <img id="img_sq" src="./assets/images/sq_gray.png" alt=""/>
+                    <img id="img_sq" src="/internshipmgn/student/assets/images/sq_gray.png" alt=""/>
                 </div>
                 <p class="weui-tabbar__label">申请</p>
             </a>
             <a href="#tab3" id="tj" class="weui-tabbar__item">
                 <div class="weui-tabbar__icon">
-                    <img id="img_tj" src="./assets/images/tj_gray.png" alt=""/>
+                    <img id="img_tj" src="/internshipmgn/student/assets/images/tj_gray.png" alt=""/>
                 </div>
                 <p class="weui-tabbar__label">统计</p>
             </a>
         </div>
     </div>
     <!--js-->
-    <script type="text/javascript" src="./assets/js/jquery-2.1.0.min.js"></script>
-    <script type="text/javascript" src="./assets/js/jquery-url.js"></script>
-    <script type="text/javascript" src="./assets/js/jquery-weui.min.js"></script>
-    <script type="text/javascript" src="./assets/js/jweixin-1.2.0.js"></script>
-    <script type="text/javascript" src="./assets/js/fastclick.js"></script>
-    <script type="text/javascript" src="./assets/js/weixin_attendance_index.js"></script>
+    <script type="text/javascript" src="/internshipmgn/student/assets/js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="/internshipmgn/student/assets/js/jquery-url.js"></script>
+    <script type="text/javascript" src="/internshipmgn/student/assets/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="/internshipmgn/student/assets/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript" src="/internshipmgn/student/assets/js/fastclick.js"></script>
+    <script type="text/javascript" src="/internshipmgn/student/assets/js/weixin_attendance_index.js"></script>
 </body>
 
 </html>
