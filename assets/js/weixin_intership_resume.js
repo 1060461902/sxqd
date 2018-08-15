@@ -115,11 +115,11 @@ $(document).ready(function () {
         var X = moveEndX - startX;
         var Y = moveEndY - startY;
         if (Y < 30 && Y > -30) {
-            if (X > 65) {
+            if (X > 30) {
                 $('.side-nav-bg').fadeIn();
                 $('.side-nav').removeClass('nav-out');
                 $('.side-nav').addClass('nav-show');
-            } else if (X < -65) {
+            } else if (X < -30) {
                 $('.side-nav-bg').fadeOut();
                 $('.side-nav').removeClass('nav-show');
                 $('.side-nav').addClass('nav-out');
