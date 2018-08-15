@@ -7,13 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>title</title>
     <!--css-->
-    <link rel="stylesheet" href="../../student/assets/css/jquery-weui.min.css">
-    <link rel="stylesheet" href="../../student/assets/css/weui.min.css">
-    <link rel="stylesheet" href="../../student/assets/css/weixin_head.css">
-    <link rel="stylesheet" href="../../student/assets/css/weixin_attendance_calender.css">
+    <link rel="stylesheet" href="./assets/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="./assets/css/weui.min.css">
+    <link rel="stylesheet" href="./assets/css/weixin_head.css">
+    <link rel="stylesheet" href="./assets/css/weixin_attendance_repair.css">
+
+    <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery-url.js"></script>
     <script>
         function backto() {
-            window.location.href = '../../student/weixin_attendance_index.html?tab=3'
+            var from = $.parseURL(location.href)['from'];
+            if (from == 2){
+                window.location.href = './weixin_attendance_index.html?tab=2';
+            }else {
+                window.location.href = './weixin_attendance_index.html?tab=3';
+            }
         }
     </script>
 </head>
@@ -22,13 +30,13 @@
     <div class="title-bar">
         <p>
             <a id="title-back" onclick="backto()">
-                <img src="../../student/assets/images/back_lt.png" alt=""/>
+                <img src="./assets/images/back_lt.png" alt=""/>
             </a>
             <span id="title-name">考勤月历</span>
         </p>
     </div>
     <div class="user-bar">
-        <img id="user-img" src="../../student/assets/images/head_img.png" alt=""/>
+        <img id="user-img" src="./assets/images/head_img.png" alt=""/>
         <span id="user-name">小陈</span>
         <span id="user-select-time"></span>
     </div>
@@ -36,7 +44,7 @@
 
     </div>
     <div class="info-bar">
-        <img src="../../student/assets/images/clock.png" alt=""/>
+        <img src="./assets/images/clock.png" alt=""/>
         <span id="info-firstspan">今日打卡</span>
         <span id="info-times">0</span>
         <span>次</span>
@@ -44,7 +52,7 @@
     <div class="dk-bar">
         <div class="dk-item">
             <div>
-                <img src="../../student/assets/images/dk_point_gray.png" />
+                <img src="./assets/images/dk_point_gray.png" />
             </div>
             <div>
                 <p id="dk-start-timebar">上班打卡时间
@@ -55,19 +63,22 @@
         </div>
         <div class="dk-item">
             <div>
-                <img src="../../student/assets/images/dk_point_gray.png" />
+                <img src="./assets/images/dk_point_gray.png" />
             </div>
             <div>
                 <p id="dk-end-timebar">下班打卡时间无</p>
+                <a data-id="" href="./weixin_attendance_apply.html" class="bk_btn">
+                    <span>申请补卡</span>
+                    <img src="./assets/images/go_gt.png" alt=""/>
+                </a>
             </div>
         </div>
     </div>
     <!--js-->
-    <script type="text/javascript" src="../../student/assets/js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="../../student/assets/js/jquery-weui.min.js"></script>
-    <script type="text/javascript" src="../../student/assets/js/jweixin-1.2.0.js"></script>
-    <script type="text/javascript" src="../../student/assets/js/fastclick.js"></script>
-    <script type="text/javascript" src="../../student/assets/js/weixin_attendance_calender.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript" src="./assets/js/fastclick.js"></script>
+    <script type="text/javascript" src="./assets/js/weixin_attendance_repair.js"></script>
 </body>
 
 </html>
