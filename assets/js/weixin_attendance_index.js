@@ -10,6 +10,10 @@ var isGoToWork = true;
  * 最后一条记录的ID
  */
 var lastID;
+/**
+ * 当前日期
+ */
+var YMDate = getCHDate();
 
 $(document).ready(function () {
     /**
@@ -101,7 +105,6 @@ $(document).ready(function () {
                             posForm.append("latitude",latitude);
                             posForm.append("longitude",longitude);
                             if (!isGoToWork){
-                                console.log(latitude+' '+longitude);
                                 posForm.append("id",lastID);
                             }
                             $.ajax({
@@ -163,9 +166,33 @@ $(document).ready(function () {
     });
 
     /**
-     * 请求当日记录
+     * 请求当日打卡记录
      */
     getTodayRecord(false,true);
+
+    /**
+     * 设置考勤统计的年月
+     */
+    $('#tj-top-time').val(YMDate);
+    var calendar = new datePicker();
+    calendar.init({
+        'trigger': '#tj-top-time', /*按钮选择器，用于触发弹出插件*/
+        'type': 'ym',/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+        'minDate':'1900-1-1',/*最小日期*/
+        'maxDate':'2100-12-31',/*最大日期*/
+        'onSubmit':function(){/*确认时触发事件*/
+            var theSelectData=calendar.value;
+            getThisMouthStatistic(getCHDate(theSelectData));
+        },
+        'onClose':function(){/*取消时触发事件*/
+        }
+    });
+
+    /**
+     * 获取考勤统计
+     */
+    getThisMouthStatistic(getCHDate(YMDate));
+
 });
 
 function getTodayRecord(isAsync,isNeedName) {
@@ -176,10 +203,15 @@ function getTodayRecord(isAsync,isNeedName) {
         data:{},
         success:function (d) {
             if (d.code === 200){
-                if (!isNeedName){
-                    $('#first-username').html(d.data.username);
+                var attendances = d.data.attendances;
+                if (isNeedName){
+                    $('#first-username,#second-username').html(d.data.username);
+                    $('#first-userimg,#second-userimg').attr("src", d.data.logo);
+
                 }
-                $('.first-dk-body').handlebars($('#dk-model'),d.data.attendances);
+                $('.first-dk-body').handlebars($('#dk-model'), attendances);
+                var scrollTop = $(".first-dk-body")[0].scrollHeight;
+                $(".first-dk-body").scrollTop(scrollTop);
                 if(d.data.flag == 0){
                     isGoToWork = true;
                     $('#show-status').html('上班打卡');
@@ -187,7 +219,9 @@ function getTodayRecord(isAsync,isNeedName) {
                     isGoToWork = false;
                     $('#show-status').html('下班打卡');
                 }
-                lastID = d.data.attendances.pop().id;
+                if(attendances.length > 0){
+                    lastID = attendances.pop().id;
+                }
             }else {
                 console.log(d.code + ":" + d.msg);
                 $.toptip('无法获取当天记录','warning');
@@ -198,4 +232,43 @@ function getTodayRecord(isAsync,isNeedName) {
             setAlert("系统繁忙,请稍后再试");
         }
     });
+}
+
+/**
+ * 获取考勤统计
+ */
+function getThisMouthStatistic(mouth) {
+    $.ajax({
+        url:'/internshipmgn/wx/statistics/statistic',
+        type:'GET',
+        data:{pattern: mouth},
+        success:function (d) {
+            if (d.code === 200){
+                $('.tj-list').handlebars($('#tj-model'),d.data);
+            }else {
+                console.log(d.code + ":" + d.msg);
+                $.toptip('无法获取本月考勤数据','warning');
+            }
+        },
+        error:function () {
+            console.log(res);
+            setAlert("系统繁忙,请稍后再试");
+        }
+    });
+}
+
+function getCHDate(str) {
+    if (str){
+        var date = str.split('-');
+        return date[0]+'年'+date[1]+'月';
+    }else {
+        var dateObj = new Date();
+        var year = dateObj.getFullYear();
+        var month = dateObj.getMonth() + 1;
+        if (month < 10) {
+            month = "0" + month;
+        }
+        var newDate = year + "-" + month;
+        return newDate;
+    }
 }
