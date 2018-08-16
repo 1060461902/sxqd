@@ -275,3 +275,8 @@ html {
     position: absolute;
     right: 10px;
 }
+
+.first-dk-body{
+    height: 10rem;
+    overflow-y: auto;
+}

@@ -93,6 +93,66 @@ $(document).ready(function () {
                     success:function (rs) {
                         latitude = rs.latitude; //维度
                         longitude = rs.longitude; //经度
+                        /**
+                         * 点击打卡按钮
+                         */
+                        $('#work-status-change-btn').click(function () {
+                            var posForm = new FormData();
+                            posForm.append("latitude",latitude);
+                            posForm.append("longitude",longitude);
+                            if (!isGoToWork){
+                                console.log(latitude+' '+longitude);
+                                posForm.append("id",lastID);
+                            }
+                            $.ajax({
+                                url:"/internshipmgn/wx/attendances/default",
+                                type:"POST",
+                                data:posForm,
+                                processData:false,
+                                contentType:false,
+                                success:function (d) {
+                                    if (d.code === 200){
+                                        getTodayRecord(true,false);
+                                        $.toptip('打卡成功','success');
+                                    }else {
+                                        if (d.msg == "501"){
+                                            $.confirm({
+                                                text: '不在考勤范围，确定要打外勤卡吗？',
+                                                onOK:function () {
+                                                    $.ajax({
+                                                        url: "/internshipmgn/wx/attendances/outside",
+                                                        type: "POST",
+                                                        data: posForm,
+                                                        processData: false,
+                                                        contentType: false,
+                                                        success:function (d) {
+                                                            if (d.code === 200){
+                                                                getTodayRecord(true,false);
+                                                                $.toptip('打卡成功','success');
+                                                            }else {
+                                                                console.log(d.code + ":" + d.msg);
+                                                                $.toptip("打卡失败", "warning");
+                                                            }
+                                                        },
+                                                        error:function (res) {
+                                                            console.log(res);
+                                                            $.toptip("系统繁忙,请稍后再试",'error');
+                                                        }
+                                                    });
+                                                }
+                                            })
+                                        }else {
+                                            console.log(d.code + ":" + d.msg);
+                                            $.toptip("打卡失败", "warning");
+                                        }
+                                    }
+                                },
+                                error:function (res) {
+                                    console.log(res);
+                                    $.toptip("系统繁忙,请稍后再试",'error');
+                                }
+                            });
+                        });
                     },
                     cancel:function (rs) {
                         $.alert("您拒绝提供位置信息");
@@ -106,66 +166,6 @@ $(document).ready(function () {
      * 请求当日记录
      */
     getTodayRecord(false,true);
-
-    /**
-     * 点击打卡按钮
-     */
-    $('#work-status-change-btn').click(function () {
-        var posForm = new FormData();
-        posForm.append("latitude",latitude);
-        posForm.append("longitude",longitude);
-        if (isGoToWork){
-            posForm.append("id",lastID);
-        }
-        $.ajax({
-            url:"/internshipmgn/wx/attendances/default",
-            type:"POST",
-            data:posForm,
-            processData:false,
-            contentType:false,
-            success:function (d) {
-                if (d.code === 200){
-                    getTodayRecord(true,false);
-                    $.toptip('打卡成功','success');
-                }else {
-                    if (d.msg == "501"){
-                        $.confirm({
-                            text: '不在考勤范围，确定要打外勤卡吗？',
-                            onOK:function () {
-                                $.ajax({
-                                    url: "/internshipmgn/wx/attendances/outside",
-                                    type: "POST",
-                                    data: posForm,
-                                    processData: false,
-                                    contentType: false,
-                                    success:function (d) {
-                                        if (d.code === 200){
-                                            getTodayRecord(true,false);
-                                            $.toptip('打卡成功','success');
-                                        }else {
-                                            console.log(d.code + ":" + d.msg);
-                                            $.toptip("打卡失败", "warning");
-                                        }
-                                    },
-                                    error:function (res) {
-                                        console.log(res);
-                                        $.toptip("系统繁忙,请稍后再试",'error');
-                                    }
-                                });
-                            }
-                        })
-                    }else {
-                        console.log(d.code + ":" + d.msg);
-                        $.toptip("打卡失败", "warning");
-                    }
-                }
-            },
-            error:function (res) {
-                console.log(res);
-                $.toptip("系统繁忙,请稍后再试",'error');
-            }
-        });
-    });
 });
 
 function getTodayRecord(isAsync,isNeedName) {
@@ -184,11 +184,11 @@ function getTodayRecord(isAsync,isNeedName) {
                     isGoToWork = true;
                     $('#show-status').html('上班打卡');
                 }else {
+                    isGoToWork = false;
                     $('#show-status').html('下班打卡');
                 }
                 lastID = d.data.attendances.pop().id;
             }else {
-                isGoToWork = false;
                 console.log(d.code + ":" + d.msg);
                 $.toptip('无法获取当天记录','warning');
             }
