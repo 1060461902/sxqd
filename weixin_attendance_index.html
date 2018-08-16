@@ -28,33 +28,12 @@
                     <p id="first-subtitle">打卡记录时间和位置</p>
                 </div>
                 <div class="first-dk-body">
-                    <div class="dk-item">
-                        <div>
-                            <img src="/internshipmgn/student/assets/images/dk_point_gray.png" />
-                        </div>
-                        <div>
-                            <p id="dk-start-timebar">上班打卡时间
-                                <span id="dk-start-time">8:05</span>
-                            </p>
-                            <p id="dk-start-place">浙商大现教中心</p>
-                        </div>
-                    </div>
-                    <div class="dk-item">
-                        <div>
-                            <img src="/internshipmgn/student/assets/images/dk_point_gray.png" />
-                        </div>
-                        <div>
-                            <p id="dk-end-timebar">下班打卡时间
-                                <span id="dk-end-time">17:05</span>
-                            </p>
-                            <p id="dk-end-place">浙商大现教中心</p>
-                        </div>
-                    </div>
+                    <!-- dk-model -->
                 </div>
                 <div class="work-status-btn-block">
                     <a id="work-status-change-btn">
                         <div>
-                            <p id="show-status">打卡</p>
+                            <p id="show-status"></p>
                             <p id="show-time"></p>
                         </div>
                     </a>
@@ -162,8 +141,40 @@
             </a>
         </div>
     </div>
+    <script id="dk-model" type="text/x-handlebars-template">
+        {{#each this}}
+        {{#if startLoc}}
+        <div class="dk-item">
+            <div>
+                <img src="/internshipmgn/student/assets/images/dk_point_gray.png" />
+            </div>
+            <div>
+                <p class="dk-start-timebar">上班打卡时间
+                    <span class="dk-start-time">{{startTime}}</span>
+                </p>
+                <p id="dk-start-place">{{startLoc}}</p>
+            </div>
+        </div>
+        {{/if}}
+        {{#if endLoc}}
+        <div class="dk-item">
+            <div>
+                <img src="/internshipmgn/student/assets/images/dk_point_gray.png" />
+            </div>
+            <div>
+                <p class="dk-end-timebar">下班打卡时间
+                    <span class="dk-end-time">{{endTime}}</span>
+                </p>
+                <p id="dk-end-place">{{endLoc}}</p>
+            </div>
+        </div>
+        {{/if}}
+        {{/each}}
+    </script>
     <!--js-->
     <script type="text/javascript" src="/internshipmgn/student/assets/js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="/internshipmgn/student/assets/js/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="/internshipmgn/student/assets/js/handlebars-jquery.js"></script>
     <script type="text/javascript" src="/internshipmgn/student/assets/js/jquery-url.js"></script>
     <script type="text/javascript" src="/internshipmgn/student/assets/js/jquery-weui.min.js"></script>
     <script type="text/javascript" src="/internshipmgn/student/assets/js/jweixin-1.2.0.js"></script>

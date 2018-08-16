@@ -1,9 +1,17 @@
-$(document).ready(function () {
-    /**
-     * 经纬度
-     */
-    var latitude,longitude;
+/**
+ * 经纬度
+ */
+var latitude,longitude;
+/**
+ * 上班打卡还是下班打卡
+ */
+var isGoToWork = true;
+/**
+ * 最后一条记录的ID
+ */
+var lastID;
 
+$(document).ready(function () {
     /**
      * 获取url中的参数并判断切换到哪一页面
      */
@@ -52,6 +60,7 @@ $(document).ready(function () {
     $.ajax({
         url:"/internshipmgn/wx/config",
         type:"GET",
+        async:false,
         data:{url:location.href},
         dataType:"json",
         success:function (data) {
@@ -94,12 +103,20 @@ $(document).ready(function () {
     });
 
     /**
+     * 请求当日记录
+     */
+    getTodayRecord(false,true);
+
+    /**
      * 点击打卡按钮
      */
     $('#work-status-change-btn').click(function () {
         var posForm = new FormData();
         posForm.append("latitude",latitude);
         posForm.append("longitude",longitude);
+        if (isGoToWork){
+            posForm.append("id",lastID);
+        }
         $.ajax({
             url:"/internshipmgn/wx/attendances/default",
             type:"POST",
@@ -108,6 +125,7 @@ $(document).ready(function () {
             contentType:false,
             success:function (d) {
                 if (d.code === 200){
+                    getTodayRecord(true,false);
                     $.toptip('打卡成功','success');
                 }else {
                     if (d.msg == "501"){
@@ -122,29 +140,62 @@ $(document).ready(function () {
                                     contentType: false,
                                     success:function (d) {
                                         if (d.code === 200){
+                                            getTodayRecord(true,false);
                                             $.toptip('打卡成功','success');
                                         }else {
                                             console.log(d.code + ":" + d.msg);
-                                            $.toptip("系统繁忙，请稍后再试", "error");
+                                            $.toptip("打卡失败", "warning");
                                         }
                                     },
                                     error:function (res) {
                                         console.log(res);
-                                        setAlert("系统繁忙,请稍后再试");
+                                        $.toptip("系统繁忙,请稍后再试",'error');
                                     }
                                 });
                             }
                         })
                     }else {
                         console.log(d.code + ":" + d.msg);
-                        $.toptip("系统繁忙，请稍后再试", "error");
+                        $.toptip("打卡失败", "warning");
                     }
                 }
             },
             error:function (res) {
                 console.log(res);
-                setAlert("系统繁忙,请稍后再试");
+                $.toptip("系统繁忙,请稍后再试",'error');
             }
         });
     });
 });
+
+function getTodayRecord(isAsync,isNeedName) {
+    $.ajax({
+        url:'/internshipmgn/wx/attendances/record',
+        type:'GET',
+        async:isAsync,
+        data:{},
+        success:function (d) {
+            if (d.code === 200){
+                if (!isNeedName){
+                    $('#first-username').html(d.data.username);
+                }
+                $('.first-dk-body').handlebars($('#dk-model'),d.data.attendances);
+                if(d.data.flag == 0){
+                    isGoToWork = true;
+                    $('#show-status').html('上班打卡');
+                }else {
+                    $('#show-status').html('下班打卡');
+                }
+                lastID = d.data.attendances.pop().id;
+            }else {
+                isGoToWork = false;
+                console.log(d.code + ":" + d.msg);
+                $.toptip('无法获取当天记录','warning');
+            }
+        },
+        error:function (res) {
+            console.log(res);
+            setAlert("系统繁忙,请稍后再试");
+        }
+    });
+}
