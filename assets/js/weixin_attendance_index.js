@@ -189,10 +189,11 @@ $(document).ready(function () {
     });
 
     /**
-     * 获取考勤统计
+     * 获取考勤统计(每次点击统计请求一次)
      */
-    getThisMouthStatistic(getCHDate(YMDate));
-
+    $('#tj').click(function () {
+        getThisMouthStatistic(getCHDate(YMDate));
+    });
 });
 
 function getTodayRecord(isAsync,isNeedName) {

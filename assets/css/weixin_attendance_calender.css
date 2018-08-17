@@ -59,16 +59,16 @@
     display: inline-block;
 }
 
-#dk-start-timebar,
-#dk-end-timebar {
+.dk-start-timebar,
+.dk-end-timebar {
     margin-left: 1rem;
     font-size: 0.7rem;
     line-height: 1.7rem;
     color: black;
 }
 
-#dk-start-place,
-#dk-end-place {
+.dk-start-place,
+.dk-end-place {
     margin-left: 1rem;
     font-size: 0.6rem;
     color: #7f7f7f;

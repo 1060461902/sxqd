@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./assets/css/jquery-weui.min.css">
     <link rel="stylesheet" href="./assets/css/weui.min.css">
     <link rel="stylesheet" href="./assets/css/weixin_head.css">
-    <link rel="stylesheet" href="./assets/css/weixin_attendance_repair.css">
+    <link rel="stylesheet" href="./assets/css/weixin_attendance_calender.css">
 
     <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="./assets/js/jquery-url.js"></script>
@@ -50,35 +50,71 @@
         <span>次</span>
     </div>
     <div class="dk-bar">
+        <!-- dk-model -->
+    </div>
+    <script type="text/x-handlebars-template" id="dk-model">
+        {{#each this}}
+        {{#if startTime}}
         <div class="dk-item">
             <div>
-                <img src="./assets/images/dk_point_gray.png" />
+                <img src="/internshipmgn/student/assets/images/dk_point_gray.png" />
             </div>
             <div>
-                <p id="dk-start-timebar">上班打卡时间
-                    <span id="dk-start-time">8:05</span>
+                <p class="dk-start-timebar">上班打卡时间
+                    <span class="dk-start-time">{{startTime}}</span>
                 </p>
-                <p id="dk-start-place">浙商大现教中心</p>
+                <p class="dk-start-place">{{startLoc}}</p>
             </div>
         </div>
+        {{else}}
         <div class="dk-item">
             <div>
                 <img src="./assets/images/dk_point_gray.png" />
             </div>
             <div>
-                <p id="dk-end-timebar">下班打卡时间无</p>
+                <p class="dk-start-timebar">上班打卡时间无</p>
                 <a data-id="" href="./weixin_attendance_apply.html" class="bk_btn">
                     <span>申请补卡</span>
                     <img src="./assets/images/go_gt.png" alt=""/>
                 </a>
             </div>
         </div>
-    </div>
+        {{/if}}
+        {{#if endTime}}
+        <div class="dk-item">
+            <div>
+                <img src="/internshipmgn/student/assets/images/dk_point_gray.png" />
+            </div>
+            <div>
+                <p class="dk-end-timebar">下班打卡时间
+                    <span class="dk-end-time">{{endTime}}</span>
+                </p>
+                <p class="dk-end-place">{{endLoc}}</p>
+            </div>
+        </div>
+        {{else}}
+        <div class="dk-item">
+            <div>
+                <img src="./assets/images/dk_point_gray.png" />
+            </div>
+            <div>
+                <p class="dk-end-timebar">下班打卡时间无</p>
+                <a data-id="" href="./weixin_attendance_apply.html" class="bk_btn">
+                    <span>申请补卡</span>
+                    <img src="./assets/images/go_gt.png" alt=""/>
+                </a>
+            </div>
+        </div>
+        {{/if}}
+        {{/each}}
+    </script>
     <!--js-->
     <script type="text/javascript" src="./assets/js/jquery-weui.min.js"></script>
     <script type="text/javascript" src="./assets/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-jquery.js"></script>
     <script type="text/javascript" src="./assets/js/fastclick.js"></script>
-    <script type="text/javascript" src="./assets/js/weixin_attendance_repair.js"></script>
+    <script type="text/javascript" src="./assets/js/weixin_attendance_calender.js"></script>
 </body>
 
 </html>
