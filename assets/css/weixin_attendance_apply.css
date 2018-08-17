@@ -8,6 +8,14 @@
 }
 
 #time-date{
+    width: 15%;
+    float: right;
+    position: relative;
+    top: 0.2rem;
+}
+
+#apply-date,
+#date-space{
     float: right;
 }
 

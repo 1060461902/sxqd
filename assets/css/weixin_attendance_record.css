@@ -1,3 +1,11 @@
+.title-bar{
+    top: 0;
+    z-index: 100;
+    background: #FFFFFF;
+    position: fixed;
+    width: 100%;
+}
+
 .search-bar{
     display: -webkit-box; /* OLD: Safari, iOS 6 and earlier; Android browser, older WebKit */
     display: -moz-box; /* OLD: Firefox (can be buggy) */
@@ -59,18 +67,12 @@
 }
 
 .weui-cells{
-    margin-top: 0;
+    margin-top: 2rem;
 }
 
 .cell-info{
+    width: 80%;
     margin-left: 0.5rem;
-    
-}
-
-.cell-head-img img{
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 1.5rem;
 }
 
 .cell-info-title{
@@ -93,4 +95,10 @@
 
 .cell-info-status-r{
     color: #ff0000c9;
+}
+
+.cell-time{
+    font-size: 0.6em;
+    color: #0c0c0c;
+    width: 20%;
 }
