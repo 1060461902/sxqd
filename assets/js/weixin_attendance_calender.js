@@ -2,7 +2,9 @@ $(document).ready(function () {
     /**
      * 日历
      */
-    $('.date-select').calendar();
+    $('.date-select').calendar({
+        touchMove:false
+    });
     /**
      * 设置当前日期
      */
@@ -25,8 +27,16 @@ $(document).ready(function () {
         data:{},
         success:function (d) {
             if (d.code === 200){
+                var times = 0;
                 var attendances = d.data.attendances;
                 $('.dk-bar').handlebars($('#dk-model'), attendances);
+                attendances.forEach(function (item, index) {
+                    times += 1;
+                    if (item.endTime){
+                        times += 1;
+                    }
+                });
+                $('#info-times').html(times);
             }else {
                 console.log(d.code + ":" + d.msg);
                 $.toptip('无法获取当天记录','warning');
@@ -39,7 +49,7 @@ $(document).ready(function () {
     });
 
     /**
-     * 点击年月的选择按钮
+     * 年月变化时，请求当月状态
      */
     $('body').on('click','.picker-calendar-year-picker a,.picker-calendar-month-picker a',function () {
         var year = $('.current-year-value').html();
@@ -108,7 +118,16 @@ $(document).on('click', '.picker-calendar-day', function () {
         },
         success:function (d) {
             if (d.code === 200){
-                $('.dk-bar').handlebars($('#dk-model'),d.data.attendances);
+                var times = 0;
+                var attendances = d.data.attendances;
+                $('.dk-bar').handlebars($('#dk-model'),attendances);
+                attendances.forEach(function (item, index) {
+                    times += 1;
+                    if (item.endTime){
+                        times += 1;
+                    }
+                });
+                $('#info-times').html(times);
             }else {
                 console.log(d.code+':'+d.msg);
                 $.toptip('无法获取当日记录','warning');
