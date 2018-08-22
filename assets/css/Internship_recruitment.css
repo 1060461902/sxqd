@@ -28,6 +28,7 @@
 .post-list{
     margin-left: 0.5vw;
     margin-right: 0.5vw;
+    min-height: 1000px;
 }
 .post-item:hover{
     transition-duration: 0.3s;

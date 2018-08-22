@@ -113,3 +113,12 @@
     transform: translate3D(-0.2vw,-0.2vw,0.2vw);
     box-shadow: 0.2vw 0.2vw 0.2vw #7f7f7f;
 }
+
+.list-empty-info{
+    font-size: 30px;
+    color: #000000;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    top: 50%;
+}

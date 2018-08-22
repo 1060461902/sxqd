@@ -26,10 +26,11 @@ $(document).ready(function () {
             $("#receiver-v").handlebars($("#receiver-model"), data.data.students);
             $(".answer-item-v").handlebars($("#answer-item-model"), data.data.replies);
         } else {
-            alert(data.msg);
+            setAlert('无法获取页面信息');
         }
     }
     option.error = function (res) {
+        setAlert("系统繁忙，请稍候再试");
         console.log(res)
     }
     $.ajax(option);
@@ -48,11 +49,34 @@ $(document).ready(function () {
             option.success = function (data) {
                 if (data.code === 200) {
                     setAlert('回复成功');
+                    $('#answer-content').val('');
+                    /**
+                     * 请求接口获取回复列表
+                     */
+                    var option = getBASEGETAJAX();
+                    option.url = '../student/messages/details';
+                    option.data = {
+                        "id": message_id
+                    }
+                    option.success = function (data) {
+                        if (data.code === 200) {
+                            $(".answer-item-v").handlebars($("#answer-item-model"), data.data.replies);
+                        } else {
+                            setAlert('无法获取回复列表');
+                        }
+                    }
+                    option.error = function (res) {
+                        setAlert("系统繁忙，请稍候再试");
+                        console.log(res)
+                    }
+                    $.ajax(option);
                 } else {
-                    alert("回复发生错误:" + data.msg);
+                    console.log(data.code+':'+data.msg);
+                    setAlert("回复失败");
                 }
             }
             option.error = function (res) {
+                setAlert("系统繁忙，请稍候再试");
                 console.log(res)
             }
             $.ajax(option);

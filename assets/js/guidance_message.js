@@ -21,7 +21,16 @@ $(document).ready(function () {
             alert(data.msg);
             return;
         } else {
-            $('.table-v').handlebars($('#guidance-message-model'), data.data.message);
+            $('.table-v').handlebars($('#guidance-message-model'), data.data.message,{
+                name:'content_tool',
+                callback:function (content) {
+                    if (content.length <= 10){
+                        return content;
+                    }else {
+                        return content.substring(0,10) + '...'
+                    }
+                }
+            });
             /**
              * 分页
              */
@@ -36,7 +45,16 @@ $(document).ready(function () {
                         alert(data.msg);
                         return;
                     } else {
-                        $('.table-v').handlebars($('#guidance-message-model'), data.data.message);
+                        $('.table-v').handlebars($('#guidance-message-model'), data.data.message, {
+                            name:'content_tool',
+                            callback:function (content) {
+                                if (content.length <= 8){
+                                    return content;
+                                }else {
+                                    return content.substring(0,10) + '...'
+                                }
+                            }
+                        });
                     }
                 }
                 option.error = function (res) {

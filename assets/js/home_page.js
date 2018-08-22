@@ -27,16 +27,19 @@ $(document).ready(function () {
 			/**
 			 * 轮播图
 			 * */
-			$('#myCarousel').handlebars($('#carousel-model'), data.data.shows, {
-				name: 'active',
-				callback: function (index) {
-					if (index == 0) {
-						return 'active';
-					} else {
-						return '';
-					}
-				}
-			})
+			var shows = data.data.shows;
+			if(shows.length > 0) {
+                $('#myCarousel').handlebars($('#carousel-model'), shows, {
+                    name: 'active',
+                    callback: function (index) {
+                        if (index == 0) {
+                            return 'active';
+                        } else {
+                            return '';
+                        }
+                    }
+                });
+            }
 			/**
 			 * 新闻列表
 			 */

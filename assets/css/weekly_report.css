@@ -15,3 +15,8 @@
 .weekly-report-item{
     margin: 10px;
 }
+
+.report-show-entity{
+    border-left: 1px dashed #ffa000;
+    border-right: 1px dashed #ffa000;
+}
