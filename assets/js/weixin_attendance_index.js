@@ -17,6 +17,17 @@ var YMDate = getCHDate();
 
 $(document).ready(function () {
     /**
+     * 询问是否已绑定，后端自动跳转到提示页面
+     */
+    var option = getBASEGETAJAX();
+    option.url = '/internshipmgn/wx/auth/attendance';
+    option.error = function (res) {
+        $.toptip("系统繁忙，请稍后再试", 'error');
+        console.log(res);
+    }
+    $.ajax(option);
+
+    /**
      * 获取url中的参数并判断切换到哪一页面
      */
     var res = $.parseURL(location.href);

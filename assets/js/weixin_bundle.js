@@ -1,17 +1,8 @@
 /*$(document).ready(function () {
     $.ajax({
         type: 'GET',
-        url: '../auth/bind',
+        url: '/internshipmgn/wx/auth/bind',
         data: {},
-        success: function (d) {
-            if (d.code === 500) {
-                if(d.msg == '502') {
-                    $.toptip('该微信已绑定账号', 'warning');
-                }else {
-                    $.toptip('系统繁忙', 'error');
-                }
-            }
-        },
         error: function (res) {
             console.log(res);
             $.toptip('系统繁忙', 'error');
@@ -29,14 +20,16 @@ function dobind() {
     } else {
         $.ajax({
             type: 'POST',
-            url: '../bind',
+            url: '../wx/bind',
             data: {
                 'username': userid,
                 'password': password
             },
             success: function (d) {
                 if (d.code === 200) {
-                    $.toptip('绑定成功', 'success');
+                    $.alert('绑定成功', function () {
+                        location.href = './error_binded.html'
+                    });
                 } else {
                     if (d.msg == '501'){
                         $.toptip('请检查账号密码', 'warning');
