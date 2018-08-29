@@ -17,6 +17,18 @@
 </head>
 
 <body>
+    <div class="mask"></div>
+    <div class="answer-window">
+        <div class="close-bar">
+            <button onclick="close_window()">X</button>
+        </div>
+        <div>
+            <textarea autofocus id="answer-content"></textarea>
+        </div>
+        <div class="answer-send">
+            <button id="answer-who">回复</button>
+        </div>
+    </div>
     <div class="alert-model"></div>
     <div class="page_head">
         <div class="logo_bar">
@@ -180,10 +192,16 @@
         <li class="list-group-item ask-item">
             <a>
                 <div class="head-img">
-                    <img src="{{logo}}" />
+                    <img src="{{logo}}" notFoundSrc="./assets/images/default_head.png"/>
                 </div>
                 <div class="ask-body">
-                    <p>{{name}}</p>
+                    <p>
+                        {{#if name}}
+                            {{name}}
+                        {{else}}
+                            【未知用户名】
+                        {{/if}}
+                    </p>
                     <p>
                         {{#if followName}}
                             回复&nbsp;{{followName}}&nbsp;:
@@ -194,7 +212,7 @@
                 <div class="ask-time">
                     <p>{{createTime}}</p>
                     <p>
-                        <a class="answer-person" data-id="{{id}}">回复</a>
+                        <button class="answer-person" data-id="{{id}}" data-name="{{name}}">回复</button>
                     </p>
                 </div>
             </a>
@@ -231,7 +249,7 @@
     <script id="company-model" type="x-handlebars-template">
         <a href="./company_profile.html?id={{id}}">
             <div class="company-info-top">
-                <img src="{{logo}}" notFoundSrc="./assets/images/defult_company.png"/>
+                <img src="{{logo}}" notFoundSrc="./assets/images/default_company.jpg"/>
                 <div id="company-name">
                     <p>{{companyName}}</p>
                 </div>

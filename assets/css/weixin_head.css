@@ -1,3 +1,7 @@
+* {
+    background: #FFFFFF;
+}
+
 .title-bar {
     height: 2rem;
     position: relative;

@@ -9,8 +9,11 @@ $(document).ready(function () {
     };
     option.success = function (data) {
         if (data.code !== 200) {
-            alert(data.msg);
-            return;
+            if (data.msg != '0'){
+                console(data.code+':'+data.msg);
+                setAlert('无法获取收藏列表');
+                return;
+            }
         } else {
             $('.list-group').handlebars($('#job-collection-model'), data.data.data,{
                 name:'if_bool',
@@ -33,8 +36,8 @@ $(document).ready(function () {
                 };
                 option.success = function (data) {
                     if (data.code !== 200) {
-                        console.log(data.msg);
-                        setAlert("系统繁忙，请稍后再试");
+                        console(data.code+':'+data.msg);
+                        setAlert('无法获取收藏列表');
                         return;
                     } else {
                         $('.list-group').handlebars($('#job-collection-model'), data.data.data,{
@@ -97,7 +100,7 @@ $(document).ready(function () {
         option.success = function (data) {
             if (data.code !== 200) {
                 console.log(data.msg);
-                setAlert("系统繁忙，请稍后再试");
+                setAlert("无法投递简历");
                 return;
             } else {
                 var tag = $('.send-btn[data-id="'+id+'"]');

@@ -18,7 +18,8 @@ $(document).ready(function () {
     };
     option.success = function (data) {
         if (data.code !== 200) {
-            alert(data.msg);
+            console.log(data.msg);
+            setAlert('获取指导消息失败');
             return;
         } else {
             $('.table-v').handlebars($('#guidance-message-model'), data.data.message,{
@@ -42,7 +43,8 @@ $(document).ready(function () {
                 };
                 option.success = function (data) {
                     if (data.code !== 200) {
-                        alert(data.msg);
+                        console.log(data.msg);
+                        setAlert('获取指导消息失败');
                         return;
                     } else {
                         $('.table-v').handlebars($('#guidance-message-model'), data.data.message, {
@@ -99,7 +101,8 @@ function answer_it() {
                 setAlert('回复成功');
                 // $('tr[data-id="'+info_id+'"] .is-answered').html("已回复");
             }else{
-                alert("回复发生错误:"+data.msg);
+                console.log("回复发生错误:"+data.msg);
+                setAlert('回复失败');
             }
         }
         option.error = function (res) {

@@ -129,11 +129,17 @@
     color: white;
 }
 
-#preview-btn,
+/*#preview-btn,
 #output-btn{
     height: 100%;
     outline: none;
     width: 40%;
+    border-radius: 5px;
+}*/
+#preview-btn{
+    height: 100%;
+    outline: none;
+    width: 95%;
     border-radius: 5px;
 }
 

@@ -105,9 +105,6 @@ function getPageData(pageNum,pageLimit) {
                     getPageData(page);
                 })
             }
-        } else {
-            console.log(data.msg);
-            setAlert("系统繁忙，请稍后再试");
         }
     }
     option.error = function (res) {

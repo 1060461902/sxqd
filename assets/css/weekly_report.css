@@ -20,3 +20,12 @@
     border-left: 1px dashed #ffa000;
     border-right: 1px dashed #ffa000;
 }
+
+.empty-info{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}

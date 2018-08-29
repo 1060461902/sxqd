@@ -1,13 +1,13 @@
 var collect_status = 0; //0 未收藏   1 已收藏
 var send_status = 0; //0 未投递   1 已投递
-var reply_who;
+var post_id;
 
 $(document).ready(function () {
 
     /**
      * 获得岗位ID
      */
-    var post_id = $.parseURL(location.href)['id'];
+    post_id = $.parseURL(location.href)['id'];
 
     /**
      * 请求页面数据
@@ -47,7 +47,7 @@ $(document).ready(function () {
             }
         } else {
             setAlert('系统繁忙，请稍后再试');
-            console.log(msg);
+            console.log(data.code+":"+data.msg);
         }
     }
     option.error = function (res) {
@@ -139,16 +139,33 @@ $(document).ready(function () {
      * 点击发送按钮发送咨询信息
      */
     $('.question-send-bar button').on('click',function () {
-
+        askFunc();
     });
 
     /**
-     *
+     * 点击评论条的回复按钮
      */
     $('.ask-list').on('click','.answer-person',function () {
         var id = $(this).data('id');
-        reply_who = id;
+        var name = $(this).data('name');
+        if (name == ''){
+            name = '[未知用户]';
+        }
+        $('.mask').fadeIn();
+        $('.answer-window').css({
+            'display':'block'
+        });
+        $('#answer-content').attr('placeholder','回复 '+name);
+        $('#answer-who').attr('data-id',id);
         $('.question-send-bar button').off('click');
+    });
+
+    /**
+     * 点击弹出框的回复按钮
+     */
+    $('#answer-who').click(function () {
+        answer_it();
+        close_window();
     });
 });
 
@@ -168,19 +185,7 @@ function askFunc() {
                 console.log(data.msg);
                 setAlert("系统繁忙，请稍后再试");
             } else {
-                var option = getBASEGETAJAX();
-                option.url = '../student/recruitments/profile';
-                option.data = {
-                    id: post_id
-                };
-                option.success = function (data) {
-                    $(".ask-list").handlebars($('#answer-item-model'), data.data.commits);
-                };
-                option.error = function (res) {
-                    setAlert("系统繁忙，请稍后再试");
-                    console.log(res)
-                };
-                $.ajax(option);
+                reflashAskList();
                 setAlert("消息已发送");
                 $('#ask-input').val('');
             }
@@ -193,40 +198,61 @@ function askFunc() {
     }
 }
 
-function replyFunc() {
-    var ask_content = $('#ask-input').val();
+function close_window() {
+    $('.answer-window').css({
+        'display':'none',
+    });
+    $('#answer-who').attr('data-id','');
+    $('#answer-content').val('');
+    $('#answer-content').attr('placeholder','');
+    $('.mask').fadeOut();
+}
 
-    var option = getBASEPOSTAJAX();
-    option.url = '../student/recruitments/reply';
-    option.data = {
-        commitId:id,
-        content:ask_content
+function answer_it() {
+    var answer_content = $('#answer-content').val();
+    var id = $('#answer-who').data('id');
+    if(answer_content !=null && answer_content != ''){
+        var option = getBASEPOSTAJAX();
+        option.url = '../student/recruitments/reply';
+        option.data = {
+            "commitId": id,
+            "content": answer_content
+        }
+        option.success = function (data) {
+            if(data.code === 200){
+                setAlert('回复成功');
+                reflashAskList();
+            }else{
+                console.log("回复发生错误:"+data.msg);
+                setAlert('回复失败');
+            }
+        }
+        option.error = function (res) {
+            console.log(res)
+        }
+        $.ajax(option);
+    }else{
+        setAlert("请输入回复内容！");
     }
-    option.success = function () {
-        if (data.code !== 200) {
-            console.log(data.msg);
-            setAlert("系统繁忙，请稍后再试");
+}
+
+function reflashAskList() {
+    var option = getBASEGETAJAX();
+    option.url = '../student/recruitments/profile';
+    option.data = {
+        id: post_id
+    };
+    option.success = function (data) {
+        if (data.code === 200) {
+            $(".ask-list").handlebars($('#answer-item-model'), data.data.commits);
         } else {
-            var option = getBASEGETAJAX();
-            option.url = '../student/recruitments/profile';
-            option.data = {
-                id: post_id
-            };
-            option.success = function (data) {
-                $(".ask-list").handlebars($('#answer-item-model'), data.data.commits);
-            };
-            option.error = function (res) {
-                setAlert("系统繁忙，请稍后再试");
-                console.log(res)
-            };
-            $.ajax(option);
-            setAlert("消息已发送");
-            $('#ask-input').val('');
+            setAlert('刷新咨询板列表出错');
+            console.log(data.code+":"+data.msg);
         }
     }
     option.error = function (res) {
+        console.log(res);
         setAlert("系统繁忙，请稍后再试");
-        console.log(res)
-    };
+    }
     $.ajax(option);
 }

@@ -68,7 +68,6 @@ $(document).ready(function () {
                 console.log(res);
             }
             $.ajax(option);
-            setAlert('发表成功');
         }
     });
 });

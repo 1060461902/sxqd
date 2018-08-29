@@ -152,6 +152,30 @@ $(document).ready(function () {
     $('.upload-btn').click(function () {
         $('#attachment-upload').trigger("click");
     });
+    $('#attachment-upload').change(function () {
+        var form = new FormData();
+        var attachment = $('#attachment-upload')[0].files[0];
+        form.append('attachment',attachment);
+
+        var option = getBASEPOSTAJAX();
+        option.url = "../student/studentsets/attachment";
+        option.data = form;
+        option.processData = false;
+        option.contentType = false;
+        option.success = function (data) {
+            if (data.code === 200) {
+                setAlert("上传成功");
+            } else {
+                console.log(data.code+":"+data.msg);
+                setAlert("上传失败，请稍后再试");
+            }
+        }
+        option.error = function (res) {
+            setAlert("系统繁忙，请稍后再试");
+            console.log(res);
+        }
+        $.ajax(option);
+    });
 
     /**
      * 预览按钮
