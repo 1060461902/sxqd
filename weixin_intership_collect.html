@@ -38,7 +38,7 @@
     </div>
     <script id="collect-item-model" type="text/x-handlebars-template">
         {{#each this}}
-        <div class="weui-cell" data-id="{{id}}" href="../student/weixin_intership_post.html">
+        <div class="weui-cell" data-id="{{id}}">
             <a href="../student/weixin_intership_post.html?id={{id}}" class="cell-left">
                 <p class="post-name">{{post}}</p>
                 <p>{{companyName}}</p>
@@ -51,7 +51,7 @@
             <div class="cell-right">
                 <a class="post-unfocus" data-id="{{id}}">取消关注</a>
                 <div class="post-img-container">
-                    <img src="{{logo}}" alt="">
+                    <img src="{{logo}}" alt="" notFoundSrc="../student/assets/images/default_company.jpg">
                 </div>
                 {{#if_bool sendflag}}
                 <a class="post-sent" data-id="{{id}}">已投递</a>

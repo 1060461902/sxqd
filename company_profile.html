@@ -230,7 +230,7 @@
             <!--</p>-->
         </div>
         <div class="company-intro-right">
-            <img src="{{logo}}" alt="" notFoundSrc="./assets/images/defult_company.png">
+            <img src="{{logo}}" alt="" notFoundSrc="./assets/images/default_company.jpg">
             <p>{{name}}</p>
         </div>
     </script>
@@ -246,13 +246,13 @@
     <script id="post-item-model" type="text/x-handlebars-template">
         {{#each this}}
         <li class="list-group-item post-item">
-            <a href="./job_profile.html">
+            <a href="./job_profile.html?id={{id}}">
                 <div class="post-item-left">
                     <p>
                         <span>招聘岗位</span>
                         <span>&nbsp;&nbsp;&nbsp;</span>
                         <span>{{post}}</span>
-                        <span class="out-time">[{{outtime}}发布]</span>
+                        <span class="out-time">{{outtime}}</span>
                     </p>
                     <p>
                         <span>招聘人数</span>

@@ -174,10 +174,18 @@
                 {{date}}
             </td>
             <td>
-                {{startTime}}
+                {{#if startTime}}
+                    {{startTime}}
+                {{else}}
+                    无打卡记录
+                {{/if}}
             </td>
             <td>
-                {{endTime}}
+                {{#if endTime}}
+                    {{endTime}}
+                {{else}}
+                    无打卡记录
+                {{/if}}
             </td>
         </tr>
         {{/each}}

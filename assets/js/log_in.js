@@ -1,6 +1,19 @@
 var role = 0;
 
 $(document).ready(function () {
+    /**
+     * 读取本地存储的用户名密码
+     * @type {string | null}
+     */
+    var user_id = localStorage.getItem('x-keyName');
+    var password = localStorage.getItem('x-keyPass');
+    if(user_id){
+        $('#user-id').val(user_id);
+    }if(password){
+        $('#check-remember').attr('checked',true);
+        $('#user-password').val(password);
+    }
+
    $(".log-input ul li").on("click",function (e) {
        $(".log-input ul li").css({
            'border-bottom': 'none',
@@ -35,7 +48,7 @@ $(document).ready(function () {
    }) ;
 
    /**
-    *
+    * 点击登录按钮
     * */
    $('.logIn-btn button').click(function () {
        /*switch (role){
@@ -53,6 +66,12 @@ $(document).ready(function () {
        }else if(password == ''||password == null){
            setAlert("请检查密码");
        }else{
+           localStorage.setItem('x-keyName',user_id);
+           if($('#check-remember').is(':checked')) {
+               localStorage.setItem('x-keyPass', password);
+           } else{
+               localStorage.removeItem('x-keyPass');
+           }
            var option = getBASEPOSTAJAX();
            option.url = '../login';
            option.contentType = "application/json";
