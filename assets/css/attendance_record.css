@@ -53,8 +53,20 @@
     height: 100%;
 }
 
-.record-body{
-    height: 600px;
+#record-items {
+    display:block;
+    height:580px;
+    overflow-y:auto;
+}
+
+table thead, #record-items tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
+table thead {
+    width: calc( 100% - 1em )
 }
 
 .record-body table{

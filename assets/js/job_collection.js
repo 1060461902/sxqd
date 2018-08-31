@@ -71,22 +71,24 @@ $(document).ready(function () {
      */
     $('.list-group').on('click', '.unfocus-btn', function () {
         var id = $(this).data('id');
-        var option = getBASEDELETEAJAX();
-        option.url = '../student/collections/collection?id='+id;
-        option.success = function (data) {
-            if (data.code !== 200) {
-                console.log(data.msg);
+        setConfirm("是否取消对该岗位的关注？",function () {
+            var option = getBASEDELETEAJAX();
+            option.url = '../student/collections/collection?id='+id;
+            option.success = function (data) {
+                if (data.code !== 200) {
+                    console.log(data.msg);
+                    setAlert("无法取消关注，请稍候再试");
+                } else {
+                    $('.list-group-item[data-id="'+id+'"]').remove();
+                    setAlert("已取消关注");
+                }
+            };
+            option.error = function (res) {
                 setAlert("系统繁忙，请稍后再试");
-            } else {
-                $('.list-group-item[data-id="'+id+'"]').remove();
-                setAlert("已取消关注");
-            }
-        };
-        option.error = function (res) {
-            setAlert("系统繁忙，请稍后再试");
-            console.log(res)
-        };
-        $.ajax(option);
+                console.log(res)
+            };
+            $.ajax(option);
+        });
     });
 
     /**

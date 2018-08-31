@@ -110,25 +110,27 @@ $(document).ready(function () {
      */
     $('.post-list').on('click', '.post-focused', function () {
         var id = $(this).data('id');
-        var option = getBASEDELETEAJAX();
-        option.url = '../student/collections/collection?id=' + id;
-        option.success = function (data) {
-            if (data.code !== 200) {
-                alert(data.msg);
-                return;
-            } else {
-                var focus_btn = $('.post-focused[data-id="' + id + '"]');
-                focus_btn.html('关注');
-                focus_btn.removeClass('post-focused');
-                focus_btn.addClass('post-focus');
-                setAlert("已取消关注");
+        setConfirm('确定取消关注该职位？',function () {
+            var option = getBASEDELETEAJAX();
+            option.url = '../student/collections/collection?id=' + id;
+            option.success = function (data) {
+                if (data.code !== 200) {
+                    alert(data.msg);
+                    return;
+                } else {
+                    var focus_btn = $('.post-focused[data-id="' + id + '"]');
+                    focus_btn.html('关注');
+                    focus_btn.removeClass('post-focused');
+                    focus_btn.addClass('post-focus');
+                    setAlert("已取消关注");
+                }
             }
-        }
-        option.error = function (res) {
-            setAlert("系统繁忙，请稍后再试");
-            console.log(res)
-        }
-        $.ajax(option);
+            option.error = function (res) {
+                setAlert("系统繁忙，请稍后再试");
+                console.log(res)
+            }
+            $.ajax(option);
+        });
     });
 
     /**
@@ -165,30 +167,32 @@ $(document).ready(function () {
      */
     $('.post-list').on('click', '.hand-in-resume', function () {
         var id = $(this).data('id');
-        // var option = getBASEPOSTAJAX();
-        var option = getBASEGETAJAX(); //暂时
-        option.url = '../student/recruitments/resume';
-        option.data = {
-            'recruitmentId': id
-        };
-        option.success = function (data) {
-            if (data.code !== 200) {
-                console.log(data.msg);
-                setAlert("系统繁忙，请稍后再试");
-                return;
-            } else {
-                var tag = $('.hand-in-resume[data-id="' + id + '"]');
-                tag.html('已投递');
-                tag.removeClass('hand-in-resume');
-                tag.addClass('handed-in-resume');
-                setAlert("简历已投递");
+        setConfirm('确定投递简历？（一旦投递无法撤回）',function () {
+            // var option = getBASEPOSTAJAX();
+            var option = getBASEGETAJAX(); //暂时
+            option.url = '../student/recruitments/resume';
+            option.data = {
+                'recruitmentId': id
+            };
+            option.success = function (data) {
+                if (data.code !== 200) {
+                    console.log(data.msg);
+                    setAlert("系统繁忙，请稍后再试");
+                    return;
+                } else {
+                    var tag = $('.hand-in-resume[data-id="' + id + '"]');
+                    tag.html('已投递');
+                    tag.removeClass('hand-in-resume');
+                    tag.addClass('handed-in-resume');
+                    setAlert("简历已投递");
+                }
             }
-        }
-        option.error = function (res) {
-            setAlert("系统繁忙，请稍后再试");
-            console.log(res)
-        }
-        $.ajax(option);
+            option.error = function (res) {
+                setAlert("系统繁忙，请稍后再试");
+                console.log(res)
+            }
+            $.ajax(option);
+        });
     });
 });
 

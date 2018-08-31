@@ -34,10 +34,17 @@ function requestURL() {
     };
     option.success = function (data) {
         if (data.code !== 200) {
-            alert(data.msg);
+            setAlert('暂时无法获取职位列表');
+            console.log(data.code+":"+data.msg);
             return;
         } else {
-            $('.list-group').handlebars($('#post-item-model'), data.data.data);
+            if (data.data.data.length>0){
+                $('.list-group').handlebars($('#post-item-model'), data.data.data);
+            } else {
+                $('.list-group').html('<div class="list-empty-info">' +
+                    '<p>暂无内容</p>' +
+                    '</div>');
+            }
             /**
              * 分页
              */
@@ -49,13 +56,15 @@ function requestURL() {
                 };
                 option.success = function (data) {
                     if (data.code !== 200) {
-                        alert(data.msg);
+                        setAlert('暂时无法获取职位列表');
+                        console.log(data.code+":"+data.msg);
                         return;
                     } else {
                         $('.list-group').handlebars($('#post-item-model'), data.data.data);
                     }
                 }
                 option.error = function (res) {
+                    setAlert('系统繁忙，请稍候再试');
                     console.log(res)
                 }
                 $.ajax(option);
@@ -63,6 +72,7 @@ function requestURL() {
         }
     }
     option.error = function (res) {
+        setAlert('系统繁忙，请稍候再试');
         console.log(res)
     }
     $.ajax(option);

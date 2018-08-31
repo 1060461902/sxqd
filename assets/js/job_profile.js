@@ -82,23 +82,25 @@ $(document).ready(function () {
             }
             $.ajax(option);
         } else if (collect_status === 1) {
-            var option = getBASEDELETEAJAX();
-            option.url = '../student/collections/collection?id='+post_id;
-            option.success = function (data) {
-                if (data.code !== 200) {
-                    console.log(data.msg);
-                    setAlert("系统繁忙，请稍后再试");
-                } else {
-                    collect_status = 0;
-                    $('#collect_job').attr('src', './assets/images/collect_star.png');
-                    setAlert("已取消关注");
+            setConfirm('确定取消关注该岗位吗？',function () {
+                var option = getBASEDELETEAJAX();
+                option.url = '../student/collections/collection?id='+post_id;
+                option.success = function (data) {
+                    if (data.code !== 200) {
+                        console.log(data.msg);
+                        setAlert("系统繁忙，请稍后再试");
+                    } else {
+                        collect_status = 0;
+                        $('#collect_job').attr('src', './assets/images/collect_star.png');
+                        setAlert("已取消关注");
+                    }
                 }
-            }
-            option.error = function (res) {
-                setAlert("系统繁忙，请稍后再试");
-                console.log(res)
-            }
-            $.ajax(option);
+                option.error = function (res) {
+                    setAlert("系统繁忙，请稍后再试");
+                    console.log(res)
+                }
+                $.ajax(option);
+            });
         }
     });
 
@@ -107,29 +109,31 @@ $(document).ready(function () {
      */
     $('.send-btn').click(function () {
         if (send_status === 0) {
-            var option = getBASEGETAJAX();
-            option.url = '../student/recruitments/resume';
-            option.data = {
-                'recruitmentId': post_id
-            };
-            option.success = function (data) {
-                if (data.code !== 200) {
-                    console.log(data.msg);
-                    setAlert("系统繁忙，请稍后再试");
-                } else {
-                    var sub_btn = $('.send-btn');
-                    sub_btn.html('已投递');
-                    sub_btn.removeClass('send-btn');
-                    sub_btn.addClass('sent-btn');
-                    send_status = 1;
-                    setAlert("简历投递成功");
+            setConfirm('确定投递简历？（一旦投递无法撤回）',function () {
+                var option = getBASEGETAJAX();
+                option.url = '../student/recruitments/resume';
+                option.data = {
+                    'recruitmentId': post_id
+                };
+                option.success = function (data) {
+                    if (data.code !== 200) {
+                        console.log(data.msg);
+                        setAlert("系统繁忙，请稍后再试");
+                    } else {
+                        var sub_btn = $('.send-btn');
+                        sub_btn.html('已投递');
+                        sub_btn.removeClass('send-btn');
+                        sub_btn.addClass('sent-btn');
+                        send_status = 1;
+                        setAlert("简历投递成功");
+                    }
                 }
-            }
-            option.error = function (res) {
-                setAlert("系统繁忙，请稍后再试");
-                console.log(res)
-            }
-            $.ajax(option);
+                option.error = function (res) {
+                    setAlert("系统繁忙，请稍后再试");
+                    console.log(res)
+                }
+                $.ajax(option);
+            });
         }else {
             setAlert("简历已投递");
         }

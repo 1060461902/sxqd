@@ -234,13 +234,13 @@ function reportView(status,day) {
 /**
  * 顶部导航栏滑动固定
  */
-$(document).scroll(function (e) {
-    if ($(document).scrollTop()>50){
+/*$(document).scroll(function (e) {
+    if ($(document).scrollTop()>300){
         $(".nav-up").addClass('nav-fix');
     }else {
         $(".nav-up").removeClass('nav-fix');
     }
-});
+});*/
 
 /**
  * 处理错误

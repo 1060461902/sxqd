@@ -92,13 +92,14 @@ $(document).ready(function () {
             option.contentType = false;
             option.success = function (d) {
                 if (d.code === 200){
-                    reflashSkill();
-                    $('.editable-lable>input').val('');
-                    if ($('.edited-lables').children('.edited-lable').length >= 10) {
-                        $('.editable-lable').css({
-                            'display': 'none'
-                        });
-                    }
+                    reflashSkill(function () {
+                        $('.editable-lable>input').val('');
+                        if ($('.edited-lables').children('.edited-lable').length >= 10) {
+                            $('.editable-lable').css({
+                                'display': 'none'
+                            });
+                        }
+                    });
                 }else {
                     console.log(d.code + ":" + d.msg);
                     setAlert("系统繁忙,请稍后再试");
@@ -121,12 +122,13 @@ $(document).ready(function () {
         option.url = '../student/studentsets/skill?id='+id;
         option.success = function (d) {
             if (d.code === 200){
-                reflashSkill();
-                if ($('.edited-lables').children('.edited-lable').length < 10) {
-                    $('.editable-lable').css({
-                        'display': 'inline-block'
-                    });
-                }
+                reflashSkill(function () {
+                    if ($('.edited-lables').children('.edited-lable').length < 10) {
+                        $('.editable-lable').css({
+                            'display': 'inline-block'
+                        });
+                    }
+                });
             }else {
                 console.log(d.code + ":" + d.msg);
                 setAlert("系统繁忙,请稍后再试");
@@ -278,82 +280,89 @@ $(document).ready(function () {
         }
         form.append('phone', phone_edit);
         form.append('email', email_edit);
+        var reg = new RegExp("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z0-9]{2,6}$");
 
-        var option = getBASEPOSTAJAX();
-        option.url = "../student/studentsets/set";
-        option.data = form;
-        option.processData = false;
-        option.contentType = false;
-        option.success = function (d) {
-            if (d.code === 200) {
-                $.ajax({
-                    type: "GET",
-                    url: "../student/studentsets/set",
-                    data: {},
-                    success: function (d) {
-                        if (d.code === 200) {
-                            /**
-                             * 基础信息
-                             */
-                            var info = d.data.info;
-                            $('.basic-info-entity').handlebars($('#basic-info-model'), info);
-                            $("#student-name").html(info.name);
-                            $("#student-no").html(info.studentNum);
-                            $("#student-edit-nation").html(info.nation);
-                            $("#student-place").html(info.place); //空缺
-                            $("#student-birthday").html(info.birthday);
-                            if (info.sex === '男') {
-                                $('#male-btn').css({
-                                    'display': 'block'
-                                })
+        if (phone_edit != ''&&phone_edit != null&&phone_edit.length != 11){
+            setAlert('请检查您的手机号码');
+        } else if (email_edit != '' && email_edit != null && !reg.test(email_edit)) {
+            setAlert('请检查您的邮箱')
+        } else {
+            var option = getBASEPOSTAJAX();
+            option.url = "../student/studentsets/set";
+            option.data = form;
+            option.processData = false;
+            option.contentType = false;
+            option.success = function (d) {
+                if (d.code === 200) {
+                    $.ajax({
+                        type: "GET",
+                        url: "../student/studentsets/set",
+                        data: {},
+                        success: function (d) {
+                            if (d.code === 200) {
+                                /**
+                                 * 基础信息
+                                 */
+                                var info = d.data.info;
+                                $('.basic-info-entity').handlebars($('#basic-info-model'), info);
+                                $("#student-name").html(info.name);
+                                $("#student-no").html(info.studentNum);
+                                $("#student-edit-nation").html(info.nation);
+                                $("#student-place").html(info.place); //空缺
+                                $("#student-birthday").html(info.birthday);
+                                if (info.sex === '男') {
+                                    $('#male-btn').css({
+                                        'display': 'block'
+                                    })
+                                } else {
+                                    $('#female-btn').css({
+                                        'display': 'block'
+                                    })
+                                }
+
+                                /**
+                                 * 信息读取完成后计算百分比
+                                 */
+                                persent();
                             } else {
-                                $('#female-btn').css({
-                                    'display': 'block'
-                                })
+                                console.log(d.code + ":" + d.msg);
+                                setAlert("系统繁忙,请稍后再试");
                             }
-
-                            /**
-                             * 信息读取完成后计算百分比
-                             */
-                            persent();
-                        } else {
-                            console.log(d.code + ":" + d.msg);
+                        },
+                        error: function (res) {
+                            console.log(res);
                             setAlert("系统繁忙,请稍后再试");
                         }
-                    },
-                    error: function (res) {
-                        console.log(res);
-                        setAlert("系统繁忙,请稍后再试");
-                    }
-                });
-                setAlert("修改成功");
-            } else {
-                console.log(d.code + ":" + d.msg);
+                    });
+                    setAlert("修改成功");
+                } else {
+                    console.log(d.code + ":" + d.msg);
+                    setAlert("系统繁忙，请稍后再试");
+                }
+            };
+            option.error = function (res) {
                 setAlert("系统繁忙，请稍后再试");
+                console.log(res);
             }
-        };
-        option.error = function (res) {
-            setAlert("系统繁忙，请稍后再试");
-            console.log(res);
+            $.ajax(option);
+            $('.mask').fadeOut();
+            $('.edit-position').fadeOut();
+            // nativePlaveUseStatus = USE_ORIGIN_NATIVE_PLACE;
+            // $('#origin-native-place').html(native_place);
+            // $('#origin-native-place').css({
+            //     'display': 'inline'
+            // });
+            // $('#change-place-btn').css({
+            //     'display': 'inline'
+            // });
+            // $('#native-place-select').css({
+            //     'display': 'none'
+            // });
+            setAlert("编辑成功");
         }
-        $.ajax(option);
-        $('.mask').fadeOut();
-        $('.edit-position').fadeOut();
-        // nativePlaveUseStatus = USE_ORIGIN_NATIVE_PLACE;
-        // $('#origin-native-place').html(native_place);
-        // $('#origin-native-place').css({
-        //     'display': 'inline'
-        // });
-        // $('#change-place-btn').css({
-        //     'display': 'inline'
-        // });
-        // $('#native-place-select').css({
-        //     'display': 'none'
-        // });
-        setAlert("编辑成功");
     });
 
-    $('#project-info-group,#corporation-info-group,#honor-info-group').hide();
+    // $('#project-info-group,#corporation-info-group,#honor-info-group').hide();
 
     /**
      * 右键弹出菜单
@@ -856,10 +865,10 @@ $(document).ready(function () {
 
 $(document).scroll(function (e) {
     //侧边导航栏
-    if ($(document).scrollTop() > 450) {
+    if ($(document).scrollTop() > 550) {
         $(".guide-bar").css({
             "position": "fixed",
-            "top": "50px"
+            "top": 0
         });
     } else {
         $(".guide-bar").css({
@@ -1017,7 +1026,7 @@ function reflashHonor() {
 /**
  * 刷新技能列表
  */
-function reflashSkill() {
+function reflashSkill(callback) {
     $.ajax({
         type: "GET",
         url: "../student/studentsets/set",
@@ -1029,6 +1038,9 @@ function reflashSkill() {
                  */
                 var skill = d.data.skill;
                 $('.edited-lables').handlebars($('#skill-info-model'), skill);
+                if (callback){
+                    callback();
+                }
             } else {
                 console.log(d.code + ":" + d.msg);
                 setAlert("系统繁忙,请稍后再试");

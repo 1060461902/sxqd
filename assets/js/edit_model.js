@@ -30,7 +30,7 @@ $(document).ready(function () {
            // ['codeview',['codeview']], //查看html代码
            ['undo',['undo']], //撤销
            ['redo',['redo']], //取消撤销
-           ['help',['help']], //帮助
+           // ['help',['help']], //帮助
        ]
    })
 });

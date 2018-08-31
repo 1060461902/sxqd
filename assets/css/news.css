@@ -34,3 +34,7 @@
 .news-title {
     text-align: center;
 }
+
+.news-content-body{
+    min-height: 300px;
+}

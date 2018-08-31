@@ -7,7 +7,8 @@ $(document).ready(function () {
         option.data = {'id':id};
         option.success = function (data) {
             if(data.code !== 200){
-                alert(data.msg);
+                setAlert("无法获取新闻内容");
+                console.log(data.code+':'+data.msg)
                 return;
             }else{
                 $('.news-title h2').html(data.data.title);
@@ -17,6 +18,7 @@ $(document).ready(function () {
             }
         }
         option.error = function (res) {
+            setAlert("系统繁忙，请稍候再试");
             console.log(res)
         }
         $.ajax(option);

@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $('#project-info-group,#corporation-info-group,#honor-info-group').hide();
+    // $('#project-info-group,#corporation-info-group,#honor-info-group').hide();
 
     $.ajax({
         type: "GET",
