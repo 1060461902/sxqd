@@ -1,0 +1,96 @@
+.user-bar {
+    height: 2.5rem;
+    border-bottom: 1px solid #e0e0e085;
+    line-height: 2.5rem;
+}
+
+#user-name,
+#user-select-time {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: #00000086;
+}
+
+#user-select-time {
+    float: right;
+    margin-right: 10px;
+}
+
+#user-img {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 10px;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 1rem;
+}
+
+.info-bar {
+    position: relative;
+    height: 2rem;
+    border-bottom: 1px solid #e0e0e085;
+}
+
+#info-firstspan{
+    margin-left: 35px;
+}
+
+.info-bar>span{
+    font-size: 0.8rem;
+    line-height: 2rem;
+}
+
+.info-bar>img{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 10px;
+}
+
+.dk-item {
+    display: block;
+    height: 3.5rem;
+    margin-left: 1rem;
+}
+
+.dk-item>div {
+    float: left;
+    display: inline-block;
+}
+
+.dk-start-timebar,
+.dk-end-timebar {
+    margin-left: 1rem;
+    font-size: 0.7rem;
+    line-height: 1.7rem;
+    color: black;
+}
+
+.dk-start-place,
+.dk-end-place {
+    margin-left: 1rem;
+    font-size: 0.6rem;
+    color: #7f7f7f;
+}
+
+.bk_btn{
+    position: relative;
+    margin-left: 1rem;
+    font-size: 0.6rem;
+    color: #1379ff;
+}
+
+.bk_btn>img{
+    float: right;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.info-point{
+    height: 0.2rem;
+    width: 0.2rem;
+    position: absolute;
+    bottom: 3%;
+}

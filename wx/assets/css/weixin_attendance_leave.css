@@ -1,0 +1,99 @@
+.start-time-bar{
+    padding: 5px;
+    border-bottom: 1px solid #e0e0e085;
+    color: #000000;
+}
+
+.end-time-bar,
+.duration-bar{
+    padding: 5px;
+    border-bottom: 6px solid #e0e0e085;
+    color: #000000;
+}
+
+.start-time-bar *{
+    display: inline-block;
+}
+
+.date-picker-block{
+    float: right;
+}
+
+#start-date-picker,
+#end-date-picker,
+#duration-day-num{
+    text-align: right;
+}
+
+#reason-title{
+    font-size: 0.8rem;
+    color: #000000;
+    padding: 5px;
+}
+
+#reason-enter{
+    resize: none;
+    padding: 5px;
+    width: 100%;
+    height: 120px;
+    border: none;
+    border-bottom: 6px solid #e0e0e085;
+    outline: none;
+    overflow-y: auto;
+}
+
+#approver-title{
+    padding: 0 5px;
+}
+
+#approver-title1{
+    font-size: 0.8rem;
+    columns: #00000085;
+}
+
+#approver-title2{
+    font-size: 0.7rem;
+    color:#b6b6b6;
+}
+
+#approver-container{
+    margin-top: 10px;
+    height: 200px;
+}
+
+.approver-person{
+    width: 20%;
+    float: left;
+    text-align: center;
+    color: #00000070;
+    font-size: 0.7rem;
+}
+
+.approver-person img{
+    display: inline-block;
+    height: 1.3rem;
+    width: 1.3rem;
+    border-radius: 1.3rem;
+}
+
+.submit-bar{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    border-top: 1px solid #e0e0e085;
+    padding: 5px 0;
+}
+
+.submit-bar button{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 30px;
+    border-radius: 5px;
+    margin: auto;
+    border: none;
+    background: #3692fc;
+    outline: none;
+    color: white;
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>浙商大学生实习管理</title>
+    <!--css-->
+    <link rel="stylesheet" href="./assets/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="./assets/css/weui.min.css">
+    <link rel="stylesheet" href="./assets/css/weixin_head.css">
+    <link rel="stylesheet" href="./assets/css/weixin_attendance_record_leave.css">
+</head>
+
+<body>
+    <div class="title-bar">
+        <p>
+            <a id="title-back" onclick="javascript:history.back()">
+                <img src="./assets/images/back_lt.png" alt="">
+            </a>
+            <span id="title-name">请假申请</span>
+        </p>
+    </div>
+    <div class="info-container">
+        <!-- info-model -->
+    </div>
+    <div class="approver-bar">
+        <!-- approver-status-s 正在处理
+             approver-status-p 请求通过
+             approver-status-r 未通过-->
+
+        <!-- approver-item-model -->
+    </div>
+
+    <script type="text/x-handlebars-template" id="info-model">
+        <div class="status-bar">
+            <div class="status-head-img">
+                <img src="{{image_tool studentEvent.logo}}" notFoundSrc="./assets/images/head_img.png" alt="">
+            </div>
+            <div class="status-info">
+                <p id="status-name">{{name}}</p>
+                {{#if_bool pass_tag}}
+                <p class="status-p">审批通过</p>
+                {{else}}
+                    {{#if companyEvent.time}}
+                    <p class="status-r">未通过</p>
+                    {{else}}
+                    <p class="status-s">正在处理</p>
+                    {{/if}}
+                {{/if_bool}}
+            </div>
+        </div>
+        <div class="info-bar">
+            <p>开始时间:
+                <span id="info-start-time">{{startTime}}</span>
+            </p>
+            <p>结束时间:
+                <span id="info-end-time">{{endTime}}</span>
+            </p>
+            <p>请假天数:
+                <span id="info-days">{{days}}</span>
+            </p>
+            <div class="info-reason">
+                <p id="info-reason-title">请假理由:</p>
+                <p id="info-reason-body">{{reason}}</p>
+            </div>
+        </div>
+    </script>
+    <script type="text/x-handlebars-template" id="approver-item-model">
+        <div class="approver-item">
+            <div class="approver-info">
+            <img class="approver-head" src="./assets/images/head_img.png" alt="">
+            <span class="approver-name">A某</span>
+            {{#if_bool pass_tag}}
+            <span class="approver-status approver-status-p">已通过</span>
+            {{else}}
+                {{#if companyEvent.time}}
+                <span class="approver-status approver-status-r">未通过</span>
+                {{else}}
+                <span class="approver-status approver-status-s">正在处理</span>
+                {{/if}}
+            {{/if_bool}}
+            </div>
+            <div class="approver-time">
+            <p>{{companyEvent.time}}</p>
+            </div>
+        </div>
+    </script>
+    <!--js-->
+    <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery-url.js"></script>
+    <script type="text/javascript" src="./assets/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript" src="./assets/js/fastclick.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-jquery.js"></script>
+    <script type="text/javascript" src="./assets/js/model.js"></script>
+    <script type="text/javascript" src="./assets/js/weixin_attendance_record_leave.js"></script>
+</body>
+
+</html>

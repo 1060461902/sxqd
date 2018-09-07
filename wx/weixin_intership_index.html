@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <title>浙商大学生实习管理</title>
+    <!--css-->
+    <link rel="stylesheet" href="/internshipmgn/wx/assets/css/weixin_head.css">
+    <link rel="stylesheet" href="/internshipmgn/wx/assets/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="/internshipmgn/wx/assets/css/weui.min.css">
+    <link rel="stylesheet" href="/internshipmgn/wx/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="/internshipmgn/wx/assets/css/commonCSS.css">
+    <link rel="stylesheet" href="/internshipmgn/wx/assets/css/weixin_intership_index.css">
+    <link rel="stylesheet" href="/internshipmgn/wx/assets/css/mescroll.min.css">
+</head>
+
+<body ontouchstart>
+    <div class="weui-tab">
+        <div class="weui-tab__bd">
+            <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+                <!-- <div class="title-bar-1">
+                    <a id="location-select">
+                        <img id="location-select-img" src="/internshipmgn/wx/assets/images/local_white.png" alt="">
+                        <span id="location-name">杭州</span>
+                    </a>
+                    <div id="search-bar">
+                        <img id="search-bar-img" src="/internshipmgn/wx/assets/images/magnifier.png" alt="">
+                        <input id="search-info" type="text" placeholder="搜索实习\公司" />
+                    </div>
+                </div> -->
+                <div class="weui-search-bar" id="searchBar">
+                    <form class="weui-search-bar__form">
+                        <div class="weui-search-bar__box">
+                            <i class="weui-icon-search"></i>
+                            <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
+                            <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                        </div>
+                        <label class="weui-search-bar__label" id="searchText">
+                            <i class="weui-icon-search"></i>
+                            <span>搜索实习\公司</span>
+                        </label>
+                    </form>
+                    <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+                </div>
+                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000"></div>
+                <div class="weui-cells post-cells mescroll" id="mescroll_sxzp">
+                    <div class="cells-container data-list" id="dataList_sxzp">
+                        <!-- post-list-model -->
+                    </div>
+                </div>
+            </div>
+            <div id="tab2" class="weui-tab__bd-item">
+                <div class="list-group road-cells mescroll" id="mescroll_qzzl">
+                    <div class="resume-list data-list" id="dataList_qzzl">
+                        <!-- resume-list-model -->
+                    </div>
+                </div>
+            </div>
+            <div id="tab3" class="weui-tab__bd-item">
+                <div class="person-bar">
+                    <!-- person-info-model -->
+                </div>
+                <a class="person-resume next-container" href="/internshipmgn/wx/weixin_intership_resume.html">
+                    <img src="/internshipmgn/wx/assets/images/mobile_resume.png" alt="">
+                    <span>我的简历</span>
+                </a>
+                <a class="person-collect next-container" href="/internshipmgn/wx/weixin_intership_collect.html">
+                    <img src="/internshipmgn/wx/assets/images/mobile_collect.png" alt="">
+                    <span>岗位关注</span>
+                </a>
+                <a class="person-suggest next-container" href="/internshipmgn/wx/weixin_intership_suggest.html">
+                    <img src="/internshipmgn/wx/assets/images/mobile_suggest.png" alt="">
+                    <span>意见反馈</span>
+                </a>
+            </div>
+        </div>
+        <div class="weui-tabbar">
+            <a href="#tab1" id="sxzp" class="weui-tabbar__item weui-bar__item--on">
+                <div class="weui-tabbar__icon">
+                    <img id="img_dk" src="/internshipmgn/wx/assets/images/sxgl_sxzp.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">实习招聘</p>
+            </a>
+            <a href="#tab2" id="qzzl" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img id="img_sq" src="/internshipmgn/wx/assets/images/sxgl_qzzl.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">求职之路</p>
+            </a>
+            <a href="#tab3" id="wd" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img id="img_tj" src="/internshipmgn/wx/assets/images/sxgl_wd.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">我的</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- 轮播图 -->
+    <script id="carousel-model" type="text/x-handlebars-template">
+        <ol class="carousel-indicators">
+            {{#each this}}
+            <li data-target="#myCarousel" data-slide-to="{{@index}}" class="{{active @index}}"></li>
+            {{/each}}
+        </ol>
+        <div class="carousel-inner">
+            {{#each this}}
+            <div class="item {{active @index}}">
+                <img src="{{image_url}}" />
+                <div class="carousel-caption">
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </script>
+    <script id="post-list-model" type="text/x-handlebars-template">
+        {{#each this}}
+        <a class="weui-cell post-item" data-id="" href="/internshipmgn/wx/weixin_intership_post.html?id={{companyId}}">
+            <div class="cell-left">
+                <p class="post-name">{{post}}</p>
+                <p>
+                    <span>{{companyName}}</span>
+                </p>
+                <p>
+                    <img src="/internshipmgn/wx/assets/images/location_point.png" alt="">
+                    <span class="location-show">{{address}}</span>
+                </p>
+            </div>
+            <div class="cell-center">
+                <p>{{companyType}}</p>
+            </div>
+            <div class="cell-right">
+                <p class="post-date">{{releaseTime}}</p>
+                <div class="post-img-container">
+                    <img src="{{logo}}" alt="" notFoundSrc="/internshipmgn/wx/assets/images/default_company.jpg">
+                </div>
+            </div>
+        </a>
+        {{/each}}
+    </script>
+    <script id="resume-list-model" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="list-group-item road-cells-item">
+            <div class="logo-part">
+                <div class="logo-img">
+                    <img src="{{logo}}" notFoundSrc="/internshipmgn/wx/assets/images/default_company.jpg">
+                </div>
+                <p class="company-name">{{companyName}}</p>
+                <p class="post-name">{{recruitmentName}}</p>
+            </div>
+            <div class="history-entity">
+                {{#each recruitmentRoads}}
+                <div class="history-entity-item">
+                    <p class="history-entity-top">{{day}}</p>
+                    <div class="history-entity-item-img">
+                        <img src="{{which_img actionName}}">
+                    </div>
+                    <div class="history-entity-bottom">
+                        <p>{{year}}年{{month}}月</p>
+                        <p>{{actionName}}</p>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/each}}
+    </script>
+    <script id="person-info-model" type="text/x-handlebars-template">
+        <div class="person-head-img">
+            <img src="{{logo}}" alt="" notFoundSrc="/internshipmgn/wx/assets/images/default_head.png">
+        </div>
+        <span class="person-name">{{name}}</span>
+    </script>
+
+    <!--js-->
+    <script type="text/javascript" src="/internshipmgn/wx/assets/js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="/internshipmgn/wx/assets/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="/internshipmgn/wx/assets/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript" src="/internshipmgn/wx/assets/js/fastclick.js"></script>
+    <script type="text/javascript" src="/internshipmgn/wx/assets/js/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="/internshipmgn/wx/assets/js/handlebars-jquery.js"></script>
+    <script type="text/javascript" src="/internshipmgn/wx/assets/js/mescroll.min.js"></script>
+    <script type="text/javascript" src="/internshipmgn/wx/assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/internshipmgn/wx/assets/js/model.js"></script>
+    <script type="text/javascript" src="/internshipmgn/wx/assets/js/jquery-url.js"></script>
+    <script type="text/javascript" src="/internshipmgn/wx/assets/js/weixin_intership_index.js"></script>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $("#myCarousel").carousel({
+                interval: 3000,
+            });
+        });
+    </script>
+</body>
+
+</html>

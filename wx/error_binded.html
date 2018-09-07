@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <title>浙商大学生实习管理</title>
+    <link rel="stylesheet" href="./assets/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="./assets/css/weui.min.css">
+    <style type="text/css">
+        .unbind-btn-bar{
+            position: relative;
+        }
+
+        .unbind-btn{
+            position: absolute;
+            display: inline-block;
+            right: 3rem;
+            color: red;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .red-btn {
+            display: inline-block;
+            position: relative;
+            height: 0px;
+            width: 0px;
+            border-top: 5px solid transparent;
+            border-left: 10px solid red;
+            border-bottom: 5px solid transparent;
+        }
+
+        .info-content{
+            font-size: 20px;
+            font-weight: bold;
+            color: #000000;
+            font-family: "微软雅黑", Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            text-align: center;
+        }
+
+        .remind-info{
+            position: fixed;
+            width: 100%;
+            top: 30%;
+            transform: translateY(-70%);
+        }
+    </style>
+    <script type="text/javascript">
+        function dounbind() {
+            $.confirm('确定要解绑吗？（功能暂未实现）', function () {
+                $.toptip('目前无法解绑', 'success')
+            }, function () {
+                $.toptip('已取消', 'warning')
+            })
+        }
+    </script>
+</head>
+<body>
+    <div class="remind-info">
+        <p class="info-content">已绑定学号</p>
+        <div class="unbind-btn-bar">
+            <a class="unbind-btn" onclick="dounbind()">解除绑定<div class="red-btn"></div></a>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="./assets/js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript" src="./assets/js/fastclick.js"></script>
+</body>
+</html>

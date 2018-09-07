@@ -1,0 +1,99 @@
+.search-bar{
+    width: 100%;
+    position: relative;
+    height: 50px;
+}
+.search-bar-left{
+    position: absolute;
+    left: 0;
+    width: 230px;
+    background: #F2F2F2;
+    padding: 0.5vw;
+    margin-left: 0.5vw;
+}
+.search-bar-left input{
+    width: 65%;
+}
+.search-bar-left button{
+    width: 30%;
+}
+.search-bar-right{
+    position: absolute;
+    right: 0.5vw;
+}
+.search-bar-right select{
+    height: 35px;
+}
+
+.post-list{
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    min-height: 800px;
+}
+.post-item:hover{
+    transition-duration: 0.3s;
+    transition-property: transform;
+    transform: translate3d(-5px,-5px,5px);
+    box-shadow: 5px 5px 5px #888888;
+}
+.post-item{
+    position: relative;
+    height: 150px;
+}
+.post-item a{
+    display: inline-block;
+    height: 100%;
+    width: 45%;
+    margin: 0.5%;
+}
+.post-item div{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.post-item-left{
+    width: 50%;
+}
+.post-name{
+    font-size: 18px;
+    color: rgb(100, 100, 100);
+    font-weight: bold;
+}
+.post-out-time{
+    font-size: 10px;
+    color: #888888;
+}
+.post-ef-time,.post-position{
+    font-size: 15px;
+    color: #7F7F7F;
+}
+.post-item-mid{
+    position: absolute;
+    left: 55%;
+    width: 20%;
+    font-size: 15px;
+    color: rgb(100, 100, 100);
+}
+.post-item-right{
+    position: absolute;
+    left: 80%;
+}
+.post-item-right img{
+    width: 100px;
+    height: 100px;
+}
+
+.page-bar{
+    position: relative;
+    height: 50px;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+
+}
+
+.page-bar ul{
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+}

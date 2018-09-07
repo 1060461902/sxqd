@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <title>浙商大学生实习管理</title>
+    <style type="text/css">
+        .blue-btn {
+            display: inline-block;
+            position: relative;
+            height: 0px;
+            width: 0px;
+            border-top: 5px solid transparent;
+            border-left: 10px solid #00a9ff;
+            border-bottom: 5px solid transparent;
+        }
+
+        .to-bind-bar{
+            position: relative;
+        }
+
+        .to-bind-btn{
+            position: absolute;
+            display: inline-block;
+            right: 3rem;
+            color: #00b9ff;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .info-content{
+            font-size: 20px;
+            font-weight: bold;
+            color: #000000;
+            font-family: "微软雅黑", Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            text-align: center;
+        }
+
+        .remind-info{
+            position: fixed;
+            width: 100%;
+            top: 30%;
+            transform: translateY(-70%);
+        }
+    </style>
+</head>
+<body>
+    <div class="remind-info">
+        <p class="info-content">未绑定学号，请前往绑定</p>
+        <div class="to-bind-bar">
+            <a class="to-bind-btn" href="/internshipmgn/wx/weixin_bundle.html">立即绑定<div class="blue-btn"></div></a>
+        </div>
+    </div>
+</body>
+</html>

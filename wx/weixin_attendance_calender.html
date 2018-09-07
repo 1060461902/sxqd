@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>浙商大学生实习管理</title>
+    <!--css-->
+    <link rel="stylesheet" href="./assets/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="./assets/css/weui.min.css">
+    <link rel="stylesheet" href="./assets/css/weixin_head.css">
+    <link rel="stylesheet" href="./assets/css/weixin_attendance_calender.css">
+
+    <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery-url.js"></script>
+    <script>
+        function backto() {
+            var from = $.parseURL(location.href)['from'];
+            if (from == 2){
+                window.location.href = './weixin_attendance_index.html?tab=2';
+            }else {
+                window.location.href = './weixin_attendance_index.html?tab=3';
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="title-bar">
+        <p>
+            <a id="title-back" onclick="backto()">
+                <img src="./assets/images/back_lt.png" alt=""/>
+            </a>
+            <span id="title-name">考勤月历</span>
+        </p>
+    </div>
+    <div class="user-bar">
+        <img id="user-img" src="./assets/images/head_img.png" alt=""/>
+        <span id="user-name">小陈</span>
+        <span id="user-select-time"></span>
+    </div>
+    <div class="date-select">
+
+    </div>
+    <div class="info-bar">
+        <img src="./assets/images/clock.png" alt=""/>
+        <span id="info-firstspan">今日打卡</span>
+        <span id="info-times"></span>
+        <span>次</span>
+    </div>
+    <div class="dk-bar">
+        <!-- dk-model -->
+    </div>
+    <script type="text/x-handlebars-template" id="dk-model">
+        {{#each this}}
+        {{#if startTime}}
+        <div class="dk-item">
+            <div>
+                <img src="/internshipmgn/student/assets/images/dk_point_gray.png" />
+            </div>
+            <div>
+                <p class="dk-start-timebar">上班打卡时间
+                    <span class="dk-start-time">{{startTime}}</span>
+                </p>
+                <p class="dk-start-place">{{startLoc}}</p>
+            </div>
+        </div>
+        {{else}}
+        <div class="dk-item">
+            <div>
+                <img src="./assets/images/dk_point_gray.png" />
+            </div>
+            <div>
+                <p class="dk-start-timebar">上班打卡时间无</p>
+                <a data-id="" href="./weixin_attendance_apply.html" class="bk_btn">
+                    <span>申请补卡</span>
+                    <img src="./assets/images/go_gt.png" alt=""/>
+                </a>
+            </div>
+        </div>
+        {{/if}}
+        {{#if endTime}}
+        <div class="dk-item">
+            <div>
+                <img src="/internshipmgn/student/assets/images/dk_point_gray.png" />
+            </div>
+            <div>
+                <p class="dk-end-timebar">下班打卡时间
+                    <span class="dk-end-time">{{endTime}}</span>
+                </p>
+                <p class="dk-end-place">{{endLoc}}</p>
+            </div>
+        </div>
+        {{else}}
+        <div class="dk-item">
+            <div>
+                <img src="./assets/images/dk_point_gray.png" />
+            </div>
+            <div>
+                <p class="dk-end-timebar">下班打卡时间无</p>
+                <a data-id="" href="./weixin_attendance_apply.html?date={{date}}" class="bk_btn">
+                    <span>申请补卡</span>
+                    <img src="./assets/images/go_gt.png" alt=""/>
+                </a>
+            </div>
+        </div>
+        {{/if}}
+        {{/each}}
+    </script>
+    <!--js-->
+    <script type="text/javascript" src="./assets/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-jquery.js"></script>
+    <script type="text/javascript" src="./assets/js/fastclick.js"></script>
+    <script type="text/javascript" src="./assets/js/weixin_attendance_calender.js"></script>
+</body>
+
+</html>

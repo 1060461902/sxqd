@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>浙商大学生实习管理</title>
+    <!--css-->
+    <link rel="stylesheet" href="./assets/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="./assets/css/weui.min.css">
+    <link rel="stylesheet" href="./assets/css/commonCSS.css">
+    <link rel="stylesheet" href="./assets/css/weixin_head.css">
+    <link rel="stylesheet" href="./assets/css/weixin_intership_post.css">
+    <!-- <script>
+        function backto() {
+            window.location.href = './weixin_intership_index.html?tab=1'
+        }
+    </script> -->
+</head>
+
+<body>
+    <div class="title-bar">
+        <p>
+            <a id="title-back" onclick="javascript:history.back()">
+                <img src="./assets/images/back_lt.png" alt="">
+            </a>
+            <span id="title-name">职位详情</span>
+        </p>
+    </div>
+    <div class="post-title">
+        <img src="./assets/images/mobile_letter.png" alt="">
+        <span>招聘信息</span>
+    </div>
+    <div class="post-info">
+        <!-- post-info-model -->
+    </div>
+    <div class="post-info-other">
+        <!-- post-info-other-model -->
+    </div>
+    <div class="post-title">
+        <img src="./assets/images/mobile_document.png" alt="">
+        <span>工作描述</span>
+    </div>
+    <div class="post-describe">
+        <p>
+
+        </p>
+    </div>
+    <div class="post-title">
+        <img src="./assets/images/mobile_paper.png" alt="">
+        <span>咨询板</span>
+    </div>
+    <div class="weui-cells ask-items">
+        <!-- ask-item-model -->
+    </div>
+    <div class="post-do-bar">
+        <!-- do-model -->
+    </div>
+
+    <script id="post-info-model" type="text/x-handlebars-template">
+        <div class="post-info-left">
+            {{#with recruitment}}
+            <p id="post-name">{{post}}</p>
+            <p>
+                <span>招聘时段</span>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <span id="post-time">{{startTime}}~{{endTime}}</span>
+            </p>
+            <div id="post-location-bar">
+                <div id="post-location-title">
+                    <span>工作地址</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <img src="./assets/images/location_point.png" alt="">
+                </div>
+                <span id="post-location">{{address}}</span>
+            </div>
+            <div>
+                <span>招聘人数</span>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <img src="./assets/images/person.png" alt="">
+                <span id="post-person">{{currentNumber}}人</span>
+            </div>
+            <div id="post-skills-bar">
+                <div>
+                    <span>技能要求</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                </div>
+                <div id="post-skills">
+                    {{{skills skillRequire}}}
+                </div>
+            </div>
+            {{/with}}
+        </div>
+        {{#with company}}
+        <a class="post-info-right" href="./weixin_intership_company.html?id={{id}}">
+            <div class="post-info-img">
+                <img src="{{logo}}" alt="">
+            </div>
+            <p id="post-company-name">{{companyName}}</p>
+        </a>
+        {{/with}}
+    </script>
+    <script type="text/x-handlebars-template" id="post-info-other-model">
+        领域&nbsp;
+        <span id="post-field">{{type}}</span>
+        &nbsp;&nbsp;规模&nbsp;
+        <span id="post-size">{{size}}</span>
+        &nbsp;&nbsp;阶段&nbsp;
+        <span id="post-stage">{{stage}}</span>
+    </script>
+    <script type="text/x-handlebars-template" id="ask-item-model">
+        {{#each this}}
+        <div class="weui-cell">
+            <div class="cell-head-img">
+                <div class="head-img-square">
+                    <img src="{{logo}}" alt="" notFoundSrc="./assets/images/default_head.png">
+                </div>
+            </div>
+            <div class="cell-info">
+                <p class="cell-name">{{name}}</p>
+                <p class="cell-question">{{#if followName}}回复&nbsp;{{followName}}&nbsp;:{{/if}}{{content}}</p>
+            </div>
+            <div>
+                <p class="cell-time">{{createTime}}</p>
+                <p class="reply-btn"><a data-id="{{id}}">回复</a></p>
+            </div>
+        </div>
+        {{/each}}
+    </script>
+    <script type="text/x-handlebars-template" id="do-model">
+        {{#if_bool collectflag}}
+        <a class="collected-btn" data-status="">
+            <img class="collect-star" src="./assets/images/collected_star.png" alt="">
+            <span class="collect-text">已关注</span>
+        </a>
+        {{else}}
+        <a class="collect-btn" data-status="">
+            <img class="collect-star" src="./assets/images/collect_star.png" alt="">
+            <span class="collect-text">关注岗位</span>
+        </a>
+        {{/if_bool}}
+        {{#if_bool sendflag}}
+        <a class="sent-btn">已投递</a>
+        {{else}}
+        <a class="send-btn">投简历</a>
+        {{/if_bool}}
+        <a id="ask-btn">咨询</a>
+    </script>
+    <!--js-->
+    <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery-url.js"></script>
+    <script type="text/javascript" src="./assets/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript" src="./assets/js/fastclick.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="./assets/js/handlebars-jquery.js"></script>
+    <script type="text/javascript" src="./assets/js/model.js"></script>
+    <script type="text/javascript" src="./assets/js/weixin_intership_post.js"></script>
+</body>
+
+</html>
