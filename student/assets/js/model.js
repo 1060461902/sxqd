@@ -97,7 +97,7 @@ $(document).ready(function () {
         option.url = '../logout';
         option.success = function (data) {
             if (data.code === 200){
-                window.location.href = './log_in.html'
+                window.location.href = '../log_in.html'
             }else {
                 console.log(data.code+":"+data.msg);
                 setAlert('系统繁忙，请稍候再试');

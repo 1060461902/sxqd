@@ -24,7 +24,7 @@ $(document).ready(function () {
             });
             $('.post-info-other').handlebars($('#post-info-other-model'),d.data.company);
             $('.post-describe p').html(d.data.recruitment.postInfo);
-            $('.ask-items').handlebars($('#ask-item-model'),d.data.commits);
+            $('.ask-items').handlebars($('#ask-item-model'),d.data.commits,image_tool);
             $('.post-do-bar').handlebars($('#do-model'),d.data,{
                 name:'if_bool',
                 callback:function (flag, options) {
@@ -127,5 +127,96 @@ $(document).ready(function () {
             console.log(res)
         }
         $.ajax(option);
-    })
+    });
+
+    /**
+     * 点击回复按钮
+     */
+    var reply_who;
+    $('.ask-items').on('click','.reply-btn a',function () {
+        reply_who = $(this).data('id');
+        var reply_name = $(this).data('name');
+        $.prompt({
+            title: '请输入内容',
+            text: '回复 '+reply_name+' :',
+            empty: false, // 是否允许为空
+            onOK: function (input) {
+                var option = getBASEPOSTAJAX();
+                option.url = '../student/recruitments/reply';
+                option.data = {
+                    "commitId": reply_who,
+                    "content": input
+                }
+                option.success = function (data) {
+                    if(data.code === 200){
+                        $.toptip('回复成功','success');
+                        reflashAskList(post_id);
+                    }else{
+                        console.log("回复发生错误:"+data.msg);
+                        $.toptip('回复失败','error');
+                    }
+                }
+                option.error = function (res) {
+                    console.log(res)
+                }
+                $.ajax(option);
+            }
+        });
+    });
+
+    /**
+     * 点击咨询按钮
+     */
+    $('body').on('click','#ask-btn',function () {
+        $.prompt({
+            title: '请输入内容',
+            empty: false, // 是否允许为空
+            onOK: function (input) {
+                var option = getBASEPOSTAJAX();
+                option.url = '../student/recruitments/consult';
+                option.data = {
+                    "id":post_id,
+                    "content": input
+                }
+                option.success = function (data) {
+                    if(data.code === 200){
+                        $.toptip('回复成功','success');
+                        reflashAskList(post_id);
+                    }else{
+                        console.log("回复发生错误:"+data.msg);
+                        $.toptip('回复失败','warning');
+                    }
+                }
+                option.error = function (res) {
+                    $.toptip('系统繁忙，请稍候再试','error');
+                    console.log(res)
+                }
+                $.ajax(option);
+            }
+        });
+    });
 });
+
+/**
+ * 刷新回复列表
+ */
+function reflashAskList(post_id) {
+    var option = getBASEGETAJAX();
+    option.url = '../student/recruitments/profile';
+    option.data = {
+        id: post_id
+    };
+    option.success = function (d) {
+        if (d.code === 200) {
+            $('.ask-items').handlebars($('#ask-item-model'), d.data.commits, image_tool);
+        } else {
+            $.toptip('刷新咨询板列表出错','error');
+            console.log(d.code+":"+d.msg);
+        }
+    }
+    option.error = function (res) {
+        console.log(res);
+        $.toptip("系统繁忙，请稍后再试",'error');
+    }
+    $.ajax(option);
+}

@@ -16,9 +16,9 @@
 
 <body>
     <div class="side-nav-bg"></div>
-    <div class="remind-swipe">
+    <!--<div class="remind-swipe">
         <p>右滑可呼出菜单</p>
-    </div>
+    </div>-->
     <div class="side-nav">
         <ul class="nav-items">
             <li class="nav-item nav-on" data-id="0">
@@ -44,6 +44,9 @@
                 <img src="./assets/images/back_lt.png" alt="">
             </a>
             <span id="title-name">简历管理·基本信息</span>
+            <a id="menu">
+                <img src="./assets/images/menu.png" alt="">
+            </a>
         </p>
     </div>
     <div class="main-body">
@@ -171,7 +174,7 @@
                 </div>
                 <div class="editable-lable">
                     <input type="text" class="weui-input" data-role="none" placeholder="请输入技能水平">
-                    <a data-role="none">X</a>
+                    <a data-role="none">×</a>
                 </div>
             </div>
         </div>
@@ -295,13 +298,14 @@
             </div>
             <div class="honor-img">
                 <p>获奖证书</p>
-                <input type="file" class="honor-img-upload-input" data-role="none" hidden> {{#if_show image}}
+                <input type="file" class="honor-img-upload-input" data-role="none" hidden>
+                {{#if_show image}}
                 <div class="honor-img-show">
-                    <img src="{{image}}" notFoundSrc="./assets/images/not_found.jpg" />
+                    <img src="{{image_tool image}}" notFoundSrc="./assets/images/default_company.jpg" />
                 </div>
                 {{else}}
                 <div class="honor-img-show" style="display:none">
-                    <img src="" notFoundSrc="./assets/images/not_found.jpg" />
+                    <img src="" notFoundSrc="./assets/images/default_company.jpg" />
                 </div>
                 <div class="honor-img-upload">
                     <a class="honor-img-btn">
@@ -331,7 +335,7 @@
         {{#each this}}
         <div class="edited-lable">
             <span>{{skill}}</span>
-            <a data-id="{{id}}">X</a>
+            <a data-id="{{id}}">×</a>
         </div>
         {{/each}}
     </script>

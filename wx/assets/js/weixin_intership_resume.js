@@ -19,7 +19,7 @@ $(document).ready(function () {
                  * 基础信息
                  */
                 var info = d.data.info;
-                $('#person-head-img img').attr('src', info.logo);
+                $('#person-head-img img').attr('src', '/static/'+info.logo);
                 $("#student-name").html(info.name);
                 $("#student-no").html(info.studentNum);
                 $("#student-nation").html(info.nation);
@@ -44,7 +44,7 @@ $(document).ready(function () {
                  * 所获荣誉
                  */
                 var honor = d.data.honor;
-                $('.honor-items').handlebars($('#honor-item-model'), honor, [timeTool, {
+                $('.honor-items').handlebars($('#honor-item-model'), honor, [timeTool,image_tool, {
                     name: 'if_show',
                     callback: function (image_url, options) {
                         if (image_url != null && image_url != '') {
@@ -100,7 +100,7 @@ $(document).ready(function () {
     });
 
     /**
-     * 右滑菜单
+     * 菜单
      */
     var startX, startY;
     $("body").on("touchstart", function (e) {
@@ -108,6 +108,13 @@ $(document).ready(function () {
         startX = e.originalEvent.changedTouches[0].pageX;
         startY = e.originalEvent.changedTouches[0].pageY;
     });
+    //点击菜单按钮呼出
+    $("#menu").click(function () {
+        $('.side-nav-bg').fadeIn();
+        $('.side-nav').removeClass('nav-out');
+        $('.side-nav').addClass('nav-show');
+    });
+    //左滑关闭
     $("body").on("touchmove", function (e) {
         e.preventDefault();
         moveEndX = e.originalEvent.changedTouches[0].pageX;
@@ -115,11 +122,7 @@ $(document).ready(function () {
         var X = moveEndX - startX;
         var Y = moveEndY - startY;
         if (Y < 30 && Y > -30) {
-            if (X > 30) {
-                $('.side-nav-bg').fadeIn();
-                $('.side-nav').removeClass('nav-out');
-                $('.side-nav').addClass('nav-show');
-            } else if (X < -30) {
+            if (X < -30) {
                 $('.side-nav-bg').fadeOut();
                 $('.side-nav').removeClass('nav-show');
                 $('.side-nav').addClass('nav-out');
@@ -710,7 +713,7 @@ $(document).ready(function () {
                 '<div class="honor-img">' +
                 '<p>获奖证书</p>' +
                 '<input type="file" class="honor-img-upload-input" data-role="none" hidden>'+
-                '<div class="honor-img-show">'+
+                '<div class="honor-img-show" style="display:none">'+
                 '<img src="" notFoundSrc="./assets/images/not_found.jpg" />'+
                 '</div>'+
                 '<div class="honor-img-upload">' +
@@ -1015,7 +1018,7 @@ function reflashHonor() {
                  * 所获荣誉
                  */
                 var honor = d.data.honor;
-                $('.honor-items').handlebars($('#honor-item-model'), honor, [timeTool, {
+                $('.honor-items').handlebars($('#honor-item-model'), honor, [timeTool,image_tool, {
                     name: 'if_show',
                     callback: function (image_url, options) {
                         if (image_url != null && image_url != '') {

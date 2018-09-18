@@ -95,7 +95,7 @@
         {{#with company}}
         <a class="post-info-right" href="./weixin_intership_company.html?id={{id}}">
             <div class="post-info-img">
-                <img src="{{logo}}" alt="">
+                <img src="{{logo}}" notFoundSrc="./assets/images/dafault_company.jpg" alt="">
             </div>
             <p id="post-company-name">{{companyName}}</p>
         </a>
@@ -114,16 +114,21 @@
         <div class="weui-cell">
             <div class="cell-head-img">
                 <div class="head-img-square">
-                    <img src="{{logo}}" alt="" notFoundSrc="./assets/images/default_head.png">
+                    <img src="{{image_tool logo}}" alt="" notFoundSrc="./assets/images/default_head.png">
                 </div>
             </div>
             <div class="cell-info">
                 <p class="cell-name">{{name}}</p>
-                <p class="cell-question">{{#if followName}}回复&nbsp;{{followName}}&nbsp;:{{/if}}{{content}}</p>
+                <p class="cell-question">{{content}}</p>
+                {{#if followName}}
+                <p class="cell-follow-content">
+                    @&nbsp;{{followName}}&nbsp;: {{followContent}}
+                </p>
+                {{/if}}
             </div>
             <div>
                 <p class="cell-time">{{createTime}}</p>
-                <p class="reply-btn"><a data-id="{{id}}">回复</a></p>
+                <p class="reply-btn"><a data-id="{{id}}" data-name="{{name}}">回复</a></p>
             </div>
         </div>
         {{/each}}

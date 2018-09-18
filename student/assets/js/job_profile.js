@@ -188,7 +188,7 @@ function askFunc() {
         option.success = function (data) {
             if (data.code !== 200) {
                 console.log(data.msg);
-                setAlert("系统繁忙，请稍后再试");
+                setAlert("系统繁忙，请稍候再试");
             } else {
                 reflashAskList();
                 setAlert("消息已发送");
@@ -196,7 +196,7 @@ function askFunc() {
             }
         };
         option.error = function (res) {
-            setAlert("系统繁忙，请稍后再试");
+            setAlert("系统繁忙，请稍候再试");
             console.log(res)
         };
         $.ajax(option);

@@ -68,7 +68,8 @@ $(document).ready(function () {
                                 url: '../student/companies/recruitment',
                                 data: {
                                     pageNum: page.num,
-                                    id:company_id
+                                    id:company_id,
+                                    order:''
                                 },
                                 success: function (data) {
                                     if (data.code === 200) {
@@ -122,7 +123,7 @@ $(document).ready(function () {
             $('.company-album-list>p').handlebars($('#company-album-model'), data.data.images);
             $('.company-introduction-entity').html(data.data.info);
             $('.company-lable-list').handlebars($('#company-lable-model'), data.data.marks);
-            var location_point = data.data.location.lnglat.split('#');
+            var location_point = data.data.location.lnglat.split(',');
             /**
              * 腾讯地图
              */
